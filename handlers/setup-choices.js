@@ -26,7 +26,7 @@ async function openSetupChoices(client, origin, title, choices, options = {}) {
       choices_select: { accept: i => i.isStringSelectMenu(), async run(i, session) {
         const choice = choices.slice(page * 25, page * 25 + 25).find(choice => choice.id === i.values?.[0])
         if (i.values.length !== 1 || !choice) throw new Error('invalid_setup_definition')
-        await i.editReply({ content: '', embeds: [], components: [] }); session.close('selected')
+        await i.editReply({ components: [] }); session.close('selected')
         const back = () => options.reload ? options.reload(setupOrigin(origin, message, undefined, locale)) : openSetupChoices(client, setupOrigin(origin, message, undefined, locale), title, choices, options)
         await choice.open(client, setupOrigin(origin, message, back, locale))
       } },

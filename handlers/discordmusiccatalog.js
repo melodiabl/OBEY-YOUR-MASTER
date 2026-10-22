@@ -45,7 +45,7 @@ function leoGet(path) {
 
 async function searchDiscordCatalog(client, query, context) {
   const [result, albumsRaw] = await Promise.all([
-    client.music.search(query, 'Búsqueda', context).catch(() => null),
+    client.music.search(query, 'Búsqueda', { ...context, multiple: true }).catch(() => null),
     leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`),
   ])
 

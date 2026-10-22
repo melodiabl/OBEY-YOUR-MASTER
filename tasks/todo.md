@@ -1726,3 +1726,9 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Seleccionar y conectar `trinium-02` como principal; conservar Serenetia/GDjkhp/MilloHost y nodo privado apagado. Ocho comprobaciones de pool, 25 originales, tres Compose y salud operativa pasan. [Entrega](../docs/platform/DESPLIEGUE-TRINIUM-2026-10-22.md).
 - [ ] Escucha y conmutación de voz reales; no había reproducción observada al verificar el arranque.
 - [ ] Adaptar letras/capacidades nativas de NodeLink, sin confundir versión del motor y API v4; pendientes globales conservados.
+
+### Búsquedas, álbumes y radio · corrección solicitada
+
+- [x] Reproducir búsqueda escasa de adela, respuesta nativa album y API 50006 de radio; corregir selectores, colecciones y transiciones vacías. 19 grupos temporales, consulta real 11 pistas/siete álbumes/álbum de 11 canciones y 25 originales pasan. [Alcance](../docs/guia-arquitectura/BUSQUEDAS_ALBUMES_RADIO.md).
+- [ ] Desplegar manteniendo Trinium 02 principal, respaldos públicos y privado apagado.
+- [ ] Recorrido y escucha reales en Discord; conservar pendientes de letras y plan global.

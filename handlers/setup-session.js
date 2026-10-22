@@ -14,7 +14,7 @@ function attachSetupSession(client, message, context, { controls, notice, onErro
       await interaction.followUp({ content: t(locale(), 'setup.form.saveBeforeBack'), ephemeral: true, allowedMentions: { parse: [] } })
       return
     }
-    await interaction.editReply({ content: '', embeds: [], components: [], attachments: [] })
+    await interaction.editReply({ components: [] })
     session.close('back')
     await back()
   } } }

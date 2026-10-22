@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "baselineFailuresReproduced": [
+    "Picker stopped after one-item search response",
+    "Native album loadType not queued as complete collection",
+    "Radio choices hit Discord API 50006 by clearing all message content"
+  ],
+  "localRegressionGroupsPassed": 19,
+  "originalTestsPassed": 25,
+  "originalTestFiles": 3,
+  "welcomeTypecheck": "passed",
+  "dependencyRules": {
+    "passed": true,
+    "modules": 1078,
+    "dependencies": 3289
+  },
+  "liveReadOnlyProviderResults": [
+    {
+      "query": "spsearch:adela",
+      "http": 200,
+      "loadType": "search",
+      "tracks": 1,
+      "sourceNames": [
+        "spotify"
+      ]
+    },
+    {
+      "query": "ytsearch:adela",
+      "http": 200,
+      "loadType": "search",
+      "tracks": 10,
+      "sourceNames": [
+        "youtube"
+      ]
+    },
+    {
+      "query": "spsearch:album:adela",
+      "http": 200,
+      "loadType": "search",
+      "tracks": 1,
+      "sourceNames": [
+        "spotify"
+      ]
+    },
+    {
+      "query": "https://listen.reyfm.de/original_320kbps.mp3",
+      "http": 200,
+      "loadType": "track",
+      "tracks": 1,
+      "sourceNames": [
+        "http"
+      ]
+    },
+    {
+      "query": "https://streams.ilovemusic.de/iloveradio1.mp3",
+      "http": 200,
+      "loadType": "track",
+      "tracks": 1,
+      "sourceNames": [
+        "http"
+      ]
+    }
+  ],
+  "liveCatalogResult": {
+    "pickerTracks": 11,
+    "albums": 7,
+    "albumResolved": {
+      "loadType": "playlist",
+      "tracks": 11
+    },
+    "ms": 4500
+  },
+  "radioActivationTransport": "Isolated music/store/Discord transports with actual form builders and services",
+  "radioFlowGroupsPassed": 6,
+  "setupDiagnostic": "Two real setup-session/control api_50006 rows at setup-choices.js:29 observed before fix; no guild/user data retained",
+  "npmProductionAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 36,
+    "high": 1,
+    "critical": 0,
+    "total": 37
+  },
+  "sourceHashes": {
+    "handlers/music/node-search.js": "2b40fbe6367bdba66b85ce6b4226f72c4a296f4d2b03ff9824f96d903ee3f984",
+    "handlers/discordmusiccatalog.js": "60ca9bfe8bded48445b4a4b7fd12bdef6c41839d5cba87478aec426002daf22c",
+    "handlers/musiccatalog.js": "3a6ee75891dca2ca4caefb4ee1198d53710de2e4799e68bdfbe2ef739396dbc8",
+    "handlers/setup-choices.js": "70501380b70d24bde2e95f686e3222ff28f2ee475a50198301cc629d84e2652e",
+    "handlers/setup-session.js": "79f0383f6382e549749d4aad0a5976c945f38854b11cee25d8200fa5448e71c9"
+  },
+  "temporaryVerifierHashes": {
+    "regressions.cjs": "e092fd06ff3421f9380851b5ac3572c1041c6654c6c75b3467c4d80704483338",
+    "extended.cjs": "bcb0bfe7469f1241cf45c3e69d2f8158ffb53dee81769564f2e599b6c569bbd9",
+    "radio-flow.cjs": "96feb320c3a8816f0d9d264fff48100e53642c87f25b63774e70177ff02eb535"
+  },
+  "temporaryVerifiersRetained": false,
+  "externalDiscordTestMessagesSent": false,
+  "voiceJoinedForTesting": false,
+  "productionDataChangedByTests": false,
+  "remaining": [
+    "Actual Discord picker/menu and audio acceptance",
+    "Native NodeLink lyrics adapter and capability discovery",
+    "Original setup incident and full existing plan"
+  ]
+}

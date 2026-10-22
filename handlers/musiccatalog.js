@@ -509,7 +509,7 @@ function createMusicCatalog(client, options = {}) {
       if (!result?.data || ['error', 'empty'].includes(result.loadType)) return []
       const rawTracks = result.loadType === 'track'
         ? [result.data]
-        : result.loadType === 'playlist'
+        : ['playlist', 'album'].includes(result.loadType)
           ? result.data?.tracks || []
           : Array.isArray(result.data) ? result.data : []
       return rawTracks.map(track => normalizeTrack(track, sourceName))
@@ -704,10 +704,10 @@ function createMusicCatalog(client, options = {}) {
     if (!result?.data || ['error', 'empty'].includes(result.loadType)) {
       return { tracks: [], albums: [], playlists: [] }
     }
-    if (result.loadType === 'playlist') {
+    if (['playlist', 'album'].includes(result.loadType)) {
       const info = result.data?.info || {}
       const pluginInfo = result.data?.pluginInfo || {}
-      const collectionType = /album/i.test(info.name || pluginInfo.type || '') ? 'album' : 'playlist'
+      const collectionType = result.loadType === 'album' || /album/i.test(info.name || pluginInfo.type || '') ? 'album' : 'playlist'
       const collection = normalizeCollection({
         info: { ...info, uri: query, totalTracks: result.data?.tracks?.length },
         pluginInfo,
