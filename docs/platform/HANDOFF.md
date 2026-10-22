@@ -2,6 +2,10 @@
 
 Rama: `feature/obey-main-implementation`, repositorio `melodiabl/OBEY-YOUR-MASTER`. El usuario entregó la planificación nueva y reanudó trabajo local el 18/10/2026; el estado del 17/10 que sigue se conserva como registro histórico.
 
+## Estado vigente · búsquedas/radio corregidas el 22/10/2026
+
+Desplegado `07da107` (correcciones `9402f80` y parche follow-redirects 1.16.1): !play adela continúa tras la pista única de Spotify; álbumes nativos se cargan completos; elección/regreso de radio/setup evita API 50006. 19 grupos locales, 25 originales locales y en imagen limpia, 31 hashes y tipos/dependencias pasan. Auditoría sin high/critical, 36 moderate heredadas. Consulta real desde el contenedor: 11 pistas, siete álbumes y colección de 11 canciones; una radio entregó PCM no silencioso, sin iniciar voz o mensajes de prueba. Bot/imágenes/Redis saludables, Gateway/heartbeat y salud local/pública 200. Trinium 02 principal y respaldos Serenetia/MilloHost conectados; GDjkhp configurado sin conexión, privado apagado. Backup/reversión conservados, temporales retirados, sin push. [Entrega vigente](DESPLIEGUE-BUSQUEDAS-RADIO-2026-10-22.md). Recorrido/escucha reales, letras NodeLink y resto del plan siguen pendientes.
+
 ## Estado vigente · Trinium activado el 22/10/2026
 
 Por instrucción del usuario, `trinium-02` es el principal predeterminado y está conectado. Serenetia/MilloHost conectados como respaldos; GDjkhp configurado sin conexión confirmada. Cambio solo de configuración, mismo código `0be39f3` e imagen `e806ccb`; privado apagado. Ocho escenarios del selector, 25 originales y tres Compose pasan. Gateway/heartbeat, Mongo, 20 slash, 25 hashes y salud local/pública 200; bot/imágenes/Redis saludables, cero reinicios y solo tres servicios always. Snapshots y reversión preservados, sin push. [Entrega vigente](DESPLIEGUE-TRINIUM-2026-10-22.md). Sin reproducción activa observada: escucha/conmutación real, adaptador de letras NodeLink y pendientes globales siguen abiertos.

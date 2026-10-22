@@ -1730,5 +1730,5 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 ### Búsquedas, álbumes y radio · corrección solicitada
 
 - [x] Reproducir búsqueda escasa de adela, respuesta nativa album y API 50006 de radio; corregir selectores, colecciones y transiciones vacías. 19 grupos temporales, consulta real 11 pistas/siete álbumes/álbum de 11 canciones y 25 originales pasan. [Alcance](../docs/guia-arquitectura/BUSQUEDAS_ALBUMES_RADIO.md).
-- [ ] Desplegar manteniendo Trinium 02 principal, respaldos públicos y privado apagado.
+- [x] Desplegar `07da107`: 31 hashes, 25 tests en imagen limpia, búsqueda desde el contenedor y PCM de una radio, servicios saludables y respaldo/reversión conservados; Trinium 02 principal, respaldos públicos y privado apagado. [Evidencia](../docs/platform/evidence/search-radio-deployment-20261022.json).
 - [ ] Recorrido y escucha reales en Discord; conservar pendientes de letras y plan global.

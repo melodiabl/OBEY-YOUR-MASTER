@@ -27,8 +27,8 @@
     "latestRevision": "documentation_refinement_of_existing_scope"
   },
   "currentRuntime": {
-    "code": "0be39f31008519de4cda3c46e41d08c664a794c2",
-    "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
+    "code": "07da107f020d40d825373af4cd5f35d231a838da",
+    "image": "078d7a2807c82dce298cc9f3afe44f4ea7874c3ac600222fcb3d0ae95cc5e667",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,11 +36,11 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/trinium-deployment-20261022.json",
-    "change": "Configuration-only: Trinium NodeLink 02 principal; existing engine, public backups and private-off policy retained",
-    "tag": "release-log-visibility-20261020-0be39f3",
+    "evidence": "evidence/search-radio-deployment-20261022.json",
+    "change": "Fix sparse music pickers, complete native albums and empty radio/setup transitions; follow-redirects security patch; Trinium 02 retained",
+    "tag": "release-search-radio-20261022-07da107",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-TRINIUM-2026-10-22.md",
+    "statusEvidence": "DESPLIEGUE-BUSQUEDAS-RADIO-2026-10-22.md",
     "connectedPublicNodes": [
       "trinium-02",
       "serenetia",
@@ -50,7 +50,7 @@
       "gdjkhp"
     ],
     "selectedNodeConnected": true,
-    "deploymentKind": "configuration_only"
+    "deploymentKind": "code_and_dependency_patch"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

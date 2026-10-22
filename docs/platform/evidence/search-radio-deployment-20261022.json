@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-22T21:58:38.766530+00:00",
+  "code": "07da107f020d40d825373af4cd5f35d231a838da",
+  "imageTag": "localhost/obey-your-master_bot:release-search-radio-20261022-07da107",
+  "containers": {
+    "obey_bot": {
+      "id": "4d7b3f4c3556f289481804045e6d1c659e4c4ba0ae20f3bd82ff1e1ecd450af2",
+      "image": "078d7a2807c82dce298cc9f3afe44f4ea7874c3ac600222fcb3d0ae95cc5e667",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "runtimeSourceHashesMatched": 31,
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "registeredGlobalSlashCommands": 20,
+  "selected": "trinium-02",
+  "privateEnabled": false,
+  "enabledPublicNodes": [
+    "trinium-02",
+    "serenetia",
+    "gdjkhp",
+    "millohost"
+  ],
+  "followRedirects": "1.16.1",
+  "connectedPublicNodes": [
+    "trinium-02",
+    "serenetia",
+    "millohost"
+  ],
+  "health": {
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 104
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 104
+      }
+    }
+  },
+  "startupFailureMarkers": [],
+  "logCaptureFailuresDuringVerification": 0,
+  "setupApi50006AfterRestart": 0,
+  "ownerNoticeRowsAtStartup": 0,
+  "restartAlwaysContainers": [
+    "obey_bot",
+    "obey_images",
+    "obey_redis"
+  ],
+  "runtimeCatalog": {
+    "query": "adela",
+    "primary": "trinium-02",
+    "tracks": 11,
+    "albums": 7,
+    "firstAlbumTracks": 11,
+    "firstAlbumLoadType": "playlist",
+    "followRedirects": "1.16.1",
+    "externalDiscordMessagesSent": false,
+    "voiceJoined": false
+  },
+  "imageChecks": {
+    "matched": 31,
+    "total": 31,
+    "followRedirects": "1.16.1",
+    "originalTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0
+    },
+    "testExitCode": 0
+  },
+  "verificationPassed": true,
+  "localEvidence": "search-radio-local-20261022.json",
+  "radioAudioProbe": {
+    "stationId": "1",
+    "source": "http",
+    "http": 200,
+    "mime": "audio/l16;rate=48000;channels=2",
+    "bytes": 192436,
+    "nonZeroBytes": 187075,
+    "audioStored": false,
+    "voiceJoined": false
+  },
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-22T21-51-24-460Z",
+    "mongoArchiveBytes": 59233751,
+    "privateSnapshotDirectory": ".runtime/deploy-search-radio-20261022"
+  },
+  "rollback": {
+    "image": "e806ccb03c04dd41e4741d315b73d56ecc3ee8cebfaedef4102de98b6020a635",
+    "imageName": "localhost/obey-your-master_bot:release-log-visibility-20261020-0be39f3",
+    "argumentsFile": ".runtime/deploy-search-radio-20261022/rollback-arguments.json",
+    "testedDuringThisDeployment": false
+  },
+  "temporaryVerifiersRetained": false,
+  "temporaryBuildContextRemoved": true,
+  "externalDiscordTestMessagesSent": false,
+  "artificialGuildEventsTriggered": false,
+  "voiceJoinedForTesting": false,
+  "pushed": false,
+  "remaining": [
+    "Actual Discord user walkthrough and voice listening",
+    "Native NodeLink lyrics/capability integration",
+    "Original setup incident and remaining global plan"
+  ]
+}
