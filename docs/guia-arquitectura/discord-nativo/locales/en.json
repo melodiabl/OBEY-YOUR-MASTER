@@ -1,0 +1,50 @@
+{
+  "discordNative": {
+    "picker": {
+      "channel": "Choose a channel",
+      "role": "Choose a role",
+      "user": "Choose a person",
+      "invalid": "That resource is not available for this feature."
+    },
+    "form": {
+      "report": "Report a bug",
+      "area": "Where did it happen?",
+      "music": "Music",
+      "tickets": "Tickets",
+      "other": "Other",
+      "description": "Tell us what happened and how to reproduce it.",
+      "evidence": "Optional screenshot or file",
+      "reproducible": "I was able to reproduce the bug",
+      "invalidFile": "We could not accept that file. Check its format and size.",
+      "expired": "This form expired. Open it again to continue."
+    },
+    "voice": {
+      "playing": "Playing: {title} — {artist}",
+      "paused": "Playback paused",
+      "waiting": "Waiting for songs",
+      "permission": "OBEY could not update the channel status. Playback continues."
+    },
+    "time": {
+      "ends": "Ends {relativeTime}",
+      "opened": "Opened {relativeTime}",
+      "estimated": "Estimated end: {relativeTime}"
+    },
+    "poll": {
+      "preview": "Review the poll before publishing it.",
+      "unknown": "The result is not available yet."
+    },
+    "event": {
+      "preview": "Review the event date, time zone, and destination.",
+      "created": "Event created: {eventName}."
+    },
+    "automod": {
+      "review": "Review the rule and its exceptions before applying it.",
+      "saved": "OBEY rule saved."
+    },
+    "capability": {
+      "unavailable": "This feature is not enabled in this server yet.",
+      "denied": "There are not enough permissions to complete this action.",
+      "notReady": "OBEY is still preparing its services. Try again in a moment."
+    }
+  }
+}

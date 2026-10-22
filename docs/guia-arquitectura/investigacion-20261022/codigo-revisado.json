@@ -1,0 +1,65 @@
+[
+  {
+    "repo": "Cog-Creators/Red-DiscordBot",
+    "commit": "004a160b2b8b244d8c623f2f4ede819a2b16d7a1",
+    "path": "redbot/cogs/audio/core/events/lavalink.py",
+    "url": "https://raw.githubusercontent.com/Cog-Creators/Red-DiscordBot/004a160b2b8b244d8c623f2f4ede819a2b16d7a1/redbot/cogs/audio/core/events/lavalink.py",
+    "sha256": "3ffe9b53064aca085134bba821f0351b994d0a477b0ea9b1ed1001c31a3cecfb",
+    "review": "El listener distingue TRACK_START, TRACK_END y QUEUE_END; el último coordina autoplay y sus errores. OBEY debe tener una sola autoridad de avance.",
+    "licenseMetadata": "GPL-3.0"
+  },
+  {
+    "repo": "Cog-Creators/Red-DiscordBot",
+    "commit": "004a160b2b8b244d8c623f2f4ede819a2b16d7a1",
+    "path": "redbot/cogs/audio/core/commands/queue.py",
+    "url": "https://raw.githubusercontent.com/Cog-Creators/Red-DiscordBot/004a160b2b8b244d8c623f2f4ede819a2b16d7a1/redbot/cogs/audio/core/commands/queue.py",
+    "sha256": "1c3c9670ad582d726be1edda521052fdc1ec02b5e915a3db54e52ee9a74082be",
+    "review": "La vista de cola lee auto_play, shuffle y repeat y comprueba permisos DJ en operaciones. OBEY presentará el estado confirmado de su servicio.",
+    "licenseMetadata": "GPL-3.0"
+  },
+  {
+    "repo": "botlabs-gg/yagpdb",
+    "commit": "d002e62908167b6eb67cc72177246f2492aad295",
+    "path": "moderation/modlog.go",
+    "url": "https://raw.githubusercontent.com/botlabs-gg/yagpdb/d002e62908167b6eb67cc72177246f2492aad295/moderation/modlog.go",
+    "sha256": "3f38fce8185395949e1760cacb57674ad3b052348be17497c0965d6a46ac0ae8",
+    "review": "ModlogAction reúne semántica visual; CreateModlogEmbed recibe autor, acción, objetivo y motivo. OBEY debe mantener esos campos tipados fuera del texto traducido.",
+    "licenseMetadata": "MIT"
+  },
+  {
+    "repo": "botlabs-gg/yagpdb",
+    "commit": "d002e62908167b6eb67cc72177246f2492aad295",
+    "path": "automod/effects.go",
+    "url": "https://raw.githubusercontent.com/botlabs-gg/yagpdb/d002e62908167b6eb67cc72177246f2492aad295/automod/effects.go",
+    "sha256": "4517643f33ac5f5b153ed0be82136cfb4f777828d319612e468e2864e77bd4cc",
+    "review": "Los efectos contemplan fallos de Discord y acciones diferidas. OBEY distinguirá efecto desconocido, confirmado y notificación fallida.",
+    "licenseMetadata": "MIT"
+  },
+  {
+    "repo": "jagrosh/MusicBot",
+    "commit": "859e5c5862decf433f8face5eaca3372d7d27b22",
+    "path": "src/main/java/com/jagrosh/jmusicbot/audio/AudioHandler.java",
+    "url": "https://raw.githubusercontent.com/jagrosh/MusicBot/859e5c5862decf433f8face5eaca3372d7d27b22/src/main/java/com/jagrosh/jmusicbot/audio/AudioHandler.java",
+    "sha256": "7633d597dd0527938143b1e2747944f679a35c618d9749783ceeb2bae93fdfff",
+    "review": "onTrackEnd repite solo ante FINISHED y decide consumir cola o playlist por defecto. No es código para copiar a lavalink-client.",
+    "licenseMetadata": "Apache-2.0"
+  },
+  {
+    "repo": "poketwo/poketwo",
+    "commit": "83349975739fb30bdf7fa3ee6364e552877808e8",
+    "path": "cogs/trading.py",
+    "url": "https://raw.githubusercontent.com/poketwo/poketwo/83349975739fb30bdf7fa3ee6364e552877808e8/cogs/trading.py",
+    "sha256": "781dc0a16922ecc834201dd1a30adfebcd3dd4406fc95e260ab8dde2617602df",
+    "review": "Trading usa ConfirmationView, vencimiento y Redis para estado/cancelación entre clusters. Esto no demuestra por sí solo seguridad transaccional.",
+    "licenseMetadata": "GPL-3.0"
+  },
+  {
+    "repo": "poketwo/poketwo",
+    "commit": "83349975739fb30bdf7fa3ee6364e552877808e8",
+    "path": "cogs/market.py",
+    "url": "https://raw.githubusercontent.com/poketwo/poketwo/83349975739fb30bdf7fa3ee6364e552877808e8/cogs/market.py",
+    "sha256": "f3a0a338abd289b38733895c027abcb3b3709bdbe74897fcf8de063c8cd0c804",
+    "review": "Market aplica cambios de compra, propietario y saldos. La inspección no acredita ausencia de carreras; OBEY requiere su propia operación atómica o saga conciliable.",
+    "licenseMetadata": "GPL-3.0"
+  }
+]

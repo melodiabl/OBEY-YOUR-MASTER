@@ -1,0 +1,3056 @@
+{
+  "version": 2,
+  "scope": "included-for-implementation-not-runtime",
+  "reference": "https://docs.quark.bot/logs/types",
+  "referenceTypesCount": 113,
+  "verifiedOriginalAssetsCount": 4,
+  "completeOriginalEmojiInventory": false,
+  "palette": {
+    "gold": "#FFD36F",
+    "green": "#42C87B",
+    "red": "#F4677C",
+    "blue": "#66A8FF",
+    "navy": "#101D36"
+  },
+  "entries": [
+    {
+      "key": "event.q001-member-join",
+      "label": "Miembro entró",
+      "category": "Members",
+      "referenceEventId": 1,
+      "noun": "member",
+      "action": "join",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q001-member-join.svg",
+          "png": "png/dorado/q001-member-join.png",
+          "color": "#FFD36F",
+          "sha256": "f600409369459e64173b61d033724d1f91a19270aa6832579a89a84f57401abb"
+        },
+        "estado": {
+          "svg": "svg/estado/q001-member-join.svg",
+          "png": "png/estado/q001-member-join.png",
+          "color": "#42C87B",
+          "sha256": "c7a4ebc7c4fe73a09478bfd3f71d3bc439b00ae5f99aa2ecacb62278a4d88e4e"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q001-member-join",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q002-member-leave",
+      "label": "Miembro salió",
+      "category": "Members",
+      "referenceEventId": 2,
+      "noun": "member",
+      "action": "leave",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q002-member-leave.svg",
+          "png": "png/dorado/q002-member-leave.png",
+          "color": "#FFD36F",
+          "sha256": "e946061f0dd771a71133c99b6d390b95098b006f93d34c78472f3a5af154ebfe"
+        },
+        "estado": {
+          "svg": "svg/estado/q002-member-leave.svg",
+          "png": "png/estado/q002-member-leave.png",
+          "color": "#F4677C",
+          "sha256": "2d3c2a51031906962b704475dca195e5362db03d7510d6cf3791a0c0dfdd5e6e"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q002-member-leave",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q025-name-edit",
+      "label": "Apodo actualizado",
+      "category": "Members",
+      "referenceEventId": 25,
+      "noun": "name",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q025-name-edit.svg",
+          "png": "png/dorado/q025-name-edit.png",
+          "color": "#FFD36F",
+          "sha256": "0206064519dfaf8a19c146a220bff48cb028106158f10e6d95e9f4a5e2ba8dd9"
+        },
+        "estado": {
+          "svg": "svg/estado/q025-name-edit.svg",
+          "png": "png/estado/q025-name-edit.png",
+          "color": "#66A8FF",
+          "sha256": "f48a701c9d6151b616c08bf13c3a28645b8c91302c75588cbf513baa7e7c8f21"
+        }
+      }
+    },
+    {
+      "key": "event.q026-avatar-edit",
+      "label": "Avatar del servidor cambiado",
+      "category": "Members",
+      "referenceEventId": 26,
+      "noun": "avatar",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q026-avatar-edit.svg",
+          "png": "png/dorado/q026-avatar-edit.png",
+          "color": "#FFD36F",
+          "sha256": "9e76c278fabddf56efb2b5e2e7bde3caf94680a104ea792649b975cd6fa25755"
+        },
+        "estado": {
+          "svg": "svg/estado/q026-avatar-edit.svg",
+          "png": "png/estado/q026-avatar-edit.png",
+          "color": "#66A8FF",
+          "sha256": "84059ed373940993a22fb583113793b96ea6790b95d23a4e1ba9b774f6b60fa5"
+        }
+      }
+    },
+    {
+      "key": "event.q044-role-grant",
+      "label": "Rol concedido",
+      "category": "Members",
+      "referenceEventId": 44,
+      "noun": "role",
+      "action": "grant",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q044-role-grant.svg",
+          "png": "png/dorado/q044-role-grant.png",
+          "color": "#FFD36F",
+          "sha256": "9dabf3ec46c68ae3b411d2cb47288e1f8dcf33239a85e8eea3e543e894d39aa7"
+        },
+        "estado": {
+          "svg": "svg/estado/q044-role-grant.svg",
+          "png": "png/estado/q044-role-grant.png",
+          "color": "#42C87B",
+          "sha256": "68df45446228e3acc0b724954f0b3cb905c2e45de6183b68dada3f65ee3f18a2"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q044-role-grant",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q045-role-revoke",
+      "label": "Rol retirado",
+      "category": "Members",
+      "referenceEventId": 45,
+      "noun": "role",
+      "action": "revoke",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q045-role-revoke.svg",
+          "png": "png/dorado/q045-role-revoke.png",
+          "color": "#FFD36F",
+          "sha256": "92707811fca90b2041f733f4f72a63f912cd83591344890766d10641494a6987"
+        },
+        "estado": {
+          "svg": "svg/estado/q045-role-revoke.svg",
+          "png": "png/estado/q045-role-revoke.png",
+          "color": "#F4677C",
+          "sha256": "28fb3433eb8c99b0182ffc82578e4c786e17d360ce15db323e5aba2c1d36ffdd"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q045-role-revoke",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q046-members-delete",
+      "label": "Miembros depurados",
+      "category": "Members",
+      "referenceEventId": 46,
+      "noun": "members",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q046-members-delete.svg",
+          "png": "png/dorado/q046-members-delete.png",
+          "color": "#FFD36F",
+          "sha256": "39cae91885787396e6b594cdcdb7f5009f503cc3f17df3b00f47dfa5f6aa5b23"
+        },
+        "estado": {
+          "svg": "svg/estado/q046-members-delete.svg",
+          "png": "png/estado/q046-members-delete.png",
+          "color": "#F4677C",
+          "sha256": "311659391c612905793e7e7649f5b1845044dcb083ab6bf16a1e514cff8f855f"
+        }
+      }
+    },
+    {
+      "key": "event.q057-bot-add",
+      "label": "Bot añadido",
+      "category": "Members",
+      "referenceEventId": 57,
+      "noun": "bot",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q057-bot-add.svg",
+          "png": "png/dorado/q057-bot-add.png",
+          "color": "#FFD36F",
+          "sha256": "cce16976006f778c73ddc53b23812bdbed7a392fdc9a7c38d77e617737cba7d4"
+        },
+        "estado": {
+          "svg": "svg/estado/q057-bot-add.svg",
+          "png": "png/estado/q057-bot-add.png",
+          "color": "#42C87B",
+          "sha256": "291681c2d9ea738251a42d630d8369ff1c9bf2b1e258f775237438d70720d9e3"
+        }
+      }
+    },
+    {
+      "key": "event.q058-bot-remove",
+      "label": "Bot retirado",
+      "category": "Members",
+      "referenceEventId": 58,
+      "noun": "bot",
+      "action": "remove",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q058-bot-remove.svg",
+          "png": "png/dorado/q058-bot-remove.png",
+          "color": "#FFD36F",
+          "sha256": "e7d7dd8474030affd1c7668064bc5284f3f2701793cfc1050ebae3d80d144650"
+        },
+        "estado": {
+          "svg": "svg/estado/q058-bot-remove.svg",
+          "png": "png/estado/q058-bot-remove.png",
+          "color": "#F4677C",
+          "sha256": "d8b24efd173624475cc3ec318b20609a077f3821ffc16ced45bdbd9a275710ac"
+        }
+      }
+    },
+    {
+      "key": "event.q000-file-delete",
+      "label": "Adjunto borrado",
+      "category": "Messages",
+      "referenceEventId": 0,
+      "noun": "file",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q000-file-delete.svg",
+          "png": "png/dorado/q000-file-delete.png",
+          "color": "#FFD36F",
+          "sha256": "f83ff87310032c86841d371d5b02c8e492a50851d6780778675831b740c6dec7"
+        },
+        "estado": {
+          "svg": "svg/estado/q000-file-delete.svg",
+          "png": "png/estado/q000-file-delete.png",
+          "color": "#F4677C",
+          "sha256": "7339fec9e81216961d51ec67aee3b6057b326c10cf007e3a394222663e006d11"
+        }
+      }
+    },
+    {
+      "key": "event.q003-messages-delete",
+      "label": "Mensajes borrados en lote",
+      "category": "Messages",
+      "referenceEventId": 3,
+      "noun": "messages",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q003-messages-delete.svg",
+          "png": "png/dorado/q003-messages-delete.png",
+          "color": "#FFD36F",
+          "sha256": "4b921401d692ae090d64af916cda4a449017babc0ebeeb7078540029f0ac1c4e"
+        },
+        "estado": {
+          "svg": "svg/estado/q003-messages-delete.svg",
+          "png": "png/estado/q003-messages-delete.png",
+          "color": "#F4677C",
+          "sha256": "ec7921dd053d3f368da6c7a4c28f355ea3ffeeda6f295895e68bfc19ecbb74b9"
+        }
+      }
+    },
+    {
+      "key": "event.q004-thread-delete",
+      "label": "Mensaje de hilo borrado",
+      "category": "Messages",
+      "referenceEventId": 4,
+      "noun": "thread",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q004-thread-delete.svg",
+          "png": "png/dorado/q004-thread-delete.png",
+          "color": "#FFD36F",
+          "sha256": "468bb7d22da8db455b0150b10b9e7d1f428ee530d37fec446325fe9de23f7513"
+        },
+        "estado": {
+          "svg": "svg/estado/q004-thread-delete.svg",
+          "png": "png/estado/q004-thread-delete.png",
+          "color": "#F4677C",
+          "sha256": "c38655767d0103d18abe1f8a2985e1efca0c3afc466b82ab6c605902d80920b0"
+        }
+      }
+    },
+    {
+      "key": "event.q005-message-delete",
+      "label": "Mensaje borrado",
+      "category": "Messages",
+      "referenceEventId": 5,
+      "noun": "message",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q005-message-delete.svg",
+          "png": "png/dorado/q005-message-delete.png",
+          "color": "#FFD36F",
+          "sha256": "6b4c19f8c3cb266e2365e417bab307b7c72021a3b5061a295e61d4a06914f663"
+        },
+        "estado": {
+          "svg": "svg/estado/q005-message-delete.svg",
+          "png": "png/estado/q005-message-delete.png",
+          "color": "#F4677C",
+          "sha256": "d9de836e486d4466be4c2212b2fa845b1d5d5cd4cf429f986333baad84cf9268"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q005-message-delete",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q006-thread-edit",
+      "label": "Mensaje de hilo editado",
+      "category": "Messages",
+      "referenceEventId": 6,
+      "noun": "thread",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q006-thread-edit.svg",
+          "png": "png/dorado/q006-thread-edit.png",
+          "color": "#FFD36F",
+          "sha256": "3e4e41bd5fcdcf492d176b2d8d9013069057f1fc86e332f020b13012d989e3c6"
+        },
+        "estado": {
+          "svg": "svg/estado/q006-thread-edit.svg",
+          "png": "png/estado/q006-thread-edit.png",
+          "color": "#66A8FF",
+          "sha256": "d30151e3679c47db52bc01d66a8f992935063c9e8efabb5b0ac2de47e3f1d63c"
+        }
+      }
+    },
+    {
+      "key": "event.q007-message-edit",
+      "label": "Mensaje editado",
+      "category": "Messages",
+      "referenceEventId": 7,
+      "noun": "message",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q007-message-edit.svg",
+          "png": "png/dorado/q007-message-edit.png",
+          "color": "#FFD36F",
+          "sha256": "9cc8f4ee5816d562095323ed233ae90cb02243404b166f2ac02389fdccf66b75"
+        },
+        "estado": {
+          "svg": "svg/estado/q007-message-edit.svg",
+          "png": "png/estado/q007-message-edit.png",
+          "color": "#66A8FF",
+          "sha256": "2a40e5cf764ce9c9895c495fe75aec49297c523445d304d30a20a106603a52de"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q007-message-edit",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q010-thread-add",
+      "label": "Hilo creado",
+      "category": "Messages",
+      "referenceEventId": 10,
+      "noun": "thread",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q010-thread-add.svg",
+          "png": "png/dorado/q010-thread-add.png",
+          "color": "#FFD36F",
+          "sha256": "6a0c9865754e59b991b301d38d140314a318ea5ad20de4b40cccb35034037a72"
+        },
+        "estado": {
+          "svg": "svg/estado/q010-thread-add.svg",
+          "png": "png/estado/q010-thread-add.png",
+          "color": "#42C87B",
+          "sha256": "9ed0f9903580a06bd275b2cfa348163857c7e80b57c69cdf3bdf73e7b645ab13"
+        }
+      }
+    },
+    {
+      "key": "event.q011-thread-delete",
+      "label": "Hilo eliminado",
+      "category": "Messages",
+      "referenceEventId": 11,
+      "noun": "thread",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q011-thread-delete.svg",
+          "png": "png/dorado/q011-thread-delete.png",
+          "color": "#FFD36F",
+          "sha256": "468bb7d22da8db455b0150b10b9e7d1f428ee530d37fec446325fe9de23f7513"
+        },
+        "estado": {
+          "svg": "svg/estado/q011-thread-delete.svg",
+          "png": "png/estado/q011-thread-delete.png",
+          "color": "#F4677C",
+          "sha256": "c38655767d0103d18abe1f8a2985e1efca0c3afc466b82ab6c605902d80920b0"
+        }
+      }
+    },
+    {
+      "key": "event.q034-message-pin",
+      "label": "Mensaje fijado",
+      "category": "Messages",
+      "referenceEventId": 34,
+      "noun": "message",
+      "action": "pin",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q034-message-pin.svg",
+          "png": "png/dorado/q034-message-pin.png",
+          "color": "#FFD36F",
+          "sha256": "424feb27d746784615d82fb188bc66a2b4e7528d555bf92b4e976847e1f76c96"
+        },
+        "estado": {
+          "svg": "svg/estado/q034-message-pin.svg",
+          "png": "png/estado/q034-message-pin.png",
+          "color": "#FFD36F",
+          "sha256": "424feb27d746784615d82fb188bc66a2b4e7528d555bf92b4e976847e1f76c96"
+        }
+      }
+    },
+    {
+      "key": "event.q035-message-unpin",
+      "label": "Mensaje desfijado",
+      "category": "Messages",
+      "referenceEventId": 35,
+      "noun": "message",
+      "action": "unpin",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q035-message-unpin.svg",
+          "png": "png/dorado/q035-message-unpin.png",
+          "color": "#FFD36F",
+          "sha256": "4e50a9c15abbd70f1b2fe4fbe2123ba8df33b9ee9f8840aceb848aa8cbc2fe90"
+        },
+        "estado": {
+          "svg": "svg/estado/q035-message-unpin.svg",
+          "png": "png/estado/q035-message-unpin.png",
+          "color": "#FFD36F",
+          "sha256": "4e50a9c15abbd70f1b2fe4fbe2123ba8df33b9ee9f8840aceb848aa8cbc2fe90"
+        }
+      }
+    },
+    {
+      "key": "event.q051-reaction-remove",
+      "label": "Reacción retirada",
+      "category": "Messages",
+      "referenceEventId": 51,
+      "noun": "reaction",
+      "action": "remove",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q051-reaction-remove.svg",
+          "png": "png/dorado/q051-reaction-remove.png",
+          "color": "#FFD36F",
+          "sha256": "d3fe9e4d6a5adc7177968ea6fa58a3faeed241f936b1d7ee50028174ce8ac0e6"
+        },
+        "estado": {
+          "svg": "svg/estado/q051-reaction-remove.svg",
+          "png": "png/estado/q051-reaction-remove.png",
+          "color": "#F4677C",
+          "sha256": "9c24c73f9636cca478fbab8c02d711022a7c5298de97d62ad9e3ac575df95ac6"
+        }
+      }
+    },
+    {
+      "key": "event.q086-poll-delete",
+      "label": "Encuesta eliminada",
+      "category": "Messages",
+      "referenceEventId": 86,
+      "noun": "poll",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q086-poll-delete.svg",
+          "png": "png/dorado/q086-poll-delete.png",
+          "color": "#FFD36F",
+          "sha256": "5dcc555933743089b909106a91195b61c885238bb037e1ea2fca1478b3c2e801"
+        },
+        "estado": {
+          "svg": "svg/estado/q086-poll-delete.svg",
+          "png": "png/estado/q086-poll-delete.png",
+          "color": "#F4677C",
+          "sha256": "d0888bd5a004e4eb45486b180f882ba0c38086019daafb4383518848911fd84b"
+        }
+      }
+    },
+    {
+      "key": "event.q087-thread-modify",
+      "label": "Hilo modificado",
+      "category": "Messages",
+      "referenceEventId": 87,
+      "noun": "thread",
+      "action": "modify",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q087-thread-modify.svg",
+          "png": "png/dorado/q087-thread-modify.png",
+          "color": "#FFD36F",
+          "sha256": "bfe0221fb4d96ffa7d6f0375418ef8d9afe72c1825a61195da07dd2cee84de32"
+        },
+        "estado": {
+          "svg": "svg/estado/q087-thread-modify.svg",
+          "png": "png/estado/q087-thread-modify.png",
+          "color": "#66A8FF",
+          "sha256": "bdc56ec4cbe26763c229f824836baf0dca9d78f6bf5f1d55fd7aff29bb7b8fd8"
+        }
+      }
+    },
+    {
+      "key": "event.q100-reaction-group-remove",
+      "label": "Varias reacciones retiradas",
+      "category": "Messages",
+      "referenceEventId": 100,
+      "noun": "reactionGroup",
+      "action": "remove",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q100-reaction-group-remove.svg",
+          "png": "png/dorado/q100-reaction-group-remove.png",
+          "color": "#FFD36F",
+          "sha256": "f6303b80465f38f16e83ababa9a6d63075ce69ec89e488342b397de3ab4e6442"
+        },
+        "estado": {
+          "svg": "svg/estado/q100-reaction-group-remove.svg",
+          "png": "png/estado/q100-reaction-group-remove.png",
+          "color": "#F4677C",
+          "sha256": "85d95886188e268b4778cb4a1bfe4a9614153c536d19c0cde81015fffd6fdf7a"
+        }
+      }
+    },
+    {
+      "key": "event.q102-message-shield-block",
+      "label": "Mensaje bloqueado por AutoMod",
+      "category": "Messages",
+      "referenceEventId": 102,
+      "noun": "messageShield",
+      "action": "block",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q102-message-shield-block.svg",
+          "png": "png/dorado/q102-message-shield-block.png",
+          "color": "#FFD36F",
+          "sha256": "10d801e94c0e7a7fe9173338891b13c5a837de818429285aa2562b3f929661b5"
+        },
+        "estado": {
+          "svg": "svg/estado/q102-message-shield-block.svg",
+          "png": "png/estado/q102-message-shield-block.png",
+          "color": "#F4677C",
+          "sha256": "033bee188c3979a9d663c159bd3b20686f8a4c5a33679023d3919766638fa2ab"
+        }
+      }
+    },
+    {
+      "key": "event.q103-thread-member-join",
+      "label": "Miembro entró al hilo",
+      "category": "Messages",
+      "referenceEventId": 103,
+      "noun": "threadMember",
+      "action": "join",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q103-thread-member-join.svg",
+          "png": "png/dorado/q103-thread-member-join.png",
+          "color": "#FFD36F",
+          "sha256": "36bb0527c87ef1b2626996f3c24fa969bbc576aa510d1f085faf2f9224c222be"
+        },
+        "estado": {
+          "svg": "svg/estado/q103-thread-member-join.svg",
+          "png": "png/estado/q103-thread-member-join.png",
+          "color": "#42C87B",
+          "sha256": "f92c505939dfceec0f7ecb96662b68b24453ca31aa9b64be8530185c6affc3ea"
+        }
+      }
+    },
+    {
+      "key": "event.q104-thread-member-leave",
+      "label": "Miembro salió del hilo",
+      "category": "Messages",
+      "referenceEventId": 104,
+      "noun": "threadMember",
+      "action": "leave",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q104-thread-member-leave.svg",
+          "png": "png/dorado/q104-thread-member-leave.png",
+          "color": "#FFD36F",
+          "sha256": "2c80ab9e15fd8f7458c5909e14c592bec815a61c3722e5c6773c480fa7c120dc"
+        },
+        "estado": {
+          "svg": "svg/estado/q104-thread-member-leave.svg",
+          "png": "png/estado/q104-thread-member-leave.png",
+          "color": "#F4677C",
+          "sha256": "26abea5b55d32066981b126e36f6293e41176a950e1017f1adc2562477dc0730"
+        }
+      }
+    },
+    {
+      "key": "event.q105-thread-members-activity",
+      "label": "Varios cambios de miembros del hilo",
+      "category": "Messages",
+      "referenceEventId": 105,
+      "noun": "threadMembers",
+      "action": "activity",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q105-thread-members-activity.svg",
+          "png": "png/dorado/q105-thread-members-activity.png",
+          "color": "#FFD36F",
+          "sha256": "bec540136f238bb2b6bfbc90d0a7a8c709c745e51ff9ae914265bd10287741d2"
+        },
+        "estado": {
+          "svg": "svg/estado/q105-thread-members-activity.svg",
+          "png": "png/estado/q105-thread-members-activity.png",
+          "color": "#66A8FF",
+          "sha256": "63567fae81323e948cf60e6d151bc861b29d30fa19f3723b55af8c4a2755cdd8"
+        }
+      }
+    },
+    {
+      "key": "event.q108-reaction-clear",
+      "label": "Reacciones vaciadas",
+      "category": "Messages",
+      "referenceEventId": 108,
+      "noun": "reaction",
+      "action": "clear",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q108-reaction-clear.svg",
+          "png": "png/dorado/q108-reaction-clear.png",
+          "color": "#FFD36F",
+          "sha256": "f2a7fc258d42b989c9a67d5f6cda50bcb62010570b7c801850c99c287c7c3a0a"
+        },
+        "estado": {
+          "svg": "svg/estado/q108-reaction-clear.svg",
+          "png": "png/estado/q108-reaction-clear.png",
+          "color": "#F4677C",
+          "sha256": "bedf647a2d9f17089f025cb4323860b25108fa96af6e06bbdf4b445232d82868"
+        }
+      }
+    },
+    {
+      "key": "event.q109-thread-close",
+      "label": "Hilo cerrado",
+      "category": "Messages",
+      "referenceEventId": 109,
+      "noun": "thread",
+      "action": "close",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q109-thread-close.svg",
+          "png": "png/dorado/q109-thread-close.png",
+          "color": "#FFD36F",
+          "sha256": "53fc7e3b86e2a3ff7dbcd44bce70898fa1d612e259e7895b2774a7ecb004b873"
+        },
+        "estado": {
+          "svg": "svg/estado/q109-thread-close.svg",
+          "png": "png/estado/q109-thread-close.png",
+          "color": "#F4677C",
+          "sha256": "ad95e16eb7ba85c62480bf145c2e6fe0a108fd71a9808a56664ca53016df0b1f"
+        }
+      }
+    },
+    {
+      "key": "event.q110-thread-open",
+      "label": "Hilo reabierto",
+      "category": "Messages",
+      "referenceEventId": 110,
+      "noun": "thread",
+      "action": "open",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q110-thread-open.svg",
+          "png": "png/dorado/q110-thread-open.png",
+          "color": "#FFD36F",
+          "sha256": "567a236c941988907a488885557f6859439ef6a1a0d5c7180469b52510f42b4e"
+        },
+        "estado": {
+          "svg": "svg/estado/q110-thread-open.svg",
+          "png": "png/estado/q110-thread-open.png",
+          "color": "#42C87B",
+          "sha256": "7afd66646e07dccd590b122d52a4e7773591949299168d6e8a43bd282a3c3bc9"
+        }
+      }
+    },
+    {
+      "key": "event.q111-thread-lock",
+      "label": "Hilo bloqueado",
+      "category": "Messages",
+      "referenceEventId": 111,
+      "noun": "thread",
+      "action": "lock",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q111-thread-lock.svg",
+          "png": "png/dorado/q111-thread-lock.png",
+          "color": "#FFD36F",
+          "sha256": "2afb9ad79ae515e9eb752812dc6602639c00ec659d5b6fd348a1a80fab0d9ea4"
+        },
+        "estado": {
+          "svg": "svg/estado/q111-thread-lock.svg",
+          "png": "png/estado/q111-thread-lock.png",
+          "color": "#F4677C",
+          "sha256": "d256e9bb0193df4afcc63d297ca6f633d12fa9247c45c0de77f90cd5f6691e54"
+        }
+      }
+    },
+    {
+      "key": "event.q112-thread-unlock",
+      "label": "Hilo desbloqueado",
+      "category": "Messages",
+      "referenceEventId": 112,
+      "noun": "thread",
+      "action": "unlock",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q112-thread-unlock.svg",
+          "png": "png/dorado/q112-thread-unlock.png",
+          "color": "#FFD36F",
+          "sha256": "2b1190e4cb6473999d846001cb1c59cb5264ed6fd77538ea66c76b1ba0088aac"
+        },
+        "estado": {
+          "svg": "svg/estado/q112-thread-unlock.svg",
+          "png": "png/estado/q112-thread-unlock.png",
+          "color": "#42C87B",
+          "sha256": "e0895d017c5dc47aaf34669d04714bd142188b1d0a9b3777e11b17e5a660091b"
+        }
+      }
+    },
+    {
+      "key": "event.q008-stream-start",
+      "label": "Transmisión iniciada",
+      "category": "Voice",
+      "referenceEventId": 8,
+      "noun": "stream",
+      "action": "start",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q008-stream-start.svg",
+          "png": "png/dorado/q008-stream-start.png",
+          "color": "#FFD36F",
+          "sha256": "246dcaa60ac7c9bcbd842ec987fbcb49d521893b69119bb8bd84c921900b9f21"
+        },
+        "estado": {
+          "svg": "svg/estado/q008-stream-start.svg",
+          "png": "png/estado/q008-stream-start.png",
+          "color": "#42C87B",
+          "sha256": "617fab4672da83fc5ac7d7e56edd98f4d0b8e8606b80d3ecaed92b5555f1beed"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q008-stream-start",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q009-stream-stop",
+      "label": "Transmisión terminada",
+      "category": "Voice",
+      "referenceEventId": 9,
+      "noun": "stream",
+      "action": "stop",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q009-stream-stop.svg",
+          "png": "png/dorado/q009-stream-stop.png",
+          "color": "#FFD36F",
+          "sha256": "4fd253b0d6f6dd809b40455b70f64d9953153c61382d0708cbf9ccaa49e8d18b"
+        },
+        "estado": {
+          "svg": "svg/estado/q009-stream-stop.svg",
+          "png": "png/estado/q009-stream-stop.png",
+          "color": "#F4677C",
+          "sha256": "bfc8f3d4b91d1635ed0c7b23a6e1c25e0b281ad93fd47a07ca40db76858bdd9e"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q009-stream-stop",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q012-camera-start",
+      "label": "Cámara activada",
+      "category": "Voice",
+      "referenceEventId": 12,
+      "noun": "camera",
+      "action": "start",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q012-camera-start.svg",
+          "png": "png/dorado/q012-camera-start.png",
+          "color": "#FFD36F",
+          "sha256": "ae684b8ef5e2e5782a0582a9245d22db2fa486aeca3906b2684c22509bacce5e"
+        },
+        "estado": {
+          "svg": "svg/estado/q012-camera-start.svg",
+          "png": "png/estado/q012-camera-start.png",
+          "color": "#42C87B",
+          "sha256": "445d865564673fcdef50435e3f8a8a3d3174f4e959534f0231cd6eb6159eecc6"
+        }
+      }
+    },
+    {
+      "key": "event.q013-camera-stop",
+      "label": "Cámara desactivada",
+      "category": "Voice",
+      "referenceEventId": 13,
+      "noun": "camera",
+      "action": "stop",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q013-camera-stop.svg",
+          "png": "png/dorado/q013-camera-stop.png",
+          "color": "#FFD36F",
+          "sha256": "7a3217f9ae27c88e434c007853650a0c5690e01e356e9ad330dc1855285d146c"
+        },
+        "estado": {
+          "svg": "svg/estado/q013-camera-stop.svg",
+          "png": "png/estado/q013-camera-stop.png",
+          "color": "#F4677C",
+          "sha256": "85e91d4c88760b325b8cb6d1a1e4979cd733aaddb1ca475cfe032e51c102c432"
+        }
+      }
+    },
+    {
+      "key": "event.q014-member-move",
+      "label": "Miembro movido por moderación",
+      "category": "Voice",
+      "referenceEventId": 14,
+      "noun": "member",
+      "action": "move",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q014-member-move.svg",
+          "png": "png/dorado/q014-member-move.png",
+          "color": "#FFD36F",
+          "sha256": "32d6184d540238e2614d83c22e69264820730df80818deaf86eb997ae8712701"
+        },
+        "estado": {
+          "svg": "svg/estado/q014-member-move.svg",
+          "png": "png/estado/q014-member-move.png",
+          "color": "#66A8FF",
+          "sha256": "efc3f7c8669633911465f29a2317b83b1516c9a1aefb9c55030064a35c19ea6f"
+        }
+      }
+    },
+    {
+      "key": "event.q015-speaker-move",
+      "label": "Cambió de canal de voz",
+      "category": "Voice",
+      "referenceEventId": 15,
+      "noun": "speaker",
+      "action": "move",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q015-speaker-move.svg",
+          "png": "png/dorado/q015-speaker-move.png",
+          "color": "#FFD36F",
+          "sha256": "0259e58a33afde1ef53f09a243422d981864b55819b42cec71e5f5b376195c33"
+        },
+        "estado": {
+          "svg": "svg/estado/q015-speaker-move.svg",
+          "png": "png/estado/q015-speaker-move.png",
+          "color": "#66A8FF",
+          "sha256": "83e997a153c4628745116dacf12ca07ffa1dbf45dbb70b7a41924ac5fe700e9b"
+        }
+      }
+    },
+    {
+      "key": "event.q016-headphones-block",
+      "label": "Audio ensordecido",
+      "category": "Voice",
+      "referenceEventId": 16,
+      "noun": "headphones",
+      "action": "block",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q016-headphones-block.svg",
+          "png": "png/dorado/q016-headphones-block.png",
+          "color": "#FFD36F",
+          "sha256": "a31ac5b8baf1852bc1e63111649aa33ab97cf15544cd7dc81991c9c5a746f8fe"
+        },
+        "estado": {
+          "svg": "svg/estado/q016-headphones-block.svg",
+          "png": "png/estado/q016-headphones-block.png",
+          "color": "#F4677C",
+          "sha256": "55299d479911ee03cf8ce499d4a4d85e167c81380aad232bcfec04be43584afb"
+        }
+      }
+    },
+    {
+      "key": "event.q017-speaker-join",
+      "label": "Entró a voz",
+      "category": "Voice",
+      "referenceEventId": 17,
+      "noun": "speaker",
+      "action": "join",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q017-speaker-join.svg",
+          "png": "png/dorado/q017-speaker-join.png",
+          "color": "#FFD36F",
+          "sha256": "9cfacac337ffc144c68b645e7049c24f1092c7ec13d6a21cd09cfeafc2970b23"
+        },
+        "estado": {
+          "svg": "svg/estado/q017-speaker-join.svg",
+          "png": "png/estado/q017-speaker-join.png",
+          "color": "#42C87B",
+          "sha256": "9b0ff66d3a6c08f0e1658a0d8270af0f77bbd103a72d004b571161e629ec5a24"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q017-speaker-join",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q018-speaker-leave",
+      "label": "Salió de voz",
+      "category": "Voice",
+      "referenceEventId": 18,
+      "noun": "speaker",
+      "action": "leave",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q018-speaker-leave.svg",
+          "png": "png/dorado/q018-speaker-leave.png",
+          "color": "#FFD36F",
+          "sha256": "a770599553b9cc635a7c0745b66c9b3fcc26c56b8ecba27192b954b0cd33a6f8"
+        },
+        "estado": {
+          "svg": "svg/estado/q018-speaker-leave.svg",
+          "png": "png/estado/q018-speaker-leave.png",
+          "color": "#F4677C",
+          "sha256": "22374c3221b2aac2fc46a2341f3eb0c468ae83268451470da6a41d2d2a5c1c69"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q018-speaker-leave",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q019-microphone-block",
+      "label": "Micrófono silenciado",
+      "category": "Voice",
+      "referenceEventId": 19,
+      "noun": "microphone",
+      "action": "block",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q019-microphone-block.svg",
+          "png": "png/dorado/q019-microphone-block.png",
+          "color": "#FFD36F",
+          "sha256": "b65f2c14060ac4cfa164509f295004f2b0bef238810f923c74cc0b9de7074e47"
+        },
+        "estado": {
+          "svg": "svg/estado/q019-microphone-block.svg",
+          "png": "png/estado/q019-microphone-block.png",
+          "color": "#F4677C",
+          "sha256": "f6f5e72f3992c2733570ff00af251ab74d7fe4417c577381e039dc4bd298cd8e"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q019-microphone-block",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q020-headphones-allow",
+      "label": "Audio habilitado",
+      "category": "Voice",
+      "referenceEventId": 20,
+      "noun": "headphones",
+      "action": "allow",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q020-headphones-allow.svg",
+          "png": "png/dorado/q020-headphones-allow.png",
+          "color": "#FFD36F",
+          "sha256": "7052a3765b2f99203984e3a11b25e0610f1e767bbb1d94ab4bc63c0c22072ec7"
+        },
+        "estado": {
+          "svg": "svg/estado/q020-headphones-allow.svg",
+          "png": "png/estado/q020-headphones-allow.png",
+          "color": "#42C87B",
+          "sha256": "e8d07352e7d814bc53afc1099c3b8b7522cb53183df99a014448083187a91b87"
+        }
+      }
+    },
+    {
+      "key": "event.q021-microphone-allow",
+      "label": "Micrófono habilitado",
+      "category": "Voice",
+      "referenceEventId": 21,
+      "noun": "microphone",
+      "action": "allow",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q021-microphone-allow.svg",
+          "png": "png/dorado/q021-microphone-allow.png",
+          "color": "#FFD36F",
+          "sha256": "5d0374951317370d8608874fe8a3c1684835dda004678e12569494b8285b0b84"
+        },
+        "estado": {
+          "svg": "svg/estado/q021-microphone-allow.svg",
+          "png": "png/estado/q021-microphone-allow.png",
+          "color": "#42C87B",
+          "sha256": "b04642bab48de226d6f8e7d474b5c1555b15cf0a393d4bf574c128cebb1f4312"
+        }
+      },
+      "pendingMotion": {
+        "sourceKey": "event.q021-microphone-allow",
+        "manifest": "motion/manifest.json",
+        "variant": "marca-azul",
+        "approved": false,
+        "runtimeRegistered": false,
+        "applicationEmojiId": null
+      }
+    },
+    {
+      "key": "event.q022-speaker-disconnect",
+      "label": "Desconectado de voz",
+      "category": "Voice",
+      "referenceEventId": 22,
+      "noun": "speaker",
+      "action": "disconnect",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q022-speaker-disconnect.svg",
+          "png": "png/dorado/q022-speaker-disconnect.png",
+          "color": "#FFD36F",
+          "sha256": "3a15cc834e8f3663fc3765bdd25a944bbe440ed19e29cd1d8c39b9e9121f8b42"
+        },
+        "estado": {
+          "svg": "svg/estado/q022-speaker-disconnect.svg",
+          "png": "png/estado/q022-speaker-disconnect.png",
+          "color": "#F4677C",
+          "sha256": "6bebe9276e1b9af5397f5452c89d5f79045f337309ac63b4aba7a8d0289748c5"
+        }
+      }
+    },
+    {
+      "key": "event.q054-speaker-edit",
+      "label": "Estado de voz actualizado",
+      "category": "Voice",
+      "referenceEventId": 54,
+      "noun": "speaker",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q054-speaker-edit.svg",
+          "png": "png/dorado/q054-speaker-edit.png",
+          "color": "#FFD36F",
+          "sha256": "04a4b25c143debb8cddd8246dc1d07cced756aed221589ad65bbf75837c28279"
+        },
+        "estado": {
+          "svg": "svg/estado/q054-speaker-edit.svg",
+          "png": "png/estado/q054-speaker-edit.png",
+          "color": "#66A8FF",
+          "sha256": "0570717f2ec0015899e3c8934ee661f9f26746a98664f4e9256d5dfa9b50d7d7"
+        }
+      }
+    },
+    {
+      "key": "event.q059-stage-start",
+      "label": "Escenario iniciado",
+      "category": "Voice",
+      "referenceEventId": 59,
+      "noun": "stage",
+      "action": "start",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q059-stage-start.svg",
+          "png": "png/dorado/q059-stage-start.png",
+          "color": "#FFD36F",
+          "sha256": "d4d58675cc30b440357d767cc5e84e3cbc9ae517bd41ba535c345c6d38e10e01"
+        },
+        "estado": {
+          "svg": "svg/estado/q059-stage-start.svg",
+          "png": "png/estado/q059-stage-start.png",
+          "color": "#42C87B",
+          "sha256": "2c6039368037bdc51f0c8e5e1da9b7b66cdf97edfbd77c2c400a666fe5f7aeb6"
+        }
+      }
+    },
+    {
+      "key": "event.q060-stage-stop",
+      "label": "Escenario terminado",
+      "category": "Voice",
+      "referenceEventId": 60,
+      "noun": "stage",
+      "action": "stop",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q060-stage-stop.svg",
+          "png": "png/dorado/q060-stage-stop.png",
+          "color": "#FFD36F",
+          "sha256": "8c82f81f06cc4c405a86d907773cf1acd5da28e36edfb5a467c7f64e83393cf4"
+        },
+        "estado": {
+          "svg": "svg/estado/q060-stage-stop.svg",
+          "png": "png/estado/q060-stage-stop.png",
+          "color": "#F4677C",
+          "sha256": "d4ea058bde6c636450085e7a19a7a6dc41c634bfa79516a21cdaab6bd243a299"
+        }
+      }
+    },
+    {
+      "key": "event.q061-stage-edit",
+      "label": "Escenario actualizado",
+      "category": "Voice",
+      "referenceEventId": 61,
+      "noun": "stage",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q061-stage-edit.svg",
+          "png": "png/dorado/q061-stage-edit.png",
+          "color": "#FFD36F",
+          "sha256": "1139cf8f012d3c2874403e08fbe56096f1e6d8359fd9a3355477329eff64658b"
+        },
+        "estado": {
+          "svg": "svg/estado/q061-stage-edit.svg",
+          "png": "png/estado/q061-stage-edit.png",
+          "color": "#66A8FF",
+          "sha256": "4d316bde21de1649869f1c2648acbf5972b34547be73e5f59483d584c20b044a"
+        }
+      }
+    },
+    {
+      "key": "event.q062-stage-join",
+      "label": "Nuevo orador",
+      "category": "Voice",
+      "referenceEventId": 62,
+      "noun": "stage",
+      "action": "join",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q062-stage-join.svg",
+          "png": "png/dorado/q062-stage-join.png",
+          "color": "#FFD36F",
+          "sha256": "acfc4b20ee8d27858288eeaa3204a8370d40cd438501e8ff25ec7c240dfb4bc0"
+        },
+        "estado": {
+          "svg": "svg/estado/q062-stage-join.svg",
+          "png": "png/estado/q062-stage-join.png",
+          "color": "#42C87B",
+          "sha256": "496691aa5dcaffa14d03722234043017f72153c6331310a5ea15c3d9b9e67555"
+        }
+      }
+    },
+    {
+      "key": "event.q063-microphone-invite",
+      "label": "Orador invitado",
+      "category": "Voice",
+      "referenceEventId": 63,
+      "noun": "microphone",
+      "action": "invite",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q063-microphone-invite.svg",
+          "png": "png/dorado/q063-microphone-invite.png",
+          "color": "#FFD36F",
+          "sha256": "d45d39febae471c21662712cb7844e28c18e941c9e221dcb548e59279542def5"
+        },
+        "estado": {
+          "svg": "svg/estado/q063-microphone-invite.svg",
+          "png": "png/estado/q063-microphone-invite.png",
+          "color": "#42C87B",
+          "sha256": "a421adebfade0fdbba853a7be80f00bcb4da74612384b3391120f5634c926b74"
+        }
+      }
+    },
+    {
+      "key": "event.q064-microphone-stop",
+      "label": "Dejó de hablar",
+      "category": "Voice",
+      "referenceEventId": 64,
+      "noun": "microphone",
+      "action": "stop",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q064-microphone-stop.svg",
+          "png": "png/dorado/q064-microphone-stop.png",
+          "color": "#FFD36F",
+          "sha256": "dcd50f0aff55d66b1d6b5e8ce1e9d308d7a00ab432210ad7e26c53711486978c"
+        },
+        "estado": {
+          "svg": "svg/estado/q064-microphone-stop.svg",
+          "png": "png/estado/q064-microphone-stop.png",
+          "color": "#F4677C",
+          "sha256": "4c0a2dd477b2b226a18827ed5b110dcb37d68a60287a10438b8be5f80f220dd8"
+        }
+      }
+    },
+    {
+      "key": "event.q088-voice-group-activity",
+      "label": "Varios eventos de voz",
+      "category": "Voice",
+      "referenceEventId": 88,
+      "noun": "voiceGroup",
+      "action": "activity",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q088-voice-group-activity.svg",
+          "png": "png/dorado/q088-voice-group-activity.png",
+          "color": "#FFD36F",
+          "sha256": "43f7025561ac3bcccd002b59477d5cbe397ca85ae702e77b27a6a66dd5a24225"
+        },
+        "estado": {
+          "svg": "svg/estado/q088-voice-group-activity.svg",
+          "png": "png/estado/q088-voice-group-activity.png",
+          "color": "#66A8FF",
+          "sha256": "548bdd8c2bddb2c02d3c469f0671774b63c3b213141b0f81672e96eb6695d974"
+        }
+      }
+    },
+    {
+      "key": "event.q023-invite-add",
+      "label": "Invitación creada",
+      "category": "Actions",
+      "referenceEventId": 23,
+      "noun": "invite",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q023-invite-add.svg",
+          "png": "png/dorado/q023-invite-add.png",
+          "color": "#FFD36F",
+          "sha256": "8008574192ee6ba50eac4bf54ec580282b40cfaa042c9c9dc539fa92e8b9b87c"
+        },
+        "estado": {
+          "svg": "svg/estado/q023-invite-add.svg",
+          "png": "png/estado/q023-invite-add.png",
+          "color": "#42C87B",
+          "sha256": "0f103325bdfbbd4ece49a5e767150b07d3aa5e1292f9642835e4db38fb3b75c1"
+        }
+      }
+    },
+    {
+      "key": "event.q024-invite-delete",
+      "label": "Invitación eliminada",
+      "category": "Actions",
+      "referenceEventId": 24,
+      "noun": "invite",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q024-invite-delete.svg",
+          "png": "png/dorado/q024-invite-delete.png",
+          "color": "#FFD36F",
+          "sha256": "46086fe3873b4764713a3150ebb7a6115a272961ba942b505ae79f99052465f5"
+        },
+        "estado": {
+          "svg": "svg/estado/q024-invite-delete.svg",
+          "png": "png/estado/q024-invite-delete.png",
+          "color": "#F4677C",
+          "sha256": "c4b1f7168b4aa466914934c39e9ffbbf1b9a322edbf80e5f7af476a44c24451e"
+        }
+      }
+    },
+    {
+      "key": "event.q036-emoji-add",
+      "label": "Emoji creado",
+      "category": "Actions",
+      "referenceEventId": 36,
+      "noun": "emoji",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q036-emoji-add.svg",
+          "png": "png/dorado/q036-emoji-add.png",
+          "color": "#FFD36F",
+          "sha256": "7cfa31ab250dd2ab96138e6aeaac41be4d4e743e6b7568bd4b6bcf072cee8f1c"
+        },
+        "estado": {
+          "svg": "svg/estado/q036-emoji-add.svg",
+          "png": "png/estado/q036-emoji-add.png",
+          "color": "#42C87B",
+          "sha256": "da94bf6c5f02fc4e97554cae6d61c092e9d7c9ca88673617ec20ed0202e10867"
+        }
+      }
+    },
+    {
+      "key": "event.q037-emoji-delete",
+      "label": "Emoji eliminado",
+      "category": "Actions",
+      "referenceEventId": 37,
+      "noun": "emoji",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q037-emoji-delete.svg",
+          "png": "png/dorado/q037-emoji-delete.png",
+          "color": "#FFD36F",
+          "sha256": "03c9aa2d7b710ae1ffd00fac364ef410ee5f4adf28bc2b9f807e595b5b5ec4e9"
+        },
+        "estado": {
+          "svg": "svg/estado/q037-emoji-delete.svg",
+          "png": "png/estado/q037-emoji-delete.png",
+          "color": "#F4677C",
+          "sha256": "156b22479d04847da2c15ffd2e99e2a2949c90229b614b93fc26cf779a79cca1"
+        }
+      }
+    },
+    {
+      "key": "event.q038-emoji-edit",
+      "label": "Emoji editado",
+      "category": "Actions",
+      "referenceEventId": 38,
+      "noun": "emoji",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q038-emoji-edit.svg",
+          "png": "png/dorado/q038-emoji-edit.png",
+          "color": "#FFD36F",
+          "sha256": "e03bc5e0f85ac684c2d2c81085e0635bc6d3f01f1cfcc4a9f6932f521c4b99c9"
+        },
+        "estado": {
+          "svg": "svg/estado/q038-emoji-edit.svg",
+          "png": "png/estado/q038-emoji-edit.png",
+          "color": "#66A8FF",
+          "sha256": "dd5ae05d12adf3e645384947c0152866674f506b319d1d4bf42ea813653391a2"
+        }
+      }
+    },
+    {
+      "key": "event.q065-calendar-add",
+      "label": "Evento creado",
+      "category": "Actions",
+      "referenceEventId": 65,
+      "noun": "calendar",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q065-calendar-add.svg",
+          "png": "png/dorado/q065-calendar-add.png",
+          "color": "#FFD36F",
+          "sha256": "776e741dd65622b71604d2315e81e04e716448c0fcf5c61958349ebccd2704f6"
+        },
+        "estado": {
+          "svg": "svg/estado/q065-calendar-add.svg",
+          "png": "png/estado/q065-calendar-add.png",
+          "color": "#42C87B",
+          "sha256": "779163f159a1e4de5207265158c3333ddcada4abda2167f8f0f60b0bf7cadbc5"
+        }
+      }
+    },
+    {
+      "key": "event.q066-calendar-delete",
+      "label": "Evento eliminado",
+      "category": "Actions",
+      "referenceEventId": 66,
+      "noun": "calendar",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q066-calendar-delete.svg",
+          "png": "png/dorado/q066-calendar-delete.png",
+          "color": "#FFD36F",
+          "sha256": "a901295f523ce1bca21d603d370311a30e97ca25ef05f36628f0fcbe92b3bf32"
+        },
+        "estado": {
+          "svg": "svg/estado/q066-calendar-delete.svg",
+          "png": "png/estado/q066-calendar-delete.png",
+          "color": "#F4677C",
+          "sha256": "f8aa5b493a39affc151f0215848eaab7455e435b63692bec361b633edef485af"
+        }
+      }
+    },
+    {
+      "key": "event.q067-calendar-edit",
+      "label": "Evento actualizado",
+      "category": "Actions",
+      "referenceEventId": 67,
+      "noun": "calendar",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q067-calendar-edit.svg",
+          "png": "png/dorado/q067-calendar-edit.png",
+          "color": "#FFD36F",
+          "sha256": "7f2d7ad76841c1a2fc400eca36f7770cdb41ef1f3e4657a9fb81a4bfe2b64e6f"
+        },
+        "estado": {
+          "svg": "svg/estado/q067-calendar-edit.svg",
+          "png": "png/estado/q067-calendar-edit.png",
+          "color": "#66A8FF",
+          "sha256": "3111d996bd145305d4461c793249fe28d51158be8007775635f667164bd8154c"
+        }
+      }
+    },
+    {
+      "key": "event.q090-sticker-add",
+      "label": "Sticker creado",
+      "category": "Actions",
+      "referenceEventId": 90,
+      "noun": "sticker",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q090-sticker-add.svg",
+          "png": "png/dorado/q090-sticker-add.png",
+          "color": "#FFD36F",
+          "sha256": "f4920ad6cc68f417d6ebd61c456c8334c6a1af3e94773be5d59a414d02fbb2fb"
+        },
+        "estado": {
+          "svg": "svg/estado/q090-sticker-add.svg",
+          "png": "png/estado/q090-sticker-add.png",
+          "color": "#42C87B",
+          "sha256": "578f609f6461d7a27d5e0bc0f2e7254c08ff24cea73df50eac18fe4df2763c93"
+        }
+      }
+    },
+    {
+      "key": "event.q091-sticker-delete",
+      "label": "Sticker eliminado",
+      "category": "Actions",
+      "referenceEventId": 91,
+      "noun": "sticker",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q091-sticker-delete.svg",
+          "png": "png/dorado/q091-sticker-delete.png",
+          "color": "#FFD36F",
+          "sha256": "08c2767b8c469823e9a23fb7324a761f7f3f1e0858ac75e95731058eaacc87dc"
+        },
+        "estado": {
+          "svg": "svg/estado/q091-sticker-delete.svg",
+          "png": "png/estado/q091-sticker-delete.png",
+          "color": "#F4677C",
+          "sha256": "ba5901bea7090fded8ed0dac932ad3d0f8d8874b258eff72a458fcbac3019a42"
+        }
+      }
+    },
+    {
+      "key": "event.q092-sticker-edit",
+      "label": "Sticker editado",
+      "category": "Actions",
+      "referenceEventId": 92,
+      "noun": "sticker",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q092-sticker-edit.svg",
+          "png": "png/dorado/q092-sticker-edit.png",
+          "color": "#FFD36F",
+          "sha256": "5d69e3e67c6e35e0843adb181a6fc320be5db365f70874c5067c4b0105640ad4"
+        },
+        "estado": {
+          "svg": "svg/estado/q092-sticker-edit.svg",
+          "png": "png/estado/q092-sticker-edit.png",
+          "color": "#66A8FF",
+          "sha256": "a6383445a036eac305620ccba24584dec9e574aedb1ed805bf1c1d14ac1a80b9"
+        }
+      }
+    },
+    {
+      "key": "event.q093-soundboard-add",
+      "label": "Sonido añadido",
+      "category": "Actions",
+      "referenceEventId": 93,
+      "noun": "soundboard",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q093-soundboard-add.svg",
+          "png": "png/dorado/q093-soundboard-add.png",
+          "color": "#FFD36F",
+          "sha256": "6ff0d7de81a4f26fbc4d0de57327d785ce92682bb3279fd51f6ca93fdfc970d6"
+        },
+        "estado": {
+          "svg": "svg/estado/q093-soundboard-add.svg",
+          "png": "png/estado/q093-soundboard-add.png",
+          "color": "#42C87B",
+          "sha256": "fd6157d8cbb47783be4ac6aec69abe1697bb23ab87ec777fa9760aacd848826a"
+        }
+      }
+    },
+    {
+      "key": "event.q094-soundboard-delete",
+      "label": "Sonido eliminado",
+      "category": "Actions",
+      "referenceEventId": 94,
+      "noun": "soundboard",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q094-soundboard-delete.svg",
+          "png": "png/dorado/q094-soundboard-delete.png",
+          "color": "#FFD36F",
+          "sha256": "b706367e92dd494f83025273fa786091b2cd5e33fd459b8c55f3805159c37473"
+        },
+        "estado": {
+          "svg": "svg/estado/q094-soundboard-delete.svg",
+          "png": "png/estado/q094-soundboard-delete.png",
+          "color": "#F4677C",
+          "sha256": "756951b845946043fbd3abe97a0c5ef2f6841d6fdae15859149977ec6c441bd1"
+        }
+      }
+    },
+    {
+      "key": "event.q095-soundboard-edit",
+      "label": "Sonido modificado",
+      "category": "Actions",
+      "referenceEventId": 95,
+      "noun": "soundboard",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q095-soundboard-edit.svg",
+          "png": "png/dorado/q095-soundboard-edit.png",
+          "color": "#FFD36F",
+          "sha256": "ad94209504433eee2e8cfc06677d77a2b07524812a2a21097487f82ab8b6973e"
+        },
+        "estado": {
+          "svg": "svg/estado/q095-soundboard-edit.svg",
+          "png": "png/estado/q095-soundboard-edit.png",
+          "color": "#66A8FF",
+          "sha256": "a0af779d8046ef13d31980124efc5bb86f6fe2b00db0b9135dee7b25da7fd15e"
+        }
+      }
+    },
+    {
+      "key": "event.q096-rule-add",
+      "label": "Regla AutoMod creada",
+      "category": "Actions",
+      "referenceEventId": 96,
+      "noun": "rule",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q096-rule-add.svg",
+          "png": "png/dorado/q096-rule-add.png",
+          "color": "#FFD36F",
+          "sha256": "e20e4d6d035e549619f90906ce37f0d96dbec82de9829428cc622050e94b34c3"
+        },
+        "estado": {
+          "svg": "svg/estado/q096-rule-add.svg",
+          "png": "png/estado/q096-rule-add.png",
+          "color": "#42C87B",
+          "sha256": "cdd54bc88a979ba988bd1caf6311a9f44e4f13290b3efa1a562502c135657ef7"
+        }
+      }
+    },
+    {
+      "key": "event.q097-rule-delete",
+      "label": "Regla AutoMod eliminada",
+      "category": "Actions",
+      "referenceEventId": 97,
+      "noun": "rule",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q097-rule-delete.svg",
+          "png": "png/dorado/q097-rule-delete.png",
+          "color": "#FFD36F",
+          "sha256": "01f6cf5a3a84b34e855e7dc36cc5b82e087ef70449c9de3a5172e9b576116448"
+        },
+        "estado": {
+          "svg": "svg/estado/q097-rule-delete.svg",
+          "png": "png/estado/q097-rule-delete.png",
+          "color": "#F4677C",
+          "sha256": "886dfd7f83e2288d1c23f25b5eb6eeee11c9b4f3e39eb6ab129a757110f04b55"
+        }
+      }
+    },
+    {
+      "key": "event.q098-rule-edit",
+      "label": "Regla AutoMod modificada",
+      "category": "Actions",
+      "referenceEventId": 98,
+      "noun": "rule",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q098-rule-edit.svg",
+          "png": "png/dorado/q098-rule-edit.png",
+          "color": "#FFD36F",
+          "sha256": "670fa9549b907958574359c5c367312be36e6a74afb3b867f2ea7023484f98d3"
+        },
+        "estado": {
+          "svg": "svg/estado/q098-rule-edit.svg",
+          "png": "png/estado/q098-rule-edit.png",
+          "color": "#66A8FF",
+          "sha256": "4b8032910e28a24457ca34bf55e0c7eb0263006273cc3c6e750a3fa0980592a4"
+        }
+      }
+    },
+    {
+      "key": "event.q027-channel-add",
+      "label": "Canal creado",
+      "category": "Channels",
+      "referenceEventId": 27,
+      "noun": "channel",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q027-channel-add.svg",
+          "png": "png/dorado/q027-channel-add.png",
+          "color": "#FFD36F",
+          "sha256": "281ea1b155c975241694baa3fa5127fceea107fa8f8b29dbb0a85bdbc18fc975"
+        },
+        "estado": {
+          "svg": "svg/estado/q027-channel-add.svg",
+          "png": "png/estado/q027-channel-add.png",
+          "color": "#42C87B",
+          "sha256": "e3b6f73b9a174affad64bf50f6f3d936a46a318a67ad3bb09b7aafbbedc31567"
+        }
+      }
+    },
+    {
+      "key": "event.q028-channel-delete",
+      "label": "Canal eliminado",
+      "category": "Channels",
+      "referenceEventId": 28,
+      "noun": "channel",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q028-channel-delete.svg",
+          "png": "png/dorado/q028-channel-delete.png",
+          "color": "#FFD36F",
+          "sha256": "36e245e9949c257e74341cea87b4275771f2efe2c4551d280e5b5e232e809453"
+        },
+        "estado": {
+          "svg": "svg/estado/q028-channel-delete.svg",
+          "png": "png/estado/q028-channel-delete.png",
+          "color": "#F4677C",
+          "sha256": "6f89cc30aadffee6f70c0a386ffeec8ed15975c0e6139ad63edee1d358bdfa0f"
+        }
+      }
+    },
+    {
+      "key": "event.q029-channel-edit",
+      "label": "Canal modificado",
+      "category": "Channels",
+      "referenceEventId": 29,
+      "noun": "channel",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q029-channel-edit.svg",
+          "png": "png/dorado/q029-channel-edit.png",
+          "color": "#FFD36F",
+          "sha256": "3b4f7945effddd53e524275762ba7260b52a9cdf66d12a89277380e1ac8bcdaa"
+        },
+        "estado": {
+          "svg": "svg/estado/q029-channel-edit.svg",
+          "png": "png/estado/q029-channel-edit.png",
+          "color": "#66A8FF",
+          "sha256": "6c0801a14d6281f033f116270eb1d1c884666350284e1dd5c87eb67cd2f8fefd"
+        }
+      }
+    },
+    {
+      "key": "event.q047-channel-permission-add",
+      "label": "Permisos de canal añadidos",
+      "category": "Channels",
+      "referenceEventId": 47,
+      "noun": "channelPermission",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q047-channel-permission-add.svg",
+          "png": "png/dorado/q047-channel-permission-add.png",
+          "color": "#FFD36F",
+          "sha256": "91f3cfcc34d79b3ff2e27632dca6ba71a7ea500ba0799cab86259177d7af8c0d"
+        },
+        "estado": {
+          "svg": "svg/estado/q047-channel-permission-add.svg",
+          "png": "png/estado/q047-channel-permission-add.png",
+          "color": "#42C87B",
+          "sha256": "dbb460233b0b98575a110d36a576a67b23d047097f9d60f1255f655e7513653c"
+        }
+      }
+    },
+    {
+      "key": "event.q048-channel-permission-delete",
+      "label": "Permisos de canal retirados",
+      "category": "Channels",
+      "referenceEventId": 48,
+      "noun": "channelPermission",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q048-channel-permission-delete.svg",
+          "png": "png/dorado/q048-channel-permission-delete.png",
+          "color": "#FFD36F",
+          "sha256": "913dd733f5863d4598d5837b6c59109fc235dfa549a57e9f56cd2479869da27a"
+        },
+        "estado": {
+          "svg": "svg/estado/q048-channel-permission-delete.svg",
+          "png": "png/estado/q048-channel-permission-delete.png",
+          "color": "#F4677C",
+          "sha256": "9e68dc2d7bca1a60a91820d1bc66e332e0fc0988ae8dea944b99ab19293c1c2f"
+        }
+      }
+    },
+    {
+      "key": "event.q049-channel-permission-edit",
+      "label": "Permisos de canal cambiados",
+      "category": "Channels",
+      "referenceEventId": 49,
+      "noun": "channelPermission",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q049-channel-permission-edit.svg",
+          "png": "png/dorado/q049-channel-permission-edit.png",
+          "color": "#FFD36F",
+          "sha256": "e9bd3d2cd6136a9aedb14d8fb44e47bf2073a9d068639b9f7ea46ebb9149dd7a"
+        },
+        "estado": {
+          "svg": "svg/estado/q049-channel-permission-edit.svg",
+          "png": "png/estado/q049-channel-permission-edit.png",
+          "color": "#66A8FF",
+          "sha256": "326ad7f49fcc6d6e59d5e3622a26c9540c92455d9c7a7831330664b39e8d1e63"
+        }
+      }
+    },
+    {
+      "key": "event.q079-webhook-add",
+      "label": "Webhook creado",
+      "category": "Channels",
+      "referenceEventId": 79,
+      "noun": "webhook",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q079-webhook-add.svg",
+          "png": "png/dorado/q079-webhook-add.png",
+          "color": "#FFD36F",
+          "sha256": "e19093783e55282649c682b71693f418981e044518939b5ab4a177745e6071f0"
+        },
+        "estado": {
+          "svg": "svg/estado/q079-webhook-add.svg",
+          "png": "png/estado/q079-webhook-add.png",
+          "color": "#42C87B",
+          "sha256": "50d4495e45af851da862a4b95712542f8a364b7774873e3dff2519c88a3076af"
+        }
+      }
+    },
+    {
+      "key": "event.q080-webhook-delete",
+      "label": "Webhook eliminado",
+      "category": "Channels",
+      "referenceEventId": 80,
+      "noun": "webhook",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q080-webhook-delete.svg",
+          "png": "png/dorado/q080-webhook-delete.png",
+          "color": "#FFD36F",
+          "sha256": "679c97cf01e5c61346c90c5f8beb99af466bee5774b4c67acbd51290d628c61f"
+        },
+        "estado": {
+          "svg": "svg/estado/q080-webhook-delete.svg",
+          "png": "png/estado/q080-webhook-delete.png",
+          "color": "#F4677C",
+          "sha256": "eeb20b9ccfe70ab08c9f63e68e508a58a38fc71b36386145ea69266b990f89ae"
+        }
+      }
+    },
+    {
+      "key": "event.q081-webhook-edit",
+      "label": "Webhook modificado",
+      "category": "Channels",
+      "referenceEventId": 81,
+      "noun": "webhook",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q081-webhook-edit.svg",
+          "png": "png/dorado/q081-webhook-edit.png",
+          "color": "#FFD36F",
+          "sha256": "05f1a14ee42156981a009596a9aa99e516a80f7886386a95dd0c8913c6b52e36"
+        },
+        "estado": {
+          "svg": "svg/estado/q081-webhook-edit.svg",
+          "png": "png/estado/q081-webhook-edit.png",
+          "color": "#66A8FF",
+          "sha256": "ec638739d6923a84ae1a5559d741fad8ce9679dd205e56e59bbab57c7329579c"
+        }
+      }
+    },
+    {
+      "key": "event.q082-webhook-avatar-edit",
+      "label": "Avatar del webhook cambiado",
+      "category": "Channels",
+      "referenceEventId": 82,
+      "noun": "webhookAvatar",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q082-webhook-avatar-edit.svg",
+          "png": "png/dorado/q082-webhook-avatar-edit.png",
+          "color": "#FFD36F",
+          "sha256": "05f1a14ee42156981a009596a9aa99e516a80f7886386a95dd0c8913c6b52e36"
+        },
+        "estado": {
+          "svg": "svg/estado/q082-webhook-avatar-edit.svg",
+          "png": "png/estado/q082-webhook-avatar-edit.png",
+          "color": "#66A8FF",
+          "sha256": "ec638739d6923a84ae1a5559d741fad8ce9679dd205e56e59bbab57c7329579c"
+        }
+      }
+    },
+    {
+      "key": "event.q083-broadcast-add",
+      "label": "Canal seguido",
+      "category": "Channels",
+      "referenceEventId": 83,
+      "noun": "broadcast",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q083-broadcast-add.svg",
+          "png": "png/dorado/q083-broadcast-add.png",
+          "color": "#FFD36F",
+          "sha256": "45687b3e76777add768f8b6070712e59752252e954c534432f027205bd18bba4"
+        },
+        "estado": {
+          "svg": "svg/estado/q083-broadcast-add.svg",
+          "png": "png/estado/q083-broadcast-add.png",
+          "color": "#42C87B",
+          "sha256": "e4492f03d0a332e32ee7432b77cbbc2f321477c69607bc9b927817338d4dfdf3"
+        }
+      }
+    },
+    {
+      "key": "event.q084-broadcast-remove",
+      "label": "Canal dejado de seguir",
+      "category": "Channels",
+      "referenceEventId": 84,
+      "noun": "broadcast",
+      "action": "remove",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q084-broadcast-remove.svg",
+          "png": "png/dorado/q084-broadcast-remove.png",
+          "color": "#FFD36F",
+          "sha256": "3754a96adb2c9f3584ca045ff47ed84514b36e5a3b71a62d0ffb59979139d5f3"
+        },
+        "estado": {
+          "svg": "svg/estado/q084-broadcast-remove.svg",
+          "png": "png/estado/q084-broadcast-remove.png",
+          "color": "#F4677C",
+          "sha256": "96e287e906b6c9599a0d889dfe81bbcd1f71883386c156829aee1878c2e8fea7"
+        }
+      }
+    },
+    {
+      "key": "event.q085-broadcast-edit",
+      "label": "Canal seguido actualizado",
+      "category": "Channels",
+      "referenceEventId": 85,
+      "noun": "broadcast",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q085-broadcast-edit.svg",
+          "png": "png/dorado/q085-broadcast-edit.png",
+          "color": "#FFD36F",
+          "sha256": "811d918bcb8e5b15587314c9efeb1e17a9e7594af7debc8e3f85fa8f5579a122"
+        },
+        "estado": {
+          "svg": "svg/estado/q085-broadcast-edit.svg",
+          "png": "png/estado/q085-broadcast-edit.png",
+          "color": "#66A8FF",
+          "sha256": "11954947e376025fca6cf6c1394eac23e2e72226f9077242e94cf8dd638f566e"
+        }
+      }
+    },
+    {
+      "key": "event.q106-channels-reorder",
+      "label": "Canales reordenados",
+      "category": "Channels",
+      "referenceEventId": 106,
+      "noun": "channels",
+      "action": "reorder",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q106-channels-reorder.svg",
+          "png": "png/dorado/q106-channels-reorder.png",
+          "color": "#FFD36F",
+          "sha256": "5a36cc0716e0a86553c5ab45dfdbb987bf5b770491c3dc17c6173fb8c816593f"
+        },
+        "estado": {
+          "svg": "svg/estado/q106-channels-reorder.svg",
+          "png": "png/estado/q106-channels-reorder.png",
+          "color": "#66A8FF",
+          "sha256": "b4679401b7ea18226c8eb5534c7aacedd51ce581dfb8247d39517b20fedacfff"
+        }
+      }
+    },
+    {
+      "key": "event.q030-server-edit",
+      "label": "Servidor modificado",
+      "category": "Server",
+      "referenceEventId": 30,
+      "noun": "server",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q030-server-edit.svg",
+          "png": "png/dorado/q030-server-edit.png",
+          "color": "#FFD36F",
+          "sha256": "d0a755f034e7e816c4ab790ad32f3fb7e67576c22026f8c1aa9b35f1d6b0e098"
+        },
+        "estado": {
+          "svg": "svg/estado/q030-server-edit.svg",
+          "png": "png/estado/q030-server-edit.png",
+          "color": "#66A8FF",
+          "sha256": "b1609a4299cd3e86145bc4f734345a68e897c621a59b507ad78fae63ec080da6"
+        }
+      }
+    },
+    {
+      "key": "event.q052-server-icon-edit",
+      "label": "Icono del servidor cambiado",
+      "category": "Server",
+      "referenceEventId": 52,
+      "noun": "serverIcon",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q052-server-icon-edit.svg",
+          "png": "png/dorado/q052-server-icon-edit.png",
+          "color": "#FFD36F",
+          "sha256": "02c9b5e911d11bef476c6567e45da9b72e71bf82c1ba44f271478beb14692f70"
+        },
+        "estado": {
+          "svg": "svg/estado/q052-server-icon-edit.svg",
+          "png": "png/estado/q052-server-icon-edit.png",
+          "color": "#66A8FF",
+          "sha256": "366543452809e1c1781f1f0eb9e7b1a061c5163cfba6400ec0ea60c2ef1d3495"
+        }
+      }
+    },
+    {
+      "key": "event.q055-boost-add",
+      "label": "Mejora del servidor añadida",
+      "category": "Server",
+      "referenceEventId": 55,
+      "noun": "boost",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q055-boost-add.svg",
+          "png": "png/dorado/q055-boost-add.png",
+          "color": "#FFD36F",
+          "sha256": "46df1cda7649a774bfd10f3d2b56cc2c321b2c71a3fa06e2aeef70d58fc06b7c"
+        },
+        "estado": {
+          "svg": "svg/estado/q055-boost-add.svg",
+          "png": "png/estado/q055-boost-add.png",
+          "color": "#42C87B",
+          "sha256": "5f0b2428147342e07dbd5e87c98397f34f691e1c3994d994adfc97450f33bb0e"
+        }
+      }
+    },
+    {
+      "key": "event.q056-boost-remove",
+      "label": "Mejora del servidor retirada",
+      "category": "Server",
+      "referenceEventId": 56,
+      "noun": "boost",
+      "action": "remove",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q056-boost-remove.svg",
+          "png": "png/dorado/q056-boost-remove.png",
+          "color": "#FFD36F",
+          "sha256": "681f9c948fc55d0cabc7cb2da300070b4306527ffd9da5e3cf3ee195ae83836f"
+        },
+        "estado": {
+          "svg": "svg/estado/q056-boost-remove.svg",
+          "png": "png/estado/q056-boost-remove.png",
+          "color": "#F4677C",
+          "sha256": "e0414fea5adbead0a70b8c21f2cff16f262d0a71a56f72b59b1dd3c7cbcfcfbc"
+        }
+      }
+    },
+    {
+      "key": "event.q107-banner-edit",
+      "label": "Banner del servidor cambiado",
+      "category": "Server",
+      "referenceEventId": 107,
+      "noun": "banner",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q107-banner-edit.svg",
+          "png": "png/dorado/q107-banner-edit.png",
+          "color": "#FFD36F",
+          "sha256": "c2be90d239331f05d83bcbb6e67e543fd993e99d91ef09d232de30ff7c73559b"
+        },
+        "estado": {
+          "svg": "svg/estado/q107-banner-edit.svg",
+          "png": "png/estado/q107-banner-edit.png",
+          "color": "#66A8FF",
+          "sha256": "7c51e7a2e360f1019f98ee8fa53c05c16ffa5302f686b3fa7951292c8814a1e6"
+        }
+      }
+    },
+    {
+      "key": "event.q031-role-add",
+      "label": "Rol creado",
+      "category": "Roles",
+      "referenceEventId": 31,
+      "noun": "role",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q031-role-add.svg",
+          "png": "png/dorado/q031-role-add.png",
+          "color": "#FFD36F",
+          "sha256": "06d324763b8f715c58db67e45ed1294fc96c592c943ce9b53eb41cc03874e7e9"
+        },
+        "estado": {
+          "svg": "svg/estado/q031-role-add.svg",
+          "png": "png/estado/q031-role-add.png",
+          "color": "#42C87B",
+          "sha256": "83967c524d25f4f5c0e1761d1af40f0dcfef0d273a24d6c112853de966b8f91a"
+        }
+      }
+    },
+    {
+      "key": "event.q032-role-delete",
+      "label": "Rol eliminado",
+      "category": "Roles",
+      "referenceEventId": 32,
+      "noun": "role",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q032-role-delete.svg",
+          "png": "png/dorado/q032-role-delete.png",
+          "color": "#FFD36F",
+          "sha256": "2bc17d6703778140d5cefcb10a0d1459e303223766eee2307d8242a979c9e013"
+        },
+        "estado": {
+          "svg": "svg/estado/q032-role-delete.svg",
+          "png": "png/estado/q032-role-delete.png",
+          "color": "#F4677C",
+          "sha256": "17929bab8693df4d172ae23e8cb54f667f3e313c8157f817d8a8b2524ddbce45"
+        }
+      }
+    },
+    {
+      "key": "event.q033-role-edit",
+      "label": "Rol modificado",
+      "category": "Roles",
+      "referenceEventId": 33,
+      "noun": "role",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q033-role-edit.svg",
+          "png": "png/dorado/q033-role-edit.png",
+          "color": "#FFD36F",
+          "sha256": "46b908aacce312dcdbfd38cb3b1837d7a7e7f25666d8aa22061e249120b346f5"
+        },
+        "estado": {
+          "svg": "svg/estado/q033-role-edit.svg",
+          "png": "png/estado/q033-role-edit.png",
+          "color": "#66A8FF",
+          "sha256": "38e48e54d6c279cb031305d823973a791bcc96ad2b3fdd85dae8e4002881743b"
+        }
+      }
+    },
+    {
+      "key": "event.q050-role-permission-edit",
+      "label": "Permisos de rol cambiados",
+      "category": "Roles",
+      "referenceEventId": 50,
+      "noun": "rolePermission",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q050-role-permission-edit.svg",
+          "png": "png/dorado/q050-role-permission-edit.png",
+          "color": "#FFD36F",
+          "sha256": "d58e0f3cde78f22e569500f7484c4bedf0cba14987024f693a95e30019727b8a"
+        },
+        "estado": {
+          "svg": "svg/estado/q050-role-permission-edit.svg",
+          "png": "png/estado/q050-role-permission-edit.png",
+          "color": "#66A8FF",
+          "sha256": "79f0049505dd9248b643a90ce8b15a42e18ddf791314a9f8ff1a22db2da34601"
+        }
+      }
+    },
+    {
+      "key": "event.q053-role-icon-edit",
+      "label": "Icono del rol cambiado",
+      "category": "Roles",
+      "referenceEventId": 53,
+      "noun": "roleIcon",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q053-role-icon-edit.svg",
+          "png": "png/dorado/q053-role-icon-edit.png",
+          "color": "#FFD36F",
+          "sha256": "c590311fa66beed0015d4b44f2505f34da28a1ac61a8c46d716c1c862a200e3a"
+        },
+        "estado": {
+          "svg": "svg/estado/q053-role-icon-edit.svg",
+          "png": "png/estado/q053-role-icon-edit.png",
+          "color": "#66A8FF",
+          "sha256": "6c7c07f6ff1b837694fcc9664dd8f7af207c87e41798cee09e8dbed0c9fb3dbb"
+        }
+      }
+    },
+    {
+      "key": "event.q068-log-move",
+      "label": "Canal de registros cambiado",
+      "category": "Quark Events",
+      "referenceEventId": 68,
+      "noun": "log",
+      "action": "move",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q068-log-move.svg",
+          "png": "png/dorado/q068-log-move.png",
+          "color": "#FFD36F",
+          "sha256": "a0eeb97c35085b51a8814b727b45e26802024822df8849812aca3b4f247de94d"
+        },
+        "estado": {
+          "svg": "svg/estado/q068-log-move.svg",
+          "png": "png/estado/q068-log-move.png",
+          "color": "#66A8FF",
+          "sha256": "ca5603e92eb87601d29d2dfedadc2487c26a00ee44fb689d3c8fd58108921cbe"
+        }
+      }
+    },
+    {
+      "key": "event.q069-eye-edit",
+      "label": "Opciones de exclusión cambiadas",
+      "category": "Quark Events",
+      "referenceEventId": 69,
+      "noun": "eye",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q069-eye-edit.svg",
+          "png": "png/dorado/q069-eye-edit.png",
+          "color": "#FFD36F",
+          "sha256": "b54004357a63608894d6a693dd0ef49f537dc29e1b6e94ea30612a16fee9621b"
+        },
+        "estado": {
+          "svg": "svg/estado/q069-eye-edit.svg",
+          "png": "png/estado/q069-eye-edit.png",
+          "color": "#66A8FF",
+          "sha256": "139983233af78deb4b94cb6f8ff8d0e6b2c679c668044c9b5f9a8ca0b2b65ce3"
+        }
+      }
+    },
+    {
+      "key": "event.q070-language-edit",
+      "label": "Idioma cambiado",
+      "category": "Quark Events",
+      "referenceEventId": 70,
+      "noun": "language",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q070-language-edit.svg",
+          "png": "png/dorado/q070-language-edit.png",
+          "color": "#FFD36F",
+          "sha256": "73092b48527fa7b78866a5423d29d308b203ec0a681761dd970da3e7e67f24d5"
+        },
+        "estado": {
+          "svg": "svg/estado/q070-language-edit.svg",
+          "png": "png/estado/q070-language-edit.png",
+          "color": "#66A8FF",
+          "sha256": "e13cb94789c8268566c6d3f20adf392e6fe9b104b59101d1ecbc9e0c1099292d"
+        }
+      }
+    },
+    {
+      "key": "event.q071-key-revoke",
+      "label": "Token revocado",
+      "category": "Quark Events",
+      "referenceEventId": 71,
+      "noun": "key",
+      "action": "revoke",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q071-key-revoke.svg",
+          "png": "png/dorado/q071-key-revoke.png",
+          "color": "#FFD36F",
+          "sha256": "03104776762646fdc64852279bd89ea597c53f21ba8a8ba81df2e0191d76cad4"
+        },
+        "estado": {
+          "svg": "svg/estado/q071-key-revoke.svg",
+          "png": "png/estado/q071-key-revoke.png",
+          "color": "#F4677C",
+          "sha256": "c64dbc289f29edfe9b002d205ece90986fd097a3a4c60c82f42985d9ca8a0a02"
+        }
+      }
+    },
+    {
+      "key": "event.q072-key-add",
+      "label": "Token generado",
+      "category": "Quark Events",
+      "referenceEventId": 72,
+      "noun": "key",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q072-key-add.svg",
+          "png": "png/dorado/q072-key-add.png",
+          "color": "#FFD36F",
+          "sha256": "2011723e53968d9e88a7be4e7021cb2b87b758ae72405fc6964ffcb209b6de6f"
+        },
+        "estado": {
+          "svg": "svg/estado/q072-key-add.svg",
+          "png": "png/estado/q072-key-add.png",
+          "color": "#42C87B",
+          "sha256": "84004df6303d677b3e360529c02e2842ebfa65b7b3c99c6eeedba7fd96314cde"
+        }
+      }
+    },
+    {
+      "key": "event.q073-tag-delete",
+      "label": "Etiqueta eliminada",
+      "category": "Quark Events",
+      "referenceEventId": 73,
+      "noun": "tag",
+      "action": "delete",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q073-tag-delete.svg",
+          "png": "png/dorado/q073-tag-delete.png",
+          "color": "#FFD36F",
+          "sha256": "f95de29e7f9989864c1c4fac9d6d2df7421c0f9aa17da37bb37a531ef20febe9"
+        },
+        "estado": {
+          "svg": "svg/estado/q073-tag-delete.svg",
+          "png": "png/estado/q073-tag-delete.png",
+          "color": "#F4677C",
+          "sha256": "146db68fd1db4f179e99ff5bb133f74d286cfd73d79374823f48d29bef29ed46"
+        }
+      }
+    },
+    {
+      "key": "event.q074-tag-add",
+      "label": "Etiqueta añadida",
+      "category": "Quark Events",
+      "referenceEventId": 74,
+      "noun": "tag",
+      "action": "add",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q074-tag-add.svg",
+          "png": "png/dorado/q074-tag-add.png",
+          "color": "#FFD36F",
+          "sha256": "9b590619fcbbcbf86f593bc0152eca5bb704ede8554cb79606e7dcbd064b5176"
+        },
+        "estado": {
+          "svg": "svg/estado/q074-tag-add.svg",
+          "png": "png/estado/q074-tag-add.png",
+          "color": "#42C87B",
+          "sha256": "d2526f5506a701a98f70f6ff375b2031191092e9f276c3175a53b6b2027bdd12"
+        }
+      }
+    },
+    {
+      "key": "event.q075-tag-edit",
+      "label": "Etiqueta modificada",
+      "category": "Quark Events",
+      "referenceEventId": 75,
+      "noun": "tag",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q075-tag-edit.svg",
+          "png": "png/dorado/q075-tag-edit.png",
+          "color": "#FFD36F",
+          "sha256": "9d035ecec03d0f2a5eb4b892f0e4704fcb37d10a198bd0c97ab91bc9c90cfc0c"
+        },
+        "estado": {
+          "svg": "svg/estado/q075-tag-edit.svg",
+          "png": "png/estado/q075-tag-edit.png",
+          "color": "#66A8FF",
+          "sha256": "fb745d9d2e6f8fa3513f955ebc516be591b431733f0472e6da28f8929473d6f1"
+        }
+      }
+    },
+    {
+      "key": "event.q076-settings-edit",
+      "label": "Opciones de registros cambiadas",
+      "category": "Quark Events",
+      "referenceEventId": 76,
+      "noun": "settings",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q076-settings-edit.svg",
+          "png": "png/dorado/q076-settings-edit.png",
+          "color": "#FFD36F",
+          "sha256": "9e0312aa4017748d4e8296519302e0f1da1ee9adb6bf11dd1ea0ad85afede0bb"
+        },
+        "estado": {
+          "svg": "svg/estado/q076-settings-edit.svg",
+          "png": "png/estado/q076-settings-edit.png",
+          "color": "#66A8FF",
+          "sha256": "bcf1fd2715e6588d054fc13a728f3933b57e4c56b83fcb62731f4e399b6b4059"
+        }
+      }
+    },
+    {
+      "key": "event.q077-log-edit",
+      "label": "Registro actualizado",
+      "category": "Quark Events",
+      "referenceEventId": 77,
+      "noun": "log",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q077-log-edit.svg",
+          "png": "png/dorado/q077-log-edit.png",
+          "color": "#FFD36F",
+          "sha256": "bcd0139a37c67ad1606f1cc195e4c20a28220f279f57233caa238d3e398ad79b"
+        },
+        "estado": {
+          "svg": "svg/estado/q077-log-edit.svg",
+          "png": "png/estado/q077-log-edit.png",
+          "color": "#66A8FF",
+          "sha256": "92d19d23a9e19a9a2b9222c06a235c3472e329918ba6706452c4240758b48c1e"
+        }
+      }
+    },
+    {
+      "key": "event.q078-settings-reset",
+      "label": "Configuración restablecida",
+      "category": "Quark Events",
+      "referenceEventId": 78,
+      "noun": "settings",
+      "action": "reset",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q078-settings-reset.svg",
+          "png": "png/dorado/q078-settings-reset.png",
+          "color": "#FFD36F",
+          "sha256": "204c8c09750b30913b16a2dcca470a84c8f4cca00292da3cda13e7ba11892756"
+        },
+        "estado": {
+          "svg": "svg/estado/q078-settings-reset.svg",
+          "png": "png/estado/q078-settings-reset.png",
+          "color": "#FFD36F",
+          "sha256": "204c8c09750b30913b16a2dcca470a84c8f4cca00292da3cda13e7ba11892756"
+        }
+      }
+    },
+    {
+      "key": "event.q089-subscription-edit",
+      "label": "Plan del servidor cambiado",
+      "category": "Quark Events",
+      "referenceEventId": 89,
+      "noun": "subscription",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q089-subscription-edit.svg",
+          "png": "png/dorado/q089-subscription-edit.png",
+          "color": "#FFD36F",
+          "sha256": "bf9435bfcde54df63f9650c74d4c30ad56b72b36c59e0fc196214f0b1cc824ff"
+        },
+        "estado": {
+          "svg": "svg/estado/q089-subscription-edit.svg",
+          "png": "png/estado/q089-subscription-edit.png",
+          "color": "#66A8FF",
+          "sha256": "a40b48dec1df6695cdf57c798f227d5a0fbe19607d4c9c59504d7a517175f3f0"
+        }
+      }
+    },
+    {
+      "key": "event.q099-dashboard-edit",
+      "label": "Acceso al panel cambiado",
+      "category": "Quark Events",
+      "referenceEventId": 99,
+      "noun": "dashboard",
+      "action": "edit",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q099-dashboard-edit.svg",
+          "png": "png/dorado/q099-dashboard-edit.png",
+          "color": "#FFD36F",
+          "sha256": "8977213036f1491d10ae0ea7a3f27b9834b2f50c478a4d05adbae57683e98dca"
+        },
+        "estado": {
+          "svg": "svg/estado/q099-dashboard-edit.svg",
+          "png": "png/estado/q099-dashboard-edit.png",
+          "color": "#66A8FF",
+          "sha256": "b0ff60961a9ba89f4b45f47e69c2971aea8005fa6f43a847cb6fc0c6b4e27d78"
+        }
+      }
+    },
+    {
+      "key": "event.q101-automation-execute",
+      "label": "Acción de automatización",
+      "category": "Quark Events",
+      "referenceEventId": 101,
+      "noun": "automation",
+      "action": "execute",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q101-automation-execute.svg",
+          "png": "png/dorado/q101-automation-execute.png",
+          "color": "#FFD36F",
+          "sha256": "6bd9300a7ca69822082e0a52d2696ac5fe618dfb26d033a605eb7752fda6c336"
+        },
+        "estado": {
+          "svg": "svg/estado/q101-automation-execute.svg",
+          "png": "png/estado/q101-automation-execute.png",
+          "color": "#66A8FF",
+          "sha256": "d94a6d6b0fec484ad088d5cec0db6c3aca41201f32a13267a38133296b2c4c24"
+        }
+      }
+    },
+    {
+      "key": "event.q039-gavel-block",
+      "label": "Miembro baneado",
+      "category": "Modlogs",
+      "referenceEventId": 39,
+      "noun": "gavel",
+      "action": "block",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q039-gavel-block.svg",
+          "png": "png/dorado/q039-gavel-block.png",
+          "color": "#FFD36F",
+          "sha256": "0285c1e562ceb7db3cf6d8f25643469c5097faf10193541e59c06fc75c78c35c"
+        },
+        "estado": {
+          "svg": "svg/estado/q039-gavel-block.svg",
+          "png": "png/estado/q039-gavel-block.png",
+          "color": "#F4677C",
+          "sha256": "37eceb8c5dca916b9298babfa59b0b63f2de68d8b94eac770a65c9cac09f6b5a"
+        }
+      }
+    },
+    {
+      "key": "event.q040-member-clock",
+      "label": "Timeout aplicado",
+      "category": "Modlogs",
+      "referenceEventId": 40,
+      "noun": "member",
+      "action": "clock",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q040-member-clock.svg",
+          "png": "png/dorado/q040-member-clock.png",
+          "color": "#FFD36F",
+          "sha256": "865104274f6b2422642fbf61ffb9b0d6ffc083b16f7abe6550b6ff044c4bb542"
+        },
+        "estado": {
+          "svg": "svg/estado/q040-member-clock.svg",
+          "png": "png/estado/q040-member-clock.png",
+          "color": "#FFD36F",
+          "sha256": "865104274f6b2422642fbf61ffb9b0d6ffc083b16f7abe6550b6ff044c4bb542"
+        }
+      }
+    },
+    {
+      "key": "event.q041-door-leave",
+      "label": "Miembro expulsado",
+      "category": "Modlogs",
+      "referenceEventId": 41,
+      "noun": "door",
+      "action": "leave",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q041-door-leave.svg",
+          "png": "png/dorado/q041-door-leave.png",
+          "color": "#FFD36F",
+          "sha256": "683a533c1a2b85657687bc48d8dab0e98ad68a10472adbdb2263349964d9d868"
+        },
+        "estado": {
+          "svg": "svg/estado/q041-door-leave.svg",
+          "png": "png/estado/q041-door-leave.png",
+          "color": "#F4677C",
+          "sha256": "2a1bcb96615d5574133f4b419eb2517e5b6f5d72fefa47feaefa59c213802412"
+        }
+      }
+    },
+    {
+      "key": "event.q042-clock-allow",
+      "label": "Timeout retirado",
+      "category": "Modlogs",
+      "referenceEventId": 42,
+      "noun": "clock",
+      "action": "allow",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q042-clock-allow.svg",
+          "png": "png/dorado/q042-clock-allow.png",
+          "color": "#FFD36F",
+          "sha256": "8e97f875de299a669ded3954cf404a7853a56929e8d63ebafc766a12fa7224c6"
+        },
+        "estado": {
+          "svg": "svg/estado/q042-clock-allow.svg",
+          "png": "png/estado/q042-clock-allow.png",
+          "color": "#42C87B",
+          "sha256": "033ffb0431787e4afbd76e6dd6dd03ce91f3344e33a9b8ed4d83d0be44c39815"
+        }
+      }
+    },
+    {
+      "key": "event.q043-gavel-allow",
+      "label": "Ban retirado",
+      "category": "Modlogs",
+      "referenceEventId": 43,
+      "noun": "gavel",
+      "action": "allow",
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/q043-gavel-allow.svg",
+          "png": "png/dorado/q043-gavel-allow.png",
+          "color": "#FFD36F",
+          "sha256": "043c611651deaf01f0f100993c502457e71e5f9813190d750df5cc1fdbaea6b0"
+        },
+        "estado": {
+          "svg": "svg/estado/q043-gavel-allow.svg",
+          "png": "png/estado/q043-gavel-allow.png",
+          "color": "#42C87B",
+          "sha256": "d8a33dd7354e52425c19a9c8c8ab9702b4ce84849c7fbfcd842667496f3ac1f4"
+        }
+      }
+    },
+    {
+      "key": "ui.assistance",
+      "label": "Ayuda y soporte",
+      "category": "Auxiliary",
+      "referenceEventId": null,
+      "noun": "help",
+      "action": null,
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/assistance.svg",
+          "png": "png/dorado/assistance.png",
+          "color": "#FFD36F",
+          "sha256": "021e9574bd42727cdb31a4d153c9ae95c51e6d9eb7a0e829455dbfb0db2ce9a7"
+        },
+        "estado": {
+          "svg": "svg/estado/assistance.svg",
+          "png": "png/estado/assistance.png",
+          "color": "#FFD36F",
+          "sha256": "021e9574bd42727cdb31a4d153c9ae95c51e6d9eb7a0e829455dbfb0db2ce9a7"
+        }
+      }
+    },
+    {
+      "key": "ui.billing",
+      "label": "Facturación",
+      "category": "Auxiliary",
+      "referenceEventId": null,
+      "noun": "wallet",
+      "action": null,
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/billing.svg",
+          "png": "png/dorado/billing.png",
+          "color": "#FFD36F",
+          "sha256": "a0b6bbaf4eb9fe5dbdfaba5e04b905fb630df46d81678585577f990d3a3da1cc"
+        },
+        "estado": {
+          "svg": "svg/estado/billing.svg",
+          "png": "png/estado/billing.png",
+          "color": "#FFD36F",
+          "sha256": "a0b6bbaf4eb9fe5dbdfaba5e04b905fb630df46d81678585577f990d3a3da1cc"
+        }
+      }
+    },
+    {
+      "key": "ui.error",
+      "label": "Error",
+      "category": "Auxiliary",
+      "referenceEventId": null,
+      "noun": "error",
+      "action": null,
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/error.svg",
+          "png": "png/dorado/error.png",
+          "color": "#FFD36F",
+          "sha256": "34dd06bf8ea7536b70d81b9e395f47671f8cc19c418bb67f4cc55efc18db2b05"
+        },
+        "estado": {
+          "svg": "svg/estado/error.svg",
+          "png": "png/estado/error.png",
+          "color": "#FFD36F",
+          "sha256": "34dd06bf8ea7536b70d81b9e395f47671f8cc19c418bb67f4cc55efc18db2b05"
+        }
+      }
+    },
+    {
+      "key": "ui.unexpected",
+      "label": "Situación inesperada",
+      "category": "Auxiliary",
+      "referenceEventId": null,
+      "noun": "unexpected",
+      "action": null,
+      "status": "included-for-implementation",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {
+        "dorado": {
+          "svg": "svg/dorado/unexpected.svg",
+          "png": "png/dorado/unexpected.png",
+          "color": "#FFD36F",
+          "sha256": "906b5441d7840b8c021c5cedd16a52f733c4b1a66e4e496c214432e2824e8b64"
+        },
+        "estado": {
+          "svg": "svg/estado/unexpected.svg",
+          "png": "png/estado/unexpected.png",
+          "color": "#FFD36F",
+          "sha256": "906b5441d7840b8c021c5cedd16a52f733c4b1a66e4e496c214432e2824e8b64"
+        }
+      }
+    }
+  ],
+  "duplicateExportAliases": {
+    "event.q011-thread-delete.dorado": "event.q004-thread-delete.dorado",
+    "event.q011-thread-delete.estado": "event.q004-thread-delete.estado",
+    "event.q034-message-pin.estado": "event.q034-message-pin.dorado",
+    "event.q035-message-unpin.estado": "event.q035-message-unpin.dorado",
+    "event.q082-webhook-avatar-edit.dorado": "event.q081-webhook-edit.dorado",
+    "event.q082-webhook-avatar-edit.estado": "event.q081-webhook-edit.estado",
+    "event.q078-settings-reset.estado": "event.q078-settings-reset.dorado",
+    "event.q040-member-clock.estado": "event.q040-member-clock.dorado",
+    "ui.assistance.estado": "ui.assistance.dorado",
+    "ui.billing.estado": "ui.billing.dorado",
+    "ui.error.estado": "ui.error.dorado",
+    "ui.unexpected.estado": "ui.unexpected.dorado"
+  },
+  "uniquePngHashes": 222,
+  "integratedEdition": "0.6",
+  "integrationMap": "integration-map.json",
+  "materialsEdition": "0.15"
+}

@@ -1,0 +1,731 @@
+{
+  "entries": [
+    {
+      "key": "emoji.ayuda",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "bytes": 41168,
+          "sha256": "7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_ayuda.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/3a5c01d738e31ebbf470eda7cc290fd673eb91627fe11473ddc7a9a6e9a54d97.png",
+          "bytes": 137702,
+          "sha256": "3a5c01d738e31ebbf470eda7cc290fd673eb91627fe11473ddc7a9a6e9a54d97",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_ayuda.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.bienvenida",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238.png",
+          "bytes": 40333,
+          "sha256": "c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_bienvenida.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/9f6088998b81e73fe3976024f0c6d44260c96bf6fbc19d7d336ef804fc75b379.png",
+          "bytes": 134058,
+          "sha256": "9f6088998b81e73fe3976024f0c6d44260c96bf6fbc19d7d336ef804fc75b379",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_bienvenida.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.espera",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+          "bytes": 40601,
+          "sha256": "4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_espera.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/2e423ee50db749c52442bef7e1f256ef1028a6346b66d070d0997ab4e67045a0.png",
+          "bytes": 135415,
+          "sha256": "2e423ee50db749c52442bef7e1f256ef1028a6346b66d070d0997ab4e67045a0",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_espera.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.exito",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "bytes": 39906,
+          "sha256": "d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_exito.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/8678d2102d1fcb271cbff038a1b4cd1bcbbbaea5b652a3840e8431502d2174c2.png",
+          "bytes": 133389,
+          "sha256": "8678d2102d1fcb271cbff038a1b4cd1bcbbbaea5b652a3840e8431502d2174c2",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_exito.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.moderacion",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+          "bytes": 41083,
+          "sha256": "ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_moderacion.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/277c733f39c3bbfb318ae1575ded3cc65629967d1108b1e4a85e7ebc3deda1d2.png",
+          "bytes": 138038,
+          "sha256": "277c733f39c3bbfb318ae1575ded3cc65629967d1108b1e4a85e7ebc3deda1d2",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_moderacion.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.musica",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b.png",
+          "bytes": 39335,
+          "sha256": "140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/128/obey_musica.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/2c1aee992a53808b2de8fa14c851a59b28fa8c8226458ae13980a12ce307027e.png",
+          "bytes": 131266,
+          "sha256": "2c1aee992a53808b2de8fa14c851a59b28fa8c8226458ae13980a12ce307027e",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "06_ELEMENTOS/assets/personaje/256/obey_musica.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.colecciones",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae.png",
+          "bytes": 40820,
+          "sha256": "afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/personaje/colecciones-128.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/511f3f7ba21b8f14b0bef4f4d0f21ec2bf0fbf29281716556c2abfbcb2e9307a.png",
+          "bytes": 140810,
+          "sha256": "511f3f7ba21b8f14b0bef4f4d0f21ec2bf0fbf29281716556c2abfbcb2e9307a",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/personaje/colecciones-256.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.configuracion",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "bytes": 41003,
+          "sha256": "551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/personaje/configuracion-128.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/c07cc0be095d436c6406975daf8ddb7931129482d4c7ea93dc0c6afe5094e4b6.png",
+          "bytes": 141678,
+          "sha256": "c07cc0be095d436c6406975daf8ddb7931129482d4c7ea93dc0c6afe5094e4b6",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/personaje/configuracion-256.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.sobre",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762.png",
+          "bytes": 41819,
+          "sha256": "b02aebd9c36a17b7e2bd5cabb4a397cc53df52d66ac99f11e9178a9f6cd2a762",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-128.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/8bd844a57ac076c66b43e9790a57aa4c03e53636eba70ee157527fe9c4eaa0ab.png",
+          "bytes": 144787,
+          "sha256": "8bd844a57ac076c66b43e9790a57aa4c03e53636eba70ee157527fe9c4eaa0ab",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "08_TICKETS_VISUAL/personaje/exports/sobre-256.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "emoji.gracias",
+      "kind": "character",
+      "files": {
+        "png128": {
+          "variant": "png128",
+          "path": "selected/16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7.png",
+          "bytes": 38483,
+          "sha256": "16e8bd94978a17bb5312dba7ede94fa6435c764fbfe206fd38983ee757db80e7",
+          "width": 128,
+          "height": 128,
+          "frames": 1,
+          "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-128.png"
+        },
+        "png256": {
+          "variant": "png256",
+          "path": "selected/c2b1f0af7d635b76364bd7705f87f88e66a1259d7056686488effc4a5a4d7474.png",
+          "bytes": 133086,
+          "sha256": "c2b1f0af7d635b76364bd7705f87f88e66a1259d7056686488effc4a5a4d7474",
+          "width": 256,
+          "height": 256,
+          "frames": 1,
+          "sourcePath": "08_TICKETS_VISUAL/personaje/exports/gracias-256.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png128",
+        "thumbnailVariant": "png256",
+        "webVariant": "png256"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "scene.vacio",
+      "kind": "scene",
+      "files": {
+        "png512": {
+          "variant": "png512",
+          "path": "selected/90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611.png",
+          "bytes": 251871,
+          "sha256": "90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611",
+          "width": 512,
+          "height": 288,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/vacio-512.png"
+        },
+        "png1024": {
+          "variant": "png1024",
+          "path": "selected/26bc7c5b40806269459e5995c21a78e72284de912047a09aa11f5ef3fbfbfbcb.png",
+          "bytes": 922220,
+          "sha256": "26bc7c5b40806269459e5995c21a78e72284de912047a09aa11f5ef3fbfbfbcb",
+          "width": 1024,
+          "height": 576,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/vacio-1024.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png512",
+        "webVariant": "png1024"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "scene.sin-conexion",
+      "kind": "scene",
+      "files": {
+        "png512": {
+          "variant": "png512",
+          "path": "selected/2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526.png",
+          "bytes": 239848,
+          "sha256": "2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526",
+          "width": 512,
+          "height": 288,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/sin-conexion-512.png"
+        },
+        "png1024": {
+          "variant": "png1024",
+          "path": "selected/a839ccf572d539c247f487a0fee082c1c934782c183ca02dc736c76db1557cc1.png",
+          "bytes": 869209,
+          "sha256": "a839ccf572d539c247f487a0fee082c1c934782c183ca02dc736c76db1557cc1",
+          "width": 1024,
+          "height": 576,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/sin-conexion-1024.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png512",
+        "webVariant": "png1024"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "scene.celebracion",
+      "kind": "scene",
+      "files": {
+        "png512": {
+          "variant": "png512",
+          "path": "selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+          "bytes": 253358,
+          "sha256": "876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a",
+          "width": 512,
+          "height": 288,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/celebracion-512.png"
+        },
+        "png1024": {
+          "variant": "png1024",
+          "path": "selected/9e08c3b701ac7d8f3cb2b0a7a9df0c86f9ba0ddc1524c2955c8dc7f50ec7a4dc.png",
+          "bytes": 912575,
+          "sha256": "9e08c3b701ac7d8f3cb2b0a7a9df0c86f9ba0ddc1524c2955c8dc7f50ec7a4dc",
+          "width": 1024,
+          "height": 576,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/escenas/celebracion-1024.png"
+        }
+      },
+      "destinations": {
+        "discordVariant": "png512",
+        "webVariant": "png1024"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "fondos.bienvenida",
+      "kind": "background",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "bytes": 600,
+          "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/bienvenida.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+          "bytes": 60447,
+          "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/bienvenida.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "rendererRasterVariant": "png",
+        "webVariant": "svg"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "fondos.despedida",
+      "kind": "background",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "bytes": 600,
+          "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/despedida.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+          "bytes": 60447,
+          "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/despedida.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "rendererRasterVariant": "png",
+        "webVariant": "svg"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "fondos.evento",
+      "kind": "background",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "bytes": 600,
+          "sha256": "93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934",
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/evento.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c.png",
+          "bytes": 60447,
+          "sha256": "950f4e721e1aae94d6dcca0c58d614c3fd137fadc89ea1187ae8c0036689850c",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/evento.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "rendererRasterVariant": "png",
+        "webVariant": "svg"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "fondos.nivel",
+      "kind": "background",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be.svg",
+          "bytes": 598,
+          "sha256": "3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be",
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/nivel.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/a89f6695f4fc062b019965a80daac1c53c8a30d9495fff825bd908962876279a.png",
+          "bytes": 46189,
+          "sha256": "a89f6695f4fc062b019965a80daac1c53c8a30d9495fff825bd908962876279a",
+          "width": 1000,
+          "height": 320,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/nivel.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "rendererRasterVariant": "png",
+        "webVariant": "svg"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "fondos.perfil",
+      "kind": "background",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1.svg",
+          "bytes": 598,
+          "sha256": "1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1",
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/perfil.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/a931113dd115b8f9978fcf0ddc1f7556a0bef1181de68a958d7407bd81e6da65.png",
+          "bytes": 86867,
+          "sha256": "a931113dd115b8f9978fcf0ddc1f7556a0bef1181de68a958d7407bd81e6da65",
+          "width": 1000,
+          "height": 600,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/fondos/perfil.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "rendererRasterVariant": "png",
+        "webVariant": "svg"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "plantillas.bienvenida",
+      "kind": "card-template",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025.svg",
+          "bytes": 628727,
+          "sha256": "965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025",
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/bienvenida.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/3b0b5e2e804caab7fcfc3e59586d9c113719d3253bdb2b691ac1b3906469da48.png",
+          "bytes": 254702,
+          "sha256": "3b0b5e2e804caab7fcfc3e59586d9c113719d3253bdb2b691ac1b3906469da48",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/bienvenida.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "webVariant": "svg",
+        "previewFixtureVariant": "png"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "plantillas.despedida",
+      "kind": "card-template",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778.svg",
+          "bytes": 628724,
+          "sha256": "3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778",
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/despedida.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/b522f6bc76b3b286778b1cd7143a5ecb0f766ec8a5cd24a3d4be936952272cca.png",
+          "bytes": 254968,
+          "sha256": "b522f6bc76b3b286778b1cd7143a5ecb0f766ec8a5cd24a3d4be936952272cca",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/despedida.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "webVariant": "svg",
+        "previewFixtureVariant": "png"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "plantillas.evento",
+      "kind": "card-template",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a.svg",
+          "bytes": 628878,
+          "sha256": "9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a",
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/evento.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/b0d6f2db4383625d7ffbd4ce2197c76c285d0873048ef34f892d96163a19d1aa.png",
+          "bytes": 253113,
+          "sha256": "b0d6f2db4383625d7ffbd4ce2197c76c285d0873048ef34f892d96163a19d1aa",
+          "width": 1200,
+          "height": 400,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/evento.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "webVariant": "svg",
+        "previewFixtureVariant": "png"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "plantillas.nivel",
+      "kind": "card-template",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7.svg",
+          "bytes": 628726,
+          "sha256": "dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7",
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/nivel.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/a4900fd1863880ed7c35f9735facc639a05138d7b4fbcc8d1bb95fe0746531b0.png",
+          "bytes": 209571,
+          "sha256": "a4900fd1863880ed7c35f9735facc639a05138d7b4fbcc8d1bb95fe0746531b0",
+          "width": 1000,
+          "height": 320,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/nivel.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "webVariant": "svg",
+        "previewFixtureVariant": "png"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    },
+    {
+      "key": "plantillas.perfil",
+      "kind": "card-template",
+      "files": {
+        "svg": {
+          "variant": "svg",
+          "path": "selected/2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a.svg",
+          "bytes": 629472,
+          "sha256": "2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a",
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/perfil.svg"
+        },
+        "png": {
+          "variant": "png",
+          "path": "selected/621fb8604b922759a9380c359b70a5d1986938313c41de57ff63dd606d000872.png",
+          "bytes": 259725,
+          "sha256": "621fb8604b922759a9380c359b70a5d1986938313c41de57ff63dd606d000872",
+          "width": 1000,
+          "height": 600,
+          "frames": 1,
+          "sourcePath": "10_ENTREGA_CODEX/assets/plantillas/perfil.png"
+        }
+      },
+      "destinations": {
+        "rendererVariant": "svg",
+        "webVariant": "svg",
+        "previewFixtureVariant": "png"
+      },
+      "status": "preserve-existing-identity-not-new-approval",
+      "applicationEmojiId": null
+    }
+  ],
+  "policy": "reuse-existing-character-and-template-assets; no avatar/banner replacement"
+}

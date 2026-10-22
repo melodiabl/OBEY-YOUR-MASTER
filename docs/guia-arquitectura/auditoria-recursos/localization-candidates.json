@@ -1,0 +1,5302 @@
+[
+  {
+    "file": "commands/Administration/addroletobots.js",
+    "line": 198,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "9528eeeab848d074cae3b830cbc54b96ec50a777cd3bfc53227975c3eae0ba53",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletobots.js",
+    "line": 196,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletohumans.js",
+    "line": 198,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "0051f2cfa4246e90d34592d3cd41309e23e9beebd1015c4f8d688a346a499e7f",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletohumans.js",
+    "line": 196,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletorole.js",
+    "line": 83,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "c73873ad42690070848145618a48980a4c8670bec42699f937e47cc1a6dec5ae",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletorole.js",
+    "line": 93,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "c73873ad42690070848145618a48980a4c8670bec42699f937e47cc1a6dec5ae",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletorole.js",
+    "line": 92,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "ea320e35e41a0ccff12080c4d296924bfc59373874f08ed49693b410af9e579e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletorole.js",
+    "line": 210,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "177bc1e6b08ce1c9e5c67dba87d4f265086fcf56cd665c5ca8d5fce4c81c4ed3",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/addroletorole.js",
+    "line": 208,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/createbackup.js",
+    "line": 24,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "5d9ca0c06a8802c59999f60dba475e535e9a4a5344854b03b9865d061e0f175a",
+    "module": "architect",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/createbackup.js",
+    "line": 27,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "bbac43ada9f3a58912f7bab564977aa91e5fb6158bace70164957ba0ebf70282",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/createbackup.js",
+    "line": 107,
+    "column": 41,
+    "method": "send",
+    "stringHash": "29fbb37d713094c7af7ada6bb7573a767f9c3ba2a37846ab2bd93d0366cde83e",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/createbackup.js",
+    "line": 111,
+    "column": 45,
+    "method": "send",
+    "stringHash": "e9006914d64d61598d16db2b05ff3d0b6f50997282ff159fa1849b2adbe3fb73",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/createbackup.js",
+    "line": 116,
+    "column": 45,
+    "method": "send",
+    "stringHash": "360429a7f2f37749c549ceed5e9557c03bf958893c3314b9c4ff6be2c4f52d7c",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/deleterole.js",
+    "line": 91,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "1ed81415d1fa9712648f67063202a1944e2f303ead4886de66e7b3a78e8f0680",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/giveaway.js",
+    "line": 538,
+    "column": 61,
+    "method": "reply",
+    "stringHash": "402ce6541fb77b1432ea943a65170c5a66f6d93ffe5edc28eb450fa8016c8228",
+    "module": "giveaways",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/giveaway.js",
+    "line": 565,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "402ce6541fb77b1432ea943a65170c5a66f6d93ffe5edc28eb450fa8016c8228",
+    "module": "giveaways",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/instantclose.js",
+    "line": 129,
+    "column": 33,
+    "method": "reply",
+    "stringHash": "1ed81415d1fa9712648f67063202a1944e2f303ead4886de66e7b3a78e8f0680",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/instantclose.js",
+    "line": 167,
+    "column": 57,
+    "method": "send",
+    "stringHash": "15887694b47e8046f7d82ae621f9fd056c2dd647ca6f8ce8f3e2374cb0b10884",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/instantclose.js",
+    "line": 174,
+    "column": 49,
+    "method": "send",
+    "stringHash": "39118b525c5b752eb2fb66697f1e4dfe8992a1de862c70219a7bfc5a5d81ab05",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/instantclose.js",
+    "line": 179,
+    "column": 60,
+    "method": "send",
+    "stringHash": "e73b90eda689440b013fec92ff9dcc2353b02670037418281d17670a51766626",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/instantdelete.js",
+    "line": 112,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "1ed81415d1fa9712648f67063202a1944e2f303ead4886de66e7b3a78e8f0680",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/jointhread.js",
+    "line": 60,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "56590397aa1d4fa308ad88f94bf18d5ed6f47abcdbc873d44b0e0c4ae62b1666",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/jointhread.js",
+    "line": 69,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "d44e702e16b4181bb847041c5bd021d59a8c63326c25b9e29783907b100e9f39",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/jointhread.js",
+    "line": 80,
+    "column": 43,
+    "method": "setTitle",
+    "stringHash": "528bb39faf6b7724b4cf905ca0b34cc8212066074836ca6cd1c3b859f88f43ae",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/jointhread.js",
+    "line": 90,
+    "column": 43,
+    "method": "setTitle",
+    "stringHash": "5596bc2ec924874bcb11bcf7dc667228bbc8fc11f48d67d6fd311142d061ee96",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/leavethread.js",
+    "line": 59,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "1398b29f64f8322fc5f858bf49e4f32fd472afd272b75a5f6a2f3eadfecc57a0",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/leavethread.js",
+    "line": 71,
+    "column": 47,
+    "method": "setTitle",
+    "stringHash": "8dfd92e309b10581a9fea9469c599fd82e46fbaf55b9260d78edcecce072756b",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/leavethread.js",
+    "line": 82,
+    "column": 43,
+    "method": "setTitle",
+    "stringHash": "33ffb8cd9e827ac0937abccdfa65ebd92cb4814bde12a736ecb44212407a1845",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/listbackups.js",
+    "line": 21,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "75e41ced744c418c709b548258b7875d5dc5e0957326ba5f299091a733ee2fb5",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/listbackups.js",
+    "line": 64,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "8a90959749f5195c046060ad9405acd541426d0fb6354e8b24b0b968b5ddfd5b",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 23,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "774362d6f7ac79f3b68f76069a10323944ae9e2e6d45859da0549e54071d9341",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 27,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "75e41ced744c418c709b548258b7875d5dc5e0957326ba5f299091a733ee2fb5",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 32,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "75e41ced744c418c709b548258b7875d5dc5e0957326ba5f299091a733ee2fb5",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 36,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "5d9ca0c06a8802c59999f60dba475e535e9a4a5344854b03b9865d061e0f175a",
+    "module": "architect",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 39,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "17c9927c6b90808f79daee1bffc016019d3e82639d521b9bea0fd8221607ec87",
+    "module": "architect",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 42,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "27260505e32c708c776f88e500c90f61ea241af39c50d96067624bcfb5180cd0",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 84,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "6ed22ae3f666924319eefdc83797fbbbe146723f18a8760e4ed2b69a756a1f01",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 89,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "f7e965f7b83d393a06ff030a37f295d280c45985d8ea37c8ead03d3f9da6ed6f",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 93,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "5a71f2a935103182c25973166f9009796d76b5a76a4c955ccf2b51b8dac5bf18",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 97,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "623638de5e22e6b2cfd5f3ec6728b4b51879623b38ae637fb716eb7d8a2a4853",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/loadbackup.js",
+    "line": 103,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "fe6070f7698a48c57a2acb05de4dde0086482569ec1a8b003db7b1c84987b7aa",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/lockthread.js",
+    "line": 59,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "d44e702e16b4181bb847041c5bd021d59a8c63326c25b9e29783907b100e9f39",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/lockthread.js",
+    "line": 68,
+    "column": 35,
+    "method": "setTitle",
+    "stringHash": "a9fa4abf325d0e61d5ec917668b6743ed8b2084b9dbd1d235ec0860ee313584a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/mute.js",
+    "line": 99,
+    "column": 31,
+    "method": "reply",
+    "stringHash": "96b0cff8637bdc7d7b5481421826de4fe341abe08c5ff7610b1d8058bc1fb051",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/mute.js",
+    "line": 122,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "075927866d03e00b7a569d057d52d0c16e25f674c25b7769f330cb67c81e0596",
+    "module": "moderation",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/mute.js",
+    "line": 187,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefrombots.js",
+    "line": 104,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "4759e14e0059876d5c00a24f3be3625f8d2bde492a87ff155d4af8c9e1042a0e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefrombots.js",
+    "line": 103,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "fadcecd8c2fd59e1217711a875f07e7ba5433070eb04b648921fcafc7d5ce95d",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefrombots.js",
+    "line": 198,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "81ffeb311b7fc3748e371baba5d82d041265b366efc3d2e181ff2c9de9a1f469",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefrombots.js",
+    "line": 196,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromeveryone.js",
+    "line": 104,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "4759e14e0059876d5c00a24f3be3625f8d2bde492a87ff155d4af8c9e1042a0e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromeveryone.js",
+    "line": 103,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "fadcecd8c2fd59e1217711a875f07e7ba5433070eb04b648921fcafc7d5ce95d",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromeveryone.js",
+    "line": 198,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "6e340d5ae39d66695ebbf3e1d1a02eca57a2e3636a9c664a809b6aec7af538bd",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromeveryone.js",
+    "line": 196,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromhumans.js",
+    "line": 104,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "4759e14e0059876d5c00a24f3be3625f8d2bde492a87ff155d4af8c9e1042a0e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromhumans.js",
+    "line": 103,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "fadcecd8c2fd59e1217711a875f07e7ba5433070eb04b648921fcafc7d5ce95d",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromhumans.js",
+    "line": 198,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "12bdef3790a12c50b9c52af89270879d5c3ca223f0c9b17191dce323016e5d7e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromhumans.js",
+    "line": 196,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 83,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "52484eed98d78e408e0cfee3d809836fb23419df8829b06404972cb45473a7ca",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 93,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "52484eed98d78e408e0cfee3d809836fb23419df8829b06404972cb45473a7ca",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 92,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "ea320e35e41a0ccff12080c4d296924bfc59373874f08ed49693b410af9e579e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 116,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "4759e14e0059876d5c00a24f3be3625f8d2bde492a87ff155d4af8c9e1042a0e",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 115,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "fadcecd8c2fd59e1217711a875f07e7ba5433070eb04b648921fcafc7d5ce95d",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 210,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "be73e7c135377f4bc82b861d3f8d2726a0ddee4bc3e9d6b15250066974721ac8",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/removerolefromrole.js",
+    "line": 208,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "c0747276ab1596e8c95c2a171e06c23aa3fea3bd0847d971f941a69c4541aef9",
+    "module": "roles",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/setautoarchiveduration.js",
+    "line": 60,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "d44e702e16b4181bb847041c5bd021d59a8c63326c25b9e29783907b100e9f39",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/setautoarchiveduration.js",
+    "line": 70,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "ca424f96fcd7f1a0559e30e7dfda95d5b9c05fefe1db69f913766198f93d7095",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/setautoarchiveduration.js",
+    "line": 69,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "8efc84257357bad9d864419e98401c461d53faa84ddaef409019fad87da80518",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/setautoarchiveduration.js",
+    "line": 81,
+    "column": 29,
+    "method": "setTitle",
+    "stringHash": "f9556860312a9a1c7f9823c16b4df648605ffc4dbcd1ee7495c0ce3378e792c2",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/sync-invites.js",
+    "line": 75,
+    "column": 30,
+    "method": "reply",
+    "stringHash": "927058b8e9f2c6c7f0cc05a38bc991384f8f0fc531fb27461951f1909bdf7f5d",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/sync-invites.js",
+    "line": 142,
+    "column": 30,
+    "method": "reply",
+    "stringHash": "2fa3da2a53b39a9f05e450a5a947a883ba419f036e276c28dc3bc876085a0859",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/tempmute.js",
+    "line": 143,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "b017d447c845e1cc13ffe89e6c0b8688cb90fcd9d5946f3c6f84cb454a1d936b",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/timeout.js",
+    "line": 79,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "80f02eafdb9f9cde39f16f3994e69c49db322ebf395874a7b7513c9f2427008a",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/timeout.js",
+    "line": 90,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "69c1cc9eb1b95ede764684003c3edadb4714ef7b1052c9dc58e2c0d04eb958ef",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 39,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "a31a005979fafdfe64a918e96dde03d16194d7a1876400b26d9eeab469d768f6",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 37,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "21d724faa30d0809c3bf2daa7528137e60192c7143d5cff708be4d2d30aced1c",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 52,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "89af8673054c572fd546fbb65b928d2da111c6894dfd9e85c59fa66869782f0d",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 51,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "b3abfbf93363f7e1b3aea7c4bc68c8ef49ba7d87b2424a9f6a86bcc38e6dd65c",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 64,
+    "column": 45,
+    "method": "setDescription",
+    "stringHash": "f7c47091f8742599375bb6426c4f2d904e6e85307b05627b51c099760b30e221",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unban.js",
+    "line": 63,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "85f540f3143d680ab6978b477c9ee13dc43ffafd366f2ee3bbaa500aec3f88f9",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unlockthread.js",
+    "line": 60,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "d44e702e16b4181bb847041c5bd021d59a8c63326c25b9e29783907b100e9f39",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Administration/unlockthread.js",
+    "line": 69,
+    "column": 35,
+    "method": "setTitle",
+    "stringHash": "24d89c3eba6a2e37a5c16afc9306a18d1f1706e6dc7d9900e769d216f98ad5df",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Custom-Queue/savedqueue.js",
+    "line": 9,
+    "column": 79,
+    "method": "reply",
+    "stringHash": "fc8f0f5b5111048edb54134bf2e882e1aa5e6fedd2eb853dea5dfc89081941d1",
+    "module": "music",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Fun/8ball.js",
+    "line": 49,
+    "column": 31,
+    "method": "setTitle",
+    "stringHash": "391b0983af5d91d1877ee0b43d1f0d0fbcdb727c7fca8e62f4bd5557d3a221d8",
+    "module": "fun",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/addquote.js",
+    "line": 74,
+    "column": 27,
+    "method": "reply",
+    "stringHash": "002d38d7e6ccde305919c99a2ff2e43f365de01c33d7ce03ba7b7e2e3529e097",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/avatar.js",
+    "line": 72,
+    "column": 21,
+    "method": "setDescription",
+    "stringHash": "05234c899a6a03f14faa0f82a95d90abca0a4342b81e5d707ffaf085dbbf117e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/customavatar.js",
+    "line": 89,
+    "column": 25,
+    "method": "setDescription",
+    "stringHash": "6da315a92043b526ea32e3b5afce2e714306eb8088bb73747d5341d402e0607f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/epic.js",
+    "line": 27,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "05ab04b3e5a00569890f6331840c39ea7dab21cccab61fb46db04865d0217601",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/epic.js",
+    "line": 55,
+    "column": 38,
+    "method": "reply",
+    "stringHash": "6facbbb8b107a907a3caa457fc9624425f4a8a0aaf9426c2c2874492253ac100",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 35,
+    "column": 29,
+    "method": "reply",
+    "stringHash": "775ad23fddab25c334d33f9f2c783d78acdc18e21accdfe012cbb112eb5da3fa",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 41,
+    "column": 53,
+    "method": "reply",
+    "stringHash": "92c4d04f1e292e6291c12945dc9e3cec7a630fff1bb920a16a1a66b7445551b9",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 45,
+    "column": 29,
+    "method": "send",
+    "stringHash": "7579d30376ff5bf7537a481eb038126c047c24010ec7dd256a0a0b68152fd479",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 58,
+    "column": 42,
+    "method": "reply",
+    "stringHash": "5f535a6f659144bf325be2610e068fff6bb9c0dc63555b5dfca7350c3af8e76c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 64,
+    "column": 50,
+    "method": "reply",
+    "stringHash": "100ecab928f01f23baff3db795f03176873c4e366360fd3a70c3b50183f2c2fe",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 71,
+    "column": 57,
+    "method": "send",
+    "stringHash": "c6f6398855b117bbfa48b88b801f6ac289bbcb065d1a618877b8761f80066ef6",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/fnstats.js",
+    "line": 76,
+    "column": 38,
+    "method": "send",
+    "stringHash": "412d33d51ec8f9d426963ea55022bbdf3a67f7db34cc077a2b0770b68fc8a352",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/getInviteChannel.js",
+    "line": 39,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "ca4c40a205385d0c4186e7b9e5f4ff8626242fbeb03edb6a3c19a52d309732c1",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/invitesleaderboard.js",
+    "line": 38,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "51ebc5aadeeada895b451ad9873b0d549fde81880a57cb9312f8a928feb37b19",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/invitesleaderboard.js",
+    "line": 55,
+    "column": 67,
+    "method": "setTitle",
+    "stringHash": "007172e37c7016459d83d8861890a647ee319b1b3d4b7b6ffcc0a8d233932742",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/latestquotes.js",
+    "line": 42,
+    "column": 42,
+    "method": "reply",
+    "stringHash": "1b6e11a24b1f69f12014fe428a1f1b17c2861573ca672cbf169ece8786bf496d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 168,
+    "column": 40,
+    "method": "reply",
+    "stringHash": "de7853452d835c5686b06568b3113f71b4148469dd6507d72bbe185882285f43",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 183,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "71b6090ae5e37727c7475bc2a37ec8befcee959dc4beffce0b997e0d26cccb6e",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 196,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "1a87633a694f9817037d789a4db4da4285180ed372ddfcff9def6f25b7d9746c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 200,
+    "column": 44,
+    "method": "reply",
+    "stringHash": "18e1708480da716378bcd2ccefb7723ec241f9a42f2a82a3d191884a1cee4d90",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 215,
+    "column": 53,
+    "method": "reply",
+    "stringHash": "48f451f691198502b70babcd2f9ada7ebd1b48a72e8cb49f81e5ad7928057d80",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 310,
+    "column": 52,
+    "method": "reply",
+    "stringHash": "76bb4481e1f3eda49445e94085ac5fc376ded518c92bdf8856cd8581f1183db0",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 561,
+    "column": 36,
+    "method": "reply",
+    "stringHash": "fff9ac213c3c833048fb3c37abcc6c71fe095b9944ea95ef5e35c03ff549aaf8",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 762,
+    "column": 54,
+    "method": "reply",
+    "stringHash": "54ee04b298bd0503f5aa6b1c3d2b1df6c66db6d116f0771fe3e8774656b683bd",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 764,
+    "column": 99,
+    "method": "reply",
+    "stringHash": "54ee04b298bd0503f5aa6b1c3d2b1df6c66db6d116f0771fe3e8774656b683bd",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 773,
+    "column": 40,
+    "method": "reply",
+    "stringHash": "71b6090ae5e37727c7475bc2a37ec8befcee959dc4beffce0b997e0d26cccb6e",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 788,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "1a87633a694f9817037d789a4db4da4285180ed372ddfcff9def6f25b7d9746c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 795,
+    "column": 48,
+    "method": "reply",
+    "stringHash": "18e1708480da716378bcd2ccefb7723ec241f9a42f2a82a3d191884a1cee4d90",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 810,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "48f451f691198502b70babcd2f9ada7ebd1b48a72e8cb49f81e5ad7928057d80",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/notes.js",
+    "line": 877,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "9abc8dca5b7853e11a79a9330f50014b0357cba5658c093e782c956a0e70e025",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/permissions.js",
+    "line": 66,
+    "column": 75,
+    "method": "setDescription",
+    "stringHash": "0e53858c7d36dc06f8890794d27e480a61cddb2112a709bbdf35e4c9e6d4d51f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/quotes.js",
+    "line": 46,
+    "column": 42,
+    "method": "reply",
+    "stringHash": "1b6e11a24b1f69f12014fe428a1f1b17c2861573ca672cbf169ece8786bf496d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/reactions.js",
+    "line": 7,
+    "column": 84,
+    "method": "setTitle",
+    "stringHash": "7f83c0d740b9e0f68811add1fd274174b9318f1728c93590ae9beaeb5bb71dfb",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/removequote.js",
+    "line": 59,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "d52a91358cc2514cce21884e129424723e6dc89914d3776fedce06e5669724a8",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/serverbanner.js",
+    "line": 27,
+    "column": 25,
+    "method": "setDescription",
+    "stringHash": "5e2144dbc8d12835053ebcd96d0ef04f80afe42c69ab95373628d0a43d0abdd1",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/serverbanner.js",
+    "line": 23,
+    "column": 31,
+    "method": "setTitle",
+    "stringHash": "7522a3e5aa2458d000afa08bdd42643640257cc3c7d40dd84f3196c341473cec",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/serverbanner.js",
+    "line": 33,
+    "column": 31,
+    "method": "setTitle",
+    "stringHash": "e5f080bb5786e1d52104b7158d8cce9a48115ad7a1832105fa24b13e33b8fb18",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/userid.js",
+    "line": 35,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "e8657b54dbaf9ac21643df4feac90d4f6452f7829ae0e42aac672447b712dd9f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Info/usertag.js",
+    "line": 35,
+    "column": 34,
+    "method": "reply",
+    "stringHash": "8ca4ff9a9e8208dab40d8f82e23b1a69ac4cd57447a1ec40194e0207d53e3859",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/poker-night.js",
+    "line": 26,
+    "column": 30,
+    "method": "reply",
+    "stringHash": "5d748ebf4b5c1684332f7550adea3db0b1df65291a6873a9dd8f3c7fab09008a",
+    "module": "fun",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 58,
+    "column": 39,
+    "method": "reply",
+    "stringHash": "5842f777ed0e18f7db4076fb97ec2b1875b3c52dbd56a6875a27d406f17984e8",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 60,
+    "column": 39,
+    "method": "reply",
+    "stringHash": "330a5464d6d413f17511de489f3717f655a36352087f18c2b2684d3c8ec87990",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 63,
+    "column": 39,
+    "method": "reply",
+    "stringHash": "34841cf7f77cf2635e32f8b02e958c1612c7ef78799a13e4ef3df68e558eb674",
+    "module": "fun",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 126,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 141,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 191,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 206,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 256,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 271,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 321,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 336,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 386,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 401,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 451,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 466,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 516,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 531,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 581,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 596,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 646,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "38a926e5114976df8a35b9a91bb19fe58070ef7619a4380bcd1afd3d33fa6178",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 661,
+    "column": 56,
+    "method": "reply",
+    "stringHash": "741a718369c6db4ab5260fb860a92304429044e533be062cbb74a92434f24913",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/tictactoe.js",
+    "line": 768,
+    "column": 45,
+    "method": "reply",
+    "stringHash": "0345a8d75865cca55a37917828b6347759fcc3d909d0996abfc4509f00ccd846",
+    "module": "fun",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/MiniGames/uno.js",
+    "line": 32,
+    "column": 30,
+    "method": "reply",
+    "stringHash": "53931ccd174ca8787f931902f027d19e6a781352b4ad07a18dd9a046419747a4",
+    "module": "fun",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Music/grab.js",
+    "line": 19,
+    "column": 23,
+    "method": "setDescription",
+    "stringHash": "63f0994aa7b89b7be641de668c006874c01a98c3ab66052dea278f909243e4ad",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Music/musictop.js",
+    "line": 20,
+    "column": 92,
+    "method": "setDescription",
+    "stringHash": "a402efead227275b587e3ba420651aabd0e9f995390a67fd4efc1d6ea630412a",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Music/playskip.js",
+    "line": 18,
+    "column": 120,
+    "method": "setDescription",
+    "stringHash": "c8e34cc6955ea13881393af5f5a90818190ae91eccc7c850a943b331b61c02df",
+    "module": "music",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Music/playtop.js",
+    "line": 18,
+    "column": 120,
+    "method": "setDescription",
+    "stringHash": "c8e34cc6955ea13881393af5f5a90818190ae91eccc7c850a943b331b61c02df",
+    "module": "music",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/cmdreload.js",
+    "line": 81,
+    "column": 41,
+    "method": "setDescription",
+    "stringHash": "fb06016e2b373e7def6680fb2e319c45b99f9378a6b817d06f29aa563e8765ce",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/deployslash.js",
+    "line": 58,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "8eb39ee8f895725659dfa8d35fb478e2cf8a6d5ade102f6fb96f43a20c343a20",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/deployslash.js",
+    "line": 71,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "fab3897057534595c552ed72b809586c5a84a5629a89448468a3b3126e2c41ff",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/leaveserver.js",
+    "line": 56,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "505135d4d5bd4dfe0ac91a202cccae14123738e8e80cc47e9e387b988e8e802e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/reloadallcmds.js",
+    "line": 31,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "92e86c9f3be5765393dabfca4a0577a16e12c53b012277556dcc52a4caf93705",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Owner/restartbot.js",
+    "line": 20,
+    "column": 33,
+    "method": "reply",
+    "stringHash": "6bc23578f87a2311ca804aea0df471ccd34278e1351183fa0e79c389d97ecce2",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Programming/coliru.js",
+    "line": 85,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "3510901b5365ad50bf3ac206956a9fc9f3fb5f044126e4044fe16f1c624aa14e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Programming/compile.js",
+    "line": 85,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "3510901b5365ad50bf3ac206956a9fc9f3fb5f044126e4044fe16f1c624aa14e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Settings/afk.js",
+    "line": 22,
+    "column": 17,
+    "method": "reply",
+    "stringHash": "75ed1ffb1da985abe0b8ee24009ad1b321c82dc70dd74ca204fba238dc7a641f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Settings/toggledisabled.js",
+    "line": 32,
+    "column": 29,
+    "method": "setTitle",
+    "stringHash": "3bdf7a9abd4b7fa0b69f0a217f68c15bf698b9fe97c4653c9323b6cecc7267d6",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admin.js",
+    "line": 185,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admin.js",
+    "line": 273,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admin.js",
+    "line": 703,
+    "column": 86,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admin.js",
+    "line": 942,
+    "column": 86,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admincmdlog.js",
+    "line": 132,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-admincmdlog.js",
+    "line": 159,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-aichat.js",
+    "line": 129,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-aichat.js",
+    "line": 149,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 215,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 356,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 465,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 507,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 509,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-anticaps.js",
+    "line": 555,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 275,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 388,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 485,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "b01e20fdcaf7d1e1e01acbc1db4a2b4f6cc924550d57a1cab3716e5d2f25ed13",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 507,
+    "column": 79,
+    "method": "reply",
+    "stringHash": "1adfc099653271d5c3d72b5bd3cce40e6fa90464adce680313ae2e3b5a5ec1fc",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 581,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "b01e20fdcaf7d1e1e01acbc1db4a2b4f6cc924550d57a1cab3716e5d2f25ed13",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 625,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 627,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antidiscord.js",
+    "line": 673,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 266,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 377,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 472,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "b01e20fdcaf7d1e1e01acbc1db4a2b4f6cc924550d57a1cab3716e5d2f25ed13",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 494,
+    "column": 79,
+    "method": "reply",
+    "stringHash": "1adfc099653271d5c3d72b5bd3cce40e6fa90464adce680313ae2e3b5a5ec1fc",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 562,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "b01e20fdcaf7d1e1e01acbc1db4a2b4f6cc924550d57a1cab3716e5d2f25ed13",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 605,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 607,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antilink.js",
+    "line": 653,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimassmention.js",
+    "line": 29,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "0dcc292f975bac2dbe3e38534625591255627b791037ea556be314573dccca4d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimasspings.js",
+    "line": 23,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "0dcc292f975bac2dbe3e38534625591255627b791037ea556be314573dccca4d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 206,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 351,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 460,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 502,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 504,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antimention.js",
+    "line": 550,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinewaccount.js",
+    "line": 192,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinewaccount.js",
+    "line": 209,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "cd1e095610393da2422bcf425226f8a8e44136efa7c8644df17fadb38cbf5040",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinewaccount.js",
+    "line": 368,
+    "column": 68,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinewaccount.js",
+    "line": 375,
+    "column": 84,
+    "method": "reply",
+    "stringHash": "18c42410d5660208f099dba486a8c2cc0bc1cfc3bc37f5fa98dc2afe6102c85d",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinewaccount.js",
+    "line": 390,
+    "column": 54,
+    "method": "reply",
+    "stringHash": "12194dd871e34ba2a558926b0f1c6f66ae12d1369165437a2e71177163a0c99c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinuke.js",
+    "line": 1781,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "71b50a9db3d7bb3a9feefe4ebdb99ad441fdf1304bd18a5f844d67d22da327be",
+    "module": "security",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antinuke.js",
+    "line": 1832,
+    "column": 53,
+    "method": "reply",
+    "stringHash": "cad2434c29fa14bc4401d2fed6395865dfbfb5267a735ec539212ad30b229e88",
+    "module": "security",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antipings.js",
+    "line": 23,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "0dcc292f975bac2dbe3e38534625591255627b791037ea556be314573dccca4d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 207,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 350,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 459,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 501,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 503,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-antispam.js",
+    "line": 549,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-auditlog.js",
+    "line": 23,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "4047bbe0a4e510aa2d98915525d60e72b3c6d474e2ca0829716b1402f598602d",
+    "module": "logs",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autobackup.js",
+    "line": 34,
+    "column": 38,
+    "method": "reply",
+    "stringHash": "5d9ca0c06a8802c59999f60dba475e535e9a4a5344854b03b9865d061e0f175a",
+    "module": "architect",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autobackup.js",
+    "line": 37,
+    "column": 38,
+    "method": "reply",
+    "stringHash": "bbac43ada9f3a58912f7bab564977aa91e5fb6158bace70164957ba0ebf70282",
+    "module": "architect",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autodelete.js",
+    "line": 224,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autodelete.js",
+    "line": 324,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autoembed.js",
+    "line": 202,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "messages",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autoembed.js",
+    "line": 314,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "messages",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-automeme.js",
+    "line": 129,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-automeme.js",
+    "line": 147,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 388,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "ccde8f61c5fbea1154d2255651e81dfe9cc358fef5392486906107183b1636ea",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 396,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "ccde8f61c5fbea1154d2255651e81dfe9cc358fef5392486906107183b1636ea",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 547,
+    "column": 65,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 562,
+    "column": 65,
+    "method": "reply",
+    "stringHash": "8aec2910dc7c50d0b156a039fd45031d3494ea1981359aff461855c073dc3809",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 570,
+    "column": 71,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 832,
+    "column": 73,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 849,
+    "column": 73,
+    "method": "reply",
+    "stringHash": "8aec2910dc7c50d0b156a039fd45031d3494ea1981359aff461855c073dc3809",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 858,
+    "column": 69,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 875,
+    "column": 61,
+    "method": "reply",
+    "stringHash": "3b91d866a9f9ddb2affc844d090ffd3c01e03b9475d4c729b0089d092fe6904c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autosupport.js",
+    "line": 1001,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "81b63f5f45053b6e3b61139140b40d34d0b888ebb11caa8eb8688cee56694f56",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-autowarn.js",
+    "line": 134,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "45575c3309be1302f7b76311512fff99021b867af645dd7a3ab6755f85b82243",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 212,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 316,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 447,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 549,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 591,
+    "column": 81,
+    "method": "reply",
+    "stringHash": "65f1d21ec3cdc7a71474b16673eacd7ca6dc24ae7e5d844bfe5f8249ef7e892a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 593,
+    "column": 66,
+    "method": "reply",
+    "stringHash": "0f7f0f5e876e376a4f28481ae618b0d8335a2e881e90a427ab4a4cfbcc4c92e3",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-blacklist.js",
+    "line": 639,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "915f4bb079e6edcb2160dfbe04e1103454eaf57b20a7739ea626679d02b098d0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boost.js",
+    "line": 38,
+    "column": 48,
+    "method": "reply",
+    "stringHash": "e9163ff1251ac22c5618499f26690cd2dcb513734bdbe82219923c657691e899",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boost.js",
+    "line": 41,
+    "column": 31,
+    "method": "reply",
+    "stringHash": "b1a7cc97060a7241c4b785f46051643eb5c6c4f446cbe9227b377c9c313be469",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boost.js",
+    "line": 60,
+    "column": 41,
+    "method": "setDescription",
+    "stringHash": "9592ab2ae7b11cea4546fa9d81ad9be9b4ef84d2589ead473274a23d9ce9d36b",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boostlog.js",
+    "line": 159,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boostlog.js",
+    "line": 180,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boostlog.js",
+    "line": 220,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boostlog.js",
+    "line": 276,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-boostlog.js",
+    "line": 332,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-commands.js",
+    "line": 144,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "0709fe8875df27193b4acde725c25e7aba7ca435d7b6d205b4571114e1119286",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-counter.js",
+    "line": 140,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-counter.js",
+    "line": 160,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-customcommand.js",
+    "line": 337,
+    "column": 78,
+    "method": "reply",
+    "stringHash": "32d89353ae89703865fc8fbde356f01b21da38fbdde0f8b583e0a34b0cf02809",
+    "module": "automation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-dailyfact.js",
+    "line": 147,
+    "column": 51,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-epicgamesverify.js",
+    "line": 138,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-epicgamesverify.js",
+    "line": 185,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-epicgamesverify.js",
+    "line": 226,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-epicgamesverify.js",
+    "line": 249,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ghost-ping-detector.js",
+    "line": 187,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 44,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "9bd3f106de233cbedb9346ecb0f799ae7c3f8d9eb15d8d02a88906a18eb1ca1e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 42,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "d1bd6613b0862883e649b13b5178048003ea36f68460feb1e9c8a0f6750334ed",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 51,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "6eff42a0afb3927dd1b2bdfdb58e8c68cddc6fac5f207ce547dd41a804590cda",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 64,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "026d5bdd4fae51329d5f261429889186b56c7ce7eacd4862066f7410639b39d6",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 77,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "bcdd8cc2408208c8d8df59ddea390f8fcc98e7df8e31d616fc752c0cbf1c60c3",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 90,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "2c64481a3c28a580396199d3a8e1396350d052e139ba3a7fa7175983ad7894a2",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 103,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "db2e20af97aea3d2d29e1f62d5aa42424becb459d69afeafb1f344b1c1de43f6",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 116,
+    "column": 33,
+    "method": "setTitle",
+    "stringHash": "ab1b5d77d0c367d8f2394734929e60b419179dc834ae2e5535564263af7de4eb",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 131,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "11bbbf80144d28a785e667cc3a5185bad48739259eb0282f1628996fb860499b",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 135,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "93df5b0627e367c4839ac73b67d092d2db501d90af50be53fc365f7395e04908",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 139,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "d1fd77b95e18b5b55ead02f630b009850d99199a0d756ad5dcbf0ef620ac8f77",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 144,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "c8d8dc291d049145cf9e7aa7df68e45335d87ae6f21ca0026c82f45427c0813c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 148,
+    "column": 21,
+    "method": "reply",
+    "stringHash": "73bd841371afb7aca10b186e5adad4b37737a22fc6a2d4eef69d5c63aab8ac6c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 181,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "40112581d85d9d981af85077e7a57385e878a2d6b3343e9ec8965643bd45c0d7",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 183,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "6e1be79676a7882b47d747a7f73576e7097e8f45396679d45e05b984b2e75973",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 197,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 202,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "6a25f1a2b2e2a4ba7d12daf81ab63dfa34634a6ec2c3d141fb72fdf3277d0e90",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 225,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 230,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "adf3f371dcd37e1c5049515603dd931a141dcf8a6d554c2f8d78e8d124fc0f14",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 241,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "cdd2031ac649aac615c8dede4bb38cb9ffd60ed9399e77d090918cce5339801f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 254,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 259,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "eacb81e58c225b4c3e05fb1fe2a7f0ffa735e557c454278e3a6a6b2297fcaa61",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 282,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 287,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "ffe23ea064143f277410b7adabf7617d0cb220da1680f5ea68308836708d33d2",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 296,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "4dfca1ed3a4495f937e6a530e0d7a8465922928f967780936d48cc896b4bd65e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 306,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "8ba9a804cdb20bc41ccb40ee5a7dab7e14c685504db880dfb006ee76c52517ff",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 314,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 319,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "7573d6ac72fd46419ba1e90c779f5c75debe624190ed297de8231c8eb9a31093",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 342,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 347,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "edfbc4c7cf56166a50b35e0f6f7ef2b1710e4118c718dd334acd63b9f83f3212",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 356,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "d6a4d2259f9bcc5709251df83aa39ad68013437f8eb45a83f80b9d08559e6afb",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 366,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "4d7110d7f83e685a1b4b5d425a34d4f84ecbc729886756217ff25940f59d35b9",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 370,
+    "column": 54,
+    "method": "reply",
+    "stringHash": "36b48e57e368b233fba963f6765f496971ecd787bc71d8efa76202774c1d2926",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 377,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 382,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "16d69f54c69b2d48bd54a7d580b8c3651fbb14a1af0e8985cfed46cff812b5ff",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 405,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 410,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "926fb4f82e7dc235fbed65aca665d1f865a7d3794ded198a205be0d19386cb5d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 421,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "577a43e9206bd0d71029987b078affe45c17180693f373906815e43d86bbd879",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 431,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "4d7110d7f83e685a1b4b5d425a34d4f84ecbc729886756217ff25940f59d35b9",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 435,
+    "column": 54,
+    "method": "reply",
+    "stringHash": "36b48e57e368b233fba963f6765f496971ecd787bc71d8efa76202774c1d2926",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 442,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 447,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "6e3edad8969105f82307eaa30e81916f2042d0928f2adb6418a69a52e842739d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 470,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 474,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "d514b2e2a399224088ef9d9e77b2cf4e476e644d7533165a00192dde811853f4",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 485,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "0688cbdef573ed97077eff9c77355108dbff25c454077d729e9a1a5f41818b84",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 496,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "56702a2280f29cf45f6ee1c8739fb8f8d6997fbcc879b7c321607bb7b9c4decc",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 504,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "0a40dcc25387b0cf57a882385d2964a6b03ae4fcd465aee6b70e5b4290b60303",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 509,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "138f91164009c43c432bbdc3e0fd2dcde86bf0480a1ded0df6e58d6ba60f959a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 532,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "f5ef449bf7ae98eefc9af2daf0647700f694636e19630e4ffe15d700becdb2fa",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 537,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "4f9ff58439b1579603e03ef41292d47511f728fa9a25a13aeb82e64e5081c1a8",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 546,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "eddfe64a2b0d3a2cb4ac316d46feab29ab7bcf9538b0a65101141695f619bc82",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinlist.js",
+    "line": 553,
+    "column": 21,
+    "method": "send",
+    "stringHash": "fceff6e4091011a3fc4db10f7557d0ccb783fcaf4c39a9d90d1f6b8423df8b5a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinvc.js",
+    "line": 259,
+    "column": 61,
+    "method": "reply",
+    "stringHash": "b8d0f9148b6095566df15c9a7a32be8730af412523c5fd75cb947b654482d324",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinvc.js",
+    "line": 407,
+    "column": 65,
+    "method": "reply",
+    "stringHash": "b8d0f9148b6095566df15c9a7a32be8730af412523c5fd75cb947b654482d324",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinvc.js",
+    "line": 672,
+    "column": 65,
+    "method": "reply",
+    "stringHash": "b8d0f9148b6095566df15c9a7a32be8730af412523c5fd75cb947b654482d324",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-joinvc.js",
+    "line": 826,
+    "column": 61,
+    "method": "reply",
+    "stringHash": "b8d0f9148b6095566df15c9a7a32be8730af412523c5fd75cb947b654482d324",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-keyword.js",
+    "line": 360,
+    "column": 89,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-keyword.js",
+    "line": 460,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-keyword.js",
+    "line": 482,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-keyword.js",
+    "line": 503,
+    "column": 78,
+    "method": "reply",
+    "stringHash": "32d89353ae89703865fc8fbde356f01b21da38fbdde0f8b583e0a34b0cf02809",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-language.js",
+    "line": 277,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "bff7a78e0db2825cd28809f44e975cc74d14de161829f848302d73ba50ca1276",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-leave.js",
+    "line": 266,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "7312b989f72b42d8aaae4eca67c74e0b4cdf3c14aa90d21c77d49ffabbe9df99",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-leave.js",
+    "line": 1168,
+    "column": 69,
+    "method": "reply",
+    "stringHash": "c2339a2dc33ecc94c8906921942400def9bd4df1eef36f0b814df86dd4e09f7a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-leave.js",
+    "line": 2261,
+    "column": 69,
+    "method": "reply",
+    "stringHash": "c2339a2dc33ecc94c8906921942400def9bd4df1eef36f0b814df86dd4e09f7a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-logger.js",
+    "line": 163,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "logs",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-membercount.js",
+    "line": 132,
+    "column": 60,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-membercount.js",
+    "line": 604,
+    "column": 51,
+    "method": "reply",
+    "stringHash": "725c0f9d5d052ec1e89c7f9fcaada7bcf90a9f488f8ffbc9e82b80c54fda7955",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-membercount.js",
+    "line": 621,
+    "column": 43,
+    "method": "reply",
+    "stringHash": "e92efc59c0aa60837fc94cc7eefe9af211be22868b880037db593b71cb401b38",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 394,
+    "column": 57,
+    "method": "reply",
+    "stringHash": "d79f5f29af96bd52b53c331f47787d2871bbad70ad889fc2eb40b25a9adcb014",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 401,
+    "column": 59,
+    "method": "reply",
+    "stringHash": "d79f5f29af96bd52b53c331f47787d2871bbad70ad889fc2eb40b25a9adcb014",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 587,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "c8d7d83b14f53dade6847b04a70fe7c136a1a1d0e1ffc28021bfa8d6d17495c5",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 632,
+    "column": 71,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 646,
+    "column": 61,
+    "method": "reply",
+    "stringHash": "8aec2910dc7c50d0b156a039fd45031d3494ea1981359aff461855c073dc3809",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 654,
+    "column": 67,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuapply.js",
+    "line": 790,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "dd95abc413cb457c12278084b4279c73b724e663a498ebf179185958c7f07452",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 286,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "43e967c1e2e041254bca28cf153e40d01e37bf1fc8db4887905fcb22d7d6a37c",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 315,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "43e967c1e2e041254bca28cf153e40d01e37bf1fc8db4887905fcb22d7d6a37c",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 423,
+    "column": 35,
+    "method": "reply",
+    "stringHash": "7d10c76c3bdb35b6cc09a59ff60553ff5e4c67a7df5a4d0ed3024e13df7a9155",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 428,
+    "column": 33,
+    "method": "reply",
+    "stringHash": "7d10c76c3bdb35b6cc09a59ff60553ff5e4c67a7df5a4d0ed3024e13df7a9155",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 516,
+    "column": 15,
+    "method": "reply",
+    "stringHash": "931d0d837799cab10c4a36d968cd3630d7fde26ff009f45b0e60fe653b91b591",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 518,
+    "column": 15,
+    "method": "reply",
+    "stringHash": "e55e6029a671c3b223f0415873ee2b7cd802a72a5e238bc2c28d833ca145da33",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 546,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 559,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "8aec2910dc7c50d0b156a039fd45031d3494ea1981359aff461855c073dc3809",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 566,
+    "column": 39,
+    "method": "reply",
+    "stringHash": "612fe59d8f35c6843aa520eadd2e0ad9ba257111ca4b46fd33ea7a947dc65d35",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 839,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "931d0d837799cab10c4a36d968cd3630d7fde26ff009f45b0e60fe653b91b591",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 841,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e55e6029a671c3b223f0415873ee2b7cd802a72a5e238bc2c28d833ca145da33",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1040,
+    "column": 31,
+    "method": "reply",
+    "stringHash": "0ea519a8f161ae23ab92338027184a6769b17a6de601b10bf2732b2fb963bd6d",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1075,
+    "column": 40,
+    "method": "reply",
+    "stringHash": "9f83b2a9b139115edd1aef333461300a27e19506e6519a763fb610319029ef58",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1079,
+    "column": 40,
+    "method": "reply",
+    "stringHash": "3525ade72dec7a64e90f12bc88ecd7fc73423f9af64ca7cd96629b195f2a6bfe",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1082,
+    "column": 40,
+    "method": "reply",
+    "stringHash": "391016d9808c93f0547d87a3769ba5805c0289296ea5b8165309d49568408e69",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1085,
+    "column": 31,
+    "method": "reply",
+    "stringHash": "a7e01909cdaf0efd2007aa9fde06e5aae690cf4ae24a7396a214ba2db7ab8d53",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-menuticket.js",
+    "line": 1139,
+    "column": 29,
+    "method": "reply",
+    "stringHash": "c64607860312e9c43390c3790817b9de38fed139faeea61d29ab42f3a16dd98b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-music.js",
+    "line": 135,
+    "column": 38,
+    "method": "reply",
+    "stringHash": "a443744e8e05bf91a49fbc90cff44c367a75f033b467b04ac237a28d3e980d9d",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-mute.js",
+    "line": 135,
+    "column": 50,
+    "method": "reply",
+    "stringHash": "2ed80f1dbcc0cef52cd1d868c809c2036c72fc0d7947ee23125016d569b9c10e",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-mute.js",
+    "line": 160,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "moderation",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-mute.js",
+    "line": 181,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "b0f2843ba061b55fdcf06d6409a2bae7336337d572593b6270a624bce608f210",
+    "module": "moderation",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-mute.js",
+    "line": 218,
+    "column": 72,
+    "method": "reply",
+    "stringHash": "dd9dd9b91d6100a2db591e30932dd822024f85272451bb922605d490ce5950e0",
+    "module": "moderation",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-mute.js",
+    "line": 238,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "eb9171dc077e28b8d520c9d9ceda1e6e1bb93c779f3171066ff09fecb1280485",
+    "module": "moderation",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-radio.js",
+    "line": 193,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "a6e26bf61fac52b748efe0edef02a751d8613fee4bd40804fd45124e9d0f89f7",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-radio.js",
+    "line": 191,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "0deaa9d7a871581910005f5364d52eb4588f4a7b870b687f89e08ced2f057d20",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 371,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 471,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 571,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 761,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "57d6c6657e9906f510bf8ece61c6afe0810a594927f7298aeed49381151da8f7",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 888,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "8f72c78de93b0f9e048f3d6449ff81185b8dd11fb026ade13839f2e89b0ff056",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-roster.js",
+    "line": 968,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "8f72c78de93b0f9e048f3d6449ff81185b8dd11fb026ade13839f2e89b0ff056",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-serverstats.js",
+    "line": 23,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "ec02427d979d7c3cce17369114f30f9613a75d7b8505ca0db8bc73cb681353fc",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-serverstats.js",
+    "line": 39,
+    "column": 41,
+    "method": "setDescription",
+    "stringHash": "9592ab2ae7b11cea4546fa9d81ad9be9b4ef84d2589ead473274a23d9ce9d36b",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 240,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "058de8ba5a8c94a0cfb771a1e6dafb1be266ad6532f6d2fee30a2ba2b1d5b02c",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 337,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 420,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 504,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 587,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 663,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 747,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "75e4b6c1a5e9b97a2fecc0ba0a544760a25eb7924062c2aeb13d3abe4157defc",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 870,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "505fb987ed46e8e85b57de591ad709b02eca2a1a96a876e8d1bb6457cda1395e",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-suggestion.js",
+    "line": 993,
+    "column": 55,
+    "method": "reply",
+    "stringHash": "505fb987ed46e8e85b57de591ad709b02eca2a1a96a876e8d1bb6457cda1395e",
+    "module": "suggestions",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 324,
+    "column": 70,
+    "method": "reply",
+    "stringHash": "9f83b2a9b139115edd1aef333461300a27e19506e6519a763fb610319029ef58",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 329,
+    "column": 53,
+    "method": "reply",
+    "stringHash": "3525ade72dec7a64e90f12bc88ecd7fc73423f9af64ca7cd96629b195f2a6bfe",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 333,
+    "column": 70,
+    "method": "reply",
+    "stringHash": "391016d9808c93f0547d87a3769ba5805c0289296ea5b8165309d49568408e69",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 340,
+    "column": 59,
+    "method": "reply",
+    "stringHash": "a7e01909cdaf0efd2007aa9fde06e5aae690cf4ae24a7396a214ba2db7ab8d53",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 385,
+    "column": 70,
+    "method": "reply",
+    "stringHash": "e544caae82bd2800de2860f2d8be5fbec8e3a35e117c42f7202f1d861dbbe2d8",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 388,
+    "column": 70,
+    "method": "reply",
+    "stringHash": "116a97f097a8267ab38849ba60538e60297a38fb7e4a1052cc8328ebdb929149",
+    "module": "tickets",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 397,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "6b516980343918f7e38bf2080b37485c0ca54aeb29b7e997cd43f79229260718",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 1007,
+    "column": 75,
+    "method": "reply",
+    "stringHash": "43e967c1e2e041254bca28cf153e40d01e37bf1fc8db4887905fcb22d7d6a37c",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 1061,
+    "column": 75,
+    "method": "reply",
+    "stringHash": "43e967c1e2e041254bca28cf153e40d01e37bf1fc8db4887905fcb22d7d6a37c",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-ticket.js",
+    "line": 1121,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "dd9498e504966ca5c726cdb3751cf103b737ec6e20e0501b3b25efadb8dafcb3",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-twitch.js",
+    "line": 230,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "805abd335e38f5a528793f70ddae1ac72d542125fa1fe5b804b983037c9f80e9",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-twitch.js",
+    "line": 361,
+    "column": 82,
+    "method": "reply",
+    "stringHash": "e4ce2d4c8dbeba1c6d62e12261d017c22c84b6f37175cb93426a332019809aae",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-twitch.js",
+    "line": 384,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "72b2402212faca245a6ee57f3e3ed91724c056fedae745fdbd1193db3141b4fb",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-twitch.js",
+    "line": 406,
+    "column": 62,
+    "method": "reply",
+    "stringHash": "d51e897c1e7ead03ed597e6c5590db1401a69858647aa671fd2925096452ee09",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-welcome.js",
+    "line": 428,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "7312b989f72b42d8aaae4eca67c74e0b4cdf3c14aa90d21c77d49ffabbe9df99",
+    "module": "welcome",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-welcome.js",
+    "line": 1605,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "7312b989f72b42d8aaae4eca67c74e0b4cdf3c14aa90d21c77d49ffabbe9df99",
+    "module": "welcome",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-welcome.js",
+    "line": 2991,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "welcome",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-welcome.js",
+    "line": 3092,
+    "column": 74,
+    "method": "reply",
+    "stringHash": "d9bf395c737e70684435efdc5e1b89754ce4f99adc01f32789b696b75f146cac",
+    "module": "welcome",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-youtube.js",
+    "line": 160,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "cd08035637e4dd6509a8bfa660439d35095bb2900b6898112c2cf2c7623ebb6e",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-youtube.js",
+    "line": 215,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "8dc45e9d2861d1cd12b0770f55b6c96c00e068eb16011c9e7fe8382faf56febb",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-youtube.js",
+    "line": 247,
+    "column": 58,
+    "method": "reply",
+    "stringHash": "530461fce757643c184089745e7ed4db1881cd463b6f2e83a3bf1f6ad0aac59b",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Setup/setup-youtube.js",
+    "line": 337,
+    "column": 49,
+    "method": "reply",
+    "stringHash": "64c55cf06c2af0919b2b13e18922044d93c48d9d50b83aeae23c68574f91f6e1",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 75,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 88,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 159,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 169,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 240,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 253,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 324,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 335,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 544,
+    "column": 33,
+    "method": "reply",
+    "stringHash": "7cc40ff1c60de2d26945c3ee1de7547d8da5e9d672b65a9592aab51f473acf40",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 550,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 561,
+    "column": 45,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 735,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 745,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 837,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 847,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 940,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 950,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 1043,
+    "column": 46,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 1053,
+    "column": 37,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 1346,
+    "column": 50,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "commands/Voice/voice.js",
+    "line": 1358,
+    "column": 41,
+    "method": "reply",
+    "stringHash": "e29a0324d77423b7dd5d40aed61dcdd516ccff8c0cd36101f72d9dcbbd2d4437",
+    "module": "voice",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "dashboard/index.js",
+    "line": 858,
+    "column": 26,
+    "method": "send",
+    "stringHash": "6ab98e49ca088051d2ca3e7141003382c4374274c7af2b54ac37a349fc5559a7",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "events/guild/messageCreate.js",
+    "line": 52,
+    "column": 24,
+    "method": "reply",
+    "stringHash": "e47f13d2ec961d2752ebb0f7e7fdea1c577ed3e1014a7a92df2dee69d1d0b6a2",
+    "module": "messages",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/anticaps.js",
+    "line": 368,
+    "column": 61,
+    "method": "send",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antidiscord.js",
+    "line": 537,
+    "column": 55,
+    "method": "send",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antilinks.js",
+    "line": 181,
+    "column": 45,
+    "method": "send",
+    "stringHash": "b5fcb48349dca24df3cd3499be856591747e5a285d02244d73c0b822898fadbe",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antilinks.js",
+    "line": 524,
+    "column": 51,
+    "method": "send",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antimention.js",
+    "line": 355,
+    "column": 61,
+    "method": "send",
+    "stringHash": "c7e2e5a2ebf194bb6ed2ba5af3e5a47512eb8b09a4621ab8b13254b7ab2e315c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antiselfbot.js",
+    "line": 329,
+    "column": 61,
+    "method": "send",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/antispam.js",
+    "line": 363,
+    "column": 61,
+    "method": "send",
+    "stringHash": "c7e2e5a2ebf194bb6ed2ba5af3e5a47512eb8b09a4621ab8b13254b7ab2e315c",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/blacklist.js",
+    "line": 376,
+    "column": 65,
+    "method": "send",
+    "stringHash": "67043458d2eb7738c5533bd4aa6b5d01e2a3b69d89aa85613a3ef49695ea9146",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/boostlog.js",
+    "line": 46,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "16dd977d4989a00e1baea22e4d27e4e3d045679eb0fa2bef7aa97b0fb3b2a3d2",
+    "module": "logs",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/boostlog.js",
+    "line": 52,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "628399c1b273183c8a5c5fdaaee91e6fe4501a5721770abc34aa36f400a934e4",
+    "module": "logs",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/boostlog.js",
+    "line": 58,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "e59efcd8ac22345b5fc80213a231d40ba2ff6c63c426bf33ee55c0415314ef71",
+    "module": "logs",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/command.js",
+    "line": 91,
+    "column": 37,
+    "method": "setDescription",
+    "stringHash": "b3c1670d29c1c5914dd3457c50b976e9e6d3112a2968d1c2f93fe02075e1b97e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/command.js",
+    "line": 113,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "f9dd998d47477153de2497d2ad1c19162d947e9951a9ab067a315d24348596b7",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/command.js",
+    "line": 134,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "4ba83e39e1632cc69a5d270d6c2fa082d41a5048ba2eb4c37356269e2d0665aa",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/command.js",
+    "line": 156,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "b7bc7a64e5572d40858e51057760a2254c37627f5687d7a06bf7fd5712ae48bb",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/command.js",
+    "line": 179,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "b7bc7a64e5572d40858e51057760a2254c37627f5687d7a06bf7fd5712ae48bb",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/economy/messages.js",
+    "line": 11,
+    "column": 105,
+    "method": "setDescription",
+    "stringHash": "a806613ddb711e12e447cbcd054b9c08c2fb00420f47191517e3a8c77fbdaa59",
+    "module": "economy",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/economy/messages.js",
+    "line": 23,
+    "column": 73,
+    "method": "setTitle",
+    "stringHash": "945c0b96f4d7f40a8bc63d44a8b735b7130bc11e674d2796202d47b893c03254",
+    "module": "economy",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/epicgamesverification.js",
+    "line": 118,
+    "column": 25,
+    "method": "send",
+    "stringHash": "b3bb775b90b1ed9b6051bb106ad7813f077f0812e0bc898b8f4f5ecf653e8546",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/epicgamesverification.js",
+    "line": 131,
+    "column": 29,
+    "method": "send",
+    "stringHash": "30e0c42a9fe8d041782b1dc12c3ff4a776769635c4dc6095e86c7baa73d05712",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/epicgamesverification.js",
+    "line": 196,
+    "column": 39,
+    "method": "send",
+    "stringHash": "7923475cf698c32431466cbfdf03a56c822eed8bc4a512d1b07785e8f03e139d",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 162,
+    "column": 23,
+    "method": "setTitle",
+    "stringHash": "4bf76d804dc847ba59a8ebbe223980127d9ddb1caf12882bcdda8b07f6668473",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 230,
+    "column": 23,
+    "method": "setTitle",
+    "stringHash": "b08e810e583e138293c756d808691f3bcf62846074b973510e011c9be3aa6ade",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/games-choice.js",
+    "line": 33,
+    "column": 45,
+    "method": "reply",
+    "stringHash": "a29153675444971c328b43ce3e1f3acdde2ea2104dee38ac2b053b2a4dd34f57",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ghost_ping_detector.js",
+    "line": 85,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "bfc874a49d94cff406a751f3664403d253b491fcf65ad0b516cc71fdbf38fdc4",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ghost_ping_detector.js",
+    "line": 274,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "3c6cbba7174fa05b4a6cb2341d75d5bf5a35eef05b7ccd1db98d489a7b2a4344",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/helpui.js",
+    "line": 29,
+    "column": 20,
+    "method": "setTitle",
+    "stringHash": "9825da03e556357e01274352b0fb4501a36703cd80b858fe7fd91de9c97bb1ec",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/helpui.js",
+    "line": 39,
+    "column": 128,
+    "method": "setPlaceholder",
+    "stringHash": "5b037863ccf261df2fbc8ef25c2e543acfa080302b7333d29dfe03f6a10cc97b",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/jointocreate.js",
+    "line": 113,
+    "column": 49,
+    "method": "setTitle",
+    "stringHash": "dbedc0aa9ce6e547f50b386901f2d092e139e51939e2d39d4b4dc2ea8d04da37",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/jointocreate.js",
+    "line": 197,
+    "column": 53,
+    "method": "setTitle",
+    "stringHash": "dbedc0aa9ce6e547f50b386901f2d092e139e51939e2d39d4b4dc2ea8d04da37",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/joinvc.js",
+    "line": 85,
+    "column": 49,
+    "method": "setDescription",
+    "stringHash": "cfc4b2162eb226c9066f5cdba42735a2e25fc9ad9d2eec200f4474d41c8a33fb",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/joinvc.js",
+    "line": 107,
+    "column": 49,
+    "method": "setDescription",
+    "stringHash": "76e626b39aaffb4b7e867efb176ac46e007cce634d066a59ac9e2f856872ba0a",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/joinvc.js",
+    "line": 169,
+    "column": 41,
+    "method": "setDescription",
+    "stringHash": "30b3db4b09a14ce3af370dccf952f5bdacd8d11883ab40eb166d045c4104ab8f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/moderation/action.js",
+    "line": 45,
+    "column": 141,
+    "method": "setDescription",
+    "stringHash": "773cb253a08b4b0ff58574246f50b03a97ef91587a7f8e22c1a2e11802ed20be",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/moderation/action.js",
+    "line": 47,
+    "column": 61,
+    "method": "setTitle",
+    "stringHash": "a5efcfce3f1e1a9a9b11a3d92f52d4a4f333330bb8a0b94ef2e0e7a2d0ea9981",
+    "module": "moderation",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/lyricsLive.js",
+    "line": 180,
+    "column": 147,
+    "method": "setDescription",
+    "stringHash": "6ae6ac1c38684ee69bff9db8c2d3467011e44b1189f328bc44319ab324f87c00",
+    "module": "music",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/nodes-command.js",
+    "line": 16,
+    "column": 23,
+    "method": "setDescription",
+    "stringHash": "f297ea3d4e660275eca2c472298ff01095fa1db7482656e4c973449998d23713",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/nodes-command.js",
+    "line": 15,
+    "column": 76,
+    "method": "setTitle",
+    "stringHash": "b38d077a8e54b87ccf97c52fd70abe08aa599b5994193c81da4f6cb2715e43bd",
+    "module": "music",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/prefix-compat.js",
+    "line": 19,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "0a851e7a6b09bb2bba5322695b21b094c5b5fcd4f40bfd9310e6891e2544ce19",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/prefix-compat.js",
+    "line": 43,
+    "column": 29,
+    "method": "reply",
+    "stringHash": "ef7b41b39048000a225bbf6df35c389dc87f3c9c0da8772139c8a7a61fce3bae",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/prefix-compat.js",
+    "line": 70,
+    "column": 27,
+    "method": "reply",
+    "stringHash": "7b43a37efd94c918deffb3cda970700713a5b3f6adcfa60abf36d5db14ca2336",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/prefix-compat.js",
+    "line": 71,
+    "column": 42,
+    "method": "reply",
+    "stringHash": "00b978f874efdcc1609742e1d226d210759113cd388ba1f060b0210545f58025",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/responses.js",
+    "line": 11,
+    "column": 60,
+    "method": "setDescription",
+    "stringHash": "439bdcaa1c9b094e96742b1722690c34610c49897a94eb2dd124899f7dbfdc97",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/responses.js",
+    "line": 14,
+    "column": 57,
+    "method": "setDescription",
+    "stringHash": "ad310066a72560bf42d1eefa9623204f0703ac759b175de950ec7dd16e1576a6",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/setup.js",
+    "line": 37,
+    "column": 21,
+    "method": "setDescription",
+    "stringHash": "ff06e14d026e1d8d3a9c6fb1f23405452b8608a8550675d878dde412f078ee62",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/music/setup.js",
+    "line": 36,
+    "column": 15,
+    "method": "setTitle",
+    "stringHash": "f6a69cf1a0fb8296215b7327856888b50199bd52cd99f36144a1c8131a8d8bed",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/presentation/modules.js",
+    "line": 10,
+    "column": 128,
+    "method": "setDescription",
+    "stringHash": "bf35a7e6d40f19d838f22e1cf76f608be7bd5580cdfd0de3ca41e38e8d4ac78d",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ranking.js",
+    "line": 512,
+    "column": 66,
+    "method": "send",
+    "stringHash": "8990f35d755640d25a3c08dc45fa8cd13e00a6cad4713bfa7bce2fc04b1481d7",
+    "module": "levels",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ranking.js",
+    "line": 742,
+    "column": 21,
+    "method": "send",
+    "stringHash": "d8db1f094a189117286bcec52167478b8b599230153ab6c4b7cffe3ab32abb85",
+    "module": "levels",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 79,
+    "column": 51,
+    "method": "send",
+    "stringHash": "6af917a49b9a5b244c89b4b70eccb7f1e2eae4f50babef9a033ee839bfd831af",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 87,
+    "column": 47,
+    "method": "send",
+    "stringHash": "a352dbf5ba82ae65cf06942b5aaf49b7c6bbe69f2b4394cd7383535a2c666e21",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 113,
+    "column": 51,
+    "method": "send",
+    "stringHash": "6af917a49b9a5b244c89b4b70eccb7f1e2eae4f50babef9a033ee839bfd831af",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 121,
+    "column": 47,
+    "method": "send",
+    "stringHash": "a352dbf5ba82ae65cf06942b5aaf49b7c6bbe69f2b4394cd7383535a2c666e21",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 168,
+    "column": 55,
+    "method": "send",
+    "stringHash": "f51dbbc98877384f875a78e43000aad0ffd1c46ca1f74652dd26245d040e036c",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 176,
+    "column": 51,
+    "method": "send",
+    "stringHash": "db644f152317b5946b55f53e925d6037c36346e7021acc50ced77c9287a4a19a",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 232,
+    "column": 51,
+    "method": "send",
+    "stringHash": "f51dbbc98877384f875a78e43000aad0ffd1c46ca1f74652dd26245d040e036c",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 240,
+    "column": 47,
+    "method": "send",
+    "stringHash": "db644f152317b5946b55f53e925d6037c36346e7021acc50ced77c9287a4a19a",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 267,
+    "column": 51,
+    "method": "send",
+    "stringHash": "f51dbbc98877384f875a78e43000aad0ffd1c46ca1f74652dd26245d040e036c",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 275,
+    "column": 47,
+    "method": "send",
+    "stringHash": "db644f152317b5946b55f53e925d6037c36346e7021acc50ced77c9287a4a19a",
+    "module": "roles",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 129,
+    "column": 33,
+    "method": "reply",
+    "stringHash": "1ed81415d1fa9712648f67063202a1944e2f303ead4886de66e7b3a78e8f0680",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 167,
+    "column": 57,
+    "method": "send",
+    "stringHash": "15887694b47e8046f7d82ae621f9fd056c2dd647ca6f8ce8f3e2374cb0b10884",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 174,
+    "column": 49,
+    "method": "send",
+    "stringHash": "39118b525c5b752eb2fb66697f1e4dfe8992a1de862c70219a7bfc5a5d81ab05",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 179,
+    "column": 60,
+    "method": "send",
+    "stringHash": "e73b90eda689440b013fec92ff9dcc2353b02670037418281d17670a51766626",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 357,
+    "column": 25,
+    "method": "reply",
+    "stringHash": "1ed81415d1fa9712648f67063202a1944e2f303ead4886de66e7b3a78e8f0680",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 784,
+    "column": 53,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 906,
+    "column": 53,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 969,
+    "column": 41,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1197,
+    "column": 53,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1318,
+    "column": 53,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1380,
+    "column": 41,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1537,
+    "column": 41,
+    "method": "send",
+    "stringHash": "2a6c7a216a0243944cc6b62c0ca245ddee8faf5e2b4082660b177198c123282b",
+    "module": "tickets",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 434,
+    "column": 49,
+    "method": "send",
+    "stringHash": "197add4f7d2a11258b35796c673578d18d81879399a8070c199012e119b65154",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 449,
+    "column": 61,
+    "method": "send",
+    "stringHash": "3365b9ca491a8b8513674bf882150253183a007c56bd4c27eb3cddb22416762e",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 456,
+    "column": 65,
+    "method": "send",
+    "stringHash": "eb552982e4de06b5557800702cd4fbbb0b70c6fae4a07781b6d5bd532fb384e6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 488,
+    "column": 45,
+    "method": "send",
+    "stringHash": "197add4f7d2a11258b35796c673578d18d81879399a8070c199012e119b65154",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 503,
+    "column": 57,
+    "method": "send",
+    "stringHash": "3365b9ca491a8b8513674bf882150253183a007c56bd4c27eb3cddb22416762e",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 510,
+    "column": 61,
+    "method": "send",
+    "stringHash": "eb552982e4de06b5557800702cd4fbbb0b70c6fae4a07781b6d5bd532fb384e6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 601,
+    "column": 77,
+    "method": "send",
+    "stringHash": "60d243e18e9ceffe327a687ac09552b376186f50793049867f19ed96c14090ca",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 621,
+    "column": 89,
+    "method": "send",
+    "stringHash": "e14bebd90465e3be6b509b194aba69a5f2c76bf9af44cbb670f2947716950115",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 632,
+    "column": 93,
+    "method": "send",
+    "stringHash": "bd70a4ea6ad4a415a40f2575aeada8b35dd152bbda349fe2861914fdd0c97864",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 668,
+    "column": 73,
+    "method": "send",
+    "stringHash": "197add4f7d2a11258b35796c673578d18d81879399a8070c199012e119b65154",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 687,
+    "column": 85,
+    "method": "send",
+    "stringHash": "3365b9ca491a8b8513674bf882150253183a007c56bd4c27eb3cddb22416762e",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 698,
+    "column": 89,
+    "method": "send",
+    "stringHash": "eb552982e4de06b5557800702cd4fbbb0b70c6fae4a07781b6d5bd532fb384e6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 720,
+    "column": 69,
+    "method": "send",
+    "stringHash": "e0992190d98ae5b389d2e078afc44559258dd7f172af174fb364f95082199626",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 785,
+    "column": 77,
+    "method": "send",
+    "stringHash": "197add4f7d2a11258b35796c673578d18d81879399a8070c199012e119b65154",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 805,
+    "column": 89,
+    "method": "send",
+    "stringHash": "3365b9ca491a8b8513674bf882150253183a007c56bd4c27eb3cddb22416762e",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 816,
+    "column": 93,
+    "method": "send",
+    "stringHash": "eb552982e4de06b5557800702cd4fbbb0b70c6fae4a07781b6d5bd532fb384e6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 852,
+    "column": 73,
+    "method": "send",
+    "stringHash": "197add4f7d2a11258b35796c673578d18d81879399a8070c199012e119b65154",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 871,
+    "column": 85,
+    "method": "send",
+    "stringHash": "3365b9ca491a8b8513674bf882150253183a007c56bd4c27eb3cddb22416762e",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 882,
+    "column": 89,
+    "method": "send",
+    "stringHash": "eb552982e4de06b5557800702cd4fbbb0b70c6fae4a07781b6d5bd532fb384e6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 906,
+    "column": 57,
+    "method": "send",
+    "stringHash": "e0992190d98ae5b389d2e078afc44559258dd7f172af174fb364f95082199626",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 926,
+    "column": 49,
+    "method": "send",
+    "stringHash": "416c3ca16c178aef94243b585e7a3b04854956a84b40a0799b08232c99956d1b",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1267,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "9d50abb15f9552b914ca20b1c26483b5a30fa0a6790adaf625e81edb6ca3f23a",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1260,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "5cfb349e3bd1fe2c07b73418675c7f58f0b70a98bfc6f1030726ec00bd743ab6",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1297,
+    "column": 33,
+    "method": "setDescription",
+    "stringHash": "9d50abb15f9552b914ca20b1c26483b5a30fa0a6790adaf625e81edb6ca3f23a",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1290,
+    "column": 39,
+    "method": "setTitle",
+    "stringHash": "ab367524626035fb0cb544c1d5a61fd38317c8d18c3de4c9dd646951ba4a8bfe",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1419,
+    "column": 43,
+    "method": "send",
+    "stringHash": "1e309001577dd9bb90eeaf0efe25b623781b810bb22c7eb082c8b18b67e194c7",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1428,
+    "column": 41,
+    "method": "send",
+    "stringHash": "d4175aa17be0faa43b025885c6414768fee62449feeb13be0a3b3e4b4aaaefa5",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1438,
+    "column": 41,
+    "method": "send",
+    "stringHash": "111076c3b3be468f989259f91cffa738bf928387ca02ddfd47ae7d57b45e84d9",
+    "module": "welcome",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Fun/facepalm.js",
+    "line": 13,
+    "column": 71,
+    "method": "setDescription",
+    "stringHash": "f7fe14b3c43e9aef37c6595ef45c239ae19a25447aeb55865ad88f1c63840469",
+    "module": "fun",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Info/avatar.js",
+    "line": 86,
+    "column": 21,
+    "method": "setDescription",
+    "stringHash": "05234c899a6a03f14faa0f82a95d90abca0a4342b81e5d707ffaf085dbbf117e",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Info/customavatar.js",
+    "line": 116,
+    "column": 21,
+    "method": "setDescription",
+    "stringHash": "6da315a92043b526ea32e3b5afce2e714306eb8088bb73747d5341d402e0607f",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Invites/show.js",
+    "line": 21,
+    "column": 17,
+    "method": "setTitle",
+    "stringHash": "2e820dd53bc24b8360ecd739c83a54e19b78a8509ba8f7b858c300cdb2481218",
+    "module": "shared",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Music/volume.js",
+    "line": 11,
+    "column": 96,
+    "method": "setDescription",
+    "stringHash": "32322e555b03cb183c884d65314e94f415ac8a5ca80972a7499aac0a7769942d",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Music/volume.js",
+    "line": 20,
+    "column": 23,
+    "method": "setDescription",
+    "stringHash": "f1d959a0b6aab8e6fb08ae5f5dd53fd64e4d994534791c1ad22fbd108735229e",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Music/volume.js",
+    "line": 19,
+    "column": 17,
+    "method": "setTitle",
+    "stringHash": "b94ecf61ffc9f4354f3fc96ba654887cef346739fe65a8efaae2422846d97267",
+    "module": "music",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Playlist/play.js",
+    "line": 54,
+    "column": 25,
+    "method": "setDescription",
+    "stringHash": "5c6382f60297fa8c3413c70d48c4048d21679ca57c11a113c01f067346ba831a",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "slashCommands/Playlist/show.js",
+    "line": 35,
+    "column": 25,
+    "method": "setDescription",
+    "stringHash": "d4744c919d3145b931730493e8369dca05d80f955f7c571d4a042a8ff84972ea",
+    "module": "shared",
+    "interpolated": false,
+    "review": "localization-review-required-not-all-user-facing"
+  },
+  {
+    "file": "social_log/livelog.js",
+    "line": 170,
+    "column": 27,
+    "method": "setTitle",
+    "stringHash": "10744fe65dd0a01254a69a8a462f23ea669269778b398ce6279f842236323919",
+    "module": "logs",
+    "interpolated": true,
+    "review": "localization-review-required-not-all-user-facing"
+  }
+]

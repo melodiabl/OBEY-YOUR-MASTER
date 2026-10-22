@@ -1,0 +1,27 @@
+{
+  "runtimeCatalog": false,
+  "format": "simple-placeholders",
+  "published": false,
+  "reviewedByNativeSpeakers": false,
+  "locales": [
+    "es",
+    "en",
+    "pt-BR",
+    "fr",
+    "de",
+    "ja"
+  ],
+  "keysPerLocale": 18,
+  "nextLocale": "ar",
+  "rtlRendererTested": false,
+  "default": "es",
+  "commandLocaleMapping": {
+    "es": "es-ES",
+    "en": "en-US",
+    "pt-BR": "pt-BR",
+    "fr": "fr",
+    "de": "de",
+    "ja": "ja"
+  },
+  "fallbackPolicy": "published variant > published base > es; availability checked per module"
+}

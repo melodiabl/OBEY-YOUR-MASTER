@@ -16,7 +16,7 @@ Estado: propuesta documentada. La lista no es una orden de instalar todo a la ve
 | Jobs | BullMQ/Redis y repositorio actuales | Trabajo durable, reintentos y conciliación de efectos | Solo capacidades con jobs |
 | Tiempo real | Socket.IO existente + revisión de estado | Actualizaciones de vista; la respuesta del caso de uso confirma la operación | Por pantalla |
 | Discord | discord.js actual y adaptadores pequeños | Transporte, permisos y componentes; reglas fuera de comandos | Por operación |
-| Audio | Shoukaku/motor actuales; voice donde ya corresponda | Conservar sesión, nodos y reloj; no duplicar propiedad de reproducción | Migración musical posterior |
+| Audio | lavalink-client como destino; Shoukaku como base legacy; voice donde haya consumidor local | Conservar datos/reloj y una sola autoridad de cola; verificar versión y recuperación | Migración musical definida en sistema/07 |
 | Imágenes | Workers/pool y assets actuales | Conservar aislamiento y límites; DTO de render explícito | Por tarjeta |
 | Límites de imports | dependency-cruiser como herramienta de desarrollo | Comprobar reglas del área migrada | Tras establecer fronteras |
 | Logs | Interfaz pequeña de logger; Pino como adaptador propuesto posterior | Campos estructurados y redacción; conservar Sentry actual | Después de definir eventos y redacción |

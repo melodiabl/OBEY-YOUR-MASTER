@@ -1,0 +1,142 @@
+[
+  {
+    "path": "assets/obey/growth-proposals/acceso/idle-128.png",
+    "bytes": 2804,
+    "sha256": "748a78122f831746a3a37870b813b5fa9b7509bb2a1b8af84481301d7010d87a"
+  },
+  {
+    "path": "assets/obey/growth-proposals/acceso/idle-256.png",
+    "bytes": 5949,
+    "sha256": "d4259b9c1b8cce5e14093ca33cf811ec10c7bc807e78dd7c09623cbfb7a06485"
+  },
+  {
+    "path": "assets/obey/growth-proposals/acceso/idle.svg",
+    "bytes": 652,
+    "sha256": "d8c395d25a86f16f1735898521176e3e365660baf71dd59f4816d9dd47a34be8"
+  },
+  {
+    "path": "assets/obey/growth-proposals/acceso/result-128.png",
+    "bytes": 3996,
+    "sha256": "d50174378d075aa44bc679e3f590c1e127f5876f4a1af5ca1bee5eeb9b652c7b"
+  },
+  {
+    "path": "assets/obey/growth-proposals/acceso/result-256.png",
+    "bytes": 8603,
+    "sha256": "98e9f6c850b4695591e5085ed27f6f92f21894a4a595ed24d5bfa4f150aad36b"
+  },
+  {
+    "path": "assets/obey/growth-proposals/acceso/result.svg",
+    "bytes": 850,
+    "sha256": "cafd07db53777b0af9e389a08d6ca2f89a99a4532efc9d1aa0507cdb34bc079a"
+  },
+  {
+    "path": "assets/obey/growth-proposals/manifest.json",
+    "bytes": 2464,
+    "sha256": "27ba232978a11a4af4474802cb05ab064ccaed2108c0362875ef8eff5c8a587a"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/idle-128.png",
+    "bytes": 2921,
+    "sha256": "0d666bb9ae36043551e1e0abd4ab055f71f506f2bc49bc64c04decd4aafe33f8"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/idle-256.png",
+    "bytes": 5494,
+    "sha256": "50b79ee79ff21889b7a927ac4e1b00b4b8987e7884d474de3c958ec829d6bbfc"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/idle.svg",
+    "bytes": 651,
+    "sha256": "8b362644a8479240b0a967836950775e1de74b885005a027b24ca437ba0dee5a"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/result-128.png",
+    "bytes": 3970,
+    "sha256": "19f44a41c3242c59e6c69f3b39babfc159047202d1ab31a6c75616492992a76f"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/result-256.png",
+    "bytes": 7688,
+    "sha256": "f896c2e8bab431173bce6dde7df98a19648ffebc9ed1e3fccbd21ef6e67ced46"
+  },
+  {
+    "path": "assets/obey/growth-proposals/suscripcion/result.svg",
+    "bytes": 849,
+    "sha256": "260b9b8acddaf0131ce3333f449e8a16a2c15797f3fff27e819a51401617877b"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/idle-128.png",
+    "bytes": 2650,
+    "sha256": "003f8e51ce1d7386c9f8032bb5cef0612b85b87ed456d029cdc1814183b28686"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/idle-256.png",
+    "bytes": 5551,
+    "sha256": "2d2209b0830ff93aa49e140b25036be206b47ad8856da4725c1e66a0e8ca6631"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/idle.svg",
+    "bytes": 745,
+    "sha256": "ab8960b7b3facf412a8da1035bd04633be9055e3834b2f87c830b2df55765233"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/motion.gif",
+    "bytes": 53567,
+    "sha256": "3a398458ace3fb27cea024d84d8c796b32282ae8350b64c360b32f6d3fa6973a"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/result-128.png",
+    "bytes": 3930,
+    "sha256": "33c3cf94fe89fa845802efa0e7da535d042eea75f799a641264a31e5d9b04a59"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/result-256.png",
+    "bytes": 8212,
+    "sha256": "4f9c17a0abd706be85c1f18c90c40ef6c3b729029937baf69d3e2782337b8d21"
+  },
+  {
+    "path": "assets/obey/growth-proposals/traspaso/result.svg",
+    "bytes": 943,
+    "sha256": "21d3d2d7687c2eb71b0dc29f47507f0cad429dffa939c9a2909987cf86256d8c"
+  },
+  {
+    "path": "assets/obey/growth-proposals/vista-previa.png",
+    "bytes": 46927,
+    "sha256": "2997f04b9a2c40abf34d2176fe5948e4b0a47de3295f450483586e9eb4afd777"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/idle-128.png",
+    "bytes": 3121,
+    "sha256": "75d006237eedf64d1ec933ce6ff589f1264b7f43f6194f4697e366eb6fa7233e"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/idle-256.png",
+    "bytes": 5329,
+    "sha256": "e3124f166e0eb55c53467f74808ccc15de4ccc1638ca1ff6fc7ef4fa72f3d348"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/idle.svg",
+    "bytes": 614,
+    "sha256": "95e127d6e252ff9998a81086ef79f6421ccf8d86d49756f238b257e8b943a72e"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/motion.gif",
+    "bytes": 49429,
+    "sha256": "bb7dd32eb23597e065c86192eb1d518aa7f3118653ca3a65bb52243266e5bb11"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/result-128.png",
+    "bytes": 4177,
+    "sha256": "3aa42751a9a1f6efa9b1bc39536ef35159cadfbc7604fd31c43234d68d803552"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/result-256.png",
+    "bytes": 7843,
+    "sha256": "47caa46a9d0cc37527a212433647025c57ceb7677624677f37d7304e352d98da"
+  },
+  {
+    "path": "assets/obey/growth-proposals/voto/result.svg",
+    "bytes": 812,
+    "sha256": "584193a2a4e41bd5c1b866a7458b2be7120045915f31fa13da31e0b8b972e6c8"
+  }
+]

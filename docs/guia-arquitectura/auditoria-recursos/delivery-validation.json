@@ -1,0 +1,249 @@
+{
+  "passed": true,
+  "errors": [],
+  "checks": {
+    "baseFilesRemoved": [],
+    "runtimeOrBaseCodeChanged": [],
+    "sourceHashesVerified": 1050,
+    "mappedRowsWithMissingTarget": [],
+    "mappedRows": 11866,
+    "individualNewGifs": [
+      {
+        "path": "approved/autoplay/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 32989
+      },
+      {
+        "path": "approved/avisos/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 29176
+      },
+      {
+        "path": "approved/confirmacion/motion.gif",
+        "frames": 16,
+        "durationMs": 1600,
+        "bytes": 25190
+      },
+      {
+        "path": "approved/escudo/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 39247
+      },
+      {
+        "path": "approved/exportar/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 39608
+      },
+      {
+        "path": "approved/favorito/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 26655
+      },
+      {
+        "path": "approved/mezcla/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 32434
+      },
+      {
+        "path": "approved/repetir/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 22576
+      },
+      {
+        "path": "approved/reproduccion/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 25794
+      },
+      {
+        "path": "approved/sincronizar/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 26085
+      },
+      {
+        "path": "approved/tarjeta/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 46782
+      },
+      {
+        "path": "approved/ticket/motion.gif",
+        "frames": 32,
+        "durationMs": 1600,
+        "bytes": 116355
+      },
+      {
+        "path": "new/applications/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 19518
+      },
+      {
+        "path": "new/automation/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 18898
+      },
+      {
+        "path": "new/coins/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 24680
+      },
+      {
+        "path": "new/feeds/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 17397
+      },
+      {
+        "path": "new/gift/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 23156
+      },
+      {
+        "path": "new/logs/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 15326
+      },
+      {
+        "path": "new/reconnect/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 12659
+      },
+      {
+        "path": "new/reminders/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 17792
+      },
+      {
+        "path": "new/reopen/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 15426
+      },
+      {
+        "path": "new/save/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 18336
+      },
+      {
+        "path": "new/search/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 16198
+      },
+      {
+        "path": "new/support/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 21381
+      },
+      {
+        "path": "new/technical/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 16025
+      },
+      {
+        "path": "new/transcript/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 15326
+      },
+      {
+        "path": "new/upload/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 17744
+      },
+      {
+        "path": "new/wait/motion.gif",
+        "frames": 20,
+        "durationMs": 1600,
+        "bytes": 16374
+      }
+    ],
+    "localeKeysPerLanguage": 470,
+    "galleryLogicalEntries": 525,
+    "galleryGroups": {
+      "approved": 12,
+      "new": 65,
+      "platform": 15,
+      "events": 117,
+      "base": 293,
+      "character": 23
+    },
+    "changedBaseFiles": [
+      "LEER_PRIMERO.md",
+      "docs/guia-arquitectura/INDICE_DE_ARCHIVOS.md",
+      "docs/guia-arquitectura/INSTRUCCIONES_PARA_CODEX.md",
+      "docs/guia-arquitectura/LEER_PRIMERO.md",
+      "docs/guia-arquitectura/REVISION_DOCUMENTAL.md",
+      "docs/guia-arquitectura/modulos/analytics.md",
+      "docs/guia-arquitectura/modulos/applications.md",
+      "docs/guia-arquitectura/modulos/architect.md",
+      "docs/guia-arquitectura/modulos/automation.md",
+      "docs/guia-arquitectura/modulos/automod.md",
+      "docs/guia-arquitectura/modulos/cards.md",
+      "docs/guia-arquitectura/modulos/collections.md",
+      "docs/guia-arquitectura/modulos/decoration.md",
+      "docs/guia-arquitectura/modulos/economy.md",
+      "docs/guia-arquitectura/modulos/events.md",
+      "docs/guia-arquitectura/modulos/feeds.md",
+      "docs/guia-arquitectura/modulos/fun.md",
+      "docs/guia-arquitectura/modulos/giveaways.md",
+      "docs/guia-arquitectura/modulos/levels.md",
+      "docs/guia-arquitectura/modulos/logs.md",
+      "docs/guia-arquitectura/modulos/messages.md",
+      "docs/guia-arquitectura/modulos/migrations.md",
+      "docs/guia-arquitectura/modulos/moderation.md",
+      "docs/guia-arquitectura/modulos/music.md",
+      "docs/guia-arquitectura/modulos/profiles.md",
+      "docs/guia-arquitectura/modulos/reminders.md",
+      "docs/guia-arquitectura/modulos/roles.md",
+      "docs/guia-arquitectura/modulos/security.md",
+      "docs/guia-arquitectura/modulos/starboard.md",
+      "docs/guia-arquitectura/modulos/sticky.md",
+      "docs/guia-arquitectura/modulos/suggestions.md",
+      "docs/guia-arquitectura/modulos/templates.md",
+      "docs/guia-arquitectura/modulos/tickets.md",
+      "docs/guia-arquitectura/modulos/utilities.md",
+      "docs/guia-arquitectura/modulos/verification.md",
+      "docs/guia-arquitectura/modulos/voice.md",
+      "docs/guia-arquitectura/modulos/welcome.md",
+      "OBEY_Plan_Maestro_Arquitectura_UX_UI.md",
+      "docs/guia-arquitectura/sistema/00_INDICE.md",
+      "docs/guia-arquitectura/sistema/03_UX_UI_DISCORD.md",
+      "docs/guia-arquitectura/sistema/05_I18N.md",
+      "docs/guia-arquitectura/sistema/10_EJECUCION_Y_ACEPTACION.md",
+      "docs/guia-arquitectura/sistema/13_ASSETS_POR_MODULO.md",
+      "docs/guia-arquitectura/sistema/11_INSTRUCCIONES_IA.md",
+      "docs/guia-arquitectura/sistema/12_INVENTARIO_Y_FUENTES.md",
+      "docs/guia-arquitectura/sistema/06_RECURSOS.md",
+      "assets/obey/expansion-20261020/manifest.json",
+      "MATERIALES.md"
+    ],
+    "markdownFilesChecked": 56,
+    "externalBrowserVerification": "not-run-no-browser-executable",
+    "connectedDiscordTests": "not-run",
+    "discordUploadsPerformed": false,
+    "backendChanged": false,
+    "galleryJavaScriptSyntax": "passed",
+    "assetGeneratorsSyntax": "passed",
+    "dynamicCallSitesTraced": 23
+  }
+}

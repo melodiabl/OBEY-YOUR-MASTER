@@ -1,0 +1,41 @@
+{
+  "runtimeConfig": false,
+  "secretsIncluded": false,
+  "exampleOnly": true,
+  "totalShards": 4,
+  "groups": [
+    {
+      "id": "bot-a",
+      "host": "vps-a",
+      "shardList": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "bot-b",
+      "host": "vps-b",
+      "shardList": [
+        2,
+        3
+      ]
+    }
+  ],
+  "stateOwner": "guild session with lease + generation + revision",
+  "requiredExternalServices": [
+    "MongoDB",
+    "Redis",
+    "Lavalink"
+  ],
+  "preconditions": [
+    "Gateway Bot limits fetched",
+    "disjoint assignments",
+    "central REST coordination or measured shared rate-limit strategy",
+    "drain procedure tested"
+  ],
+  "identities": {
+    "discordApplicationId": null,
+    "topggProjectId": null
+  },
+  "capacityClaim": null
+}

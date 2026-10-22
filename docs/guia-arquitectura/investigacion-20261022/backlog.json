@@ -1,0 +1,231 @@
+{
+  "edition": "0.14",
+  "kind": "implementation-contract-not-completion-report",
+  "tasks": [
+    {
+      "id": "G01",
+      "priority": "P0",
+      "owner": "runtime",
+      "title": "Conciliar Node/lock/CI",
+      "acceptance": "Instalación limpia con versión exacta; no usar engines >=20 como prueba",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G02",
+      "priority": "P0",
+      "owner": "platform",
+      "title": "Resolver inventario de comandos",
+      "acceptance": "674 archivos candidatos comparados con loader y registro staging; alias documentados",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G03",
+      "priority": "P1",
+      "owner": "music",
+      "title": "Unificar operaciones slash/botones",
+      "acceptance": "Una revisión y una operación por intención; doce IDs conservados",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G04",
+      "priority": "P1",
+      "owner": "music",
+      "title": "Migrar a lavalink-client",
+      "acceptance": "Versión fijada, paridad y recuperación antes de retirar Shoukaku",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G05",
+      "priority": "P1",
+      "owner": "music",
+      "title": "Arreglar transición de cola",
+      "acceptance": "Fin/skip/error/stop no duplican ni detienen indebidamente avance",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G06",
+      "priority": "P1",
+      "owner": "music",
+      "title": "Autoplay explicable",
+      "acceptance": "Cola manual prioritaria; feedback/likes consentidos, disponibilidad y sin repetición reciente",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G07",
+      "priority": "P2",
+      "owner": "configuration",
+      "title": "Extender configuración por capacidad",
+      "acceptance": "Borrador/preview/publicación con revisiones y permisos; no solo welcome",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G08",
+      "priority": "P2",
+      "owner": "tickets",
+      "title": "Completar recorrido de soporte",
+      "acceptance": "Cierre/claim/transcripción y DM bloqueado con recibos",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G09",
+      "priority": "P2",
+      "owner": "logs",
+      "title": "Corregir siete huecos de captura",
+      "acceptance": "Diff completo, datos ausentes, persistencia y permisos/intents revisados",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G10",
+      "priority": "P2",
+      "owner": "moderation",
+      "title": "Sanción y entrega independientes",
+      "acceptance": "Un caso/efecto y recibo aun cuando falle notificación",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G11",
+      "priority": "P2",
+      "owner": "roles",
+      "title": "Concesiones por origen",
+      "acceptance": "Quitar panel no retira otro origen válido",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G12",
+      "priority": "P3",
+      "owner": "assets",
+      "title": "Conciliar catálogo y publicar pendientes",
+      "acceptance": "Validar hashes, aprobación, disponibilidad y IDs reales; referencias excluidas",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G13",
+      "priority": "P3",
+      "owner": "i18n",
+      "title": "Migrar resolvedor",
+      "acceptance": "Compatibilidad legacy y nuevos locales por módulo; no ICU en parser antiguo",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G14",
+      "priority": "P3",
+      "owner": "cards",
+      "title": "Probar tarjetas multilenguaje",
+      "acceptance": "Avatar/nombre/XP reales; glifos, wrapping y límites del worker",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G15",
+      "priority": "P4",
+      "owner": "votes",
+      "title": "Top.gg v1",
+      "acceptance": "Firma, proyecto, test sin premio, dedupe y ledger único",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G16",
+      "priority": "P4",
+      "owner": "billing",
+      "title": "Seleccionar proveedor y alcance",
+      "acceptance": "País/entidad/precios/costes/políticas comprobados antes de venta",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G17",
+      "priority": "P4",
+      "owner": "entitlements",
+      "title": "Resolver acceso único",
+      "acceptance": "Todas las entradas usan derechos efectivos y fuente alternativa vigente",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G18",
+      "priority": "P4",
+      "owner": "billing",
+      "title": "Completar checkout/gestión",
+      "acceptance": "Sandbox, evento fuera de orden, cancelación, refund y conciliación",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G19",
+      "priority": "P5",
+      "owner": "operations",
+      "title": "Propiedad entre procesos",
+      "acceptance": "Listas de shards disjuntas, lease/generation y drain probado",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G20",
+      "priority": "P5",
+      "owner": "operations",
+      "title": "Añadir VPS",
+      "acceptance": "Release/secretos/red, Redis/Mongo/nodos y rollback verificados",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G21",
+      "priority": "P5",
+      "owner": "operations",
+      "title": "Backups y restauración",
+      "acceptance": "Restaurar datos en aislado con RPO/RTO medidos",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G22",
+      "priority": "P6",
+      "owner": "collections",
+      "title": "Intercambio y mercado originales",
+      "acceptance": "Consentimiento, saldo/stock/propiedad y derechos del material",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G23",
+      "priority": "P6",
+      "owner": "architect",
+      "title": "Completar /servidor",
+      "acceptance": "Permisos de creación, diff, pasos, recuperación y materiales conservados",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G24",
+      "priority": "P6",
+      "owner": "automation",
+      "title": "Automatizaciones limitadas",
+      "acceptance": "Triggers permitidos, sin bucles y presupuesto por guild",
+      "status": "pending-implementation",
+      "evidence": null
+    },
+    {
+      "id": "G25",
+      "priority": "P0",
+      "owner": "repository",
+      "title": "Ordenar documentación pública",
+      "acceptance": "README/guías/avisos/soporte reales; conservar historia y exclusiones",
+      "status": "pending-implementation",
+      "evidence": null
+    }
+  ]
+}

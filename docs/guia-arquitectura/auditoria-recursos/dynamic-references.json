@@ -1,0 +1,209 @@
+[
+  {
+    "file": "dashboard/cards-routes.js",
+    "line": 44,
+    "column": 26,
+    "method": "image",
+    "expressionHash": "b91ddc15a0a855cb7981be815484e5e6178f36d32e4756ef609747d51b5d8f64",
+    "module": "cards",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "dashboard/cards-routes.js",
+    "line": 88,
+    "column": 147,
+    "method": "image",
+    "expressionHash": "b91ddc15a0a855cb7981be815484e5e6178f36d32e4756ef609747d51b5d8f64",
+    "module": "cards",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/card-assets.js",
+    "line": 82,
+    "column": 66,
+    "method": "image",
+    "expressionHash": "7cba5fdd1bbd187c1508355d7669e2b036c5117e5b9737d3636bd681bda11b46",
+    "module": "cards",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/economy/messages.js",
+    "line": 12,
+    "column": 58,
+    "method": "markup",
+    "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+    "module": "economy",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/economy/messages.js",
+    "line": 23,
+    "column": 76,
+    "method": "markup",
+    "expressionHash": "15fda6d541494ba27205a2ae19ae75db9746d2f69e33e6551b437257e1933fe8",
+    "module": "economy",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/helpui.js",
+    "line": 8,
+    "column": 116,
+    "method": "emoji",
+    "expressionHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874",
+    "module": "shared",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/moderation/action.js",
+    "line": 47,
+    "column": 64,
+    "method": "markup",
+    "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+    "module": "moderation",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/config.js",
+    "line": 10,
+    "column": 32,
+    "method": "musicEmoji",
+    "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/controls.js",
+    "line": 30,
+    "column": 92,
+    "method": "emoji",
+    "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/platforms.js",
+    "line": 26,
+    "column": 72,
+    "method": "emoji",
+    "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/platforms.js",
+    "line": 26,
+    "column": 101,
+    "method": "markup",
+    "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/platforms.js",
+    "line": 26,
+    "column": 142,
+    "method": "imageURL",
+    "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/playui.js",
+    "line": 31,
+    "column": 33,
+    "method": "markup",
+    "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/playui.js",
+    "line": 46,
+    "column": 31,
+    "method": "markup",
+    "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/playui.js",
+    "line": 64,
+    "column": 21,
+    "method": "emoji",
+    "expressionHash": "962284b20b745d7e01095d56ea759bd315e90ff96862c82bc9e01b710126f841",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/music/playui.js",
+    "line": 70,
+    "column": 167,
+    "method": "emoji",
+    "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/presentation/modules.js",
+    "line": 10,
+    "column": 131,
+    "method": "markup",
+    "expressionHash": "8cbe476445f9b213d3d6ecead0bb816c06d86d80894abfbeaf1bb50c8f2aa6e5",
+    "module": "shared",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/suggestions/presentation.js",
+    "line": 8,
+    "column": 55,
+    "method": "emoji",
+    "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+    "module": "suggestions",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/suggestions/presentation.js",
+    "line": 9,
+    "column": 84,
+    "method": "emoji",
+    "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+    "module": "suggestions",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/suggestions/presentation.js",
+    "line": 18,
+    "column": 140,
+    "method": "markup",
+    "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+    "module": "suggestions",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/tickets/application-buttons.js",
+    "line": 8,
+    "column": 182,
+    "method": "emoji",
+    "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+    "module": "tickets",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "handlers/tickets/presentation.js",
+    "line": 13,
+    "column": 43,
+    "method": "markup",
+    "expressionHash": "4cdb143a6b37aadda68235c837f15b444edff5ec58189021d0e5c553de380103",
+    "module": "tickets",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  },
+  {
+    "file": "slashCommands/Music/volume.js",
+    "line": 16,
+    "column": 19,
+    "method": "markup",
+    "expressionHash": "d0f9b34cad1456da1b9b299e0dd4cd0e9e14c8423a4b4ec053e3ce04bd475a8a",
+    "module": "music",
+    "reason": "computed-key-needs-runtime-or-caller-trace"
+  }
+]

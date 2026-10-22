@@ -1,0 +1,20 @@
+{
+  "status.pending": "Wird verarbeitet…",
+  "status.confirmed": "Bestätigt",
+  "status.error": "Der Vorgang konnte nicht abgeschlossen werden.",
+  "status.permission": "Du hast keine Berechtigung für diese Aktion.",
+  "status.expired": "Dieses Steuerelement ist abgelaufen. Öffne ein neues.",
+  "status.unavailable": "Diese Funktion ist derzeit nicht verfügbar.",
+  "vote.open": "Für OBEY abstimmen",
+  "vote.received": "Deine Stimme wurde erfasst. Danke für deine Unterstützung!",
+  "vote.pending": "Die Stimme wurde noch nicht bestätigt.",
+  "vote.duplicate": "Diese Stimme wurde bereits erfasst.",
+  "premium.title": "Abonnement",
+  "premium.active": "Zugriff aktiv",
+  "premium.verifying": "Wir überprüfen deine Zahlung.",
+  "premium.ends": "Dein Zugriff ist bis {date} verfügbar.",
+  "setup.diagnostics": "Konfiguration prüfen",
+  "setup.valid": "Die Konfiguration hat diese Prüfung bestanden.",
+  "help.language": "Sprache",
+  "help.support": "Support"
+}

@@ -1,0 +1,83 @@
+event,category,intents,intentInBase,candidateSdkNames,sourceCandidateCount,policy,status,limits
+HELLO,operacion-protocolo,,,,0,operational-diagnostic-not-community-log,adapter-or-sdk-event-resolution-pending,
+READY,operacion-protocolo,,,ready | clientReady,8,operational-diagnostic-not-community-log,literal-candidate-found-not-tested,
+RESUMED,operacion-protocolo,,,shardResume,1,operational-diagnostic-not-community-log,literal-candidate-found-not-tested,
+RECONNECT,operacion-protocolo,,,shardReconnecting,1,operational-diagnostic-not-community-log,literal-candidate-found-not-tested,
+RATE_LIMITED,operacion-protocolo,,,,0,operational-diagnostic-not-community-log,adapter-or-sdk-event-resolution-pending,
+INVALID_SESSION,operacion-protocolo,,,invalidated,0,operational-diagnostic-not-community-log,adapter-or-sdk-event-resolution-pending,
+APPLICATION_COMMAND_PERMISSIONS_UPDATE,permisos-comandos,,,applicationCommandPermissionsUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+AUTO_MODERATION_RULE_CREATE,automod,AUTO_MODERATION_CONFIGURATION,False,autoModerationRuleCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+AUTO_MODERATION_RULE_UPDATE,automod,AUTO_MODERATION_CONFIGURATION,False,autoModerationRuleUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+AUTO_MODERATION_RULE_DELETE,automod,AUTO_MODERATION_CONFIGURATION,False,autoModerationRuleDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+AUTO_MODERATION_ACTION_EXECUTION,automod,AUTO_MODERATION_EXECUTION,False,autoModerationActionExecution,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+CHANNEL_CREATE,canales,GUILDS,True,channelCreate,3,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+CHANNEL_UPDATE,canales,GUILDS,True,channelUpdate,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+CHANNEL_DELETE,canales,GUILDS,True,channelDelete,2,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+CHANNEL_INFO,canales,,,channelInfo,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+CHANNEL_PINS_UPDATE,canales,GUILDS,True,channelPinsUpdate,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+THREAD_CREATE,hilos,GUILDS,True,threadCreate,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+THREAD_UPDATE,hilos,GUILDS,True,threadUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+THREAD_DELETE,hilos,GUILDS,True,threadDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+THREAD_LIST_SYNC,hilos,GUILDS,True,threadListSync,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+THREAD_MEMBER_UPDATE,hilos,GUILDS,True,threadMemberUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+THREAD_MEMBERS_UPDATE,hilos,GUILDS | GUILD_MEMBERS,True,threadMembersUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+ENTITLEMENT_CREATE,aplicacion-comercial,,,entitlementCreate,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,
+ENTITLEMENT_UPDATE,aplicacion-comercial,,,entitlementUpdate,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+ENTITLEMENT_DELETE,aplicacion-comercial,,,entitlementDelete,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,
+GUILD_CREATE,servidor,GUILDS,True,guildCreate,3,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,distinguish-availability-session-state-from-real-join-or-removal
+GUILD_UPDATE,servidor,GUILDS,True,guildUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+GUILD_DELETE,servidor,GUILDS,True,guildDelete,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,distinguish-availability-session-state-from-real-join-or-removal
+GUILD_AUDIT_LOG_ENTRY_CREATE,auditoria,GUILD_MODERATION,True,guildAuditLogEntryCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_BAN_ADD,miembros,GUILD_MODERATION,True,guildBanAdd,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_BAN_REMOVE,miembros,GUILD_MODERATION,True,guildBanRemove,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_EMOJIS_UPDATE,expresiones,GUILD_EXPRESSIONS,True,emojiCreate | emojiUpdate | emojiDelete,3,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+GUILD_STICKERS_UPDATE,expresiones,GUILD_EXPRESSIONS,True,stickerCreate | stickerUpdate | stickerDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+GUILD_INTEGRATIONS_UPDATE,integraciones,GUILD_INTEGRATIONS,True,guildIntegrationsUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+GUILD_MEMBER_ADD,miembros,GUILD_MEMBERS,True,guildMemberAdd,7,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_MEMBER_REMOVE,miembros,GUILD_MEMBERS,True,guildMemberRemove,5,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,leave-kick-ban-not-distinguishable-from-event-alone
+GUILD_MEMBER_UPDATE,miembros,GUILD_MEMBERS,True,guildMemberUpdate,3,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+GUILD_MEMBERS_CHUNK,miembros,,,guildMembersChunk,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_ROLE_CREATE,roles,GUILDS,True,roleCreate,2,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_ROLE_UPDATE,roles,GUILDS,True,roleUpdate,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+GUILD_ROLE_DELETE,roles,GUILDS,True,roleDelete,2,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+GUILD_SCHEDULED_EVENT_CREATE,eventos,GUILD_SCHEDULED_EVENTS,False,guildScheduledEventCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SCHEDULED_EVENT_UPDATE,eventos,GUILD_SCHEDULED_EVENTS,False,guildScheduledEventUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+GUILD_SCHEDULED_EVENT_DELETE,eventos,GUILD_SCHEDULED_EVENTS,False,guildScheduledEventDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SCHEDULED_EVENT_USER_ADD,eventos,GUILD_SCHEDULED_EVENTS,False,guildScheduledEventUserAdd,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SCHEDULED_EVENT_USER_REMOVE,eventos,GUILD_SCHEDULED_EVENTS,False,guildScheduledEventUserRemove,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SOUNDBOARD_SOUND_CREATE,expresiones,GUILD_EXPRESSIONS,True,guildSoundboardSoundCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SOUNDBOARD_SOUND_UPDATE,expresiones,GUILD_EXPRESSIONS,True,guildSoundboardSoundUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+GUILD_SOUNDBOARD_SOUND_DELETE,expresiones,GUILD_EXPRESSIONS,True,guildSoundboardSoundDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+GUILD_SOUNDBOARD_SOUNDS_UPDATE,expresiones,GUILD_EXPRESSIONS,True,guildSoundboardSoundsUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+SOUNDBOARD_SOUNDS,expresiones,,,soundboardSounds,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+INTEGRATION_CREATE,integraciones,GUILD_INTEGRATIONS,True,integrationCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+INTEGRATION_UPDATE,integraciones,GUILD_INTEGRATIONS,True,integrationUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+INTEGRATION_DELETE,integraciones,GUILD_INTEGRATIONS,True,integrationDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+INTERACTION_CREATE,interaccion-propia,,,interactionCreate,9,owner-module-private-projection-only,literal-candidate-found-not-tested,exclude-tokens-and-credential-fields-from-persistence
+INVITE_CREATE,invitaciones,GUILD_INVITES,True,inviteCreate,2,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+INVITE_DELETE,invitaciones,GUILD_INVITES,True,inviteDelete,2,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+MESSAGE_CREATE,mensajes,GUILD_MESSAGES,True,messageCreate,21,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+MESSAGE_UPDATE,mensajes,GUILD_MESSAGES,True,messageUpdate,7,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial
+MESSAGE_DELETE,mensajes,GUILD_MESSAGES,True,messageDelete,3,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,no-deleted-content-in-event; prior-authorized-snapshot-required
+MESSAGE_DELETE_BULK,mensajes,GUILD_MESSAGES,True,messageDeleteBulk,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,no-deleted-content-in-event; prior-authorized-snapshot-required
+MESSAGE_REACTION_ADD,reacciones,GUILD_MESSAGE_REACTIONS,True,messageReactionAdd,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+MESSAGE_REACTION_REMOVE,reacciones,GUILD_MESSAGE_REACTIONS,True,messageReactionRemove,1,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,
+MESSAGE_REACTION_REMOVE_ALL,reacciones,GUILD_MESSAGE_REACTIONS,True,messageReactionRemoveAll,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+MESSAGE_REACTION_REMOVE_EMOJI,reacciones,GUILD_MESSAGE_REACTIONS,True,messageReactionRemoveEmoji,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+PRESENCE_UPDATE,presencia-perfil-observable,GUILD_PRESENCES,True,presenceUpdate,0,opt-in-metadata-only-no-default-history,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+STAGE_INSTANCE_CREATE,voz,GUILDS,True,stageInstanceCreate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+STAGE_INSTANCE_UPDATE,voz,GUILDS,True,stageInstanceUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+STAGE_INSTANCE_DELETE,voz,GUILDS,True,stageInstanceDelete,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+SUBSCRIPTION_CREATE,aplicacion-comercial,,,subscriptionCreate,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,
+SUBSCRIPTION_UPDATE,aplicacion-comercial,,,subscriptionUpdate,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+SUBSCRIPTION_DELETE,aplicacion-comercial,,,subscriptionDelete,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,
+TYPING_START,escritura-opcional,GUILD_MESSAGE_TYPING,False,typingStart,0,opt-in-metadata-only-no-default-history,adapter-or-sdk-event-resolution-pending,
+USER_UPDATE,presencia-perfil-observable,,,userUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial | own-user-event; not-universal-profile-history-of-every-user
+VOICE_CHANNEL_EFFECT_SEND,voz,GUILD_VOICE_STATES,True,voiceChannelEffectSend,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+VOICE_CHANNEL_START_TIME_UPDATE,voz,GUILDS,True,voiceChannelStartTimeUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+VOICE_CHANNEL_STATUS_UPDATE,voz,GUILDS,True,voiceChannelStatusUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial
+VOICE_STATE_UPDATE,voz,GUILD_VOICE_STATES,True,voiceStateUpdate,6,guild-configured-log-projection-with-permission-gate,literal-candidate-found-not-tested,before-value-needs-previous-state; payload-may-be-partial | flags-only; no-conversation-audio-or-video-capture
+VOICE_SERVER_UPDATE,transporte-voz-secreto-excluido,,,voiceServerUpdate,0,owner-module-private-projection-only,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial | exclude-tokens-and-credential-fields-from-persistence
+WEBHOOKS_UPDATE,webhooks,GUILD_WEBHOOKS,True,webhooksUpdate,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,before-value-needs-previous-state; payload-may-be-partial | notification-without-full-webhook-diff; authorized-reconciliation-needed
+MESSAGE_POLL_VOTE_ADD,encuestas,GUILD_MESSAGE_POLLS,False,messagePollVoteAdd,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,
+MESSAGE_POLL_VOTE_REMOVE,encuestas,GUILD_MESSAGE_POLLS,False,messagePollVoteRemove,0,guild-configured-log-projection-with-permission-gate,adapter-or-sdk-event-resolution-pending,

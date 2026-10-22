@@ -1,0 +1,368 @@
+[
+  {
+    "module": "music",
+    "references": "Red, JMusicBot, Rythm",
+    "flow": "cola, fin, modos, autoplay",
+    "acceptance": "fin natural pasa una vez; stop invalida recomendación tardía",
+    "assets": [
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "tickets",
+    "references": "Ticket Tool, Tickets Bot",
+    "flow": "abrir, claim, cierre, transcripción",
+    "acceptance": "doble clic no crea dos tickets; privado al usuario/equipo",
+    "assets": [
+      "A01",
+      "B13–B17"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "logs",
+    "references": "Quark, Dyno",
+    "flow": "captura, diff, entrega",
+    "acceptance": "cambio simultáneo no pierde campos; actor ausente visible",
+    "assets": [
+      "catálogo-eventos"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "moderation",
+    "references": "YAGPDB, Wick",
+    "flow": "sanción, caso, notificación",
+    "acceptance": "jerarquía revalidada; fallo DM no duplica sanción",
+    "assets": [
+      "A07",
+      "B34"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "automod",
+    "references": "Wick, YAGPDB",
+    "flow": "reglas, ejecución y explicación",
+    "acceptance": "no sancionar dos veces por el mismo hecho/regla",
+    "assets": [
+      "A07",
+      "B24"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "security",
+    "references": "Wick",
+    "flow": "observación, incidente, recuperación",
+    "acceptance": "contención opt-in; rollback solo de cambios propios confirmados",
+    "assets": [
+      "A07",
+      "B26"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "welcome",
+    "references": "ProBot, Mimu",
+    "flow": "configurar, preview, prueba, envío",
+    "acceptance": "DM cerrado no impide bienvenida configurada al canal",
+    "assets": [
+      "B31",
+      "A10"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "cards",
+    "references": "Arcane, ProBot",
+    "flow": "render de datos y exports",
+    "acceptance": "nombre largo/multilenguaje no desborda; worker acotado",
+    "assets": [
+      "A10"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "levels",
+    "references": "Arcane, ProBot",
+    "flow": "XP, rango, recompensas",
+    "acceptance": "cooldown/exclusiones/roles explicados; no premiar dos veces",
+    "assets": [
+      "B36",
+      "B37"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "roles",
+    "references": "YAGPDB, Carl-bot",
+    "flow": "panel, concesión y retirada",
+    "acceptance": "no quitar concesiones de otro origen; jerarquía válida",
+    "assets": [
+      "B33"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "collections",
+    "references": "Pokétwo, Mudae parcial",
+    "flow": "inventario, búsqueda e intercambio",
+    "acceptance": "ambas partes confirman revisión actual; sin duplicar activos",
+    "assets": [
+      "B37",
+      "B40"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "economy",
+    "references": "Mimu, Pokétwo",
+    "flow": "saldo, ledger, tienda",
+    "acceptance": "saldo/stock consistentes con compra repetida",
+    "assets": [
+      "B38",
+      "B39"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "giveaways",
+    "references": "GiveawayBot",
+    "flow": "crear, participar, finalizar, reroll",
+    "acceptance": "cierre y premio idempotentes; elegibilidad documentada",
+    "assets": [
+      "B41"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "architect",
+    "references": "Server Maker",
+    "flow": "/servidor, diff y aplicación",
+    "acceptance": "preview no modifica; recibo por paso y cambios autorizados",
+    "assets": [
+      "B49",
+      "B50"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "applications",
+    "references": "Ticket Tool, Tickets Bot",
+    "flow": "formulario, revisión y decisión",
+    "acceptance": "aprobar/denegar una vez; privacidad del candidato",
+    "assets": [
+      "B48"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "profiles",
+    "references": "Rythm, Arcane, Mudae parcial",
+    "flow": "vista Discord/web autorizada",
+    "acceptance": "separar datos públicos, gustos privados y roles",
+    "assets": [
+      "B37",
+      "A02"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "feeds",
+    "references": "YAGPDB, Sapphire general",
+    "flow": "suscribir, recibir, deduplicar",
+    "acceptance": "reintento no repite aviso; fallo de proveedor visible",
+    "assets": [
+      "B46"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "messages",
+    "references": "Mimu, MEE6",
+    "flow": "plantilla, variables, audiencia",
+    "acceptance": "escape y menciones seguras; sin placeholders crudos",
+    "assets": [
+      "B44"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "verification",
+    "references": "Wick",
+    "flow": "reglas, comprobación, acceso",
+    "acceptance": "accesibilidad/fallo recuperable; no pedir QR de login",
+    "assets": [
+      "A07",
+      "B26"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "suggestions",
+    "references": "Carl-bot general",
+    "flow": "proponer, votar, decidir",
+    "acceptance": "decisión staff autorizada; voto propio sin duplicar",
+    "assets": [
+      "B42"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "utilities",
+    "references": "Arcane, GiveawayBot",
+    "flow": "ayuda, contexto, diagnóstico",
+    "acceptance": "ayuda lista solo capacidades habilitadas y entradas reales",
+    "assets": [
+      "B65"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "templates",
+    "references": "Server Maker",
+    "flow": "guardar, previsualizar y aplicar",
+    "acceptance": "template no transporta secretos o IDs ajenos como propios",
+    "assets": [
+      "B50"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "migrations",
+    "references": "Propuesta OBEY",
+    "flow": "migrar, checkpoint, conciliar",
+    "acceptance": "reiniciar no duplica efectos; origen se conserva hasta aceptar",
+    "assets": [
+      "A12"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "automation",
+    "references": "Propuesta OBEY",
+    "flow": "trigger, condición, acción",
+    "acceptance": "sin bucle de eventos propios; presupuesto de ejecución",
+    "assets": [
+      "B45"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "analytics",
+    "references": "Propuesta OBEY",
+    "flow": "consulta y agregación por guild",
+    "acceptance": "conteos parciales identificados; sin fuga entre tenants",
+    "assets": [
+      "B47"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "events",
+    "references": "Capacidad nativa Discord",
+    "flow": "programar, asistir, recordar",
+    "acceptance": "evento y permiso resueltos; recordatorio no duplicado",
+    "assets": [
+      "B58"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "voice",
+    "references": "Capacidad nativa Discord",
+    "flow": "estado y canales temporales",
+    "acceptance": "no grabar audio; no borrar canal ajeno u ocupado por error",
+    "assets": [
+      "B55"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "reminders",
+    "references": "Propuesta OBEY",
+    "flow": "programar, listar, cancelar",
+    "acceptance": "hora/zona correctas; sin entrega tras cancelación confirmada",
+    "assets": [
+      "B43"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "starboard",
+    "references": "ProBot, propuesta OBEY",
+    "flow": "destacar mensaje elegible",
+    "acceptance": "revisión de permisos y eliminación en origen",
+    "assets": [
+      "B58"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "sticky",
+    "references": "Propuesta OBEY",
+    "flow": "mensaje persistente por canal",
+    "acceptance": "coalescing y rate limits; no repost infinito propio",
+    "assets": [
+      "B44"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "decoration",
+    "references": "Propuesta OBEY",
+    "flow": "preferencias de apariencia",
+    "acceptance": "no cambiar datos o permisos al elegir tema",
+    "assets": [
+      "A10"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  },
+  {
+    "module": "fun",
+    "references": "Alcance conservado",
+    "flow": "comandos permitidos existentes",
+    "acceptance": "no recuperar NSFW o generadores retirados",
+    "assets": [
+      "B40"
+    ],
+    "implementation": "pending-reconciliation",
+    "newFeatureActivation": false
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "keyProposal": "character.tickets.proposal",
+  "file": "assets/obey/assets/character/png/obey_tickets_proposal.png",
+  "approval": "pending-user-review",
+  "generatedWith": "built-in-imagegen",
+  "reference": "assets/obey/assets/character/png/obey_help_master.png",
+  "promptFile": "PROMPT_PERSONAJE_TICKETS.txt",
+  "uses": [
+    "ticket-panel-thumbnail",
+    "support-guide-illustration"
+  ],
+  "notFor": [
+    "tiny-button-emoji",
+    "platform-logo",
+    "replacement-bot-avatar"
+  ],
+  "transparent": true,
+  "discordEmojiId": null,
+  "runtimeRegistered": false,
+  "sha256": "ce6fbdeadb615d36536a341046eb24125d7a6c01c8c055e9580b9dd31a2e3d70"
+}

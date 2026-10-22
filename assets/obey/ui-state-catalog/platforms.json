@@ -1,0 +1,466 @@
+{
+  "scope": "platform-proposals-no-runtime-overwrite",
+  "items": [
+    {
+      "id": "C01",
+      "slug": "spotify",
+      "label": "Spotify",
+      "canonical": "brand.spotify",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/spotify.svg",
+      "sourceSha256": "f41740bfc053eed60bf89366b0d6b9a73de6be4487a35c1e7681727fd31f9624",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/spotify/color.png",
+          "svg": "platforms/spotify/color.svg"
+        },
+        "white": {
+          "png": "platforms/spotify/white.png",
+          "svg": "platforms/spotify/white.svg"
+        },
+        "dark": {
+          "png": "platforms/spotify/dark.png",
+          "svg": "platforms/spotify/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/spotify/muted.png",
+          "svg": "platforms/spotify/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C02",
+      "slug": "youtube",
+      "label": "YouTube",
+      "canonical": "brand.youtube",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/youtube.svg",
+      "sourceSha256": "e816ccb358a5c93b3010beaf758adf3e6d027731dbe353ce81336b05fa60f24d",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/youtube/color.png",
+          "svg": "platforms/youtube/color.svg"
+        },
+        "white": {
+          "png": "platforms/youtube/white.png",
+          "svg": "platforms/youtube/white.svg"
+        },
+        "dark": {
+          "png": "platforms/youtube/dark.png",
+          "svg": "platforms/youtube/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/youtube/muted.png",
+          "svg": "platforms/youtube/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C03",
+      "slug": "youtubemusic",
+      "label": "YouTube Music",
+      "canonical": "brand.youtubemusic",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/youtubemusic.svg",
+      "sourceSha256": "d7d3d09422b7b81270c4e52fe92f061c192351d91cb08c1e99c8ef9e29065846",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/youtubemusic/color.png",
+          "svg": "platforms/youtubemusic/color.svg"
+        },
+        "white": {
+          "png": "platforms/youtubemusic/white.png",
+          "svg": "platforms/youtubemusic/white.svg"
+        },
+        "dark": {
+          "png": "platforms/youtubemusic/dark.png",
+          "svg": "platforms/youtubemusic/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/youtubemusic/muted.png",
+          "svg": "platforms/youtubemusic/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C04",
+      "slug": "applemusic",
+      "label": "Apple Music",
+      "canonical": "brand.applemusic",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/applemusic.svg",
+      "sourceSha256": "38d51d4fa88a3fed3129ffc4925889b31a793ee1e9354821ac740c68348dc96d",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/applemusic/color.png",
+          "svg": "platforms/applemusic/color.svg"
+        },
+        "white": {
+          "png": "platforms/applemusic/white.png",
+          "svg": "platforms/applemusic/white.svg"
+        },
+        "dark": {
+          "png": "platforms/applemusic/dark.png",
+          "svg": "platforms/applemusic/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/applemusic/muted.png",
+          "svg": "platforms/applemusic/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C05",
+      "slug": "soundcloud",
+      "label": "SoundCloud",
+      "canonical": "brand.soundcloud",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/soundcloud.svg",
+      "sourceSha256": "593aae3cdf5832491df58af58c7d9d9111e1b47b6c757ebc0b0512148a2bd3d3",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/soundcloud/color.png",
+          "svg": "platforms/soundcloud/color.svg"
+        },
+        "white": {
+          "png": "platforms/soundcloud/white.png",
+          "svg": "platforms/soundcloud/white.svg"
+        },
+        "dark": {
+          "png": "platforms/soundcloud/dark.png",
+          "svg": "platforms/soundcloud/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/soundcloud/muted.png",
+          "svg": "platforms/soundcloud/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C06",
+      "slug": "deezer",
+      "label": "Deezer",
+      "canonical": "brand.deezer",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/deezer.svg",
+      "sourceSha256": "f2a1cd2c93d7cd839e34df749d0acbd87d0725fc03b295d9338b5eeee14ab244",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/deezer/color.png",
+          "svg": "platforms/deezer/color.svg"
+        },
+        "white": {
+          "png": "platforms/deezer/white.png",
+          "svg": "platforms/deezer/white.svg"
+        },
+        "dark": {
+          "png": "platforms/deezer/dark.png",
+          "svg": "platforms/deezer/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/deezer/muted.png",
+          "svg": "platforms/deezer/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C07",
+      "slug": "twitch",
+      "label": "Twitch",
+      "canonical": "brand.twitch",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/twitch.svg",
+      "sourceSha256": "8497b62080729bdb029f514ee6b8bdb3d47bbae2dcb9ee50a5fd61757b912dd5",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/twitch/color.png",
+          "svg": "platforms/twitch/color.svg"
+        },
+        "white": {
+          "png": "platforms/twitch/white.png",
+          "svg": "platforms/twitch/white.svg"
+        },
+        "dark": {
+          "png": "platforms/twitch/dark.png",
+          "svg": "platforms/twitch/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/twitch/muted.png",
+          "svg": "platforms/twitch/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C08",
+      "slug": "bandcamp",
+      "label": "Bandcamp",
+      "canonical": "brand.bandcamp",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/bandcamp.svg",
+      "sourceSha256": "a076f36f51ae1b2cbd4fc4cdd440351eca88bbf677c8d2e8dc767eb24e1cb34c",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/bandcamp/color.png",
+          "svg": "platforms/bandcamp/color.svg"
+        },
+        "white": {
+          "png": "platforms/bandcamp/white.png",
+          "svg": "platforms/bandcamp/white.svg"
+        },
+        "dark": {
+          "png": "platforms/bandcamp/dark.png",
+          "svg": "platforms/bandcamp/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/bandcamp/muted.png",
+          "svg": "platforms/bandcamp/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C09",
+      "slug": "discord",
+      "label": "Discord",
+      "canonical": "brand.discord",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/discord.svg",
+      "sourceSha256": "a2625a85ff8a4aa0703ba7c9db39bc57257b3223cd8c19394e8ec491f50b9b83",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/discord/color.png",
+          "svg": "platforms/discord/color.svg"
+        },
+        "white": {
+          "png": "platforms/discord/white.png",
+          "svg": "platforms/discord/white.svg"
+        },
+        "dark": {
+          "png": "platforms/discord/dark.png",
+          "svg": "platforms/discord/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/discord/muted.png",
+          "svg": "platforms/discord/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C10",
+      "slug": "github",
+      "label": "GitHub",
+      "canonical": "brand.github",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/github.svg",
+      "sourceSha256": "4a6b3318b5e73d259e32696463dd7fd2039250b067201866324ed95f4a04775d",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/github/color.png",
+          "svg": "platforms/github/color.svg"
+        },
+        "white": {
+          "png": "platforms/github/white.png",
+          "svg": "platforms/github/white.svg"
+        },
+        "dark": {
+          "png": "platforms/github/dark.png",
+          "svg": "platforms/github/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/github/muted.png",
+          "svg": "platforms/github/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C11",
+      "slug": "tiktok",
+      "label": "TikTok",
+      "canonical": "brand.tiktok",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/tiktok.svg",
+      "sourceSha256": "6e199721b1f5ef3102eecc564dba4997550ddf6df0c5d06cd873492b656985ec",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/tiktok/color.png",
+          "svg": "platforms/tiktok/color.svg"
+        },
+        "white": {
+          "png": "platforms/tiktok/white.png",
+          "svg": "platforms/tiktok/white.svg"
+        },
+        "dark": {
+          "png": "platforms/tiktok/dark.png",
+          "svg": "platforms/tiktok/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/tiktok/muted.png",
+          "svg": "platforms/tiktok/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C12",
+      "slug": "x",
+      "label": "X",
+      "canonical": "brand.x",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/x.svg",
+      "sourceSha256": "6cc7df189ce44ff0d88420ab43ac9c19da083b3d9fd470519fc67f012fa313fe",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/x/color.png",
+          "svg": "platforms/x/color.svg"
+        },
+        "white": {
+          "png": "platforms/x/white.png",
+          "svg": "platforms/x/white.svg"
+        },
+        "dark": {
+          "png": "platforms/x/dark.png",
+          "svg": "platforms/x/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/x/muted.png",
+          "svg": "platforms/x/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C13",
+      "slug": "paypal",
+      "label": "PayPal",
+      "canonical": "brand.paypal",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/paypal.svg",
+      "sourceSha256": "1b11b6c39777e600c48753760ba172e8601a79bae36ebc4d94c1b8907ef62358",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/paypal/color.png",
+          "svg": "platforms/paypal/color.svg"
+        },
+        "white": {
+          "png": "platforms/paypal/white.png",
+          "svg": "platforms/paypal/white.svg"
+        },
+        "dark": {
+          "png": "platforms/paypal/dark.png",
+          "svg": "platforms/paypal/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/paypal/muted.png",
+          "svg": "platforms/paypal/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C14",
+      "slug": "patreon",
+      "label": "Patreon",
+      "canonical": "brand.patreon",
+      "source": "https://github.com/simple-icons/simple-icons/blob/develop/icons/patreon.svg",
+      "sourceSha256": "ceb8ca318beda814c2231a9701546ac6488392eac15ac5c532e3561d2e0599a4",
+      "sourceType": "community-icon-collection-not-official-endorsement",
+      "colorPolicy": "proposed-identity-colour-or-monochrome; verify product presentation when integrating",
+      "approvedByUser": false,
+      "status": "new-platform-proposal-review-required",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "variants": {
+        "color": {
+          "png": "platforms/patreon/color.png",
+          "svg": "platforms/patreon/color.svg"
+        },
+        "white": {
+          "png": "platforms/patreon/white.png",
+          "svg": "platforms/patreon/white.svg"
+        },
+        "dark": {
+          "png": "platforms/patreon/dark.png",
+          "svg": "platforms/patreon/dark.svg"
+        },
+        "muted": {
+          "png": "platforms/patreon/muted.png",
+          "svg": "platforms/patreon/muted.svg"
+        }
+      }
+    },
+    {
+      "id": "C15",
+      "slug": "jiosaavn",
+      "label": "JioSaavn",
+      "canonical": "brand.jiosaavn",
+      "status": "existing-resource-retained-source-verification-pending",
+      "sourceType": "existing-project-resource",
+      "existingPath": "../production/brand_jiosaavn.png",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "variants": {}
+    }
+  ]
+}

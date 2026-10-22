@@ -1,0 +1,566 @@
+{
+  "edition": "0.14",
+  "date": "2026-10-22",
+  "bots": 20,
+  "deepScopedReviews": 10,
+  "comparisonOrLimited": 10,
+  "reviewedPublicCodeFiles": 7,
+  "reviewedRepositories": 4,
+  "visualReferences": 8,
+  "baseModuleFiches": 32,
+  "commandCandidateFiles": 674,
+  "newOriginalFamilies": 4,
+  "newOriginalPng": 16,
+  "newOriginalSvg": 8,
+  "newOriginalGif": 2,
+  "previewPng": 1,
+  "seedLocales": 6,
+  "seedKeysEach": 18,
+  "backlogTasks": 25,
+  "jsonFilesParsed": 15,
+  "relativeLinksChecked": 99,
+  "brokenNewRelativeLinks": [],
+  "imagesVerified": [
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/yagpdb-roles.png",
+      "size": [
+        844,
+        480
+      ],
+      "frames": 1,
+      "bytes": 59689
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/yagpdb-moderacion.png",
+      "size": [
+        854,
+        480
+      ],
+      "frames": 1,
+      "bytes": 57808
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-edicion.png",
+      "size": [
+        652,
+        540
+      ],
+      "frames": 1,
+      "bytes": 149153
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-entrada.png",
+      "size": [
+        652,
+        456
+      ],
+      "frames": 1,
+      "bytes": 139034
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/tickettool-hilo-equipo.png",
+      "size": [
+        760,
+        395
+      ],
+      "frames": 1,
+      "bytes": 75739
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/arcane-recompensas.png",
+      "size": [
+        994,
+        466
+      ],
+      "frames": 1,
+      "bytes": 45950
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-rol.png",
+      "size": [
+        652,
+        331
+      ],
+      "frames": 1,
+      "bytes": 93538
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/arcane-tarjeta.png",
+      "size": [
+        800,
+        200
+      ],
+      "frames": 1,
+      "bytes": 47355
+    },
+    {
+      "path": "assets/obey/growth-proposals/vista-previa.png",
+      "size": [
+        1200,
+        430
+      ],
+      "frames": 1,
+      "bytes": 46927
+    },
+    {
+      "path": "assets/obey/growth-proposals/acceso/result-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 8603
+    },
+    {
+      "path": "assets/obey/growth-proposals/acceso/idle-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 5949
+    },
+    {
+      "path": "assets/obey/growth-proposals/acceso/result-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 3996
+    },
+    {
+      "path": "assets/obey/growth-proposals/acceso/idle-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 2804
+    },
+    {
+      "path": "assets/obey/growth-proposals/suscripcion/result-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 7688
+    },
+    {
+      "path": "assets/obey/growth-proposals/suscripcion/idle-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 5494
+    },
+    {
+      "path": "assets/obey/growth-proposals/suscripcion/result-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 3970
+    },
+    {
+      "path": "assets/obey/growth-proposals/suscripcion/idle-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 2921
+    },
+    {
+      "path": "assets/obey/growth-proposals/traspaso/result-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 8212
+    },
+    {
+      "path": "assets/obey/growth-proposals/traspaso/idle-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 5551
+    },
+    {
+      "path": "assets/obey/growth-proposals/traspaso/result-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 3930
+    },
+    {
+      "path": "assets/obey/growth-proposals/traspaso/idle-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 2650
+    },
+    {
+      "path": "assets/obey/growth-proposals/voto/result-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 7843
+    },
+    {
+      "path": "assets/obey/growth-proposals/voto/idle-256.png",
+      "size": [
+        256,
+        256
+      ],
+      "frames": 1,
+      "bytes": 5329
+    },
+    {
+      "path": "assets/obey/growth-proposals/voto/result-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 4177
+    },
+    {
+      "path": "assets/obey/growth-proposals/voto/idle-128.png",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 1,
+      "bytes": 3121
+    },
+    {
+      "path": "assets/obey/growth-proposals/traspaso/motion.gif",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 16,
+      "bytes": 53567
+    },
+    {
+      "path": "assets/obey/growth-proposals/voto/motion.gif",
+      "size": [
+        128,
+        128
+      ],
+      "frames": 16,
+      "bytes": 49429
+    }
+  ],
+  "linguisticNativeReview": false,
+  "galleryBrowserRendered": false,
+  "galleryBrowserLimitation": "Local file navigation rejected by cloud browser policy. No bypass attempted; links/resources checked offline.",
+  "runtimeChanges": false,
+  "liveDiscordTest": false,
+  "emojiUploads": false,
+  "paymentsEnabled": false,
+  "deployment": false,
+  "files": [
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/00_LEER_PRIMERO.md",
+      "bytes": 1966,
+      "sha256": "ab58d5c7402c736f20264a7cc081a1a511b88ae652ee8edc859be05ea04a157b"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/01_COMPARATIVA.md",
+      "bytes": 3067,
+      "sha256": "82d779f94a84543f7f0e56d14168bc9c7c5ec6e48a3f22dc81b67ebea0752660"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/02_CODIGO_PUBLICO.md",
+      "bytes": 4081,
+      "sha256": "59308ec6036acbdae8a9f19779218608e1d58dcf8fc30ad082e0503009a17017"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/03_REFERENCIAS_VISUALES.md",
+      "bytes": 4283,
+      "sha256": "b398a7f3d63e4281ec5cc44eb9029faed9a4f9195287371a08d1efee06033c49"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/04_ARQUITECTURA_Y_EXPERIENCIA.md",
+      "bytes": 5635,
+      "sha256": "c5a8416fcfbabda015e8e5eddb71d7f89388d163b1b1438355d4769cdab7d170"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/05_ESCALADO_Y_VPS.md",
+      "bytes": 7028,
+      "sha256": "3f0be5e319915b7fd9bbea2e2cc0cf45d4ff36e739ce1fa55da5b422ea727b37"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/06_VOTOS_Y_SUSCRIPCIONES.md",
+      "bytes": 7964,
+      "sha256": "f87c1179907490783ef6a8ddb0971bd902e3ab14a113bc01752bd5d4b5bee011"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/07_IDIOMAS_Y_GITHUB.md",
+      "bytes": 5538,
+      "sha256": "4b8f0679ff32df6b0418efdc7d4d8ca03b508973ffaa3718f8af2933a0e108ab"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/08_PLAN_DE_EJECUCION.md",
+      "bytes": 8087,
+      "sha256": "95e9c54676f1365a07101016cf30aa21756bcd63bd5e95afc7d45e1304464f22"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/09_MATERIALES_NUEVOS.md",
+      "bytes": 2170,
+      "sha256": "25fa4006771802bef4d84538cbca2413009eea356ef83714407d102135afa05f"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/10_FRICCIONES_Y_PRIORIDADES.md",
+      "bytes": 3489,
+      "sha256": "cee5e4e96cc0763dcce394dc42aed17bd270d03c2a69cb56a5d71fb2944cf10e"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/11_DATOS_Y_CONTRATOS_DE_INTEGRACION.md",
+      "bytes": 4467,
+      "sha256": "fd37e033eb92b090be17e1209c1fef6fb1b06d5b86912c356858e13e349c8808"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/backlog.json",
+      "bytes": 7167,
+      "sha256": "5cb60b4e615a3d6700d2460d7a44493d47aaf97f1ed370d9a8a1b9cc191b0ef5"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/arcane.md",
+      "bytes": 1540,
+      "sha256": "22ce8c5e847b01fae66ce8cab5c2442884b0d2fe8675d4f44f4e65919163a56a"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/carl.md",
+      "bytes": 1495,
+      "sha256": "1128fbefc4a3fcff827ad70692062f7e4ad99de082f29160708fecd255c1d81c"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/dyno.md",
+      "bytes": 1430,
+      "sha256": "16d05d22dadd50c3d2fac9b012d0a928eadf52ddec8f0463c4e35c035c0bb3cf"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/fredboat.md",
+      "bytes": 1414,
+      "sha256": "3e7a2bb9cd8a9020fb717470b6b3458391f4e6a7e8b951ee8d8b806264dc028a"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/giveawaybot.md",
+      "bytes": 1456,
+      "sha256": "ee9250ecb4a1ec41da563f1508226cccb7721135b0549c44d7859d760ab47462"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/jmusicbot.md",
+      "bytes": 1478,
+      "sha256": "075824d0a4fec6a7fdb541ef6b0b1da6e12dc4c0b2d93ca9aebf444c3cac8fd2"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/mee6.md",
+      "bytes": 1458,
+      "sha256": "3269ee536b43cadc7979506b1f1f7542ad001ae1da737727ba69b703dfe319a4"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/mimu.md",
+      "bytes": 1490,
+      "sha256": "e616ecae2fca86fc6765d49f7fc1507d5d48bfa7007b0fa7a09a9a94f7e82886"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/mudae.md",
+      "bytes": 1511,
+      "sha256": "314e7640454442ca4fc86982b17255700e7a6fe355df28b97229670e45d696ce"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/poketwo.md",
+      "bytes": 1543,
+      "sha256": "dfa918c28a6a8064f0f2c50f2ededa38d7e771207ad6adeb90a1fe0dd4d5a055"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/probot.md",
+      "bytes": 1473,
+      "sha256": "7d4510094c81825819f80da331a2ebbc86ddcedba594abde70a673336db24895"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/quark.md",
+      "bytes": 1587,
+      "sha256": "c91dd010dd5d2d1a66aafd1b5391c1e40ab61e9c1b05638b9d7d7469df640703"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/red.md",
+      "bytes": 1508,
+      "sha256": "ded94dd217dd7c35004221fd94de8a841aec8fbbd2f07ec87578c4dfdacc15de"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/rythm.md",
+      "bytes": 1479,
+      "sha256": "178fcaf74592668d35c22cd45f93a2f55d68174fb7b33a0de908ddee1dc59513"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/sapphire.md",
+      "bytes": 1402,
+      "sha256": "22998be0e1e27320b01a42f5848a64d9b010651521268d8a7d3f91756ee4e5b9"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/servermaker.md",
+      "bytes": 1510,
+      "sha256": "072be8d7b2a3439968228e3be2bc4abbb181fd53064ff02f82c060ab08fee398"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/ticketsbot.md",
+      "bytes": 1396,
+      "sha256": "6a40eec5e58c87afa5e72ef41060ec189efb203ce495a730792468c280a4861a"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/tickettool.md",
+      "bytes": 1545,
+      "sha256": "6226b3ab4f922615bfb49ef87c6ccd0ee38deb6fc9bcf1151346d48c24891c17"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/wick.md",
+      "bytes": 1485,
+      "sha256": "1315946d94560f6f05b1fe70821d426ddb79b2991843c16335e460923105d2a7"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots/yagpdb.md",
+      "bytes": 1557,
+      "sha256": "add6dfcc55b83a4bd7e4b42808ac71ef6c07d4586451fbe5d7c0d51164505c15"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/bots.json",
+      "bytes": 16307,
+      "sha256": "712bc43072efd0506aaa6cd9b780b8b777b3391acdcfc77caf6617cd53e1cd85"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/codigo-revisado.json",
+      "bytes": 3971,
+      "sha256": "73c9f59a3fbe2416f639b2df697107eb619feeda1c55cc57173d04a9a45e3979"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/comandos-base.csv",
+      "bytes": 101131,
+      "sha256": "0d10180839b1bd943d5c1d3077c4d0a11d3bc8a657adde4f229f36742a348ff3"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/galeria.html",
+      "bytes": 7052,
+      "sha256": "bf7de6412e38abfd078ab69eb90990256cf7ff06efb93b0361916f94c7ba8e4a"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/idiomas.json",
+      "bytes": 536,
+      "sha256": "0662a1a06fa8939fe737974a152a05572a79e8eacdb7501127da2c5052b74aa5"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/de.json",
+      "bytes": 977,
+      "sha256": "e3fc2e1b460721da2adef34570eca22a3844a77db81f301a32fe46b737a42720"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/en.json",
+      "bytes": 900,
+      "sha256": "b55e3af65a30e4b810e9df83c6df362aa3bdd5de1c733d7300bd408361910515"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/es.json",
+      "bytes": 902,
+      "sha256": "752fbbca75dce52a6ca3f5b56736da85f799214b0ce6ed4661d241b3c68bee60"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/fr.json",
+      "bytes": 997,
+      "sha256": "c9dcb957941c21ebb3dd15b92a80d70c133206df6964ed2599d92ca8746b3b47"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/ja.json",
+      "bytes": 1076,
+      "sha256": "e1096009955bd523e1bc62e74c4c8a6d0c5f0f00965622c88cf9bbe309ea3245"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/locales-semilla/pt-BR.json",
+      "bytes": 924,
+      "sha256": "4f0c5f800120b04b99ad2e1b7b83ec311944a5b6e8bc7b185b5272d383fc3d66"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/modulos.json",
+      "bytes": 10147,
+      "sha256": "8a520d93696bb72649947db8090ad381ebe4dfd8a6b9985686e132a28e32e979"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/perfiles.propuestos.json",
+      "bytes": 778,
+      "sha256": "86b50a80b753d34761f6473f1836b2fc5243ac407d7ce955cc12db814856eba5"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/ARCANE-LICENSE.txt",
+      "bytes": 1075,
+      "sha256": "4279f267856c82ab982d92ec4af5eca559d04c3ca7395bf6f012692b2e3efad5"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/YAGPDB-LICENSE.txt",
+      "bytes": 1066,
+      "sha256": "ccb0aa4db610fe10afae5f666831af39d2b79add0317945b4f2fab563a37a09b"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/arcane-recompensas.png",
+      "bytes": 45950,
+      "sha256": "76cc749b2d924c81d9f8c0ff30910f3b11d3d74af9138d34a3a31834a61cd56b"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/arcane-tarjeta.png",
+      "bytes": 47355,
+      "sha256": "0febd13bf6d8e1949c1a2ae3627b2d4b1952fef13f2add3f0f7267dfa3380f7c"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-edicion.png",
+      "bytes": 149153,
+      "sha256": "97c344a915fd8f0431ab18b42b2d38ac3e07885137a7b2cc3d1e02979d14ade8"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-entrada.png",
+      "bytes": 139034,
+      "sha256": "68b2cef2d0789250296870ffd5e3b66ece450093ca86b8ee7a471e85d2b7c1be"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/quark-rol.png",
+      "bytes": 93538,
+      "sha256": "f86f4ee80262b615c4b9048934d448fe8eded55a7600b6e9f9494d102af441a0"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/tickettool-hilo-equipo.png",
+      "bytes": 75739,
+      "sha256": "3fdd71515f135f7bbe9a2126597075a26cd88695659246e54017a641b8c6d7f0"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/yagpdb-moderacion.png",
+      "bytes": 57808,
+      "sha256": "ce511fe073c802bfb6911fbcbf21a6db25817aa1c26e2d4aa462f8675d8210ec"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias/yagpdb-roles.png",
+      "bytes": 59689,
+      "sha256": "b0567fad9ab3567b3edba5715d34635fbb6292b817a99adf71c59f64ffd7b51a"
+    },
+    {
+      "path": "docs/guia-arquitectura/investigacion-20261022/referencias.json",
+      "bytes": 4983,
+      "sha256": "454b45bad90ba08169a6688efd143d521524e5afe2347553bf2e38851344414e"
+    }
+  ],
+  "baseFilesDeleted": 0,
+  "existingFilesChanged": 39,
+  "unchangedRuntimeAndPreviousAssets": true
+}

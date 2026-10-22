@@ -1,0 +1,28 @@
+{
+  "capture": {
+    "actorUnknown": "Responsable no identificado",
+    "beforeUnavailable": "El valor anterior no está disponible.",
+    "contentUnavailable": "El contenido anterior no estaba disponible para OBEY.",
+    "metadataOnly": "Solo se registraron los datos de identificación disponibles.",
+    "partial": "Registro con datos parciales",
+    "correlationPending": "Buscando evidencia del responsable…",
+    "auditUnavailable": "No se pudo consultar la auditoría.",
+    "noPermission": "Faltan permisos para esta categoría de registros.",
+    "intentUnavailable": "Esta fuente no está habilitada o no tiene acceso confirmado.",
+    "gap": "Hay un intervalo sin cobertura confirmada entre {start} y {end}.",
+    "reconciled": "Se comparó el estado actual. El historial intermedio puede estar incompleto.",
+    "captureDegraded": "La captura está funcionando con limitaciones.",
+    "deliveryFailed": "El registro se guardó, pero su envío al canal sigue pendiente.",
+    "bufferExceeded": "Se alcanzó el límite del buffer. La cobertura necesita revisión.",
+    "changedFields": "Cambios observados: {count}",
+    "reference": "Referencia: {reference}",
+    "leaveUnclassified": "El miembro dejó de aparecer en el servidor. El motivo no está confirmado.",
+    "noHistory": "No hay datos suficientes para reconstruir ese cambio.",
+    "before": "Antes",
+    "after": "Después",
+    "observed": "Dato observado",
+    "retained": "Dato conservado previamente",
+    "disabled": "Categoría desactivada",
+    "healthy": "Cobertura verificada para el alcance configurado"
+  }
+}

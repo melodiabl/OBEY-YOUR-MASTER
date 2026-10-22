@@ -1,3 +1,9 @@
+> Estado vigente del checkout: [conciliación 0.15 y prioridades](CONCILIACION_2026-10-23.md). Se preservan los avances y el runtime `07da107`; los informes de base conservan su fecha y alcance.
+
+> Actualización vigente 0.6: [catálogo de eventos](sistema/15_CATALOGO_EVENTOS.md) integrado en assets/obey/catalog-eventos/. Escenas y seis GIF se conservan. Los antiguos 24 iconos de registros se retiraron; runtime y publicación Discord siguen pendientes.
+
+> Edición vigente 0.4: empezar por [sistema/00_INDICE.md](sistema/00_INDICE.md). El destino musical es lavalink-client. Las fichas de esta carpeta se ampliaron en su ubicación. Los documentos de evidencia conservan su contexto histórico y no acreditan implementación nueva.
+
 # Documentación para reorganizar OBEY
 
 Esta carpeta contiene instrucciones y contratos para guiar a Codex sobre la rama de implementación. El proyecto está en la raíz del paquete conjunto. La guía no acredita una migración ya aplicada. Para el alcance del código incluido, leer ../../LEER_PRIMERO.md.
@@ -42,3 +48,7 @@ Continuación de setups: [idioma y guardado confirmado](IDIOMA_SETUP.md) en `f41
 ## Estado vigente después del despliegue
 
 Los 63 setups están remodelados y desplegados en `f4acfac` (18/10/2026). El usuario priorizó después su facilidad de uso: continuar por [FACILIDAD_SETUP.md](FACILIDAD_SETUP.md), con una sola entrada `!setup` y recorrido por el mismo mensaje. Los incrementos descritos arriba son históricos; no implican que sigan pendientes 61 comandos. El plan global de arquitectura conserva sus tareas abiertas.
+
+## Actualización 0.7 · materiales y mapa de consumidores
+
+La entrega incorpora las doce familias A aprobadas, la extensión B01–B65, propuestas de plataformas, galería y deltas ES/EN. Leer [índice del sistema](sistema/00_INDICE.md), en especial los capítulos 16–19, y el mapa de [reemplazos CSV](auditoria-recursos/replacements.csv). Los 32 módulos tienen referencias de materiales actualizadas. El inventario estático y los hallazgos distinguen datos, lógica y presentación. No acreditar conexiones runtime, pruebas Discord, publicación o migración musical a partir de estos archivos.

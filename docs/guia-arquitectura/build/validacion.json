@@ -1,0 +1,28 @@
+{
+  "edition": "0.8",
+  "scope": "build-specification-only",
+  "baselineLibraryVersion": 6,
+  "sourceOrDependencyFilesChanged": 0,
+  "originalFilesRemoved": 0,
+  "originalMarkdownFilesUpdated": 9,
+  "newFilesBeforeThisReport": 7,
+  "buildLocaleKeysPerLanguage": 53,
+  "placeholderParity": true,
+  "localMarkdownLinksValid": true,
+  "inspectedSourceHashesMatch": true,
+  "remoteBranchRechecked": false,
+  "discordRuntimeTestsRun": false,
+  "externalBotSessionTested": false,
+  "newEmojiUploads": 0,
+  "changedOriginalFiles": [
+    "LEER_PRIMERO.md",
+    "docs/guia-arquitectura/INDICE_DE_ARCHIVOS.md",
+    "docs/guia-arquitectura/INSTRUCCIONES_PARA_CODEX.md",
+    "docs/guia-arquitectura/REVISION_DOCUMENTAL.md",
+    "docs/guia-arquitectura/modulos/architect.md",
+    "OBEY_Plan_Maestro_Arquitectura_UX_UI.md",
+    "docs/guia-arquitectura/sistema/00_INDICE.md",
+    "docs/guia-arquitectura/sistema/11_INSTRUCCIONES_IA.md",
+    "MATERIALES.md"
+  ]
+}

@@ -1,6 +1,8 @@
 # Plan de implementación de la plataforma OBEY
 
-Prioridad vigente del 18/10/2026: [facilidad de uso de setups](../docs/guia-arquitectura/FACILIDAD_SETUP.md), solicitada después de desplegar los 63 adaptadores. Entrada única `!setup`, navegación por el mismo mensaje, regreso y rutas básicas sobre los servicios existentes. Continuar las tareas globales pendientes al completar esta corrección; las entregas anteriores que siguen se conservan como historial.
+Prioridad vigente del 23/10/2026: [entrega 0.15 conciliada](../docs/guia-arquitectura/CONCILIACION_2026-10-23.md), con P0 de base/inventario parcialmente comprobado y P1 de continuidad/migración a lavalink-client como siguiente unidad. Los checkpoints anteriores conservan avances y fechas.
+
+Prioridad anterior del 18/10/2026: [facilidad de uso de setups](../docs/guia-arquitectura/FACILIDAD_SETUP.md), solicitada después de desplegar los 63 adaptadores. Entrada única `!setup`, navegación por el mismo mensaje, regreso y rutas básicas sobre los servicios existentes. Continuar las tareas globales pendientes al completar esta corrección; las entregas anteriores que siguen se conservan como historial.
 
 Preferencia de nombres del usuario: archivos por función, sin el prefijo `module-` (por ejemplo, `cards.js`, `configuration-service.js`, `configuration-editor.js`, `feature-registry.js`). La interfaz nombra directamente Bienvenida, Tarjetas y cada función; evita «módulo» en títulos y mensajes. Las futuras entregas siguen esta convención.
 
@@ -18,7 +20,7 @@ El maestro integral gobierna los siete antecedentes y recursos aprobados. El tra
 
 ## Decisiones y dependencias
 
-CommonJS/EJS/Mongo/Shoukaku se conservan. Manifest/servicios/repositorios/contratos se introducen en la parte modificada; sin reorganización masiva ni adapters vacíos. Discord mantiene autoridad de recursos; Mongo mantiene configuración/datos OBEY; Redis coordina estado temporal, locks y cola durable tras ADR. Los handlers Discord y HTTP llaman al mismo servicio y proyección de estado. Cada slice conecta permisos, persistencia, errores, HTTP/eventos/web y tests de ese dominio.
+CommonJS/EJS/Mongo se conservan. Shoukaku sigue en producción como origen de la migración a lavalink-client fijada en la edición 0.15. Manifest/servicios/repositorios/contratos se introducen en la parte modificada; sin reorganización masiva ni adapters vacíos. Discord mantiene autoridad de recursos; Mongo mantiene configuración/datos OBEY; Redis coordina estado temporal, locks y cola durable tras ADR. Los handlers Discord y HTTP llaman al mismo servicio y proyección de estado. Cada slice conecta permisos, persistencia, errores, HTTP/eventos/web y tests de ese dominio.
 
 ```mermaid
 flowchart TD
@@ -128,3 +130,12 @@ El usuario pidió remodelar todos los setups antiguos y confirmó «Código y me
 Navegación inicial completada localmente en `eadc547b0684ded2c9cca65cc685362c518ab660`; [evidencia y límites](../docs/guia-arquitectura/REMODELACION_SETUPS.md). La entrega posterior de idioma se registra a continuación; el resto conserva sus tareas por comando en todo.md. No se ha desplegado este rediseño.
 
 Idioma remodelado localmente en `f4163778677b3b893bde2308c1a328e8d24111e5`: [menú/servicio y evidencia](../docs/guia-arquitectura/IDIOMA_SETUP.md). Dos entradas de 63 implementadas; 61 pendientes, siguiente setup-embed. El nodo HeavenCloud aportado no respondió desde el host y no se incorporó al runtime.
+
+## Continuación de la edición 0.15 · sin reiniciar el plan
+
+1. P0/G01–G02: recepción, hashes, versiones e inventario estático + loader slash verificados. Completar propietarios y registro/aliases prefix; fijar paquete exacto de migración y CI. No cerrar por el CSV de candidatos.
+2. P1/G03–G07 y ARCH-07: reutilizar fachada musical y contratos; migrar por recorrido a una autoridad de cola lavalink-client. Aceptación: fin/skip/stop/autoplay/manual, permisos y recuperación de snapshots sin duplicación; doce IDs y favoritos conservados.
+3. P2/P3: configuración, bienvenida, tickets, moderación/logs y materiales/i18n por recorrido; usar fichas existentes y audiencia/recibo reales.
+4. P4–P6: votos/premium sandbox, escalado/recuperación y ampliaciones con contratos y límites. No activar cobros, VPS, comandos o recursos por leer el ZIP.
+
+Esta recepción no cambia runtime ni dependencias, y no acredita aceptación real. No restaura tests/scripts retirados; continuar con comprobaciones temporales pertinentes. Fuente de puertas de salida: investigacion-20261022/08_PLAN_DE_EJECUCION.md.

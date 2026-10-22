@@ -1,0 +1,675 @@
+surfaceDirectory,path,sha256,literalNameCandidates,runtimeRegistered,acceptance
+commands,commands/Administration/addrole.js,b66f756087642b9b3e38949adb237478b448bf6a0dbb9e3a76119e7522bf56c3,,not-verified,pending
+commands,commands/Administration/addroletobots.js,449d07f9431eda20c743f7f5fbfae3d68a50c824bfe8558b1ec4da117b2c495b,,not-verified,pending
+commands,commands/Administration/addroletoeveryone.js,e6c2489bf60d8da4bdf9fa2917063d147bc090b979ed45b3e2d967a967d38ebc,,not-verified,pending
+commands,commands/Administration/addroletohumans.js,7ff2e5b146dd46777414eb42a8812526d4c66889e8ca5805e7da14badcd076bf,,not-verified,pending
+commands,commands/Administration/addroletorole.js,a22d8f1c60a3a7396783f178d41a2c13f9bfdd5aab2f10076b8426cc8b2bda8a,,not-verified,pending
+commands,commands/Administration/archivethread.js,2082f90cee92bed62500614cc32d990f038083b02cae8ce3f5f9386c561c3b0c,,not-verified,pending
+commands,commands/Administration/ban.js,89c50ad0d6be230c2569870b2ad4255e3731efa11d5158bee661180bd78846ec,,not-verified,pending
+commands,commands/Administration/bans.js,e466376d58b877121131f78c3f882dcb9f4babd350f4ef898a632ea1a8b17bf4,,not-verified,pending
+commands,commands/Administration/channellock.js,c6f702ce526f680d18d0eec191a18d35d9340ef6d1b37f60861b6478ae000dae,channellock,not-verified,pending
+commands,commands/Administration/channelunlock.js,d32a2ddfdf6ad29302d00fee8d88c310ad195a2381626a5aa6da2c8d6af1e8e0,channelunlock,not-verified,pending
+commands,commands/Administration/clear.js,a1e17e83b256639b8da2c1a2247e3f51f7b73011a5c8c3a9dad3b0064c89e46e,,not-verified,pending
+commands,commands/Administration/clearbotmessages.js,34fadf99894859fbb5222d70f7c81b2bda9d3a9eb5ee9f8e631e95163d9ea54d,,not-verified,pending
+commands,commands/Administration/close.js,0b569724056f1b7eaa48354ae5919e3093a8c1f4834df917314ab30d8f75f48f,ticket,not-verified,pending
+commands,commands/Administration/copymessage.js,c440e880cc0e9f5d4ee1e5112c161ed09e3be6c127004a1be4d26b4ee045d5fc,copymessage,not-verified,pending
+commands,commands/Administration/createbackup.js,1f18318c9ba11c4af64d52f78f3f104d8bffe36505dd05c8716200412c886e6b,createbackup,not-verified,pending
+commands,commands/Administration/deletechannel.js,c34d7886887f43f977348421f2d18029f4765e1da7435a29e955b74245f20e4a,,not-verified,pending
+commands,commands/Administration/deleterole.js,5af629442781e20de2fefc67768723a828b31a44afa4125b03f9ccf8ecc5cedc,,not-verified,pending
+commands,commands/Administration/deletethread.js,d81e07303aeba976b6f696a5a69da43963f6f210c5233c3fc4d1a019d07eb711,,not-verified,pending
+commands,commands/Administration/detailwarn.js,410d418776bcbed146a54b15639d3ef49af4b5fe889840e60f494fa1afea8470,,not-verified,pending
+commands,commands/Administration/dm.js,fc8aee048df90a9f9cebd45395de90c856dcf628252aba7149d63f1f37bb393e,dm,not-verified,pending
+commands,commands/Administration/editembed.js,4da2d1abd08c3bfdafcedbc223eeee70dcd80f114b17e99d901f911632eea806,editembed,not-verified,pending
+commands,commands/Administration/editimgembed.js,5a890c1e33ba7ceef8dff6a99797556c86a736f62397e922674e763d851a2cf2,editimgembed,not-verified,pending
+commands,commands/Administration/embed.js,436ac58a2f16e9a5d3ffc30d2ee98e0cae8a1f79d1e6b84a28b7cd5993206e75,embed,not-verified,pending
+commands,commands/Administration/embedbuilder.js,c77dcd5598831d87ab8e5994254be45e11478e43b4e01062adfa9d2f6c1dd9e0,embedbuilder,not-verified,pending
+commands,commands/Administration/esay.js,2e2e977255944966b415303aa7572fc9daa8eb44503f7cbaf2132a64c0e92c45,esay,not-verified,pending
+commands,commands/Administration/giveaway.js,941230d7d26c82b09fbbc74a9f6093213e251255310cae741916c2d73121ee18,giveaway,not-verified,pending
+commands,commands/Administration/globalwarnings.js,a4796dfe9d44efff1aad601993a0cb32d352a391d1d51e909f3d2db8017f34cc,,not-verified,pending
+commands,commands/Administration/idban.js,eebf567ca381d671e145cdc98639be4df98b1abc7a7c256e128610737b239263,,not-verified,pending
+commands,commands/Administration/image.js,e0dfe660220a4ccea3830fb86dbe9ad5ce2e391d557de6c9c784307255bb3ddf,image,not-verified,pending
+commands,commands/Administration/imgembed.js,5af29a731ca5438251d8b5f8a59e34ad2a4cdc74e8b121ddba9c22168d57213f,imgembed,not-verified,pending
+commands,commands/Administration/instantclose.js,9a7051a4095c8b05b70d579a465ab07d549469cfc7fe45e3f104371f6158ed36,instantclose | User:  | State: ,not-verified,pending
+commands,commands/Administration/instantdelete.js,fa7bdbc3037b9e42ba1a69c80972b5efee477c63cf041396f10264dca233d979,instantdelete,not-verified,pending
+commands,commands/Administration/jointhread.js,35916bbce533f2c22be2a2a83d35642ff954c6405abc4fcac1ba3eb0054c3a97,,not-verified,pending
+commands,commands/Administration/jointhreads.js,f067cfd4b0d6f65caaa8441d4754025e892fd3341e178b8b7780246090827a20,,not-verified,pending
+commands,commands/Administration/kick.js,77e0391a8fc995a4140e98be68ef9a5de781dcb246ee2ed9c758fb390b5127ed,,not-verified,pending
+commands,commands/Administration/leavethread.js,9ea2600d6cf9e27dacc241b42bf302832780eb7af4001228595236935212fb32,,not-verified,pending
+commands,commands/Administration/listbackups.js,8db78f39113a8186178f03af74acf5d911094687b01c73b01cdd5a560170451a,listbackups,not-verified,pending
+commands,commands/Administration/listbans.js,f39052fa3ca45c52939ef8145eff8f71e59a5107325aa31441c1fb4289ced0aa,listbans,not-verified,pending
+commands,commands/Administration/loadbackup.js,9fedc691e4df192680c229bb3d4ca519c9799d114b3c009186d64891246571b3,loadbackup,not-verified,pending
+commands,commands/Administration/lockchannel.js,9e128a135ba35f5c543af2d80c93a1b976b7a414f77b319136faa416e10a88bb,,not-verified,pending
+commands,commands/Administration/lockthread.js,97e5efc8ab4f43e6a4f5b18ca7ccd7dc87710f42f41bd62e579688285689c746,,not-verified,pending
+commands,commands/Administration/manageinvites.js,916ce91b29ebe1455d3842a54e89c93defe1de7213ddb979f04ae9ddab0e6989,**CURRENT INVITES:** | \u200b,not-verified,pending
+commands,commands/Administration/mute.js,f54b2fbc1e3304794c3d53557b0640e31cf1dd76b4d524040cd63f31ef077eab,,not-verified,pending
+commands,commands/Administration/nickname.js,35d225a4ece12b4efa30d5993a9e87d67c43658dcf6e9f96ebfc130a4df53f96,,not-verified,pending
+commands,commands/Administration/permamute.js,c8171f6c284aea61530b77dfd2783aa2d9c1c9b698caabcd08127d382abf6751,,not-verified,pending
+commands,commands/Administration/poll.js,eefbf9f3052bbc7f1347a32c050b4c3fe9d9b5fcc10fd5460710baf5d3f510ac,poll,not-verified,pending
+commands,commands/Administration/react.js,ecaf63fde026e55ce58ecac437df15ec7c9a37b2071793eafa0b994a723859d7,,not-verified,pending
+commands,commands/Administration/removeallwarns.js,857fc2d689eb21b6c60e95b34a188cdbb0e97cec2eabb6e795886c70626f5b73,,not-verified,pending
+commands,commands/Administration/removerole.js,02ac8d2f84852cd2b48da53e5fab1785be86f7371698277b58d88b8b7be01b6b,,not-verified,pending
+commands,commands/Administration/removerolefrombots.js,4fb3d88470bbba370bb01aa6a74441bae0b3c4a1b8e1af3fa627d557fa5ff53e,,not-verified,pending
+commands,commands/Administration/removerolefromeveryone.js,31aaa68a038a92d33fdb4221e1c84c2ea60a904f84720ec66016676f2e06d974,,not-verified,pending
+commands,commands/Administration/removerolefromhumans.js,6aa5fd2544a761c1989692439be65651100e1bfb5ed596c87eb53e2fa977ace3,,not-verified,pending
+commands,commands/Administration/removerolefromrole.js,8538bf7259d8a3f4a043e756b5a1e0ba6a5ad0712141f1ad616bd295da989f16,,not-verified,pending
+commands,commands/Administration/removetimeout.js,6adfb26d0199e4a131ba18c732804b9b56683952d45f428b17df9098b7cd6b94,,not-verified,pending
+commands,commands/Administration/report.js,8a676320660f9d1632e2d91368a0661fa1e3bb56436a2c7877204dcbc2bddb01,,not-verified,pending
+commands,commands/Administration/say.js,be006b035a6ccf4b6a6250c550be045f541e907610a23daee9ee9c8a633ce4d0,say,not-verified,pending
+commands,commands/Administration/setautoarchiveduration.js,b46bd80014b57ab2c8cb4508b31334e9a56e30ff3f5bb4632de5d76067a4bd2b,,not-verified,pending
+commands,commands/Administration/slowmode.js,7826c5a0673a61e6adf318cb7471aceb17852a4f7caf1f753e217566e137b99c,,not-verified,pending
+commands,commands/Administration/snipe.js,238c39739faab8b6e88a32f5adc286f673ba9945aae7c57b8d2aa33da5982fc9,snipe,not-verified,pending
+commands,commands/Administration/suggest.js,a8cb4103ebb4d5203751b7644ab26c07d3137d5ede91201e43676b4500b17c6d,,not-verified,pending
+commands,commands/Administration/sync-invites.js,90f8359435137ce7304461a9f4feb645b196f6e20dc556ee1858ed683dff172b,,not-verified,pending
+commands,commands/Administration/tempmute.js,8e3b191f9570a205008b2311b24030e9a85d99435ae3c97fb8ae2ac5c0f7fef2,,not-verified,pending
+commands,commands/Administration/timeout.js,2d08ae2bf5dbddd56946dd640c4dbc937519765fcde7696645017927ae496b7c,,not-verified,pending
+commands,commands/Administration/unarchivethread.js,54145c72590ea19ba71aaca38f4a942d8f763b117cf160d692e9715183677a68,,not-verified,pending
+commands,commands/Administration/unban.js,483d2d80ec09f8bbf4bcb688c82b2d92368d29ca364088fa9871707e887afafb,,not-verified,pending
+commands,commands/Administration/unlockchannel.js,da924fe54ca51c4ead21ff901cc7d794c23c352e05551e892f943ec556b31eb2,,not-verified,pending
+commands,commands/Administration/unlockthread.js,e1faa2f70ad20f88d6d3967c4380d215da024b70dc335d585e26ceddd5c948d9,,not-verified,pending
+commands,commands/Administration/unmute.js,5e295bbe34895ac79888e9d9627327f2688c75d3e5bb258f304909ec1b65d73c,,not-verified,pending
+commands,commands/Administration/unwarn.js,53631de9e1e08de4688278d3b83a03c227b5cac7e2474986b81b272f53f773ce,,not-verified,pending
+commands,commands/Administration/updatemessage.js,7143b3c8f74b34adfb9856647db0513917818eac98775641b93486e54d97babe,updatemessage,not-verified,pending
+commands,commands/Administration/useridban.js,9c152728519c6bac0a7e517dbb3821cb5312300fe075ac0a965db67164c9b510,,not-verified,pending
+commands,commands/Administration/warn.js,c2c60df312d0066a53837b59b2a8ca80530b4ede8a0a833a0e08aad8fa3b9797,,not-verified,pending
+commands,commands/Administration/warnings.js,b23da9f7dadc1d782ebd1d95a49711c4a7af75f0fb3ac2f3f3bc509a5e2970aa,,not-verified,pending
+commands,commands/Anime-Emotions/a-agree.js,287eb75d338729395469022281727a60bbb922d8cceb4919b6c78415d77e91de,a-agress,not-verified,pending
+commands,commands/Anime-Emotions/a-baka.js,1a20b73bf315e4c2a75ce2405cd7b1b397455155af402980e2a75b910cbf4123,a-baka,not-verified,pending
+commands,commands/Anime-Emotions/a-bite.js,f585783214791e24e04f30618ebeb22af5fcfeb0060a8a7a8ce391dd05aea232,a-bite,not-verified,pending
+commands,commands/Anime-Emotions/a-blush.js,5ffd187f33cb458fdc6907af51315c37189684fcd65fbb193e8a29acf90c2d2e,a-blush,not-verified,pending
+commands,commands/Anime-Emotions/a-bonk.js,8146b6b81f09375dc8fbfe986ed8d5a6056f4fa9c5e317ac22ca2ca1d2c86e0f,a-bonk,not-verified,pending
+commands,commands/Anime-Emotions/a-bored.js,5ec40199b33f6f31575a40df77160a291898de43322e18c0614055429d200689,a-bored,not-verified,pending
+commands,commands/Anime-Emotions/a-bully.js,532599d4535cb6b13935f1030c07e61055905eda340b29130a1e96e7b0bf76c4,a-bully,not-verified,pending
+commands,commands/Anime-Emotions/a-confused.js,562d40498c2c47add2ccc42db64648e666efb8795dad167c60951f2d5dd3e6fd,a-confused,not-verified,pending
+commands,commands/Anime-Emotions/a-cry.js,b767cc59dfd2403ead8951683fd603ef92a0fa97606ace6d8e2617c36bdc7c7a,a-cry,not-verified,pending
+commands,commands/Anime-Emotions/a-cuddle.js,1967257884c10ce518d3536ed32e174148f32a9c59dd7ef82cbe6cf9c11bdb99,a-cuddle,not-verified,pending
+commands,commands/Anime-Emotions/a-dance.js,bd17bf0fa2b27725009d066bbaefb1ac70638165c46ae164fa484f81d222b049,a-dance,not-verified,pending
+commands,commands/Anime-Emotions/a-goodnight.js,11f34afafb3bbbf9f274d23c1eaee7245dc41c028d4e381696f953a162e54ffa,a-goodnight,not-verified,pending
+commands,commands/Anime-Emotions/a-happy.js,b565cf1cecbb7f1e3827f2f5ec23af5534cf490d819a0294e49289dc8013c637,a-happy,not-verified,pending
+commands,commands/Anime-Emotions/a-highfive.js,4292b59170ff37b25cc2776936a86a620cec04f7cbc566d998ffff080c8b27e0,a-highfive,not-verified,pending
+commands,commands/Anime-Emotions/a-hug.js,76589c213f9eaa0ee6fc62d94989fd3d782c6ed7cc950f41dd442a6d8922fd5c,a-hug,not-verified,pending
+commands,commands/Anime-Emotions/a-kick.js,237543f00e87b5f8460bed1ec8b180588847460351b7d01269d40d0a54fee5b2,a-kick,not-verified,pending
+commands,commands/Anime-Emotions/a-kill.js,8ba9095bbecba1b76ee9182f1dc297d2a09da8414996f69ae3e8d2da2a396897,a-kill,not-verified,pending
+commands,commands/Anime-Emotions/a-kiss.js,5aee5184b322777f429b9ab442a9767ef184f6146cae4eb5a844ee0403c4fac6,a-kiss,not-verified,pending
+commands,commands/Anime-Emotions/a-nervous.js,dd57b60c0e7a6ef2482e68627309da2297fffd4d6e9149005e5d58eceba87eb8,a-nervous,not-verified,pending
+commands,commands/Anime-Emotions/a-pat.js,0e9da54714d82a6f313c95a1cc47ac39d824a32fd3cccbb7e791a82ead360168,a-pat,not-verified,pending
+commands,commands/Anime-Emotions/a-poke.js,818f45dfe485c3e37a381ed9a206435b06858b335ad882110877af48f11857bb,a-poke,not-verified,pending
+commands,commands/Anime-Emotions/a-punch.js,036eb6c1e2d5449dcf98fc60a6862565ca69337c760865d2e079b3ab5e68f469,a-punch,not-verified,pending
+commands,commands/Anime-Emotions/a-sad.js,da970c0178f2cd287cc7d85533b435a93efb4bd516e59c0d489ca2686c9e58fc,a-sad,not-verified,pending
+commands,commands/Anime-Emotions/a-scream.js,26874dd2db835e1710c6ffdb8cf8d8cbe527edb2443408b02102f02d23db8f7d,a-scream,not-verified,pending
+commands,commands/Anime-Emotions/a-slap.js,cbf9bf28e2f96e89544e1809ec9dffc63e2a563896391ea9f1d91df830fff52a,a-slap,not-verified,pending
+commands,commands/Anime-Emotions/a-smile.js,6c974bcd4a1aaf2f75378c8ff8bd5739ebb844f11cb31ecaa4da34a8c5b62b59,a-smile,not-verified,pending
+commands,commands/Anime-Emotions/a-stare.js,51bc2ebbf677928b71599aaaac713cf9f80f3da476f9d8d662d76cbfc847e02c,a-stare,not-verified,pending
+commands,commands/Anime-Emotions/a-thinking.js,7e1b9193c1a63e1efd0b6f5efd61290c5959527ca2d186d489b4806bd9922300,a-thinking,not-verified,pending
+commands,commands/Anime-Emotions/a-wallpaper.js,e363e0d3f03e0b8b15cfdab53aa8317eabb4ea0122a878b58f25a83d747a4528,a-wallpaper,not-verified,pending
+commands,commands/Anime-Emotions/a-wave.js,9f62a4a0458ce7d72fe4e8e51e6387f92b70faf4c1c28779afca06e1b0f75a34,a-wave,not-verified,pending
+commands,commands/Anime-Emotions/a-wink.js,1b7fccd70138bd9e1c205a992b150f78980777d92983702b39c48f13f9a7d8d2,a-wink,not-verified,pending
+commands,commands/Anime-Emotions/a-yeet.js,9c553e981db02e6119e7b97e3a18ba469de364eed9f1d47136ec96e231860fbd,a-yeet,not-verified,pending
+commands,commands/Anime-Emotions/a-yes.js,fb3e22d5036524389aa67b53e20a4508b51d273cb5167a21d76ff7414df50a13,a-yes,not-verified,pending
+commands,commands/Anime-Emotions/a-zerotwo.js,eb36eb14d0106879fdb2c24d8f710cadf5890d7b7f3d91149110df5a2279ee66,a-zerotwo,not-verified,pending
+commands,commands/Custom-Queue/savedqueue.js,5fef342ab2cd9ea7e63bf4f710ae8a9c0279b5cb7de47af533200a15754aab1d,savedqueue,not-verified,pending
+commands,commands/Economy/balance.js,42793daaf72e451393c93ac525b2f4fdf73dd03cc30b01aeecc09c8a91ac7083,balance,not-verified,pending
+commands,commands/Economy/bank.js,074c4dbc8dcec04e1c4a9010c51fd4a16410c8a1746ad7fb9797750d3e5286d7,bank,not-verified,pending
+commands,commands/Economy/beg.js,f3f0d5226f93a6a1307682920b9a1a022f886a3096056761d59f61a873382c82,beg,not-verified,pending
+commands,commands/Economy/blackmarket.js,7cf1c64b6aca0225fdae0ec650eb5f1dd7e3e9dd878a195badfb7ec5afe2e531,blackmarket,not-verified,pending
+commands,commands/Economy/buy.js,0ff80d90339100b88f39c9cf3743e089cea51c63e70bcb31227f7f179daf3490,buy,not-verified,pending
+commands,commands/Economy/coinflip.js,becb2ff2851f2b1e919b16530059eaca20ea502d1764ceb0583db7dc6338fc7e,coinflip,not-verified,pending
+commands,commands/Economy/crime.js,5ec41114b9dcf6b3af30df38ddde2988315eef11e19f22c445ae414aee5f2cf0,crime,not-verified,pending
+commands,commands/Economy/daily.js,28dcc20bed7475ec9dedafbc908368025964c1f900f9fcd3e5d631d55a58bede,daily,not-verified,pending
+commands,commands/Economy/deposit.js,4a9b65fe1dc6764f7d931b7111940cc1937bbc7158dc4c92399cf0bc61ee9096,deposit,not-verified,pending
+commands,commands/Economy/dice.js,61427abe5fc4ea2a3f07976ad62273c3453ffb1633bd113a944138b60afd830a,dice,not-verified,pending
+commands,commands/Economy/ecohelp.js,2a4af8dd7ee4fcf6a1edec9d036b465fd2c5d6146ae9c6bb98a3a471399adba8,ecohelp,not-verified,pending
+commands,commands/Economy/ecolb.js,ded667d7b58cf827527424aa3489a8401125bebd15835dc09e89f85772bd358b,ecolb,not-verified,pending
+commands,commands/Economy/hourly.js,246dd5f8eb19b5cee01f672640988f989210f04bbf47b6c57d1d2c9f95688bc2,hourly,not-verified,pending
+commands,commands/Economy/inventory.js,8622aeb94ef6620fb91b79cd06bf204a40216f5eb6dfee68c130b9464cb1de3a,inventory,not-verified,pending
+commands,commands/Economy/items.js,e351611f7a21940f6f1bec364f5077144026c5d13b9cfc9c5f40ee436b87703f,items,not-verified,pending
+commands,commands/Economy/monthly.js,b8fd9fba715a76b2096696e80745c86532fdc2127b0b1e97a686763db7c5951e,monthly,not-verified,pending
+commands,commands/Economy/pay.js,0ea6756d50ca8c2181e3ede0033901848679abf3c108329ba9a17a79c542cf1e,pay,not-verified,pending
+commands,commands/Economy/profile.js,388edf6d7319162c31d4e128366c4e8ea5c4ecc471a8abf11bcc9fba43ba03ed,profile,not-verified,pending
+commands,commands/Economy/rob.js,f04d200ba3cba221913bd33491cfb387e3ccd228886d896ff060641fd0f1a2b7,rob,not-verified,pending
+commands,commands/Economy/sell.js,4b78cb214240016ff830467bf0b6c02d2eeb1a884d06659b080e7db9539c0b26,sell | To sell items:,not-verified,pending
+commands,commands/Economy/slots.js,c0f2cd8c7b99780b4e3e4e215fa4646d6cc413dc85c14eafa9de301328531e4c,slots,not-verified,pending
+commands,commands/Economy/storeinfo.js,b361584e65ed9e16d7a239dcb17a82c3afcdb82c74e22cef6cea0193c1972b02,storeinfo,not-verified,pending
+commands,commands/Economy/transfer.js,099ae3104a13bbfbd19ab52dfe68d4ca020008f45eac9cd62e8a7c14045534d3,transfer,not-verified,pending
+commands,commands/Economy/weekly.js,b0ba9e3e9b885edb6525d4d64dc5a74d409ae37669dc805903a9524b5e690a66,weekly,not-verified,pending
+commands,commands/Economy/withdraw.js,9f1d2f7ecb2064f9c3a2d26c47fa891e179dec01c47ce73b96d745d97204875e,withdraw,not-verified,pending
+commands,commands/Economy/work.js,4ca48fc8691e71616fa8f36e3c53bf1ca7e3a9496ac0bd0f0039268d6804ce52,work,not-verified,pending
+commands,commands/Filter/3d.js,61b345ebeb94015e9df5e1dfd87085ea67f5a925c6fe08c1a0595b6a06dfde5c,3d,not-verified,pending
+commands,commands/Filter/bassboost.js,ca441e6169e225ab0870a6e716439bcff2d0e0ef12cce40d69bff909d7ce4824,bassboost,not-verified,pending
+commands,commands/Filter/china.js,eeaf9114a8111cc83ee526998b360587e72723a820e9cac7e8ea0dba510a4f8c,china,not-verified,pending
+commands,commands/Filter/chipmunk.js,8ec47059aa051782598e94179e3f2e41c768d3eb149e726b20eac571da2abbd3,chipmunk,not-verified,pending
+commands,commands/Filter/cleareq.js,5234369247703f8181dc9fce1b59262ab9478a5bc137445f72753984bc80352a,cleareq,not-verified,pending
+commands,commands/Filter/clearfilter.js,45ecad856d9cd03eda3079a6174bbe7788637d465b14b402f0b248482cd4107c,clearfilter,not-verified,pending
+commands,commands/Filter/darthvader.js,9a05de42a32a826288e9d9508020f70d15618d7156fc5105ac60062edf18d25b,darthvader,not-verified,pending
+commands,commands/Filter/equalizer.js,0f784896a9338be06f3e16eeb05e889b204a54eb2c5773fa74b919b7fe337c46,equalizer,not-verified,pending
+commands,commands/Filter/filtros.js,7b582743511393bf5a89b8a67e2a2e17ca328534e8966bd12c73c4eb9b7fce98,filtros | Filtros de Audio,not-verified,pending
+commands,commands/Filter/nightcore.js,4ef5a39e6ea5a4c5d82c29e36065f7b9e1c9fb9a531c812730856d124e5cc094,nightcore,not-verified,pending
+commands,commands/Filter/pitch.js,1525852fe338ea959ea8793c6556bc4786a9d004923a217c764577adcc5e621c,pitch,not-verified,pending
+commands,commands/Filter/rate.js,fe20f2117edc3b72e6847f7b21b97a396d46f30c6eb65dbbd854bd2ca2e26a19,rate,not-verified,pending
+commands,commands/Filter/slowmo.js,1d5965eb73ea470fddb869af2e63944d33e847532491be7e2f0a3f1de556faf4,slowmo,not-verified,pending
+commands,commands/Filter/speed.js,04003102e40a7712f6978fd7291502d0a2b55d19840ac58f21bae7a997adae61,speed,not-verified,pending
+commands,commands/Filter/tremolo.js,c5635d192cdda76c81c664035de73888984fcc8c36d3c32c1a0149c0f2b01c33,tremolo,not-verified,pending
+commands,commands/Filter/vibrate.js,f9ab9710ae4c14dbf6ab939961c107c95ec4e2f3e7b27244143980e9cfdb996f,vibrate,not-verified,pending
+commands,commands/Filter/vibrato.js,8e6d4893e6a5b21cfc291df85540d0346d4ace46e1f709b55e03818e10f9dc22,vibrato,not-verified,pending
+commands,commands/Fun/8ball.js,c913fe20d157c673e0cfde7e33aff7c4bd192ddd859b1b9d9881ef8e20b6bd90,8ball | Question:  | Asked by:  | Reply: ,not-verified,pending
+commands,commands/Fun/abandon.js,bc6483dac375a6471a13ff152e23f4fc3d464c21c58970063d6302f1e4f97f56,abandon | Obteniendo datos de imagen... | abandon.png,not-verified,pending
+commands,commands/Fun/affect.js,83a19a94cd343dcc2c93b573cd34cace85fd2ac99d72e86722fee799a2e4e15a,affect | Obteniendo datos de imagen... | affect.png,not-verified,pending
+commands,commands/Fun/airpods.js,5a26c02424eb5ba9ff545600369685d61ee3b02f0805a54dc9f07b3c8d364e28,airpods | Obteniendo datos de imagen... | airpods.png,not-verified,pending
+commands,commands/Fun/amazeme.js,fc73e773b7515c7e797bbbb3b7fa8d180e5835448d27b4a70ec44f057576ba7e,,not-verified,pending
+commands,commands/Fun/america.js,8d421f0236ccac8ee3576cf238d53bbee04201a0e3ab12835b34af9b23924162,america | Obteniendo datos de imagen... | america.png,not-verified,pending
+commands,commands/Fun/armor.js,a692521daa29bf748b1b724c0f708e0264c8135cfa4a3e636d1cea6039d59426,armor | Obteniendo datos de imagen... | armor.png,not-verified,pending
+commands,commands/Fun/beautiful.js,3f10cfad6a3f24ef93d31fb792b291999d8216570e5054050594a46d44bea296,beautiful | Obteniendo datos de imagen... | beautiful.png,not-verified,pending
+commands,commands/Fun/bed.js,7fa756313d6f575d53a3adedb3b46f8aa4e6fd02ae29ccb823417a319a3da9ce,bed | Obteniendo datos de imagen... | bed.png,not-verified,pending
+commands,commands/Fun/blur.js,bc4ee1bf933d9ecf70f591ff3e93e1bbb4c512e93a3bbd980dcffe32473e2efe,blur | Obteniendo datos de imagen... | blur.png,not-verified,pending
+commands,commands/Fun/byemom.js,5dafae099bffb11af678b2cbd4a725cdbad423d3875220b3116784c7e616cddf,byemom | Obteniendo datos de imagen... | byemom.png,not-verified,pending
+commands,commands/Fun/cancer.js,0b0ee998f88c5474422706ec6cf1bd336515d10a799d20bca6d831e52616da25,cancer | Obteniendo datos de imagen... | cancer.png,not-verified,pending
+commands,commands/Fun/changemymind.js,3546e3cdf19510916f4deb7efc6b09c906b3fd6dc97e28c8f9a5c5989a4125a3,changemymind | Obteniendo datos de imagen... | changemymind.png,not-verified,pending
+commands,commands/Fun/chat.js,3c48a61e914f70bf47d4e2eb0f0fefd49d0b64cd9faf7c8159f5f9a94267b9ee,chat,not-verified,pending
+commands,commands/Fun/circle.js,c7e1166f20ebd7fb788fbedc12682f22f301cdf7be8ae303f8f589c664f59c1f,circle | Obteniendo datos de imagen... | circle.png,not-verified,pending
+commands,commands/Fun/communism.js,8acfc9b6f7a951ba96d6ec88f8a281bc4f953031ff2767c382fd08c5e4002ee8,communism | Obteniendo datos de imagen... | communism.png,not-verified,pending
+commands,commands/Fun/corporate.js,2c8956a270bee9baddc500671b86871e0c1c3f39d52f892b2b40f0f1136ae456,corporate | Obteniendo datos de imagen... | corporate.png,not-verified,pending
+commands,commands/Fun/cry.js,ba813cb5550825f891d52022a419a7b01c963a1bb33c2c7125b1d5b1a5178afc,cry | Obteniendo datos de imagen... | cry.png,not-verified,pending
+commands,commands/Fun/dab.js,d68f27d4258e625f192783d8bcce4d23cb347a908e6dc305e02cf66ab5ad7afc,dab | Obteniendo datos de imagen... | dab?.png,not-verified,pending
+commands,commands/Fun/delete.js,8e8049a829a50a8188b804e42595d25855435a39837bb269067324fe8c07c916,delete | Obteniendo datos de imagen... | delete.png,not-verified,pending
+commands,commands/Fun/disability.js,e4eba3d7e64087456367db7379bc5e4e0847ba1f2b6fe90415053da758fe9501,disability | Obteniendo datos de imagen... | disability.png,not-verified,pending
+commands,commands/Fun/door.js,7335763c9b721bafe60d9f6dc6c378bc6ff70af6e092ed6bee1f9c7be7af6d7d,door | Obteniendo datos de imagen... | door.png,not-verified,pending
+commands,commands/Fun/drake.js,2017265b6df82c18919e43fdcd84168139ee183da88e4baa830d58819d8d600f,drake | Obteniendo datos de imagen... | drake.png,not-verified,pending
+commands,commands/Fun/egg.js,e68f4ab086e3b26933aa949aec0a897b0d2e2b53c1a8c422b9dc207d9cac053c,egg | Obteniendo datos de imagen... | egg.png,not-verified,pending
+commands,commands/Fun/emergencymeeting.js,3471c6e6ebb0889e287e3e9d9d4f35d59331b9bb4ce71f1313331c5d4761aed0,emergencymeeting | Obteniendo datos de imagen... | emergencymeeting.png,not-verified,pending
+commands,commands/Fun/excuseme.js,649035af028922a03f7f3bcfb95d921a0da62fab66202c2ea6f44cc7a71c8540,excuseme | Obteniendo datos de imagen... | excuseme.png,not-verified,pending
+commands,commands/Fun/facepalm.js,dca5ffbf8047fd21989513ee776de6d988e3319bf07e34ab7141838955864edc,facepalm | Obteniendo datos de imagen... | facepalm.png,not-verified,pending
+commands,commands/Fun/fact.js,e32f98850203e0f092f821b2ade9abb669b6337d2b77b6ecda2cdbdf2c9197bf,,not-verified,pending
+commands,commands/Fun/facts.js,8cf89701330db6f06d91a19fa18c29c4b4484f2cd20362ec410ad0f6279015bd,facts | Obteniendo datos de imagen... | facts.png,not-verified,pending
+commands,commands/Fun/failure.js,c7e349c1e41da20ad058096ff0d2053f2bfcf80d9e80ec6747710eccdac19ac4,failure | Obteniendo datos de imagen... | failure.png,not-verified,pending
+commands,commands/Fun/fakenews.js,d54d47a101662404afcfac0bab8c5f76ddf418a41551cf052c108ac3fdd5be41,fakenews | Obteniendo datos de imagen... | fakenews.png,not-verified,pending
+commands,commands/Fun/floor.js,a9a7fd1ae0126a5015e609814f1d2ef1746df7f70dc9e57ca307ca61e1ef3873,floor | Obteniendo datos de imagen... | floor.png,not-verified,pending
+commands,commands/Fun/godwhy.js,888f387aa5d9ebd6fd1b6b00ce48d72abcd0e1b0a46b889962c6be60ea8fc056,godwhy | Obteniendo datos de imagen... | godwhy.png,not-verified,pending
+commands,commands/Fun/greyscale.js,00561cbbc179136cabc63d55db3738f2699c8ccf93483c21b928779a95771f2a,greyscale | Obteniendo datos de imagen... | greyscale.png,not-verified,pending
+commands,commands/Fun/hitler.js,83811a1ccea9f0a73fca2049273873b73fbc4541b2cc33c8bfa576b16f811a78,hitler | Obteniendo datos de imagen... | hitler.png,not-verified,pending
+commands,commands/Fun/invert.js,d1c18035f1495c1126257bd479b7c9b386fb00d8be4b68b685f3ad45dc0e4910,invert | Obteniendo datos de imagen... | invert.png,not-verified,pending
+commands,commands/Fun/ipad.js,8d8dd2bfa6373f8f86e23b2238162bee9b789768058a7db12a00cea19a0e7bb8,ipad | Obteniendo datos de imagen... | ipad.png,not-verified,pending
+commands,commands/Fun/jail.js,7b3c6aeb04d6ff40aac6cb3da51ffd94e3edfe782d9e16e87847d78ec8da70b8,jail | Obteniendo datos de imagen... | jail.png,not-verified,pending
+commands,commands/Fun/joke.js,3055783f78fc347329645fe279e904111a4cc070b65f64c6d3ba46da98e9eec1,Joke,not-verified,pending
+commands,commands/Fun/jokeOverHead.js,cf7bf98e7d4fc574c7da1c24212782fdeaec35828624c983add5a24c8b87021b,jokeoverhead | Obteniendo datos de imagen... | jokeOverHead.png,not-verified,pending
+commands,commands/Fun/keepdistance.js,9515f1f13be3c5f649e2cfe81b11a5f1df1d8a0149042db0c62617b81976ac7c,keepdistance | Obteniendo datos de imagen... | keepdistance.png,not-verified,pending
+commands,commands/Fun/kill.js,cc2fc299d54f18e161f4d378d2dd3d126fcdbca96f5f366b5da5a21621a90096,,not-verified,pending
+commands,commands/Fun/kiss.js,d6797a49fb7a8bd545f86354dca61b5546f0ed0533086fbade218f77cf89eef0,Obteniendo datos de imagen...,not-verified,pending
+commands,commands/Fun/meme.js,ab8c1c94673b727fa1ab0c5bc8647ae4bd9d06bb3a6b72c8475b6521d686050c,,not-verified,pending
+commands,commands/Fun/note.js,a508567ca63723288cff8c2eeaa9828837b6ff7a8fbbf4ccde43b5e6393b4ed4,note | Obteniendo datos de imagen... | note.png,not-verified,pending
+commands,commands/Fun/notstonks.js,f9868562668641850b40f1704ac48d0fd36c337c8d8c79bc90d6a442af7deea2,notstonks | Obteniendo datos de imagen... | notstonks.png,not-verified,pending
+commands,commands/Fun/obama.js,018e26244dcb857f6b9091861c59f272fb71740792d4d32c67038c8e739e84df,obama | Obteniendo datos de imagen... | obama.png,not-verified,pending
+commands,commands/Fun/ohno.js,9ec24341a035ce80fd2691738724bcfc68887338f74e9050e0dad7b48e180017,ohno | Obteniendo datos de imagen... | ohno2.png,not-verified,pending
+commands,commands/Fun/piccolo.js,e1fdad5e59031311746a55cf696da82f1bea6dccdda042d03959a0d79287ee75,piccolo | Obteniendo datos de imagen... | piccolo.png,not-verified,pending
+commands,commands/Fun/rainbow.js,5e51803cc8d1a555ace9c1fe86828e23776ef986a760a0f3c157a0d843835a42,rainbow | Obteniendo datos de imagen... | rainbow.png,not-verified,pending
+commands,commands/Fun/rip.js,82a0ac017be33b8028d0076d88963cf1b56264f5ec010d6662bfd74b88abb76b,Obteniendo datos de imagen...,not-verified,pending
+commands,commands/Fun/roblox.js,bc33593e47659c901a43fc0a9c83d209efe4a2d8b203b055b489bc8af9c57fda,roblox | Obteniendo datos de imagen... | roblox.png,not-verified,pending
+commands,commands/Fun/satan.js,fdd12b327dc25a9224f78d77e49417536166c8df0d0951da8ca35ea4494f072a,satan | Obteniendo datos de imagen... | satan.png,not-verified,pending
+commands,commands/Fun/savehumanity.js,9cc1928bbe2a1611fe2646275105ddb12179e4322e153eb01d84465c74100e02,savehumanity | Obteniendo datos de imagen... | savehumanity.png,not-verified,pending
+commands,commands/Fun/sepia.js,18f82707b59be083d7d738233e5a77cc7dd6059788dd6d2f408ed5d04bf5c2fd,sepia | Obteniendo datos de imagen... | sepia.png,not-verified,pending
+commands,commands/Fun/stonks.js,e640cff780158e2c110a2b763d8409774d2b4e8916e3edfa51d1d74353e6a3f2,stonks | Obteniendo datos de imagen... | stonks.png,not-verified,pending
+commands,commands/Fun/stroke.js,22f385d4c5c56f5e7fc214f253a1192fc0176a7f05eb45c3370407d1a3af2fab,stroke | Obteniendo datos de imagen... | stroke.png,not-verified,pending
+commands,commands/Fun/test.js,ff561c1de28e0692610706954baa7d14d1235e100443fbd3227ec8238527336f,test | Obteniendo datos de imagen... | spotify.png,not-verified,pending
+commands,commands/Fun/tornado.js,9ba68daa5567c5c5a8ece640cd43326f06efaffe336a3baf2d15aecf161d396e,tornado | Obteniendo datos de imagen... | tornado.png,not-verified,pending
+commands,commands/Fun/trash.js,378a9e10f63692c4950647b892359c65a3531dabddeb9451061c1d918948828e,trash | Obteniendo datos de imagen... | trash.png,not-verified,pending
+commands,commands/Fun/trigger.js,9280ce435f0008d5e8b19ea99fe3e347cf2889ad1d2eb1ac7d13f504356beb45,trigger | Obteniendo datos de imagen... | triggered.gif,not-verified,pending
+commands,commands/Fun/tweet.js,19f72797052426da46a8b81b27ddf4a6241c7c069880ae488eea4b2713c3da23,tweet | Obteniendo datos de imagen... | tweet.png,not-verified,pending
+commands,commands/Fun/violence.js,b9c4044638bba7ddc193f0990579f8e91040ecf799ce339757c1e03031aec280,violence | Obteniendo datos de imagen... | violence.png,not-verified,pending
+commands,commands/Fun/walking.js,14173a79c3938ea1b6340c78be9cbafddff07cef83c38b8f9544c15f832a5f96,walking | Obteniendo datos de imagen... | walking.png,not-verified,pending
+commands,commands/Fun/wanted.js,4aef084d0554bb079b794e9862911b4c2144174674e34748bf7d90637f8e7862,wanted | Obteniendo datos de imagen... | wanted.png,not-verified,pending
+commands,commands/Fun/wasted.js,409f664f97895a2efc57bc5f3c960ddc5e18fcefed2bbe2efb634b4f5a32e744,wasted | Obteniendo datos de imagen... | wasted.png,not-verified,pending
+commands,commands/Fun/weather.js,75ad916fc709c963171c7921e6ce53b543b81b1f34def77a72009588730b3cff,**Temp:** | **Weather:** | **Day:** | **Feels like:** | **Humidity:** | **Wind:**,not-verified,pending
+commands,commands/Fun/whodidthis.js,ff9a003f3ce09966548fefab8d47107a2f56a9c13100150cd47b2c491c315f24,whodidthis | Obteniendo datos de imagen... | whodidthis.png,not-verified,pending
+commands,commands/Fun/youtube.js,679a70883ca7722fc842a503e136d65b755ad836b68bc1c60a62287c8265019c,youtubememe | Obteniendo datos de imagen... | youtube.png,not-verified,pending
+commands,commands/Info/addquote.js,a98fc80a1f37893599891cce55c5c792663b4ca254980f676bd0c63123736d36,addquote,not-verified,pending
+commands,commands/Info/avatar.js,8224e5e084eb13a5daf35998fa45a2704c33e4c58773a5cd722c97b95893212e,avatar,not-verified,pending
+commands,commands/Info/botfaq.js,8b35ce0674832d61ebdd15e3e7c0868ca43d1ac8e2f39c3b1c739acf57905963,botfaq,not-verified,pending
+commands,commands/Info/botinfo.js,e9ccdd71212a36520484a461828c369637bebcabd9d6abd8939d8ff7a543bc88,botinfo,not-verified,pending
+commands,commands/Info/color.js,7bc9acec77825766481d99d88641ad31b5c790913965c8b1a3ae91e1c17ed48d,color | Color ==  your Highest Role!,not-verified,pending
+commands,commands/Info/commandcount.js,efb23609b9adb718999062663300c593f36c74232c982028cafd960d33203a47,commandcount,not-verified,pending
+commands,commands/Info/connectioninfo.js,bebc8e2aac4c4aec5545a2227dc0718631146ec190d738f3ccb8ec669da743f6,connectioninfo,not-verified,pending
+commands,commands/Info/customavatar.js,06605809b8df10827aace6fdd1980ac655aab34224faa96ed7ce8805feaffb9e,customavatar,not-verified,pending
+commands,commands/Info/developer.js,151853d4147487ac4860b45b354eff51fb00787ac4ee12b3012906ef32f06f07,developer,not-verified,pending
+commands,commands/Info/emojiinfo.js,53cb946fcda271252f6457c115e895afdc2cab808c7cc54b75ae7fcc7e033abb,emojiinfo,not-verified,pending
+commands,commands/Info/enlarge.js,18b5b4a7d3fbace0d82dfe810b622b723ccbe0ac55fb8ed44af5cccd99fd125a,enlarge,not-verified,pending
+commands,commands/Info/epic.js,05df088c0a98dbce88cf865b85201f8a6d282d5b86f7c24981862a2017c3faab,epic | **Epic Games Name:** | **Platform:** | **Input Method:**,not-verified,pending
+commands,commands/Info/fnshop.js,91e57316119ff9ccbca530b0b2237b3bfb8678e0d7ba2ac182f3aa0f4bb16e7f,fnshop,not-verified,pending
+commands,commands/Info/fnstats.js,e772787a00cf7f95512db02c4396c8fdc03cf4e290ae8309c2e168808290d3b0,fnstats,not-verified,pending
+commands,commands/Info/getInviteChannel.js,4656878dce605a1d53dd715741961a945c946b9fe874ba9fdbecc1ef3b1bcbe0,getinvitechannel,not-verified,pending
+commands,commands/Info/github.js,9a9228c6972516eed8c89d8e975aa9ad5465d15713306107da73fc3127ec241e,ownergithub,not-verified,pending
+commands,commands/Info/help.js,df7fc7adeb57a90cb254101749f6f75c9ebdc9646588220f9e1c7f9d2641114d,help,not-verified,pending
+commands,commands/Info/invite.js,3f905aa07ba9643615bdb48c97dd7207bb322635768d96395291a89538582818,invite,not-verified,pending
+commands,commands/Info/invites.js,622a17bc9357345e5c9b5cca656e601308e90f4d2a7e568e3084f11e879540f0,invites | \u200b,not-verified,pending
+commands,commands/Info/invitesleaderboard.js,196f0488029f0050d0811d336ec341120edff8e8e5fa05282e5161c7e0d89e3d,invitesleaderboard,not-verified,pending
+commands,commands/Info/latestquotes.js,28041a3191e68d3de1ba02723634a4505e6c2b984c14017ca3cee7a5fd59f728,latestquotes | **Quote by:** | **Quote at:**,not-verified,pending
+commands,commands/Info/membercount.js,b1e46fb9ecc5e773d70a64ec39938c0748e2e30c6ee6881cc0023bee1a5f8a5a,membercount,not-verified,pending
+commands,commands/Info/modstats.js,9160386ccc7dea7472d672d75f5ad87946aec5f277c0fd6a9e5870e313733020,modstats | \u200b,not-verified,pending
+commands,commands/Info/notes.js,ef4ad94f7ec9ddb1052fa7206eb8738d83cc42e220977ff46eac383b70a3b5a2,notes,not-verified,pending
+commands,commands/Info/permissions.js,ce8dceb599ed81a943bc870139368c947ad6a9db4c5dd4cbd59a0413984fe9f2,permissions,not-verified,pending
+commands,commands/Info/ping.js,5951ffcc40f2b4a8e9de94e4bb217e74c758b38ec7346ef55063ed7f07e74279,ping,not-verified,pending
+commands,commands/Info/quotes.js,a2a7586de0f287523c5ffef9ad5729ca0e24770c5cad4b0dab4aa73d97797d3e,quotes | **Quote by:** | **Quote at:**,not-verified,pending
+commands,commands/Info/reactions.js,d22347bc83fed11fcc8360152bc9509e2a3bbda78e3e79cc54b84c84fe516249,reactions,not-verified,pending
+commands,commands/Info/removequote.js,c3d18e6b132451cb8618e26c9660d8e7766868f2544ae83a07acce4ac1ede167,removequote | **Quote by:** | **Quote at:**,not-verified,pending
+commands,commands/Info/roleinfo.js,654f5874fe2c09289521d93afa6175f193a8972dca9b6e3631e818d68414d201,roleinfo,not-verified,pending
+commands,commands/Info/serveravatar.js,6bba03840a48a2dbc87050b74ac64b06df9da0dfe4c8f016d6111a4a925a0119,serveravatar,not-verified,pending
+commands,commands/Info/serverbanner.js,db259c089d75e9bbafd169be0bdbcfe7d2941d27cb08c957bd2853bad0722844,serverbanner,not-verified,pending
+commands,commands/Info/serverinfo.js,23a66cde5b8a160e2345c5d25395512c0b963d9f77d66c3e992972323d416bc6,serverinfo,not-verified,pending
+commands,commands/Info/servers.js,18c867ae493af2ff56302766e4c1e8674702c0659598fada23b22f7d70dbd594,servers,not-verified,pending
+commands,commands/Info/showblacklist.js,84f28e33ff9bc9775aca0932292e588b37c1e378b004342520cb6d893418b186,showblacklist,not-verified,pending
+commands,commands/Info/sponsor.js,476ae8b840154d1cf1ea786a1b4f8b71b135625dc1b68db063c9133ea8f103e0,sponsor,not-verified,pending
+commands,commands/Info/stats.js,b470396731d0da4d50e0122caf83d25a417829deb8c9c5546fcc97f1632d2ca3,stats,not-verified,pending
+commands,commands/Info/support.js,54f7f6c5d7aff7409e56a0f38c5be738cffc0552bb023e79d584eb2e89a7ecac,support,not-verified,pending
+commands,commands/Info/tiktokinfo.js,3eb02d3edd238a4577a606241f836ddb0dab507827687b031516b66ec0c1d89b,tiktokinfo,not-verified,pending
+commands,commands/Info/translate.js,17837c89fcb99938040a7f8fccf66b4aa14aa7da2f71b4ff1d0662baaf99c0fb,translate,not-verified,pending
+commands,commands/Info/twitterinfo.js,cc6a2bf1b04bc71f5a1338b851d39efef1a4789f000537104474a22ff28b38b2,twitterinfo,not-verified,pending
+commands,commands/Info/uptime.js,cfd7db378b45b5fdb15d3bf9a04b4d938438d4d8e30725e0616c4d43fa2f06fc,uptime,not-verified,pending
+commands,commands/Info/userbanner.js,67abeb1e0196e89a60d8bca3d638ff9fffbaf67cb3c438df803cf9698a6fa808,userbanner,not-verified,pending
+commands,commands/Info/userid.js,b44f78c7a93dd6b5b8a5a56d8fd111655020e94e8c5d97df487c444f6c022cc4,userid,not-verified,pending
+commands,commands/Info/userinfo.js,a90d3a32c7f1519f36c4291db45e4248b16ed3dc1ea247ea9833ecf06861b3f9,userinfo | ❌,not-verified,pending
+commands,commands/Info/usertag.js,c83b00919f236de33c38f80b9d9388be1f41e87f81f4180775bba245393dee6f,usertag,not-verified,pending
+commands,commands/Info/youtubeinfo.js,6f2941a2149a65153671c6ecc8c6f838201a2f3da3ac138a1ef9564793983535,youtubeinfo,not-verified,pending
+commands,commands/MiniGames/2024.js,c85c569cba4c68a3ebf2ae00a34a2795b58cf76cd8cb1ec7a776246694162f90,2048 | board.png,not-verified,pending
+commands,commands/MiniGames/bent.js,732062e9b90424b01536ba4bc440ffe88a99ce19afcfc77a18b394c0636c5e85,bent,not-verified,pending
+commands,commands/MiniGames/betrayal-io.js,47b880b10f5f35514ea102395cbd698a75b9510caf104aade2ec3e5c76992b33,betrayal-io,not-verified,pending
+commands,commands/MiniGames/chaoswords.js,a175efa9f9e27adb3822d80916320f0e9b8550870cdee98356d477732ba22301,chaoswords,not-verified,pending
+commands,commands/MiniGames/chess.js,dad93f503bf51771679539291c20de30ef768e4a190480b3ba38f7a796edd244,chess,not-verified,pending
+commands,commands/MiniGames/connect4.js,58791465c8f2aa09d9b2436e58b4b47701544dde00acfc2acc3d014ed0a607a2,connect4,not-verified,pending
+commands,commands/MiniGames/fasttype.js,35b8ddadc4ffbc29c50d55261faf994c5d1b1bd7ec37551555e8b787d5fbb765,fasttype,not-verified,pending
+commands,commands/MiniGames/fight.js,2cc03c487e04584fb3ab921a192f667319be5e54c32ee1f69c1c1eacd594bdc8,fight,not-verified,pending
+commands,commands/MiniGames/fishington-io.js,1966b248e6d68cdf69bef5d5302bf36aca441b2375f7fbce289a4887cc0ed645,fishington-io,not-verified,pending
+commands,commands/MiniGames/flip.js,8ba6375586ea4eb0f6b811e7704033f003c2cea722e127594b4423409c55d0c2,flip,not-verified,pending
+commands,commands/MiniGames/guessthenumber.js,6841440eb356b8e1d690272080d60385d813a1cf8161aad455ee53b2dc4e32c1,guessthenumber,not-verified,pending
+commands,commands/MiniGames/guessthepokemon.js,644ab457d51ee841efb134491fc6f62254c413ba00e28cff1354c8e3ff412ed0,guessthepokemon,not-verified,pending
+commands,commands/MiniGames/hangman.js,f53b33097b38777bee3f56314bea632508b7d75c5a54f2becc1bc480a00510ed,Hangman Minigame | How To Play | Letters Guessed | hangman,not-verified,pending
+commands,commands/MiniGames/lieswatter.js,099b42c06dfd8a018de731b489f6e7ee15e8aec0de2329b9d1308f534452db24,lieswatter,not-verified,pending
+commands,commands/MiniGames/mirror.js,40b468453b0aaf9abdb10b35f36eb618cf6943c0af4e8c7a560333048e7671e8,mirror,not-verified,pending
+commands,commands/MiniGames/neverhaveiever.js,1a1f97d125a55d8838a3a7e6b635128e1fcc741e440cf335d52d1d706e758b7f,neverhaveiever,not-verified,pending
+commands,commands/MiniGames/pokemon.js,b53bc8e32c04fcf55a8a653680460a4a2c54d00b1a030495fab8efa8d6b1b3fd,question-image.png | Type(s) | Abilities | answer-image.png | Pokemon Name | pokemon,not-verified,pending
+commands,commands/MiniGames/poker-night.js,2391aed6242f7ba3313ceba1373b7a9317f6971495069b00fc3fb4ed9093a106,poker-night,not-verified,pending
+commands,commands/MiniGames/quickclick.js,8d6a396b7d9d9d455c6624b7c4cb0cfba17fb600cd0fdb5add565bc3753a9e3f,quickclick,not-verified,pending
+commands,commands/MiniGames/randomcase.js,b6bbaa00ea4d5479460d2723dba74e419a052a1edcd3584b65bb3f160e92666b,randomcase,not-verified,pending
+commands,commands/MiniGames/randomcolor.js,47fdaaf8d4604f90542a3543c2f8cbe810dab71b84c26b51949b02d120ee29b3,randomcolor,not-verified,pending
+commands,commands/MiniGames/reverse.js,4eaef1181537f40ff168ae3cbafaceedfeb359adc73538bcad20387b30e87041,reverse,not-verified,pending
+commands,commands/MiniGames/rockpaperscissors.js,7a0e58372986a923887f6d905cd3e57f9471f7590c9a7d4a45e0daefc41f4775,rockpaperscissors,not-verified,pending
+commands,commands/MiniGames/shuffleguess.js,07a4adb660275119d5e0205702f9c96c7bee0c9d0a3cfbe2345a6d2182856ffc,shuffleguess,not-verified,pending
+commands,commands/MiniGames/snake.js,4a13e6a479066e9a887f962b1abc8dd52edcac3c144a9421f39fc42502ed57bd,obey-snake.png | snake,not-verified,pending
+commands,commands/MiniGames/tictactoe.js,8b5b000678b8483eafc247242e58b2ca99d7c77aeff6285538d3d20f8b46a469,tictactoe,not-verified,pending
+commands,commands/MiniGames/tiny.js,3bd0351f1ccd9c1f9b7315567a3a0892f2ac8dba4cebba1b07367772e1ec62be,tiny,not-verified,pending
+commands,commands/MiniGames/uno.js,9e74c26f447eada75858059e9ae16afbfdfa70ddb09e5a72750d4fbc4a31f563,uno,not-verified,pending
+commands,commands/MiniGames/vaporwave.js,7754b55166d04623e3da01c93925ed568fd544c3bf3fbcd8222c6858b98692fe,vaporwave,not-verified,pending
+commands,commands/MiniGames/willyoupressthebutton.js,5855050b523898ee0c2949999fc1c07100ddb350118b26bf86e9664d6cfc3692,willyoupressthebutton,not-verified,pending
+commands,commands/MiniGames/wouldyourather.js,6e1b2916d3b880a0795d7e5ca716770fcaf739b208677f540cfcb40d6545bd9a,wouldyourather,not-verified,pending
+commands,commands/MiniGames/youtubetogether.js,046fd639936b8e8b314c27afd9f3cd868a2bf16f9a4276d615c119b4c9cd7d7f,youtubetogether,not-verified,pending
+commands,commands/Music/247.js,35a17b3bb02ae73d7b241dc9a353089be2b358498b74abc9cf3a2afcde059886,247,not-verified,pending
+commands,commands/Music/addprevious.js,1e7ca4eccf87214feb81383e65da09b2d83b8dc657dd85c2b4b66a7012be6f85,addprevious,not-verified,pending
+commands,commands/Music/addsimilar.js,924d7d4f6e0a4dbb01534488d989b0bdc4857b788746a86599265238aceb7e0b,addsimilar,not-verified,pending
+commands,commands/Music/autoplay.js,25fbe6e7b25f66eae70ec4c2025beab87c5c38de176eef6c7c2b0572c14b3ae2,autoplay,not-verified,pending
+commands,commands/Music/clearqueue.js,e31f0d9adac429c9b75136c799363b4c038ea701ffcd224db40f985e6fb422ab,clearqueue,not-verified,pending
+commands,commands/Music/forceskip.js,dfa76bc7b6b7f9cc0cf083b7727641c8fc7663ca0852186030cf6adbfec483e6,forceskip,not-verified,pending
+commands,commands/Music/forward.js,58e68549e585573c3ed2b288fa95db77541563c3227ec457472802709f643c2c,forward,not-verified,pending
+commands,commands/Music/grab.js,239d278e78e52cd523e7de8bbdb74c97c78c17ebb5e1dd8c243282e7c2763ab1,grab,not-verified,pending
+commands,commands/Music/join.js,c9125c027b6d0c66bd61a552b36e6fb3c0fe981460574de6dc0278f27185f307,join,not-verified,pending
+commands,commands/Music/jump.js,f0c1a9fd7cae679bbc4c4f60b2bf23fb311912baf52ff2d56589dd11f8b9a9da,jump,not-verified,pending
+commands,commands/Music/like.js,0f0b26f0eb3a1858205d1cb884a2440808d08e2fbc83998d8742b4869bebbd07,like,not-verified,pending
+commands,commands/Music/likedsongs.js,8c88356bfb5dc0c275c80c4e901943084899f79baf68f1305d1da45c6c6a0f80,likedsongs,not-verified,pending
+commands,commands/Music/loop.js,d216e1b8a0dd9ea296e29cb6aa9d125733221a963e4c84d659622993ec9d37fb,loop,not-verified,pending
+commands,commands/Music/loopqueue.js,91f538f6719f8b24df0c0d5ce3dc10a3e260ab1f2204e90ed6f11cf6e1150085,loopqueue,not-verified,pending
+commands,commands/Music/loopsong.js,99a333eed04a32b803df10dc3d3b99fb4792054c70ddff6e8d78c4f98c875bc6,loopsong,not-verified,pending
+commands,commands/Music/lyrics.js,81db8df845562e06a35a178a7821d5da5da9aed3ac9a87cd2da34c95f892f0b4,lyrics,not-verified,pending
+commands,commands/Music/move.js,dcc8da2e6b4dd4988246259d1871ae12c82786e2dd5cb9ae6cd654efb0d65e0c,move,not-verified,pending
+commands,commands/Music/moveme.js,62a63217676293640535f789c03c4203bc1e08f4e20ca67115689b30e39b5892,moveme,not-verified,pending
+commands,commands/Music/musictop.js,85764259d1592fc6bd8b554ab4518d35c9575a15141a884d5f66d743f940ac77,musictop,not-verified,pending
+commands,commands/Music/nodes.js,364061d076ffd35cfa12d3dbd709d651d0963defd08779253ada7dd383bab253,nodes,not-verified,pending
+commands,commands/Music/nowplaying.js,d1c0eea9eaa71809c722508217238f83c57a0c131b19fbdc4f7e42545cd58582,nowplaying,not-verified,pending
+commands,commands/Music/pause.js,98768db4f56bee32d31ce331ed2ebd0a877b0ae41376f59d3235d3dde14acce0,pause,not-verified,pending
+commands,commands/Music/play.js,aa3c9280302276c146aa8191799846a72f2d562abf018b61e6bc8df42c6e38bd,play,not-verified,pending
+commands,commands/Music/playlist.js,ab35dff506b9d3dc6e76a469bc0871e1183cc6e43c1773520910ff51a3ba7fb5,playlist,not-verified,pending
+commands,commands/Music/playmusicmix.js,30b232bb9b087f9f7d126332d155fc7fc98330ef5401fd9a2bb1df745695faa8,playmusicmix,not-verified,pending
+commands,commands/Music/playprevious.js,ea8e4b0db12eb8155c4a756c8dfa1a35a061d9c9d82ae70bc9a7c91af61a5738,playprevious,not-verified,pending
+commands,commands/Music/playsc.js,45ea049dbc467c5ad4d07e45904c83188f899f3fe8670fa065a40b181a004328,playsc,not-verified,pending
+commands,commands/Music/playskip.js,f865ed750050fec6b66c845e590c67f0d3e930f7f4173b500c24d3a0f2b3882f,playskip,not-verified,pending
+commands,commands/Music/playskipsc.js,67da557318dca4f71ebba82a98de0a3643ee1b7ce997da83a110680f00488d08,playskipsc,not-verified,pending
+commands,commands/Music/playsongoftheday.js,4526b5af6e012231d5ee3ac66e67b39335d5f8272ef8f4036e7c79ec47ca9e37,playsongoftheday,not-verified,pending
+commands,commands/Music/playtop.js,bf1f065d0b682ad3506180472fc79e17bdfe99065a2f81ff8a5655da42081b83,playtop,not-verified,pending
+commands,commands/Music/queue.js,d3ed805af2a7534c564e5221eb099f3c3ecd5fcd7002d33add493ee4aeda83af,queue,not-verified,pending
+commands,commands/Music/queuestatus.js,525b4cf1ce732aaa2a3cc92414a701a331e46e7c850f30a23f42ec5346d86196,queuestatus,not-verified,pending
+commands,commands/Music/radio.js,adc432229355c16825e077a99281b0947e0fb0d67460e62393c2142e9bf49d58,radio,not-verified,pending
+commands,commands/Music/reconnect.js,243ab3c697ba2f6b167cb86218a25435cf6696564d415796e1e8b4bcb48ebb00,reconnect,not-verified,pending
+commands,commands/Music/removedupes.js,ac2971799d61240c8ef0935e2acbfb61569e4ed778093474fb7709148cc80f16,removedupes,not-verified,pending
+commands,commands/Music/removetrack.js,1db55fe19244768d04831e04e7d4e322d299759132c3be75d3908beefcc404a9,removetrack,not-verified,pending
+commands,commands/Music/removevoteskip.js,3822a678d70c29806b962f40b4dac7c03bce9bf2b97da02583d38b695d518c46,removevoteskip,not-verified,pending
+commands,commands/Music/restart.js,d42c051533e5d2c82f256e947acf82dfdc6ce8ebccf0ddb3afcd6038dc430a36,restart,not-verified,pending
+commands,commands/Music/resume.js,e57846e791acab74fa9d21dcc7420aba6e4c1e0e8884cb358b794f583159816c,resume,not-verified,pending
+commands,commands/Music/rewind.js,caa6ebfeb65162af1d2a51dd2c3a08cf4712fc5271e2a6c5410b2b1a56c5f1bc,rewind,not-verified,pending
+commands,commands/Music/search.js,125e03d671fd9b81ed3833741c6855cfcc00b5b3aec6d3453a5c230b13017d20,search,not-verified,pending
+commands,commands/Music/searchplaylist.js,bfdb85d75ee5bcb64cfbb54a6196c372d569c0f38495ce0990ccaabf30f18807,searchplaylist,not-verified,pending
+commands,commands/Music/searchradio.js,7c2f09377f7838e71c1949b6f7e785627e382b72dc0a99e3092b30d4a88c0baa,searchradio,not-verified,pending
+commands,commands/Music/searchsc.js,f0c391fb516066d4ea31664f7e24607182767d764172a96b291ac9cf973cb5b3,searchsc,not-verified,pending
+commands,commands/Music/searchsimilar.js,f64e0d215bbd90b65fdc82677a28d12ab78891e09da80cc09fbab3101a6408c9,searchsimilar,not-verified,pending
+commands,commands/Music/seek.js,7e0a3523d2b6bba1de0243e4496ad0e4a5050b63b06f2489bc068c3f353c67a0,seek,not-verified,pending
+commands,commands/Music/setupmusic.js,96c34216e9e1bad8881f3b4830b210d26a56261dcd0e58f534e4c4fc64843774,setupmusic,not-verified,pending
+commands,commands/Music/shuffle.js,93d93a7acfe90e6c45c4bcfcd8416e93469ff7e143affbf0d99cd42e4c55e1be,shuffle,not-verified,pending
+commands,commands/Music/skip.js,a7351a20dab567502753d9a9a79fef86e839f19c8f27f3b0f4d77491ea06ccfb,skip,not-verified,pending
+commands,commands/Music/stop.js,dd160de9ff5121f7ca16da33f69b79faa1f69f37d7a984e665efc99852f2c147,stop,not-verified,pending
+commands,commands/Music/stoploop.js,ff0e7ef8cac564f97d447a8da7513a0d9de1b1a55d59115f2c77f0b50cd1b0bc,stoploop,not-verified,pending
+commands,commands/Music/unshuffle.js,893d918523a876ed55124c98e04c3da150d099f9036794e93f16f711a013e7cd,unshuffle,not-verified,pending
+commands,commands/Music/volume.js,8d6da144fadb548311b81a53f76eeb925e3754fa96b10bd97148d639b797de88,volume,not-verified,pending
+commands,commands/Music/voteskip.js,61ac9b11d9173e0a72f3418c17287b21cd0a4005230e4ed41612f1b57c48cbfb,voteskip,not-verified,pending
+commands,commands/Owner/addmoney.js,edc53365e72e61b100d627c044a34215601cf139fab5f03592987a25cb2f9253,owneraddmoney,not-verified,pending
+commands,commands/Owner/botfilename.js,b58b0960ad395f975f4c2f3e5093522bac17ce33eb21a15ea435fc07a8a4fa81,botfilename,not-verified,pending
+commands,commands/Owner/changeavatar.js,b36dc5c57308e1220fad05b1825890fdd8ffa8e5b2b1491df300d89cbf9ef503,changeavatar,not-verified,pending
+commands,commands/Owner/changename.js,f3d664d36fd9d5b44dd26c97929a64272c6701aaab51fbf3643659ebec6c7388,changename,not-verified,pending
+commands,commands/Owner/changeprefix.js,d42e88dfd2553d5ceb7d8ce810df1b295473c2bec0a078934fd58f07d41b0a46,,not-verified,pending
+commands,commands/Owner/changestatus.js,4dfb6384c16ba291ec4d8e5b9f85783df51f9fbc482476f07b04985c18baa4a8,changestatus | Change Status | KEYWORDS which get replaced:,not-verified,pending
+commands,commands/Owner/cmdreload.js,a3b29bb2dc9e4236f38d594a02617010992789efdf9c981f7c704dadaa6c9b94,,not-verified,pending
+commands,commands/Owner/deployslash.js,2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d,,not-verified,pending
+commands,commands/Owner/detailedeval.js,4e58361580bb01c615437cae2a0db359fdea189d532d34056b954037b2e16acd,,not-verified,pending
+commands,commands/Owner/eval.js,6a0fcf0faaa2993ad118554c42ff66d89afe7b659f019bb94144fe2c5cd765f4,,not-verified,pending
+commands,commands/Owner/leaveserver.js,f940ad044b60c32c51cc68cdb8d3014d06b17a220c75854ec7d9e2055fe7bfc8,,not-verified,pending
+commands,commands/Owner/reloadallcmds.js,0018f919abfe43afd059994160f3e87774d7e5ef869fe32b878a725e7afc4f00,,not-verified,pending
+commands,commands/Owner/reloadbot.js,6da5e77efdfaf0f1fc2a4f98863cef406ae6dd90ede5e6bd8e7995c235da5e19,reloadbot,not-verified,pending
+commands,commands/Owner/removemoney.js,809b37a032e647763c56ba6ce3d6d2f41a6080237ba225bbf0df78723503c983,ownerremovemoney,not-verified,pending
+commands,commands/Owner/resetsettings.js,82333c53b626fa95e6e478714f7e1bcd347c81b4267e30dfe054c4b8328c5200,resetsettings,not-verified,pending
+commands,commands/Owner/restartbot.js,23e0e806f2a627f0532aa7fa7f22b7a273ec04ca540ddfc73226235f6f2571fd,restartbot,not-verified,pending
+commands,commands/Owner/setup-advertise.js,ed1de8e773526e8b48ee969c069626e82fd71cc10fc369009fa5a8dfa69a3734,setup-advertise | Advertising Setup,not-verified,pending
+commands,commands/Owner/setup-owner.js,b0b03ede97737856c57310713b1639037286d91e8c54b4bf3f20f1dcdddd9dd8,setup-owner | Owner Setup,not-verified,pending
+commands,commands/Owner/stopbot.js,23066d5c79d80c6738e4bc43748ba8991f6d2553ccbc210e3df85bb6066f214a,stopbot,not-verified,pending
+commands,commands/Programming/coliru.js,f3ffbc55f105bff74003082cf7c9e08bba3794f6e1c5886de60c104e1e14f8e5,coliru,not-verified,pending
+commands,commands/Programming/compile.js,d02fb64d15994e82acf916d3eb626d0bf5f26b84b5a90b0bbd5fd8eed0d71816,compile,not-verified,pending
+commands,commands/Programming/github.js,16ff384bb52235027c91c97607f6fc4c30e18b6cff68e47bf5c87c60332820e3,github | GitHub,not-verified,pending
+commands,commands/Programming/httpstatus.js,4dbff62052178a5b45101bd380c192f8a90a0c5d93b0d1597a8c0631ef7339ff,httpstatus,not-verified,pending
+commands,commands/Programming/npm.js,d06f7df80bf93df199fcf2a0f996536848f6b138698c7a02ccdd568df7cc095d,npm | Desconocido,not-verified,pending
+commands,commands/Programming/npmpkgsize.js,c5f83520129819fa9e9479e1dce3942f794be7f421b62c32753800e6590e09a5,npmpkgsize,not-verified,pending
+commands,commands/Ranking/addlevel.js,e851666ffdb624a8efebb813603a6547b45e18f060c7e87c46f33bbf8b90b158,addlevel,not-verified,pending
+commands,commands/Ranking/addpoints.js,061701f5ab324ef7128311d874d6c24ec1fb854040dd37299df7f46bcbd16105,addpoints,not-verified,pending
+commands,commands/Ranking/addrandomall.js,c9ab1c0cee325c6d1283b5716bd56d68829d6b8110fa0614a8d502b5cbe82c15,addrandomall,not-verified,pending
+commands,commands/Ranking/leaderboard.js,a1fd73e640e4dc4d0a4889ecc0d0d2eb2930d8fc577ac11bb6eea45d6f4bf7f1,leaderboard,not-verified,pending
+commands,commands/Ranking/levelinghelp.js,f4be60c8b4b1e5e7232cba18a4c764e159c7da679df22f3d3c27b2ac7689563f,levelinghelp,not-verified,pending
+commands,commands/Ranking/rank.js,56be7af3ca4e93649cc57b7973a557fc4899432cc436a8bdf5cb16e71d282607,rank,not-verified,pending
+commands,commands/Ranking/registerall.js,9ac9c1744ffcd28a0a98c4f7764e36e6806c12bbeb82e1e7b48ae27fe099ceac,registerall,not-verified,pending
+commands,commands/Ranking/removelevel.js,0b4e50477a56cb89ed08a56cce89cf9e0ade79dbbddd9791fe20dcec2266999d,removelevel,not-verified,pending
+commands,commands/Ranking/removepoints.js,4f28b13cec7a3a90f6f41de28a3e55a007c56e3c4efcbb4767ef09d586b03178,removepoints,not-verified,pending
+commands,commands/Ranking/resetranking.js,c57e22193bfa6632db728fc4e2d556a3dddd746222f62b9343f8e7aa71f8d59c,resetranking,not-verified,pending
+commands,commands/Ranking/resetrankingall.js,ee18ffc213b08d14c3083047f1e30b3c3431e28b8a726b46421dc2b236f85b31,resetrankingall,not-verified,pending
+commands,commands/Ranking/setlevel.js,d2043b29f5e06697ba2966099646cda788b5c6ed3d334052b80ac49f5f8f6e2c,setlevel,not-verified,pending
+commands,commands/Ranking/setpoints.js,29a1404688e997119811e2fc242321b620fdca9d102755ff6a7c7f09cd8df9d2,setpoints,not-verified,pending
+commands,commands/Ranking/voiceleaderboard.js,0abb6a777009bde67b19bd5cebe78cecd95f41b1af159d97f5a4c64de830aa2f,voiceleaderboard,not-verified,pending
+commands,commands/Ranking/voicerank.js,43fa260aa3ee28f587654fff0e1bee3b4be7d4162f40468779a714a162c1ff48,voicerank,not-verified,pending
+commands,commands/School-Commands/calc.js,5b33a4421d56480f13292314befe3c4a6c640a8f5ec41e926715685c0ee3d9c9,calc,not-verified,pending
+commands,commands/School-Commands/calculator.js,d1d50e6b58c17a14ecfa766765e4f65256c152e831cb901cc06cd3708c202ad1,calculator,not-verified,pending
+commands,commands/School-Commands/e.js,67a35e62c585f103e26761ba174ddfc3260294976ec2a4fafc55633a5b7bf72f,e,not-verified,pending
+commands,commands/School-Commands/pi.js,3db99632a109e2620a3787ada35c3f03b32263c7c339836ec38f5abd95575492,pi,not-verified,pending
+commands,commands/School-Commands/remind.js,914043c677198b45feeaf719fa43f6a5137090610f6daf26389363a32ecd8f56,remind,not-verified,pending
+commands,commands/Settings/addbotchat.js,9744d382ad44824d6c65b807c6243a6618d86b66a1f85e90afe828ae4e039f7c,,not-verified,pending
+commands,commands/Settings/adddj.js,85858194cd40b1227a50384879ae049a0201921fff2773bce34f84222adca6a9,,not-verified,pending
+commands,commands/Settings/addmoney.js,11bdfb13c42fed29583a3d685ea4be3546a0eda64a9f132dd18230dfd0527a43,addmoney,not-verified,pending
+commands,commands/Settings/afk.js,6060f43ec1e13b6f94c734e16152ce2fca910a315c56fc873ac9a1a697d322ef,afk,not-verified,pending
+commands,commands/Settings/afkmusic.js,6bccb256357da35e3b1e636864d1e8531bd5d7ef49a0490dd6645c9e88e7f6f3,afkmusic,not-verified,pending
+commands,commands/Settings/defaultautoplay.js,90f2549ea019557391634e65655182f40143a107e9b9954ab155f7cb18eba1a7,defaultautoplay,not-verified,pending
+commands,commands/Settings/defaultequalizer.js,d43e4151dabfd95504aaac4ed3ec8f4cece848051d3dc9b844d90863aea01245,defaultequalizer,not-verified,pending
+commands,commands/Settings/defaultvolume.js,b5b7a1775b0d2ccd4a41c6c65977584e227269f57257e799e5c5d30d2a535cd3,defaultvolume,not-verified,pending
+commands,commands/Settings/playmsg.js,fe8861ffc33b3e6ac28e0f0b74259afa3d1560dd3d692803da92b347696e17eb,playmsg,not-verified,pending
+commands,commands/Settings/prefix.js,97836486bf59f4b511ba2e8fe374bac1775d37f7027ef2153dd8f30891b22fce,,not-verified,pending
+commands,commands/Settings/removebotchat.js,ad87a4bfd037f031198d5a6735063342f02f4bdccdb9f894227118caff35316e,,not-verified,pending
+commands,commands/Settings/removedj.js,c48058ecfa9c80fb5b263f6d2420d4e24c7ec6e1dced641ea7d6d1605a4995ca,,not-verified,pending
+commands,commands/Settings/removemoney.js,1b6e684421a0c93bb83fc3e8c82ac4d0c586ba0129cf790967ed0fdc97770e86,removemoney,not-verified,pending
+commands,commands/Settings/reset.js,4f85f8279f8b3bc9a487ac79d8a5761ed33e329346bbbf936b2f746bdeee56aa,,not-verified,pending
+commands,commands/Settings/toggledisabled.js,479c35d0f2ef34f3237991609487890200a0f59de5121df2659c45efca55f785,toggledisabled,not-verified,pending
+commands,commands/Settings/toggledjonly.js,751510fdd049869cd29d7fbf94c15e4d19421edcb6867464ef85e1b9097471fe,toggledjonly,not-verified,pending
+commands,commands/Settings/toggledm.js,0235fee2ab59545b866589e722bc9a29dceeeba62b0f3fd191fe92672d79c4ea,toggledm,not-verified,pending
+commands,commands/Settings/toggleplaymessage.js,869cb6e522d8e22f56593402c66fee2090887a89c8432563e7d98c3968715ec3,toggleplaymessage,not-verified,pending
+commands,commands/Settings/togglepruning.js,a66146566f124b973d286c2dec7723123f2d12fed0d95efd0bce49f23efc948e,togglepruning,not-verified,pending
+commands,commands/Settings/togglerequestonly.js,eaea8af63ef02878bd4b95dba9421c89d49c417472e866e9f76f1e247cb194f4,togglerequestonly,not-verified,pending
+commands,commands/Settings/toggleunknowncommandinfo.js,72d789d65ce7f372754a5fe2ff01e34deb4b4740c97a1be5e1d3cb916fdfa67b,toggleunknowncommandinfo,not-verified,pending
+commands,commands/Setup/setup-admin.js,70a10a197f24bc70ed412ee6ebb1cf238f9e55c04a44b055641bcce700b17189,setup-admin | Admin Setup,not-verified,pending
+commands,commands/Setup/setup-admincmdlog.js,7a9a6cd55a917d01921cfee8200239c1f878faae98964271f1b492bd00257934,setup-admincmdlog | Admin Setup,not-verified,pending
+commands,commands/Setup/setup-aichat.js,7d9fdb42d00ffde4a67fb0f5b85cd8456f10efd374095a57654da2caae79ca21,setup-aichat | Ai-Chat,not-verified,pending
+commands,commands/Setup/setup-anticaps.js,7d2fc228b779f70c02639c53f71314f9213f5e6918417debbcf8aa0d160a11cb,setup-anticaps | Anti-Caps System Setup,not-verified,pending
+commands,commands/Setup/setup-antidiscord.js,12c28062bf50d29b4cfb7eb71adc4bb57249610272752fac316cd60d41acaa1f,setup-antidiscord | Anti-Discord-Links System Setup | **Whitelisted Links**,not-verified,pending
+commands,commands/Setup/setup-antilink.js,a09049ae7e0f8b4e4d4fef63101f76c4548615269ef4b6c188ae6e2173cdafcd,setup-antilink | Anti-Links System Setup | **Whitelisted Links**,not-verified,pending
+commands,commands/Setup/setup-antimassmention.js,97a23b2367b984cc2a94d5f6a8d4103be9a43d0bb0ea468100163e832b33c73a,setup-antimassmention,not-verified,pending
+commands,commands/Setup/setup-antimasspings.js,10f0f8f052f7cf9a9173b3a68240af70d38c581692f0f1e3f4a42b550c1df944,setup-antimasspings,not-verified,pending
+commands,commands/Setup/setup-antimention.js,ccb044909dbbf08c7540ef8b16b66e2db09ae7b5bfa09af358d6b776db7a16e7,setup-antimention | Anti-Mention System Setup,not-verified,pending
+commands,commands/Setup/setup-antinewaccount.js,5974b59ee040ba7b4825edc4653a7c1768d15d2c13623e82ad96770632f49594,setup-antinewaccount | Anti-New-Account,not-verified,pending
+commands,commands/Setup/setup-antinuke.js,936e6631ceb49b3565f297e02b96e2f208e9e4675fac57e4426306b1695a127b,setup-antinuke | Anti Nuke Setup | **Other Security Systems:** | Anti Nuke Settings | \u200b | Antinuke Setup,not-verified,pending
+commands,commands/Setup/setup-antipings.js,58644aa85546fc01d7eed1a806add28e410ad05cd2afd11138b786407bf90d7d,setup-antipings,not-verified,pending
+commands,commands/Setup/setup-antispam.js,b7abaf72c09621b6207c3430173396bcb2794d0ed4d1589e10b0aee84ccf74c9,setup-antispam | Anti-Spam System Setup,not-verified,pending
+commands,commands/Setup/setup-apply.js,43721879f274434a0875b028c8b069dda2ef6ffff7bdb709e683425130bc09bb,"setup-apply | Setting up... | You reached the maximum amount of Questions! | <:no:833101993668771842> ERROR | Could not Access the Role | What should be the new accept message? | Successfully changed the ACCEPT MESSAGE! | What should be the new accept Role, which will be granted when the User got accepted? | Successfully changed the ACCEPT ROLE! | What should be the new deny message? | Successfully changed the DENY MESSAGE! | What should be the new Ticket message? | {user} pings the User | Successfully changed the TICKET MESSAGE! | What should be the new accept message for emoji one? | Successfully changed the ACCEPT MESSAGE for emoji one! | What should be the new accept Role, which will be granted when the User got accepted for emoji one? | Successfully changed the ACCEPT ROLE for emoji one! | Successfully deleted the ACCEPT ROLE for emoji one! | What should be the new accept message for emoji two? | Successfully changed the ACCEPT MESSAGE for emoji two! | What should be the new accept Role, which will be granted when the User got accepted for emoji two? | Successfully changed the ACCEPT ROLE for emoji two! | Successfully deleted the ACCEPT ROLE for emoji two! | What should be the new accept message for emoji three? | Successfully changed the ACCEPT MESSAGE for emoji three! | What should be the new accept Role, which will be granted when the User got accepted for emoji three? | Successfully changed the ACCEPT ROLE for emoji three! | Successfully deleted the ACCEPT ROLE for emoji three! | What should be the new accept message for emoji four? | Successfully changed the ACCEPT MESSAGE for emoji four! | What should be the new accept Role, which will be granted when the User got accepted for emoji four? | Successfully changed the ACCEPT ROLE for emoji four! | Successfully deleted the ACCEPT ROLE for emoji four! | What should be the new accept message for emoji five? | Successfully changed the ACCEPT MESSAGE for emoji five! | What should be the new accept Role, which will be granted when the User got accepted for emoji five? | Successfully changed the ACCEPT ROLE for emoji five! | Successfully deleted the ACCEPT ROLE for emoji five! | Successfully deleted the ACCEPT IMAGE for emoji five! | What should be the new Question? | It seems, that this Question does not exist! Please retry! Here are all Questions: | Successfully changed the TEMP ROLE! | Successfully added your Question!",not-verified,pending
+commands,commands/Setup/setup-auditlog.js,116dc85d391db6c3be0c0c6e2822cac3c732c7a3a441d834cce317d9125df681,setup-auditlog,not-verified,pending
+commands,commands/Setup/setup-autobackup.js,58654982283afd10b70f34ae4deacbe3cf35fc54d6ea8da5d0b42be4d4c80138,setup-autobackup | Auto-Backup System Setup,not-verified,pending
+commands,commands/Setup/setup-autodelete.js,963ec2050f9ae7b391ffec08007632656db16a3863c4950b3db220cd0f158fab,setup-autodelete | Auto Delete Setup,not-verified,pending
+commands,commands/Setup/setup-autoembed.js,dbdc4908db4141367438ffc399f97c30e41e09d7bb3d6879dc9fc72624ff8ec1,setup-autoembed | Configuración de Embed Automático,not-verified,pending
+commands,commands/Setup/setup-automeme.js,0b0500eee480937ac1e56f8e5518ef77e20e639766766e63a16edf471cc7763a,setup-automeme | Auto MEME Setup,not-verified,pending
+commands,commands/Setup/setup-autosupport.js,ba6f848f116f016ddccd966ccdf04fd54ad8b6cbaa19653acf41af73618109ea,setup-autosupport | Auto Support Setup,not-verified,pending
+commands,commands/Setup/setup-autowarn.js,9f6d3905f725516c49f388d57f2e85c0eb9075ea55f973a35f9883551d0fbc52,setup-autowarn | Auto-Warn Setup,not-verified,pending
+commands,commands/Setup/setup-blacklist.js,3c84d4a494ae933f28b88d0b58b39f142ce2be66c29cc21d2e3183885b542d2b,setup-blacklist | Setup Blacklist,not-verified,pending
+commands,commands/Setup/setup-boost.js,359d3df2cd7c1a5b9684f52b190bc0850303fb330de68d6e8b88f3f9a131ccf7,setup-boost,not-verified,pending
+commands,commands/Setup/setup-boostlog.js,fa771da298a14ad67b16172e00e4ae0fe961b859f85b4094cec1bb0c771e93bb,setup-boostlog | Registro de Impulso,not-verified,pending
+commands,commands/Setup/setup-commands.js,e0009fabb8cd4915c03cdae070e760af4aa838fb9952610904c1bad88da72f2b,setup-commands,not-verified,pending
+commands,commands/Setup/setup-counter.js,517e18f3467682d7b9b0bc1f57339c040c14190051efabeb738db1c99fe6fb37,setup-counter | Number Counter Setup,not-verified,pending
+commands,commands/Setup/setup-customcommand.js,2094f3c97c64e8ade8ad2dee24929856fa64cca3b002298ac62ad96fb2389381,setup-customcommand | Custom Command Setup,not-verified,pending
+commands,commands/Setup/setup-dailyfact.js,a1f4dff089556d81090ce85fc7dacd1d2e4bf97d9be29ae0aa29c45ab4f88ed9,setup-dailyfact | Daily Facts Setup,not-verified,pending
+commands,commands/Setup/setup-embed.js,497210ae9827c87a0985caf247f0fe8ff5627fd8738d3e0bbe6a1c326869fd61,setup-embed,not-verified,pending
+commands,commands/Setup/setup-epicgamesverify.js,ad98fd1056650db113787cb4e10a0573864d86885fb928258add188c1159ff1d,setup-epicgamesverify | Epic Games Verify Setup,not-verified,pending
+commands,commands/Setup/setup-ghost-ping-detector.js,1e5aa8f107b3fc9f9373443f794eccfa90630e170fbf76c40dc8a05e35de706b,setup-ghost-ping-detector | Ghost-Ping-Detector Setup,not-verified,pending
+commands,commands/Setup/setup-joinlist.js,32d93c30cc5897d66223c45e3283d39e54ef4db92955898f3d931d79840504a1,setup-joinlist | Valid Types: | Valid Actions:,not-verified,pending
+commands,commands/Setup/setup-joinvc.js,2467dcaa6c5e88e784b67e4fd5725b4520578ec844ca6ca1c93a5bea5a3d495c,setup-joinvc | Join VC System | Send Message in a Channel | Add / Remove Role,not-verified,pending
+commands,commands/Setup/setup-jtc.js,2dc74deeedad0af3ee8c1abc93ceb9ff40b0a52fb9f7c9838b383c153586ff86,setup-jtc | Join-to-Create Setup,not-verified,pending
+commands,commands/Setup/setup-keyword.js,ec5ee6f8da0a32fa28f775324619ba55f74768a4540434b94d6d089fd98e3d7a,setup-keyword | Keyword Setup | Custom Command Setup,not-verified,pending
+commands,commands/Setup/setup-language.js,89eadd77ae4f0a71c1c14609903c25aa00503c6ab99e21effb5702ff0cd2de8d,setup-language | Language System Setup,not-verified,pending
+commands,commands/Setup/setup-leave.js,e402bf6415d53a95065598fbf953443dcb3ff0f97dfac9e0c8edcd9214e63dd1,setup-leave | Leave Setup,not-verified,pending
+commands,commands/Setup/setup-logger.js,1823a32acb28024886afd5b31f8a4121ab3fdfd4f625e580b53fb2aa69ab5a68,setup-logger | Audit Logger Setup,not-verified,pending
+commands,commands/Setup/setup-membercount.js,f9c3371a83ca020af234e8a7a18792bb67ae7c09ae42fb2398eeae206a3b70fe,setup-membercount | Member Counter Setup,not-verified,pending
+commands,commands/Setup/setup-menuapply.js,b0b13e40617c93a80ba3e69267bce8e02efee208d035a1ab0978e004464c131c,setup-menuapply | Menu Apply Setup,not-verified,pending
+commands,commands/Setup/setup-menuticket.js,683233aed067307054c567ab44af999165c08d003ab605e44f2f0c20f2302e77,setup-menuticket | Value: | Description: | Category: | Defaultname: | ReplyMsg: | Emoji:,not-verified,pending
+commands,commands/Setup/setup-music.js,e9f1f3c23d5408eea7c29c83155cb62fc847e6af66861ac897920c1314ce6e0c,setup-music,not-verified,pending
+commands,commands/Setup/setup-mute.js,e7a8cdaa6734b80c793a3d3b4a1597deedb5d464d26d46d6ade4c947ba3f81f4,setup-mute | Mute System,not-verified,pending
+commands,commands/Setup/setup-radio.js,b0adf3ac5cbdf592a714121a1b8467c3bed18cb07d3242833f391c2465d63de3,setup-radio,not-verified,pending
+commands,commands/Setup/setup-rank.js,a3a6f4cb3c8f2abdd7e5d5aa3bf8fbcd668045ae85db513bc84acc4f7a4e95dd,setup-rank | Rank Setup | To __add__ a Rank Role send the Following: | To __remove__ a Rank Role send the Following: | **Levelup-Message**,not-verified,pending
+commands,commands/Setup/setup-reactionrole.js,dc75d72a5f4255e5e35fabb0cf474199b3f1c3c24e4b7f86270dac352c01d597,setup-reactionrole,not-verified,pending
+commands,commands/Setup/setup-reportlog.js,9baca06ef92a96e76320adf5d9a8fef1cc37cbf00e48ae77051a60a2d806204b,setup-reportlog | Report Log Setup,not-verified,pending
+commands,commands/Setup/setup-roster.js,72bb443d0e65275ba889eb0afade2df3876587668fe0488b85b080c4b7214d62,setup-roster,not-verified,pending
+commands,commands/Setup/setup-serverstats.js,830c3698caa02c3078ec7524e41c77fa4eef629bc945246d2edca6456200f49c,setup-serverstats,not-verified,pending
+commands,commands/Setup/setup-suggestion.js,578505a5189a13a354df5c59d1c3e76be4127d7858d7a93d4329c3d2870f2e2b,setup-suggestion | Suggestion System,not-verified,pending
+commands,commands/Setup/setup-ticket.js,d4c9ab5a157f77833be356ed99fc5eaf52268ebec9afa7f6ca2583bcccd97072,setup-ticket,not-verified,pending
+commands,commands/Setup/setup-tiktok.js,059ca3264603a7e483e0cf955bf6009393b0be22c09d7ea32c575cae416d33e2,setup-tiktok | **VARIABLES**,not-verified,pending
+commands,commands/Setup/setup-twitch.js,0125a7656e2d2ab14513b2d75411b28fb08a532870a6e8dcbac802ee94aebc4b,setup-twitch | Twitch-Logger | Twitch-Poster,not-verified,pending
+commands,commands/Setup/setup-twitter.js,404d2dd20a017ea9fc051fc07a5ba9054ac3681b6ad400252561ff1b158192b7,setup-twitter | Twitter Setup,not-verified,pending
+commands,commands/Setup/setup-validcode.js,b8bbe7980ec6d529aa1b211d77f9e41ee26359e0603d521570b9bc60a23fd478,setup-validcode | Valid-Code System Setup,not-verified,pending
+commands,commands/Setup/setup-warn.js,efc6e0b795d9989e25e7b00d4ecd3f8b1f777729114bbcb96d6829471dd7f054,setup-warn | Warn Setup,not-verified,pending
+commands,commands/Setup/setup-welcome.js,1790b9931bb640b1cbfb1643b49936132ea2a024b8c58afaceb5dd015d6643cf,setup-welcome | Welcome Setup | DM - Welcome Setup,not-verified,pending
+commands,commands/Setup/setup-youtube.js,d533cf28ec4a415ed755c21d982cce9397e17f417214d5c4eb49c1242f2d69b3,setup-youtube | Youtube-Poster | **VARIABLES**,not-verified,pending
+commands,commands/Setup/setup.js,0565977be9249faa4d371b188a498b197d35b5ed17b83d8e3985d9d2ce9fd444,setup | Setup-Systems | (1/3) [A-C] | Setup-Systems | (2/3) [C-R] | Setup-Systems | (3/3) [R-Z],not-verified,pending
+commands,commands/Soundboard/a-wow.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/abdi.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/afewmomentslater.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/ahshit.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/airhorn.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/amogus.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/araara.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/bhau.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/bruh.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/cuteuwu.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/dattebayo.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/disconnected.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/fart.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/game-over.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/giggle.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/gimme-ohyeah.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/ha-gay.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/hellomf.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/honk.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/ilikecutg.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/illuminati.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/iphone-notification.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/john-cena.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/kuss-digga.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/laugh.js,3784788f41ca5c4084dd9a866a78b543ea561fcf06e7beed6df81cc96206154d,,not-verified,pending
+commands,commands/Soundboard/magic.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/margayamc.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/moin-meister.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/nani.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/nogodno.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/oioi.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/oioioi.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/onichan.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/pew-pew.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/ph-intro.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/quack-quack.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/rickroll.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/samsung-notification.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/sheesh.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/sike.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/silly-fart.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/skype.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/suiii.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/superidol.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/surprisemf.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/sus.js,3784788f41ca5c4084dd9a866a78b543ea561fcf06e7beed6df81cc96206154d,,not-verified,pending
+commands,commands/Soundboard/uwu.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/verpissdich.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/wetfart.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/wow.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Soundboard/wryd-stepbro.js,c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3,,not-verified,pending
+commands,commands/Voice/voice.js,ebebc1df85565fd8f0d69d137dba5facc7c91b603083abf9346ed645c796c2c4,voice,not-verified,pending
+slashCommands,slashCommands/Admin/embed.js,72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040,embed | ping_amount | title | description | color | ping_a_user | in_where | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Admin/say.js,a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809,say | ping_amount | text | ping_a_user | in_where | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Anime/emote.js,778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566,emote | emocion | usuario,not-verified,pending
+slashCommands,slashCommands/Birthday/check.js,ce8cea993339dac218c32138932782c6e3f8be2774e592dafd69028e00b9a64c,check | usuario,not-verified,pending
+slashCommands,slashCommands/Birthday/list.js,e2a58015413e95f8244cd87dc72fbfd908c6be3b16646f9aaf3b5aa41b67a021,list,not-verified,pending
+slashCommands,slashCommands/Birthday/remove.js,da8dd691c079eeb4460687fd4d448013ae87d6269cd1ac2a2810373d7b0bc147,remove,not-verified,pending
+slashCommands,slashCommands/Birthday/set.js,54585d97d3a7eafab7b3c3b21d32367308c7e2f40ba48e14e84049d14ccf34f7,set | dia | mes,not-verified,pending
+slashCommands,slashCommands/Config/247.js,0afcabde4f98bcc9e752e45d9e1e1e72e8611d70a3665488dcf2863a2fc3880c,247,not-verified,pending
+slashCommands,slashCommands/Config/adminrol.js,02452e109fff8d33701fd21b247767d215448d0db3ca07ff5fd62d0e97c889cc,adminrol | accion | rol,not-verified,pending
+slashCommands,slashCommands/Config/architect.js,25c0d320dee64fc675a3a4beae99dad3af50f70f7753ad6035fba709cb8dedcf,architect | accion | Estructura actual | Tu propuesta | Tus trabajos recientes | Tus análisis,not-verified,pending
+slashCommands,slashCommands/Config/autorole.js,07baf4deee47a77689ae192f948cca73751d5a8cf9b473eb517665336b31623f,autorole | accion | rol,not-verified,pending
+slashCommands,slashCommands/Config/idioma.js,81ca46f679bfdc3be5e5a958e7b6043babf973267d1dd1869c23afa77b6c14fa,idioma,not-verified,pending
+slashCommands,slashCommands/Config/logs.js,3133cd354048f4274b91e9ad6027e20f9a57968535f444148f2abc6d2fd9a802,logs | canal,not-verified,pending
+slashCommands,slashCommands/Config/musica.js,3c8768fc417c0bda48f105ff900eadbfbfc1be22375f85838e117b2da65c61e9,musica | estado,not-verified,pending
+slashCommands,slashCommands/Config/prefix.js,676f202a0d14f2e1e7e9e493f1a1f06155c0f611b34b2808a7e766ff883d7bc6,prefix | prefijo,not-verified,pending
+slashCommands,slashCommands/Config/setupmusic.js,041b860534ca45c92ea625cc2190fb0ec447294fde03c20d8b7bebee2360c171,setupmusic | accion,not-verified,pending
+slashCommands,slashCommands/Config/ver.js,1b298a904b369338167c6b2976ea74978563a5a183f9e18925558349798b6a63,ver,not-verified,pending
+slashCommands,slashCommands/Economy/balance.js,c0cf238ce6e8648b339a57bfe5d0ea436b3ce57c3ff09489242721af9a013a13,balance | usuario,not-verified,pending
+slashCommands,slashCommands/Economy/coinflip.js,b51a2ffd622dd2d23a9fd4265772e493b8b44ec6a2898236e14969f3c4247d70,coinflip | lado | apuesta,not-verified,pending
+slashCommands,slashCommands/Economy/daily.js,869ba8ce442e4657d3482cca8f56a4a5fad8d53816c5521be100a18762e7e272,daily,not-verified,pending
+slashCommands,slashCommands/Economy/depositar.js,795b16a04e289e12870df4e57244d20066befaa9cd30a956fc4034e65cc64070,depositar | cantidad,not-verified,pending
+slashCommands,slashCommands/Economy/pay.js,f8c219281171685dc5b41cb02f86ee0d87328840272376e43391ec10002fb0b7,pay | usuario | cantidad,not-verified,pending
+slashCommands,slashCommands/Economy/retirar.js,f683b8899f9140fedd3ebd144b701309618cfb0a7c5b7ec1e8efd2d0927c84be,retirar | cantidad,not-verified,pending
+slashCommands,slashCommands/Economy/rob.js,c646efd1bf432a1538feb5e2df992d15fd46e98038d7f95750a0d97e3413fda9,rob | usuario,not-verified,pending
+slashCommands,slashCommands/Economy/work.js,5a39645bb3ce37dc6366ed46483dee3df6a854747f1c4c2251db9219f1f79fc6,work,not-verified,pending
+slashCommands,slashCommands/Favorites/like.js,08b269f8e0193e8ca31f5c30f19abac3e39adba6ed5af61602fc17ea1f9bb5bc,like,not-verified,pending
+slashCommands,slashCommands/Favorites/lista.js,8909c1155a120316c8b33166d588d05ab2cd5458b5232085abb3abf5a21c0a48,lista,not-verified,pending
+slashCommands,slashCommands/Fun/8ball.js,bc72fcd3ff1f8bf64d3b2f3d60438e36a81b7d30256b4369d27318e8365a9483,8ball | pregunta,not-verified,pending
+slashCommands,slashCommands/Fun/blur.js,7b7a6d34ce0e55bc97e046533c961cc146f5775a6bae9f16f887037645450f8a,blur | usuario | blur.png,not-verified,pending
+slashCommands,slashCommands/Fun/facepalm.js,b49e572adb291ae1060a30dc9eb567f54ff26637941936ebf34efa3bea9c7963,facepalm | texto,not-verified,pending
+slashCommands,slashCommands/Fun/fact.js,23c9b6b5db216dd6bbd8e97c2bbac26cf6e454e56245ce6326ae9d090a2fd47f,fact,not-verified,pending
+slashCommands,slashCommands/Fun/greyscale.js,018bc60fa9cda7cf82a97ad91723762b20f77bb81dafc4467d836453633b9693,greyscale | usuario | greyscale.png,not-verified,pending
+slashCommands,slashCommands/Fun/invert.js,5cc185d85d8c359771a00a991c9908a93dd0b329f1a4b859eeab7bfecdc9ac49,invert | usuario | invert.png,not-verified,pending
+slashCommands,slashCommands/Fun/joke.js,f941498d2e0a5c7274574080b17cb8e220cbc01549de65d5cbdc17b81972074b,joke,not-verified,pending
+slashCommands,slashCommands/Fun/meme.js,2c3cbfb76d9e5f4a0e22f6263e5770734736735d8f4e0c7d2ae2301854ef38d8,,not-verified,pending
+slashCommands,slashCommands/Fun/note.js,15aca6d7ceb922f7cee52564238e30ea9a45c350e74b8d75892368d0391b90bd,note | texto,not-verified,pending
+slashCommands,slashCommands/Fun/notstonks.js,5bd34be1570c8a63c0f1f4284fe0edad6e2b696002bbf115be900c3c1ac9385a,notstonks | texto,not-verified,pending
+slashCommands,slashCommands/Fun/ohno.js,3b1078882d822ddded877b3a04d07ae8c2aae3bca8bcd72db15ab0786f47dbc6,ohno | texto,not-verified,pending
+slashCommands,slashCommands/Fun/rainbow.js,8c7d06536c9a25711be7cf4c4e83112c3d34c518a295de90037568e919fdae12,rainbow | usuario | rainbow.png,not-verified,pending
+slashCommands,slashCommands/Fun/rip.js,36df7b1e8267986ca0d2699692c17eccc33195b8b62b3e4081883b0ede193bca,rip | usuario | rip.png,not-verified,pending
+slashCommands,slashCommands/Fun/roblox.js,1875d24348b20aa4145d6189f46c97b8bd72adbed378ad27714cf69985de7e16,roblox | usuario,not-verified,pending
+slashCommands,slashCommands/Fun/sepia.js,bbcb1753175b3e4810f997c74a351f14eb8d5bde666c54c3f657dd4efb26da82,sepia | usuario | sepia.png,not-verified,pending
+slashCommands,slashCommands/Fun/stonks.js,96bad24f7de9c689a027d77765e84b086169210a9c8fee57558b091470ca4e21,stonks | texto,not-verified,pending
+slashCommands,slashCommands/Fun/stroke.js,1adf1c173648e0a53f72897d7dd2af867bc938210ee36f8afc5f3d4dee0cd46a,stroke | texto,not-verified,pending
+slashCommands,slashCommands/Fun/trash.js,d2d9abbc3955bdecf854ff14aa97fc6e3d42a180f90ff0eb6f93d1a56d0e35fa,trash | usuario | trash.png,not-verified,pending
+slashCommands,slashCommands/Fun/wanted.js,9c30eea9fb7b6775211aa5d1560ecef6bd6c7849d146560e6d906188e4b142d0,wanted | which_user | wanted.png,not-verified,pending
+slashCommands,slashCommands/Fun/wasted.js,7dfaf13d14d24a5059a3c4b6e56a11fa1a998a41e38eed37ec7cdae7795f4dc7,wasted | usuario | wasted.png,not-verified,pending
+slashCommands,slashCommands/Fun/weather.js,6c2fc6bd9ce74413826659240c0d2a99a30cd32b8ab2c842c1b0625940f2c464,unit | city | **Temp:** | **Weather:** | **Day:** | **Feels like:** | **Humidity:** | **Wind:**,not-verified,pending
+slashCommands,slashCommands/Fun/whodidthis.js,fed45ed40b956ec6dbdfe9977a8bb3669588f81bde9e2ad0c010df96bd7d3e1a,whodidthis | usuario | whodidthis.png,not-verified,pending
+slashCommands,slashCommands/Giveaway/end.js,22f1ee2aed407d2f625668432e627f3456d53ca7a4cb71bc2d2ae5af2892e55d,end | message_id,not-verified,pending
+slashCommands,slashCommands/Giveaway/list.js,39cf27f9e17d3042a55f915f0d80344fd74ab9f3de4acbb8a141eccd3efaa84b,list,not-verified,pending
+slashCommands,slashCommands/Giveaway/pause.js,f67aa133dd10f5295c1da8224523a61e195e709b53f89cae285d6a6587dd6b0e,pause | message_id,not-verified,pending
+slashCommands,slashCommands/Giveaway/reroll.js,f2d9fbc8bea8347f61854ae6bb9005792e34ffe80e714f09e364f12afdc24704,reroll | message_id | ganadores,not-verified,pending
+slashCommands,slashCommands/Giveaway/resume.js,95a34ce722f8b94598356ad68cfa63fa2f645a040e643e7636d665e8f0e557d5,resume | message_id,not-verified,pending
+slashCommands,slashCommands/Giveaway/start.js,7066d9be0c955ffea7531dfe06bd294ce5ad0d8868abcb7695992aa105de0e3c,start | canal | duracion | premio | ganadores | rol_requerido,not-verified,pending
+slashCommands,slashCommands/Info/avatar.js,93decadb84d651693aec86bb53e5dab013f42dc8453dc8ea802b3d618a902019,avatar | ping_amount | which_user | what_channel | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/botfaq.js,149d3753b5948993b199d53ccb6d9415a6e9dc9ae6f0ba2e64568f26384797f6,botfaq,not-verified,pending
+slashCommands,slashCommands/Info/botinfo.js,892585ef50fb514861f7639697ee231b80cb78932d692bb65261525a3a432dc7,botinfo,not-verified,pending
+slashCommands,slashCommands/Info/color.js,af4cc4482c826a58d67654cddb377730c53dda70cf652417c8dab146e89baccc,color | ping_amount | which_user | what_channel | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/commandcount.js,96af47ade220411f33a34add1f4fe0844b7336c84d9a5b2c7077ba507ce49da2,commandcount,not-verified,pending
+slashCommands,slashCommands/Info/customavatar.js,c4223da19bac2da74c44792813406e2efab83b1e6953142d20c21f172b191364,customavatar | ping_amount | which_user | what_channel | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/emojiinfo.js,8993d9e3413be61f1a40ca80a636003a89e65391bd2e82603c8468c15ff8f0da,emojiinfo | ping_amount | emoji | which_user | what_channel | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/enlarge.js,93279b021a73614a82e01b4e63c49a85af9aea07a970f56326741398d40a5dc9,enlarge | emoji,not-verified,pending
+slashCommands,slashCommands/Info/help.js,bc8ff5ad54c35061d95618d1c0d5f34f2c984f340fe32babe731c8e1e639efb4,help | comando,not-verified,pending
+slashCommands,slashCommands/Info/invites.js,a46638054a872b8656a9735ebbc94dcc8cf3b9f12787490c53f00f1fadc6d319,invites | ping_amount | which_user | what_channel | what_role | what_ping | \u200b,not-verified,pending
+slashCommands,slashCommands/Info/membercount.js,a12015fff92984c795035275629c1be59de637bfd635b026c3b98f1061bd5e5d,membercount,not-verified,pending
+slashCommands,slashCommands/Info/modstats.js,a84423ed234fafa16e3a6e288b6afef38f94f015305b9080d70b0c391ec8070d,modstats | ping_amount | which_user | what_channel | what_role | what_ping | \u200b,not-verified,pending
+slashCommands,slashCommands/Info/permissions.js,8a0a0ccfeb94456b01c924dcc88ba3de7775b198b3593fd7ed2feedaacd38137,permissions | ping_amount | which_user | what_channel | what_role | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/ping.js,ad0139fa216241be036f58f39e51fd6e8e683913e6aac1d285db30c852704bca,ping,not-verified,pending
+slashCommands,slashCommands/Info/roleinfo.js,e2616b9abbb1ecdcf85b491413ce448fbade664ceb15b8d8777f95e3da4498f4,roleinfo | ping_amount | what_role | what_channel | what_ping,not-verified,pending
+slashCommands,slashCommands/Info/serveravatar.js,0271f99a0b90b312458958fa5ac4872e71f09ac8bb3bb3bea7fca63af67216ae,serveravatar,not-verified,pending
+slashCommands,slashCommands/Info/serverbanner.js,2a1e2f0b5b33fe5ddc49efc5283943dee7e6b1c104fbf6d325d78694d21c96ca,serverbanner,not-verified,pending
+slashCommands,slashCommands/Info/serverinfo.js,e82b32984b0bad46c10c6d1a2ca42bae2c1e4650608b43dad77e5bd05226bd4e,serverinfo,not-verified,pending
+slashCommands,slashCommands/Info/stats.js,b29cf159e6592a7c9d5e017eb3f9acaeb12b33fccc9f2450c1934bb6d28bbb66,stats,not-verified,pending
+slashCommands,slashCommands/Info/translate.js,1fa54b7d04728c134cdc0f2379a5827d06c3c012b88945434ed7c45e7aab11ff,translate,not-verified,pending
+slashCommands,slashCommands/Info/uptime.js,abaade791275f990493d59f8a3e385bafd98c5b55a7be2a2d03cf06117f9018d,uptime,not-verified,pending
+slashCommands,slashCommands/Info/userbanner.js,959dcb3a45b4b4791934782537ae4ad9cfe89127ed99fd4e4dd50b095dd09f8c,userbanner | usuario,not-verified,pending
+slashCommands,slashCommands/Info/userid.js,2874a8b324670ffa77c093e610830e73a6ca90f226d325496e37f6528ce0a48f,userid | usuario,not-verified,pending
+slashCommands,slashCommands/Info/userinfo.js,9fa893d31425bc8967b7ebb1b1141ffb3720292a932101d4e058e2d10efecbb1,userinfo | ping_amount | which_user | what_channel | what_role | what_ping | ❌,not-verified,pending
+slashCommands,slashCommands/Info/usertag.js,b5e67b453b6e061ac57f2421c4dd227f26faf4427994a0a7c72c68380b15f540,usertag | usuario,not-verified,pending
+slashCommands,slashCommands/Invites/add.js,1c0b6d5d72660746a541218a4acda2298f6a86737f2f3c21a0828e50721e1f3e,add | usuario | cantidad,not-verified,pending
+slashCommands,slashCommands/Invites/leaderboard.js,44938c49a158b2e480f17651074b9b97d3f1d61370bb0634c6664ceed655d3b5,leaderboard,not-verified,pending
+slashCommands,slashCommands/Invites/reset.js,64674c2df8e314f426a619ed3f1bae379cf8d2a3a6e40aab4b40ac752562f0bd,reset | usuario,not-verified,pending
+slashCommands,slashCommands/Invites/show.js,a8e7b061340722ec916e9cacaa6d31b7f6d7f314928925991f25801b7b31442e,show | usuario,not-verified,pending
+slashCommands,slashCommands/Moderation/ban.js,5833fc77f3344cb2f8569111994ce5dc9158e50ef0a2538e2d98999e025498ab,ban | usuario | razon | dias,not-verified,pending
+slashCommands,slashCommands/Moderation/cases.js,cfb3e11ccbb996e964cc90f277e49d9428ae015dbafdc35bfe04aca46cbf9445,cases | usuario | pagina,not-verified,pending
+slashCommands,slashCommands/Moderation/kick.js,80e2115c16531583a77d7062e2b8e5ab69df4d08e4eac168815fb1936ee1d86d,kick | usuario | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/purge.js,ea4ff3c0532ac9a6833ec496e78ebaf27b09a57719cc36f5eb958f2bb0b23046,purge | cantidad | filtro | usuario,not-verified,pending
+slashCommands,slashCommands/Moderation/slowmode.js,669e453971ff2da04d140bd721140ebe23d8922988318375ce962d45ddacb12d,slowmode | segundos | canal,not-verified,pending
+slashCommands,slashCommands/Moderation/timeout.js,6a98395fd4d9dfc05a7b8d7a2057357714020f75eface264c1c39d8e9d5e5609,timeout | usuario | duracion | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/unban.js,736be2fe036dc6c0cf7105c2461f39b27088a4abcea4543aec47fa4ffa964e25,unban | user_id | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/unwarn.js,61810496c2f962617d1fd71e8c83b51026e0132bc36a8ae664d1d1f64932501f,unwarn | caso | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/vdeafen.js,f057443f95b46c1a9ca4c8ea72b72e3dbdfe9f0fdd20a9f543730f3350ac10a3,vdeafen | usuario | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/vkick.js,5bb39418729b0b7bb082f0218bb1965f1dcf78b85a359807e2e66ebfeab2efff,vkick | usuario | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/vmute.js,0d9fe976f1cd8bc7013f8f021aba153cdb75d679556cf5538fc1e270f0098695,vmute | usuario | razon,not-verified,pending
+slashCommands,slashCommands/Moderation/warn.js,cf25b8740b1be3f7686b6c1ec33aeca81bcb41259220ff6b779048c257fb74e7,warn | usuario | razon,not-verified,pending
+slashCommands,slashCommands/Music/autoplay.js,5852abb1a2a0226f6667106a210e24a1ab478529c74b7f86beeb9c24a5d3ff31,autoplay | estado | Activar | Desactivar,not-verified,pending
+slashCommands,slashCommands/Music/clearqueue.js,b141bb18cf7696032a238ff7d515387f2ec47fa4a12d6bfed1180ce83f481eac,clearqueue,not-verified,pending
+slashCommands,slashCommands/Music/filter.js,8001405e9c0bfec9d1b87c09187869b1c929256920f8426e95ee2cc3891fa45f,filter | preset | Bass Boost | Nightcore | 8D | Vaporwave | Lo-Fi | Slowed | Crystal | Metal | Pop | Soft | Tremolo | Vibrato | Karaoke | Normalizar volumen | Eco | Radio FM | Sin filtro,not-verified,pending
+slashCommands,slashCommands/Music/forward.js,426d018540be177764c81499b129194bef0eb8112863acbd78f62be2ee047670,forward | segundos,not-verified,pending
+slashCommands,slashCommands/Music/history.js,793651ed14b223f747894ca14824717aa7a472ad19439d52acfb4bd4015a8617,history | limite,not-verified,pending
+slashCommands,slashCommands/Music/jump.js,fb734e8e3535c6dda874d2d0feac00c3a63942221ad9b9aa56d7011b530fe613,jump | posicion,not-verified,pending
+slashCommands,slashCommands/Music/loop.js,ed9508c3289d38d08f6f56ecbf34c5c31b3d0debfb7c1afb042a4d290b489907,loop | modo | Desactivado | Cancion actual | Cola completa,not-verified,pending
+slashCommands,slashCommands/Music/lyrics.js,86b81f7ecc9b1a5d4beb42963b8fdb0fa93803889f0b88153d4632bf190dd904,lyrics | cancion,not-verified,pending
+slashCommands,slashCommands/Music/move.js,ae84720b7ee1d9b6a338b9e929679d6648705640fa9e4b9b1d9e0257a6deae57,move | desde | hasta,not-verified,pending
+slashCommands,slashCommands/Music/nowplaying.js,386440d816afc79746c2fe90d107a66f77c90f9a76f5af91755afec293001bbd,nowplaying,not-verified,pending
+slashCommands,slashCommands/Music/pause.js,32f7d1ac8ee86f000ea4630aef1661b674545f355dad1987c1d0e643df0a70a0,pause,not-verified,pending
+slashCommands,slashCommands/Music/play.js,4df027b21b87cc9605027712f7d1c5be5b7ba8ab259980e5cb09b83f7bcab0df,play | what_song,not-verified,pending
+slashCommands,slashCommands/Music/playmusicmix.js,8ed90f6f36053c521b5811474da430425979bb0d95f1f4f0d8f2b5c762ecedc5,playmusicmix | cancion,not-verified,pending
+slashCommands,slashCommands/Music/playtop.js,fdd62f65948bb2bf71020b9595152d2c77a8e1a91dc122fcf99df023ddab4a3c,playtop | cancion,not-verified,pending
+slashCommands,slashCommands/Music/queue.js,7601fe0ee8b0c7c46fdc813d4507b15f5aa5d6e1641b63dcaffdc37cf713f423,queue | pagina,not-verified,pending
+slashCommands,slashCommands/Music/remove.js,04460821a9d43e7e41dfcc501ccf18d67661911b343fab3af22ad10a82cc99f2,remove | posicion,not-verified,pending
+slashCommands,slashCommands/Music/replay.js,0374b68a6df996c912122eaee76524499f35b4c408c294fea81f922be06c9d71,replay,not-verified,pending
+slashCommands,slashCommands/Music/resume.js,3b6db594396f57d5cec628e81a6c69586929736b4f5727dad09377f447c6bc99,resume,not-verified,pending
+slashCommands,slashCommands/Music/rewind.js,67355945a7113f6e22e8961546c9daf94b6ea28064cff74b325cfe55acdadd1f,rewind | segundos,not-verified,pending
+slashCommands,slashCommands/Music/search.js,e1104e858f8228c9f53e3506f60ca68653bb5d09c8023fdba804520e7a0925d3,search | what_song,not-verified,pending
+slashCommands,slashCommands/Music/seek.js,2dba6e7723eb30bc809ec59dcfd83e077120b6f5a684acb0d480af730a249cc6,seek | tiempo,not-verified,pending
+slashCommands,slashCommands/Music/shuffle.js,23d3d0b431712e7a7754cf16c702adc7d4a43999e0df910058cde3c87914aa67,shuffle,not-verified,pending
+slashCommands,slashCommands/Music/skip.js,24a531cbdb6402aa7c529c63420d8c843b424a352ea850e407ba10b792ee945d,skip | cantidad,not-verified,pending
+slashCommands,slashCommands/Music/stop.js,4ff1a3adaf45eaf204dba7a8ef05e8a800df3730596022674bd00ce196af28e6,stop,not-verified,pending
+slashCommands,slashCommands/Music/volume.js,18725c9ec128eb63ee60dfd9c7e7dc9a225a7182ae95c6e33212cb9368d39894,volume | volumen,not-verified,pending
+slashCommands,slashCommands/Playlist/add.js,f1dcc5136758ec7198cc595d22e4da24a9038b2a347b0964e3c4b13548c4909c,add | playlist | cancion,not-verified,pending
+slashCommands,slashCommands/Playlist/create.js,a2f8b0a739e592cfff44a262661eaad588430d21173d7035f9f0350c06d148d0,create | nombre,not-verified,pending
+slashCommands,slashCommands/Playlist/delete.js,3fe263804458b803c7a0a1ce3153d6571ebb1706c9f5fd2a884d73c3bf8324e4,delete | nombre,not-verified,pending
+slashCommands,slashCommands/Playlist/list.js,474b3e8e760e6e0c2bac0ce1eb080f2796f44bee9f647fa0f20e3cd5e304616f,list,not-verified,pending
+slashCommands,slashCommands/Playlist/play.js,271db97450aacf14db1cf89d655b4ba6e65435cc3baf286d1ab2a877de5945dc,play | nombre,not-verified,pending
+slashCommands,slashCommands/Playlist/share.js,08319e680c278a26569f25f294b711b5d3e9fc6dc688ba2c24e13d9d9e8632b6,share | nombre | visibilidad | 🌐 Pública | 🔒 Privada,not-verified,pending
+slashCommands,slashCommands/Playlist/show.js,6cfb383a833e6734febbf2fdfc11a123f760d3a9b60d49e2a8f3573bad8277d8,show | nombre | usuario,not-verified,pending
+slashCommands,slashCommands/Rank/leaderboard.js,a61aa756e31f56a8161fee184f45fb66006d9ceb7db5f598d99c739ad0a9fdfb,leaderboard | tipo,not-verified,pending
+slashCommands,slashCommands/Rank/rank.js,b54eda26d6b1344f1ff2f2f2e988a59a84e30873b8a439a9f933768d7b3e0fd1,rank | usuario | rank.png,not-verified,pending
+slashCommands,slashCommands/Rank/setlevel.js,a87534a7f428c290f7a436ad0bb538ce656868701eafa82bc08f43e5997640c9,setlevel | usuario | nivel | tipo,not-verified,pending
+slashCommands,slashCommands/Soundboard/play.js,7cac4a75e3e9cb1c51475faabf3b3d5b63aaf78d6199d1a9ee5b375ee2ad65cd,play | sonido,not-verified,pending
+slashCommands,slashCommands/Ticket/add.js,f9a5242a4b4f010195ca336450f04d86d95a745ed12a6b1d0b0743343b5526af,add | usuario,not-verified,pending
+slashCommands,slashCommands/Ticket/claim.js,1e8f1084c765e4b309562b6ade2e84ae2eedc4c9d5ff1e647e508cfa8882ecdb,claim,not-verified,pending
+slashCommands,slashCommands/Ticket/close.js,4b79ce140fdcb6e1dc56ad3eec058b232ed95a753bf4979893502689d5ba6311,close | razon,not-verified,pending
+slashCommands,slashCommands/Ticket/remove.js,21f3010ccbed75363c0af1e6216a17858b965635c6ea20695e6aff68699a8f38,remove | usuario,not-verified,pending
+slashCommands,slashCommands/Welcome/canal.js,a564ec057ce29a0eec35dd0a0cb88b948c670becc8fb99305bac5b5a37cf8fc9,canal,not-verified,pending
+slashCommands,slashCommands/Welcome/mensaje.js,bb0f63e8b93308755457d66b88e311587f598c7525925f1521e92d18f1c42246,mensaje,not-verified,pending
+slashCommands,slashCommands/Welcome/tarjeta.js,d000955d28d5958f03269f586fe3d99b113a88c245eed3795d35f508768461dd,tarjeta | usuario,not-verified,pending
+slashCommands,slashCommands/Welcome/test.js,a45c2e03a42926ac31b8a4bd438cb4eb4d21516661cdd90b44e56bdc20bf9e36,test | usuario,not-verified,pending
+slashCommands,slashCommands/Welcome/ver.js,289b90e77c320bc3e109f81a280f8ec60e4c9b3bd7322e939dec9dcfc7147c65,ver,not-verified,pending
+slashCommands,slashCommands/chat.js,67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931,chat | chat_text,not-verified,pending
+slashCommands,slashCommands/nodes.js,e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7,nodes | connection,not-verified,pending

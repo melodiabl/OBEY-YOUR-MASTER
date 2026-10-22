@@ -1,0 +1,20 @@
+{
+  "status.pending": "Traitement en cours…",
+  "status.confirmed": "Confirmé",
+  "status.error": "Impossible de terminer cette opération.",
+  "status.permission": "Vous n’avez pas l’autorisation d’effectuer cette action.",
+  "status.expired": "Ce contrôle a expiré. Ouvrez-en un nouveau.",
+  "status.unavailable": "Cette fonctionnalité est indisponible pour le moment.",
+  "vote.open": "Voter pour OBEY",
+  "vote.received": "Votre vote a été enregistré. Merci de soutenir OBEY !",
+  "vote.pending": "Le vote n’a pas encore été confirmé.",
+  "vote.duplicate": "Ce vote a déjà été enregistré.",
+  "premium.title": "Abonnement",
+  "premium.active": "Accès actif",
+  "premium.verifying": "Nous vérifions votre paiement.",
+  "premium.ends": "Votre accès est disponible jusqu’au {date}.",
+  "setup.diagnostics": "Vérifier la configuration",
+  "setup.valid": "La configuration a passé cette vérification.",
+  "help.language": "Langue",
+  "help.support": "Assistance"
+}

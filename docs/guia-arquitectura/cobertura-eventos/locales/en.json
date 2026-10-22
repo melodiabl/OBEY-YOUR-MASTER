@@ -1,0 +1,28 @@
+{
+  "capture": {
+    "actorUnknown": "Actor not identified",
+    "beforeUnavailable": "The previous value is unavailable.",
+    "contentUnavailable": "The previous content was not available to OBEY.",
+    "metadataOnly": "Only the available identifying metadata was recorded.",
+    "partial": "Record with partial data",
+    "correlationPending": "Looking for actor evidence…",
+    "auditUnavailable": "The audit log could not be checked.",
+    "noPermission": "Permissions are missing for this log category.",
+    "intentUnavailable": "This source is not enabled or its access is not confirmed.",
+    "gap": "Coverage is unconfirmed between {start} and {end}.",
+    "reconciled": "Current state was compared. Intermediate history may be incomplete.",
+    "captureDegraded": "Capture is operating with limitations.",
+    "deliveryFailed": "The record was saved, but delivery to the channel is still pending.",
+    "bufferExceeded": "The buffer limit was reached. Coverage needs review.",
+    "changedFields": "Observed changes: {count}",
+    "reference": "Reference: {reference}",
+    "leaveUnclassified": "The member is no longer in the server. The reason is unconfirmed.",
+    "noHistory": "There is not enough data to reconstruct that change.",
+    "before": "Before",
+    "after": "After",
+    "observed": "Observed data",
+    "retained": "Previously retained data",
+    "disabled": "Category disabled",
+    "healthy": "Coverage verified for the configured scope"
+  }
+}

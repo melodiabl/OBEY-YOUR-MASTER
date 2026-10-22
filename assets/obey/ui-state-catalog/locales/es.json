@@ -1,0 +1,632 @@
+{
+  "visual": {
+    "common": {
+      "ready": "Listo",
+      "pending": "Procesando…",
+      "empty": "No hay elementos para mostrar.",
+      "expired": "Esta sesión caducó. Abrí una nueva.",
+      "permissionDenied": "No tenés permisos para esta acción.",
+      "offline": "El servicio no está disponible.",
+      "partial": "Se completó parte de la operación. Revisá el detalle.",
+      "reference": "Referencia: {operationId}"
+    },
+    "assets": {
+      "a01": {
+        "label": "Ticket",
+        "pending": "Abriendo tu ticket…",
+        "confirmed": "Tu ticket se abrió.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Ticket"
+      },
+      "a02": {
+        "label": "Favorito",
+        "pending": "Guardando tu favorito…",
+        "confirmed": "Tu favorito quedó guardado.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Favorito"
+      },
+      "a03": {
+        "label": "Reproducción",
+        "pending": "Solicitando el cambio de reproducción…",
+        "confirmed": "Estado de reproducción actualizado.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Reproducción"
+      },
+      "a04": {
+        "label": "Mezclar",
+        "pending": "Cambiando el modo de mezcla…",
+        "confirmed": "Modo de mezcla actualizado.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Mezclar"
+      },
+      "a05": {
+        "label": "Repetir",
+        "pending": "Cambiando el modo de repetición…",
+        "confirmed": "Modo de repetición actualizado.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Repetir"
+      },
+      "a06": {
+        "label": "Autoplay",
+        "pending": "Actualizando autoplay…",
+        "confirmed": "Configuración de autoplay actualizada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Autoplay"
+      },
+      "a07": {
+        "label": "Protección",
+        "pending": "Revisando la configuración de protección…",
+        "confirmed": "Revisión completada. Consultá el detalle.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Protección"
+      },
+      "a08": {
+        "label": "Avisos",
+        "pending": "Enviando el aviso…",
+        "confirmed": "Aviso enviado.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Avisos"
+      },
+      "a09": {
+        "label": "Exportar",
+        "pending": "Preparando tu archivo…",
+        "confirmed": "Tu archivo está disponible.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Exportar"
+      },
+      "a10": {
+        "label": "Tarjeta",
+        "pending": "Generando la tarjeta…",
+        "confirmed": "Tarjeta generada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Tarjeta"
+      },
+      "a11": {
+        "label": "Confirmación",
+        "pending": "Esperando confirmación…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Confirmación"
+      },
+      "a12": {
+        "label": "Sincronizar",
+        "pending": "Sincronizando los datos…",
+        "confirmed": "Datos actualizados.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sincronizar"
+      },
+      "b01": {
+        "label": "Anterior",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Anterior"
+      },
+      "b02": {
+        "label": "Siguiente pista",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Siguiente pista"
+      },
+      "b03": {
+        "label": "Detener",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Detener"
+      },
+      "b04": {
+        "label": "Bajar volumen",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Bajar volumen"
+      },
+      "b05": {
+        "label": "Subir volumen",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Subir volumen"
+      },
+      "b06": {
+        "label": "Silenciar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Silenciar"
+      },
+      "b07": {
+        "label": "Cola",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Cola"
+      },
+      "b08": {
+        "label": "Letras",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Letras"
+      },
+      "b09": {
+        "label": "Buscar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Buscar"
+      },
+      "b10": {
+        "label": "Álbum",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Álbum"
+      },
+      "b11": {
+        "label": "Radio",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Radio"
+      },
+      "b12": {
+        "label": "Repetir pista",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Repetir pista"
+      },
+      "b13": {
+        "label": "Asignar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Asignar"
+      },
+      "b14": {
+        "label": "Cerrar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Cerrar"
+      },
+      "b15": {
+        "label": "Reabrir",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Reabrir"
+      },
+      "b16": {
+        "label": "Transcripción",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Transcripción"
+      },
+      "b17": {
+        "label": "Archivar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Archivar"
+      },
+      "b18": {
+        "label": "Valorar atención",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Valorar atención"
+      },
+      "b19": {
+        "label": "Reporte",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Reporte"
+      },
+      "b20": {
+        "label": "Soporte",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Soporte"
+      },
+      "b21": {
+        "label": "Ayuda técnica",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Ayuda técnica"
+      },
+      "b22": {
+        "label": "En espera",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "En espera"
+      },
+      "b23": {
+        "label": "Error",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Error"
+      },
+      "b24": {
+        "label": "Advertencia",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Advertencia"
+      },
+      "b25": {
+        "label": "Información",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Información"
+      },
+      "b26": {
+        "label": "Permisos",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Permisos"
+      },
+      "b27": {
+        "label": "Sin contenido",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sin contenido"
+      },
+      "b28": {
+        "label": "Sesión caducada",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sesión caducada"
+      },
+      "b29": {
+        "label": "Sin conexión",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sin conexión"
+      },
+      "b30": {
+        "label": "Reconectar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Reconectar"
+      },
+      "b31": {
+        "label": "Bienvenida",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Bienvenida"
+      },
+      "b32": {
+        "label": "Despedida",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Despedida"
+      },
+      "b33": {
+        "label": "Roles",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Roles"
+      },
+      "b34": {
+        "label": "Moderación",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Moderación"
+      },
+      "b35": {
+        "label": "Registros",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Registros"
+      },
+      "b36": {
+        "label": "Niveles",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Niveles"
+      },
+      "b37": {
+        "label": "Perfil",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Perfil"
+      },
+      "b38": {
+        "label": "Economía",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Economía"
+      },
+      "b39": {
+        "label": "Regalo",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Regalo"
+      },
+      "b40": {
+        "label": "Juegos",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Juegos"
+      },
+      "b41": {
+        "label": "Sorteos",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sorteos"
+      },
+      "b42": {
+        "label": "Sugerencias",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Sugerencias"
+      },
+      "b43": {
+        "label": "Recordatorios",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Recordatorios"
+      },
+      "b44": {
+        "label": "Mensajes",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Mensajes"
+      },
+      "b45": {
+        "label": "Automatización",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Automatización"
+      },
+      "b46": {
+        "label": "Fuentes y avisos",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Fuentes y avisos"
+      },
+      "b47": {
+        "label": "Estadísticas",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Estadísticas"
+      },
+      "b48": {
+        "label": "Solicitudes",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Solicitudes"
+      },
+      "b49": {
+        "label": "Estructura",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Estructura"
+      },
+      "b50": {
+        "label": "Plantillas",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Plantillas"
+      },
+      "b51": {
+        "label": "Configuración",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Configuración"
+      },
+      "b52": {
+        "label": "Editar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Editar"
+      },
+      "b53": {
+        "label": "Guardar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Guardar"
+      },
+      "b54": {
+        "label": "Eliminar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Eliminar"
+      },
+      "b55": {
+        "label": "Voz",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Voz"
+      },
+      "b56": {
+        "label": "Canal",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Canal"
+      },
+      "b57": {
+        "label": "Miembros",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Miembros"
+      },
+      "b58": {
+        "label": "Avisos desactivados",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Avisos desactivados"
+      },
+      "b59": {
+        "label": "Página anterior",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Página anterior"
+      },
+      "b60": {
+        "label": "Página siguiente",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Página siguiente"
+      },
+      "b61": {
+        "label": "Idioma",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Idioma"
+      },
+      "b62": {
+        "label": "Subir archivo",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Subir archivo"
+      },
+      "b63": {
+        "label": "Enviar",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Enviar"
+      },
+      "b64": {
+        "label": "Imagen",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Imagen"
+      },
+      "b65": {
+        "label": "Ayuda",
+        "pending": "Procesando…",
+        "confirmed": "Operación confirmada.",
+        "failed": "No se pudo completar la operación.",
+        "unknown": "La operación sigue sin confirmarse. Consultá su estado antes de repetirla.",
+        "alt": "Ayuda"
+      }
+    }
+  }
+}

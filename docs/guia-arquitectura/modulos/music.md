@@ -150,3 +150,62 @@ Registrar entrada canónica, permisos, datos, efectos, revisión, traducciones, 
 ## Rendimiento y latencia
 
 Leer [MUSICA_RENDIMIENTO_Y_LATENCIA.md](../MUSICA_RENDIMIENTO_Y_LATENCIA.md) antes de modificar buffers, timers o transporte. Distingue investigación de Red/JMusicBot/Muse/NodeLink, límites de Discord, hallazgos estáticos de OBEY, perfiles condicionales y medición A/B. Sus objetivos y tareas siguen pendientes; no acreditan ausencia de cortes o latencia.
+
+## Contrato de producto ampliado · plan 0.4
+
+Objetivo de implementación; no verificación runtime. Estas precisiones amplían la ficha y prevalecen sobre recomendaciones de destino anteriores incompatibles con el plan vigente.
+
+| Dimensión | Definición |
+| --- | --- |
+| Operaciones | Buscar, resolver, encolar, controlar, guardar favoritos, consultar letras y recuperar sesiones con lavalink-client. |
+| Configuración | Destinos, DJ, permanencia, fuentes, límites y autoplay; conservar alcance legacy y doce IDs. |
+| Datos e invariantes | Una cola operativa y propietario por guild; generación/playbackId descartan respuestas viejas. |
+| UX/UI | Soundy conserva distribución; búsqueda/cola/letras/gustos personales tienen sesión y audiencia propias. |
+| Fallo/concurrencia | Fin y skip simultáneos, búsqueda tardía, 429 o pérdida del nodo: transición única y recuperación confirmada. |
+| Criterio específico | Fin avanza sin acción manual, stop invalida autoplay, repeat/shuffle conservan semántica y restart no duplica pista; ver contrato musical completo. |
+
+### Conexión con el sistema común
+
+Las entradas presentes en esta ficha deben vincularse al mismo servicio, política y catálogo de errores. Identificar cuáles están efectivamente cargadas; las rutas candidatas anteriores no son un grafo exhaustivo. Aplicar [contratos](../sistema/02_CONTRATOS.md), [configuración](../sistema/04_CONFIGURACION.md) e [idiomas](../sistema/05_I18N.md).
+
+El mensaje público usa el idioma de la guild; las respuestas personales siguen la política privada. No traducir contenido del usuario automáticamente. Versionar configuración y revalidar audiencia/recurso en cada interacción.
+
+### Recursos vinculados
+
+Claves declaradas existentes: `emoji.musica`, `icon.play`, `icon.pause`, `icon.previous`, `icon.skip`, `icon.shuffle`, `icon.stop`, `icon.loop`, `icon.queue`, `icon.lyrics`, `icon.volume-down`, `icon.volume-up`, `icon.like`, `icon.autoplay`, `icon.info`, `motion.cargando`, `icon.success`, `icon.error`, `motion.favorito`, `motion.reproduciendo`, `icon.music`, `icon.album`, `icon.link`, `icon.profile`, `icon.send`, `icon.close`, `icon.mute`, `icon.clock`, `icon.repeat-one`, `icon.page-previous`, `icon.page-next`, `icon.delete`.
+
+La lista no acredita aprobación, archivo disponible o publicación. Conciliar cada vista/estado con clave, export, binding real y fallback conforme a [recursos](../sistema/06_RECURSOS.md). Emoji ausente nunca elimina la etiqueta de una acción necesaria.
+
+### Cierre de esta ficha
+
+Demostrar el criterio específico anterior con estado feliz y fallo relevante, dos guilds aisladas y ES/EN del alcance. Anotar commit/entorno y separar inspección, simulación y servicio real. Preservar lectura de datos y controles legacy hasta completar consumidores. Apagar el módulo tiene semántica documentada; no borra datos silenciosamente.
+
+## Materiales vigentes integrados · edición 0.6
+
+Conservar los doce controles y recursos propios de Soundy. Los símbolos de voz/registros no reemplazan controles musicales o marcas de plataformas. Escenas/GIF solo si reflejan estado real y sin retrasar acciones.
+
+La selección vigente está en `assets/obey/catalog-eventos/` desde la raíz del proyecto; consultar [capítulo 15](../sistema/15_CATALOGO_EVENTOS.md). integration-map.json propone claves semánticas, variantes y consumidores; no es un registro runtime instalado. Los labels de revisión se traducen mediante el resolvedor único, y el fallback conserva texto sin markup roto.
+
+Los tres PNG de personaje y seis GIF de expansion-20261020 se mantienen. Los 24 iconos previos de registros de esa expansión se retiraron. Al integrar: permiso/audiencia, export elegido, alias canónico, ID real de Discord si aplica y comprobación en móvil/escritorio. No hay publicación o binding acreditados por esta edición.
+
+
+## Materiales y consumidores · edición 0.7
+
+Ficha visual: `assets/obey/ui-state-catalog/capability-materials.json`, entrada `music`. Familias propuestas de este recorrido: `A02`, `A03`, `A04`, `A05`, `A06`, `B01`, `B02`, `B03`, `B04`, `B05`, `B06`, `B07`, `B08`, `B09`, `B10`, `B11`, `B12`, `B30`, `B23`, `B24`, `B25`, `B27`, `B28`, `B29`, `B51`, `B52`, `B53`, `B54`, `B57`, `B59`, `B60`, `B61`, `B62`, `B65`, `A11`, `A12`. A01–A12 tienen aprobación visual; B/C requieren revisión. La base previa conserva bindings y datos.
+
+La auditoría por ruta registra 547 apariciones y 160 referencias literales de assets para esta asignación; un cero no demuestra ausencia de función porque existen constructores compartidos y claves calculadas. Consultar el mapa completo y el contrato del módulo.
+
+Aplicar [estados y animaciones](../sistema/16_ESTADOS_Y_ANIMACIONES.md), [mapa de reemplazos](../sistema/17_MAPA_REEMPLAZOS.md) y [recetas](../sistema/19_RECETAS_POR_RECORRIDO.md). El servicio confirma el efecto; el presentador elige PNG/GIF y texto. No modificar contenido del usuario ni símbolos internos de juegos. Esta sección no marca tareas runtime como terminadas.
+
+## Aplicación al servidor de soporte · edición 0.10
+
+El [capítulo 22](../sistema/22_COMUNIDAD_Y_GITHUB.md) y [mapa de canales](../comunidad/MAPA_DE_CANALES.md) proponen destinos del servidor mostrado por el usuario. Conservar este módulo como propietario de sus datos y publicación; validar IDs, permisos y audiencia antes de habilitar. El perfil de soporte no se hereda en guilds cliente. No acreditar funciones por un nombre de canal. GitHub usa inicialmente webhook nativo para avisos técnicos; receptor propio de feeds queda condicional.
+
+## Capacidades Discord aplicables · edición 0.12
+
+[Capítulo 24](../sistema/24_CAPACIDADES_NATIVAS_DISCORD.md) y [matriz](../discord-nativo/capacidades.json), entrada `music`. Capacidades dirigidas a esta ficha: D02, D09, D11. D01/D08/D10/D18 se aplican cuando el módulo esté ofrecido, según entrada, recursos, audiencia e idiomas. Conservar servicio y datos; no activar un dominio diferido por esta referencia. La compatibilidad se revisa contra lockfile y el recorrido real; esta edición no añade implementación.
+
+
+## Conciliación de investigación 0.14
+
+El alcance de music se relaciona con referencias, recorrido, material y aceptación en [plan de ejecución](../investigacion-20261022/08_PLAN_DE_EJECUCION.md) y modulos.json. No se marca implementado ni se cambia su contrato operativo por añadir esta referencia. Las ampliaciones solicitadas se ejecutan por etapas, conservando datos y restricciones vigentes.

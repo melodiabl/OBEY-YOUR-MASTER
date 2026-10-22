@@ -1,0 +1,57 @@
+{
+  "catalogues": [
+    {
+      "file": "languages/de.json",
+      "leaves": 4641,
+      "empty": 1,
+      "sha256": "96130a46dfaa283546d23fd81a94aa6f42cde4c2e5545f985eb5ad0b7d87d10b"
+    },
+    {
+      "file": "languages/en.json",
+      "leaves": 4641,
+      "empty": 1,
+      "sha256": "469f243ac9f8da4bb252e527a8a5772884a8f46c49b67c5cffca5cee825d94ef"
+    },
+    {
+      "file": "languages/es.json",
+      "leaves": 4641,
+      "empty": 1,
+      "sha256": "5bf7516b764ae7f10245f0796dd1afced55ec99f8794c4f931274785f3d1572e"
+    },
+    {
+      "file": "languages/in.json",
+      "leaves": 4628,
+      "empty": 1,
+      "sha256": "23d775d566108c4430feb9ab905a2c492f4164a5ea4d6872aebedc616f380d23"
+    },
+    {
+      "file": "languages/temp.json",
+      "leaves": 4641,
+      "empty": 1,
+      "sha256": "d3c92d961b954bc6b9f7d14e0a010e511be8c9bfcb2f652e5bd4884a6ee6f741"
+    },
+    {
+      "file": "locales/en.json",
+      "leaves": 545,
+      "empty": 0,
+      "sha256": "e486b81d0872b7a998d9367f1934388f78f6579148d1f2f3ee2948d21d0a31d1"
+    },
+    {
+      "file": "locales/es.json",
+      "leaves": 545,
+      "empty": 0,
+      "sha256": "28399567b683a883775131a671b174c9d8eb24fc82242994c6dc9d34987130a5"
+    }
+  ],
+  "comparisons": {
+    "languages": {
+      "onlyES": [],
+      "onlyEN": []
+    },
+    "locales": {
+      "onlyES": [],
+      "onlyEN": []
+    }
+  },
+  "note": "Coverage is structural; it does not certify translation quality or runtime use."
+}

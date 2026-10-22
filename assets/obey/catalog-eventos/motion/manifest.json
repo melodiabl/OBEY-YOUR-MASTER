@@ -1,0 +1,417 @@
+{
+  "edition": "0.15",
+  "kind": "new-unapproved-motion-variants-of-existing-assets",
+  "families": [
+    {
+      "id": "M01",
+      "sourceKey": "event.q001-member-join",
+      "semanticKeyProposal": "logs.member.joined",
+      "label": "Miembro entró",
+      "module": "Miembros",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q001-member-join.svg",
+      "path": "assets/obey/catalog-eventos/motion/q001-member-join",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Deslizamiento breve de la flecha de entrada.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M02",
+      "sourceKey": "event.q002-member-leave",
+      "semanticKeyProposal": "logs.member.left",
+      "label": "Miembro salió",
+      "module": "Miembros",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q002-member-leave.svg",
+      "path": "assets/obey/catalog-eventos/motion/q002-member-leave",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Deslizamiento breve de la flecha de salida.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M03",
+      "sourceKey": "event.q017-speaker-join",
+      "semanticKeyProposal": "logs.speaker.joined",
+      "label": "Entró a voz",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q017-speaker-join.svg",
+      "path": "assets/obey/catalog-eventos/motion/q017-speaker-join",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Flecha de entrada; altavoz estable.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M04",
+      "sourceKey": "event.q018-speaker-leave",
+      "semanticKeyProposal": "logs.speaker.left",
+      "label": "Salió de voz",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q018-speaker-leave.svg",
+      "path": "assets/obey/catalog-eventos/motion/q018-speaker-leave",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Flecha de salida; altavoz estable.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M05",
+      "sourceKey": "event.q019-microphone-block",
+      "semanticKeyProposal": "logs.microphone.blocked",
+      "label": "Micrófono silenciado",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q019-microphone-block.svg",
+      "path": "assets/obey/catalog-eventos/motion/q019-microphone-block",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "La diagonal atraviesa el micrófono y permanece visible; énfasis suave del trazo.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true,
+      "designRevision": 2,
+      "hasSeparateBadge": false,
+      "geometry": "microphone-with-crossing-slash"
+    },
+    {
+      "id": "M06",
+      "sourceKey": "event.q021-microphone-allow",
+      "semanticKeyProposal": "logs.microphone.allowed",
+      "label": "Micrófono habilitado",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q021-microphone-allow.svg",
+      "path": "assets/obey/catalog-eventos/motion/q021-microphone-allow",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Énfasis suave del indicador habilitado.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M07",
+      "sourceKey": "event.q008-stream-start",
+      "semanticKeyProposal": "logs.stream.started",
+      "label": "Transmisión iniciada",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q008-stream-start.svg",
+      "path": "assets/obey/catalog-eventos/motion/q008-stream-start",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Énfasis del triángulo de inicio.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M08",
+      "sourceKey": "event.q009-stream-stop",
+      "semanticKeyProposal": "logs.stream.stopped",
+      "label": "Transmisión terminada",
+      "module": "Voz",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q009-stream-stop.svg",
+      "path": "assets/obey/catalog-eventos/motion/q009-stream-stop",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Asentamiento del indicador de fin.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M09",
+      "sourceKey": "event.q007-message-edit",
+      "semanticKeyProposal": "logs.message.updated",
+      "label": "Mensaje editado",
+      "module": "Mensajes",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q007-message-edit.svg",
+      "path": "assets/obey/catalog-eventos/motion/q007-message-edit",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Trazo corto del lápiz; el globo conserva su forma.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M10",
+      "sourceKey": "event.q005-message-delete",
+      "semanticKeyProposal": "logs.message.deleted",
+      "label": "Mensaje borrado",
+      "module": "Mensajes",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q005-message-delete.svg",
+      "path": "assets/obey/catalog-eventos/motion/q005-message-delete",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Énfasis breve de la cruz de eliminación.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M11",
+      "sourceKey": "event.q044-role-grant",
+      "semanticKeyProposal": "logs.member.role.added",
+      "label": "Rol concedido",
+      "module": "Roles",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q044-role-grant.svg",
+      "path": "assets/obey/catalog-eventos/motion/q044-role-grant",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Énfasis del signo más sin cambiar su significado.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    },
+    {
+      "id": "M12",
+      "sourceKey": "event.q045-role-revoke",
+      "semanticKeyProposal": "logs.member.role.removed",
+      "label": "Rol retirado",
+      "module": "Roles",
+      "variant": "marca-azul",
+      "sourceSvg": "assets/obey/catalog-eventos/svg/dorado/q045-role-revoke.svg",
+      "path": "assets/obey/catalog-eventos/motion/q045-role-revoke",
+      "png": [
+        "idle-128.png",
+        "idle-256.png"
+      ],
+      "svg": "idle.svg",
+      "gif": "motion.gif",
+      "motion": "Énfasis del signo menos sin convertirlo en cruz.",
+      "approval": "pending-user-review",
+      "discordEmojiId": null,
+      "runtimeRegistered": false,
+      "publish": false,
+      "usage": [
+        "log-title-emoji",
+        "log-thumbnail"
+      ],
+      "notFor": [
+        "progress-clock",
+        "proof-of-action",
+        "voice-recording"
+      ],
+      "fallback": "localized-label-and-static-png",
+      "durationMs": 1920,
+      "frameCount": 11,
+      "staticMatchesFirstFrameGeometry": true
+    }
+  ]
+}

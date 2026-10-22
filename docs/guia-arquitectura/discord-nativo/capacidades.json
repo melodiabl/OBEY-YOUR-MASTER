@@ -1,0 +1,828 @@
+{
+  "edition": "0.12",
+  "kind": "implementation-design-not-runtime-config",
+  "date": "2026-10-22",
+  "capabilities": [
+    {
+      "id": "D01",
+      "label": "Comandos claros e idiomas",
+      "source": "commands",
+      "owners": [
+        "utilities",
+        "architect"
+      ],
+      "priority": "P1",
+      "target": "Localizar nombres/descripciones y entradas comunes sin cambiar valores internos.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D02",
+      "label": "Autocompletado",
+      "source": "commands",
+      "owners": [
+        "music",
+        "utilities"
+      ],
+      "priority": "P1",
+      "target": "Sugerencias de listas y búsquedas con consultas acotadas y caché.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D03",
+      "label": "Menús sobre mensajes y usuarios",
+      "source": "commands",
+      "owners": [
+        "moderation",
+        "profiles",
+        "tickets"
+      ],
+      "priority": "P2",
+      "target": "Reportar mensaje y consultar perfil mediante el caso de uso propietario.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D04",
+      "label": "Selectores de canales, roles y usuarios",
+      "source": "components",
+      "owners": [
+        "architect",
+        "welcome",
+        "tickets",
+        "roles",
+        "logs"
+      ],
+      "priority": "P1",
+      "target": "Configurar recursos por ID real con autorización actual.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D05",
+      "label": "Formularios de texto y opciones",
+      "source": "modals",
+      "owners": [
+        "tickets",
+        "suggestions",
+        "architect",
+        "messages"
+      ],
+      "priority": "P1",
+      "target": "Recoger datos estructurados antes de ejecutar una acción.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D06",
+      "label": "Archivos, casillas y elección única",
+      "source": "components",
+      "owners": [
+        "tickets",
+        "applications",
+        "architect"
+      ],
+      "priority": "P1",
+      "target": "Reporte con adjuntos y preferencias mediante formulario nativo.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D07",
+      "label": "Paneles Components V2",
+      "source": "overview",
+      "owners": [
+        "messages",
+        "tickets",
+        "architect",
+        "utilities"
+      ],
+      "priority": "P2",
+      "target": "Organizar ayuda y configuración con layout nativo, por vista.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D08",
+      "label": "Emojis propios de aplicación",
+      "source": "emoji",
+      "owners": [
+        "shared-assets"
+      ],
+      "priority": "P1",
+      "target": "Publicar diseños elegidos y mantener IDs/hash verificados.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D09",
+      "label": "Tiempos relativos",
+      "source": "formatting",
+      "owners": [
+        "music",
+        "tickets",
+        "giveaways",
+        "reminders",
+        "logs"
+      ],
+      "priority": "P1",
+      "target": "Mostrar fechas/duraciones derivadas de timestamps reales.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D10",
+      "label": "Respuestas privadas y confirmación diferida",
+      "source": "interactions",
+      "owners": [
+        "all-offered-modules"
+      ],
+      "priority": "P1",
+      "target": "Resultados personales y trabajos largos sin alterar paneles comunes.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D11",
+      "label": "Estado del canal de voz",
+      "source": "channels",
+      "owners": [
+        "music"
+      ],
+      "priority": "P1",
+      "target": "Reflejar canción/pausa/espera a partir del reproductor confirmado.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D12",
+      "label": "Encuestas nativas",
+      "source": "polls",
+      "owners": [
+        "suggestions"
+      ],
+      "priority": "P2",
+      "target": "Votaciones simples con resultado final conciliado.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D13",
+      "label": "Eventos programados",
+      "source": "events",
+      "owners": [
+        "events",
+        "voice"
+      ],
+      "priority": "P2",
+      "target": "Crear encuentros de comunidad con zona horaria y alcance definidos.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D14",
+      "label": "AutoMod nativo",
+      "source": "automod",
+      "owners": [
+        "automod",
+        "moderation",
+        "security"
+      ],
+      "priority": "P2",
+      "target": "Administrar reglas propias y registrar acciones sin sancionar dos veces.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D15",
+      "label": "Hilos y organización de foros",
+      "source": "threads",
+      "owners": [
+        "tickets",
+        "suggestions",
+        "applications"
+      ],
+      "priority": "P2",
+      "target": "Elegir organización por caso y permisos; conservar soporte privado.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D16",
+      "label": "Eventos y registros",
+      "source": "gateway",
+      "owners": [
+        "logs",
+        "security",
+        "voice",
+        "roles"
+      ],
+      "priority": "P1",
+      "target": "Procesar cambios de Discord y atribuir actor solo con evidencia.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D17",
+      "label": "Webhooks de integración",
+      "source": "webhooks",
+      "owners": [
+        "feeds",
+        "messages"
+      ],
+      "priority": "P2",
+      "target": "Conectar avisos externos autorizados y mantener la revisión pública.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    },
+    {
+      "id": "D18",
+      "label": "Permisos y disponibilidad",
+      "source": "permissions",
+      "owners": [
+        "all-offered-modules"
+      ],
+      "priority": "P1",
+      "target": "Habilitar acciones según actor, bot, recurso, guild y soporte real.",
+      "platformStatus": "documented",
+      "deliveryStatus": "specified-not-implemented-by-this-edition",
+      "enabledByThisEdition": false,
+      "acceptanceGate": [
+        "version-and-export-check",
+        "permissions-and-audience",
+        "es-en-and-fallback",
+        "relevant-connected-flow"
+      ]
+    }
+  ],
+  "modules": {
+    "analytics": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "applications": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D06",
+        "D15"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "architect": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D01",
+        "D04",
+        "D05",
+        "D06",
+        "D07"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "automation": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "automod": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D14"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "cards": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "collections": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "decoration": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "economy": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "events": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D13"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "feeds": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D17"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "fun": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "giveaways": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D09"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "levels": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "logs": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D04",
+        "D09",
+        "D16"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "messages": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D05",
+        "D07",
+        "D17"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "migrations": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "moderation": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D03",
+        "D14"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "music": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D02",
+        "D09",
+        "D11"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "profiles": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D03"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "reminders": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D09"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "roles": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D04",
+        "D16"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "security": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D14",
+        "D16"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "starboard": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "sticky": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "suggestions": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D05",
+        "D12",
+        "D15"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "templates": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "tickets": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D03",
+        "D04",
+        "D05",
+        "D06",
+        "D07",
+        "D09",
+        "D15"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "utilities": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D01",
+        "D02",
+        "D07"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "verification": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "voice": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D13",
+        "D16"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    },
+    "welcome": {
+      "sharedWhenOffered": [
+        "D01",
+        "D08",
+        "D10",
+        "D18"
+      ],
+      "targeted": [
+        "D04"
+      ],
+      "status": "requires-module-scope-and-consumer-reconciliation",
+      "enableUnavailableDomain": false
+    }
+  },
+  "sources": {
+    "components": "https://docs.discord.com/developers/components/reference",
+    "overview": "https://docs.discord.com/developers/components/overview",
+    "modals": "https://docs.discord.com/developers/components/using-modal-components",
+    "commands": "https://docs.discord.com/developers/interactions/application-commands",
+    "interactions": "https://docs.discord.com/developers/interactions/receiving-and-responding",
+    "emoji": "https://docs.discord.com/developers/resources/emoji",
+    "formatting": "https://docs.discord.com/developers/reference",
+    "channels": "https://docs.discord.com/developers/resources/channel",
+    "polls": "https://docs.discord.com/developers/resources/poll",
+    "events": "https://docs.discord.com/developers/resources/guild-scheduled-event",
+    "automod": "https://docs.discord.com/developers/resources/auto-moderation",
+    "threads": "https://docs.discord.com/developers/topics/threads",
+    "gateway": "https://docs.discord.com/developers/events/overview",
+    "permissions": "https://docs.discord.com/developers/topics/permissions",
+    "webhooks": "https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks",
+    "containerBuilder": "https://discord.js.org/docs/packages/discord.js/14.27.0/ContainerBuilder:Class",
+    "modalFields": "https://discord.js.org/docs/packages/discord.js/14.27.0/ModalSubmitFields:Class",
+    "fileBuilder": "https://discord.js.org/docs/packages/builders/1.14.1/FileUploadBuilder:Class",
+    "checkboxBuilder": "https://discord.js.org/docs/packages/builders/1.14.1/CheckboxBuilder:Class",
+    "radioBuilder": "https://discord.js.org/docs/packages/builders/1.14.1/RadioGroupBuilder:Class"
+  },
+  "runtimeChanges": false,
+  "messageRenderPolicy": {
+    "CM01": "v2-candidate-after-config-adapter",
+    "CM02": "existing-welcome-renderer-preserved",
+    "CM03": "v2-target-with-private-operation-results",
+    "CM04": "private-renderer-with-form-capability-gate",
+    "CM05": "native-webhook-format-or-separate-custom-adapter",
+    "CM06": "v2-candidate-after-publication-service",
+    "Soundy": "preserve-layout-and-12-controls-evaluate-new-renderer-separately",
+    "nativePoll": "separate-message-compatible-with-poll"
+  }
+}

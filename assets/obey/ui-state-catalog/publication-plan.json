@@ -1,0 +1,1837 @@
+{
+  "scope": "candidate-files-not-authorized-execution-not-runtime-map",
+  "candidates": [
+    {
+      "id": "A01",
+      "phase": "idle",
+      "path": "approved/ticket/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "eee9d2de7f921893940ce5263ec96dfdc8753420baf0b30291f2191bbe6768f8",
+      "bytes": 6498,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A01",
+      "phase": "pending-or-active",
+      "path": "approved/ticket/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "a2bc07767735cbfaf9001228d02f460ae4a6a0f075eed09100bbfaa2f1ab466b",
+      "bytes": 116355,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A01",
+      "phase": "result",
+      "path": "approved/ticket/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "2ebe33ebb0bfeb7dd01687bfa002d21e71dd70243d370dc40b85b296e560a921",
+      "bytes": 6888,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A02",
+      "phase": "idle",
+      "path": "approved/favorito/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "3371665bda440be858cd74ca18e6d3f7db94a4090b4b68ac9bbbd98942eb3787",
+      "bytes": 2492,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A02",
+      "phase": "pending-or-active",
+      "path": "approved/favorito/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "9e86b19ebb02d8d73f3bc1f523f82b081c0597e270a985cdc4725600a719ee51",
+      "bytes": 26655,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A02",
+      "phase": "result",
+      "path": "approved/favorito/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "440463df507904f4d1b97e0c5f72026096daf6735b024c83a00845f3d6f736c8",
+      "bytes": 5347,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A03",
+      "phase": "idle",
+      "path": "approved/reproduccion/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "70b551573b6de76eaf11be9c121b0ac287b34e57a6db96a3de138328117253e3",
+      "bytes": 3782,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A03",
+      "phase": "pending-or-active",
+      "path": "approved/reproduccion/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "438dccbef225ea13b4d1e972a38fa3a0c4dd411e5838b4f4fbdc343bba4eff09",
+      "bytes": 25794,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A03",
+      "phase": "result",
+      "path": "approved/reproduccion/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "ec6d2936d1b79ed5e6cf57c2b05239eac40c44a8679cf33eadbe698595042794",
+      "bytes": 2366,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A04",
+      "phase": "idle",
+      "path": "approved/mezcla/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "8ec6a5d910ab531bf23b954a0c0d0a80bb433a53f901bd93b7eb797083a7af0f",
+      "bytes": 3062,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A04",
+      "phase": "pending-or-active",
+      "path": "approved/mezcla/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "22f9ac73756700003750b58de9d55cea3e1319963d26049ac20c7b92891dde87",
+      "bytes": 32434,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A04",
+      "phase": "result",
+      "path": "approved/mezcla/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "a0201b5f6f3c5dcca0c8e8fab374839c1ddb4d1bd0d97c82e04b3a3f17f8b5bf",
+      "bytes": 3201,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A05",
+      "phase": "idle",
+      "path": "approved/repetir/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "76ed2352972e9eb090d53c8adffdb9314573e3733322ea312c9665a70b902650",
+      "bytes": 1940,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A05",
+      "phase": "pending-or-active",
+      "path": "approved/repetir/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "39fbb1226f7fd9564f889423d225289cbd4c2d8e2fda96fa425d9003edc07564",
+      "bytes": 22576,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A05",
+      "phase": "result",
+      "path": "approved/repetir/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "69da3c92a5f5b87c1ceb87a9a8693a16489ecb3146a983f322357655f92a1c22",
+      "bytes": 2073,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A06",
+      "phase": "idle",
+      "path": "approved/autoplay/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "3a0ee8b4f89aea337adce5dc061078f4d9d8eafb1039e68c8141530bd2a0e061",
+      "bytes": 2864,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A06",
+      "phase": "pending-or-active",
+      "path": "approved/autoplay/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "0b32d43e554833037824786be985661fd8c0b757ddde1c57f8b9d76e677402a6",
+      "bytes": 32989,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A06",
+      "phase": "result",
+      "path": "approved/autoplay/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "363f6db5260dae333efbaa039a598ffe0f333fac9033de4735c5a1a8368da2e6",
+      "bytes": 3088,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A07",
+      "phase": "idle",
+      "path": "approved/escudo/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "edffd8c9bcb7c0294a941548faeba0992bc6a57aaa5f9d2f7400173379a2fc0d",
+      "bytes": 2604,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A07",
+      "phase": "pending-or-active",
+      "path": "approved/escudo/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "78e53bf322018d6ae85135629d3e016c8040f2c6a693985a2142ed78ee313f54",
+      "bytes": 39247,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A07",
+      "phase": "result",
+      "path": "approved/escudo/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "658fe3177bbcf5a53d3a7adf64ef566b6d63ce0c426b9ca6b145f81c92043b8d",
+      "bytes": 2875,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A08",
+      "phase": "idle",
+      "path": "approved/avisos/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "4349fa13ab208f17319a59e5696757db838d11bec8b9984bde082a0a6d32fb90",
+      "bytes": 1838,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A08",
+      "phase": "pending-or-active",
+      "path": "approved/avisos/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "1dd32b2523ae37871e32a8a41699d4eaae12cb54b9fdcab05cab66cce9e55309",
+      "bytes": 29176,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A08",
+      "phase": "result",
+      "path": "approved/avisos/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "ca5b31a3b659b58ff64d37d9e43c29dea6747aa3bb50d5ac07f33ab5da33c5fc",
+      "bytes": 2163,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A09",
+      "phase": "idle",
+      "path": "approved/exportar/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "c36d6bac81d8884a0bfc0e4fcbe48ada7179f88b2af77140d487c7dcd1eb0697",
+      "bytes": 1604,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A09",
+      "phase": "pending-or-active",
+      "path": "approved/exportar/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "8a172f851c105049dbeb130a64f24f409242ba5396a8f6063c15d22aff85545f",
+      "bytes": 39608,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A09",
+      "phase": "result",
+      "path": "approved/exportar/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "c9cf334bd0a4f7e59fca14c5e687b3921f4f6b031f3cbb33cfa1b6aafc21af0a",
+      "bytes": 1660,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A10",
+      "phase": "idle",
+      "path": "approved/tarjeta/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "924f9b44a0b8c86a8120b6bb07fef4b5c55c9b14804829d771807b5ec755c674",
+      "bytes": 2161,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A10",
+      "phase": "pending-or-active",
+      "path": "approved/tarjeta/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "c8171d5d511cc62a0d8be73caead6643f8dd0bd572decf9b8b8ceab6fba5a26f",
+      "bytes": 46782,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A10",
+      "phase": "result",
+      "path": "approved/tarjeta/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "f6ea2505a92a0d06c8ad97c4f12dce9e3979646f6053186726a221055c340e92",
+      "bytes": 2670,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A11",
+      "phase": "idle",
+      "path": "approved/confirmacion/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "ebdc2124616dc8b1306bbaafcb4ef37efb7c1b0085a88cfc10d9f5031f5163a9",
+      "bytes": 3493,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A11",
+      "phase": "pending-or-active",
+      "path": "approved/confirmacion/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "ef618e2c75e63980130de9388ab2955203067a817870cc0ea770f729b3cfef2b",
+      "bytes": 25190,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A11",
+      "phase": "result",
+      "path": "approved/confirmacion/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "45c0ad8467cadcdd6c9ea76e3c724b67aff08fca7a3443e53f07fcb92aaff9d4",
+      "bytes": 3475,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A12",
+      "phase": "idle",
+      "path": "approved/sincronizar/idle-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "7d479fd2d36aaff0fa99d0f901e76084e6477a41bfd091715a675a888faa6890",
+      "bytes": 2709,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A12",
+      "phase": "pending-or-active",
+      "path": "approved/sincronizar/motion.gif",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "9491eb824101f3a024217ae700eedaaf1c4fe34a16fce67e4cb4731e3fca6b20",
+      "bytes": 26085,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "A12",
+      "phase": "result",
+      "path": "approved/sincronizar/result-128.png",
+      "approved": true,
+      "eligibleForReview": true,
+      "sha256": "47e9584fb2237bfe1be55f60719a0cbfb47489d7c1df185eb942bfcd6e50f392",
+      "bytes": 3009,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B01",
+      "phase": "idle",
+      "path": "new/previous/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "dbc0b35cfa04aa025591b2e3bcbfec72fa1ac872d1b34a394de08bbc1c73af43",
+      "bytes": 1547,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B02",
+      "phase": "idle",
+      "path": "new/skip/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "072bfe795f18d4768537bf178e1e249ef2be90296492ce999571bbda5fe9b47c",
+      "bytes": 1538,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B03",
+      "phase": "idle",
+      "path": "new/stop/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "4c5dd455220a7ec710dcb11861cd1f1ac2bfd292b8d8e070ccf6facadc30d12d",
+      "bytes": 813,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B04",
+      "phase": "idle",
+      "path": "new/volume-down/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "bfe7dd9c51da68a22f29ae39ba0347aca8a7a5bef10f9745f251c79992c774b1",
+      "bytes": 1802,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B05",
+      "phase": "idle",
+      "path": "new/volume-up/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "e5ead14231dd5e42878c786bdb59a0eee7e1c38a0527c5dea084fa8a1da53157",
+      "bytes": 2436,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B06",
+      "phase": "idle",
+      "path": "new/mute/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "e53cddd0e2e6de89bea51c99cb4479b548e18d77e1ffd0b8c4f79c74db2aa0ea",
+      "bytes": 2024,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B07",
+      "phase": "idle",
+      "path": "new/queue/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "859b051a00bebb96a9cbc68724e6e948efa3ad6cf55cad430973b4b776405589",
+      "bytes": 1004,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B08",
+      "phase": "idle",
+      "path": "new/lyrics/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "6c1027e1cc2964ede38ea237038fcc08c9b29b3d05806b50612af8d6618a19aa",
+      "bytes": 1625,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B09",
+      "phase": "idle",
+      "path": "new/search/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "e9cba1ec08b6b32d80b3170edabcd8921f20ebb48cf82e3140f1565e59190e23",
+      "bytes": 2166,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B09",
+      "phase": "pending",
+      "path": "new/search/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "c4c875f4c9005256bafdda881cfb75eb801a22810a5e7f743be888772d2a429e",
+      "bytes": 16198,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B10",
+      "phase": "idle",
+      "path": "new/album/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "5d77ab7492b71460df7b9a912845443128f553e7147269b7c7be80be0ea053b2",
+      "bytes": 2874,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B11",
+      "phase": "idle",
+      "path": "new/radio/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "859846db7bbee3378bd468894001509174ab94d9e5b0c73cbc74cee12aba3af4",
+      "bytes": 2454,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B12",
+      "phase": "idle",
+      "path": "new/repeat-one/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "77e9c306dbc9bb20d3c7524305e22aa1c8b8b388078bfa0e9d843065ece726e5",
+      "bytes": 2182,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B13",
+      "phase": "idle",
+      "path": "new/claim/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "3b9ac014a2446ccd51c18be932393df5d5e456e16dec64a12f006cd20ab85e4a",
+      "bytes": 2213,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B14",
+      "phase": "idle",
+      "path": "new/close/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "c88d17d3b9cc6674450f5bc10a819e6ad50744b40639d2dddebc4afaf9670c7e",
+      "bytes": 971,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B15",
+      "phase": "idle",
+      "path": "new/reopen/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "106bea17ffba0f2f3f5c19d487ebd124065722c6377de3720748ffaa8118aa86",
+      "bytes": 2337,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B15",
+      "phase": "pending",
+      "path": "new/reopen/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "9fa420ec7735bcaf21c5fbc8b127604b248d56e80286e56da60b25411f6e7266",
+      "bytes": 15426,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B16",
+      "phase": "idle",
+      "path": "new/transcript/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "98a8c512696daf4f695219e391f7bd1645fc8ae6835cbd75f5c78540c20601ed",
+      "bytes": 1406,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B16",
+      "phase": "pending",
+      "path": "new/transcript/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "91abfa34feea02e6121fb73863b461ad7b046ef74a260dafc2ab21eaa23405aa",
+      "bytes": 15326,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B17",
+      "phase": "idle",
+      "path": "new/archive/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "4e7d1b8ad4b1be5772983ccc0f0c6cdaf4c790e432cacde9f3e82610b0954553",
+      "bytes": 1555,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B18",
+      "phase": "idle",
+      "path": "new/rating/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "a5a963fdc45cd917f5baee346379e1910398de23843298dac2f9a1cacf51140d",
+      "bytes": 1556,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B19",
+      "phase": "idle",
+      "path": "new/report/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "5244d6b9ba756974a431ff44b17dae302a30e2f206993139b1c92744ea243b06",
+      "bytes": 2344,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B20",
+      "phase": "idle",
+      "path": "new/support/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "15ef12e2cf86ee7978320eb65c1b1277f9c7c77843a2b4d4053f11db272d9da0",
+      "bytes": 2943,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B20",
+      "phase": "pending",
+      "path": "new/support/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "026b8d1c2fd0b47a9954ff2aa761ef86fb72eb3ff96a803973d26fd0131ca557",
+      "bytes": 21381,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B21",
+      "phase": "idle",
+      "path": "new/technical/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "b7a8f54b0ff76089e4fa753053778cf94544f193ce02a6fbf2be3a10fb07c8bf",
+      "bytes": 2454,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B21",
+      "phase": "pending",
+      "path": "new/technical/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "209bc25c5ceb4c9a4d7be6d3b6e6388248e5d6680d26d47d997b74ee00054e4a",
+      "bytes": 16025,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B22",
+      "phase": "idle",
+      "path": "new/wait/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "69d081ad457f209cce21460f4d96493d29942eab7deee1d06a9bf1f1ba4fdef2",
+      "bytes": 2932,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B22",
+      "phase": "waiting",
+      "path": "new/wait/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "f8af022fecd66706662066ae30bfe89082290aa84a4839ad04ad65eb913aaf93",
+      "bytes": 16374,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B23",
+      "phase": "idle",
+      "path": "new/error/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "8c1358f7dd60cc9d80905916098952bc6667882db62e40da71c1a9a0de9b5d09",
+      "bytes": 3289,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B24",
+      "phase": "idle",
+      "path": "new/warning/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "5244d6b9ba756974a431ff44b17dae302a30e2f206993139b1c92744ea243b06",
+      "bytes": 2344,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B25",
+      "phase": "idle",
+      "path": "new/info/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "540b1e6bf98ab215e060b336734bb6afae637281f97c38eb77d25fd8e604add1",
+      "bytes": 2943,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B26",
+      "phase": "idle",
+      "path": "new/permissions/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "2fb38ea9fa73ce899b9e972622142b86f23461f2e580d3434d6659e4f5c75f0e",
+      "bytes": 1928,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B27",
+      "phase": "idle",
+      "path": "new/empty/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "7e92566ef8bc60a7e71a45d51d1f2a722b4b522c0a34d6647d83cd00f9e316ee",
+      "bytes": 1817,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B28",
+      "phase": "idle",
+      "path": "new/expired/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "3a5cf96e2d43497dd5fbe30b67f8e58e327b3676b55da60655fa9b05c0080ba8",
+      "bytes": 4015,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B29",
+      "phase": "idle",
+      "path": "new/offline/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "794adff2867317b72b76bcd28abe322425296bebd6de9b68bbf301c8e0e7b2fd",
+      "bytes": 2372,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B30",
+      "phase": "idle",
+      "path": "new/reconnect/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "21f2ea6d2612b1605e303df72e097e8c0cf98488625f91380f2aa00386f5acc4",
+      "bytes": 1829,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B30",
+      "phase": "pending",
+      "path": "new/reconnect/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "ce22578ed7ccace6dbd8d6c2d1eed2002526cc41e20a91df6d494ac4b31baaa6",
+      "bytes": 12659,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B31",
+      "phase": "idle",
+      "path": "new/welcome/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "9bbd1bbb738b7c49a32398f8247cdf24cf587600a5af6cd0e28751d820619c0e",
+      "bytes": 1885,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B32",
+      "phase": "idle",
+      "path": "new/farewell/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "3a20d5a5095a15fe9e311dd9549610a24a3170931bd20cb1500d50398734721d",
+      "bytes": 1960,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B33",
+      "phase": "idle",
+      "path": "new/roles/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "764b84b7dc39c42ec86cc0ad13849c3aeacfbdb5e87372eb4b2f35a4099c5b51",
+      "bytes": 2725,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B34",
+      "phase": "idle",
+      "path": "new/moderation/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "f909bec035d9a89488304801f71cb61d8587f631a7aa1a994d019e6597ca5ae8",
+      "bytes": 1739,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B35",
+      "phase": "idle",
+      "path": "new/logs/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "98a8c512696daf4f695219e391f7bd1645fc8ae6835cbd75f5c78540c20601ed",
+      "bytes": 1406,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B35",
+      "phase": "pending",
+      "path": "new/logs/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "91abfa34feea02e6121fb73863b461ad7b046ef74a260dafc2ab21eaa23405aa",
+      "bytes": 15326,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B36",
+      "phase": "idle",
+      "path": "new/levels/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "aea376a054aad343031f23533da9e98ca656b1b392828f8c6f3f10a8f3b9fdd4",
+      "bytes": 1536,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B37",
+      "phase": "idle",
+      "path": "new/profile/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "a9df4e85773b90e5a1a832b0680e45c29c0a039659a7d4d9e34893e69047dbc5",
+      "bytes": 2927,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B38",
+      "phase": "idle",
+      "path": "new/coins/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "e806790ff88318737e557d51bdfce73d911d512c4eb4a0da748a9f49765b559d",
+      "bytes": 3328,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B38",
+      "phase": "pending",
+      "path": "new/coins/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "6dd5226bac40e54f3d6bd1a1e0cf3cf8ec8895850ab4e7530a482a5338fb95a5",
+      "bytes": 24680,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B39",
+      "phase": "idle",
+      "path": "new/gift/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "b3c51557eb6708b54985614665a72d98335f2eaf55bd6eab4115422cd9f49bd5",
+      "bytes": 2522,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B39",
+      "phase": "confirmed-celebration",
+      "path": "new/gift/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "843291d2600f5fd4486da6b25e77f48b165c03f24404e7ac33f037f561ecf37a",
+      "bytes": 23156,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B40",
+      "phase": "idle",
+      "path": "new/games/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "548aad4c80cccb4111de41d26c14545e560ce70ca2d62b37011a34f6785b28f0",
+      "bytes": 2751,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B41",
+      "phase": "idle",
+      "path": "new/giveaways/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "b178eab8973ab836fcc3c7043350d71b1c66e238c0c234c19997753c162fa164",
+      "bytes": 2312,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B42",
+      "phase": "idle",
+      "path": "new/suggestions/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "eb0f15b496824712bc692e982340e8ed4d8354048923e80fc3fd5ba501ec17ad",
+      "bytes": 2120,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B43",
+      "phase": "idle",
+      "path": "new/reminders/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "4fb9392844e8473fb52618970693edde3176f691be2ed25ea6f3d72edf7517ae",
+      "bytes": 1954,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B43",
+      "phase": "pending",
+      "path": "new/reminders/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "62f70276501e30ac54316bf3737e0fa587d0c5cc31db30d6982bf43b78c271ed",
+      "bytes": 17792,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B44",
+      "phase": "idle",
+      "path": "new/messages/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "44f9b4063591526e6fafbabe87082f3ae062388eda7b824736bcb3474aa517fb",
+      "bytes": 1336,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B45",
+      "phase": "idle",
+      "path": "new/automation/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "3280f93729dde3271ada9a2b998d2359f782f77c7269ae7abc155cd1c1fba7bb",
+      "bytes": 2290,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B45",
+      "phase": "pending",
+      "path": "new/automation/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "842ac160b4dddd5be28abd428cb7a97fd016b4a29b544e0031c7f2b566c7b05e",
+      "bytes": 18898,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B46",
+      "phase": "idle",
+      "path": "new/feeds/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "04349535df22a8dc898cc2de03cd81a0dbfbb126b8458cd390cf9473813acf7d",
+      "bytes": 2508,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B46",
+      "phase": "pending",
+      "path": "new/feeds/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "87415319a167d4e64c4776be271e5ab732e85d42d89d076a534b9a42e84395e6",
+      "bytes": 17397,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B47",
+      "phase": "idle",
+      "path": "new/analytics/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "aea376a054aad343031f23533da9e98ca656b1b392828f8c6f3f10a8f3b9fdd4",
+      "bytes": 1536,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B48",
+      "phase": "idle",
+      "path": "new/applications/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "b3dd4828ebc34a3e13b12b236a051208a1f43a00cbd64b93ac752ecaeba3f540",
+      "bytes": 1845,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B48",
+      "phase": "pending",
+      "path": "new/applications/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "a464ce9f75fe831fe6db01ec683efc6c56889ed94eca7291263a8a20ab07cef3",
+      "bytes": 19518,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B49",
+      "phase": "idle",
+      "path": "new/architect/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "141058488705c42d1a8ad30acf032ad0899a3a54e29235d54d608178edb52a53",
+      "bytes": 1662,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B50",
+      "phase": "idle",
+      "path": "new/templates/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "1afe7f867172dbc2b2bc15d1fd286568f42ac1355b01d6242ef9dfa135811595",
+      "bytes": 1933,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B51",
+      "phase": "idle",
+      "path": "new/settings/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "0347b8d747573e08bdbfcda455d61da3573297693ea5bc456c71b4a915202dea",
+      "bytes": 1678,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B52",
+      "phase": "idle",
+      "path": "new/edit/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "77c2db04b39fe605402de125acb0dd340cc70033c397c490ddba195e2edeb9c6",
+      "bytes": 1350,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B53",
+      "phase": "idle",
+      "path": "new/save/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "d27a8444c33ce4db96b4097cf784f6ccc6acd2c65a44625e6fa5c58dc6a3cce1",
+      "bytes": 1656,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B53",
+      "phase": "pending",
+      "path": "new/save/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "1624bcbb7239bc024fe6ea8b108f62a31b1d711c22b191044a614c6513e58538",
+      "bytes": 18336,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B54",
+      "phase": "idle",
+      "path": "new/delete/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "ecb52d1aeba82d8a8f02d28ce8eccd32b47550722b0fee3b1672dcc8b863bace",
+      "bytes": 1862,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B55",
+      "phase": "idle",
+      "path": "new/voice/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "9f0f6a4fc73fa7e63c62cf235467619022fa20f29968d8b24bb7e3657d6241d4",
+      "bytes": 2616,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B56",
+      "phase": "idle",
+      "path": "new/channel/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "0ae5e5516dd1221d4ff2d7f2256f8cecae61d3a57566e3a8f0ae7a5757a8d3bb",
+      "bytes": 1379,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B57",
+      "phase": "idle",
+      "path": "new/members/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "6c7a955c95fbe0ecb23836cd9367fe836c3ec1ebe88f3e43fdb5869f6261bb07",
+      "bytes": 2559,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B58",
+      "phase": "idle",
+      "path": "new/notify-off/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "1fe630bbfe8a95da3bb26a94fcd142685a947d19b3c26c5b0d67ae1d4ef6d5eb",
+      "bytes": 2244,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B59",
+      "phase": "idle",
+      "path": "new/back/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "abfca3323383175005c0bd89800c013be733bc55e0929a6c6fae000db824290c",
+      "bytes": 794,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B60",
+      "phase": "idle",
+      "path": "new/next/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "830037e8ba7ecf4c5044b3efff3f1cd0da89bd26ee86976e466cb6e954beb46a",
+      "bytes": 802,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B61",
+      "phase": "idle",
+      "path": "new/language/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "6dc248752cafab2fed1ab5c5dea451ebeefd44d5089a9013996d30208da7df6c",
+      "bytes": 3948,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B62",
+      "phase": "idle",
+      "path": "new/upload/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "8d3243a7623e8d023bedff5ffa6b3c395ac986f2c09f39236e1ace9682106953",
+      "bytes": 2761,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B62",
+      "phase": "pending",
+      "path": "new/upload/motion.gif",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "7c3a7589b7bbc83a091a7301498cfc1fd0ef6c6ffc082869d69f90c74c55cd2e",
+      "bytes": 17744,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B63",
+      "phase": "idle",
+      "path": "new/send/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "56962a14d17de1aec98aee94abd0297f6dad98d65ece387f0c9efd3926df597c",
+      "bytes": 2331,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B64",
+      "phase": "idle",
+      "path": "new/image/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "49fb43f622a441173e2f2b9e81d7c44270daa1a7e94ea12f39b58a737b71c012",
+      "bytes": 2764,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "B65",
+      "phase": "idle",
+      "path": "new/help/icon-128.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "4f1c5509c99af785f38943e1181f5991bc489834713956e72e4ee51f522f53f9",
+      "bytes": 1877,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C01",
+      "phase": "identity",
+      "path": "platforms/spotify/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "0957b520b4fd4f296c1796efac297613801c917b34adadc410b7e884f34696c6",
+      "bytes": 3172,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C02",
+      "phase": "identity",
+      "path": "platforms/youtube/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "7f2a2b0d453ff858b3d87bd2d1459d7481f1be64022d6b7ea042c651d01459af",
+      "bytes": 1523,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C03",
+      "phase": "identity",
+      "path": "platforms/youtubemusic/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "0461decf35903cb9c9809249195052dc8c463eef2fe63ce37a29942a0ab1defd",
+      "bytes": 3501,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C04",
+      "phase": "identity",
+      "path": "platforms/applemusic/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "21b7f45c7ae88c9d22746b29d94360cea3eca7ee9aae5435ca2fa3c65a766c37",
+      "bytes": 2277,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C05",
+      "phase": "identity",
+      "path": "platforms/soundcloud/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "f7e667780deb74407d76e8a6534801924e7334b5c4128112b23e10a508316b8a",
+      "bytes": 2207,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C06",
+      "phase": "identity",
+      "path": "platforms/deezer/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "cb0c40cb28eb2b5596db496798eb9189024e5937ba5c8ac0c86638a6b8e9f422",
+      "bytes": 3422,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C07",
+      "phase": "identity",
+      "path": "platforms/twitch/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "aa610e9aeae811376ea2374c7fddec5fe337c6ddbb9577bddd2a781bf8a535b5",
+      "bytes": 1252,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C08",
+      "phase": "identity",
+      "path": "platforms/bandcamp/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "97f6ca64bd6c2fa799400fb1b0f8fafa0837e262acbf3c6d99cdca7a96601784",
+      "bytes": 1173,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C09",
+      "phase": "identity",
+      "path": "platforms/discord/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "035171d93b4bf091812bc53f4e631c2fc5ae0c31d753a164c795d42b37dfd1e5",
+      "bytes": 2333,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C10",
+      "phase": "identity",
+      "path": "platforms/github/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "66bbac5f957ca4e700e9a9ccf0ad36f794ff70d14f9f334c5d53f93851d3932f",
+      "bytes": 2837,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C11",
+      "phase": "identity",
+      "path": "platforms/tiktok/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "13fbbb0a13f7058eda7ce2c482644a9aaed31f5f953a2d60210361304e894f18",
+      "bytes": 1998,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C12",
+      "phase": "identity",
+      "path": "platforms/x/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "d732740f9cf548593a846f2db72072eaa938d14d937a5ea1b79ef97acb979cbc",
+      "bytes": 3628,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C13",
+      "phase": "identity",
+      "path": "platforms/paypal/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "8d512940e18ed3de2ee6c33cae107922cfd6e2dcb8604ecd78815cdae548ae9b",
+      "bytes": 2582,
+      "applicationEmojiId": null,
+      "published": false
+    },
+    {
+      "id": "C14",
+      "phase": "identity",
+      "path": "platforms/patreon/color.png",
+      "approved": false,
+      "eligibleForReview": true,
+      "sha256": "16e17ea988c27ba6fc8bad1ebf3451afea83a4e78347da5fdb89985238b61fd6",
+      "bytes": 1665,
+      "applicationEmojiId": null,
+      "published": false
+    }
+  ],
+  "uniqueCandidateFiles": 127,
+  "approvedCandidateFiles": 36,
+  "deduplication": {
+    "eee9d2de7f921893940ce5263ec96dfdc8753420baf0b30291f2191bbe6768f8": [
+      "A01/idle"
+    ],
+    "a2bc07767735cbfaf9001228d02f460ae4a6a0f075eed09100bbfaa2f1ab466b": [
+      "A01/pending-or-active"
+    ],
+    "2ebe33ebb0bfeb7dd01687bfa002d21e71dd70243d370dc40b85b296e560a921": [
+      "A01/result"
+    ],
+    "3371665bda440be858cd74ca18e6d3f7db94a4090b4b68ac9bbbd98942eb3787": [
+      "A02/idle"
+    ],
+    "9e86b19ebb02d8d73f3bc1f523f82b081c0597e270a985cdc4725600a719ee51": [
+      "A02/pending-or-active"
+    ],
+    "440463df507904f4d1b97e0c5f72026096daf6735b024c83a00845f3d6f736c8": [
+      "A02/result"
+    ],
+    "70b551573b6de76eaf11be9c121b0ac287b34e57a6db96a3de138328117253e3": [
+      "A03/idle"
+    ],
+    "438dccbef225ea13b4d1e972a38fa3a0c4dd411e5838b4f4fbdc343bba4eff09": [
+      "A03/pending-or-active"
+    ],
+    "ec6d2936d1b79ed5e6cf57c2b05239eac40c44a8679cf33eadbe698595042794": [
+      "A03/result"
+    ],
+    "8ec6a5d910ab531bf23b954a0c0d0a80bb433a53f901bd93b7eb797083a7af0f": [
+      "A04/idle"
+    ],
+    "22f9ac73756700003750b58de9d55cea3e1319963d26049ac20c7b92891dde87": [
+      "A04/pending-or-active"
+    ],
+    "a0201b5f6f3c5dcca0c8e8fab374839c1ddb4d1bd0d97c82e04b3a3f17f8b5bf": [
+      "A04/result"
+    ],
+    "76ed2352972e9eb090d53c8adffdb9314573e3733322ea312c9665a70b902650": [
+      "A05/idle"
+    ],
+    "39fbb1226f7fd9564f889423d225289cbd4c2d8e2fda96fa425d9003edc07564": [
+      "A05/pending-or-active"
+    ],
+    "69da3c92a5f5b87c1ceb87a9a8693a16489ecb3146a983f322357655f92a1c22": [
+      "A05/result"
+    ],
+    "3a0ee8b4f89aea337adce5dc061078f4d9d8eafb1039e68c8141530bd2a0e061": [
+      "A06/idle"
+    ],
+    "0b32d43e554833037824786be985661fd8c0b757ddde1c57f8b9d76e677402a6": [
+      "A06/pending-or-active"
+    ],
+    "363f6db5260dae333efbaa039a598ffe0f333fac9033de4735c5a1a8368da2e6": [
+      "A06/result"
+    ],
+    "edffd8c9bcb7c0294a941548faeba0992bc6a57aaa5f9d2f7400173379a2fc0d": [
+      "A07/idle"
+    ],
+    "78e53bf322018d6ae85135629d3e016c8040f2c6a693985a2142ed78ee313f54": [
+      "A07/pending-or-active"
+    ],
+    "658fe3177bbcf5a53d3a7adf64ef566b6d63ce0c426b9ca6b145f81c92043b8d": [
+      "A07/result"
+    ],
+    "4349fa13ab208f17319a59e5696757db838d11bec8b9984bde082a0a6d32fb90": [
+      "A08/idle"
+    ],
+    "1dd32b2523ae37871e32a8a41699d4eaae12cb54b9fdcab05cab66cce9e55309": [
+      "A08/pending-or-active"
+    ],
+    "ca5b31a3b659b58ff64d37d9e43c29dea6747aa3bb50d5ac07f33ab5da33c5fc": [
+      "A08/result"
+    ],
+    "c36d6bac81d8884a0bfc0e4fcbe48ada7179f88b2af77140d487c7dcd1eb0697": [
+      "A09/idle"
+    ],
+    "8a172f851c105049dbeb130a64f24f409242ba5396a8f6063c15d22aff85545f": [
+      "A09/pending-or-active"
+    ],
+    "c9cf334bd0a4f7e59fca14c5e687b3921f4f6b031f3cbb33cfa1b6aafc21af0a": [
+      "A09/result"
+    ],
+    "924f9b44a0b8c86a8120b6bb07fef4b5c55c9b14804829d771807b5ec755c674": [
+      "A10/idle"
+    ],
+    "c8171d5d511cc62a0d8be73caead6643f8dd0bd572decf9b8b8ceab6fba5a26f": [
+      "A10/pending-or-active"
+    ],
+    "f6ea2505a92a0d06c8ad97c4f12dce9e3979646f6053186726a221055c340e92": [
+      "A10/result"
+    ],
+    "ebdc2124616dc8b1306bbaafcb4ef37efb7c1b0085a88cfc10d9f5031f5163a9": [
+      "A11/idle"
+    ],
+    "ef618e2c75e63980130de9388ab2955203067a817870cc0ea770f729b3cfef2b": [
+      "A11/pending-or-active"
+    ],
+    "45c0ad8467cadcdd6c9ea76e3c724b67aff08fca7a3443e53f07fcb92aaff9d4": [
+      "A11/result"
+    ],
+    "7d479fd2d36aaff0fa99d0f901e76084e6477a41bfd091715a675a888faa6890": [
+      "A12/idle"
+    ],
+    "9491eb824101f3a024217ae700eedaaf1c4fe34a16fce67e4cb4731e3fca6b20": [
+      "A12/pending-or-active"
+    ],
+    "47e9584fb2237bfe1be55f60719a0cbfb47489d7c1df185eb942bfcd6e50f392": [
+      "A12/result"
+    ],
+    "dbc0b35cfa04aa025591b2e3bcbfec72fa1ac872d1b34a394de08bbc1c73af43": [
+      "B01/idle"
+    ],
+    "072bfe795f18d4768537bf178e1e249ef2be90296492ce999571bbda5fe9b47c": [
+      "B02/idle"
+    ],
+    "4c5dd455220a7ec710dcb11861cd1f1ac2bfd292b8d8e070ccf6facadc30d12d": [
+      "B03/idle"
+    ],
+    "bfe7dd9c51da68a22f29ae39ba0347aca8a7a5bef10f9745f251c79992c774b1": [
+      "B04/idle"
+    ],
+    "e5ead14231dd5e42878c786bdb59a0eee7e1c38a0527c5dea084fa8a1da53157": [
+      "B05/idle"
+    ],
+    "e53cddd0e2e6de89bea51c99cb4479b548e18d77e1ffd0b8c4f79c74db2aa0ea": [
+      "B06/idle"
+    ],
+    "859b051a00bebb96a9cbc68724e6e948efa3ad6cf55cad430973b4b776405589": [
+      "B07/idle"
+    ],
+    "6c1027e1cc2964ede38ea237038fcc08c9b29b3d05806b50612af8d6618a19aa": [
+      "B08/idle"
+    ],
+    "e9cba1ec08b6b32d80b3170edabcd8921f20ebb48cf82e3140f1565e59190e23": [
+      "B09/idle"
+    ],
+    "c4c875f4c9005256bafdda881cfb75eb801a22810a5e7f743be888772d2a429e": [
+      "B09/pending"
+    ],
+    "5d77ab7492b71460df7b9a912845443128f553e7147269b7c7be80be0ea053b2": [
+      "B10/idle"
+    ],
+    "859846db7bbee3378bd468894001509174ab94d9e5b0c73cbc74cee12aba3af4": [
+      "B11/idle"
+    ],
+    "77e9c306dbc9bb20d3c7524305e22aa1c8b8b388078bfa0e9d843065ece726e5": [
+      "B12/idle"
+    ],
+    "3b9ac014a2446ccd51c18be932393df5d5e456e16dec64a12f006cd20ab85e4a": [
+      "B13/idle"
+    ],
+    "c88d17d3b9cc6674450f5bc10a819e6ad50744b40639d2dddebc4afaf9670c7e": [
+      "B14/idle"
+    ],
+    "106bea17ffba0f2f3f5c19d487ebd124065722c6377de3720748ffaa8118aa86": [
+      "B15/idle"
+    ],
+    "9fa420ec7735bcaf21c5fbc8b127604b248d56e80286e56da60b25411f6e7266": [
+      "B15/pending"
+    ],
+    "98a8c512696daf4f695219e391f7bd1645fc8ae6835cbd75f5c78540c20601ed": [
+      "B16/idle",
+      "B35/idle"
+    ],
+    "91abfa34feea02e6121fb73863b461ad7b046ef74a260dafc2ab21eaa23405aa": [
+      "B16/pending",
+      "B35/pending"
+    ],
+    "4e7d1b8ad4b1be5772983ccc0f0c6cdaf4c790e432cacde9f3e82610b0954553": [
+      "B17/idle"
+    ],
+    "a5a963fdc45cd917f5baee346379e1910398de23843298dac2f9a1cacf51140d": [
+      "B18/idle"
+    ],
+    "5244d6b9ba756974a431ff44b17dae302a30e2f206993139b1c92744ea243b06": [
+      "B19/idle",
+      "B24/idle"
+    ],
+    "15ef12e2cf86ee7978320eb65c1b1277f9c7c77843a2b4d4053f11db272d9da0": [
+      "B20/idle"
+    ],
+    "026b8d1c2fd0b47a9954ff2aa761ef86fb72eb3ff96a803973d26fd0131ca557": [
+      "B20/pending"
+    ],
+    "b7a8f54b0ff76089e4fa753053778cf94544f193ce02a6fbf2be3a10fb07c8bf": [
+      "B21/idle"
+    ],
+    "209bc25c5ceb4c9a4d7be6d3b6e6388248e5d6680d26d47d997b74ee00054e4a": [
+      "B21/pending"
+    ],
+    "69d081ad457f209cce21460f4d96493d29942eab7deee1d06a9bf1f1ba4fdef2": [
+      "B22/idle"
+    ],
+    "f8af022fecd66706662066ae30bfe89082290aa84a4839ad04ad65eb913aaf93": [
+      "B22/waiting"
+    ],
+    "8c1358f7dd60cc9d80905916098952bc6667882db62e40da71c1a9a0de9b5d09": [
+      "B23/idle"
+    ],
+    "540b1e6bf98ab215e060b336734bb6afae637281f97c38eb77d25fd8e604add1": [
+      "B25/idle"
+    ],
+    "2fb38ea9fa73ce899b9e972622142b86f23461f2e580d3434d6659e4f5c75f0e": [
+      "B26/idle"
+    ],
+    "7e92566ef8bc60a7e71a45d51d1f2a722b4b522c0a34d6647d83cd00f9e316ee": [
+      "B27/idle"
+    ],
+    "3a5cf96e2d43497dd5fbe30b67f8e58e327b3676b55da60655fa9b05c0080ba8": [
+      "B28/idle"
+    ],
+    "794adff2867317b72b76bcd28abe322425296bebd6de9b68bbf301c8e0e7b2fd": [
+      "B29/idle"
+    ],
+    "21f2ea6d2612b1605e303df72e097e8c0cf98488625f91380f2aa00386f5acc4": [
+      "B30/idle"
+    ],
+    "ce22578ed7ccace6dbd8d6c2d1eed2002526cc41e20a91df6d494ac4b31baaa6": [
+      "B30/pending"
+    ],
+    "9bbd1bbb738b7c49a32398f8247cdf24cf587600a5af6cd0e28751d820619c0e": [
+      "B31/idle"
+    ],
+    "3a20d5a5095a15fe9e311dd9549610a24a3170931bd20cb1500d50398734721d": [
+      "B32/idle"
+    ],
+    "764b84b7dc39c42ec86cc0ad13849c3aeacfbdb5e87372eb4b2f35a4099c5b51": [
+      "B33/idle"
+    ],
+    "f909bec035d9a89488304801f71cb61d8587f631a7aa1a994d019e6597ca5ae8": [
+      "B34/idle"
+    ],
+    "aea376a054aad343031f23533da9e98ca656b1b392828f8c6f3f10a8f3b9fdd4": [
+      "B36/idle",
+      "B47/idle"
+    ],
+    "a9df4e85773b90e5a1a832b0680e45c29c0a039659a7d4d9e34893e69047dbc5": [
+      "B37/idle"
+    ],
+    "e806790ff88318737e557d51bdfce73d911d512c4eb4a0da748a9f49765b559d": [
+      "B38/idle"
+    ],
+    "6dd5226bac40e54f3d6bd1a1e0cf3cf8ec8895850ab4e7530a482a5338fb95a5": [
+      "B38/pending"
+    ],
+    "b3c51557eb6708b54985614665a72d98335f2eaf55bd6eab4115422cd9f49bd5": [
+      "B39/idle"
+    ],
+    "843291d2600f5fd4486da6b25e77f48b165c03f24404e7ac33f037f561ecf37a": [
+      "B39/confirmed-celebration"
+    ],
+    "548aad4c80cccb4111de41d26c14545e560ce70ca2d62b37011a34f6785b28f0": [
+      "B40/idle"
+    ],
+    "b178eab8973ab836fcc3c7043350d71b1c66e238c0c234c19997753c162fa164": [
+      "B41/idle"
+    ],
+    "eb0f15b496824712bc692e982340e8ed4d8354048923e80fc3fd5ba501ec17ad": [
+      "B42/idle"
+    ],
+    "4fb9392844e8473fb52618970693edde3176f691be2ed25ea6f3d72edf7517ae": [
+      "B43/idle"
+    ],
+    "62f70276501e30ac54316bf3737e0fa587d0c5cc31db30d6982bf43b78c271ed": [
+      "B43/pending"
+    ],
+    "44f9b4063591526e6fafbabe87082f3ae062388eda7b824736bcb3474aa517fb": [
+      "B44/idle"
+    ],
+    "3280f93729dde3271ada9a2b998d2359f782f77c7269ae7abc155cd1c1fba7bb": [
+      "B45/idle"
+    ],
+    "842ac160b4dddd5be28abd428cb7a97fd016b4a29b544e0031c7f2b566c7b05e": [
+      "B45/pending"
+    ],
+    "04349535df22a8dc898cc2de03cd81a0dbfbb126b8458cd390cf9473813acf7d": [
+      "B46/idle"
+    ],
+    "87415319a167d4e64c4776be271e5ab732e85d42d89d076a534b9a42e84395e6": [
+      "B46/pending"
+    ],
+    "b3dd4828ebc34a3e13b12b236a051208a1f43a00cbd64b93ac752ecaeba3f540": [
+      "B48/idle"
+    ],
+    "a464ce9f75fe831fe6db01ec683efc6c56889ed94eca7291263a8a20ab07cef3": [
+      "B48/pending"
+    ],
+    "141058488705c42d1a8ad30acf032ad0899a3a54e29235d54d608178edb52a53": [
+      "B49/idle"
+    ],
+    "1afe7f867172dbc2b2bc15d1fd286568f42ac1355b01d6242ef9dfa135811595": [
+      "B50/idle"
+    ],
+    "0347b8d747573e08bdbfcda455d61da3573297693ea5bc456c71b4a915202dea": [
+      "B51/idle"
+    ],
+    "77c2db04b39fe605402de125acb0dd340cc70033c397c490ddba195e2edeb9c6": [
+      "B52/idle"
+    ],
+    "d27a8444c33ce4db96b4097cf784f6ccc6acd2c65a44625e6fa5c58dc6a3cce1": [
+      "B53/idle"
+    ],
+    "1624bcbb7239bc024fe6ea8b108f62a31b1d711c22b191044a614c6513e58538": [
+      "B53/pending"
+    ],
+    "ecb52d1aeba82d8a8f02d28ce8eccd32b47550722b0fee3b1672dcc8b863bace": [
+      "B54/idle"
+    ],
+    "9f0f6a4fc73fa7e63c62cf235467619022fa20f29968d8b24bb7e3657d6241d4": [
+      "B55/idle"
+    ],
+    "0ae5e5516dd1221d4ff2d7f2256f8cecae61d3a57566e3a8f0ae7a5757a8d3bb": [
+      "B56/idle"
+    ],
+    "6c7a955c95fbe0ecb23836cd9367fe836c3ec1ebe88f3e43fdb5869f6261bb07": [
+      "B57/idle"
+    ],
+    "1fe630bbfe8a95da3bb26a94fcd142685a947d19b3c26c5b0d67ae1d4ef6d5eb": [
+      "B58/idle"
+    ],
+    "abfca3323383175005c0bd89800c013be733bc55e0929a6c6fae000db824290c": [
+      "B59/idle"
+    ],
+    "830037e8ba7ecf4c5044b3efff3f1cd0da89bd26ee86976e466cb6e954beb46a": [
+      "B60/idle"
+    ],
+    "6dc248752cafab2fed1ab5c5dea451ebeefd44d5089a9013996d30208da7df6c": [
+      "B61/idle"
+    ],
+    "8d3243a7623e8d023bedff5ffa6b3c395ac986f2c09f39236e1ace9682106953": [
+      "B62/idle"
+    ],
+    "7c3a7589b7bbc83a091a7301498cfc1fd0ef6c6ffc082869d69f90c74c55cd2e": [
+      "B62/pending"
+    ],
+    "56962a14d17de1aec98aee94abd0297f6dad98d65ece387f0c9efd3926df597c": [
+      "B63/idle"
+    ],
+    "49fb43f622a441173e2f2b9e81d7c44270daa1a7e94ea12f39b58a737b71c012": [
+      "B64/idle"
+    ],
+    "4f1c5509c99af785f38943e1181f5991bc489834713956e72e4ee51f522f53f9": [
+      "B65/idle"
+    ],
+    "0957b520b4fd4f296c1796efac297613801c917b34adadc410b7e884f34696c6": [
+      "C01/identity"
+    ],
+    "7f2a2b0d453ff858b3d87bd2d1459d7481f1be64022d6b7ea042c651d01459af": [
+      "C02/identity"
+    ],
+    "0461decf35903cb9c9809249195052dc8c463eef2fe63ce37a29942a0ab1defd": [
+      "C03/identity"
+    ],
+    "21b7f45c7ae88c9d22746b29d94360cea3eca7ee9aae5435ca2fa3c65a766c37": [
+      "C04/identity"
+    ],
+    "f7e667780deb74407d76e8a6534801924e7334b5c4128112b23e10a508316b8a": [
+      "C05/identity"
+    ],
+    "cb0c40cb28eb2b5596db496798eb9189024e5937ba5c8ac0c86638a6b8e9f422": [
+      "C06/identity"
+    ],
+    "aa610e9aeae811376ea2374c7fddec5fe337c6ddbb9577bddd2a781bf8a535b5": [
+      "C07/identity"
+    ],
+    "97f6ca64bd6c2fa799400fb1b0f8fafa0837e262acbf3c6d99cdca7a96601784": [
+      "C08/identity"
+    ],
+    "035171d93b4bf091812bc53f4e631c2fc5ae0c31d753a164c795d42b37dfd1e5": [
+      "C09/identity"
+    ],
+    "66bbac5f957ca4e700e9a9ccf0ad36f794ff70d14f9f334c5d53f93851d3932f": [
+      "C10/identity"
+    ],
+    "13fbbb0a13f7058eda7ce2c482644a9aaed31f5f953a2d60210361304e894f18": [
+      "C11/identity"
+    ],
+    "d732740f9cf548593a846f2db72072eaa938d14d937a5ea1b79ef97acb979cbc": [
+      "C12/identity"
+    ],
+    "8d512940e18ed3de2ee6c33cae107922cfd6e2dcb8604ecd78815cdae548ae9b": [
+      "C13/identity"
+    ],
+    "16e17ea988c27ba6fc8bad1ebf3451afea83a4e78347da5fdb89985238b61fd6": [
+      "C14/identity"
+    ]
+  },
+  "realApplicationId": null,
+  "rule": "Only 128px PNG/GIF with selected consumers; preserve existing live IDs; reconcile registry then run existing operational synchronizer. Do not upload every source, poster, variant or background."
+}

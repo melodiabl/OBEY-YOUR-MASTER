@@ -1732,3 +1732,12 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Reproducir búsqueda escasa de adela, respuesta nativa album y API 50006 de radio; corregir selectores, colecciones y transiciones vacías. 19 grupos temporales, consulta real 11 pistas/siete álbumes/álbum de 11 canciones y 25 originales pasan. [Alcance](../docs/guia-arquitectura/BUSQUEDAS_ALBUMES_RADIO.md).
 - [x] Desplegar `07da107`: 31 hashes, 25 tests en imagen limpia, búsqueda desde el contenedor y PCM de una radio, servicios saludables y respaldo/reversión conservados; Trinium 02 principal, respaldos públicos y privado apagado. [Evidencia](../docs/platform/evidence/search-radio-deployment-20261022.json).
 - [ ] Recorrido y escucha reales en Discord; conservar pendientes de letras y plan global.
+
+### Entrega integrada 0.15 · 23/10/2026
+
+- [x] Extraer/verificar 3.908 archivos y borrar ZIP; conciliar guías/materiales con avances del checkout, sin aplicar bootstrap o código antiguo. [Recepción](../docs/guia-arquitectura/CONCILIACION_2026-10-23.md).
+- [x] Incorporar 1.034 materiales y guías/contratos; conservar aprobaciones, bindings y estados pendientes, sin publicación.
+- [x] P0 parcial: versiones efectivas y 675 candidatos actuales; loader slash offline de la imagen: 20 entradas/144 operaciones. Verificar datos/imágenes/enlaces y 31 hashes protegidos.
+- [ ] Completar G01/G02 globales: prefix/aliases, propietarios, compatibilidad y lock/CI del cliente objetivo.
+- [ ] P1: migrar Shoukaku a lavalink-client con una única cola y aceptación de fin/skip/stop/autoplay/manual/recuperación; conservar doce controles, favoritos y reloj.
+- [ ] P2–P6 y puertas del maestro: permisos/datos/idiomas/materiales por recorrido; /servidor, eventos, sandbox premium/votos y escalado según contratos, sin cerrar funciones por documentación.

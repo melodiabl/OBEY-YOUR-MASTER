@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "receivedDate": "2026-10-23",
+  "edition": "0.15",
+  "archive": {
+    "originalPath": "/tmp/0e312f3c-b2c6-4ed1-8498-f9aa67b005cd.zip",
+    "sha256": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+    "compressedBytes": 196120760,
+    "uncompressedBytes": 314005881,
+    "entries": 3908,
+    "verifiedFiles": 3908,
+    "crcValidated": true,
+    "removedAfterVerification": true
+  },
+  "extractedRoot": "/home/OBEY_Implementacion_2026-10-23/OBEY_Implementacion",
+  "checkoutAtReceipt": "cea13f03c543d128de67eed74c2d709f78931be6",
+  "sourceBaseCommit": "c8ba6d3ee86515813e68a028e1221d093301e91b",
+  "sourceBootstrapCommitNotApplied": "887bb6e0af444ad771fed8c39be19ed746391aba",
+  "sourceComparison": {
+    "new": 1207,
+    "same": 2535,
+    "different": 166
+  },
+  "adoption": {
+    "files": 1229,
+    "newMaterialFiles": 1034,
+    "guideFiles": 190,
+    "rootReferenceFiles": 5,
+    "progressDocumentsMerged": 6,
+    "renamedPaths": {
+      "assets/obey/ui-state-catalog/module-materials.json": "assets/obey/ui-state-catalog/capability-materials.json"
+    },
+    "referencesAdapted": 37,
+    "catalogManifestHashesReconciled": [
+      "README.md",
+      "platforms/sources/LICENSE-SIMPLE-ICONS.md",
+      "tools/LEER.md"
+    ],
+    "temporarySourceArtifactsNotRestored": 7,
+    "generationHelpersNotRestored": 2,
+    "formatNormalizations": [
+      {
+        "path": "assets/obey/ui-state-catalog/platforms/sources/LICENSE-SIMPLE-ICONS.md",
+        "kind": "single_final_newline"
+      },
+      {
+        "path": "docs/guia-arquitectura/comunidad/MENSAJES_DE_LA_COMUNIDAD.md",
+        "kind": "markdown_hard_break_spaces_to_backslash"
+      },
+      {
+        "path": "docs/guia-arquitectura/investigacion-20261022/comandos-base.csv",
+        "kind": "CRLF_to_LF_preserving_CSV_fields"
+      },
+      {
+        "path": "docs/guia-arquitectura/cobertura-eventos/audit-log.csv",
+        "kind": "CRLF_to_LF_preserving_CSV_fields"
+      },
+      {
+        "path": "docs/guia-arquitectura/cobertura-eventos/gateway.csv",
+        "kind": "CRLF_to_LF_preserving_CSV_fields"
+      },
+      {
+        "path": "docs/guia-arquitectura/cobertura-eventos/materiales.csv",
+        "kind": "CRLF_to_LF_preserving_CSV_fields"
+      },
+      {
+        "path": "docs/guia-arquitectura/auditoria-recursos/replacements.csv",
+        "kind": "CRLF_to_LF_preserving_CSV_fields"
+      },
+      {
+        "path": "docs/guia-arquitectura/investigacion-20261022/referencias/ARCANE-LICENSE.txt",
+        "kind": "single_final_newline"
+      },
+      {
+        "path": "docs/guia-arquitectura/investigacion-20261022/referencias/YAGPDB-LICENSE.txt",
+        "kind": "single_final_newline"
+      }
+    ]
+  },
+  "sourceManifests": {
+    "assets/obey/ui-state-catalog/files.json": {
+      "matched": 447,
+      "mismatches": []
+    },
+    "assets/obey/catalog-eventos/motion/files.json": {
+      "matched": 51,
+      "mismatches": []
+    },
+    "docs/guia-arquitectura/materiales-20261022/validacion.json": {
+      "matched": 59,
+      "mismatches": []
+    }
+  },
+  "validation": {
+    "parsed": {
+      "json": 73,
+      "html": 5,
+      "svg": 420
+    },
+    "parseErrors": [],
+    "htmlLocalLinksChecked": 59,
+    "brokenHtmlLinks": [],
+    "protectedRuntimeHashesMatched": 31,
+    "decodedImages": {
+      "png": 539,
+      "gif": 50
+    },
+    "dimensions": {
+      "1200x430": 1,
+      "128x128": 453,
+      "1254x1254": 4,
+      "256x256": 109,
+      "1200x935": 4,
+      "1200x730": 1,
+      "1200x320": 1,
+      "1200x930": 1,
+      "1200x815": 1,
+      "1200x1040": 2,
+      "1250x2988": 2,
+      "1160x520": 1,
+      "1100x1040": 1,
+      "994x466": 1,
+      "844x480": 1,
+      "854x480": 1,
+      "760x395": 1,
+      "800x200": 1,
+      "652x456": 1,
+      "652x540": 1,
+      "652x331": 1
+    },
+    "gifVerification": "Canvas decoded first frame; no claim of visual approval or per-frame rendering",
+    "approvedRuntimeBindingsChanged": false,
+    "runtimeCodeOrBindingsChanged": false,
+    "dependenciesChanged": false,
+    "originalTestFilesRetained": 3,
+    "newPermanentTestScripts": 0,
+    "activeUiCatalogHashesMatched": 446,
+    "finalReview": {
+      "adoptedFileHashesMatched": 1229,
+      "activeCatalogHashesMatched": 497,
+      "sourceAssetGeneratorsSyntaxOnly": 3,
+      "completedProgressChecksRemoved": 0,
+      "diffWhitespaceErrors": 0,
+      "highConfidenceCredentialPatternMatches": 0,
+      "scopeRestrictedToDocumentationAndReferenceAssets": true
+    }
+  },
+  "commandInventory": {
+    "candidateFiles": 675,
+    "prefixCandidateFiles": 531,
+    "slashCandidateFiles": 144,
+    "literalNames": 612,
+    "restrictedCandidates": 0,
+    "zipCandidateFiles": 674,
+    "slashCompiler": {
+      "source": "actual deployed-image slash loader, offline client maps, no registration",
+      "groups": 20,
+      "operations": 144,
+      "handlerMapSize": 144,
+      "loaderMessages": 0,
+      "gatewayOpened": false,
+      "network": "none"
+    },
+    "prefixRegistrationOrBehaviorClaimed": false
+  },
+  "runtimeObserved": {
+    "node": "v22.23.2",
+    "discord": "14.27.0",
+    "shoukaku": "4.3.0",
+    "zod": "4.1.12",
+    "followRedirects": "1.16.1",
+    "selectedNode": "trinium-02",
+    "privateEnabled": false,
+    "code": "07da107f020d40d825373af4cd5f35d231a838da",
+    "image": "078d7a2807c82dce298cc9f3afe44f4ea7874c3ac600222fcb3d0ae95cc5e667",
+    "containerId": "4d7b3f4c3556f289481804045e6d1c659e4c4ba0ae20f3bd82ff1e1ecd450af2",
+    "health": "healthy",
+    "restarts": 0,
+    "privateContainerState": "created"
+  },
+  "planning": {
+    "existingBaseCapabilities": 32,
+    "existingBaseTasks": 140,
+    "newResearchTasks": 25,
+    "targetMusicClient": "lavalink-client",
+    "targetClientInstalled": false,
+    "newPublicEntryProposed": "servidor",
+    "newPublicEntryRegistered": false,
+    "newPaymentsActivated": false,
+    "newLocalesDeclaredComplete": false,
+    "materialReviewStatesPreserved": true
+  },
+  "deployedByThisAdoption": false,
+  "discordEmojiPublished": false,
+  "externalMessagesSent": false,
+  "productionDataWritten": false,
+  "pushed": false,
+  "temporaryVerifiersRetained": false,
+  "remaining": [
+    "G01/G02 global acceptance: prefix registry/aliases and operation owners; target migration lock pin still pending",
+    "P1 lavalink-client migration with one queue authority, continuity, cancellation and recovery matrix",
+    "Runtime bindings/publication only for approved material and verified consumers",
+    "P2-P6 and existing plan acceptance remain open"
+  ]
+}

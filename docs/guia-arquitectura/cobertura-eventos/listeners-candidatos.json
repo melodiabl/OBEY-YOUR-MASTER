@@ -1,0 +1,680 @@
+[
+  {
+    "file": "handlers/logger.js",
+    "line": 30,
+    "event": "channelCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 34,
+    "event": "channelDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 38,
+    "event": "channelPinsUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 42,
+    "event": "channelUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 55,
+    "event": "emojiCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 59,
+    "event": "emojiDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 63,
+    "event": "emojiUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 68,
+    "event": "roleCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 72,
+    "event": "roleDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 76,
+    "event": "roleUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 87,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 101,
+    "event": "guildMemberRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 111,
+    "event": "guildMembersChunk",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 120,
+    "event": "guildMemberUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 137,
+    "event": "guildBanAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 143,
+    "event": "guildBanRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 150,
+    "event": "messageDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 158,
+    "event": "messageDeleteBulk",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 164,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/logger.js",
+    "line": 173,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antiselfbot.js",
+    "line": 13,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antiselfbot.js",
+    "line": 16,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/boostlog.js",
+    "line": 5,
+    "event": "guildMemberUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/mute.js",
+    "line": 9,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/mute.js",
+    "line": 172,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 26,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 32,
+    "event": "guildCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 34,
+    "event": "inviteCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 40,
+    "event": "inviteDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 44,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/invitetracking.js",
+    "line": 82,
+    "event": "guildMemberRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/loaddb.js",
+    "line": 115,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/leave.js",
+    "line": 16,
+    "event": "guildMemberRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/jointocreate.js",
+    "line": 33,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/jointocreate.js",
+    "line": 40,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/membercount.js",
+    "line": 36,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/jobs.js",
+    "line": 41,
+    "event": "dbReady",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ghost_ping_detector.js",
+    "line": 5,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ghost_ping_detector.js",
+    "line": 21,
+    "event": "messageDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antispam.js",
+    "line": 13,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antispam.js",
+    "line": 16,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 28,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 43,
+    "event": "guildCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 55,
+    "event": "inviteCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 73,
+    "event": "inviteDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 97,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1236,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1321,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/welcome.js",
+    "line": 1465,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/keyword.js",
+    "line": 8,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/blacklist.js",
+    "line": 12,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 22,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1581,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 1975,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ticketevent.js",
+    "line": 2076,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/autoembed.js",
+    "line": 5,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 51,
+    "event": "messageReactionAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/reactionrole.js",
+    "line": 207,
+    "event": "messageReactionRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ranking.js",
+    "line": 22,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ranking.js",
+    "line": 1535,
+    "event": "ready",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ranking.js",
+    "line": 1554,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/validcode.js",
+    "line": 5,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/roster.js",
+    "line": 48,
+    "event": "guildMemberUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/suggest.js",
+    "line": 10,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/suggest.js",
+    "line": 150,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/aichat.js",
+    "line": 11,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/aichat.js",
+    "line": 43,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/aichat.js",
+    "line": 77,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/aichat.js",
+    "line": 107,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/aichat.js",
+    "line": 149,
+    "event": "messageDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 243,
+    "event": "guildMemberAdd",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 1129,
+    "event": "guildMemberRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 1732,
+    "event": "guildMemberRemove",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 2334,
+    "event": "channelCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 2369,
+    "event": "channelCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 3100,
+    "event": "channelDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 3694,
+    "event": "roleCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anti_nuke.js",
+    "line": 4424,
+    "event": "roleDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antimention.js",
+    "line": 12,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antimention.js",
+    "line": 15,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antilinks.js",
+    "line": 13,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antilinks.js",
+    "line": 16,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 96,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 112,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 139,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 149,
+    "event": "guildCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/extraevents.js",
+    "line": 179,
+    "event": "guildDelete",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anticaps.js",
+    "line": 12,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/anticaps.js",
+    "line": 15,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antidiscord.js",
+    "line": 29,
+    "event": "messageUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/antidiscord.js",
+    "line": 34,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/epicgamesverification.js",
+    "line": 14,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/counter.js",
+    "line": 4,
+    "event": "messageCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/ticket.js",
+    "line": 16,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/joinvc.js",
+    "line": 10,
+    "event": "voiceStateUpdate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/music/index.js",
+    "line": 735,
+    "event": "interactionCreate",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "handlers/music/index.js",
+    "line": 962,
+    "event": "dbReady",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "bootstrap/dashboard.js",
+    "line": 10,
+    "event": "dbReady",
+    "evidence": "literal-listener-candidate-not-runtime-proof"
+  },
+  {
+    "file": "events/guild/interactionCreate.js",
+    "line": 1,
+    "event": "interactionCreate",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/guild/threadCreate.js",
+    "line": 1,
+    "event": "threadCreate",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/guild/messageCreate.js",
+    "line": 1,
+    "event": "messageCreate",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/warn.js",
+    "line": 1,
+    "event": "warn",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/shardReconnecting.js",
+    "line": 1,
+    "event": "shardReconnecting",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/disconnect.js",
+    "line": 1,
+    "event": "disconnect",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/reconnecting.js",
+    "line": 1,
+    "event": "reconnecting",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/shardDisconnect.js",
+    "line": 1,
+    "event": "shardDisconnect",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/error.js",
+    "line": 1,
+    "event": "error",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/ready.js",
+    "line": 1,
+    "event": "ready",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/shardResume.js",
+    "line": 1,
+    "event": "shardResume",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/shardReady.js",
+    "line": 1,
+    "event": "shardReady",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/shardError.js",
+    "line": 1,
+    "event": "shardError",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/debug.js",
+    "line": 1,
+    "event": "debug",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  },
+  {
+    "file": "events/client/rateLimit.js",
+    "line": 1,
+    "event": "rateLimit",
+    "evidence": "event-file-candidate-through-loader-not-runtime-proof"
+  }
+]

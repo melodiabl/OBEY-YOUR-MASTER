@@ -1,0 +1,50 @@
+{
+  "discordNative": {
+    "picker": {
+      "channel": "Elegí un canal",
+      "role": "Elegí un rol",
+      "user": "Elegí una persona",
+      "invalid": "Ese recurso no está disponible para esta función."
+    },
+    "form": {
+      "report": "Reportar un error",
+      "area": "¿Dónde ocurrió?",
+      "music": "Música",
+      "tickets": "Tickets",
+      "other": "Otro",
+      "description": "Contanos qué pasó y cómo repetirlo.",
+      "evidence": "Captura o archivo opcional",
+      "reproducible": "Pude repetir el error",
+      "invalidFile": "No pudimos aceptar ese archivo. Revisá su formato y tamaño.",
+      "expired": "Este formulario expiró. Abrilo de nuevo para continuar."
+    },
+    "voice": {
+      "playing": "Sonando: {title} — {artist}",
+      "paused": "Reproducción pausada",
+      "waiting": "Esperando canciones",
+      "permission": "OBEY no pudo actualizar el estado del canal. La reproducción continúa."
+    },
+    "time": {
+      "ends": "Finaliza {relativeTime}",
+      "opened": "Abierto {relativeTime}",
+      "estimated": "Fin estimado: {relativeTime}"
+    },
+    "poll": {
+      "preview": "Revisá la encuesta antes de publicarla.",
+      "unknown": "El resultado todavía no está disponible."
+    },
+    "event": {
+      "preview": "Revisá la fecha, la zona horaria y el destino del evento.",
+      "created": "Evento creado: {eventName}."
+    },
+    "automod": {
+      "review": "Revisá la regla y sus excepciones antes de aplicarla.",
+      "saved": "Regla de OBEY guardada."
+    },
+    "capability": {
+      "unavailable": "Esta función todavía no está habilitada en este servidor.",
+      "denied": "No hay permisos suficientes para completar esta acción.",
+      "notReady": "OBEY todavía está preparando sus servicios. Intentá de nuevo en un momento."
+    }
+  }
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "id": "MUSIC-01",
+    "file": "handlers/music/searchui.js",
+    "line": 15,
+    "sourceHash": "37df80cf3498b79ad2b12886d888e01bb56a919177d17192fb2bfaa538995846",
+    "finding": "El selector legacy utiliza ordinales Unicode; playui usa icon.music/icon.album.",
+    "implementationAction": "Unificar consumidores; conservar ordinal en el label y resolver tipo mediante registry.emoji.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "MUSIC-02",
+    "file": "handlers/music/searchui.js",
+    "line": 21,
+    "sourceHash": "37df80cf3498b79ad2b12886d888e01bb56a919177d17192fb2bfaa538995846",
+    "finding": "Un emoji de componente puede convertirse en [object Object] al interpolarlo en texto.",
+    "implementationAction": "Usar registry.markup para texto y registry.emoji para componentes; no interpolar objetos.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "MUSIC-03",
+    "file": "handlers/music/ui.js",
+    "line": 17,
+    "sourceHash": "2541fcd0ed3efbcf3be6ecb5bcbd23ca0e0e0398b9dd968515f1f0833f74c94a",
+    "finding": "El helper devuelve el mismo E.music para varias plataformas y declara IDs m2_ separados.",
+    "implementationAction": "Trazar consumidores activos, unificar presentación y conservar la compatibilidad de interacciones; usar brand.* para identidad de plataforma.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "MUSIC-04",
+    "file": "handlers/music/embeds.js",
+    "line": 16,
+    "sourceHash": "af5a2078f99e780f107fd2e3461fb412477fde5b488e387557f6bde2513df222",
+    "finding": "Aún existen mensajes y fragmentos españoles escritos directamente en código.",
+    "implementationAction": "Conciliar con i18n, incluidas cola, LIVE, estado vacío y duración; no contar los JSON nuevos como cobertura de esos textos.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "MUSIC-05",
+    "file": "handlers/music/controls.js",
+    "line": 9,
+    "sourceHash": "f0fbb9c6dd4bd0f49a545205193482efdbaecebc2788b04e0551af353f9bce56",
+    "finding": "Los doce controles se construyen desde el contrato central; no hay pending-state visual universal.",
+    "implementationAction": "Añadir presentación de estado desde el servicio, manteniendo IDs y la disposición de Soundy.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "ASSET-01",
+    "file": "handlers/assets/system.js",
+    "line": 11,
+    "sourceHash": "05a90a67e69cde6599b16e182f89da6eb170295e06c7e73b1cf1e17861d1dc9e",
+    "finding": "El resolvedor ya diferencia contenido de OBEY y plantillas del usuario.",
+    "implementationAction": "Preservar ese límite: no pasar mensajes finales del usuario por sustitución global.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "ASSET-02",
+    "file": "handlers/assets/registry.js",
+    "line": 88,
+    "sourceHash": "fa623b1c778db32effa23cef143d1ad32d7a1ec76ce8540c5fc50dacbb760516",
+    "finding": "Ya existe validación del mapa de IDs, nombres, hashes y disponibilidad.",
+    "implementationAction": "Extender este registro; no introducir otro mapa runtime independiente ni IDs inventados.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "GAME-01",
+    "file": "handlers/assets/system.js",
+    "line": 79,
+    "sourceHash": "05a90a67e69cde6599b16e182f89da6eb170295e06c7e73b1cf1e17861d1dc9e",
+    "finding": "La representación visual de juegos tiene una frontera específica.",
+    "implementationAction": "Preservar símbolos del motor; cambiar solo su render y verificar predicados de reacción.",
+    "status": "documented-not-runtime-fixed"
+  },
+  {
+    "id": "I18N-01",
+    "file": "handlers/i18n/index.js",
+    "line": 2,
+    "sourceHash": "47bffd3ebf9afe378d5866bb4f519ecc76fbaa2c23a9d3f22b706df8ca9fc455",
+    "finding": "El normalizador pierde la región y el servicio carga solo dos catálogos nuevos.",
+    "implementationAction": "No anunciar variantes regionales o un idioma legacy completo por el nombre del archivo; revisar consumidores y fallback.",
+    "status": "documented-not-runtime-fixed"
+  }
+]

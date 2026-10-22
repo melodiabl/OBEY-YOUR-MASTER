@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-22",
+  "baselineLibraryVersion": 11,
+  "baselineEdition": "0.12",
+  "referenceSnapshots": [
+    {
+      "source": "https://github.com/discord/discord-api-docs/blob/main/developers/events/gateway-events.mdx",
+      "sha256": "b2a053065e3ce5335e5f5ed4641307f32ea212b1a453a593d34d4d8572a6f0b3"
+    },
+    {
+      "source": "https://github.com/discord/discord-api-docs/blob/main/developers/resources/audit-log.mdx",
+      "sha256": "9c404dba36c3de72999968d8476bb02a9da75778ee02e3674db8b3c359e9a8c0"
+    },
+    {
+      "source": "https://github.com/discord/discord-api-docs/blob/main/developers/events/gateway.mdx",
+      "sha256": "7af7543f0a96b1c722b0372c1151a7ea0424c739566f60bbb0fbb9146897f7b5"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "handlers/logger.js",
+      "sha256": "b6819714d46a0c33ad531066f4adaa3a8f722dd5794970e53bdb4a162b15bb8b"
+    },
+    {
+      "path": "bootstrap/discord-client.js",
+      "sha256": "2ca47f7fdb6d827b884c1eced073884fc90cddb9e6d7243e9c8a641359b4b223"
+    },
+    {
+      "path": "handlers/events.js",
+      "sha256": "51fbe4a52f09b18833c45e91b097fd9d35dcd6e6a85265d729cb58b28f20964e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/manifest.json",
+      "sha256": "38969c595963ea33272789a908eb23c00e04d7e30caf762118bd9670a5d46100"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/integration-map.json",
+      "sha256": "197c5a79c0361b6dadc8e623f250f93d7b4d375599ade955dac64649d726c3ff"
+    }
+  ],
+  "rawReferenceDocumentsIncludedInZip": false,
+  "remoteProjectBranchRechecked": false,
+  "extraction": "receive-event summary and detail headings agree; audit action codes extracted from current table; intent mapping from Gateway list; literal SDK names are candidates only"
+}

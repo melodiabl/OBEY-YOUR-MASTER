@@ -1,0 +1,652 @@
+{
+  "callSites": [
+    {
+      "file": "dashboard/cards-routes.js",
+      "line": 44,
+      "column": 26,
+      "method": "image",
+      "expressionHash": "b91ddc15a0a855cb7981be815484e5e6178f36d32e4756ef609747d51b5d8f64",
+      "module": "cards",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "managed-guild-card-image-not-an-emoji-reference",
+        "rawKeys": [],
+        "canonicalKeys": [],
+        "evidenceFileHash": "16fd1a55ab746c241ee9c0e11112be5dbc9fc2f7ad0d79b3d15874b1b50d8e5a",
+        "note": "image(guildId, assetId) accede a recursos administrados de tarjetas; no convertir assetId en ID de emoji ni cambiar fondos del usuario.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "dashboard/cards-routes.js",
+      "line": 88,
+      "column": 147,
+      "method": "image",
+      "expressionHash": "b91ddc15a0a855cb7981be815484e5e6178f36d32e4756ef609747d51b5d8f64",
+      "module": "cards",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "managed-guild-card-image-not-an-emoji-reference",
+        "rawKeys": [],
+        "canonicalKeys": [],
+        "evidenceFileHash": "16fd1a55ab746c241ee9c0e11112be5dbc9fc2f7ad0d79b3d15874b1b50d8e5a",
+        "note": "image(guildId, assetId) accede a recursos administrados de tarjetas; no convertir assetId en ID de emoji ni cambiar fondos del usuario.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/card-assets.js",
+      "line": 82,
+      "column": 66,
+      "method": "image",
+      "expressionHash": "7cba5fdd1bbd187c1508355d7669e2b036c5117e5b9737d3636bd681bda11b46",
+      "module": "cards",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "managed-guild-card-image-not-an-emoji-reference",
+        "rawKeys": [],
+        "canonicalKeys": [],
+        "evidenceFileHash": "85b89d671315b1c75bc43d74c10483b7604384fc4efadec3acce088aa124fdc4",
+        "note": "image(guildId, assetId) accede a recursos administrados de tarjetas; no convertir assetId en ID de emoji ni cambiar fondos del usuario.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/economy/messages.js",
+      "line": 12,
+      "column": 58,
+      "method": "markup",
+      "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+      "module": "economy",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.bank",
+          "icon.case",
+          "icon.coins",
+          "icon.profile",
+          "icon.wallet"
+        ],
+        "canonicalKeys": [
+          "icon.wallet",
+          "icon.bank",
+          "icon.coins",
+          "icon.case",
+          "icon.profile"
+        ],
+        "evidenceFileHash": "b29712bea3427950f2e8ea25c15a9e9962c7309817dec0061a47684c9cf2814a",
+        "note": "Parámetro asset acotado por las llamadas internas field; transacción elige enviar/banco.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/economy/messages.js",
+      "line": 23,
+      "column": 76,
+      "method": "markup",
+      "expressionHash": "15fda6d541494ba27205a2ae19ae75db9746d2f69e33e6551b437257e1933fe8",
+      "module": "economy",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.bank",
+          "icon.send"
+        ],
+        "canonicalKeys": [
+          "icon.send",
+          "icon.bank"
+        ],
+        "evidenceFileHash": "b29712bea3427950f2e8ea25c15a9e9962c7309817dec0061a47684c9cf2814a",
+        "note": "Parámetro asset acotado por las llamadas internas field; transacción elige enviar/banco.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/helpui.js",
+      "line": 8,
+      "column": 116,
+      "method": "emoji",
+      "expressionHash": "c2d4b446a44ce54fab8e01150e24dd24f3d850c7c14dcfe31f6321341dd86874",
+      "module": "shared",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "home",
+          "next",
+          "previous"
+        ],
+        "canonicalKeys": [
+          "icon.previous",
+          "icon.skip",
+          "icon.profile"
+        ],
+        "evidenceFileHash": "7e3238e17ebd0ccb467edaab8323b8cc7054557784060bccbee08d7390786349",
+        "note": "Helper button llamado con claves literales internas en la misma vista.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/moderation/action.js",
+      "line": 47,
+      "column": 64,
+      "method": "markup",
+      "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+      "module": "moderation",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.clock",
+          "icon.shield"
+        ],
+        "canonicalKeys": [
+          "icon.clock",
+          "icon.shield"
+        ],
+        "evidenceFileHash": "f9572f0c804ac3e8e3d1c7b8fe2a18b1df4746aeb12e3319701407b4491b5a70",
+        "note": "timeout elige reloj; otras acciones autorizadas, escudo. La notificación privada no cambia el resultado confirmado.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/config.js",
+      "line": 10,
+      "column": 32,
+      "method": "musicEmoji",
+      "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "back",
+          "decoration",
+          "delete",
+          "document",
+          "edit",
+          "error",
+          "globe",
+          "heart",
+          "help",
+          "history",
+          "home",
+          "info",
+          "link",
+          "live",
+          "music",
+          "next",
+          "pause",
+          "play",
+          "previous",
+          "queue",
+          "repeat",
+          "shuffle",
+          "skip",
+          "stop",
+          "success",
+          "user",
+          "vol_down",
+          "vol_up",
+          "warning"
+        ],
+        "canonicalKeys": [
+          "icon.success",
+          "icon.error",
+          "icon.link",
+          "icon.brush",
+          "icon.profile",
+          "icon.clock",
+          "icon.play",
+          "icon.pause",
+          "icon.loop",
+          "icon.shuffle",
+          "icon.previous",
+          "icon.skip",
+          "icon.stop",
+          "icon.delete",
+          "icon.volume-up",
+          "icon.volume-down",
+          "icon.queue",
+          "icon.info",
+          "icon.music",
+          "icon.warning",
+          "icon.feed",
+          "icon.transcript",
+          "icon.help",
+          "icon.edit",
+          "icon.like"
+        ],
+        "evidenceFileHash": "6aea8da60cec38d7717d6c932dda7b87bbc628e5729681ddb037269e5aeba677",
+        "note": "Getters construidos desde music-keys.json; mantener ese puente y sus aliases.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/controls.js",
+      "line": 30,
+      "column": 92,
+      "method": "emoji",
+      "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "autoplay",
+          "heart",
+          "icon.repeat-one",
+          "lyrics",
+          "pause",
+          "play",
+          "previous",
+          "queue",
+          "repeat",
+          "shuffle",
+          "skip",
+          "stop",
+          "vol_down",
+          "vol_up"
+        ],
+        "canonicalKeys": [
+          "icon.shuffle",
+          "icon.previous",
+          "icon.pause",
+          "icon.skip",
+          "icon.loop",
+          "icon.lyrics",
+          "icon.volume-down",
+          "icon.stop",
+          "icon.volume-up",
+          "icon.queue",
+          "icon.like",
+          "icon.autoplay",
+          "icon.play",
+          "icon.repeat-one"
+        ],
+        "evidenceFileHash": "f0fbb9c6dd4bd0f49a545205193482efdbaecebc2788b04e0551af353f9bce56",
+        "note": "Doce entradas del contrato y overrides de pausa/repetición. Preservar customIds y posición.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/platforms.js",
+      "line": 26,
+      "column": 72,
+      "method": "emoji",
+      "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "brand.applemusic",
+          "brand.bandcamp",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.soundcloud",
+          "brand.spotify",
+          "brand.twitch",
+          "brand.youtube",
+          "brand.youtubemusic"
+        ],
+        "canonicalKeys": [
+          "brand.youtube",
+          "brand.youtubemusic",
+          "brand.spotify",
+          "brand.applemusic",
+          "brand.soundcloud",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.twitch",
+          "brand.bandcamp"
+        ],
+        "evidenceFileHash": "3ed887868996409032425904009b43786eee273d23dec9b9960af0e6ace82a3e",
+        "note": "Tabla platforms local; el resultado genérico Audio usa icon.music. El URI decide identidad; no regenerar logos con cada track.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/platforms.js",
+      "line": 26,
+      "column": 101,
+      "method": "markup",
+      "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "brand.applemusic",
+          "brand.bandcamp",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.soundcloud",
+          "brand.spotify",
+          "brand.twitch",
+          "brand.youtube",
+          "brand.youtubemusic"
+        ],
+        "canonicalKeys": [
+          "brand.youtube",
+          "brand.youtubemusic",
+          "brand.spotify",
+          "brand.applemusic",
+          "brand.soundcloud",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.twitch",
+          "brand.bandcamp"
+        ],
+        "evidenceFileHash": "3ed887868996409032425904009b43786eee273d23dec9b9960af0e6ace82a3e",
+        "note": "Tabla platforms local; el resultado genérico Audio usa icon.music. El URI decide identidad; no regenerar logos con cada track.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/platforms.js",
+      "line": 26,
+      "column": 142,
+      "method": "imageURL",
+      "expressionHash": "e93cf4903a1619d0c1e1ef1fd3fe21875b16cdf9b98267c98f4340e06dbe9134",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "brand.applemusic",
+          "brand.bandcamp",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.soundcloud",
+          "brand.spotify",
+          "brand.twitch",
+          "brand.youtube",
+          "brand.youtubemusic"
+        ],
+        "canonicalKeys": [
+          "brand.youtube",
+          "brand.youtubemusic",
+          "brand.spotify",
+          "brand.applemusic",
+          "brand.soundcloud",
+          "brand.deezer",
+          "brand.jiosaavn",
+          "brand.twitch",
+          "brand.bandcamp"
+        ],
+        "evidenceFileHash": "3ed887868996409032425904009b43786eee273d23dec9b9960af0e6ace82a3e",
+        "note": "Tabla platforms local; el resultado genérico Audio usa icon.music. El URI decide identidad; no regenerar logos con cada track.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "line": 31,
+      "column": 33,
+      "method": "markup",
+      "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "canonicalKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "evidenceFileHash": "7188cdb0adc23f9eb954efeb7b131452e4d3caf7b7d7180b660546fcf9a66675",
+        "note": "Tabs y condicional de tipo de resultado. Emoji objeto para opciones; markup para texto.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "line": 46,
+      "column": 31,
+      "method": "markup",
+      "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "canonicalKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "evidenceFileHash": "7188cdb0adc23f9eb954efeb7b131452e4d3caf7b7d7180b660546fcf9a66675",
+        "note": "Tabs y condicional de tipo de resultado. Emoji objeto para opciones; markup para texto.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "line": 64,
+      "column": 21,
+      "method": "emoji",
+      "expressionHash": "962284b20b745d7e01095d56ea759bd315e90ff96862c82bc9e01b710126f841",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "canonicalKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "evidenceFileHash": "7188cdb0adc23f9eb954efeb7b131452e4d3caf7b7d7180b660546fcf9a66675",
+        "note": "Tabs y condicional de tipo de resultado. Emoji objeto para opciones; markup para texto.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/music/playui.js",
+      "line": 70,
+      "column": 167,
+      "method": "emoji",
+      "expressionHash": "63e759b2d8d7eadb5a0f580453640866b9b9caf7918046bc07ddd07977ae20f3",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "canonicalKeys": [
+          "icon.album",
+          "icon.music"
+        ],
+        "evidenceFileHash": "7188cdb0adc23f9eb954efeb7b131452e4d3caf7b7d7180b660546fcf9a66675",
+        "note": "Tabs y condicional de tipo de resultado. Emoji objeto para opciones; markup para texto.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/presentation/modules.js",
+      "line": 10,
+      "column": 131,
+      "method": "markup",
+      "expressionHash": "8cbe476445f9b213d3d6ecead0bb816c06d86d80894abfbeaf1bb50c8f2aa6e5",
+      "module": "shared",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.clock",
+          "icon.error",
+          "icon.info",
+          "icon.success",
+          "motion.cargando"
+        ],
+        "canonicalKeys": [
+          "icon.info",
+          "motion.cargando",
+          "icon.success",
+          "icon.error",
+          "icon.clock"
+        ],
+        "evidenceFileHash": "67e0c67af905d3f4406098a840712176503a1b9a062855d9535ff0352ff31241",
+        "note": "Tabla states local; no existe por sí misma una política de negocio por módulo.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/suggestions/presentation.js",
+      "line": 8,
+      "column": 55,
+      "method": "emoji",
+      "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+      "module": "suggestions",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-defaults-with-user-config-preserved",
+        "rawKeys": [
+          "icon.vote-down",
+          "icon.vote-up"
+        ],
+        "canonicalKeys": [
+          "icon.vote-up",
+          "icon.vote-down"
+        ],
+        "evidenceFileHash": "023d9ad03dd074cc1abdd66b8e77058d2f5e0908c2fd766727499e0d4a77b7e2",
+        "note": "Defaults internos acotados; los emojis configurados por servidor se validan y preservan, no se convierten globalmente.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/suggestions/presentation.js",
+      "line": 9,
+      "column": 84,
+      "method": "emoji",
+      "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+      "module": "suggestions",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-defaults-with-user-config-preserved",
+        "rawKeys": [
+          "icon.vote-down",
+          "icon.vote-up"
+        ],
+        "canonicalKeys": [
+          "icon.vote-up",
+          "icon.vote-down"
+        ],
+        "evidenceFileHash": "023d9ad03dd074cc1abdd66b8e77058d2f5e0908c2fd766727499e0d4a77b7e2",
+        "note": "Defaults internos acotados; los emojis configurados por servidor se validan y preservan, no se convierten globalmente.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/suggestions/presentation.js",
+      "line": 18,
+      "column": 140,
+      "method": "markup",
+      "expressionHash": "2c70e12b7a0646f92279f427c7b38e7334d8e5389cff167a1dc30e73f826b683",
+      "module": "suggestions",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-defaults-with-user-config-preserved",
+        "rawKeys": [
+          "icon.vote-down",
+          "icon.vote-up"
+        ],
+        "canonicalKeys": [
+          "icon.vote-up",
+          "icon.vote-down"
+        ],
+        "evidenceFileHash": "023d9ad03dd074cc1abdd66b8e77058d2f5e0908c2fd766727499e0d4a77b7e2",
+        "note": "Defaults internos acotados; los emojis configurados por servidor se validan y preservan, no se convierten globalmente.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/tickets/application-buttons.js",
+      "line": 8,
+      "column": 182,
+      "method": "emoji",
+      "expressionHash": "d59386e0ae435e292fbe0ebcdb954b75ed5fb3922091277cb19f798fc5d50718",
+      "module": "tickets",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.error",
+          "icon.help",
+          "icon.success"
+        ],
+        "canonicalKeys": [
+          "icon.success",
+          "icon.error",
+          "icon.help"
+        ],
+        "evidenceFileHash": "c63bbeea7c67ff086937c5dc606a6fe3b6d24d0ef399c91abf89b672adaf5fee",
+        "note": "Tuplas locales aceptar/denegar/preguntar. Validar autorización de cada operación fuera de la vista.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "handlers/tickets/presentation.js",
+      "line": 13,
+      "column": 43,
+      "method": "markup",
+      "expressionHash": "4cdb143a6b37aadda68235c837f15b444edff5ec58189021d0e5c553de380103",
+      "module": "tickets",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.claim",
+          "icon.close",
+          "icon.roles"
+        ],
+        "canonicalKeys": [
+          "icon.roles",
+          "icon.claim",
+          "icon.close"
+        ],
+        "evidenceFileHash": "7c10441028df931157021b18a252cecf7114fb132c6e858e99bbab5e48bbdb54",
+        "note": "Tabla glyph local para add/remove/claim/close; el servicio confirma antes de editar la respuesta.",
+        "runtimeExecutionVerified": false
+      }
+    },
+    {
+      "file": "slashCommands/Music/volume.js",
+      "line": 16,
+      "column": 19,
+      "method": "markup",
+      "expressionHash": "d0f9b34cad1456da1b9b299e0dd4cd0e9e14c8423a4b4ec053e3ce04bd475a8a",
+      "module": "music",
+      "reason": "computed-key-needs-runtime-or-caller-trace",
+      "trace": {
+        "classification": "bounded-system-keys",
+        "rawKeys": [
+          "icon.mute",
+          "icon.volume"
+        ],
+        "canonicalKeys": [
+          "icon.mute",
+          "icon.volume"
+        ],
+        "evidenceFileHash": "18725c9ec128eb63ee60dfd9c7e7dc9a225a7182ae95c6e33212cb9368d39894",
+        "note": "Condicional volumen cero; respetar estado confirmado y texto del porcentaje.",
+        "runtimeExecutionVerified": false
+      }
+    }
+  ],
+  "total": 23,
+  "notEmojiImageCalls": 3,
+  "runtimeVerification": "pending"
+}

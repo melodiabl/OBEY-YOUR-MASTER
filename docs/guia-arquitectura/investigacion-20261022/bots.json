@@ -1,0 +1,373 @@
+{
+  "edition": "0.14",
+  "sample": "20 referencias seleccionadas, sin ranking de popularidad",
+  "bots": [
+    {
+      "id": "BOT-01",
+      "slug": "quark",
+      "name": "Quark",
+      "category": "Logs",
+      "evidence": "documentación + imágenes",
+      "url": "https://docs.quark.bot/logs/examples",
+      "observed": "La página presenta ejemplos de logs con autor, campos, canal y controles. Se inspeccionaron tres imágenes: entrada, rol concedido y mensaje editado. La guía de integraciones documenta atribución mostrada junto al bot ejecutor.",
+      "proposal": "Registro legible con cambios antes/después; separar ejecutor confirmado de atribución declarada.",
+      "limits": "No tratar el ID incluido en un motivo escrito por otro bot como identidad autenticada. No copiar su botón de ban inmediato como default.",
+      "modules": [
+        "logs",
+        "moderation"
+      ],
+      "depth": "profunda-documental-visual",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-02",
+      "slug": "dyno",
+      "name": "Dyno",
+      "category": "Moderación y logs",
+      "evidence": "documentación parcial",
+      "url": "https://docs.dyno.gg/en/modules/actionlog",
+      "observed": "Action Log documenta seguimiento de eventos del servidor y destinos específicos que sustituyen al destino principal. La extracción completa de la página fue incompleta.",
+      "proposal": "Canal general con excepciones por categoría y vista de destino efectivo.",
+      "limits": "Sin revisión del motor interno ni captura actual de sus mensajes.",
+      "modules": [
+        "logs",
+        "moderation"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-03",
+      "slug": "wick",
+      "name": "Wick",
+      "category": "Seguridad",
+      "evidence": "documentación",
+      "url": "https://docs.wickbot.com/intro/features/",
+      "observed": "La documentación describe Anti-Nuke, cuarentena, heat, lockdown y verificación. También reconoce que la configuración completa requiere tiempo.",
+      "proposal": "Modo observar antes de aplicar; explicar cada regla, registrar la causa y ofrecer recuperación controlada.",
+      "limits": "No trasladar sus afirmaciones comerciales de eficacia a OBEY ni activar sanciones por apariencia de cuenta.",
+      "modules": [
+        "security",
+        "automod",
+        "verification"
+      ],
+      "depth": "profunda-documental",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-04",
+      "slug": "carl",
+      "name": "Carl-bot",
+      "category": "Multipropósito y roles",
+      "evidence": "documentación general",
+      "url": "https://docs.carl.gg/",
+      "observed": "La portada documenta bienvenida, reaction roles, sugerencias, moderación, AutoMod, logging y comandos personalizados. Las rutas profundas de logging consultadas no fueron accesibles.",
+      "proposal": "Organizar ajustes por tarea y paneles de roles con restricciones explícitas.",
+      "limits": "Docs abiertas no demuestran que el código del bot completo sea abierto. No se inspeccionó aquí su runtime.",
+      "modules": [
+        "roles",
+        "moderation",
+        "suggestions"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-05",
+      "slug": "sapphire",
+      "name": "Sapphire",
+      "category": "Multipropósito",
+      "evidence": "documentación general",
+      "url": "https://docs.sapph.xyz/",
+      "observed": "El resultado oficial describe un bot multipropósito configurable con logging y notificaciones sociales. El cuerpo completo no pudo extraerse.",
+      "proposal": "Configuración progresiva y nombres de acciones comprensibles.",
+      "limits": "No atribuir detalles de su interfaz ni estructura interna sin más evidencia.",
+      "modules": [
+        "logs",
+        "feeds",
+        "utilities"
+      ],
+      "depth": "comparativa-limitada",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-06",
+      "slug": "probot",
+      "name": "ProBot",
+      "category": "Bienvenida y niveles",
+      "evidence": "documentación",
+      "url": "https://docs.probot.io/docs/modules/welcome",
+      "observed": "La guía explica envío de texto/imagen, avatar y posición de elementos. La documentación de niveles describe exclusiones y recompensas de roles.",
+      "proposal": "Editor de bienvenida con preview, prueba y publicación; diagnóstico de jerarquía de roles.",
+      "limits": "Sus restricciones de imagen son de ProBot, no límites universales de Discord o de nuestro renderer.",
+      "modules": [
+        "welcome",
+        "cards",
+        "levels"
+      ],
+      "depth": "profunda-documental",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-07",
+      "slug": "tickettool",
+      "name": "Ticket Tool",
+      "category": "Soporte",
+      "evidence": "documentación + imagen",
+      "url": "https://docs.tickettool.xyz/dashboard/panel-configs/ticket-options",
+      "observed": "Documenta mensajes de apertura, cierre con confirmación y botones Claim/Close. La imagen E5IueIw muestra hilos de discusión del equipo bajo canales de tickets.",
+      "proposal": "Ciclo abrir, reclamar, responder, cerrar, transcribir y consultar; separar conversación del usuario y notas del equipo.",
+      "limits": "Cerrar, borrar y archivar tienen efectos distintos; no reutilizar una confirmación para todos.",
+      "modules": [
+        "tickets",
+        "applications"
+      ],
+      "depth": "profunda-documental-visual",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-08",
+      "slug": "ticketsbot",
+      "name": "Tickets Bot",
+      "category": "Soporte",
+      "evidence": "documentación",
+      "url": "https://docs.tickets.bot/dashboard/ticket-panels",
+      "observed": "La guía de paneles documenta botones, formularios, modo canal/hilo y resumen de cierre con transcripción.",
+      "proposal": "Selector de tipo de solicitud, formulario corto y permisos revisados en cada acción.",
+      "limits": "No asumir que la promesa comercial de disponibilidad prueba un SLA para OBEY.",
+      "modules": [
+        "tickets",
+        "applications"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-09",
+      "slug": "red",
+      "name": "Red-DiscordBot",
+      "category": "Modular y música",
+      "evidence": "código público",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot",
+      "observed": "Se revisaron el listener de Lavalink y los comandos de cola en un commit fijado: distingue inicio, fin de pista y fin de cola; procesa autoplay y muestra modos en la cola.",
+      "proposal": "Una autoridad para transición y una proyección de estado compartida por slash y botones.",
+      "limits": "Python y GPL-3.0: estudiar las reglas; no pegar archivos en OBEY sin resolver compatibilidad de licencia.",
+      "modules": [
+        "music",
+        "utilities"
+      ],
+      "depth": "profunda-codigo",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-10",
+      "slug": "yagpdb",
+      "name": "YAGPDB",
+      "category": "Multipropósito y AutoMod",
+      "evidence": "código + ilustraciones",
+      "url": "https://yagpdb.xyz/",
+      "observed": "Se revisaron moderation/modlog.go y automod/effects.go. ModlogAction agrupa emoji, color y texto; CreateModlogEmbed arma autor, objetivo y motivo. Dos imágenes oficiales son ilustraciones del cliente.",
+      "proposal": "Catálogo semántico de mensajes de sanción, estados incompletos explícitos y fallos visibles de entrega.",
+      "limits": "No replicar literalmente colores, textos, desactivación automática de configuración o supuestos de su backend.",
+      "modules": [
+        "moderation",
+        "automod",
+        "roles",
+        "feeds"
+      ],
+      "depth": "profunda-codigo-visual",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-11",
+      "slug": "jmusicbot",
+      "name": "JMusicBot",
+      "category": "Música",
+      "evidence": "código público",
+      "url": "https://github.com/jagrosh/MusicBot",
+      "observed": "AudioHandler.onTrackEnd reencola para repetición cuando el motivo es FINISHED y decide siguiente pista o playlist por defecto. Se revisó el archivo fijado, no una ejecución.",
+      "proposal": "Tabla explícita de fin natural, skip, stop y error; repeat-track y repeat-queue distintos.",
+      "limits": "Java/Lavaplayer no es la arquitectura de lavalink-client. No importar sus condiciones sin adaptar el contrato.",
+      "modules": [
+        "music"
+      ],
+      "depth": "profunda-codigo",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-12",
+      "slug": "fredboat",
+      "name": "FredBoat",
+      "category": "Música",
+      "evidence": "documentación parcial",
+      "url": "https://docs.fredboat.com/",
+      "observed": "Los resultados oficiales listan modos repeat y shuffle y una guía de permisos. Parte del contenido no se extrajo al abrirlo.",
+      "proposal": "Ayuda que explique qué cola cambia y qué permiso DJ exige cada operación.",
+      "limits": "Los ejemplos indexados usan prefijos: no prueban la interfaz actual completa ni un algoritmo de recomendaciones.",
+      "modules": [
+        "music"
+      ],
+      "depth": "comparativa-limitada",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-13",
+      "slug": "rythm",
+      "name": "Rythm",
+      "category": "Música y escucha social",
+      "evidence": "documentación",
+      "url": "https://docs.rythm.fm/commands/",
+      "observed": "La guía distingue loop de pista y queueloop, documenta búsqueda, ajustes DJ y efectos. La introducción anuncia Smart Autoplay y descubrimiento personalizado.",
+      "proposal": "Hacer visibles modos y preferencias; autoplay con señales explicables, historial y descarte de repeticiones.",
+      "limits": "No conocemos el algoritmo de Rythm. Su Activity, aplicación y bot son superficies distintas.",
+      "modules": [
+        "music",
+        "profiles"
+      ],
+      "depth": "profunda-documental",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-14",
+      "slug": "mimu",
+      "name": "Mimu",
+      "category": "Economía y mensajes",
+      "evidence": "documentación",
+      "url": "https://docs.mimu.bot/settings/getting-started/greet-leave-boost-messages",
+      "observed": "La guía separa bienvenida, despedida y boost; incluye comandos para probarlos y diagnóstico de permisos. El índice distingue botones persistentes e instanciados.",
+      "proposal": "Templates con variables tipadas, prueba sin publicar y sesiones temporales con expiración.",
+      "limits": "No copiar decoraciones densas ni su moneda global. No se ejecutaron sus botones.",
+      "modules": [
+        "welcome",
+        "economy",
+        "messages"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-15",
+      "slug": "arcane",
+      "name": "Arcane",
+      "category": "Niveles y roles",
+      "evidence": "documentación + imágenes",
+      "url": "https://docs.arcane.bot/plugins/leveling/",
+      "observed": "Documenta fuentes de XP, recompensas y rankings; se inspeccionaron tarjeta de rango y ajustes de recompensas. La guía de diagnóstico trata exclusiones, permisos y nivel máximo.",
+      "proposal": "Tarjeta con datos esenciales; asistente de diagnóstico y explicación del cálculo de XP.",
+      "limits": "La imagen de recompensas es del dashboard, no del mensaje en Discord. No atribuir a OBEY cobertura de idiomas o XP ya funcional.",
+      "modules": [
+        "levels",
+        "cards",
+        "roles"
+      ],
+      "depth": "profunda-documental-visual",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-16",
+      "slug": "mee6",
+      "name": "MEE6",
+      "category": "Multipropósito",
+      "evidence": "documentación",
+      "url": "https://help.mee6.xyz/en/articles/611787-default-settings-for-mee6-plugins",
+      "observed": "Su referencia reúne mensajes y variables de bienvenida, despedida, niveles y tickets. Otra guía compara límites de planes por funcionalidad.",
+      "proposal": "Catálogo consistente por momento del recorrido; planes transparentes con cantidades visibles.",
+      "limits": "No copiar sus textos, precios ni la recomendación de dar Administrator.",
+      "modules": [
+        "welcome",
+        "levels",
+        "tickets"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-17",
+      "slug": "poketwo",
+      "name": "Pokétwo",
+      "category": "Colecciones y mercado",
+      "evidence": "código + documentación",
+      "url": "https://docs.poketwo.net/",
+      "observed": "La introducción describe captura, intercambio y batalla. Se revisaron trading.py y market.py: hay confirmación, estado de trades y comunicación de cancelaciones mediante Redis entre clusters.",
+      "proposal": "Intercambio consentido por ambas partes, caducidad, exclusión mutua y registro de cambios de saldo/propiedad.",
+      "limits": "La presencia de Redis no demuestra atomicidad o entrega única. No reutilizar personajes Pokémon ni su economía.",
+      "modules": [
+        "collections",
+        "economy"
+      ],
+      "depth": "profunda-codigo",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-18",
+      "slug": "mudae",
+      "name": "Mudae",
+      "category": "Anime y colecciones",
+      "evidence": "catálogo web",
+      "url": "https://mudae.net/search?type=character",
+      "observed": "Se comprobó el catálogo público con búsqueda y filtros de personajes. La wiki oficial apareció en búsqueda, pero sus páginas de comandos no se extrajeron de forma suficiente.",
+      "proposal": "Colección original OBEY con filtros, favoritos, fichas y consulta web autorizada.",
+      "limits": "No se verificó el flujo actual de rolls/claims ni capturas de sus mensajes. No copiar ilustraciones o base de personajes.",
+      "modules": [
+        "collections",
+        "profiles"
+      ],
+      "depth": "comparativa-limitada",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-19",
+      "slug": "giveawaybot",
+      "name": "GiveawayBot",
+      "category": "Sorteos",
+      "evidence": "documentación",
+      "url": "https://giveawaybot.party/",
+      "observed": "La página oficial documenta creación interactiva, inicio, finalización, borrado y reroll, incluido menú contextual sobre un sorteo terminado.",
+      "proposal": "Reutilizar la misma operación para slash y menú contextual; persistir elegibilidad y resultado.",
+      "limits": "Reroll debe excluir ganadores según política y dejar trazabilidad, sin prometer aleatoriedad auditada no implementada.",
+      "modules": [
+        "giveaways"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    },
+    {
+      "id": "BOT-20",
+      "slug": "servermaker",
+      "name": "Server Maker",
+      "category": "Construcción de servidores",
+      "evidence": "sitio oficial + revisión previa",
+      "url": "https://servermaker.xyz/",
+      "observed": "El sitio presenta construcción con texto, remodelación, clonado y backups. Sus mensajes de portada son ejemplos renderizados; no prueban ejecución en Discord.",
+      "proposal": "Mantener /servidor con preview, diff, preflight y recibos; modificar solo el alcance revisado.",
+      "limits": "No prometer recuperar mensajes borrados ni rollback perfecto a partir de publicidad. Ver capítulo 20.",
+      "modules": [
+        "architect",
+        "templates",
+        "migrations"
+      ],
+      "depth": "comparativa",
+      "checkedAt": "2026-10-22",
+      "liveTested": false
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "edition": "0.10",
+  "kind": "documentation-validation-not-live-test",
+  "baselineLibraryVersion": 8,
+  "normalizedObservedLabels": 50,
+  "localeKeysPerLanguage": 16,
+  "runtimeOrDependencyFilesChanged": 0,
+  "originalFilesRemoved": 0,
+  "markdownLinksValid": true,
+  "localePlaceholderParity": true,
+  "allBindingsUnset": true,
+  "discordChanges": false,
+  "githubChanges": false,
+  "changedOriginalFiles": [
+    "LEER_PRIMERO.md",
+    "OBEY_Plan_Maestro_Arquitectura_UX_UI.md",
+    "docs/guia-arquitectura/INDICE_DE_ARCHIVOS.md",
+    "docs/guia-arquitectura/REVISION_DOCUMENTAL.md",
+    "docs/guia-arquitectura/modulos/feeds.md",
+    "docs/guia-arquitectura/modulos/logs.md",
+    "docs/guia-arquitectura/modulos/messages.md",
+    "docs/guia-arquitectura/modulos/music.md",
+    "docs/guia-arquitectura/modulos/tickets.md",
+    "docs/guia-arquitectura/modulos/welcome.md",
+    "docs/guia-arquitectura/sistema/00_INDICE.md",
+    "docs/guia-arquitectura/sistema/11_INSTRUCCIONES_IA.md"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "edition": "0.9",
+  "kind": "proposed-public-command-contract-not-runtime-registration",
+  "publicModuleLabel": {
+    "es": "Servidor",
+    "en": "Server"
+  },
+  "entry": {
+    "defaultName": "servidor",
+    "nameLocalizations": {
+      "es-ES": "servidor",
+      "es-419": "servidor",
+      "en-US": "server",
+      "en-GB": "server"
+    },
+    "description": {
+      "es": "Construye, remodela y configura la estructura de tu servidor.",
+      "en": "Build, remodel, and configure your server structure."
+    },
+    "optionalActionParameter": {
+      "name": "accion",
+      "localizedNameEn": "action",
+      "required": false,
+      "choices": [
+        {
+          "value": "build",
+          "nameEs": "Construir",
+          "nameEn": "Build",
+          "meaningEs": "Crear una estructura a partir de un asistente, una descripción o una plantilla."
+        },
+        {
+          "value": "remodel",
+          "nameEs": "Remodelar",
+          "nameEn": "Remodel",
+          "meaningEs": "Cambiar los canales, roles o colores seleccionados."
+        },
+        {
+          "value": "create",
+          "nameEs": "Crear un recurso",
+          "nameEn": "Create a resource",
+          "meaningEs": "Añadir un canal, categoría o rol."
+        },
+        {
+          "value": "templates",
+          "nameEs": "Plantillas",
+          "nameEn": "Templates",
+          "meaningEs": "Guardar, importar y reutilizar estructuras."
+        },
+        {
+          "value": "copy",
+          "nameEs": "Copiar estructura",
+          "nameEn": "Copy structure",
+          "meaningEs": "Traer estructura desde otro servidor autorizado."
+        },
+        {
+          "value": "backups",
+          "nameEs": "Copias de seguridad",
+          "nameEn": "Backups",
+          "meaningEs": "Guardar y revisar copias de la estructura."
+        },
+        {
+          "value": "history",
+          "nameEs": "Historial",
+          "nameEn": "History",
+          "meaningEs": "Consultar cambios y trabajos anteriores."
+        }
+      ]
+    },
+    "usesSlashSubcommands": false
+  },
+  "legacyPublicEntries": [
+    "architect",
+    "config architect"
+  ],
+  "doNotCreatePublicEntries": [
+    "architecth",
+    "build",
+    "maker"
+  ],
+  "internalOwnerRetained": "architect",
+  "runtimeChanged": false,
+  "registrationPerformed": false,
+  "migrationRules": [
+    "reconcile-loaded-command-and-remote-registration-inventory",
+    "adapt-legacy-valid-interactions-with-full-authorization",
+    "preserve-existing-module-data-and-resource-bindings",
+    "rename-public-command-and-help-in-same-registration-release",
+    "do-not-bulk-overwrite-unrelated-commands",
+    "do-not-advertise-unimplemented-capabilities"
+  ]
+}

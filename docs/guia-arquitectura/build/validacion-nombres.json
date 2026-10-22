@@ -1,0 +1,27 @@
+{
+  "edition": "0.9",
+  "scope": "public-naming-contract-only",
+  "baselineLibraryVersion": 7,
+  "canonicalProposedCommand": "/servidor",
+  "runtimeChanges": 0,
+  "originalFilesRemoved": 0,
+  "markdownLinksValid": true,
+  "esEnKeys": 53,
+  "placeholderParity": true,
+  "discordRegistrationPerformed": false,
+  "changedOriginalFiles": [
+    "LEER_PRIMERO.md",
+    "OBEY_Plan_Maestro_Arquitectura_UX_UI.md",
+    "docs/guia-arquitectura/INDICE_DE_ARCHIVOS.md",
+    "docs/guia-arquitectura/INSTRUCCIONES_PARA_CODEX.md",
+    "docs/guia-arquitectura/REVISION_DOCUMENTAL.md",
+    "docs/guia-arquitectura/build/LEER.md",
+    "docs/guia-arquitectura/build/alcance.json",
+    "docs/guia-arquitectura/build/locales/en.json",
+    "docs/guia-arquitectura/build/locales/es.json",
+    "docs/guia-arquitectura/modulos/architect.md",
+    "docs/guia-arquitectura/sistema/00_INDICE.md",
+    "docs/guia-arquitectura/sistema/11_INSTRUCCIONES_IA.md",
+    "docs/guia-arquitectura/sistema/20_BUILD_Y_REMODELACION.md"
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "edition": "0.12",
+  "baselineLibraryVersion": 10,
+  "baselineEdition": "0.11",
+  "remoteBranchRechecked": false,
+  "mode": "static-inspection-and-versioned-official-documentation",
+  "installedNodeModulesInspected": false,
+  "declaredDiscordJs": "^14.18.0",
+  "rootNodeEngine": ">=20.0.0",
+  "lockedDependencies": {
+    "discord.js": {
+      "version": "14.27.0",
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "@discordjs/builders": {
+      "version": "1.14.1",
+      "engines": {
+        "node": ">=16.11.0"
+      }
+    },
+    "@discordjs/rest": {
+      "version": "2.6.3",
+      "engines": {
+        "node": ">=18"
+      }
+    },
+    "@discordjs/voice": {
+      "version": "0.19.2",
+      "engines": {
+        "node": ">=22.12.0"
+      }
+    },
+    "discord-api-types": {
+      "version": "0.38.56",
+      "engines": null
+    }
+  },
+  "dockerBase": "node:22-slim",
+  "findings": [
+    {
+      "id": "NATIVE-F01",
+      "file": "handlers/slashCommands.js",
+      "finding": "Uses SlashCommandBuilder and custom option schema; supports StringAutocomplete. No context-menu/localization builder references were found in this inspected file."
+    },
+    {
+      "id": "NATIVE-F02",
+      "file": "events/guild/interactionCreate.js",
+      "finding": "Handles autocomplete then returns for non-chat-input interactions in this handler; other listeners exist. Context menu routing must be deliberately integrated."
+    },
+    {
+      "id": "NATIVE-F03",
+      "file": "handlers/events.js",
+      "finding": "Guild event wrapper skips execution when _dbReady is false; consider an explicit unavailable acknowledgement for interactions without bypassing domain readiness."
+    },
+    {
+      "id": "NATIVE-F04",
+      "file": "handlers/i18n/index.js",
+      "finding": "Loads ES/EN and interpolates {variable}; command metadata localization needs a registration adapter."
+    },
+    {
+      "id": "NATIVE-F05",
+      "file": "handlers/assets/registry.js",
+      "finding": "Already verifies application, hash, name and availability for emoji bindings; reuse it."
+    },
+    {
+      "id": "NATIVE-F06",
+      "file": "package-lock.json",
+      "finding": "Locked @discordjs/voice 0.19.2 requires Node >=22.12.0, while package.json allows >=20.0.0. The Docker major tag is not a pinned patch or digest."
+    },
+    {
+      "id": "NATIVE-F07",
+      "file": "slashCommands/Soundboard/play.js",
+      "finding": "Existing soundboard command and autocomplete should be reconciled, not replaced by a parallel implementation."
+    }
+  ],
+  "files": [
+    {
+      "path": "package.json",
+      "sha256": "95e70ac146d0daddcbd35bfc3a9994dd9a1ed8f5c45f25e820075baadd1d6da6"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "fa37cb9cc623a34ddb5e85b2d2c980a28099ea19e8cc254f54ab7e687e4ef3bf"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "f6afa757ffcb41a9b3629e1a55f5ac191dcd0ce2f656d9df3b2b86c111ec7247"
+    },
+    {
+      "path": "handlers/slashCommands.js",
+      "sha256": "f6aa686733027656f48e0c74bb38bd2f63be39e351085223a652468d435f434b"
+    },
+    {
+      "path": "events/guild/interactionCreate.js",
+      "sha256": "4e62beae5d20282277aded34a536e13efa12e56a44987ce6d59358ab6889bb3c"
+    },
+    {
+      "path": "handlers/events.js",
+      "sha256": "51fbe4a52f09b18833c45e91b097fd9d35dcd6e6a85265d729cb58b28f20964e"
+    },
+    {
+      "path": "handlers/i18n/index.js",
+      "sha256": "47bffd3ebf9afe378d5866bb4f519ecc76fbaa2c23a9d3f22b706df8ca9fc455"
+    },
+    {
+      "path": "handlers/assets/registry.js",
+      "sha256": "fa623b1c778db32effa23cef143d1ad32d7a1ec76ce8540c5fc50dacbb760516"
+    },
+    {
+      "path": "handlers/configuration-service.js",
+      "sha256": "ea9215dd72ff54b45886bab3c6fb8ba2fec89c186e69e0f568cb821d0b675df2"
+    },
+    {
+      "path": "handlers/ticketevent.js",
+      "sha256": "0b762f3b56b643d6a2c186e86317b2bc1644ba854284b9c6fbad5966c85471c6"
+    },
+    {
+      "path": "handlers/music/index.js",
+      "sha256": "c1ae1b859ab76cd9e85ed477e7e3e24da3e1f4aa63f177056cac42320dfdd1ea"
+    },
+    {
+      "path": "slashCommands/Soundboard/play.js",
+      "sha256": "7cac4a75e3e9cb1c51475faabf3b3d5b63aaf78d6199d1a9ee5b375ee2ad65cd"
+    },
+    {
+      "path": "slashCommands/Anime/emote.js",
+      "sha256": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566"
+    }
+  ]
+}

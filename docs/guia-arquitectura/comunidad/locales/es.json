@@ -1,0 +1,112 @@
+{
+  "community": {
+    "setupTitle": "Conectar canales del servidor",
+    "selectChannel": "Elige el canal que quieres usar para {purpose}.",
+    "missingBinding": "Falta elegir un canal válido para {purpose}.",
+    "permissionDenied": "No hay permisos suficientes para publicar en ese destino.",
+    "privateAudience": "Este destino debe ser visible solo para el equipo autorizado.",
+    "preview": "Revisar publicación",
+    "publish": "Publicar",
+    "saved": "Destino guardado para {purpose}.",
+    "draftRelease": "Versión {version} · borrador pendiente de revisión.",
+    "notDeployed": "La versión todavía no tiene disponibilidad confirmada.",
+    "releaseTitle": "OBEY · Novedades de {version}",
+    "incidentTitle": "Estado del servicio · {service}",
+    "channelDeleted": "El destino ya no está disponible. Elige otro canal.",
+    "supportReference": "Tu solicitud quedó registrada. Referencia: {reference}.",
+    "publicationUncertain": "No se pudo confirmar la publicación. Revisa el destino antes de repetir.",
+    "published": "Publicación confirmada en {channel}.",
+    "messages": {
+      "setup": {
+        "title": "OBEY · Conectar canales",
+        "description": "Elegí dónde funcionará cada sistema.",
+        "welcome": "Bienvenida",
+        "tickets": "Panel de soporte",
+        "logs": "Registros de moderación",
+        "technical": "Avisos técnicos",
+        "updates": "Novedades públicas",
+        "unset": "Sin configurar",
+        "choice": "Elegir función",
+        "review": "Revisar configuración",
+        "instructions": "Seleccioná una función para elegir su canal y revisar los permisos.",
+        "pending": "Comprobando el destino y sus permisos…",
+        "saved": "Destino guardado para {purpose}: {channel}.",
+        "failed": "No se pudo guardar el destino. Tu configuración anterior se conserva.",
+        "conflict": "La configuración cambió mientras la editabas. Revisá la versión actual."
+      },
+      "welcome": {
+        "title": "Bienvenido a {communityName}, {displayName}",
+        "description": "Este es el espacio para conocer OBEY, escuchar música, compartir ideas y recibir ayuda.",
+        "instructions": "Empezá por las reglas y elegí tus roles. Si necesitás una mano, encontrás al equipo en soporte.",
+        "rules": "Leer las reglas",
+        "roles": "Elegir roles",
+        "steps": "Primeros pasos",
+        "noRoles": "Empezá por las reglas y los primeros pasos. Si necesitás ayuda, consultá al equipo de soporte.",
+        "deliveryFailed": "No se pudo confirmar la bienvenida de {displayName}. Revisá el destino antes de repetir."
+      },
+      "tickets": {
+        "title": "OBEY · ¿En qué te ayudamos?",
+        "description": "Elegí el motivo de tu consulta. Abriremos un espacio privado para atenderte.",
+        "help": "Ayuda con OBEY",
+        "helpDescription": "Configuración, comandos o funcionamiento.",
+        "bug": "Reportar un error",
+        "bugDescription": "Algo falló o no respondió como esperabas.",
+        "contact": "Contactar al equipo",
+        "contactDescription": "Consultas sobre el proyecto y colaboraciones.",
+        "choose": "Elegir motivo",
+        "opening": "Preparando tu espacio privado…",
+        "opened": "Tu espacio de soporte está listo.",
+        "open": "Abrir mi ticket",
+        "existing": "Ya tenés una solicitud abierta para este motivo. Podés continuar allí.",
+        "unavailable": "No pudimos abrir tu espacio de soporte. Intentá de nuevo más tarde.",
+        "privateCheckFailed": "No se pudo comprobar la privacidad del destino. La apertura quedó detenida para revisión."
+      },
+      "report": {
+        "title": "Recibimos tu reporte · {reference}",
+        "description": "Contanos qué estabas haciendo, qué esperabas que ocurriera y qué pasó.",
+        "instructions": "Si podés reproducirlo, añadí los pasos y una captura. No compartas contraseñas ni tokens.",
+        "view": "Ver mi reporte",
+        "saving": "Guardando tu reporte…",
+        "savedNoDestination": "Tu reporte quedó guardado con referencia {reference}. El acceso al espacio de atención todavía no está disponible.",
+        "failed": "No pudimos confirmar el registro de tu reporte. Revisá tus solicitudes antes de repetirlo."
+      },
+      "github": {
+        "title": "OBEY · Cambio pendiente de revisión",
+        "change": "{author} abrió una solicitud para integrar cambios en {branch}.",
+        "repository": "Repositorio",
+        "status": "Estado",
+        "pending": "Pendiente de revisión",
+        "draft": "Borrador",
+        "instructions": "Este aviso no confirma que los cambios estén disponibles en el bot.",
+        "view": "Ver cambios en GitHub"
+      },
+      "release": {
+        "title": "OBEY · Nueva actualización",
+        "description": "La versión {version} ya está disponible para {scope}.",
+        "news": "Novedades",
+        "fixes": "Correcciones",
+        "action": "¿Necesitás cambiar algo?",
+        "noAction": "No necesitás cambiar tu configuración.",
+        "details": "Ver detalles",
+        "report": "Reportar un problema",
+        "draftTitle": "Novedades · borrador de {version}",
+        "draftBody": "Revisá el contenido, el destino y el alcance del despliegue antes de publicar.",
+        "review": "Revisar anuncio",
+        "publish": "Publicar anuncio",
+        "pending": "Publicando el anuncio revisado…",
+        "published": "Anuncio publicado en {channel}.",
+        "notDeployed": "La disponibilidad de esta versión todavía no está confirmada. Conservamos el borrador sin publicarlo.",
+        "uncertain": "No se pudo confirmar la publicación. Revisá el destino antes de repetir."
+      },
+      "common": {
+        "permissionDenied": "No tenés permiso para realizar esta acción.",
+        "expired": "Esta vista expiró. Volvé a abrirla para continuar.",
+        "unavailable": "Esta función todavía no está disponible en este servidor.",
+        "retry": "Reintentar",
+        "reopen": "Volver a abrir",
+        "saved": "Cambios guardados.",
+        "preview": "Vista previa · todavía no se publicó."
+      }
+    }
+  }
+}

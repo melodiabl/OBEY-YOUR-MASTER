@@ -1,0 +1,1686 @@
+{
+  "scope": "integration-plan-not-runtime-alias-registry",
+  "version": 1,
+  "entries": {
+    "event.q001-member-join": {
+      "proposedSemanticKey": "logs.member.joined",
+      "referenceEventType": 1,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.joined.title",
+      "altKeyProposal": "logs.member.joined.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q002-member-leave": {
+      "proposedSemanticKey": "logs.member.left",
+      "referenceEventType": 2,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.left.title",
+      "altKeyProposal": "logs.member.left.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q025-name-edit": {
+      "proposedSemanticKey": "logs.member.nickname.updated",
+      "referenceEventType": 25,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.nickname.updated.title",
+      "altKeyProposal": "logs.member.nickname.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q026-avatar-edit": {
+      "proposedSemanticKey": "logs.member.avatar.updated",
+      "referenceEventType": 26,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.avatar.updated.title",
+      "altKeyProposal": "logs.member.avatar.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q044-role-grant": {
+      "proposedSemanticKey": "logs.member.role.added",
+      "referenceEventType": 44,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.role.added.title",
+      "altKeyProposal": "logs.member.role.added.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q045-role-revoke": {
+      "proposedSemanticKey": "logs.member.role.removed",
+      "referenceEventType": 45,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.role.removed.title",
+      "altKeyProposal": "logs.member.role.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q046-members-delete": {
+      "proposedSemanticKey": "logs.members.deleted",
+      "referenceEventType": 46,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.members.deleted.title",
+      "altKeyProposal": "logs.members.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q057-bot-add": {
+      "proposedSemanticKey": "logs.bot.created",
+      "referenceEventType": 57,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.bot.created.title",
+      "altKeyProposal": "logs.bot.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q058-bot-remove": {
+      "proposedSemanticKey": "logs.bot.removed",
+      "referenceEventType": 58,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.bot.removed.title",
+      "altKeyProposal": "logs.bot.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q000-file-delete": {
+      "proposedSemanticKey": "logs.file.deleted",
+      "referenceEventType": 0,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.file.deleted.title",
+      "altKeyProposal": "logs.file.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q003-messages-delete": {
+      "proposedSemanticKey": "logs.messages.deleted",
+      "referenceEventType": 3,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.messages.deleted.title",
+      "altKeyProposal": "logs.messages.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q004-thread-delete": {
+      "proposedSemanticKey": "logs.message.thread.deleted",
+      "referenceEventType": 4,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.thread.deleted.title",
+      "altKeyProposal": "logs.message.thread.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q005-message-delete": {
+      "proposedSemanticKey": "logs.message.deleted",
+      "referenceEventType": 5,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.deleted.title",
+      "altKeyProposal": "logs.message.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q006-thread-edit": {
+      "proposedSemanticKey": "logs.message.thread.updated",
+      "referenceEventType": 6,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.thread.updated.title",
+      "altKeyProposal": "logs.message.thread.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q007-message-edit": {
+      "proposedSemanticKey": "logs.message.updated",
+      "referenceEventType": 7,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.updated.title",
+      "altKeyProposal": "logs.message.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q010-thread-add": {
+      "proposedSemanticKey": "logs.thread.created",
+      "referenceEventType": 10,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.created.title",
+      "altKeyProposal": "logs.thread.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q011-thread-delete": {
+      "proposedSemanticKey": "logs.thread.deleted",
+      "referenceEventType": 11,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.deleted.title",
+      "altKeyProposal": "logs.thread.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q034-message-pin": {
+      "proposedSemanticKey": "logs.message.pinned",
+      "referenceEventType": 34,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.pinned.title",
+      "altKeyProposal": "logs.message.pinned.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q035-message-unpin": {
+      "proposedSemanticKey": "logs.message.unpinned",
+      "referenceEventType": 35,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.unpinned.title",
+      "altKeyProposal": "logs.message.unpinned.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q051-reaction-remove": {
+      "proposedSemanticKey": "logs.reaction.removed",
+      "referenceEventType": 51,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.reaction.removed.title",
+      "altKeyProposal": "logs.reaction.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q086-poll-delete": {
+      "proposedSemanticKey": "logs.poll.deleted",
+      "referenceEventType": 86,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.poll.deleted.title",
+      "altKeyProposal": "logs.poll.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q087-thread-modify": {
+      "proposedSemanticKey": "logs.thread.updated",
+      "referenceEventType": 87,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.updated.title",
+      "altKeyProposal": "logs.thread.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q100-reaction-group-remove": {
+      "proposedSemanticKey": "logs.reaction.group.removed",
+      "referenceEventType": 100,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.reaction.group.removed.title",
+      "altKeyProposal": "logs.reaction.group.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q102-message-shield-block": {
+      "proposedSemanticKey": "logs.message.shield.blocked",
+      "referenceEventType": 102,
+      "candidateConsumers": [
+        "logs",
+        "automod",
+        "security"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.message.shield.blocked.title",
+      "altKeyProposal": "logs.message.shield.blocked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q103-thread-member-join": {
+      "proposedSemanticKey": "logs.thread.member.joined",
+      "referenceEventType": 103,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.member.joined.title",
+      "altKeyProposal": "logs.thread.member.joined.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q104-thread-member-leave": {
+      "proposedSemanticKey": "logs.thread.member.left",
+      "referenceEventType": 104,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.member.left.title",
+      "altKeyProposal": "logs.thread.member.left.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q105-thread-members-activity": {
+      "proposedSemanticKey": "logs.thread.members.activity",
+      "referenceEventType": 105,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.members.activity.title",
+      "altKeyProposal": "logs.thread.members.activity.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q108-reaction-clear": {
+      "proposedSemanticKey": "logs.reaction.cleared",
+      "referenceEventType": 108,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.reaction.cleared.title",
+      "altKeyProposal": "logs.reaction.cleared.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q109-thread-close": {
+      "proposedSemanticKey": "logs.thread.closed",
+      "referenceEventType": 109,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.closed.title",
+      "altKeyProposal": "logs.thread.closed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q110-thread-open": {
+      "proposedSemanticKey": "logs.thread.reopened",
+      "referenceEventType": 110,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.reopened.title",
+      "altKeyProposal": "logs.thread.reopened.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q111-thread-lock": {
+      "proposedSemanticKey": "logs.thread.locked",
+      "referenceEventType": 111,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.locked.title",
+      "altKeyProposal": "logs.thread.locked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q112-thread-unlock": {
+      "proposedSemanticKey": "logs.thread.unlocked",
+      "referenceEventType": 112,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.thread.unlocked.title",
+      "altKeyProposal": "logs.thread.unlocked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q008-stream-start": {
+      "proposedSemanticKey": "logs.stream.started",
+      "referenceEventType": 8,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stream.started.title",
+      "altKeyProposal": "logs.stream.started.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q009-stream-stop": {
+      "proposedSemanticKey": "logs.stream.stopped",
+      "referenceEventType": 9,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stream.stopped.title",
+      "altKeyProposal": "logs.stream.stopped.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q012-camera-start": {
+      "proposedSemanticKey": "logs.camera.started",
+      "referenceEventType": 12,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.camera.started.title",
+      "altKeyProposal": "logs.camera.started.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q013-camera-stop": {
+      "proposedSemanticKey": "logs.camera.stopped",
+      "referenceEventType": 13,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.camera.stopped.title",
+      "altKeyProposal": "logs.camera.stopped.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q014-member-move": {
+      "proposedSemanticKey": "logs.member.moved",
+      "referenceEventType": 14,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.member.moved.title",
+      "altKeyProposal": "logs.member.moved.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q015-speaker-move": {
+      "proposedSemanticKey": "logs.speaker.moved",
+      "referenceEventType": 15,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.speaker.moved.title",
+      "altKeyProposal": "logs.speaker.moved.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q016-headphones-block": {
+      "proposedSemanticKey": "logs.headphones.blocked",
+      "referenceEventType": 16,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.headphones.blocked.title",
+      "altKeyProposal": "logs.headphones.blocked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q017-speaker-join": {
+      "proposedSemanticKey": "logs.speaker.joined",
+      "referenceEventType": 17,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.speaker.joined.title",
+      "altKeyProposal": "logs.speaker.joined.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q018-speaker-leave": {
+      "proposedSemanticKey": "logs.speaker.left",
+      "referenceEventType": 18,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.speaker.left.title",
+      "altKeyProposal": "logs.speaker.left.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q019-microphone-block": {
+      "proposedSemanticKey": "logs.microphone.blocked",
+      "referenceEventType": 19,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.microphone.blocked.title",
+      "altKeyProposal": "logs.microphone.blocked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q020-headphones-allow": {
+      "proposedSemanticKey": "logs.headphones.allowed",
+      "referenceEventType": 20,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.headphones.allowed.title",
+      "altKeyProposal": "logs.headphones.allowed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q021-microphone-allow": {
+      "proposedSemanticKey": "logs.microphone.allowed",
+      "referenceEventType": 21,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.microphone.allowed.title",
+      "altKeyProposal": "logs.microphone.allowed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q022-speaker-disconnect": {
+      "proposedSemanticKey": "logs.speaker.disconnected",
+      "referenceEventType": 22,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.speaker.disconnected.title",
+      "altKeyProposal": "logs.speaker.disconnected.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q054-speaker-edit": {
+      "proposedSemanticKey": "logs.speaker.updated",
+      "referenceEventType": 54,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.speaker.updated.title",
+      "altKeyProposal": "logs.speaker.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q059-stage-start": {
+      "proposedSemanticKey": "logs.stage.started",
+      "referenceEventType": 59,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stage.started.title",
+      "altKeyProposal": "logs.stage.started.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q060-stage-stop": {
+      "proposedSemanticKey": "logs.stage.stopped",
+      "referenceEventType": 60,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stage.stopped.title",
+      "altKeyProposal": "logs.stage.stopped.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q061-stage-edit": {
+      "proposedSemanticKey": "logs.stage.updated",
+      "referenceEventType": 61,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stage.updated.title",
+      "altKeyProposal": "logs.stage.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q062-stage-join": {
+      "proposedSemanticKey": "logs.stage.joined",
+      "referenceEventType": 62,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.stage.joined.title",
+      "altKeyProposal": "logs.stage.joined.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q063-microphone-invite": {
+      "proposedSemanticKey": "logs.microphone.invited",
+      "referenceEventType": 63,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.microphone.invited.title",
+      "altKeyProposal": "logs.microphone.invited.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q064-microphone-stop": {
+      "proposedSemanticKey": "logs.microphone.stopped",
+      "referenceEventType": 64,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.microphone.stopped.title",
+      "altKeyProposal": "logs.microphone.stopped.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q088-voice-group-activity": {
+      "proposedSemanticKey": "logs.voice.group.activity",
+      "referenceEventType": 88,
+      "candidateConsumers": [
+        "logs",
+        "voice"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.voice.group.activity.title",
+      "altKeyProposal": "logs.voice.group.activity.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q023-invite-add": {
+      "proposedSemanticKey": "logs.invite.created",
+      "referenceEventType": 23,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.invite.created.title",
+      "altKeyProposal": "logs.invite.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q024-invite-delete": {
+      "proposedSemanticKey": "logs.invite.deleted",
+      "referenceEventType": 24,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.invite.deleted.title",
+      "altKeyProposal": "logs.invite.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q036-emoji-add": {
+      "proposedSemanticKey": "logs.emoji.created",
+      "referenceEventType": 36,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.emoji.created.title",
+      "altKeyProposal": "logs.emoji.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q037-emoji-delete": {
+      "proposedSemanticKey": "logs.emoji.deleted",
+      "referenceEventType": 37,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.emoji.deleted.title",
+      "altKeyProposal": "logs.emoji.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q038-emoji-edit": {
+      "proposedSemanticKey": "logs.emoji.updated",
+      "referenceEventType": 38,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.emoji.updated.title",
+      "altKeyProposal": "logs.emoji.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q065-calendar-add": {
+      "proposedSemanticKey": "logs.calendar.created",
+      "referenceEventType": 65,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.calendar.created.title",
+      "altKeyProposal": "logs.calendar.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q066-calendar-delete": {
+      "proposedSemanticKey": "logs.calendar.deleted",
+      "referenceEventType": 66,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.calendar.deleted.title",
+      "altKeyProposal": "logs.calendar.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q067-calendar-edit": {
+      "proposedSemanticKey": "logs.calendar.updated",
+      "referenceEventType": 67,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.calendar.updated.title",
+      "altKeyProposal": "logs.calendar.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q090-sticker-add": {
+      "proposedSemanticKey": "logs.sticker.created",
+      "referenceEventType": 90,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.sticker.created.title",
+      "altKeyProposal": "logs.sticker.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q091-sticker-delete": {
+      "proposedSemanticKey": "logs.sticker.deleted",
+      "referenceEventType": 91,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.sticker.deleted.title",
+      "altKeyProposal": "logs.sticker.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q092-sticker-edit": {
+      "proposedSemanticKey": "logs.sticker.updated",
+      "referenceEventType": 92,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.sticker.updated.title",
+      "altKeyProposal": "logs.sticker.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q093-soundboard-add": {
+      "proposedSemanticKey": "logs.soundboard.created",
+      "referenceEventType": 93,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.soundboard.created.title",
+      "altKeyProposal": "logs.soundboard.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q094-soundboard-delete": {
+      "proposedSemanticKey": "logs.soundboard.deleted",
+      "referenceEventType": 94,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.soundboard.deleted.title",
+      "altKeyProposal": "logs.soundboard.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q095-soundboard-edit": {
+      "proposedSemanticKey": "logs.soundboard.updated",
+      "referenceEventType": 95,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.soundboard.updated.title",
+      "altKeyProposal": "logs.soundboard.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q096-rule-add": {
+      "proposedSemanticKey": "logs.rule.created",
+      "referenceEventType": 96,
+      "candidateConsumers": [
+        "logs",
+        "automod",
+        "security"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.rule.created.title",
+      "altKeyProposal": "logs.rule.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q097-rule-delete": {
+      "proposedSemanticKey": "logs.rule.deleted",
+      "referenceEventType": 97,
+      "candidateConsumers": [
+        "logs",
+        "automod",
+        "security"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.rule.deleted.title",
+      "altKeyProposal": "logs.rule.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q098-rule-edit": {
+      "proposedSemanticKey": "logs.rule.updated",
+      "referenceEventType": 98,
+      "candidateConsumers": [
+        "logs",
+        "automod",
+        "security"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.rule.updated.title",
+      "altKeyProposal": "logs.rule.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q027-channel-add": {
+      "proposedSemanticKey": "logs.channel.created",
+      "referenceEventType": 27,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.created.title",
+      "altKeyProposal": "logs.channel.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q028-channel-delete": {
+      "proposedSemanticKey": "logs.channel.deleted",
+      "referenceEventType": 28,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.deleted.title",
+      "altKeyProposal": "logs.channel.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q029-channel-edit": {
+      "proposedSemanticKey": "logs.channel.updated",
+      "referenceEventType": 29,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.updated.title",
+      "altKeyProposal": "logs.channel.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q047-channel-permission-add": {
+      "proposedSemanticKey": "logs.channel.permission.created",
+      "referenceEventType": 47,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.permission.created.title",
+      "altKeyProposal": "logs.channel.permission.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q048-channel-permission-delete": {
+      "proposedSemanticKey": "logs.channel.permission.deleted",
+      "referenceEventType": 48,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.permission.deleted.title",
+      "altKeyProposal": "logs.channel.permission.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q049-channel-permission-edit": {
+      "proposedSemanticKey": "logs.channel.permission.updated",
+      "referenceEventType": 49,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channel.permission.updated.title",
+      "altKeyProposal": "logs.channel.permission.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q079-webhook-add": {
+      "proposedSemanticKey": "logs.webhook.created",
+      "referenceEventType": 79,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.webhook.created.title",
+      "altKeyProposal": "logs.webhook.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q080-webhook-delete": {
+      "proposedSemanticKey": "logs.webhook.deleted",
+      "referenceEventType": 80,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.webhook.deleted.title",
+      "altKeyProposal": "logs.webhook.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q081-webhook-edit": {
+      "proposedSemanticKey": "logs.webhook.updated",
+      "referenceEventType": 81,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.webhook.updated.title",
+      "altKeyProposal": "logs.webhook.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q082-webhook-avatar-edit": {
+      "proposedSemanticKey": "logs.webhook.avatar.updated",
+      "referenceEventType": 82,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.webhook.avatar.updated.title",
+      "altKeyProposal": "logs.webhook.avatar.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q083-broadcast-add": {
+      "proposedSemanticKey": "logs.broadcast.created",
+      "referenceEventType": 83,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.broadcast.created.title",
+      "altKeyProposal": "logs.broadcast.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q084-broadcast-remove": {
+      "proposedSemanticKey": "logs.broadcast.removed",
+      "referenceEventType": 84,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.broadcast.removed.title",
+      "altKeyProposal": "logs.broadcast.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q085-broadcast-edit": {
+      "proposedSemanticKey": "logs.broadcast.updated",
+      "referenceEventType": 85,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.broadcast.updated.title",
+      "altKeyProposal": "logs.broadcast.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q106-channels-reorder": {
+      "proposedSemanticKey": "logs.channels.reordered",
+      "referenceEventType": 106,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.channels.reordered.title",
+      "altKeyProposal": "logs.channels.reordered.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q030-server-edit": {
+      "proposedSemanticKey": "logs.server.updated",
+      "referenceEventType": 30,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.server.updated.title",
+      "altKeyProposal": "logs.server.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q052-server-icon-edit": {
+      "proposedSemanticKey": "logs.server.icon.updated",
+      "referenceEventType": 52,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.server.icon.updated.title",
+      "altKeyProposal": "logs.server.icon.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q055-boost-add": {
+      "proposedSemanticKey": "logs.boost.created",
+      "referenceEventType": 55,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.boost.created.title",
+      "altKeyProposal": "logs.boost.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q056-boost-remove": {
+      "proposedSemanticKey": "logs.boost.removed",
+      "referenceEventType": 56,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.boost.removed.title",
+      "altKeyProposal": "logs.boost.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q107-banner-edit": {
+      "proposedSemanticKey": "logs.banner.updated",
+      "referenceEventType": 107,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.banner.updated.title",
+      "altKeyProposal": "logs.banner.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q031-role-add": {
+      "proposedSemanticKey": "logs.role.created",
+      "referenceEventType": 31,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.role.created.title",
+      "altKeyProposal": "logs.role.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q032-role-delete": {
+      "proposedSemanticKey": "logs.role.deleted",
+      "referenceEventType": 32,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.role.deleted.title",
+      "altKeyProposal": "logs.role.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q033-role-edit": {
+      "proposedSemanticKey": "logs.role.updated",
+      "referenceEventType": 33,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.role.updated.title",
+      "altKeyProposal": "logs.role.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q050-role-permission-edit": {
+      "proposedSemanticKey": "logs.role.permissions.updated",
+      "referenceEventType": 50,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.role.permissions.updated.title",
+      "altKeyProposal": "logs.role.permissions.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q053-role-icon-edit": {
+      "proposedSemanticKey": "logs.role.icon.updated",
+      "referenceEventType": 53,
+      "candidateConsumers": [
+        "logs",
+        "roles"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.role.icon.updated.title",
+      "altKeyProposal": "logs.role.icon.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q068-log-move": {
+      "proposedSemanticKey": "logs.log.moved",
+      "referenceEventType": 68,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.log.moved.title",
+      "altKeyProposal": "logs.log.moved.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q069-eye-edit": {
+      "proposedSemanticKey": "logs.eye.updated",
+      "referenceEventType": 69,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.eye.updated.title",
+      "altKeyProposal": "logs.eye.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q070-language-edit": {
+      "proposedSemanticKey": "logs.language.updated",
+      "referenceEventType": 70,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.language.updated.title",
+      "altKeyProposal": "logs.language.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q071-key-revoke": {
+      "proposedSemanticKey": "logs.key.revoked",
+      "referenceEventType": 71,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.key.revoked.title",
+      "altKeyProposal": "logs.key.revoked.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q072-key-add": {
+      "proposedSemanticKey": "logs.key.created",
+      "referenceEventType": 72,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.key.created.title",
+      "altKeyProposal": "logs.key.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q073-tag-delete": {
+      "proposedSemanticKey": "logs.tag.deleted",
+      "referenceEventType": 73,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.tag.deleted.title",
+      "altKeyProposal": "logs.tag.deleted.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q074-tag-add": {
+      "proposedSemanticKey": "logs.tag.created",
+      "referenceEventType": 74,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.tag.created.title",
+      "altKeyProposal": "logs.tag.created.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q075-tag-edit": {
+      "proposedSemanticKey": "logs.tag.updated",
+      "referenceEventType": 75,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.tag.updated.title",
+      "altKeyProposal": "logs.tag.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q076-settings-edit": {
+      "proposedSemanticKey": "logs.settings.updated",
+      "referenceEventType": 76,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.settings.updated.title",
+      "altKeyProposal": "logs.settings.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q077-log-edit": {
+      "proposedSemanticKey": "logs.log.updated",
+      "referenceEventType": 77,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.log.updated.title",
+      "altKeyProposal": "logs.log.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q078-settings-reset": {
+      "proposedSemanticKey": "logs.settings.reset",
+      "referenceEventType": 78,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.settings.reset.title",
+      "altKeyProposal": "logs.settings.reset.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q089-subscription-edit": {
+      "proposedSemanticKey": "logs.subscription.updated",
+      "referenceEventType": 89,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.subscription.updated.title",
+      "altKeyProposal": "logs.subscription.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q099-dashboard-edit": {
+      "proposedSemanticKey": "logs.dashboard.updated",
+      "referenceEventType": 99,
+      "candidateConsumers": [
+        "logs"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.dashboard.updated.title",
+      "altKeyProposal": "logs.dashboard.updated.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q101-automation-execute": {
+      "proposedSemanticKey": "logs.automation.executed",
+      "referenceEventType": 101,
+      "candidateConsumers": [
+        "logs",
+        "automation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "logs.automation.executed.title",
+      "altKeyProposal": "logs.automation.executed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q039-gavel-block": {
+      "proposedSemanticKey": "moderation.ban.applied",
+      "referenceEventType": 39,
+      "candidateConsumers": [
+        "logs",
+        "moderation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "moderation.ban.applied.title",
+      "altKeyProposal": "moderation.ban.applied.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q040-member-clock": {
+      "proposedSemanticKey": "moderation.timeout.applied",
+      "referenceEventType": 40,
+      "candidateConsumers": [
+        "logs",
+        "moderation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "moderation.timeout.applied.title",
+      "altKeyProposal": "moderation.timeout.applied.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q041-door-leave": {
+      "proposedSemanticKey": "moderation.kick.applied",
+      "referenceEventType": 41,
+      "candidateConsumers": [
+        "logs",
+        "moderation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "moderation.kick.applied.title",
+      "altKeyProposal": "moderation.kick.applied.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q042-clock-allow": {
+      "proposedSemanticKey": "moderation.timeout.removed",
+      "referenceEventType": 42,
+      "candidateConsumers": [
+        "logs",
+        "moderation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "moderation.timeout.removed.title",
+      "altKeyProposal": "moderation.timeout.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "event.q043-gavel-allow": {
+      "proposedSemanticKey": "moderation.ban.removed",
+      "referenceEventType": 43,
+      "candidateConsumers": [
+        "logs",
+        "moderation"
+      ],
+      "defaultVariant": "estado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "moderation.ban.removed.title",
+      "altKeyProposal": "moderation.ban.removed.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "ui.assistance": {
+      "proposedSemanticKey": "common.assistance",
+      "referenceEventType": null,
+      "candidateConsumers": [
+        "utilities"
+      ],
+      "defaultVariant": "dorado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "common.assistance.title",
+      "altKeyProposal": "common.assistance.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "ui.billing": {
+      "proposedSemanticKey": "common.billing",
+      "referenceEventType": null,
+      "candidateConsumers": [
+        "utilities"
+      ],
+      "defaultVariant": "dorado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "common.billing.title",
+      "altKeyProposal": "common.billing.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "ui.error": {
+      "proposedSemanticKey": "common.error",
+      "referenceEventType": null,
+      "candidateConsumers": [
+        "utilities"
+      ],
+      "defaultVariant": "dorado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "common.error.title",
+      "altKeyProposal": "common.error.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    },
+    "ui.unexpected": {
+      "proposedSemanticKey": "common.unexpected",
+      "referenceEventType": null,
+      "candidateConsumers": [
+        "utilities"
+      ],
+      "defaultVariant": "dorado",
+      "brandVariant": "dorado",
+      "titleKeyProposal": "common.unexpected.title",
+      "altKeyProposal": "common.unexpected.alt",
+      "status": "not-bound",
+      "fallback": "localized-label-without-emoji",
+      "referenceIdIsDiscordEmojiId": false
+    }
+  }
+}

@@ -8,7 +8,7 @@ El objetivo es que una persona pueda localizar una función, modificarla y compr
 
 1. Mantener un proyecto y un bot, con módulos por capacidad y un núcleo pequeño. Conservar el registro existente y ampliarlo gradualmente.
 2. Incorporar Zod 4 en el piloto para los contratos nuevos, con JSON Schema generado para describir campos. Usar TypeScript primero para comprobar JavaScript seleccionado mediante JSDoc; decidir la compilación de `.ts` después del piloto.
-3. Mantener Express/EJS, Mongo/Mongoose, Socket.IO, BullMQ, discord.js, Shoukaku y los renderers actuales en esta migración. Adoptar límites y contratos antes de sustituir infraestructura.
+3. Mantener Express/EJS, Mongo/Mongoose, Socket.IO, BullMQ, discord.js y los renderers actuales. El destino de audio confirmado es lavalink-client; Shoukaku se conserva solo como adaptador legacy durante la transición. Ver ../sistema/07_MUSICA_LAVALINK_CLIENT.md.
 4. Definir una descripción de formulario por módulo y componentes EJS reutilizables. La validación de recursos y permisos permanece en servidor.
 5. Añadir control de dependencias con dependency-cruiser para los módulos migrados. No convertir todos los incumplimientos legacy en bloqueantes desde el primer día.
 6. Ofrecer borradores, vista previa, publicación, conflictos y diagnóstico en cada capacidad que los necesite. Extender el patrón existente de bienvenida.

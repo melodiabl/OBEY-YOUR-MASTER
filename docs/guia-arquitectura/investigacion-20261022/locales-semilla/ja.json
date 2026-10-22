@@ -1,0 +1,20 @@
+{
+  "status.pending": "処理中…",
+  "status.confirmed": "確認済み",
+  "status.error": "操作を完了できませんでした。",
+  "status.permission": "この操作を行う権限がありません。",
+  "status.expired": "この操作ボタンは期限切れです。新しく開いてください。",
+  "status.unavailable": "この機能は現在利用できません。",
+  "vote.open": "OBEY に投票する",
+  "vote.received": "投票を記録しました。応援ありがとうございます！",
+  "vote.pending": "投票の確認はまだ届いていません。",
+  "vote.duplicate": "この投票はすでに記録されています。",
+  "premium.title": "サブスクリプション",
+  "premium.active": "アクセス有効",
+  "premium.verifying": "お支払いを確認しています。",
+  "premium.ends": "{date} まで利用できます。",
+  "setup.diagnostics": "設定を確認する",
+  "setup.valid": "この確認では設定に問題はありませんでした。",
+  "help.language": "言語",
+  "help.support": "サポート"
+}

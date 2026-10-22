@@ -1,0 +1,211 @@
+{
+  "edition": "0.12",
+  "kind": "design-recipes-not-executable-tasks",
+  "enabled": false,
+  "recipes": [
+    {
+      "id": "R01",
+      "capabilities": [
+        "D01",
+        "D04",
+        "D10",
+        "D18"
+      ],
+      "owner": "welcome",
+      "entry": "/servidor -> configuración -> bienvenida",
+      "existingService": "handlers/configuration-service.js",
+      "input": "validated-channel-id",
+      "effect": "publish-module-config",
+      "messages": [
+        "CM01"
+      ],
+      "acceptance": [
+        "rename-keeps-binding",
+        "stale-revision-rejected",
+        "no-automatic-test-post"
+      ]
+    },
+    {
+      "id": "R02",
+      "capabilities": [
+        "D03",
+        "D05",
+        "D06",
+        "D10",
+        "D18"
+      ],
+      "owner": "tickets",
+      "entry": "CM03 or Reportar mensaje",
+      "form": {
+        "fields": [
+          {
+            "kind": "RadioGroup",
+            "name": "area",
+            "required": true,
+            "values": [
+              "music",
+              "tickets",
+              "other"
+            ]
+          },
+          {
+            "kind": "TextInput",
+            "name": "description",
+            "required": true
+          },
+          {
+            "kind": "FileUpload",
+            "name": "evidence",
+            "required": false,
+            "productMaxFiles": 2
+          },
+          {
+            "kind": "Checkbox",
+            "name": "reproducible",
+            "default": false
+          }
+        ]
+      },
+      "effect": "persist-authorized-report-and-private-ticket",
+      "messages": [
+        "CM03",
+        "CM04"
+      ],
+      "fallback": "text-modal-then-attachment-in-private-ticket",
+      "acceptance": [
+        "wrong-actor-denied",
+        "private-files-stay-private",
+        "no-false-receipt",
+        "missing-builder-falls-back"
+      ]
+    },
+    {
+      "id": "R03",
+      "capabilities": [
+        "D07",
+        "D08",
+        "D10"
+      ],
+      "owner": "tickets",
+      "entry": "configured-support-panel",
+      "renderMode": "v2",
+      "contentContract": "CM03",
+      "components": [
+        "Container",
+        "TextDisplay",
+        "ActionRow",
+        "StringSelect"
+      ],
+      "effect": "reconcile-stable-panel-message",
+      "acceptance": [
+        "no-embeds-or-poll-in-v2",
+        "personal-operation-does-not-mutate-public-panel"
+      ]
+    },
+    {
+      "id": "R04",
+      "capabilities": [
+        "D09",
+        "D11",
+        "D18"
+      ],
+      "owner": "music",
+      "entry": "confirmed-player-state-change",
+      "preservedControls": [
+        "mp_shuffle",
+        "mp_prev",
+        "mp_toggle",
+        "mp_skip",
+        "mp_loop",
+        "mp_lyrics",
+        "mp_voldown",
+        "mp_stop",
+        "mp_volup",
+        "mp_queue",
+        "mp_like",
+        "mp_autoplay"
+      ],
+      "transport": "Discord REST voice-status adapter",
+      "effect": "channel-status-projection-only",
+      "acceptance": [
+        "old-track-write-discarded",
+        "missing-permission-does-not-stop-audio",
+        "no-per-second-writes"
+      ]
+    },
+    {
+      "id": "R05",
+      "capabilities": [
+        "D09"
+      ],
+      "owner": "module-owning-deadline",
+      "entry": "published-deadline-view",
+      "effect": "none-on-reading",
+      "acceptance": [
+        "utc-instant-preserved",
+        "view-does-not-execute-job"
+      ]
+    },
+    {
+      "id": "R06",
+      "capabilities": [
+        "D12",
+        "D18"
+      ],
+      "owner": "suggestions",
+      "entry": "authorized-poll-setup",
+      "messageMode": "legacy-compatible-poll",
+      "effect": "create-and-record-poll-message",
+      "acceptance": [
+        "not-a-v2-message",
+        "unknown-result-not-zero",
+        "uncertain-create-reconciled"
+      ]
+    },
+    {
+      "id": "R07",
+      "capabilities": [
+        "D13",
+        "D18"
+      ],
+      "owner": "events",
+      "entry": "authorized-event-setup-only-when-module-offered",
+      "effect": "create-and-record-native-scheduled-event",
+      "acceptance": [
+        "timezone-preview",
+        "no-automatic-playback",
+        "no-duplicate-on-retry"
+      ]
+    },
+    {
+      "id": "R08",
+      "capabilities": [
+        "D14",
+        "D16",
+        "D18"
+      ],
+      "owner": "automod",
+      "entry": "authorized-rule-review",
+      "effect": "update-only-selected-owned-rule",
+      "acceptance": [
+        "exempt-role-tested",
+        "no-double-sanction",
+        "no-rule-takeover"
+      ]
+    },
+    {
+      "id": "R09",
+      "capabilities": [
+        "D08"
+      ],
+      "owner": "existing-asset-registry",
+      "entry": "scripts/obey-assets.js reconciliation",
+      "effect": "authorized-application-emoji-publication",
+      "acceptance": [
+        "hash-and-application-match",
+        "no-invented-ids",
+        "deleted-id-fallback"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "kind": "unapproved-design-proposals",
+  "productionRegistry": false,
+  "items": [
+    {
+      "id": "NX01",
+      "key": "growth.voto",
+      "label": "Voto",
+      "module": "Top.gg y participación",
+      "meaning": "Una papeleta entrando en una urna; nunca una estrella de soporte.",
+      "localeKey": "vote.open",
+      "path": "assets/obey/growth-proposals/voto",
+      "states": [
+        "idle",
+        "result"
+      ],
+      "resultMeans": "recibido",
+      "guard": "Solo confirmar después de persistir el voto válido.",
+      "approved": false,
+      "discordEmojiId": null,
+      "animated": true,
+      "publish": false
+    },
+    {
+      "id": "NX02",
+      "key": "growth.suscripcion",
+      "label": "Suscripción",
+      "module": "Facturación",
+      "meaning": "Recibo con un pequeño calendario; no identifica una plataforma.",
+      "localeKey": "premium.title",
+      "path": "assets/obey/growth-proposals/suscripcion",
+      "states": [
+        "idle",
+        "result"
+      ],
+      "resultMeans": "vigente",
+      "guard": "El recurso no prueba un pago ni sustituye estado y fecha.",
+      "approved": false,
+      "discordEmojiId": null,
+      "animated": false,
+      "publish": false
+    },
+    {
+      "id": "NX03",
+      "key": "growth.acceso",
+      "label": "Acceso habilitado",
+      "module": "Derechos de usuario/guild",
+      "meaning": "Llave reconocible con etiqueta de comprobación.",
+      "localeKey": "premium.active",
+      "path": "assets/obey/growth-proposals/acceso",
+      "states": [
+        "idle",
+        "result"
+      ],
+      "resultMeans": "habilitado",
+      "guard": "Usar solo con entitlement efectivo; no significa rol de administrador.",
+      "approved": false,
+      "discordEmojiId": null,
+      "animated": false,
+      "publish": false
+    },
+    {
+      "id": "NX04",
+      "key": "growth.traspaso",
+      "label": "Traspaso de sesión",
+      "module": "Operación entre procesos/VPS",
+      "meaning": "Dos servidores unidos por una flecha de dirección.",
+      "localeKey": "setup.diagnostics",
+      "path": "assets/obey/growth-proposals/traspaso",
+      "states": [
+        "idle",
+        "result"
+      ],
+      "resultMeans": "transferido",
+      "guard": "Solo en diagnóstico del equipo; no llenar la UI del usuario de infraestructura.",
+      "approved": false,
+      "discordEmojiId": null,
+      "animated": true,
+      "publish": false
+    }
+  ]
+}

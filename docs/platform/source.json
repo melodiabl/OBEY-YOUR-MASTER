@@ -24,7 +24,7 @@
     "writtenAcceptanceCases": 128,
     "optionalCommandProposals": 24,
     "optionalProposalsAutomaticallyAuthorized": false,
-    "latestRevision": "documentation_refinement_of_existing_scope"
+    "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
     "code": "07da107f020d40d825373af4cd5f35d231a838da",
@@ -254,5 +254,27 @@
         "Original setup access incident and remaining global plan"
       ]
     }
+  },
+  "integratedGuide015": {
+    "receivedDate": "2026-10-23",
+    "edition": "0.15",
+    "archiveSha256": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+    "originalArchivePath": "/tmp/0e312f3c-b2c6-4ed1-8498-f9aa67b005cd.zip",
+    "archiveRemovedAfterVerification": true,
+    "extractedRoot": "/home/OBEY_Implementacion_2026-10-23/OBEY_Implementacion",
+    "verifiedFiles": 3908,
+    "checkoutAtReceipt": "cea13f03c543d128de67eed74c2d709f78931be6",
+    "baseCommit": "c8ba6d3ee86515813e68a028e1221d093301e91b",
+    "bootstrapApplied": false,
+    "runtimeChanged": false,
+    "rootEntry": "LEER_PRIMERO.md",
+    "guide": "docs/guia-arquitectura/sistema/00_INDICE.md",
+    "report": "docs/guia-arquitectura/CONCILIACION_2026-10-23.md",
+    "evidence": "docs/platform/evidence/source-adoption-20261023.json",
+    "newMaterialFiles": 1034,
+    "guideFilesAdoptedOrMerged": 190,
+    "targetMusicClient": "lavalink-client",
+    "targetMusicClientInstalled": false,
+    "next": "P0 remaining registry/ownership and P1 continuity/client migration; P2-P6 retain acceptance gates"
   }
 }

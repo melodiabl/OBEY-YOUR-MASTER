@@ -1,0 +1,453 @@
+{
+  "edition": "0.11",
+  "kind": "presentation-specification-not-runtime-module",
+  "namespace": "community.messages",
+  "publicEntry": "/servidor",
+  "status": "copy-incorporated-runtime-pending",
+  "newLocaleKeysPerLanguage": 76,
+  "templates": [
+    {
+      "id": "CM01",
+      "purpose": "channel-configuration",
+      "audience": "authorized-guild-manager-private",
+      "target": "interaction-ephemeral",
+      "titleKey": "community.messages.setup.title",
+      "bodyKeys": [
+        "community.messages.setup.description",
+        "community.messages.setup.instructions"
+      ],
+      "fieldLabelKeys": [
+        "community.messages.setup.welcome",
+        "community.messages.setup.tickets",
+        "community.messages.setup.logs",
+        "community.messages.setup.technical",
+        "community.messages.setup.updates"
+      ],
+      "unsetKey": "community.messages.setup.unset",
+      "controls": [
+        {
+          "type": "string-select",
+          "labelKey": "community.messages.setup.choice",
+          "action": "choose-feature",
+          "options": [
+            "welcome",
+            "tickets",
+            "logs",
+            "technical",
+            "updates"
+          ]
+        },
+        {
+          "type": "button",
+          "labelKey": "community.messages.setup.review",
+          "action": "review-configuration"
+        }
+      ],
+      "assets": {
+        "idle": "B51",
+        "pending": "A12",
+        "confirmed": "A11"
+      },
+      "guards": [
+        "guild-manager-permission",
+        "module-capability-check",
+        "per-module-channel-type-and-effective-permissions",
+        "staff-destination-audience-review"
+      ],
+      "states": {
+        "pending": "community.messages.setup.pending",
+        "confirmed": "community.messages.setup.saved",
+        "failed": "community.messages.setup.failed",
+        "conflict": "community.messages.setup.conflict"
+      },
+      "effectAuthority": "module-configuration-service",
+      "publicationCondition": "save-confirmation-only-after-persisted-revision",
+      "dynamicDataContract": {
+        "required": [],
+        "fieldValues": "validated-current-channel-bindings-or-localized-unset",
+        "successVariables": [
+          "purpose",
+          "channel"
+        ]
+      }
+    },
+    {
+      "id": "CM02",
+      "purpose": "support-guild-welcome",
+      "audience": "support-community-public",
+      "targetBinding": "welcome",
+      "titleKey": "community.messages.welcome.title",
+      "bodyKeys": [
+        "community.messages.welcome.description",
+        "community.messages.welcome.instructions"
+      ],
+      "alternativeBodyKey": "community.messages.welcome.noRoles",
+      "controls": [
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.welcome.rules",
+          "binding": "rules"
+        },
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.welcome.roles",
+          "binding": "roles"
+        },
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.welcome.steps",
+          "binding": "onboarding"
+        }
+      ],
+      "assets": {
+        "idle": "B31"
+      },
+      "guards": [
+        "support-profile-enabled",
+        "matching-guild",
+        "member-join-event-reconciled",
+        "destination-readable",
+        "hide-unconfigured-or-inaccessible-links"
+      ],
+      "states": {
+        "failed-private-diagnostic": "community.messages.welcome.deliveryFailed"
+      },
+      "effectAuthority": "welcome-service",
+      "publicationCondition": "confirmed-member-join-and-published-config",
+      "userMentionPolicy": "none-by-default-explicit-single-user-only-if-configured",
+      "dynamicDataContract": {
+        "required": [
+          "communityName",
+          "displayName"
+        ],
+        "sources": {
+          "communityName": "configured-support-community-display-name",
+          "displayName": "confirmed-member-join-display-name"
+        },
+        "optionalLinks": [
+          "rules",
+          "roles",
+          "onboarding"
+        ]
+      }
+    },
+    {
+      "id": "CM03",
+      "purpose": "ticket-entry-panel",
+      "audience": "support-community-public",
+      "targetBinding": "ticketPanel",
+      "titleKey": "community.messages.tickets.title",
+      "bodyKeys": [
+        "community.messages.tickets.description"
+      ],
+      "reasonKeys": [
+        "community.messages.tickets.help",
+        "community.messages.tickets.bug",
+        "community.messages.tickets.contact"
+      ],
+      "reasonDescriptionKeys": [
+        "community.messages.tickets.helpDescription",
+        "community.messages.tickets.bugDescription",
+        "community.messages.tickets.contactDescription"
+      ],
+      "controls": [
+        {
+          "type": "string-select",
+          "labelKey": "community.messages.tickets.choose",
+          "action": "choose-ticket-reason",
+          "options": [
+            "help",
+            "bug",
+            "contact"
+          ]
+        }
+      ],
+      "assets": {
+        "idle": "A01",
+        "pending": "A01",
+        "confirmed": "A11"
+      },
+      "guards": [
+        "ticket-service-available",
+        "reason-policy-configured",
+        "private-overwrites-before-publication",
+        "actor-can-open",
+        "respect-existing-duplicate-policy"
+      ],
+      "states": {
+        "pending-private": "community.messages.tickets.opening",
+        "confirmed-private": "community.messages.tickets.opened",
+        "already-open-private": "community.messages.tickets.existing",
+        "failed-private": "community.messages.tickets.unavailable",
+        "needs-review-private": "community.messages.tickets.privateCheckFailed"
+      },
+      "effectAuthority": "ticket-service",
+      "publicationCondition": "stable-panel-reconciled-by-message-id",
+      "successLinkKey": "community.messages.tickets.open",
+      "dynamicDataContract": {
+        "required": [],
+        "selectionValues": [
+          "help",
+          "bug",
+          "contact"
+        ],
+        "resultLink": "confirmed-actor-owned-private-ticket-url"
+      }
+    },
+    {
+      "id": "CM04",
+      "purpose": "bug-report-acknowledgement",
+      "audience": "requester-and-authorized-support-private",
+      "target": "private-interaction-or-authorized-ticket",
+      "titleKey": "community.messages.report.title",
+      "bodyKeys": [
+        "community.messages.report.description",
+        "community.messages.report.instructions"
+      ],
+      "controls": [
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.report.view",
+          "binding": "verified-report-or-ticket-location"
+        }
+      ],
+      "assets": {
+        "idle": "B19",
+        "pending": "A12",
+        "confirmed": "A11"
+      },
+      "guards": [
+        "report-record-persisted",
+        "requester-bound",
+        "destination-access-verified",
+        "no-public-issue-creation"
+      ],
+      "states": {
+        "pending": "community.messages.report.saving",
+        "confirmed-no-link": "community.messages.report.savedNoDestination",
+        "failed-or-uncertain": "community.messages.report.failed"
+      },
+      "effectAuthority": "tickets-or-existing-report-owner-to-reconcile",
+      "publicationCondition": "durable-reference-exists",
+      "dynamicDataContract": {
+        "required": [
+          "reference"
+        ],
+        "sources": {
+          "reference": "persisted-report-or-ticket-reference"
+        },
+        "resultLink": "verified-requester-accessible-location"
+      }
+    },
+    {
+      "id": "CM05",
+      "purpose": "github-pull-request-opened-custom-notice",
+      "audience": "authorized-project-team-private",
+      "targetBinding": "development",
+      "titleKey": "community.messages.github.title",
+      "bodyKeys": [
+        "community.messages.github.change",
+        "community.messages.github.instructions"
+      ],
+      "fieldLabelKeys": [
+        "community.messages.github.repository",
+        "community.messages.github.status"
+      ],
+      "statusKeys": {
+        "draft": "community.messages.github.draft",
+        "open": "community.messages.github.pending"
+      },
+      "controls": [
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.github.view",
+          "binding": "validated-github-pr-url"
+        }
+      ],
+      "assets": {
+        "idle": "C10"
+      },
+      "guards": [
+        "custom-github-adapter-enabled",
+        "verified-signature-and-authorized-repository",
+        "event-pull-request-action-opened",
+        "private-audience-verified",
+        "delivery-reconciled"
+      ],
+      "states": {},
+      "effectAuthority": "conditional-feeds-github-adapter",
+      "publicationCondition": "validated-pull-request-opened-event",
+      "nativeWebhookUsesThisTemplate": false,
+      "dynamicDataContract": {
+        "required": [
+          "changeTitle",
+          "author",
+          "branch",
+          "repository",
+          "status"
+        ],
+        "sources": {
+          "changeTitle": "verified-payload.pull_request.title",
+          "author": "verified-payload.pull_request.user.login",
+          "branch": "verified-payload.pull_request.base.ref",
+          "repository": "authorized-repository-full-name",
+          "status": "localized-draft-or-awaiting-review"
+        },
+        "headingField": "changeTitle",
+        "fieldValues": [
+          "repository",
+          "status"
+        ],
+        "resultLink": "validated-pr-url"
+      }
+    },
+    {
+      "id": "CM06",
+      "purpose": "reviewed-public-release-announcement",
+      "audience": "support-community-public",
+      "targetBinding": "updates",
+      "titleKey": "community.messages.release.title",
+      "bodyKeys": [
+        "community.messages.release.description"
+      ],
+      "optionalFieldLabelKeys": [
+        "community.messages.release.news",
+        "community.messages.release.fixes",
+        "community.messages.release.action"
+      ],
+      "controls": [
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.release.details",
+          "binding": "authorized-public-release-url"
+        },
+        {
+          "type": "link-button",
+          "labelKey": "community.messages.release.report",
+          "binding": "bugReports"
+        }
+      ],
+      "assets": {
+        "idle": "B44",
+        "pending-private": "A12",
+        "confirmed-private": "A11"
+      },
+      "guards": [
+        "announcement-review-confirmed",
+        "deployment-scope-evidence",
+        "public-content-reviewed",
+        "binding-and-permissions-current",
+        "message-receipt-reconciled"
+      ],
+      "states": {
+        "draft-private-title": "community.messages.release.draftTitle",
+        "draft-private-body": "community.messages.release.draftBody",
+        "pending-private": "community.messages.release.pending",
+        "confirmed-private": "community.messages.release.published",
+        "not-deployed-private": "community.messages.release.notDeployed",
+        "uncertain-private": "community.messages.release.uncertain"
+      },
+      "effectAuthority": "reviewed-publication-service-to-implement",
+      "publicationCondition": "reviewed-content-and-verified-deployment-scope",
+      "dynamicDataContract": {
+        "required": [
+          "version",
+          "scope"
+        ],
+        "sources": {
+          "version": "reviewed-release-version",
+          "scope": "verified-deployment-audience"
+        },
+        "optionalFields": [
+          "news",
+          "fixes",
+          "instructions"
+        ],
+        "omitEmptyFields": true,
+        "resultLinks": [
+          "authorized-public-release-url",
+          "configured-bug-report-channel"
+        ]
+      }
+    }
+  ],
+  "assetReferences": {
+    "A01": {
+      "approval": "user-approved-design",
+      "idle": "approved/ticket/idle-128.png",
+      "motion": "approved/ticket/motion.gif",
+      "result": "approved/ticket/result-128.png",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "A11": {
+      "approval": "user-approved-design",
+      "idle": "approved/confirmacion/idle-128.png",
+      "motion": "approved/confirmacion/motion.gif",
+      "result": "approved/confirmacion/result-128.png",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "A12": {
+      "approval": "user-approved-design",
+      "idle": "approved/sincronizar/idle-128.png",
+      "motion": "approved/sincronizar/motion.gif",
+      "result": "approved/sincronizar/result-128.png",
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "B19": {
+      "approval": "review-required",
+      "idle": "new/report/icon-128.png",
+      "motion": null,
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "B31": {
+      "approval": "review-required",
+      "idle": "new/welcome/icon-128.png",
+      "motion": null,
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "B44": {
+      "approval": "review-required",
+      "idle": "new/messages/icon-128.png",
+      "motion": null,
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "B51": {
+      "approval": "review-required",
+      "idle": "new/settings/icon-128.png",
+      "motion": null,
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    },
+    "C10": {
+      "approval": "platform-review-required",
+      "idle": "platforms/github/white.png",
+      "motion": null,
+      "applicationEmojiId": null,
+      "runtimeRegistered": false,
+      "root": "assets/obey/ui-state-catalog"
+    }
+  },
+  "globalRules": {
+    "messageContentLanguage": "published-guild-locale-for-public-actor-locale-for-private",
+    "escapeUserContent": true,
+    "allowArbitraryMentions": false,
+    "neverAnimateIdlePublicPanels": true,
+    "nativeGithubFormatRemainsNative": true,
+    "suppressUnimplementedControls": true,
+    "noAutomaticDirectMessages": true,
+    "noDiscordIdsInvented": true
+  }
+}

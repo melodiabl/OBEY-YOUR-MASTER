@@ -1,0 +1,348 @@
+{
+  "edition": "0.15",
+  "staticPng": 24,
+  "svg": 12,
+  "gif": 12,
+  "characterPng": 1,
+  "characterSize": [
+    1254,
+    1254
+  ],
+  "previewPng": 2,
+  "previewGif": 1,
+  "relativeLinksChecked": 25,
+  "baseFilesDeleted": 0,
+  "runtimeChanged": false,
+  "priorAssetsChanged": false,
+  "newVariantsApproved": false,
+  "emojiPublished": false,
+  "galleryBrowserRendered": false,
+  "galleryVerification": "offline links, exports and visual inspection of PNG; no browser rendering claimed",
+  "animations": [
+    {
+      "id": "M01",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 15819,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M02",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 15828,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M03",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 17022,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M04",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 17050,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M05",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 17121,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M06",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 17568,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M07",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 16443,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M08",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 16232,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M09",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 16501,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M10",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 16878,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M11",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 16078,
+      "hasVisualChanges": true
+    },
+    {
+      "id": "M12",
+      "frames": 11,
+      "durationMs": 1920,
+      "bytes": 15495,
+      "hasVisualChanges": true
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/EJEMPLOS.md",
+      "sha256": "a785b1c1338bf1e8cf6aab06ebebfc38f64832e84a771dc2bfc6dc0ae7edbb0b"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/LEER.md",
+      "sha256": "c7ac28b19b58a7a5b34a4c1b57f93a86fc13a8b027645a81a6c1e1cd5d257203"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/PROMPT_PERSONAJE_TICKETS.txt",
+      "sha256": "e083fa56be965a76c500504e24ec7d6eaef8a48a7c8dd3f33b7b27ef6110598f"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/galeria.html",
+      "sha256": "62f289c72597a4999d7088d244610283069b577b8c1b399fcaccd590ac75f32e"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/mensajes-ejemplo.png",
+      "sha256": "ec360c36a19fcf4e00b9dd2da5a3906400cd4b8ea5d18bb6cc742ac38a5fe631"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/mensajes-ejemplo.svg",
+      "sha256": "40666d831537501beaafb34d7205297eec401b9b9a7cab317b04077bf072960e"
+    },
+    {
+      "path": "docs/guia-arquitectura/materiales-20261022/personaje.json",
+      "sha256": "28500731282c56c29f260df0a720f08f45277610559e2422ce2de27256b91c4f"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/animaciones-preview.gif",
+      "sha256": "c47f09c17995420867ee6a74b8c49cbdb8e96f331ec5f112d1d326574f861b52"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/files.json",
+      "sha256": "41440fd35b8b8057075f58fd9df2c4967b70c074e259b1fdcaa4675639b1211d"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/manifest.json",
+      "sha256": "289588a4effcb7841a7edf85ca06e5f6d1990d6f1af241c52c62bef965ad7750"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q001-member-join/idle-128.png",
+      "sha256": "e4561f4f8fb4f9cbabbccc8157a87e68c5b541c904dfd13374b47a3fe47ea029"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q001-member-join/idle-256.png",
+      "sha256": "1a8561ac962e8b9c384c2a47c0c67384389ae56dabfec32b6458d73ab002715e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q001-member-join/idle.svg",
+      "sha256": "bcc254850624d87252896e59f1f99f04464d36c6a77549257308332f1b9a605e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q001-member-join/motion.gif",
+      "sha256": "42f29304d9e2b324376878c22a253e09448c7e213b63732a41fb06a14e8096da"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q002-member-leave/idle-128.png",
+      "sha256": "dd30957a5b980d7b22510a41e920ce71d91956dd1f71663798dafb4eef285121"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q002-member-leave/idle-256.png",
+      "sha256": "c36fa638bef11bc6f4cb812c7bb8da0f74f1d193cb4bab0524a9ab02a7b30816"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q002-member-leave/idle.svg",
+      "sha256": "eafb437a796ec257818855e3a49b3868d24fb81b42d7bb88b2d721ffe382d99c"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q002-member-leave/motion.gif",
+      "sha256": "35669f2e903eee3b979dd4ce3e777583cfcdd62f7a544fe0309c5e8cc55ab9fe"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q005-message-delete/idle-128.png",
+      "sha256": "ac593889a738d8f5c201298cbedbd130703a1b2e25b86a9d8733955a5b563e25"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q005-message-delete/idle-256.png",
+      "sha256": "7c707f26da79efefac664d8e1f0d963feffd9acdcab0d545ba7046db818d6729"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q005-message-delete/idle.svg",
+      "sha256": "5e1f4d40e9826e2d3389ccae08ab6316b37a1bdba1b8aff0a92b831614191be8"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q005-message-delete/motion.gif",
+      "sha256": "ed4bfcf1f2ab697f32827c5d5620a3372705c9590bef1e4492df53b6cb7594c6"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q007-message-edit/idle-128.png",
+      "sha256": "f5afa7a3d894e16893f8e8c734360a525104f5fdcaad1158e83421fee20798cc"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q007-message-edit/idle-256.png",
+      "sha256": "e040c13821cba920e3968cffdc249f9ba75f4619c590547590fdd26cf0fe7584"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q007-message-edit/idle.svg",
+      "sha256": "9ec8d3af07c4036012bf3e1a2e9cb91b363b89217654dad47720f141a2eaa40f"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q007-message-edit/motion.gif",
+      "sha256": "f330ace37fb2533e06225029b6aeb22865930903767b28909b9dca9b715ff411"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q008-stream-start/idle-128.png",
+      "sha256": "92d4c2760f3fd371da85cce155bf1472e87ff447a06ae5fc52c237c1cae876c6"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q008-stream-start/idle-256.png",
+      "sha256": "6afa9bbed0b11c52dfb38885d1109fd20bac2459a7b6c5d931c757588426010e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q008-stream-start/idle.svg",
+      "sha256": "065b20f37d91111c6b70ac446916156f8ea00dbaa5a205c7288b8e7dae1698f9"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q008-stream-start/motion.gif",
+      "sha256": "0baea7182d15442e1eb8ac114cf733a6d3f0bf75656e3a5cf0df6c8f13fa4647"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q009-stream-stop/idle-128.png",
+      "sha256": "9d46867c3e463f430783e97f085da7146e209b4b1bc42305c5a117380cef383a"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q009-stream-stop/idle-256.png",
+      "sha256": "e57a27a39c378000e003de601d61a5152b727a9300d23a86f64770e42e0aa6be"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q009-stream-stop/idle.svg",
+      "sha256": "ff8836303fcbcf4f990fd1f2c49b79156262eb746b8408fa9792e9b7fa29aa83"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q009-stream-stop/motion.gif",
+      "sha256": "4254ec3e5c97876454af9505cef66c26e51aaccf1feff67ed10cb608ebf497dd"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q017-speaker-join/idle-128.png",
+      "sha256": "3ab23576645ca3f077555634c76a4d3fcc93eeda86ea222807349fbf6fb71cdb"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q017-speaker-join/idle-256.png",
+      "sha256": "879b04cd34b4c253ebb1ce8a6967c928e86f2fc9023b43c4de3c9a5897aab827"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q017-speaker-join/idle.svg",
+      "sha256": "5ee1b39d0258a6a9b204018e399ec5f2c7d91c13c8c501c7aa09fcebd66e61d0"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q017-speaker-join/motion.gif",
+      "sha256": "9274e74d6305ea9e910517f9699de5cccb1a36b2ab26022bf6f3edccb214191d"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q018-speaker-leave/idle-128.png",
+      "sha256": "59d2a7c227eef4c1a7d4c28612551d29ff98e980c9d356a1c871658e9eed83f0"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q018-speaker-leave/idle-256.png",
+      "sha256": "b4043392e50ced6b9dec721102a0c69c6026bb3420fd5e1d7e4eebe92c36816b"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q018-speaker-leave/idle.svg",
+      "sha256": "50d94565474dd771c0d22c3312abdcdd46f8ae4d406de96bd990bd41be716a16"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q018-speaker-leave/motion.gif",
+      "sha256": "949ffcde81e797a9add0bfa89b0240b0424d36b853ce63b64697597874982a6f"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q019-microphone-block/idle-128.png",
+      "sha256": "cf424b2d7191297fa5a525fe42c492f274b56c47216acc082ad7a29219491d70"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q019-microphone-block/idle-256.png",
+      "sha256": "62211e677828e86d10a9a6889a015f716faffed09f239fc44a9eaf7b61466e60"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q019-microphone-block/idle.svg",
+      "sha256": "b8bcd313aa9b1c6c041ae73141a89144f4ad3d11f01ee15b3a6e427f5d3be651"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q019-microphone-block/motion.gif",
+      "sha256": "855941eeb98a86f4c4426c4b4f5e5abb9943f0d708c99f1235137c01a155048e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q021-microphone-allow/idle-128.png",
+      "sha256": "4d9c6f28058006beb86bfd3ff3cbb2436c2ac759482bd08c8634f3b4221c7f5e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q021-microphone-allow/idle-256.png",
+      "sha256": "3abb776d7e0fbd5cac06610de52ffdcee405a60369da40b0ee52dc3c8a616fa7"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q021-microphone-allow/idle.svg",
+      "sha256": "ac51a479a78baa1e2e2e9b64a6f49b8cbe471a08f8b8b5b66db54698d895fde5"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q021-microphone-allow/motion.gif",
+      "sha256": "cbf60b61e25431cb2a43a78c843e45c41c46cc36f0a21691a52ccb3ddb041008"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q044-role-grant/idle-128.png",
+      "sha256": "e8be4dccee1fb8905bea56162027720faf647e4b85b57d26dd0a9ac5ccd7a13e"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q044-role-grant/idle-256.png",
+      "sha256": "153360a911079304447d8a50da3334c6a550086f3e308b8b1b12e903b38496ec"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q044-role-grant/idle.svg",
+      "sha256": "da7942b9953c370f436daf2377440eb2d2f90106b0dd8a79631e2202e640620b"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q044-role-grant/motion.gif",
+      "sha256": "f4ae71c64a363f9a8049c1b22e24e2ec887a4b2b459eb09e53307ec919d69a03"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q045-role-revoke/idle-128.png",
+      "sha256": "5444ad5121111e4fdcb045f78552c45f643dc2865d584638a59690cee0d96138"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q045-role-revoke/idle-256.png",
+      "sha256": "114d8ea379ff07aa1a34e9d64b18c41b90ff26b56cfe4a42fc1599d592cf2a02"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q045-role-revoke/idle.svg",
+      "sha256": "843512d2e9c0e2986a99d2a7de361445f7f1781c378249f2dd0d6027549ad4b6"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/q045-role-revoke/motion.gif",
+      "sha256": "ba4a0d0c7bb2d22ad92517e1b05a03a1bb5ced034cde99e070a66edd8cbbc980"
+    },
+    {
+      "path": "assets/obey/catalog-eventos/motion/vista-previa.png",
+      "sha256": "8f04a17c276bf6093477845ae252d97e8640ac569dba9a22fa41063028ff74aa"
+    }
+  ],
+  "packaging": "original archive paths plus explicit new material/document paths only",
+  "unrelatedWorkspaceFilesIncluded": false,
+  "materialCorrection": "M05 revision 2: microphone crossed by blue slash, no separate badge"
+}

@@ -1,0 +1,4581 @@
+{
+  "scope": "complete-32-module-planning-index-not-runtime-binding",
+  "modules": {
+    "music": {
+      "declaredResources": [
+        {
+          "key": "emoji.musica",
+          "id": null,
+          "path": "assets/obey/selected/140bf3978577854a4d679ac693383572f5949a5e8cadf1c0f8d039d83594cf5b.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.play",
+          "id": "A03",
+          "path": "assets/obey/ui-state-catalog/approved/reproduccion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/reproduccion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.pause",
+          "id": "A03",
+          "path": "assets/obey/ui-state-catalog/approved/reproduccion/result-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/reproduccion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.skip",
+          "id": "B02",
+          "path": "assets/obey/ui-state-catalog/new/skip/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.shuffle",
+          "id": "A04",
+          "path": "assets/obey/ui-state-catalog/approved/mezcla/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/mezcla/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.stop",
+          "id": "B03",
+          "path": "assets/obey/ui-state-catalog/new/stop/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.loop",
+          "id": "A05",
+          "path": "assets/obey/ui-state-catalog/approved/repetir/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/repetir/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.queue",
+          "id": "B07",
+          "path": "assets/obey/ui-state-catalog/new/queue/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lyrics",
+          "id": "B08",
+          "path": "assets/obey/ui-state-catalog/new/lyrics/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.volume-down",
+          "id": "B04",
+          "path": "assets/obey/ui-state-catalog/new/volume-down/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.volume-up",
+          "id": "B05",
+          "path": "assets/obey/ui-state-catalog/new/volume-up/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.like",
+          "id": "A02",
+          "path": "assets/obey/ui-state-catalog/approved/favorito/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/favorito/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.autoplay",
+          "id": "A06",
+          "path": "assets/obey/ui-state-catalog/approved/autoplay/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/autoplay/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.favorito",
+          "id": "A02",
+          "path": "assets/obey/ui-state-catalog/approved/favorito/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/favorito/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.reproduciendo",
+          "id": "A03",
+          "path": "assets/obey/ui-state-catalog/approved/reproduccion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/reproduccion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.music",
+          "id": null,
+          "path": "assets/obey/production/icon_music.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.album",
+          "id": "B10",
+          "path": "assets/obey/ui-state-catalog/new/album/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.link",
+          "id": null,
+          "path": "assets/obey/production/icon_link.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.profile",
+          "id": "B37",
+          "path": "assets/obey/ui-state-catalog/new/profile/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.mute",
+          "id": "B06",
+          "path": "assets/obey/ui-state-catalog/new/mute/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.clock",
+          "id": null,
+          "path": "assets/obey/production/icon_clock.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.repeat-one",
+          "id": "B12",
+          "path": "assets/obey/ui-state-catalog/new/repeat-one/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.page-previous",
+          "id": "B59",
+          "path": "assets/obey/ui-state-catalog/new/back/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.page-next",
+          "id": "B60",
+          "path": "assets/obey/ui-state-catalog/new/next/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.delete",
+          "id": "B54",
+          "path": "assets/obey/ui-state-catalog/new/delete/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A02",
+        "A03",
+        "A04",
+        "A05",
+        "A06",
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B30",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 547,
+      "referenceCount": 160,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "welcome": {
+      "declaredResources": [
+        {
+          "key": "emoji.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.roles",
+          "id": "B33",
+          "path": "assets/obey/ui-state-catalog/new/roles/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "fondos.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "fondos.despedida",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.despedida",
+          "id": null,
+          "path": "assets/obey/selected/3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A10",
+        "B31",
+        "B32",
+        "B64",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 89,
+      "referenceCount": 22,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "verification": {
+      "declaredResources": [
+        {
+          "key": "emoji.moderacion",
+          "id": null,
+          "path": "assets/obey/selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.verify",
+          "id": null,
+          "path": "assets/obey/selected/fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "deferred-function-no-new-runtime",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "roles": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.roles",
+          "id": "B33",
+          "path": "assets/obey/ui-state-catalog/new/roles/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.verify",
+          "id": null,
+          "path": "assets/obey/selected/fb7115b166dbb64f7652a10a44c2f7a3d1c0780d25217b90a3523dd0d117ac4d.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B13",
+        "B26",
+        "B33",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 24,
+      "referenceCount": 13,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "tickets": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.ticket",
+          "id": "A01",
+          "path": "assets/obey/ui-state-catalog/approved/ticket/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/ticket/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.claim",
+          "id": "B13",
+          "path": "assets/obey/ui-state-catalog/new/claim/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.reopen",
+          "id": "B15",
+          "path": "assets/obey/ui-state-catalog/new/reopen/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/reopen/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.abrir",
+          "id": "A01",
+          "path": "assets/obey/ui-state-catalog/approved/ticket/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/ticket/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "ticket.icon.ayuda",
+          "id": "B20",
+          "path": "assets/obey/ui-state-catalog/new/support/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/support/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.tecnico",
+          "id": "B21",
+          "path": "assets/obey/ui-state-catalog/new/technical/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/technical/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.reporte",
+          "id": "B19",
+          "path": "assets/obey/ui-state-catalog/new/report/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.atencion",
+          "id": "B20",
+          "path": "assets/obey/ui-state-catalog/new/support/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/support/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.espera",
+          "id": "B22",
+          "path": "assets/obey/ui-state-catalog/new/wait/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/wait/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.cierre",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "ticket.icon.valoracion",
+          "id": "B18",
+          "path": "assets/obey/ui-state-catalog/new/rating/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.ticket-espera",
+          "id": null,
+          "path": "assets/obey/selected/47ebadbd8aaead9cecd837fe4cf7d1dd776bf7c0748527f7eca8bf486c01249f.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "motion.ticket-atencion",
+          "id": null,
+          "path": "assets/obey/selected/6ce0e34ed543014faa7deff0442951f4d7f095ddfcab56298c4725adcac00ed9.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "motion.ticket-confirmado",
+          "id": null,
+          "path": "assets/obey/selected/abeae545e529a5e9c788edd3cf21ee6b0c29363d38135e0f8d269a0528e1ff63.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "motion.character-sobre",
+          "id": null,
+          "path": "assets/obey/selected/b7a86e371fe5d7f5a49eccaad9c1f9208c26673831339df1aea15333019fbf5f.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "motion.character-gracias",
+          "id": null,
+          "path": "assets/obey/selected/dac30a71c6f756d6d9b6f71c0a6b590bdafa4e81a2005bc5f138bb7e589e52a3.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.delete",
+          "id": "B54",
+          "path": "assets/obey/ui-state-catalog/new/delete/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A01",
+        "A09",
+        "B13",
+        "B14",
+        "B15",
+        "B16",
+        "B17",
+        "B18",
+        "B19",
+        "B20",
+        "B21",
+        "B22",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 58,
+      "referenceCount": 45,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "moderation": {
+      "declaredResources": [
+        {
+          "key": "emoji.moderacion",
+          "id": null,
+          "path": "assets/obey/selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.case",
+          "id": null,
+          "path": "assets/obey/selected/a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "A07",
+        "B19",
+        "B24",
+        "B26",
+        "B34",
+        "B09",
+        "B23",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 85,
+      "referenceCount": 28,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "automod": {
+      "declaredResources": [
+        {
+          "key": "emoji.moderacion",
+          "id": null,
+          "path": "assets/obey/selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.automation",
+          "id": "B45",
+          "path": "assets/obey/ui-state-catalog/new/automation/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/automation/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.chart",
+          "id": "B47",
+          "path": "assets/obey/ui-state-catalog/new/analytics/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A07",
+        "B24",
+        "B45",
+        "B09",
+        "B23",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "security": {
+      "declaredResources": [
+        {
+          "key": "emoji.moderacion",
+          "id": null,
+          "path": "assets/obey/selected/ab836ce9ff32405107b6145a92989c2b20ad3d854e220c8393733b5242ba1a45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.undo",
+          "id": null,
+          "path": "assets/obey/selected/9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A07",
+        "B24",
+        "B26",
+        "B34",
+        "B09",
+        "B23",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 10,
+      "referenceCount": 11,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "logs": {
+      "declaredResources": [
+        {
+          "key": "emoji.espera",
+          "id": null,
+          "path": "assets/obey/selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.export",
+          "id": "A09",
+          "path": "assets/obey/ui-state-catalog/approved/exportar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/exportar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B16",
+        "B35",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 30,
+      "referenceCount": 7,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "levels": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.skip",
+          "id": "B02",
+          "path": "assets/obey/ui-state-catalog/new/skip/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "fondos.nivel",
+          "id": null,
+          "path": "assets/obey/selected/3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.nivel",
+          "id": null,
+          "path": "assets/obey/selected/dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "scene.celebracion",
+          "id": null,
+          "path": "assets/obey/selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        }
+      ],
+      "proposedVisualResources": [
+        "B36",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 11,
+      "referenceCount": 3,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "economy": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.wallet",
+          "id": null,
+          "path": "assets/obey/selected/0f29a86cf03d0860182b3a65cac3a8560f02f85fe6cf6bcd10d942a6e88e0dab.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.gift",
+          "id": "B39",
+          "path": "assets/obey/ui-state-catalog/new/gift/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/gift/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.bank",
+          "id": null,
+          "path": "assets/obey/production/icon_bank.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.coins",
+          "id": "B38",
+          "path": "assets/obey/ui-state-catalog/new/coins/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/coins/motion.gif",
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B38",
+        "B39",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 71,
+      "referenceCount": 285,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "profiles": {
+      "declaredResources": [
+        {
+          "key": "emoji.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/c9b81826cab7b9a053d1532e18660d88a4dfd73517034c5dbe399751d1278238.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.profile",
+          "id": "B37",
+          "path": "assets/obey/ui-state-catalog/new/profile/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.save",
+          "id": "B53",
+          "path": "assets/obey/ui-state-catalog/new/save/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/save/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "fondos.perfil",
+          "id": null,
+          "path": "assets/obey/selected/1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.perfil",
+          "id": null,
+          "path": "assets/obey/selected/2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "badge.staff",
+          "id": null,
+          "path": "assets/obey/selected/7efe696ebc8495e0ee3f3619f97ed19144f5dfaa0457454db9239d6f00dc251d.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "badge.supporter",
+          "id": null,
+          "path": "assets/obey/selected/d2c6e5b5fdd269c3c09b1e92edfbb65623e01da9674efb86c5d58e9b1822c3f1.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A02",
+        "A10",
+        "B37",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "voice": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.voice",
+          "id": null,
+          "path": "assets/obey/selected/e90ec587e40f99d7e9b2d79e73e9efeaf0dc3fc913873587afae3dd1f7ab29cf.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.claim",
+          "id": "B13",
+          "path": "assets/obey/ui-state-catalog/new/claim/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B26",
+        "B30",
+        "B55",
+        "B56",
+        "B57",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 2,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "events": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.calendar",
+          "id": "B43",
+          "path": "assets/obey/ui-state-catalog/new/reminders/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/reminders/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.bell",
+          "id": "A08",
+          "path": "assets/obey/ui-state-catalog/approved/avisos/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/avisos/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "fondos.evento",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.evento",
+          "id": null,
+          "path": "assets/obey/selected/9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        }
+      ],
+      "proposedVisualResources": [
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "deferred-function-no-new-runtime",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "giveaways": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.gift",
+          "id": "B39",
+          "path": "assets/obey/ui-state-catalog/new/gift/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/gift/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "scene.celebracion",
+          "id": null,
+          "path": "assets/obey/selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B39",
+        "B41",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 36,
+      "referenceCount": 13,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "suggestions": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.idea",
+          "id": "B42",
+          "path": "assets/obey/ui-state-catalog/new/suggestions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.like",
+          "id": "A02",
+          "path": "assets/obey/ui-state-catalog/approved/favorito/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/favorito/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.undo",
+          "id": null,
+          "path": "assets/obey/selected/9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.vote-up",
+          "id": null,
+          "path": "assets/obey/production/icon_vote-up.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.vote-down",
+          "id": null,
+          "path": "assets/obey/production/icon_vote-down.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        }
+      ],
+      "proposedVisualResources": [
+        "B42",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 19,
+      "referenceCount": 11,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "starboard": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "deferred-function-no-new-runtime",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "reminders": {
+      "declaredResources": [
+        {
+          "key": "emoji.espera",
+          "id": null,
+          "path": "assets/obey/selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.bell",
+          "id": "A08",
+          "path": "assets/obey/ui-state-catalog/approved/avisos/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/avisos/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.calendar",
+          "id": "B43",
+          "path": "assets/obey/ui-state-catalog/new/reminders/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/reminders/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B43",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 7,
+      "referenceCount": 11,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "messages": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.template",
+          "id": "B50",
+          "path": "assets/obey/ui-state-catalog/new/templates/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.save",
+          "id": "B53",
+          "path": "assets/obey/ui-state-catalog/new/save/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/save/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "scene.vacio",
+          "id": null,
+          "path": "assets/obey/selected/90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "scene.sin-conexion",
+          "id": null,
+          "path": "assets/obey/selected/2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "scene.celebracion",
+          "id": null,
+          "path": "assets/obey/selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        }
+      ],
+      "proposedVisualResources": [
+        "B44",
+        "B52",
+        "B53",
+        "B63",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 18,
+      "referenceCount": 7,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "cards": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.brush",
+          "id": null,
+          "path": "assets/obey/selected/df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.save",
+          "id": "B53",
+          "path": "assets/obey/ui-state-catalog/new/save/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/save/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "fondos.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "fondos.despedida",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "fondos.evento",
+          "id": null,
+          "path": "assets/obey/selected/93bc2bdfb67607f275782db4887ba493366e16abd27d7f5930f6ae329fa72934.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "fondos.nivel",
+          "id": null,
+          "path": "assets/obey/selected/3c7d973b6546ad85a3061e678d3158cc55758df34a08a35252992096a58660be.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "fondos.perfil",
+          "id": null,
+          "path": "assets/obey/selected/1d130561c908e3674ef35f75ef6d29601a1a24e84ca769ea08f388f677e5b4f1.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.bienvenida",
+          "id": null,
+          "path": "assets/obey/selected/965f48ca785ef19a2de2edb9cc258c98c1a1a1179ea96850dc319d2cb820d025.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.despedida",
+          "id": null,
+          "path": "assets/obey/selected/3a59e48ff32b605789fa28da0c539cc40d7480f39427c7ef9afd52dcfc2de778.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.evento",
+          "id": null,
+          "path": "assets/obey/selected/9b414d972752f53310b8f66a3732ad173fda3c82709278b1fe9285071df4ca7a.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.nivel",
+          "id": null,
+          "path": "assets/obey/selected/dc018154afa338761007e58054b2b5609bb3be089d4b71ecf4f94d692d4d19f7.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "plantillas.perfil",
+          "id": null,
+          "path": "assets/obey/selected/2a850708a3815a1f398e196b751ce5b3330f4e0eb382f237386d0b156846973a.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "badge.staff",
+          "id": null,
+          "path": "assets/obey/selected/7efe696ebc8495e0ee3f3619f97ed19144f5dfaa0457454db9239d6f00dc251d.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "badge.supporter",
+          "id": null,
+          "path": "assets/obey/selected/d2c6e5b5fdd269c3c09b1e92edfbb65623e01da9674efb86c5d58e9b1822c3f1.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.template",
+          "id": "B50",
+          "path": "assets/obey/ui-state-catalog/new/templates/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A10",
+        "B52",
+        "B64",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "automation": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.automation",
+          "id": "B45",
+          "path": "assets/obey/ui-state-catalog/new/automation/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/automation/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.calendar",
+          "id": "B43",
+          "path": "assets/obey/ui-state-catalog/new/reminders/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/reminders/motion.gif",
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B45",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 15,
+      "referenceCount": 4,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "feeds": {
+      "declaredResources": [
+        {
+          "key": "emoji.espera",
+          "id": null,
+          "path": "assets/obey/selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.feed",
+          "id": "B46",
+          "path": "assets/obey/ui-state-catalog/new/feeds/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/feeds/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "scene.sin-conexion",
+          "id": null,
+          "path": "assets/obey/selected/2d14b0d37e84cd0472e55f5a33b79e945e63671e52e1075413d2ffbe913dd526.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        }
+      ],
+      "proposedVisualResources": [
+        "B46",
+        "B58",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "analytics": {
+      "declaredResources": [
+        {
+          "key": "emoji.espera",
+          "id": null,
+          "path": "assets/obey/selected/4d6ed1b9f815f45174bb9f1efa635adc1587bfe0a663d5fb42faff57d0ab25b3.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.chart",
+          "id": "B47",
+          "path": "assets/obey/ui-state-catalog/new/analytics/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.export",
+          "id": "A09",
+          "path": "assets/obey/ui-state-catalog/approved/exportar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/exportar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.calendar",
+          "id": "B43",
+          "path": "assets/obey/ui-state-catalog/new/reminders/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/reminders/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B47",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "utilities": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.help",
+          "id": "B65",
+          "path": "assets/obey/ui-state-catalog/new/help/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "scene.vacio",
+          "id": null,
+          "path": "assets/obey/selected/90855648c6cf2a1805ad26974d1f4f5756cd4ff2b283afa24af95e405da93611.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B09",
+        "B25",
+        "B59",
+        "B60",
+        "B61",
+        "B65",
+        "B23",
+        "B24",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B62",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "fun": {
+      "declaredResources": [
+        {
+          "key": "emoji.exito",
+          "id": null,
+          "path": "assets/obey/selected/d31398db0aaad53fb38f829bbd79c97df0ceb256389e4809dcbea92e26aedbfe.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.game",
+          "id": "B40",
+          "path": "assets/obey/ui-state-catalog/new/games/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.previous",
+          "id": "B01",
+          "path": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "scene.celebracion",
+          "id": null,
+          "path": "assets/obey/selected/876d3fa0f91cc3b6056ae5421c09b4058fefdcf62892b36e1269aae2ad416f4a.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.shield",
+          "id": "A07",
+          "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B40",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 267,
+      "referenceCount": 104,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "architect": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.blueprint",
+          "id": "B49",
+          "path": "assets/obey/ui-state-catalog/new/architect/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.undo",
+          "id": null,
+          "path": "assets/obey/selected/9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.template",
+          "id": "B50",
+          "path": "assets/obey/ui-state-catalog/new/templates/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.chart",
+          "id": "B47",
+          "path": "assets/obey/ui-state-catalog/new/analytics/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B49",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 11,
+      "referenceCount": 20,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "decoration": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.brush",
+          "id": null,
+          "path": "assets/obey/selected/df0e78150865a97464b75266041338e85e5aaf206bd519a8edb62d1573b18f50.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.undo",
+          "id": null,
+          "path": "assets/obey/selected/9f8d221be3adb913a2fe945be4321c27f2ed76ff2672f90692a8e1ec54cc8d8f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.close",
+          "id": "B14",
+          "path": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B52",
+        "B64",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "templates": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.template",
+          "id": "B50",
+          "path": "assets/obey/ui-state-catalog/new/templates/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.export",
+          "id": "A09",
+          "path": "assets/obey/ui-state-catalog/approved/exportar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/exportar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B50",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "collections": {
+      "declaredResources": [
+        {
+          "key": "emoji.colecciones",
+          "id": null,
+          "path": "assets/obey/selected/afbe4a4d7f5ee44c2fd3658b4baf30700e56c319f690aa9d96e15e88eb47e4ae.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.star",
+          "id": null,
+          "path": "assets/obey/selected/ccec2e1634523483125f6691416be663ba01e05cfd987514cd70481608c6137e.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.image",
+          "id": "A10",
+          "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.like",
+          "id": "A02",
+          "path": "assets/obey/ui-state-catalog/approved/favorito/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/favorito/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.carta-especial",
+          "id": null,
+          "path": "assets/obey/selected/107ff9234fef6c4dc9e1456d0427401588583374665b9d4fa850eb121daf5d21.gif",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "colecciones.carta-muestra",
+          "id": null,
+          "path": "assets/obey/selected/d9d426ee0ded8623c7442513f05f7addf430a973b3d84a801767c8744f251a54.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "colecciones.marco-azul",
+          "id": null,
+          "path": "assets/obey/selected/62ce3b11ecd9ed9ba39b4f359e5905ec5522cc5cded31fe9fb6ba690e8d9b3dd.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "colecciones.marco-base",
+          "id": null,
+          "path": "assets/obey/selected/1f54d707dc2abe12320f2c8cdc97d44f69832a60c0661c0ea70d024b4e402139.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "colecciones.marco-dorado",
+          "id": null,
+          "path": "assets/obey/selected/94908371462ba5fcb67cb5849929498793b3c0c06fb70ba57b8a6817ae67ee06.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "colecciones.marco-violeta",
+          "id": null,
+          "path": "assets/obey/selected/8c5379eb5e77aae32b32a0fe00bd49b32e4b9824c41f1f8c56dd789eb1603885.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "colecciones.reverso",
+          "id": null,
+          "path": "assets/obey/selected/fe9e6ad7372004fcd0c9089188fbe3bd87df882d7ffe70070af508cd33ffb753.svg",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "deferred-function-no-new-runtime",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "applications": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.case",
+          "id": null,
+          "path": "assets/obey/selected/a65acc8f94cb94c53803457b388efc83c4aec9d0c77d19a89beb31b222aff69f.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.send",
+          "id": "B63",
+          "path": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.lock",
+          "id": "B26",
+          "path": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.idea",
+          "id": "B42",
+          "path": "assets/obey/ui-state-catalog/new/suggestions/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "B48",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B53",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "sticky": {
+      "declaredResources": [
+        {
+          "key": "emoji.ayuda",
+          "id": null,
+          "path": "assets/obey/selected/7903a24753a1aa1735b1057d07d5667cc7318a6f9cacf32e01568d196ceace45.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.bell",
+          "id": "A08",
+          "path": "assets/obey/ui-state-catalog/approved/avisos/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/avisos/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.pause",
+          "id": "A03",
+          "path": "assets/obey/ui-state-catalog/approved/reproduccion/result-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/reproduccion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        }
+      ],
+      "proposedVisualResources": [
+        "B44",
+        "B53",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11",
+        "A12"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    },
+    "migrations": {
+      "declaredResources": [
+        {
+          "key": "emoji.configuracion",
+          "id": null,
+          "path": "assets/obey/selected/551d6873555167dc837467057091b0a2b0223178c32e9b747d6b775fc68df224.png",
+          "motion": null,
+          "approval": "existing-unmodified"
+        },
+        {
+          "key": "icon.export",
+          "id": "A09",
+          "path": "assets/obey/ui-state-catalog/approved/exportar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/exportar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.info",
+          "id": "B25",
+          "path": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.search",
+          "id": "B09",
+          "path": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.edit",
+          "id": "B52",
+          "path": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.success",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.warning",
+          "id": "B24",
+          "path": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.error",
+          "id": "B23",
+          "path": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "motion.cargando",
+          "id": "A12",
+          "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "motion.exito",
+          "id": "A11",
+          "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+          "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+          "approval": "approved-A"
+        },
+        {
+          "key": "icon.levels",
+          "id": "B36",
+          "path": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+          "motion": null,
+          "approval": "new-extension-review-required"
+        },
+        {
+          "key": "icon.transcript",
+          "id": "B16",
+          "path": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+          "motion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+          "approval": "new-extension-review-required"
+        }
+      ],
+      "proposedVisualResources": [
+        "A12",
+        "B53",
+        "B09",
+        "B23",
+        "B24",
+        "B25",
+        "B27",
+        "B28",
+        "B29",
+        "B51",
+        "B52",
+        "B54",
+        "B57",
+        "B59",
+        "B60",
+        "B61",
+        "B62",
+        "B65",
+        "A11"
+      ],
+      "codeOccurrenceCount": 0,
+      "referenceCount": 0,
+      "assignmentMethod": "declared-presentation-manifest + reviewed-family-assignment; source occurrence module is heuristic",
+      "scope": "existing-domain-to-reconcile",
+      "states": [
+        "ready",
+        "pending",
+        "confirmed",
+        "failed",
+        "unknown",
+        "partial",
+        "empty",
+        "permissionDenied",
+        "expired",
+        "offline"
+      ],
+      "connectedToRuntime": false
+    }
+  }
+}

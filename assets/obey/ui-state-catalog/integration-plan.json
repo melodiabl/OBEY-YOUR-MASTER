@@ -1,0 +1,703 @@
+{
+  "scope": "staged-assets-and-consumer-plan-not-runtime-registry",
+  "approved": [
+    {
+      "id": "A01",
+      "path": "assets/obey/ui-state-catalog/approved/ticket/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/ticket/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.ticket",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A02",
+      "path": "assets/obey/ui-state-catalog/approved/favorito/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/favorito/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.like",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A03",
+      "path": "assets/obey/ui-state-catalog/approved/reproduccion/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/reproduccion/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.play",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A04",
+      "path": "assets/obey/ui-state-catalog/approved/mezcla/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/mezcla/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.shuffle",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A05",
+      "path": "assets/obey/ui-state-catalog/approved/repetir/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/repetir/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.loop",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A06",
+      "path": "assets/obey/ui-state-catalog/approved/autoplay/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/autoplay/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.autoplay",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A07",
+      "path": "assets/obey/ui-state-catalog/approved/escudo/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/escudo/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.shield",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A08",
+      "path": "assets/obey/ui-state-catalog/approved/avisos/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/avisos/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.bell",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A09",
+      "path": "assets/obey/ui-state-catalog/approved/exportar/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/exportar/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.export",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A10",
+      "path": "assets/obey/ui-state-catalog/approved/tarjeta/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/tarjeta/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.image",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A11",
+      "path": "assets/obey/ui-state-catalog/approved/confirmacion/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/confirmacion/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "icon.success",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "A12",
+      "path": "assets/obey/ui-state-catalog/approved/sincronizar/idle-128.png",
+      "motion": "assets/obey/ui-state-catalog/approved/sincronizar/motion.gif",
+      "approval": "approved-A",
+      "canonicalProposal": "motion.sync",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    }
+  ],
+  "extension": [
+    {
+      "id": "B01",
+      "canonicalProposal": "icon.previous",
+      "targetPNG": "assets/obey/ui-state-catalog/new/previous/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B02",
+      "canonicalProposal": "icon.skip",
+      "targetPNG": "assets/obey/ui-state-catalog/new/skip/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B03",
+      "canonicalProposal": "icon.stop",
+      "targetPNG": "assets/obey/ui-state-catalog/new/stop/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B04",
+      "canonicalProposal": "icon.volume-down",
+      "targetPNG": "assets/obey/ui-state-catalog/new/volume-down/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B05",
+      "canonicalProposal": "icon.volume-up",
+      "targetPNG": "assets/obey/ui-state-catalog/new/volume-up/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B06",
+      "canonicalProposal": "icon.mute",
+      "targetPNG": "assets/obey/ui-state-catalog/new/mute/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B07",
+      "canonicalProposal": "icon.queue",
+      "targetPNG": "assets/obey/ui-state-catalog/new/queue/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B08",
+      "canonicalProposal": "icon.lyrics",
+      "targetPNG": "assets/obey/ui-state-catalog/new/lyrics/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B09",
+      "canonicalProposal": "icon.search",
+      "targetPNG": "assets/obey/ui-state-catalog/new/search/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/search/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B10",
+      "canonicalProposal": "icon.album",
+      "targetPNG": "assets/obey/ui-state-catalog/new/album/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B11",
+      "canonicalProposal": "icon.radio",
+      "targetPNG": "assets/obey/ui-state-catalog/new/radio/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B12",
+      "canonicalProposal": "icon.repeat-one",
+      "targetPNG": "assets/obey/ui-state-catalog/new/repeat-one/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B13",
+      "canonicalProposal": "icon.claim",
+      "targetPNG": "assets/obey/ui-state-catalog/new/claim/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B14",
+      "canonicalProposal": "icon.close",
+      "targetPNG": "assets/obey/ui-state-catalog/new/close/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B15",
+      "canonicalProposal": "icon.reopen",
+      "targetPNG": "assets/obey/ui-state-catalog/new/reopen/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/reopen/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B16",
+      "canonicalProposal": "icon.transcript",
+      "targetPNG": "assets/obey/ui-state-catalog/new/transcript/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/transcript/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B17",
+      "canonicalProposal": "icon.archive",
+      "targetPNG": "assets/obey/ui-state-catalog/new/archive/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B18",
+      "canonicalProposal": "ticket.icon.valoracion",
+      "targetPNG": "assets/obey/ui-state-catalog/new/rating/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B19",
+      "canonicalProposal": "ticket.icon.reporte",
+      "targetPNG": "assets/obey/ui-state-catalog/new/report/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B20",
+      "canonicalProposal": "ticket.icon.ayuda",
+      "targetPNG": "assets/obey/ui-state-catalog/new/support/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/support/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B21",
+      "canonicalProposal": "ticket.icon.tecnico",
+      "targetPNG": "assets/obey/ui-state-catalog/new/technical/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/technical/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B22",
+      "canonicalProposal": "ticket.icon.espera",
+      "targetPNG": "assets/obey/ui-state-catalog/new/wait/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/wait/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B23",
+      "canonicalProposal": "icon.error",
+      "targetPNG": "assets/obey/ui-state-catalog/new/error/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B24",
+      "canonicalProposal": "icon.warning",
+      "targetPNG": "assets/obey/ui-state-catalog/new/warning/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B25",
+      "canonicalProposal": "icon.info",
+      "targetPNG": "assets/obey/ui-state-catalog/new/info/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B26",
+      "canonicalProposal": "icon.lock",
+      "targetPNG": "assets/obey/ui-state-catalog/new/permissions/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B27",
+      "canonicalProposal": "scene.empty-symbol",
+      "targetPNG": "assets/obey/ui-state-catalog/new/empty/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B28",
+      "canonicalProposal": "state.expired",
+      "targetPNG": "assets/obey/ui-state-catalog/new/expired/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B29",
+      "canonicalProposal": "state.offline",
+      "targetPNG": "assets/obey/ui-state-catalog/new/offline/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B30",
+      "canonicalProposal": "icon.connection",
+      "targetPNG": "assets/obey/ui-state-catalog/new/reconnect/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/reconnect/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B31",
+      "canonicalProposal": "icon.join",
+      "targetPNG": "assets/obey/ui-state-catalog/new/welcome/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B32",
+      "canonicalProposal": "icon.exit",
+      "targetPNG": "assets/obey/ui-state-catalog/new/farewell/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B33",
+      "canonicalProposal": "icon.roles",
+      "targetPNG": "assets/obey/ui-state-catalog/new/roles/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B34",
+      "canonicalProposal": "icon.gavel",
+      "targetPNG": "assets/obey/ui-state-catalog/new/moderation/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B35",
+      "canonicalProposal": "icon.document",
+      "targetPNG": "assets/obey/ui-state-catalog/new/logs/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/logs/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B36",
+      "canonicalProposal": "icon.levels",
+      "targetPNG": "assets/obey/ui-state-catalog/new/levels/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B37",
+      "canonicalProposal": "icon.profile",
+      "targetPNG": "assets/obey/ui-state-catalog/new/profile/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B38",
+      "canonicalProposal": "icon.coins",
+      "targetPNG": "assets/obey/ui-state-catalog/new/coins/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/coins/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B39",
+      "canonicalProposal": "icon.gift",
+      "targetPNG": "assets/obey/ui-state-catalog/new/gift/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/gift/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B40",
+      "canonicalProposal": "icon.game",
+      "targetPNG": "assets/obey/ui-state-catalog/new/games/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B41",
+      "canonicalProposal": "icon.medal",
+      "targetPNG": "assets/obey/ui-state-catalog/new/giveaways/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B42",
+      "canonicalProposal": "icon.idea",
+      "targetPNG": "assets/obey/ui-state-catalog/new/suggestions/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B43",
+      "canonicalProposal": "icon.calendar",
+      "targetPNG": "assets/obey/ui-state-catalog/new/reminders/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/reminders/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B44",
+      "canonicalProposal": "icon.conversation",
+      "targetPNG": "assets/obey/ui-state-catalog/new/messages/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B45",
+      "canonicalProposal": "icon.automation",
+      "targetPNG": "assets/obey/ui-state-catalog/new/automation/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/automation/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B46",
+      "canonicalProposal": "icon.feed",
+      "targetPNG": "assets/obey/ui-state-catalog/new/feeds/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/feeds/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B47",
+      "canonicalProposal": "icon.chart",
+      "targetPNG": "assets/obey/ui-state-catalog/new/analytics/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B48",
+      "canonicalProposal": "icon.document",
+      "targetPNG": "assets/obey/ui-state-catalog/new/applications/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/applications/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B49",
+      "canonicalProposal": "icon.blueprint",
+      "targetPNG": "assets/obey/ui-state-catalog/new/architect/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B50",
+      "canonicalProposal": "icon.template",
+      "targetPNG": "assets/obey/ui-state-catalog/new/templates/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B51",
+      "canonicalProposal": "icon.settings",
+      "targetPNG": "assets/obey/ui-state-catalog/new/settings/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B52",
+      "canonicalProposal": "icon.edit",
+      "targetPNG": "assets/obey/ui-state-catalog/new/edit/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B53",
+      "canonicalProposal": "icon.save",
+      "targetPNG": "assets/obey/ui-state-catalog/new/save/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/save/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B54",
+      "canonicalProposal": "icon.delete",
+      "targetPNG": "assets/obey/ui-state-catalog/new/delete/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B55",
+      "canonicalProposal": "icon.microphone",
+      "targetPNG": "assets/obey/ui-state-catalog/new/voice/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B56",
+      "canonicalProposal": "icon.channel",
+      "targetPNG": "assets/obey/ui-state-catalog/new/channel/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B57",
+      "canonicalProposal": "icon.roles",
+      "targetPNG": "assets/obey/ui-state-catalog/new/members/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B58",
+      "canonicalProposal": "icon.notify-off",
+      "targetPNG": "assets/obey/ui-state-catalog/new/notify-off/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B59",
+      "canonicalProposal": "icon.page-previous",
+      "targetPNG": "assets/obey/ui-state-catalog/new/back/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B60",
+      "canonicalProposal": "icon.page-next",
+      "targetPNG": "assets/obey/ui-state-catalog/new/next/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B61",
+      "canonicalProposal": "icon.globe",
+      "targetPNG": "assets/obey/ui-state-catalog/new/language/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B62",
+      "canonicalProposal": "icon.export",
+      "targetPNG": "assets/obey/ui-state-catalog/new/upload/icon-128.png",
+      "targetMotion": "assets/obey/ui-state-catalog/new/upload/motion.gif",
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B63",
+      "canonicalProposal": "icon.send",
+      "targetPNG": "assets/obey/ui-state-catalog/new/send/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B64",
+      "canonicalProposal": "icon.image",
+      "targetPNG": "assets/obey/ui-state-catalog/new/image/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    },
+    {
+      "id": "B65",
+      "canonicalProposal": "icon.help",
+      "targetPNG": "assets/obey/ui-state-catalog/new/help/icon-128.png",
+      "targetMotion": null,
+      "approvedByUser": false,
+      "runtimeRegistered": false,
+      "applicationEmojiId": null
+    }
+  ],
+  "registryAuthority": "handlers/assets/registry.js + assets/obey/registry.json.selected",
+  "precedence": "approved A for their selected uses; B and platform proposals require visual review; preserve verified live bindings until a replacement is uploaded and reconciled",
+  "sideEffects": "none"
+}

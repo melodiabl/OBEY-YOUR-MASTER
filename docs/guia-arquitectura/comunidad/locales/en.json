@@ -1,0 +1,112 @@
+{
+  "community": {
+    "setupTitle": "Connect server channels",
+    "selectChannel": "Choose the channel to use for {purpose}.",
+    "missingBinding": "Choose a valid channel for {purpose}.",
+    "permissionDenied": "There are not enough permissions to publish to that destination.",
+    "privateAudience": "This destination must be visible only to the authorized team.",
+    "preview": "Review publication",
+    "publish": "Publish",
+    "saved": "Destination saved for {purpose}.",
+    "draftRelease": "Version {version} · draft awaiting review.",
+    "notDeployed": "Availability of this version has not been confirmed yet.",
+    "releaseTitle": "OBEY · What is new in {version}",
+    "incidentTitle": "Service status · {service}",
+    "channelDeleted": "The destination is no longer available. Choose another channel.",
+    "supportReference": "Your request was recorded. Reference: {reference}.",
+    "publicationUncertain": "Publication could not be confirmed. Check the destination before retrying.",
+    "published": "Publication confirmed in {channel}.",
+    "messages": {
+      "setup": {
+        "title": "OBEY · Connect channels",
+        "description": "Choose where each system will work.",
+        "welcome": "Welcome",
+        "tickets": "Support panel",
+        "logs": "Moderation logs",
+        "technical": "Technical updates",
+        "updates": "Public updates",
+        "unset": "Not configured",
+        "choice": "Choose a feature",
+        "review": "Review configuration",
+        "instructions": "Select a feature to choose its channel and review permissions.",
+        "pending": "Checking the destination and its permissions…",
+        "saved": "Destination saved for {purpose}: {channel}.",
+        "failed": "The destination could not be saved. Your previous configuration is preserved.",
+        "conflict": "Configuration changed while you were editing. Review the current version."
+      },
+      "welcome": {
+        "title": "Welcome to {communityName}, {displayName}",
+        "description": "This is the place to discover OBEY, listen to music, share ideas, and get help.",
+        "instructions": "Start with the rules and choose your roles. If you need a hand, you can find the team in support.",
+        "rules": "Read the rules",
+        "roles": "Choose roles",
+        "steps": "Getting started",
+        "noRoles": "Start with the rules and getting started. If you need help, contact the support team.",
+        "deliveryFailed": "The welcome message for {displayName} could not be confirmed. Check the destination before retrying."
+      },
+      "tickets": {
+        "title": "OBEY · How can we help?",
+        "description": "Choose the reason for your request. We will open a private space to help you.",
+        "help": "Help with OBEY",
+        "helpDescription": "Configuration, commands, or how things work.",
+        "bug": "Report a bug",
+        "bugDescription": "Something failed or did not respond as expected.",
+        "contact": "Contact the team",
+        "contactDescription": "Questions about the project and collaborations.",
+        "choose": "Choose a reason",
+        "opening": "Preparing your private space…",
+        "opened": "Your support space is ready.",
+        "open": "Open my ticket",
+        "existing": "You already have an open request for this reason. You can continue there.",
+        "unavailable": "We could not open your support space. Try again later.",
+        "privateCheckFailed": "The privacy of the destination could not be verified. Opening has been stopped for review."
+      },
+      "report": {
+        "title": "We received your report · {reference}",
+        "description": "Tell us what you were doing, what you expected, and what happened.",
+        "instructions": "If you can reproduce it, add the steps and a screenshot. Do not share passwords or tokens.",
+        "view": "View my report",
+        "saving": "Saving your report…",
+        "savedNoDestination": "Your report was saved with reference {reference}. Access to the support space is not available yet.",
+        "failed": "We could not confirm that your report was recorded. Check your requests before submitting it again."
+      },
+      "github": {
+        "title": "OBEY · Change awaiting review",
+        "change": "{author} opened a pull request targeting {branch}.",
+        "repository": "Repository",
+        "status": "Status",
+        "pending": "Awaiting review",
+        "draft": "Draft",
+        "instructions": "This notice does not confirm that the changes are available in the bot.",
+        "view": "View changes on GitHub"
+      },
+      "release": {
+        "title": "OBEY · New update",
+        "description": "Version {version} is now available for {scope}.",
+        "news": "What is new",
+        "fixes": "Fixes",
+        "action": "Do you need to change anything?",
+        "noAction": "You do not need to change your configuration.",
+        "details": "View details",
+        "report": "Report a problem",
+        "draftTitle": "Updates · draft for {version}",
+        "draftBody": "Review the content, destination, and deployment scope before publishing.",
+        "review": "Review announcement",
+        "publish": "Publish announcement",
+        "pending": "Publishing the reviewed announcement…",
+        "published": "Announcement published in {channel}.",
+        "notDeployed": "Availability of this version is not confirmed yet. The draft has been kept unpublished.",
+        "uncertain": "Publication could not be confirmed. Check the destination before retrying."
+      },
+      "common": {
+        "permissionDenied": "You do not have permission to perform this action.",
+        "expired": "This view expired. Reopen it to continue.",
+        "unavailable": "This feature is not available in this server yet.",
+        "retry": "Retry",
+        "reopen": "Reopen",
+        "saved": "Changes saved.",
+        "preview": "Preview · not published yet."
+      }
+    }
+  }
+}

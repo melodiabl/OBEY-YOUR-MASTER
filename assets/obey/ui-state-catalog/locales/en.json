@@ -1,0 +1,632 @@
+{
+  "visual": {
+    "common": {
+      "ready": "Ready",
+      "pending": "Processing…",
+      "empty": "There are no items to display.",
+      "expired": "This session expired. Open a new one.",
+      "permissionDenied": "You do not have permission to use this action.",
+      "offline": "The service is unavailable.",
+      "partial": "Part of the operation was completed. Review the details.",
+      "reference": "Reference: {operationId}"
+    },
+    "assets": {
+      "a01": {
+        "label": "Ticket",
+        "pending": "Opening your ticket…",
+        "confirmed": "Your ticket is open.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Ticket"
+      },
+      "a02": {
+        "label": "Favorite",
+        "pending": "Saving your favorite…",
+        "confirmed": "Your favorite was saved.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Favorite"
+      },
+      "a03": {
+        "label": "Playback",
+        "pending": "Requesting playback change…",
+        "confirmed": "Playback state updated.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Playback"
+      },
+      "a04": {
+        "label": "Shuffle",
+        "pending": "Changing shuffle mode…",
+        "confirmed": "Shuffle mode updated.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Shuffle"
+      },
+      "a05": {
+        "label": "Repeat",
+        "pending": "Changing repeat mode…",
+        "confirmed": "Repeat mode updated.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Repeat"
+      },
+      "a06": {
+        "label": "Autoplay",
+        "pending": "Updating autoplay…",
+        "confirmed": "Autoplay settings updated.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Autoplay"
+      },
+      "a07": {
+        "label": "Protection",
+        "pending": "Checking protection settings…",
+        "confirmed": "Review complete. See the details.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Protection"
+      },
+      "a08": {
+        "label": "Notifications",
+        "pending": "Sending notification…",
+        "confirmed": "Notification sent.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Notifications"
+      },
+      "a09": {
+        "label": "Export",
+        "pending": "Preparing your file…",
+        "confirmed": "Your file is available.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Export"
+      },
+      "a10": {
+        "label": "Card",
+        "pending": "Rendering the card…",
+        "confirmed": "Card rendered.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Card"
+      },
+      "a11": {
+        "label": "Confirmation",
+        "pending": "Waiting for confirmation…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Confirmation"
+      },
+      "a12": {
+        "label": "Sync",
+        "pending": "Syncing data…",
+        "confirmed": "Data updated.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Sync"
+      },
+      "b01": {
+        "label": "Previous",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Previous"
+      },
+      "b02": {
+        "label": "Next track",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Next track"
+      },
+      "b03": {
+        "label": "Stop",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Stop"
+      },
+      "b04": {
+        "label": "Volume down",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Volume down"
+      },
+      "b05": {
+        "label": "Volume up",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Volume up"
+      },
+      "b06": {
+        "label": "Mute",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Mute"
+      },
+      "b07": {
+        "label": "Queue",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Queue"
+      },
+      "b08": {
+        "label": "Lyrics",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Lyrics"
+      },
+      "b09": {
+        "label": "Search",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Search"
+      },
+      "b10": {
+        "label": "Album",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Album"
+      },
+      "b11": {
+        "label": "Radio",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Radio"
+      },
+      "b12": {
+        "label": "Repeat track",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Repeat track"
+      },
+      "b13": {
+        "label": "Assign",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Assign"
+      },
+      "b14": {
+        "label": "Close",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Close"
+      },
+      "b15": {
+        "label": "Reopen",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Reopen"
+      },
+      "b16": {
+        "label": "Transcript",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Transcript"
+      },
+      "b17": {
+        "label": "Archive",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Archive"
+      },
+      "b18": {
+        "label": "Rate support",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Rate support"
+      },
+      "b19": {
+        "label": "Report",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Report"
+      },
+      "b20": {
+        "label": "Support",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Support"
+      },
+      "b21": {
+        "label": "Technical support",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Technical support"
+      },
+      "b22": {
+        "label": "Waiting",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Waiting"
+      },
+      "b23": {
+        "label": "Error",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Error"
+      },
+      "b24": {
+        "label": "Warning",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Warning"
+      },
+      "b25": {
+        "label": "Information",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Information"
+      },
+      "b26": {
+        "label": "Permissions",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Permissions"
+      },
+      "b27": {
+        "label": "Empty",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Empty"
+      },
+      "b28": {
+        "label": "Session expired",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Session expired"
+      },
+      "b29": {
+        "label": "Offline",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Offline"
+      },
+      "b30": {
+        "label": "Reconnect",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Reconnect"
+      },
+      "b31": {
+        "label": "Welcome",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Welcome"
+      },
+      "b32": {
+        "label": "Goodbye",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Goodbye"
+      },
+      "b33": {
+        "label": "Roles",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Roles"
+      },
+      "b34": {
+        "label": "Moderation",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Moderation"
+      },
+      "b35": {
+        "label": "Logs",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Logs"
+      },
+      "b36": {
+        "label": "Levels",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Levels"
+      },
+      "b37": {
+        "label": "Profile",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Profile"
+      },
+      "b38": {
+        "label": "Economy",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Economy"
+      },
+      "b39": {
+        "label": "Gift",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Gift"
+      },
+      "b40": {
+        "label": "Games",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Games"
+      },
+      "b41": {
+        "label": "Giveaways",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Giveaways"
+      },
+      "b42": {
+        "label": "Suggestions",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Suggestions"
+      },
+      "b43": {
+        "label": "Reminders",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Reminders"
+      },
+      "b44": {
+        "label": "Messages",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Messages"
+      },
+      "b45": {
+        "label": "Automation",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Automation"
+      },
+      "b46": {
+        "label": "Feeds",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Feeds"
+      },
+      "b47": {
+        "label": "Analytics",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Analytics"
+      },
+      "b48": {
+        "label": "Applications",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Applications"
+      },
+      "b49": {
+        "label": "Structure",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Structure"
+      },
+      "b50": {
+        "label": "Templates",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Templates"
+      },
+      "b51": {
+        "label": "Settings",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Settings"
+      },
+      "b52": {
+        "label": "Edit",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Edit"
+      },
+      "b53": {
+        "label": "Save",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Save"
+      },
+      "b54": {
+        "label": "Delete",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Delete"
+      },
+      "b55": {
+        "label": "Voice",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Voice"
+      },
+      "b56": {
+        "label": "Channel",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Channel"
+      },
+      "b57": {
+        "label": "Members",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Members"
+      },
+      "b58": {
+        "label": "Notifications off",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Notifications off"
+      },
+      "b59": {
+        "label": "Previous page",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Previous page"
+      },
+      "b60": {
+        "label": "Next page",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Next page"
+      },
+      "b61": {
+        "label": "Language",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Language"
+      },
+      "b62": {
+        "label": "Upload file",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Upload file"
+      },
+      "b63": {
+        "label": "Send",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Send"
+      },
+      "b64": {
+        "label": "Image",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Image"
+      },
+      "b65": {
+        "label": "Help",
+        "pending": "Processing…",
+        "confirmed": "Operation confirmed.",
+        "failed": "The operation could not be completed.",
+        "unknown": "The operation has not been confirmed. Check its status before retrying.",
+        "alt": "Help"
+      }
+    }
+  }
+}

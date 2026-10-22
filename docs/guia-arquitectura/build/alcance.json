@@ -1,0 +1,163 @@
+{
+  "edition": "0.9",
+  "kind": "design-contract-not-runtime-config",
+  "authorizedScope": "build-and-remodeling-inside-existing-architect",
+  "reference": {
+    "userName": "Server Market",
+    "interpretedAs": "Server Maker",
+    "applicationId": "1233001713242476678",
+    "verifiedThrough": "public-author-docs-not-bot-session",
+    "date": "2026-10-21"
+  },
+  "baseline": {
+    "libraryVersion": 6,
+    "edition": "0.7",
+    "remoteReferenceNotRechecked": "c8ba6d3ee86515813e68a028e1221d093301e91b"
+  },
+  "runtimeChanged": false,
+  "newDependencies": [],
+  "newDiscordEmojiUploads": 0,
+  "localeLeavesPerLanguage": 53,
+  "owner": "architect",
+  "proposedEntry": "/servidor",
+  "reuse": {
+    "services": "handlers/architect",
+    "templates": "handlers/templates",
+    "executor": "workers/architect-edits.js",
+    "jobs": "existing-jobs",
+    "storage": "existing-architect-schemas"
+  },
+  "capabilities": [
+    {
+      "id": "guided-build",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "ai-blueprint",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "natural-language-edit",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "single-resource-create",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "theme-remodel",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "private-templates",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "authorized-structure-clone",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "reviewed-compensation",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "module-bindings",
+      "status": "specified-not-implemented-by-this-update"
+    },
+    {
+      "id": "discord-progress",
+      "status": "specified-not-implemented-by-this-update"
+    }
+  ],
+  "deferred": [
+    "destructive-replacement",
+    "public-template-marketplace",
+    "cross-server-sanction-sync",
+    "message-history-restore",
+    "advanced-channel-editors-without-adapter"
+  ],
+  "acceptance": [
+    "double-click-single-application",
+    "stale-plan-rejected",
+    "private-channel-private-at-creation",
+    "uncertain-create-reconciled",
+    "restart-id-map-preserved",
+    "external-drift-not-overwritten",
+    "binding-failure-does-not-recreate",
+    "ai-output-validated-before-effects",
+    "two-guild-isolation",
+    "es-en-placeholder-parity"
+  ],
+  "inspectedSourceFiles": [
+    {
+      "path": "slashCommands/Config/architect.js",
+      "sha256": "25c0d320dee64fc675a3a4beae99dad3af50f70f7753ad6035fba709cb8dedcf"
+    },
+    {
+      "path": "handlers/architect.js",
+      "sha256": "3b0750af8bc60e98a3d203eb43c7cba81214d60aee479307ab80373d4158b4bd"
+    },
+    {
+      "path": "handlers/architect/service.js",
+      "sha256": "544745f1ddb5cc3ef703d528cfa437805dc7340da4318a81f202d84e06c8a87c"
+    },
+    {
+      "path": "handlers/architect/wizard.js",
+      "sha256": "93fd280208531493c756d63b4a4c08d11d7745d4962ae9b36a07a93469a40b6e"
+    },
+    {
+      "path": "handlers/architect/blueprint.js",
+      "sha256": "231cb7e6e20cbdca16f53fa0c5b3516ed390da1b539df82d0e14a4d0fc1d355f"
+    },
+    {
+      "path": "handlers/architect/diff.js",
+      "sha256": "733aa0d4be1f98a7d9cc52e66f12f5054ea361b17c0db021244f2eb617653965"
+    },
+    {
+      "path": "handlers/architect/preflight.js",
+      "sha256": "e85d8f6a95a3647e0b47fcd4256f2ac465ef5f2bd9da9d0f1270676946f6f225"
+    },
+    {
+      "path": "handlers/architect/application.js",
+      "sha256": "a92e555bf5872cea1d9154ba7fc45c53736bbe76dcb72752f1fabb752ebec530"
+    },
+    {
+      "path": "handlers/architect/creations.js",
+      "sha256": "0747fa8d49ab703a7b7208e4a6f94021e06cc68e14d725a623a6c6860a7d12e7"
+    },
+    {
+      "path": "handlers/architect/permissions.js",
+      "sha256": "0a70d6e4cd99fee5867bb477508402caa90e4b13bcbda9f2d64ea3578eb307c9"
+    },
+    {
+      "path": "handlers/architect/restore-points.js",
+      "sha256": "f0c1abc17e4ec332aea8de6dc732c0ad8813ba40e5feac262b7889994888e26e"
+    },
+    {
+      "path": "handlers/templates/format.js",
+      "sha256": "9bd2cf6c34fd7eb505809843938a1305075f496957ed18cf3a33982f96d2e561"
+    },
+    {
+      "path": "workers/architect-edits.js",
+      "sha256": "e21ec2586a611518f36a87db040607ad5cf3fbddcacedf7276160bd86bd8a547"
+    },
+    {
+      "path": "dashboard/architect-routes.js",
+      "sha256": "b67231d1141cc48510e588d3cebaa5696fe744012f8d05a6242cb4e5ceebaf5e"
+    },
+    {
+      "path": "database/schemas/ArchitectApplicationPlanSchema.js",
+      "sha256": "8fdfa69b55236b981fd354ed91a57bd9ff545bea5a4da145fa86cc4e5f11572a"
+    },
+    {
+      "path": "database/schemas/ArchitectGuildOperationSchema.js",
+      "sha256": "daa6be5b54d68b1bc7c9b449603257d5f51630dc55f5f71ad22ae2a35a6ba470"
+    }
+  ],
+  "legacyEntriesToMigrate": [
+    "/architect",
+    "/config architect"
+  ],
+  "publicNamingContract": "comandos-propuestos.json",
+  "namingDecision": "plain-language-public-labels-in-user-locale"
+}
