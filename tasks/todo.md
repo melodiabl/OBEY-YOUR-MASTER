@@ -1741,3 +1741,10 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [ ] Completar G01/G02 globales: prefix/aliases, propietarios, compatibilidad y lock/CI del cliente objetivo.
 - [ ] P1: migrar Shoukaku a lavalink-client con una única cola y aceptación de fin/skip/stop/autoplay/manual/recuperación; conservar doce controles, favoritos y reloj.
 - [ ] P2–P6 y puertas del maestro: permisos/datos/idiomas/materiales por recorrido; /servidor, eventos, sandbox premium/votos y escalado según contratos, sin cerrar funciones por documentación.
+
+### Relevancia y gustos · 23/10/2026
+
+- [x] Filtrar homónimos ajenos, canales y duplicados; mantener Unicode y créditos del artista. Cuatro fuentes elegidas; retirar JioSaavn de consultas/recuperación.
+- [x] Conectar mix relacionado a autoplay/playmusicmix y descubrimiento privado por Me gusta/historial; identidad de sesión, permisos de guild, cancelación y vacío honesto.
+- [x] Veinte casos temporales y 25 originales; Chromium aislado y proveedor real. Desplegar c5033b7: 40 hashes, salud HTTP local/pública 200, acceso privado sin sesión 401, respaldo/reversión conservados. [Evidencia](../docs/platform/evidence/music-relevance-deployment-20261023.json).
+- [ ] Recorrido y escucha reales del usuario en Discord/panel; conservar incidentes y etapas del plan 0.15 abiertas. Afinidad del proveedor no garantiza clasificación exacta de géneros.

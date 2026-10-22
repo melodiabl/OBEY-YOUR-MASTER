@@ -1,0 +1,142 @@
+{
+  "verifiedAt": "2026-10-22T23:37:18.451750+00:00",
+  "code": "c5033b70f65f9a9e6243b1a2e9b14e7e1eab9a9f",
+  "image": "c296f838b75f35ac58ecc63b055475208ec03e4488ec5bae2ea1eeed7957a480",
+  "imageTag": "localhost/obey-your-master_bot:release-music-relevance-20261023-c5033b7",
+  "containers": {
+    "obey_bot": {
+      "id": "96d6f1e5150e48bbaa541c80d4375c9eabafd32138272e6f8517893afc8cc20e",
+      "image": "c296f838b75f35ac58ecc63b055475208ec03e4488ec5bae2ea1eeed7957a480",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_images": {
+      "id": "462bdff85d5ea974fe009942fd0fa1bbdc3ef3c1b023738dd10e1626e28c8d3c",
+      "image": "14a43c1b47063619759f5543febbe67f37d354da953b1cef6571e13de4dfdf69",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_redis": {
+      "id": "138d5ec55ceecae1ba9ee912146715563de51d9bfbcaa339149ec5eb8ee89b13",
+      "image": "f84b0c4678011602b9b98c227a4dcd5468bf8b088b02fdd4165cb7758bad8058",
+      "state": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "restartPolicy": "always"
+    },
+    "obey_lavalink": {
+      "id": "ac23fad705a54f72b90ef4f9697ba204e5d669d9afbaf3ec9bacef122e0bf369",
+      "image": "8e446cfb023ee07f5b75b2e80ba9ff8a34a49decaef284adde4d3959db35c807",
+      "state": "created",
+      "health": "",
+      "restarts": 0,
+      "restartPolicy": "no"
+    }
+  },
+  "imageChecks": {
+    "hashes": 40,
+    "mismatch": [],
+    "node": "v22.23.2",
+    "tests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "testExit": 0
+  },
+  "runtimeProbe": {
+    "hashes": 40,
+    "mismatch": [],
+    "query": "Adele",
+    "tracks": 6,
+    "allArtistMatches": true,
+    "related": 20,
+    "relatedArtists": [
+      "Adele",
+      "John Legend",
+      "Lewis Capaldi",
+      "Ed Sheeran",
+      "Bruno Mars",
+      "SAM SMITH",
+      "Passenger",
+      "A Great Big World",
+      "Alicia Keys",
+      "Beyoncé",
+      "P!NK",
+      "Harry Styles",
+      "Ninja Tune and The Cinematic Orchestra"
+    ],
+    "privateEnabled": "false",
+    "selected": "trinium-02",
+    "enabledPublicNodes": [
+      "serenetia",
+      "gdjkhp",
+      "millohost",
+      "trinium-02"
+    ],
+    "voiceJoined": false,
+    "messagesSent": false
+  },
+  "httpHealth": {
+    "defaultNode": "trinium-02",
+    "privateEnabled": "false",
+    "local": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 116
+      }
+    },
+    "public": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 116
+      }
+    },
+    "unauthenticatedRecommendations": {
+      "http": 401
+    }
+  },
+  "gatewayReady": true,
+  "heartbeatAcknowledged": true,
+  "databaseReady": true,
+  "connectedPublicNodes": [
+    "millohost",
+    "serenetia",
+    "trinium-02"
+  ],
+  "startupFailures": [],
+  "backup": {
+    "directory": "/home/backups/obey-releases/2026-10-22T23-30-42-046Z",
+    "mongoArchiveBytes": 59239821
+  },
+  "rollback": {
+    "image": "078d7a2807c82dce298cc9f3afe44f4ea7874c3ac600222fcb3d0ae95cc5e667",
+    "imageTag": "localhost/obey-your-master_bot:release-search-radio-20261022-07da107",
+    "argumentsFile": ".runtime/deploy-music-relevance-20261023/rollback-arguments.json",
+    "correctedContainerName": "obey_bot",
+    "executedSuccessfully": false
+  },
+  "deploymentCorrection": "Original recorded CreateCommand retained a pre-rename candidate name. Renamed the newly created container to obey_bot and corrected both argument files before verification.",
+  "temporaryVerifiersRetained": false,
+  "browser": "isolated Chromium preview with fixtures; authenticated live UI walkthrough still pending",
+  "externalDiscordTestMessagesSent": false,
+  "voiceJoinedForTesting": false,
+  "personalProductionProfilesReadForTesting": false,
+  "pushed": false,
+  "remaining": [
+    "Actual Discord user walkthrough and audio listening",
+    "Provider affinity is not a guaranteed genre classifier",
+    "Original setup access incident and global 0.15 plan/client migration remain open"
+  ]
+}

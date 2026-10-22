@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "07da107f020d40d825373af4cd5f35d231a838da",
-    "image": "078d7a2807c82dce298cc9f3afe44f4ea7874c3ac600222fcb3d0ae95cc5e667",
+    "code": "c5033b70f65f9a9e6243b1a2e9b14e7e1eab9a9f",
+    "image": "c296f838b75f35ac58ecc63b055475208ec03e4488ec5bae2ea1eeed7957a480",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,11 +36,11 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/search-radio-deployment-20261022.json",
-    "change": "Fix sparse music pickers, complete native albums and empty radio/setup transitions; follow-redirects security patch; Trinium 02 retained",
-    "tag": "release-search-radio-20261022-07da107",
+    "evidence": "evidence/music-relevance-deployment-20261023.json",
+    "change": "Relevant artist searches, four music providers, related autoplay/mix and private likes/history discovery",
+    "tag": "release-music-relevance-20261023-c5033b7",
     "status": "healthy",
-    "statusEvidence": "DESPLIEGUE-BUSQUEDAS-RADIO-2026-10-22.md",
+    "statusEvidence": "../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md",
     "connectedPublicNodes": [
       "trinium-02",
       "serenetia",
@@ -50,7 +50,7 @@
       "gdjkhp"
     ],
     "selectedNodeConnected": true,
-    "deploymentKind": "code_and_dependency_patch"
+    "deploymentKind": "application_only_layer_on_07da107"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -276,5 +276,20 @@
     "targetMusicClient": "lavalink-client",
     "targetMusicClientInstalled": false,
     "next": "P0 remaining registry/ownership and P1 continuity/client migration; P2-P6 retain acceptance gates"
+  },
+  "musicRelevance": {
+    "implementationCode": "c5033b70f65f9a9e6243b1a2e9b14e7e1eab9a9f",
+    "searchCommit": "3843e7c",
+    "providers": [
+      "spotify",
+      "youtube",
+      "ytmusic",
+      "applemusic"
+    ],
+    "localEvidence": "evidence/music-relevance-local-20261023.json",
+    "deploymentEvidence": "evidence/music-relevance-deployment-20261023.json",
+    "deployed": true,
+    "musicClientMigrated": false,
+    "remaining": "Actual Discord walkthrough/listening; genres use provider seed affinity, not demographic or guaranteed genre classification"
   }
 }

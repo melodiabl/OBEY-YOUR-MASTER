@@ -2,6 +2,8 @@
 
 Prioridad vigente del 23/10/2026: [entrega 0.15 conciliada](../docs/guia-arquitectura/CONCILIACION_2026-10-23.md), con P0 de base/inventario parcialmente comprobado y P1 de continuidad/migración a lavalink-client como siguiente unidad. Los checkpoints anteriores conservan avances y fechas.
 
+Corrección urgente solicitada después de la recepción: [relevancia y gustos](../docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), desplegada en c5033b7. Cuatro proveedores, listas pertinentes y recomendaciones por semilla/Me gusta; conservar pendientes de escucha real y continuar P0/P1 del maestro.
+
 Prioridad anterior del 18/10/2026: [facilidad de uso de setups](../docs/guia-arquitectura/FACILIDAD_SETUP.md), solicitada después de desplegar los 63 adaptadores. Entrada única `!setup`, navegación por el mismo mensaje, regreso y rutas básicas sobre los servicios existentes. Continuar las tareas globales pendientes al completar esta corrección; las entregas anteriores que siguen se conservan como historial.
 
 Preferencia de nombres del usuario: archivos por función, sin el prefijo `module-` (por ejemplo, `cards.js`, `configuration-service.js`, `configuration-editor.js`, `feature-registry.js`). La interfaz nombra directamente Bienvenida, Tarjetas y cada función; evita «módulo» en títulos y mensajes. Las futuras entregas siguen esta convención.

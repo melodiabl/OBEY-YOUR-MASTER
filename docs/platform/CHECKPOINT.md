@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 23/10/2026 · búsquedas y afinidad musical desplegadas
+
+Código c5033b7, imagen c296f83, bot saludable y cero reinicios automáticos; Trinium 02, respaldos públicos y privado apagado. Cuatro fuentes elegidas: Spotify/YouTube/YouTube Music/Apple. Filtro de artista, duplicados/canales y recuperación sin JioSaavn; autoplay/playmusicmix usan mix de grabación confirmada. Panel con recomendaciones privadas por Me gusta de sesión o historial de guild, sin inventar gustos. 20 casos temporales, 25 originales, Chromium aislado, 40 hashes y consultas reales desde contenedor pasan. [Alcance y límites](../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), [despliegue](evidence/music-relevance-deployment-20261023.json). Reversión conservada; el primer arranque conservaba un nombre candidato antiguo y se corrigió a obey_bot. No hubo mensajes/voz de prueba, push ni migración a lavalink-client. Las recepciones siguientes conservan su contexto histórico.
+
 Workspace activo: `/home/OBEY-YOUR-MASTER`. Rama: `feature/obey-main-implementation`, basada en `feat/motor-soundy`. El usuario corrigió expresamente la ubicación: continuar aquí, no en `/home/obey-platform-work`. El paquete original `OBEY_Diseno_Completo_Codex` se conserva sin cambios.
 
 ## Estado vigente · fuente 0.15 incorporada el 23/10/2026
