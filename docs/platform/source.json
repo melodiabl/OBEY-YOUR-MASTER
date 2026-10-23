@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "d5897e3533b1ba9e18b033476140c47501f6715d",
-    "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+    "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
+    "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,8 +36,8 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/frontend-welcome-20261023.json",
-    "change": "React configuration navigation and welcome draft/preview/review/publication, using existing canonical services",
+    "evidence": "evidence/frontend-library-20261023.json",
+    "change": "React personal library and automatic liked playlist, using existing repositories and player APIs",
     "tag": "release-music-boundary-20261023-7801061",
     "status": "healthy",
     "statusEvidence": "../guia-arquitectura/modulos/music.md",
@@ -339,9 +339,10 @@
     "mode": "static export served by Express under /app",
     "firstScreenDeployed": true,
     "fullMigrationComplete": false,
-    "evidence": "evidence/frontend-welcome-20261023.json",
+    "evidence": "evidence/frontend-library-20261023.json",
     "welcomeEditorDeployed": true,
     "configurationNavigationDeployed": true,
-    "next": "Library and liked tracks; full music player and remaining general settings follow existing tasks"
+    "next": "Full music player; remaining settings retain their domain tasks",
+    "libraryDeployed": true
   }
 }

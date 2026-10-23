@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "status": "verified_deployment_pending",
+  "status": "deployed_healthy",
   "scope": "React personal library, automatic likes playlist, playlist detail, recent history and guild top",
   "verification": {
     "originalTests": 25,
@@ -159,6 +159,19 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "browserArtifact": "Static export extracted from final Docker image",
+    "imageChecks": {
+      "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+      "sourceHashes": 96,
+      "compiledFiles": 24,
+      "uid": 1000,
+      "originalTests": 25
+    },
+    "screenshots": {
+      "fixturesOnly": true,
+      "desktop": "frontend-library-desktop-20261023.png",
+      "mobile": "frontend-library-mobile-20261023.png"
     }
   },
   "limits": [
@@ -167,5 +180,174 @@
     "Other client heart changes appear after refresh, not a new realtime event stream",
     "Playlist creation/editing/deletion and full player migration retain existing flows"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
+    "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+    "tag": "localhost/obey-your-master_bot:release-next-library-20261023-b31c65b",
+    "previousCode": "d5897e3533b1ba9e18b033476140c47501f6715d",
+    "previousImage": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-23T19-25-36-547Z",
+      "bytes": 59262317,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "b6b9b89d0f46a5fd1834f94abb09de4629f5c8f9e770112dade1b796fdfe6846"
+    },
+    "runtimeVerification": {
+      "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+      "verified": 120,
+      "routes": {
+        "local": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/api/music/library/100000000000000002": {
+            "status": 401
+          },
+          "/api/music/library/100000000000000002/playlists/123456789012345678901234": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          }
+        },
+        "public": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/api/music/library/100000000000000002": {
+            "status": 401
+          },
+          "/api/music/library/100000000000000002/playlists/123456789012345678901234": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          }
+        }
+      }
+    },
+    "publicAssets": [
+      {
+        "path": "/app/_next/static/_4v_2nroGL4aJ6tTx5F-H/_buildManifest.js",
+        "status": 200,
+        "contentType": "application/javascript; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "9476e0afd3f9da68a64e6ec58631191fd3eaca62c9f5a377e7517fe9a89e59ea"
+      },
+      {
+        "path": "/app/_next/static/chunks/379otflgu1tbv.css",
+        "status": 200,
+        "contentType": "text/css; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "5ec284539670167f8ceadc5cddf8a0aeab728d04f451c83c7248f8bc7b78d3f8"
+      }
+    ],
+    "observations": [
+      {
+        "at": "2026-10-23T19:34:13.248Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:17.395Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:21.597Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:25.727Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:29.837Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:33.999Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:38.139Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:42.300Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:46.421Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T19:34:50.553Z",
+        "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      }
+    ],
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16
+    },
+    "privateNodeEnabled": false,
+    "rollbackPreserved": true,
+    "testDiscordMessages": 0,
+    "newVoiceTestJoins": 0,
+    "pushed": false
+  },
+  "cleanup": {
+    "temporaryTestsScriptsAndBrowserPackageRemoved": true,
+    "previewStopped": true,
+    "originalTestFiles": 3,
+    "rollbackAndBackupPreserved": true
+  }
 }

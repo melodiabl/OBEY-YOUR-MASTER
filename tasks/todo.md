@@ -1784,7 +1784,8 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Registrar despliegue/reversión y siguientes pantallas; no declarar migración frontend completa.
 
 - [x] Migrar navegación de configuración y canal/mensaje de bienvenida con el contrato/servicio actuales y aceptación de guardado, permisos y errores; otros ajustes siguen pendientes.
-- [ ] Continuar biblioteca/Me gusta y reproductor completo; aceptación OAuth/escucha real y tareas musicales globales siguen abiertas.
+- [x] Migrar biblioteca/Me gusta con colecciones, detalle, historial/top y corazones existentes.
+- [ ] Migrar reproductor completo; aceptación OAuth/escucha real y tareas musicales globales siguen abiertas.
 
 ## Frontend · configuración y bienvenida
 
@@ -1798,8 +1799,8 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 ## Frontend · biblioteca y Me gusta
 
-- [ ] Migrar favoritos, playlists/detalle, recientes y top a React, con Tus Me gusta visible como colección automática de los corazones existentes.
-- [ ] Proyectar solo datos de sesión/servidor autorizado; distinguir fallos de almacenamiento y vacíos, sin alterar las lecturas legacy.
-- [ ] Quitar corazones con estado explícito y reproducción por las API existentes; CSRF, confirmación y bloqueo de duplicados, sin reintentos automáticos.
-- [ ] Verificar búsqueda/páginas, datos de dos usuarios/servidores, errores, móvil/teclado y artefacto Docker; retirar pruebas temporales y conservar tres archivos originales.
-- [ ] Desplegar con respaldo/reversión y actualizar el plan; reproductor completo y demás ámbitos siguen pendientes.
+- [x] Migrar favoritos, playlists/detalle, recientes y top a React, con Tus Me gusta visible como colección automática de los corazones existentes.
+- [x] Proyectar solo datos de sesión/servidor autorizado; distinguir fallos de almacenamiento y vacíos, sin alterar las lecturas legacy.
+- [x] Quitar corazones con estado explícito y reproducción por las API existentes; CSRF, confirmación y bloqueo de duplicados, sin reintentos automáticos.
+- [x] Verificar búsqueda/páginas, datos de dos usuarios/servidores, errores, móvil/teclado y artefacto Docker; retirar pruebas temporales y conservar tres archivos originales.
+- [x] Desplegar con respaldo/reversión y actualizar el plan; reproductor completo y demás ámbitos siguen pendientes.
