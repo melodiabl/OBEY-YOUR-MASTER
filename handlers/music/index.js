@@ -670,6 +670,9 @@ module.exports = client => {
       if (state.currentTrack?.info?.isStream || (state.currentTrack?.info || state.currentTrack)?.isSeekable === false || !len) throw new Error('Esta pista no permite adelantar o retroceder.')
       const pos = Math.max(0, Math.min(len, ms))
       const response = await player.seekTo(pos)
+      if (!Number.isFinite(response?.state?.position) || response.state.connected === false || response.trackPresent === false) {
+        throw new Error('No pude confirmar el cambio de posición. Vuelve a intentarlo.')
+      }
       if (getState(guildId) !== state || state.currentTrack !== track || state.playbackId !== playbackId ||
           (state.requestEpoch || 0) !== requestEpoch || response?.playbackId && response.playbackId !== playbackId) {
         throw new Error('La reproducción cambió. Vuelve a solicitar el cambio de posición.')
