@@ -221,3 +221,32 @@ Shoukaku 4.3.0 sigue activo. La siguiente unidad inventaría `client.shoukaku`, 
 Commits `3290978` y `4311148`: cuatro fuentes combinadas, respaldo acotado, ampliación de identidad Spotify, agrupación de canciones y selector paginado compartido entre prefix/slash. Web consume el mismo catálogo. Resolución antes de voz y selección delegada al playCollection existente con generación/permisos frescos. [Hallazgos, evidencia y límites](../RELEVANCIA_Y_RECOMENDACIONES.md). Veinticinco casos temporales y 25 originales pasan; no se cierra MOD-MUSIC ni la migración del cliente.
 
 Corrección de disponibilidad `ce546e8`, desplegada: errores de consulta no modifican el cooldown del audio. [Evidencia final](../../platform/evidence/music-search-audit-deployment-20261023.json); 51 hashes y caché estable por HTTP, con cantidades variables por proveedor.
+
+## Conciliación P0 y fachada musical P1 · 23/10/2026
+
+Implementación `7801061` (`282480b`, `5f8377c`, `41853c6`). Los cargadores reales, ejecutados sin red y sin login, concilian 531 comandos prefix, 144 handlers slash en veinte entradas, 675 operaciones del catálogo y 779 alias efectivos. Los 28 registros de colisión corresponden a 26 alias con ganador determinista; nombres canónicos conservan precedencia. No hay entradas deshabilitadas, archivos sin trazar o errores de carga en la muestra. El scheduler de sorteos se sustituyó solo durante el inventario para evitar efectos/timers; no se ejecutaron comandos. [Catálogo y alcance de propietarios](../../platform/evidence/commands-loaded-20261023.json).
+
+El manifest musical ahora obtiene las entradas del catálogo efectivo: 73 prefix y 29 slash, incluyendo filtros y operaciones de favoritos/listas fuera de la categoría Music. Esto no cambia las categorías visibles ni registra comandos nuevos. Los doce IDs Soundy permanecen iguales. Los demás propietarios del catálogo siguen por conciliar; null en la evidencia significa no revisado en esta unidad.
+
+| Entrada / invariante | Resultado comprobado |
+| --- | --- |
+| forward/rewind/seek/restart prefix y forward/rewind/seek/replay slash | Una operación de fachada, sin Player del SDK en las entradas |
+| Adelantar/retroceder | Referencia del reloj de sesión, serialización y diez segundos por omisión en ambas superficies |
+| Parseo y límites | Segundos, mm:ss y hh:mm:ss; cero válido; formato inválido rechazado; destino limitado por duración |
+| Stop o canción nueva | Descartar solicitud/respuesta anterior, sin sobrescribir reloj |
+| Confirmación | Sin respuesta de posición válida no hay recibo de éxito; mostrar destino acotado |
+| Panel | Publicador existente programado tras seek; el ACK del control no espera la edición de Discord |
+| lyrics prefix/slash | Mismo proveedor por grabación y misma paginación; controles de vista pertenecen al solicitante |
+| Letras durante cambio de canción | No publicar resultado anterior; distinguir stream, ausencia y proveedor caído |
+
+El prefix antiguo de letras elegía node.state === 2, construía HTTP aun para nodos seguros y publicaba solo el primer fragmento. Se retiró esa ruta; getCurrentLyrics/fetchLyricsResult conservan el transporte y la comparación de grabación. No se reescribe el reloj live ni se ofrece sincronización garantizada por cambiar este comando. Las búsquedas explícitas de letras y la canción actual usan sus estados respectivos; no se envían DMs de prueba.
+
+Verificación: 24 casos temporales y 25 originales; tipos/fronteras pasan. Las comprobaciones rojas incluyen dieciséis regresiones de implementación/registro y cuatro contratos nuevos del servicio de letras; no se presentan como veinte incidentes de producción. [Evidencia local](../../platform/evidence/music-boundary-local-20261023.json). Desplegado `7801061`, imagen `10db249`, saludable y cero reinicios automáticos. [Evidencia de despliegue](../../platform/evidence/music-boundary-deployment-20261023.json).
+
+### Cliente elegido: paquete publicado revisado
+
+Se inspeccionó lavalink-client 2.11.0 con SHA512 de npm verificado, export require ./dist/index.cjs y engines Node >=18. CommonJS carga y la cola vacía se construye en proceso aislado con Node 22.23.2. El proyecto principal conserva Shoukaku: no se añadió dependencia, Player o cola paralela. La importación usa ws 8.21.0 existente, mientras el paquete exige ^8.21.3; la instalación definitiva debe conciliar esa resolución y lock, no tomar esta prueba como compatibilidad total.
+
+El código publicado avanza queueTrackEnd antes de comprobar autoSkip para iniciar audio. Por tanto, autoSkip:false no permite mantener sin más el avance manual legacy: duplicaría autoridad sobre current/tracks/history. El corte debe trasladar la cola al cliente y retirar _playNext/bindPlayerEvents del propietario anterior para esa guild, con snapshot compatible y recuperación comprobada. [Configuración oficial](https://tomato6966.github.io/lavalink-client/home/configuration/), [resuming](https://tomato6966.github.io/lavalink-client/extra/resuming/) y fuente publicada/contratos en la [matriz de consumidores](../../platform/evidence/music-consumers-20261023.json).
+
+Quedan 19 archivos/61 accesos directos estáticos a constructor/client.shoukaku; esto no acredita ejecución de todos los helpers legacy. Próxima unidad: join/move/reconnect, dispatchers, diagnóstico, salud y cierre; después transporte/raw voice, mapeo de snapshots y transferencia de la cola. P1 y MOD-MUSIC permanecen parciales hasta la matriz de fin/skip/modos/autoplay/stop/reinicio y dos guilds.

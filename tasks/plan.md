@@ -1,5 +1,7 @@
 # Plan de implementación de la plataforma OBEY
 
+Avance activo `7801061`: [registro cargado y fachada musical](../docs/guia-arquitectura/modulos/music.md). Se conciliaron 531 prefix/144 slash/779 alias y se unificaron seek/letras. Siguiente: retirar accesos SDK de join/move/reconnect, dispatchers, diagnóstico y cierre antes de transferir la cola al cliente elegido; P0/P1 globales siguen abiertos.
+
 Auditoría de búsquedas desplegada `ce546e8`: [hallazgos y aceptación](../docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md). Catálogo/selector unificados, páginas, permisos y caché; P0/P1 globales y migración siguen abiertos.
 
 P1 parcial desplegado en `6d5b666`: [continuidad y recuperación](../docs/guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md), sin ciclos de voz durante la ventana observada. La siguiente unidad es inventariar consumidores de Shoukaku y migrar al cliente elegido con cola única y paridad comprobada; siguen abiertas aceptación P0/P1 y escucha real.

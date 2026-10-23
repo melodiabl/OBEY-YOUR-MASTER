@@ -1,4 +1,4 @@
-> Estado vigente del checkout: [conciliación 0.15 y prioridades](CONCILIACION_2026-10-23.md). Se preservan los avances y el runtime `ce546e8` ([búsquedas y continuidad](RELEVANCIA_Y_RECOMENDACIONES.md)); los informes de base conservan su fecha y alcance.
+> Estado vigente del checkout: [conciliación 0.15 y prioridades](CONCILIACION_2026-10-23.md). Se preservan los avances y el runtime `7801061` ([fachada musical y registro](modulos/music.md)); los informes de base conservan su fecha y alcance.
 
 > Actualización vigente 0.6: [catálogo de eventos](sistema/15_CATALOGO_EVENTOS.md) integrado en assets/obey/catalog-eventos/. Escenas y seis GIF se conservan. Los antiguos 24 iconos de registros se retiraron; runtime y publicación Discord siguen pendientes.
 

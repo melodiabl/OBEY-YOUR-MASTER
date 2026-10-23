@@ -1,0 +1,392 @@
+{
+  "date": "2026-10-23",
+  "code": "780106183160460eaf57335f8ca907f75724fe23",
+  "referenceFiles": 19,
+  "referenceSites": 61,
+  "scope": "Static direct client/constructor references; not proof that every legacy function is reached at runtime",
+  "consumers": [
+    {
+      "file": "index.js",
+      "sha256": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
+      "accesses": [
+        {
+          "line": 160,
+          "access": "await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))"
+        }
+      ]
+    },
+    {
+      "file": "dashboard/index.js",
+      "sha256": "fddc64f99ef1e6c7b497b246ee34db093fd5f3dc0773e382af7d11b46264b8e1",
+      "accesses": [
+        {
+          "line": 120,
+          "access": "const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)"
+        },
+        {
+          "line": 232,
+          "access": "activePlayers: client.shoukaku?.players?.size ?? 0,"
+        }
+      ]
+    },
+    {
+      "file": "events/guild/interactionCreate.js",
+      "sha256": "77c50df61a71ff3d38ec04a57456dd8129744c6c4c5622139b671129874ece4b",
+      "accesses": [
+        {
+          "line": 149,
+          "access": "const player = client.shoukaku?.players?.get(guild.id) ?? null;"
+        },
+        {
+          "line": 208,
+          "access": "try { await client.shoukaku?.leaveVoiceChannel(guild.id); await delay(350); } catch {}"
+        }
+      ]
+    },
+    {
+      "file": "events/guild/messageCreate.js",
+      "sha256": "36f4ac08ba7978197aeb03d3cca929f7539abb30788bad44788ef7d64bf5ea7b",
+      "accesses": [
+        {
+          "line": 266,
+          "access": "const player = client.shoukaku?.players?.get(message.guild.id) ?? null;"
+        },
+        {
+          "line": 309,
+          "access": "try { await client.shoukaku?.leaveVoiceChannel(message.guild.id); await delay(350); } catch {}"
+        }
+      ]
+    },
+    {
+      "file": "commands/Music/join.js",
+      "sha256": "c9125c027b6d0c66bd61a552b36e6fb3c0fe981460574de6dc0278f27185f307",
+      "accesses": [
+        {
+          "line": 76,
+          "access": "await client.shoukaku?.leaveVoiceChannel(message.guild.id)"
+        }
+      ]
+    },
+    {
+      "file": "commands/Music/reconnect.js",
+      "sha256": "243ab3c697ba2f6b167cb86218a25435cf6696564d415796e1e8b4bcb48ebb00",
+      "accesses": [
+        {
+          "line": 13,
+          "access": "const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)"
+        },
+        {
+          "line": 15,
+          "access": "await client.shoukaku.leaveVoiceChannel(message.guild.id).catch(() => {})"
+        }
+      ]
+    },
+    {
+      "file": "commands/Music/moveme.js",
+      "sha256": "62a63217676293640535f789c03c4203bc1e08f4e20ca67115689b30e39b5892",
+      "accesses": [
+        {
+          "line": 14,
+          "access": "await client.shoukaku.leaveVoiceChannel(message.guild.id).catch(() => {})"
+        }
+      ]
+    },
+    {
+      "file": "handlers/functions.js",
+      "sha256": "1ea77985f9448686d1ec8f66989b40eac7f6e859e393d1c0160c636f1ffa2701",
+      "accesses": [
+        {
+          "line": 1012,
+          "access": "player = client.shoukaku?.players?.get(player.guild) ?? null;"
+        }
+      ]
+    },
+    {
+      "file": "slashCommands/Music/playmusicmix.js",
+      "sha256": "3b4c1cab5a7d78a82a04c4502b053fe45df9a364c3482fe447a4403414033d8c",
+      "accesses": [
+        {
+          "line": 28,
+          "access": "const player = client.shoukaku?.players?.get(interaction.guild.id)"
+        }
+      ]
+    },
+    {
+      "file": "handlers/project/bot-info.js",
+      "sha256": "588033d2b87b3074f6fa9619e629f357ba4a5f896f967c3e7f72ce29ee9b01ce",
+      "accesses": [
+        {
+          "line": 14,
+          "access": "const player = client.shoukaku?.players?.get(guildId), nodes = client.music?.getNodes?.(guildId)"
+        }
+      ]
+    },
+    {
+      "file": "handlers/project/ping.js",
+      "sha256": "cd5c2ab1eaa9e75b60cb8a4e310e4caa00c46b2e35efd0b17787cfed8de750a6",
+      "accesses": [
+        {
+          "line": 14,
+          "access": "const player = client.shoukaku?.players?.get(guildId), view = client.music?.getNodes?.(guildId)"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/node-session.js",
+      "sha256": "724a15220a81bbcc2d4a79c2d9bfdb06cc97499755bda913015975131a136c27",
+      "accesses": [
+        {
+          "line": 6,
+          "access": "const previousPlayer = client.shoukaku.players.get(guildId)"
+        },
+        {
+          "line": 41,
+          "access": "if (previousPlayer && previousNode && client.shoukaku.players.get(guildId)?.node !== previousNode) {"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/nodes-runtime.js",
+      "sha256": "8edd66b5256da862932f6708f37769f176d8d153206b51cd4b1bf61d168e40d8",
+      "accesses": [
+        {
+          "line": 1,
+          "access": "const { Shoukaku, Connectors } = require('shoukaku')"
+        },
+        {
+          "line": 10,
+          "access": "client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), entries.filter(entry => entry.enabled).map(entry => ({ name: entry.id, url: entry.url, auth: entry.auth, secure: entry.secure })), {"
+        },
+        {
+          "line": 16,
+          "access": "pool.attach(client.shoukaku)"
+        },
+        {
+          "line": 25,
+          "access": "if (client._shuttingDown || client.shoukaku.nodes.get(name)?.state === 1) return"
+        },
+        {
+          "line": 27,
+          "access": "if (client.shoukaku.nodes.has(name)) client.shoukaku.removeNode(name, 'Scheduled reconnect')"
+        },
+        {
+          "line": 28,
+          "access": "client.shoukaku.addNode({ name: entry.id, url: entry.url, auth: entry.auth, secure: entry.secure })"
+        },
+        {
+          "line": 33,
+          "access": "client.shoukaku.on('ready', name => {"
+        },
+        {
+          "line": 37,
+          "access": "client.shoukaku.on('error', name => { pool.fail(name); console.warn('[Lavalink] Conexión no disponible'); retry(name) })"
+        },
+        {
+          "line": 38,
+          "access": "client.shoukaku.on('disconnect', name => { pool.fail(name); retry(name) })"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/node-search.js",
+      "sha256": "864560db4958d8498293e90e7bb58ee99c339f872cfcd03e1da5cf8cef2bc2a1",
+      "accesses": [
+        {
+          "line": 7,
+          "access": "const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)"
+        },
+        {
+          "line": 30,
+          "access": "if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)"
+        },
+        {
+          "line": 36,
+          "access": "if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/node-player.js",
+      "sha256": "880cdef1aaa2ef3ba11ecee8d77d2587fbdbbd274d9188476bd4538e7da94c1f",
+      "accesses": [
+        {
+          "line": 2,
+          "access": "const { Player, Rest } = require('shoukaku')"
+        }
+      ]
+    },
+    {
+      "file": "handlers/musiccatalog.js",
+      "sha256": "779ad1a2b057e38966634b3cdecf53c9659c155d1db7ce42f43ba230aadb539e",
+      "accesses": [
+        {
+          "line": 417,
+          "access": "return client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes) || null"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/player-events.js",
+      "sha256": "68bf27d70c18751fc6e6954fc7d5a5540d3feb30779e9fa4783c9ec7e890a0c7",
+      "accesses": [
+        {
+          "line": 7,
+          "access": "if (client.shoukaku?.players?.get(guildId) !== player) return false"
+        },
+        {
+          "line": 49,
+          "access": "if (client.shoukaku?.players?.get(guildId) !== player) return"
+        },
+        {
+          "line": 77,
+          "access": "if (client.shoukaku?.players?.get(guildId) !== player) return"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/index.js",
+      "sha256": "89d1d4cd26b62cc89831a2c6d70d0540b2538505c9c0152a81f275d48876569b",
+      "accesses": [
+        {
+          "line": 17,
+          "access": "if (!client.shoukaku) {"
+        },
+        {
+          "line": 55,
+          "access": "if (state.playbackId === playbackId && client.shoukaku.players.get(player.guildId) === player &&"
+        },
+        {
+          "line": 78,
+          "access": "if (!state.currentTrack && !['connecting', 'stopping'].includes(state.status)) state.status = client.shoukaku?.players?.has(guildId) ? 'idle' : 'disconnected'"
+        },
+        {
+          "line": 85,
+          "access": "const active = guildId && client.shoukaku.players.get(guildId)?.node"
+        },
+        {
+          "line": 87,
+          "access": "return client.nodePool ? client.nodePool.choose(guildId) : client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)"
+        },
+        {
+          "line": 103,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 181,
+          "access": "const node = client.shoukaku?.players?.get(guildId)?.node"
+        },
+        {
+          "line": 251,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 274,
+          "access": "const existing = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 283,
+          "access": "const connection = client.shoukaku.connections?.get(guildId)"
+        },
+        {
+          "line": 298,
+          "access": "try { await client.shoukaku.leaveVoiceChannel(guildId) } catch {}"
+        },
+        {
+          "line": 305,
+          "access": "const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: guild?.shardId ?? guild?.shard?.id ?? 0 })"
+        },
+        {
+          "line": 331,
+          "access": "if (!player) player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 354,
+          "access": "client.shoukaku.players.get(guildId) === player"
+        },
+        {
+          "line": 473,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 496,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 515,
+          "access": "if (player) await client.shoukaku.leaveVoiceChannel(guildId)"
+        },
+        {
+          "line": 528,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 543,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 663,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 695,
+          "access": "const player = client.shoukaku?.players?.get(guildId)"
+        },
+        {
+          "line": 927,
+          "access": "const existing = client.shoukaku.players.get(saved.guildId)"
+        },
+        {
+          "line": 1031,
+          "access": "if (client.shoukaku.players.has(row.id)) continue"
+        },
+        {
+          "line": 1038,
+          "access": "client.shoukaku.on?.('close', name => {"
+        },
+        {
+          "line": 1039,
+          "access": "for (const [guildId, player] of client.shoukaku.players) {"
+        },
+        {
+          "line": 1051,
+          "access": "client.shoukaku.on?.('ready', () => restoreSessions())"
+        }
+      ]
+    },
+    {
+      "file": "handlers/music/recommendations.js",
+      "sha256": "4386e6adcf1c231097f96bbcb5d2ac76cc8ebbe202d4c207aa0ecbb308abeea9",
+      "accesses": [
+        {
+          "line": 21,
+          "access": "const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)"
+        }
+      ]
+    }
+  ],
+  "target": {
+    "package": "lavalink-client",
+    "version": "2.11.0",
+    "integrity": "sha512-x4mobBpwSjJ+jC2XDevcMc8Mj454Bx3cTfmWgtLHisY+U/HlK7ubWkdHawZrEwBW5E6zIDjoiBvVBR8FDIUdkw==",
+    "node": "v22.23.2",
+    "commonJsExport": "./dist/index.cjs",
+    "commonJsImportVerified": true,
+    "emptyQueueConstructionVerified": true,
+    "mainDependencyInstalled": false,
+    "runtimeClientChanged": false,
+    "dependencyCaveat": "Published package declares ws ^8.21.3; current project resolves 8.21.0. CommonJS import alone does not prove target dependency compatibility.",
+    "queueFinding": "Published trackEnd advances queueTrackEnd even with autoSkip false; must transfer queue ownership, not just disable automatic play."
+  },
+  "facadeEntryPoints": [
+    "commands/Music/forward.js",
+    "commands/Music/rewind.js",
+    "commands/Music/seek.js",
+    "commands/Music/restart.js",
+    "commands/Music/lyrics.js",
+    "slashCommands/Music/forward.js",
+    "slashCommands/Music/rewind.js",
+    "slashCommands/Music/seek.js",
+    "slashCommands/Music/replay.js",
+    "slashCommands/Music/lyrics.js"
+  ]
+}

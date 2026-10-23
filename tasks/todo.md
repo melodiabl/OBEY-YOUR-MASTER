@@ -1764,3 +1764,13 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Corregir enfriamiento del audio por consultas fallidas, visto durante verificación; caché estable comprobada.
 - [x] Desplegar `ce546e8`; 25 casos temporales, 25 originales, 51 hashes y salud 200. [Evidencia](../docs/platform/evidence/music-search-audit-deployment-20261023.json). Respaldo/reversión conservados y temporales retirados.
 - [ ] Recorrido Discord/escucha real; proveedores públicos y expansión acotada no equivalen a discografía completa. Migración/aceptación global P1 permanecen abiertas.
+
+## 23/10/2026 · registro y fachada musical P0/P1 parciales
+
+- [x] Ejecutar cargadores reales offline: 531 prefix, 144 handlers slash, 779 alias y colisiones conciliadas; [evidencia](../docs/platform/evidence/commands-loaded-20261023.json).
+- [x] Conciliar el manifest musical con 73 prefix/29 slash e IDs existentes, sin comandos nuevos.
+- [x] Unificar cambios de posición prefix/slash con reloj, cancelación y confirmación; letras con proveedor/paginación comunes.
+- [x] Verificar paquete publicado 2.11.0 sin instalarlo: CommonJS/integridad y semántica de avance; [consumidores pendientes](../docs/platform/evidence/music-consumers-20261023.json).
+- [x] Desplegar `7801061`: 24 casos temporales/25 originales, 64 hashes y salud HTTP 200; respaldo/reversión y tres tests originales conservados, verificadores retirados.
+- [ ] Conciliar propietarios de las demás capacidades; el inventario no acredita ejecución de todos los comandos.
+- [ ] Migrar accesos SDK restantes, snapshot/cola única y lifecycle a lavalink-client; matriz musical y escucha/dos guilds pendientes.

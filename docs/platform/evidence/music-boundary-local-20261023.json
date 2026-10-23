@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-23",
+  "code": "780106183160460eaf57335f8ca907f75724fe23",
+  "scope": "P0 loaded registry/aliases and partial P1 control/lyrics facade; no client cutover",
+  "implementationCommits": [
+    "282480b",
+    "5f8377c",
+    "41853c6",
+    "7801061"
+  ],
+  "verification": {
+    "temporaryCases": 24,
+    "passed": 24,
+    "redFailuresBeforeFix": 20,
+    "redFailureScope": "Includes four newly specified lyrics-service contracts missing before implementation; separate from the sixteen observed implementation/registry regressions",
+    "originalCases": 25,
+    "originalPass": 25,
+    "originalFiles": 3,
+    "skipped": 0,
+    "typecheckPassed": true,
+    "dependencyBoundariesPassed": true,
+    "noNewPermanentTests": true
+  },
+  "behavior": [
+    "Relative seeking uses the session clock inside the existing action queue",
+    "Stop/replacement generations discard stale seek requests and responses",
+    "Seek returns the actual bounded position and requires node acknowledgement",
+    "Seek schedules the existing coalesced panel publisher without waiting for network edits",
+    "Prefix/slash seek controls share validation and a ten-second relative default",
+    "Both lyrics commands use the shared recording-aware lookup and paginated owner-bound view",
+    "Prefix lyrics no longer constructs an insecure node URL or sends node credentials directly",
+    "Music manifest uses loaded command contracts including filters, favorites and playlists"
+  ],
+  "registry": {
+    "prefix": 531,
+    "aliases": 779,
+    "slashHandlers": 144,
+    "slashTopLevel": 20,
+    "catalogEntries": 675,
+    "musicManifestPrefix": 73,
+    "musicManifestSlash": 29,
+    "controlIds": [
+      "mp_shuffle",
+      "mp_prev",
+      "mp_toggle",
+      "mp_skip",
+      "mp_loop",
+      "mp_lyrics",
+      "mp_voldown",
+      "mp_stop",
+      "mp_volup",
+      "mp_queue",
+      "mp_like",
+      "mp_autoplay"
+    ],
+    "loaderErrors": []
+  },
+  "registryEvidence": "commands-loaded-20261023.json",
+  "consumerEvidence": "music-consumers-20261023.json",
+  "newDiscordMessagesSentForTesting": false,
+  "newVoiceTestChannelsJoined": false,
+  "temporaryVerifiersRetained": false,
+  "targetClientInstalled": false,
+  "deployed": false,
+  "limits": [
+    "No real listening or user control/lyrics walkthrough claimed",
+    "Published lavalink-client 2.11.0 inspected and imported in isolation, not installed in the main project",
+    "Queue cutover and remaining SDK consumers remain open"
+  ]
+}

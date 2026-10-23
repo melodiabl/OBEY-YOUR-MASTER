@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
-    "image": "a6fc1d60b4710cf78df71a648130dec77c502a3063810dc3e2a89899f7593d3a",
+    "code": "780106183160460eaf57335f8ca907f75724fe23",
+    "image": "10db2498e9bdddb45c0ce0f01e349f95f0875b0f98408f13cbfc7cafdab32e5c",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,12 +36,12 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/music-search-audit-deployment-20261023.json",
-    "change": "Combined provider/artist search, bounded lookup/cache, paginated Soundy picker and fresh single-use selection",
-    "tag": "release-search-catalog-20261023-ce546e8",
+    "evidence": "evidence/music-boundary-deployment-20261023.json",
+    "change": "Shared confirmed seek clock and lyric commands; loaded music operation registry reconciled",
+    "tag": "release-music-boundary-20261023-7801061",
     "status": "healthy",
-    "statusEvidence": "../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md",
-    "deploymentKind": "application_only_search_catalog_release"
+    "statusEvidence": "../guia-arquitectura/modulos/music.md",
+    "deploymentKind": "application_only_music_facade_release"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -313,6 +313,23 @@
       "User Discord walkthrough/listening",
       "Provider quotas and bounded expansion do not guarantee complete artist discography",
       "Full P1 client migration and acceptance remain open"
+    ],
+    "pushed": false
+  },
+  "musicFacade": {
+    "implementationCode": "780106183160460eaf57335f8ca907f75724fe23",
+    "deployed": true,
+    "report": "docs/guia-arquitectura/modulos/music.md",
+    "localEvidence": "evidence/music-boundary-local-20261023.json",
+    "deploymentEvidence": "evidence/music-boundary-deployment-20261023.json",
+    "registryEvidence": "evidence/commands-loaded-20261023.json",
+    "consumerEvidence": "evidence/music-consumers-20261023.json",
+    "temporaryCases": 24,
+    "originalCases": 25,
+    "remaining": [
+      "Other feature ownership reconciliation",
+      "Remaining SDK consumers and single-queue lavalink-client cutover",
+      "Real listening and two-guild acceptance"
     ],
     "pushed": false
   }

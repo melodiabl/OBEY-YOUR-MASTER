@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-23",
+  "code": "780106183160460eaf57335f8ca907f75724fe23",
+  "image": "10db2498e9bdddb45c0ce0f01e349f95f0875b0f98408f13cbfc7cafdab32e5c",
+  "imageTag": "localhost/obey-your-master_bot:release-music-boundary-20261023-7801061",
+  "cutoverAt": "2026-10-23T17:11:05.073529+00:00",
+  "deployed": true,
+  "imageVerification": {
+    "hashes": 64,
+    "mismatch": [],
+    "tests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "testExit": 0
+  },
+  "runtimeVerification": {
+    "hashes": 64,
+    "mismatch": [],
+    "health": {
+      "local": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 202
+        }
+      },
+      "public": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 202
+        }
+      }
+    },
+    "privateWithoutSession": 401,
+    "node": "v22.23.2",
+    "discord": "14.27.0",
+    "shoukaku": "4.3.0",
+    "privateEnabled": "false",
+    "defaultNode": "trinium-02"
+  },
+  "backup": {
+    "backup": "/home/backups/obey-releases/2026-10-23T17-02-17-291Z",
+    "bytes": 59255665,
+    "dumpExitCode": 0,
+    "gzipCrcVerified": true,
+    "uncompressedBytes": 120610983
+  },
+  "rollback": {
+    "code": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+    "image": "a6fc1d60b4710cf78df71a648130dec77c502a3063810dc3e2a89899f7593d3a",
+    "imageName": "localhost/obey-your-master_bot:release-search-catalog-20261023-ce546e8",
+    "containerName": "obey_bot",
+    "privateArgumentsPreserved": true
+  },
+  "localEvidence": "music-boundary-local-20261023.json",
+  "registryEvidence": "commands-loaded-20261023.json",
+  "consumerEvidence": "music-consumers-20261023.json",
+  "temporaryVerifiersRetained": false,
+  "pushed": false,
+  "limits": [
+    "No new Discord test messages, artificial guild events or voice test joins",
+    "Clock/command/lyrics behavior covered in controlled fixtures; no real listening or control walkthrough claimed",
+    "Real loaders run in image with network disabled and no login; not a proof of every command effect",
+    "lavalink-client not installed and queue/client migration remains open"
+  ],
+  "observation": {
+    "samples": [
+      {
+        "at": "2026-10-23T17:16:00.927966+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:05.208549+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:09.297077+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:13.391818+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:17.481393+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:21.583308+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:25.675950+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:29.749433+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:33.838521+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T17:16:37.940628+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      }
+    ]
+  },
+  "startup": {
+    "connectedNodes": [
+      "millohost",
+      "serenetia",
+      "trinium-02"
+    ],
+    "loadedPrefixCommands": 531,
+    "uncaughtException": false
+  }
+}

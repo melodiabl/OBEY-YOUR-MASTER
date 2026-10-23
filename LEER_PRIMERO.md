@@ -1,4 +1,4 @@
-> Checkout vigente: esta entrega se concilió el 23/10/2026 sobre `cea13f0`; el bot desplegado está en `ce546e8`, con [auditoría de búsquedas](docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), paginación y continuidad de voz, conservando las correcciones de álbumes/radio. Trinium 02 es el predeterminado; los respaldos son públicos y el privado está apagado. `ENTREGA.json` describe el paquete recibido, no certifica este checkout. Estado y siguiente etapa en [conciliación](docs/guia-arquitectura/CONCILIACION_2026-10-23.md).
+> Checkout vigente: esta entrega se concilió el 23/10/2026 sobre `cea13f0`; el bot desplegado está en `7801061`, con [fachada musical y registro conciliado](docs/guia-arquitectura/modulos/music.md), conservando búsquedas, paginación y continuidad de voz, conservando las correcciones de álbumes/radio. Trinium 02 es el predeterminado; los respaldos son públicos y el privado está apagado. `ENTREGA.json` describe el paquete recibido, no certifica este checkout. Estado y siguiente etapa en [conciliación](docs/guia-arquitectura/CONCILIACION_2026-10-23.md).
 
 # OBEY · Proyecto y guía vigentes
 

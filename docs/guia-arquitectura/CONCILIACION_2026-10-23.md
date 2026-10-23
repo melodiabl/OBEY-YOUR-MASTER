@@ -1,3 +1,5 @@
+> Ampliación posterior: registro efectivo y fachada musical desplegados en `7801061`. [531 prefix, 144 slash y 779 alias](../platform/evidence/commands-loaded-20261023.json), [límites de migración](modulos/music.md). Esta recepción conserva debajo su estado histórico; propietarios globales e instalación del cliente siguen parciales.
+
 # Conciliación de la entrega 0.15 · 23/10/2026
 
 Se recibió el ZIP con SHA256 `8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62`. CRC y 3.908 archivos extraídos verificados; 314.005.881 bytes sin comprimir. Fuente completa en `/home/OBEY_Implementacion_2026-10-23/OBEY_Implementacion`. El ZIP se eliminó después de verificarlo.
