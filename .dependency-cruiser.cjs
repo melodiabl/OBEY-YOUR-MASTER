@@ -30,6 +30,7 @@ module.exports = {
       to: { path: '^handlers/(welcome-configuration|configuration-service|database)[.]js$' } },
   ],
   options: {
+    exclude: { path: '^dashboard/frontend/([.]next|out)/' },
     doNotFollow: { path: 'node_modules' },
     tsPreCompilationDeps: true,
     tsConfig: { fileName: 'tsconfig.welcome.json' },

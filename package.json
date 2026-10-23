@@ -62,6 +62,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "node --watch index.js",
+    "web:dev": "npm run dev --prefix dashboard/frontend",
+    "web:build": "npm run build --prefix dashboard/frontend",
+    "web:typecheck": "npm run typecheck --prefix dashboard/frontend",
     "test": "node --test test/*.test.js",
     "typecheck:welcome": "tsc --project tsconfig.welcome.json",
     "dependencies:welcome": "depcruise --config .dependency-cruiser.cjs --output-type err handlers dashboard slashCommands commands"

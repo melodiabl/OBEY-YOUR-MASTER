@@ -1774,3 +1774,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Desplegar `7801061`: 24 casos temporales/25 originales, 64 hashes y salud HTTP 200; respaldo/reversión y tres tests originales conservados, verificadores retirados.
 - [ ] Conciliar propietarios de las demás capacidades; el inventario no acredita ejecución de todos los comandos.
 - [ ] Migrar accesos SDK restantes, snapshot/cola única y lifecycle a lavalink-client; matriz musical y escucha/dos guilds pendientes.
+
+## Frontend Next.js elegido · primera pantalla
+
+- [x] Preparar paquete aislado con versiones publicadas, lock y build/tipos.
+- [x] Servir /app desde el origen existente y recuperar sesión/servidores con proyección segura; retorno OAuth limitado.
+- [x] Implementar selector, controles musicales básicos en vivo y enlaces a recorridos existentes, con identidad/fuentes actuales.
+- [x] Comprobar seguridad, estados reales, responsive y navegador; conservar tres tests originales y retirar verificadores temporales.
+- [ ] Registrar despliegue/reversión y siguientes pantallas; no declarar migración frontend completa.

@@ -32,5 +32,5 @@ jobs:
       - run: npm run dependencies:welcome
       - run: npm test
       - run: node scripts/obey-assets.js
-      - name: Build runtime image without starting services
+      - name: Build Next.js panel and runtime image without starting services
         run: docker build -t obey-platform-check .

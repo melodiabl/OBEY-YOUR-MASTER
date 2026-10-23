@@ -2,6 +2,8 @@
 
 Estado: propuesta documentada. La lista no es una orden de instalar todo a la vez. La compatibilidad se acepta contra una instalación limpia y el lockfile, no contra el nombre de una versión mayor.
 
+**Decisión del usuario · 23/10/2026:** migrar el frontend a Next.js + React + TypeScript por pantallas. Esta decisión sustituye la preferencia anterior por EJS en las pantallas migradas. Express/CommonJS, OAuth, CSRF, servicios y Socket.IO conservan su responsabilidad. Primera unidad y límites en [migración del panel](../../platform/FRONTEND-NEXT.md); las páginas todavía no migradas continúan funcionando con EJS.
+
 ## Stack objetivo para la primera migración
 
 | Área | Elección | Situación y propósito | Momento |
@@ -10,7 +12,7 @@ Estado: propuesta documentada. La lista no es una orden de instalar todo a la ve
 | Lenguaje | CommonJS + JSDoc comprobado con TypeScript | Mantener ejecución JS actual; añadir comprobación en la capacidad migrada | Piloto |
 | Contratos | Zod 4 | Dependencia nueva propuesta para validar entradas nuevas y derivar tipos | Piloto de bienvenida |
 | Descripción de campos | JSON Schema generado desde el contrato + descriptor de interfaz | No mantener otro esquema de validación manual | Después de validar el contrato |
-| Web | Express/EJS y JavaScript del navegador por módulo | Reutilizar frontend existente y sus flujos | Desde el inicio |
+| Web | Next.js + React + TypeScript; Express sirve el export bajo /app | Reutilizar API, sesión, servicios y flujos existentes; migración gradual de EJS | Primera pantalla del panel |
 | API | HTTP existente; OpenAPI 3.1 como contrato objetivo | Documentar entradas y respuestas reales, no generar handlers de negocio | Con rutas migradas |
 | Persistencia | Mongo/Mongoose y repositorios por capacidad | Conservar datos y CAS existentes; aislar escrituras críticas | Por operación |
 | Jobs | BullMQ/Redis y repositorio actuales | Trabajo durable, reintentos y conciliación de efectos | Solo capacidades con jobs |
@@ -37,7 +39,7 @@ La elección busca un contrato canónico: Zod para forma de entrada; políticas 
 | TypeScript completo desde el inicio | Diferir conversión masiva; primero comprobar una frontera JS | Piloto tipado estable y pipeline de build demostrado |
 | NestJS | Mantener composición por funciones y factories del proyecto | Problema medido que justifique su contenedor, decoradores y migración de adaptadores |
 | Fastify | Mantener Express | Cuello de botella o requisito de plugins demostrado; comparar compatibilidad de sesiones y rutas |
-| React/Next/Vue | Mantener EJS y componentes funcionales reutilizables | Interacciones de producto que la arquitectura actual no pueda sostener razonablemente |
+| React/Next/Vue | Next.js + React elegidos expresamente por el usuario; EJS durante la transición | SSR o servidor Next separado solo cuando una pantalla lo necesite |
 | Prisma/PostgreSQL | Mantener Mongo/Mongoose | Requisito de datos y plan de migración completo, no preferencia estética |
 | Nx/Turborepo/pnpm workspaces | Mantener un paquete mientras no haya varios paquetes reales | Build o distribución de paquetes con consumidores independientes |
 | RabbitMQ/Kafka | Reutilizar BullMQ para jobs; llamadas locales para operaciones síncronas | Volumen, retención o integración que exija otra infraestructura |

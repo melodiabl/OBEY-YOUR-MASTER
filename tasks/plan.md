@@ -1,5 +1,7 @@
 # Plan de implementación de la plataforma OBEY
 
+Decisión del usuario 23/10/2026: frontend Next.js + React + TypeScript. Migración por pantalla bajo /app, conservando backend Express, OAuth, CSRF, servicios, Socket.IO, tipografía y landing. Primera unidad: contexto de sesión/servidores autorizado, selector, estado/controles básicos de música en vivo y accesos a recorridos existentes. Next compila salida estática servida en el mismo origen; el backend mantiene la autoridad. No exige reescribir el bot ni activa un segundo gestor musical. Aceptación: build/tipos, sesión ausente y permiso retirado, sin datos de otras guilds o tokens OAuth, CSRF, desconexión, cambio de servidor, móvil/teclado y navegador real.
+
 Avance activo `7801061`: [registro cargado y fachada musical](../docs/guia-arquitectura/modulos/music.md). Se conciliaron 531 prefix/144 slash/779 alias y se unificaron seek/letras. Siguiente: retirar accesos SDK de join/move/reconnect, dispatchers, diagnóstico y cierre antes de transferir la cola al cliente elegido; P0/P1 globales siguen abiertos.
 
 Auditoría de búsquedas desplegada `ce546e8`: [hallazgos y aceptación](../docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md). Catálogo/selector unificados, páginas, permisos y caché; P0/P1 globales y migración siguen abiertos.

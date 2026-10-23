@@ -10,3 +10,7 @@ databases/
 image-service
 docs/audit
 __pycache__
+
+**/node_modules
+dashboard/frontend/.next
+dashboard/frontend/out

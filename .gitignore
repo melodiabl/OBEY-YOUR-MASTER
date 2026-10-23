@@ -20,3 +20,9 @@ assets/obey/application-emojis.json*
 OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/assets/
 OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/design/
 OBEY_Diseno_Completo_Codex/OBEY_Personaje_Seleccionado/preview/
+
+# Next.js build artifacts; frontend source and lock remain tracked.
+dashboard/frontend/.next/
+dashboard/frontend/out/
+dashboard/frontend/next-env.d.ts
+*.tsbuildinfo

@@ -339,6 +339,8 @@ SPOTIFY_CLIENT_SECRET=
 
 El dashboard web permite configurar el bot desde el navegador con autenticación Discord OAuth2.
 
+El nuevo centro del panel usa **Next.js + React + TypeScript** en `/app/`; configuración, biblioteca y demás recorridos se migran gradualmente desde EJS. Conserva Express, la sesión de Discord y Socket.IO. Docker compila el frontend automáticamente. Para ejecutar el bot directamente desde el checkout, instala el paquete con `npm ci --prefix dashboard/frontend --ignore-scripts` y ejecuta `npm run web:build` antes de arrancar. [Arquitectura, desarrollo y alcance](docs/platform/FRONTEND-NEXT.md).
+
 **Activar el dashboard:**
 
 1. Añade al `.env`: `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `SESSION_SECRET`, `DASHBOARD_BASE_URL`

@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-23",
+  "status": "verified_locally_deployment_pending",
+  "scope": "First Next.js panel screen under /app; other screens remain EJS",
+  "versions": {
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "socket.io-client": "4.8.3"
+  },
+  "verification": {
+    "originalTests": 25,
+    "temporaryContractTests": 12,
+    "browser": {
+      "fixture": true,
+      "productionAccountUsed": false,
+      "results": [
+        {
+          "name": "desktop, same origin assets, font and live state",
+          "pass": true
+        },
+        {
+          "name": "keyboard skip link has visible focus",
+          "pass": true
+        },
+        {
+          "name": "pause ignores rapid duplicate activation and confirms response",
+          "pass": true
+        },
+        {
+          "name": "skip and volume use the existing action contract",
+          "pass": true
+        },
+        {
+          "name": "rapid guild switching cancels older HTTP and socket subscriptions",
+          "pass": true
+        },
+        {
+          "name": "revoked permission clears music and refuses delayed updates",
+          "pass": true
+        },
+        {
+          "name": "disconnect shows a working reconnect action",
+          "pass": true
+        },
+        {
+          "name": "disconnect refuses a late initial HTTP snapshot",
+          "pass": true
+        },
+        {
+          "name": "tablet and 320px layout, native server selector and visible logout",
+          "pass": true
+        },
+        {
+          "name": "normal flows: zero browser warnings/errors and failed assets",
+          "pass": true
+        },
+        {
+          "name": "unknown guild does not display another guild player",
+          "pass": true
+        },
+        {
+          "name": "empty authorized guild list",
+          "pass": true
+        },
+        {
+          "name": "expired session offers safe OAuth return",
+          "pass": true
+        },
+        {
+          "name": "context unavailable has retry and no stale guild data",
+          "pass": true
+        },
+        {
+          "name": "failed action is not automatically repeated",
+          "pass": true
+        },
+        {
+          "name": "action permission denial hides current data",
+          "pass": true
+        },
+        {
+          "name": "real CSRF middleware rejects missing token",
+          "pass": true
+        },
+        {
+          "name": "idle playback has an honest empty state",
+          "pass": true
+        }
+      ],
+      "expectedFailures": [
+        {
+          "status": 401,
+          "path": "/api/panel/context"
+        },
+        {
+          "status": 503,
+          "path": "/api/panel/context"
+        },
+        {
+          "status": 503,
+          "path": "/api/player/100000000000000001/action"
+        },
+        {
+          "status": 403,
+          "path": "/api/player/100000000000000001/action"
+        }
+      ],
+      "uncaughtErrors": []
+    },
+    "viewports": [
+      1440,
+      768,
+      320
+    ],
+    "frontendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "backendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    },
+    "typecheck": true,
+    "welcomeTypes": true,
+    "welcomeBoundaries": true,
+    "localBuild": true,
+    "frontendDockerBuild": true
+  },
+  "screenshots": {
+    "fixturesOnly": true,
+    "desktop": "frontend-next-desktop-20261023.png",
+    "mobile": "frontend-next-mobile-20261023.png"
+  },
+  "limits": [
+    "No authenticated production Discord OAuth journey or listening test",
+    "Only first panel screen migrated; existing settings/library/music screens remain EJS",
+    "Lavalink client and latency acceptance remain separate work"
+  ],
+  "deployment": null
+}

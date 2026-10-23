@@ -21,7 +21,7 @@
 
 <!-- ── SIDEBAR ── -->
 <aside class="sidebar" id="sidebar" aria-label="Navegación del panel">
-  <a href="/panel" class="sidebar-brand">
+  <a href="/app/" class="sidebar-brand">
     <div class="brand-logo" aria-hidden="true">O</div>
     <div>
       <div class="brand-name">OBEY <span>Your Master</span></div>
@@ -35,7 +35,7 @@
   <nav class="sidebar-nav" aria-label="Secciones del panel">
     <span class="nav-sec">Espacio de trabajo</span>
     <% if (user) { %>
-    <a href="/panel" class="nav-link <%= section === 'home' ? 'active' : '' %>" <%- section === 'home' ? 'aria-current="page"' : '' %>>
+    <a href="/app/" class="nav-link <%= section === 'home' ? 'active' : '' %>" <%- section === 'home' ? 'aria-current="page"' : '' %>>
       <i class="fas fa-gauge-high"></i> Panel
     </a>
     <a href="/dashboard" class="nav-link <%= section === 'servers' && !selectedGuild ? 'active' : '' %>" <%- section === 'servers' && !selectedGuild ? 'aria-current="page"' : '' %>>
@@ -94,7 +94,7 @@
 <!-- ── TOPBAR ── -->
 <header class="topbar" id="panel-topbar">
   <div class="topbar-bc">
-    <a href="/panel" aria-label="Panel de control"><i class="fas fa-house" aria-hidden="true"></i></a>
+    <a href="/app/" aria-label="Panel de control"><i class="fas fa-house" aria-hidden="true"></i></a>
     <% if (typeof breadcrumb !== 'undefined' && breadcrumb && breadcrumb.length) { %>
       <% breadcrumb.forEach((bc, i) => { %>
         <span class="sep"><i class="fas fa-chevron-right" style="font-size:9px"></i></span>
