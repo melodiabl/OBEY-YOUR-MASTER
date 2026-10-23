@@ -33,6 +33,11 @@ module.exports = (app, client, { requireAuth, requireFreshGuildPermissions, canM
   }
   const context = req => ({ guildId: req.configurationGuild.id, actorId: req.session.user.id })
   const service = () => client.welcomeConfiguration
+  app.get('/api/guilds/:guildId/modules/:moduleId/editor', ...guarded, wrap(async (req, res) => {
+    const [configuration, destinations] = await Promise.all([service().read(context(req)), service().channels(context(req))])
+    res.json({ configuration, channels: destinations.channels,
+      form: welcomeSettingsForm(normalizeLocale(localeFor(client, req.configurationGuild.id)) === 'en' ? 'en' : 'es') })
+  }))
   app.get('/api/guilds/:guildId/modules', ...guarded, (req, res) => res.json({ modules: client.modules.list().map(manifest => ({
     id: manifest.id, version: manifest.version, capabilities: manifest.capabilities,
     configuration: manifest.configuration || null,

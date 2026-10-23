@@ -4,7 +4,7 @@ Decisión expresa del usuario, 23/10/2026: Next.js con React y TypeScript. La mi
 
 ## Primera pantalla
 
-`/app/` incorpora selector de servidores administrables con OBEY, estado musical en vivo, cola de las cinco siguientes canciones, pausa/reanudación, anterior, siguiente, detener y volumen. Configuración, bienvenida, registros, biblioteca, ayuda y reproductor completo enlazan sus recorridos existentes; esas pantallas siguen usando EJS. La landing continúa en `/`.
+`/app/` incorpora selector de servidores administrables con OBEY, estado musical en vivo, cola de las cinco siguientes canciones, pausa/reanudación, anterior, siguiente, detener y volumen. Configuración y bienvenida incorporan el recorrido descrito abajo. Registros, biblioteca, ayuda y reproductor completo enlazan sus recorridos existentes y siguen usando EJS. La landing continúa en `/`.
 
 El paquete aislado `dashboard/frontend` fija Next 16.4.3, React/React DOM 19.3.1, TypeScript 5.9.3 y Socket.IO Client 4.8.3 en su propio lock. No instala React ni Next entre las dependencias del proceso del bot. Node mínimo del paquete: 22.12.0.
 
@@ -19,6 +19,18 @@ Esta elección permite migrar componentes y rutas de manera gradual sin duplicar
 - Lectura y controles musicales reutilizan las API y Socket.IO existentes. Los POST mantienen CSRF y la comprobación fresca de permisos del backend. No hay segundo player ni cola local.
 - Cambiar de servidor aborta la lectura y elimina la suscripción anterior. Revisiones antiguas se ignoran; una revocación borra los datos y bloquea respuestas tardías hasta verificar de nuevo. Las acciones no se reintentan automáticamente, y los controles se bloquean durante su confirmación o desconexión.
 - El avance de tiempo parte de la posición y velocidad del snapshot del servicio, con interpolación local entre actualizaciones. No modifica el reloj musical canónico ni promete corregir la latencia del proveedor.
+
+## Configuración y bienvenida
+
+La navegación de `/app/` ofrece Resumen, Configuración y Bienvenida. Las vistas se conservan en `?server=ID&view=configuration` y `?server=ID&view=welcome`. La configuración central da acceso a bienvenida, registros y ajustes generales; estos dos últimos conservan sus pantallas existentes. El editor de bienvenida anterior y sus API siguen disponibles por compatibilidad; la navegación compartida dirige a React.
+
+Bienvenida reutiliza `createWelcomeService`, el contrato, el descriptor de campos y los catálogos es/en existentes. No introduce otro repositorio ni otro escritor. Un GET autorizado `/api/guilds/:guildId/modules/welcome/editor` agrupa configuración, canales disponibles y descriptor; así la apertura realiza una comprobación fresca de permisos OAuth en lugar de repetirla en tres peticiones. Las políticas del servicio siguen verificando acceso y canales. Las API de borrador, vista previa y publicación conservan sus rutas y CAS.
+
+El gestor edita canal/mensaje, guarda el borrador y publica después de comparar con lo activo. La vista previa usa datos de ejemplo y no envía mensajes. El límite procede del descriptor generado desde Zod. Publicar revalida el canal y utiliza el identificador de operación del backend. Ante un resultado desconocido se bloquean las escrituras hasta una lectura explícita; se concilia una publicación confirmada por su identificador sin reenviarla automáticamente. Un conflicto conserva la edición y obliga a actualizar/comparar. Un borrador basado en una publicación antigua puede volver a guardarse explícitamente contra la revisión actual.
+
+Cambiar de sección o servidor con edición sin guardar abre una confirmación que distingue edición local, borrador guardado y publicación. Escape conserva la edición y restaura el foco. Durante una escritura se bloquea la navegación interna; lecturas y vistas previas se cancelan al salir. Revocar acceso borra el contenido de bienvenida. Un error CSRF conserva la edición y requiere reabrir la sesión; actualizar solo la configuración no vuelve a habilitar escrituras con un token antiguo.
+
+La verificación usa el servicio real con repositorios/políticas de prueba en un servidor aislado; no modifica Mongo ni servidores de usuarios. Evidencia: `evidence/frontend-welcome-20261023.json`. Esta unidad migra canal/mensaje/borrador/revisión de bienvenida, no tarjetas, DM, despedida ni los demás ajustes generales.
 
 ## Desarrollo y compilación
 
@@ -36,6 +48,6 @@ El arranque normal del bot sirve el resultado en `/app/`. `npm run web:dev` abre
 
 La aceptación de esta unidad comprende compilación limpia local y Docker, tipos, pruebas originales, autorización HTTP/CSRF, descarte de revisiones antiguas, navegador con desconexión/revocación/cambio de servidor y disposición a 1440/768/320 px. Las comprobaciones usan un servidor local aislado y no una cuenta Discord real; la aceptación OAuth autenticada y la escucha real siguen pendientes del recorrido del usuario.
 
-El siguiente recorrido web es configuración/bienvenida, reutilizando el contrato y servicio actuales; después biblioteca/Me gusta y reproductor completo. No cerrar T10/T16/T17 globalmente con esta pantalla ni dar por migrado todo EJS. La migración musical a lavalink-client, setups y logs conservan sus pendientes en el plan maestro.
+El siguiente recorrido web es biblioteca/Me gusta y después reproductor completo. Configuración general, tarjetas y los otros ajustes de bienvenida siguen sus tareas de dominio. No cerrar T10/T16/T17 globalmente con esta pantalla ni dar por migrado todo EJS. La migración musical a lavalink-client, setups y logs conservan sus pendientes en el plan maestro.
 
 La evidencia de verificación y el resultado operativo se registran en `evidence/frontend-next-20261023.json` y en el checkpoint vigente. Los verificadores temporales se retiran al cerrar la entrega, conservando los tres archivos originales de tests.

@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-23",
+  "status": "verified_deployment_pending",
+  "scope": "React configuration navigation and welcome channel/message editor; other settings remain on existing screens",
+  "verification": {
+    "originalTests": 25,
+    "temporaryContractTests": 10,
+    "browser": {
+      "fixture": true,
+      "productionAccountUsed": false,
+      "realWelcomeService": true,
+      "results": [
+        {
+          "name": "authorized welcome load, server descriptor and visible channels",
+          "pass": true
+        },
+        {
+          "name": "preview renders variables as text and performs no publication",
+          "pass": true
+        },
+        {
+          "name": "saving a draft keeps published settings unchanged",
+          "pass": true
+        },
+        {
+          "name": "publication is explicit and rapid duplicate clicks publish once",
+          "pass": true
+        },
+        {
+          "name": "saved draft is recovered after reload",
+          "pass": true
+        },
+        {
+          "name": "dirty navigation modal keeps edits, supports Escape and restores focus",
+          "pass": true
+        },
+        {
+          "name": "confirming server change discards only unsaved edits and keeps saved draft",
+          "pass": true
+        },
+        {
+          "name": "switching during slow load ignores the previous server response",
+          "pass": true
+        },
+        {
+          "name": "normal flows have no browser warnings/errors or failed assets",
+          "pass": true
+        },
+        {
+          "name": "unknown draft save blocks writes until explicit reconciliation",
+          "pass": true
+        },
+        {
+          "name": "unknown publication reconciles operation id without a duplicate publish",
+          "pass": true
+        },
+        {
+          "name": "concurrent change preserves local input and requires refresh before saving",
+          "pass": true
+        },
+        {
+          "name": "outdated saved draft can be reviewed and saved against current revision",
+          "pass": true
+        },
+        {
+          "name": "field validation focuses invalid message and preserves edits",
+          "pass": true
+        },
+        {
+          "name": "channel permission error keeps draft and allows correction",
+          "pass": true
+        },
+        {
+          "name": "revoked authorization clears current and draft data",
+          "pass": true
+        },
+        {
+          "name": "expired session clears welcome content",
+          "pass": true
+        },
+        {
+          "name": "changed CSRF session cannot be bypassed by a config refresh",
+          "pass": true
+        },
+        {
+          "name": "pending write prevents navigation and duplicate saving",
+          "pass": true
+        },
+        {
+          "name": "server locale and contract copy are preserved",
+          "pass": true
+        },
+        {
+          "name": "no available channels permits explicit disabling of channel delivery",
+          "pass": true
+        },
+        {
+          "name": "320px and tablet layout, keyboard focus and settings navigation",
+          "pass": true
+        }
+      ],
+      "expectedHttpFailures": [
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/draft",
+          "status": 503
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/publish",
+          "status": 503
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/draft",
+          "status": 409
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/draft",
+          "status": 400
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/publish",
+          "status": 403
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/editor",
+          "status": 403
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/editor",
+          "status": 401
+        },
+        {
+          "path": "/api/guilds/100000000000000001/modules/welcome/draft",
+          "status": 403
+        }
+      ],
+      "uncaughtErrors": []
+    },
+    "viewports": [
+      1440,
+      768,
+      320
+    ],
+    "localBuild": true,
+    "welcomeTypes": true,
+    "welcomeBoundaries": true,
+    "editorFreshPermissionChecks": 1,
+    "frontendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "backendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "limits": [
+    "No production authenticated OAuth or actual member-join test",
+    "Welcome cards/DM/farewell and general settings not migrated",
+    "Music SDK/queue migration remains separate"
+  ],
+  "deployment": null
+}

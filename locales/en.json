@@ -1090,7 +1090,9 @@
       "invalidMessage": "Check this message; it allows up to {limit} characters.",
       "invalidChannel": "Choose a valid channel or disable delivery.",
       "fieldErrorSummary": "Review the highlighted fields before continuing.",
-      "invalidSession": "The editing session changed. Keep your changes and reopen the page before saving."
+      "invalidSession": "The editing session changed. Keep your changes and reopen the page before saving.",
+      "reverify": "Verify access again",
+      "noChannels": "No text channels are available for this configuration."
     }
   },
   "setup": {

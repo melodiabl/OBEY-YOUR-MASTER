@@ -1090,7 +1090,9 @@
       "invalidMessage": "Revisa este mensaje; admite hasta {limit} caracteres.",
       "invalidChannel": "Selecciona un canal válido o desactiva el envío.",
       "fieldErrorSummary": "Revisa los campos indicados antes de continuar.",
-      "invalidSession": "La sesión de edición cambió. Conserva tus cambios y vuelve a abrir la página antes de guardar."
+      "invalidSession": "La sesión de edición cambió. Conserva tus cambios y vuelve a abrir la página antes de guardar.",
+      "reverify": "Volver a verificar",
+      "noChannels": "No hay canales de texto disponibles para esta configuración."
     }
   },
   "setup": {

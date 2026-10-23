@@ -1785,3 +1785,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 
 - [ ] Migrar configuración/bienvenida al nuevo frontend con el contrato/servicio actuales y aceptación de guardado, permisos y errores.
 - [ ] Continuar biblioteca/Me gusta y reproductor completo; aceptación OAuth/escucha real y tareas musicales globales siguen abiertas.
+
+## Frontend · configuración y bienvenida
+
+- [ ] Añadir navegación de configuración/bienvenida en /app sin mezclar el asistente con música.
+- [ ] Consumir descriptor y servicio existentes: canales visibles, límites del contrato, borrador, vista previa, revisión y publicación CAS.
+- [ ] Proteger cambios locales y operaciones pendientes al navegar; recuperación explícita de conflictos/resultados inciertos, sin reintento automático de publicación.
+- [ ] Verificar acceso retirado, dos servidores, errores de campo, móvil/teclado y artefacto Docker; retirar verificadores temporales y conservar tres tests originales.
+- [ ] Desplegar con respaldo/reversión y registrar el alcance; otros ajustes EJS y matriz global permanecen pendientes.
