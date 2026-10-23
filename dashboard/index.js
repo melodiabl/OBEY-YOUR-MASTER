@@ -11,6 +11,8 @@ const { freshGuildPermissions } = require('./permissions')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth, establishSession, dashboardReturnTo } = require('./auth')
+const { createLanguageSettings } = require('../handlers/language-settings')
+const { availableLanguages } = require('../handlers/setup-language')
 
 module.exports = async client => {
   const app    = express()
@@ -350,7 +352,11 @@ module.exports = async client => {
     try { logsConfiguration = await require('../handlers/logs/configuration').createLogConfiguration(client,
       { guildId: guild.id, actorId: req.session.user.id }, require('../handlers/setup-logs').logSetupDefinition().fields).read() }
     catch (error) { return res.status(error.code === 'setup_denied' ? 403 : 503).json({ error: error.code === 'setup_denied' ? 'setup_denied' : 'setup_storage' }) }
-    const settings = { ...(client.settings.get(guild.id) || {}), welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
+    let language
+    try { language = await createLanguageSettings(client.settings, () => Boolean(client._shuttingDown)).read(guild.id) }
+    catch { return res.status(503).json({ error: 'language_storage' }) }
+    const settings = { ...(client.settings.get(guild.id) || {}), language: language.language, languageRevision: language.revision,
+      welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
     const logActor = guild.members.cache.get(req.session.user.id)
     const visibleLogChannels = allCh.filter(channel => channel.permissionsFor(logActor)?.has(PermissionFlagsBits.ViewChannel))
@@ -359,6 +365,8 @@ module.exports = async client => {
       user:     req.session.user,
       guild:    { id: guild.id, name: guild.name, icon: guild.iconURL(), memberCount: guild.memberCount },
       settings,
+      languages: availableLanguages(client),
+      languageSaved: req.query.languageSaved === '1',
       logsConfiguration,
       logDestinationChannels: visibleLogChannels.filter(channel => [0, 5].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
       logSourceChannels: visibleLogChannels.filter(channel => [0, 2, 4, 5, 13, 15, 16].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
@@ -382,13 +390,28 @@ module.exports = async client => {
       return res.status(403).json({ error: 'No permission' })
 
     const b     = req.body
+    if (b._intent === 'language') {
+      if (Object.keys(b).some(key => !['_intent', 'language', 'languageRevision', '_csrf'].includes(key)) ||
+          !availableLanguages(client).some(item => item.code === b.language))
+        return res.status(400).json({ error: 'language_invalid' })
+      try {
+        await createLanguageSettings(client.settings, () => Boolean(client._shuttingDown))
+          .save(guild.id, b.language, b.languageRevision)
+        return res.redirect(303, `/dashboard/${guild.id}?languageSaved=1`)
+      } catch (error) {
+        const codes = { language_invalid: 400, language_conflict: 409, language_unavailable: 503, language_storage: 503 }
+        const code = Object.hasOwn(codes, error?.code) ? error.code : 'language_storage'
+        return res.status(codes[code]).json({ error: code })
+      }
+    }
+    if (Object.hasOwn(b, 'language') || Object.hasOwn(b, 'languageRevision'))
+      return res.status(409).json({ error: 'language_configuration_moved', configurationUrl: `/dashboard/${guild.id}` })
     if (['modLogChannel', 'log_messages', 'log_members', 'log_moderation', 'log_voice', 'log_server'].some(key => Object.hasOwn(b, key)))
       return res.status(409).json({ error: 'logs_configuration_moved', configurationUrl: `/dashboard/${guild.id}?tab=logs` })
     const patch = {}
 
     // General
     if (b.prefix)                patch.prefix   = String(b.prefix).slice(0, 5)
-    if (b.language)              patch.language = ['es','en'].includes(b.language) ? b.language : 'es'
     if (b.memberCount !== undefined) patch.memberCount = b.memberCount || null
     patch.autoEmbed = b.autoEmbed === 'on'
     patch.autoMeme  = b.autoMeme  === 'on'
@@ -441,7 +464,6 @@ module.exports = async client => {
     // Build bot-format paths
     const botPatch = {}
     if (patch.prefix   !== undefined) botPatch.prefix   = patch.prefix
-    if (patch.language !== undefined) botPatch.language = patch.language
     if (patch.leaveChannel   !== undefined) botPatch['leave.channel']   = patch.leaveChannel   || 'nochannel'
     if (patch.leaveMessage   !== undefined) botPatch['leave.msg']       = patch.leaveMessage
     if (patch.muteRole       !== undefined) botPatch['mute.roleId']     = patch.muteRole       || null
@@ -462,7 +484,6 @@ module.exports = async client => {
     for (const [key, value] of Object.entries({ ...patch, ...botPatch })) s.set(gid, value, key)
 
     if (patch.prefix   !== undefined) s.set(gid, patch.prefix,   'prefix')
-    if (patch.language !== undefined) s.set(gid, patch.language, 'language')
     if (patch.leaveChannel   !== undefined) s.set(gid, patch.leaveChannel   || 'nochannel', 'leave.channel')
     if (patch.leaveMessage   !== undefined) s.set(gid, patch.leaveMessage,   'leave.msg')
     if (patch.muteRole       !== undefined) s.set(gid, patch.muteRole        || null, 'mute.roleId')

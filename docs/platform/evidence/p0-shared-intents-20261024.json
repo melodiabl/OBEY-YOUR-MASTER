@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-24",
+  "phase": "P0",
+  "status": "local_verification_passed_deployment_pending",
+  "inventory": "../shared-intents.json",
+  "coverage": {
+    "reviewedGroups": 9,
+    "commandEntriesReviewed": 25,
+    "httpRoutesReviewed": 19,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 650,
+    "remainingHttpRoutes": 76
+  },
+  "change": "Language setup, slash and web now use the same awaited language-settings CAS; supported catalog aligned; web language form isolated from other guild settings",
+  "regressions": {
+    "baselineCasesPassed": 3,
+    "baselineCasesFailed": 11,
+    "fixedCasesPassed": 14,
+    "fixedCasesFailed": 0,
+    "originalTestsPassed": 25,
+    "originalTestFiles": 3,
+    "storage": "synthetic model through real SyncMap and real language-settings implementation",
+    "webHandler": "actual dashboard handler extracted from source AST, no reimplementation"
+  },
+  "browser": {
+    "browser": "Chrome/151.0.7922.34",
+    "fullEjsRendered": true,
+    "supportedCatalog": true,
+    "selectedLanguagePreserved": true,
+    "formOwnershipVerified": true,
+    "csrfIncluded": true,
+    "csrfForgeryStatus": 403,
+    "mobileLanguageControlFits": true,
+    "saveRedirectVerified": true,
+    "staleSecondTabRejected": true,
+    "observedSyntheticWrites": 1,
+    "realDiscordOrDatabase": false,
+    "mcpFallback": "DevTools MCP root Chrome startup failed; isolated local Chromium via CDP"
+  },
+  "types": true,
+  "dependencyBoundaries": true,
+  "remaining": [
+    "Other shared intents and policies across current catalog",
+    "G01/G02 global acceptance",
+    "P1 single-queue client migration and music acceptance",
+    "Authenticated user walkthrough"
+  ],
+  "deployment": null
+}

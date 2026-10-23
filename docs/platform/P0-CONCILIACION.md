@@ -35,3 +35,13 @@ Se retiran seis verificadores/operadores temporales y dos paquetes aislados, con
 Revisar el vínculo de intenciones compartidas prefix/slash/web con sus políticas, servicios y stores legacy, y registrar las diferencias deliberadas o su tarea de migración. Esta revisión conserva G01/G02 parciales; no saltar al rediseño del reproductor ni marcar todas las operaciones como aceptadas por cargar sus exports. Después se aborda P1 conforme a su matriz musical.
 
 [Resultados y evidencia de la entrega](evidence/p0-reconciliation-20261023.json). Los verificadores temporales se retiran al terminar; se conservan los tres archivos originales de tests. No hay push ni ejecución de comandos/eventos/voz de prueba.
+
+## Intenciones compartidas · revisión del 24/10/2026
+
+El [mapa revisado](shared-intents.json) traza nueve grupos: idioma, prefijo, corazones, playlists, bienvenida, logs, ayuda, advertencias y pagos. Son 25 entradas y 19 rutas; no se extrapola esa revisión a las 650 entradas y 76 rutas restantes. Se distinguen propietario compartido observado, divergencia registrada y comportamiento corregido en aislamiento. Referencias e IDs se validan en el CI existente.
+
+Se corrige idioma: setup, `/config idioma` y formulario web delegan en `createLanguageSettings`. Se elimina el write directo de slash/web, se espera la persistencia condicional y se rechaza una revisión antigua. Slash comprueba acceso fresco antes de guardar y ofrece el catálogo soportado es/en/de/in. El panel conserva el idioma actual y guarda esa preferencia mediante su propio botón/formulario, sin modificar otros ajustes; conserva CSRF y devuelve conflicto si cambió desde otro panel. Las restricciones actuales de acceso de cada interfaz se mantienen explícitas en el mapa.
+
+La revisión también localiza historias de advertencias incompatibles entre prefix y slash (T35), mutaciones de playlists separadas (T19/T20), validación/confirmación de prefijo divergente (T12) y transferencias económicas sin una autoridad atómica compartida (T46). Se conservan datos y tareas de migración; no se intenta resolverlas sustituyendo masivamente el negocio legacy durante el inventario.
+
+Catorce casos aislados, 25 originales, tipos y fronteras pasan. El formulario EJS completo se recorrió en Chromium con estado sintético: catálogo, selección, formularios separados, CSRF, guardado confirmado y rechazo de una segunda pestaña antigua; control visible en móvil. [Evidencia y límites](evidence/p0-shared-intents-20261024.json). G01/G02 y el recorrido autenticado real continúan abiertos.

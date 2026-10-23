@@ -60,6 +60,13 @@ jobs:
           const routes = new Set(inventory.routes.map(route => route.id))
           assert.equal(routes.size, inventory.routes.length)
           for (const route of inventory.routes) assert.equal(inventory.owners[route.owner].kind, 'current-http-adapter')
+          const review = require('./docs/platform/shared-intents.json'), intents = new Set()
+          for (const intent of review.reviewedIntents) {
+            assert(!intents.has(intent.id)); intents.add(intent.id)
+            for (const id of intent.commands) assert(ids.has(id), `Unknown reviewed command: ${id}`)
+            for (const id of intent.routes) assert(routes.has(id), `Unknown reviewed route: ${id}`)
+          }
+          assert.equal(review.coverage.reviewedGroups, intents.size)
           const client = { commands, aliases: aliases.aliases, slashCommands: new Map(), allCommands: [], settings: {}, guilds: { cache: new Map() } }
           const music = require('./handlers/music/manifest')(client)
           require('./handlers/configuration')(client)

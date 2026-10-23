@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="/css/log-settings.css">
 
 <!-- Saved/error alert -->
+<% if (typeof languageSaved !== 'undefined' && languageSaved) { %>
+  <div class="alert alert-success" role="status" style="margin-bottom:14px">Idioma guardado correctamente.</div>
+<% } %>
 <% if (typeof saved !== 'undefined' && saved) { %>
   <div class="alert alert-success" id="saved-alert" style="margin-bottom:14px">
     <i class="fas fa-check-circle"></i> Configuración guardada correctamente.
@@ -73,12 +76,17 @@
               <input type="text" name="prefix" value="<%= settings.prefix || '!' %>" maxlength="5" class="form-input sm">
             </div>
             <div class="form-group">
-              <label class="form-label">Idioma</label>
-              <span class="form-help">Idioma del bot en este servidor</span>
-              <select name="language" class="form-select">
-                <option value="es" <%= (settings.language||'es')==='es'?'selected':'' %>>Español</option>
-                <option value="en" <%= settings.language==='en'?'selected':'' %>>English</option>
+              <label class="form-label" for="guild-language">Idioma</label>
+              <span class="form-help" id="guild-language-help">El idioma se guarda con su propio botón.</span>
+              <select id="guild-language" name="language" form="language-settings-form" class="form-select" aria-describedby="guild-language-help" required>
+                <% if (!languages.some(item => item.code === settings.language)) { %>
+                  <option value="" selected disabled>Idioma actual no disponible: <%= settings.language %></option>
+                <% } %>
+                <% languages.forEach(item => { %>
+                  <option value="<%= item.code %>" <%= settings.language===item.code?'selected':'' %>><%= item.name %></option>
+                <% }) %>
               </select>
+              <button type="submit" form="language-settings-form" class="btn btn-p btn-sm">Guardar idioma</button>
             </div>
           </div>
 
@@ -478,6 +486,10 @@
 </div><!-- end settings-layout -->
 </form>
 <form id="logs-settings-form" method="POST" action="/dashboard/<%= guild.id %>/logs" data-config-url="/api/guilds/<%= guild.id %>/logs/config" hidden></form>
+<form id="language-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
+  <input type="hidden" name="_intent" value="language">
+  <input type="hidden" name="languageRevision" value="<%= settings.languageRevision %>">
+</form>
 <script src="/js/log-settings.js" defer></script>
 
 <!-- Save bar -->

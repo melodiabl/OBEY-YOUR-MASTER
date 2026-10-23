@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "phase": "P0",
+  "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
+  "inventory": "operation-ownership.json",
+  "reviewedIntents": [
+    {
+      "id": "configuration.language.set",
+      "commands": [
+        "prefix:setup-language",
+        "slash:config.idioma"
+      ],
+      "routes": [
+        "GET /dashboard/:guildId",
+        "POST /dashboard/:guildId"
+      ],
+      "interactions": [
+        "language_save",
+        "language_reset"
+      ],
+      "service": "handlers/language-settings.js#createLanguageSettings",
+      "store": "client.settings.model (Guild.language), shared SyncMap exclusive queue and cache patch",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member authenticated by Gateway or OAuth; actor ID from interaction/session",
+      "permissions": {
+        "discord": "Administrator plus fresh member/channel/bot access at save",
+        "web": "existing owner/Administrator/ManageGuild gate plus fresh OAuth guild permissions and CSRF"
+      },
+      "permissionDifference": "Preserve existing narrower Discord setup access; no new privilege grants",
+      "parameters": {
+        "language": [
+          "es",
+          "en",
+          "de",
+          "in"
+        ],
+        "availableOnly": "loaded client.la catalogs",
+        "expectedRevision": "SHA256 snapshot from persisted language"
+      },
+      "confirmation": "explicit setup Save, slash invocation or separate web Guardar idioma",
+      "result": "success only after awaited atomic conditional persistence; failure/conflict never reports success",
+      "errors": {
+        "invalid": 400,
+        "conflict": 409,
+        "storageOrStopping": 503,
+        "missingSessionOrAccess": "existing authentication/authorization middleware"
+      },
+      "cooldown": "existing Discord dispatch cooldown; web uses existing dashboard middleware",
+      "idempotency": "CAS rejects stale retry; unchanged value with matching revision is a no-op; no durable cross-transport operation receipt",
+      "effects": [
+        "update Guild.language",
+        "publish committed language to cache when no newer legacy cache write exists"
+      ],
+      "i18n": "setup.language.* in es/en; other loaded legacy languages use existing Spanish UI fallback",
+      "material": "native Discord embed and existing dashboard settings card",
+      "recovery": "read current persisted revision after uncertain result; no blind retry",
+      "evidence": "evidence/p0-shared-intents-20261024.json",
+      "remaining": "Authenticated real Discord/OAuth walkthrough; durable cross-transport receipt remains T12/T13"
+    },
+    {
+      "id": "configuration.prefix.set",
+      "commands": [
+        "prefix:prefix",
+        "slash:config.prefix"
+      ],
+      "routes": [
+        "POST /dashboard/:guildId"
+      ],
+      "service": null,
+      "store": "client.settings SyncMap prefix",
+      "status": "divergence_recorded",
+      "finding": "All write the same field independently. Discord rejects length >5; web truncates to5, whitespace validation differs. Cache-first background writes can acknowledge before persistence.",
+      "nextTask": "T12",
+      "phase": "P2"
+    },
+    {
+      "id": "music.likes.set",
+      "commands": [
+        "prefix:like",
+        "slash:favoritos.like"
+      ],
+      "routes": [
+        "POST /api/music/like"
+      ],
+      "interactions": [
+        "mp_like"
+      ],
+      "service": "handlers/music/likes.js#setLiked (toggleLike delegates to setLiked); music database.setLikedSong delegates to the same owner",
+      "store": "LikedSongsSchema, personal userId and stable recording key",
+      "status": "shared_owner_observed",
+      "finding": "Discord hearts toggle current recording; web can set an explicit desired state for library removal. These input differences preserve the same personal ownership.",
+      "nextTask": "T19 / P1 acceptance"
+    },
+    {
+      "id": "music.playlists.manage",
+      "commands": [
+        "prefix:playlist",
+        "slash:playlist.add",
+        "slash:playlist.create",
+        "slash:playlist.delete",
+        "slash:playlist.list",
+        "slash:playlist.play",
+        "slash:playlist.share",
+        "slash:playlist.show"
+      ],
+      "routes": [
+        "GET /api/playlist/list",
+        "GET /api/playlist/view/:playlistId",
+        "POST /api/playlist/create",
+        "POST /api/playlist/add",
+        "POST /api/playlist/remove",
+        "POST /api/playlist/delete"
+      ],
+      "service": "handlers/music/prefix-compat.js delegates supported prefix actions to slash adapters; web calls handlers/music/database.js",
+      "store": "PlaylistSchema",
+      "status": "divergence_recorded",
+      "finding": "Same persisted collection, separate mutation logic and validation; prefix does not expose add and defaults share differently. Schema sharing does not establish one operation owner or concurrent-edit safety.",
+      "nextTask": "T19 / T20",
+      "phase": "P1"
+    },
+    {
+      "id": "welcome.configuration",
+      "commands": [
+        "prefix:setup-welcome",
+        "slash:welcome.canal",
+        "slash:welcome.mensaje"
+      ],
+      "routes": [
+        "GET /api/config/:guildId/welcome",
+        "POST /api/config/:guildId/welcome",
+        "PUT /api/guilds/:guildId/modules/:moduleId/draft",
+        "POST /api/guilds/:guildId/modules/:moduleId/publish"
+      ],
+      "service": "client.welcomeConfiguration; handlers/welcome-configuration.js / handlers/configuration-service.js",
+      "store": "Guild welcome fields and configurationDrafts.welcome",
+      "status": "shared_owner_observed",
+      "finding": "Prefix membership setup and slash use published configuration port; web editor stages drafts before publication. Draft versus direct published write is an explicit existing flow difference, not duplicate published ownership. Extended cards/DM/leave remain separate legacy settings.",
+      "nextTask": "T12 / T18",
+      "phase": "P2"
+    },
+    {
+      "id": "logs.configuration",
+      "commands": [
+        "prefix:setup-logger",
+        "slash:config.logs"
+      ],
+      "routes": [
+        "GET /api/guilds/:guildId/logs/config",
+        "PUT /api/guilds/:guildId/logs/config",
+        "POST /dashboard/:guildId/logs"
+      ],
+      "service": "handlers/logs/configuration.js#createLogConfiguration",
+      "store": "client.settings Guild logs, shared setup-settings CAS",
+      "status": "shared_owner_observed",
+      "finding": "Same service checks fresh ManageGuild membership and channel visibility; prefix metadata still additionally requires Administrator. Retained compatibility restriction is recorded, not declared the desired final policy.",
+      "nextTask": "T38",
+      "phase": "P2"
+    },
+    {
+      "id": "utilities.help.read",
+      "commands": [
+        "prefix:help",
+        "slash:info.help"
+      ],
+      "routes": [
+        "GET /help/:guildId",
+        "GET /api/help/:guildId",
+        "GET /api/help/:guildId/channels"
+      ],
+      "service": "handlers/helpui.js#openHelp and handlers/help.js#helpService",
+      "store": "effective command catalog, permissions/settings",
+      "status": "shared_owner_observed",
+      "finding": "Discord and web share help projections; web context requires dashboard guild access. Read projections do not execute commands or accept all catalog behavior.",
+      "nextTask": "T11"
+    },
+    {
+      "id": "moderation.warn",
+      "commands": [
+        "prefix:warn",
+        "slash:moderation.warn"
+      ],
+      "routes": [],
+      "service": null,
+      "store": {
+        "prefix": [
+          "client.modActions",
+          "client.userProfiles",
+          "client.stats"
+        ],
+        "slash": [
+          "ModerationSchema",
+          "ModerationCounterSchema"
+        ]
+      },
+      "status": "divergence_recorded",
+      "finding": "Different case histories, actor policies and automatic warning consequences. Prefix checks configured admin/cmd roles and triggers threshold actions; slash requires KickMembers and creates a separate Mongo case. No common sanction/case authority.",
+      "nextTask": "T35",
+      "phase": "P2",
+      "migrationRequirement": "Reconcile existing records and policy explicitly before replacing either path; do not silently discard warning history or duplicate sanctions."
+    },
+    {
+      "id": "economy.pay",
+      "commands": [
+        "prefix:pay",
+        "slash:economy.pay"
+      ],
+      "routes": [],
+      "service": null,
+      "store": "client.economy SyncMap guild-user balance",
+      "status": "divergence_recorded",
+      "finding": "Independent check/debit/credit operations; slash validates a safe integer and self-payment, prefix accepts Number. Shared cache does not make two-account transfer atomic or durable.",
+      "nextTask": "T46",
+      "phase": "P6"
+    }
+  ],
+  "coverage": {
+    "reviewedGroups": 9,
+    "commandEntriesReviewed": 25,
+    "httpRoutesReviewed": 19,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 650,
+    "remainingHttpRoutes": 76
+  },
+  "globalG01G02Accepted": false,
+  "limits": [
+    "Source tracing establishes current authorities, not end-to-end acceptance",
+    "Only language write behavior was executed against synthetic state in this increment",
+    "No moderation actions, Discord messages, real database writes or voice joins used for this review"
+  ]
+}
