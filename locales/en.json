@@ -8,6 +8,16 @@
     "commandError": "An error occurred while running the command."
   },
   "music": {
+    "seekLoading": "Checking playback position…",
+    "seekInvalid": "Invalid time. Use seconds, mm:ss or hh:mm:ss.",
+    "seekSecondsInvalid": "Enter a positive whole number of seconds.",
+    "seekUnconfirmed": "The position change could not be confirmed. Please try again.",
+    "seekPosition": "Playback position changed to **{position}**.",
+    "lyricsLoading": "Looking up lyrics for this recording…",
+    "lyricsMissing": "No lyrics were found for this recording.",
+    "lyricsUnavailable": "The lyrics provider is unavailable. Please try again.",
+    "lyricsTrackChanged": "The track changed. Request its lyrics again.",
+    "lyricsStream": "This live stream has no synchronized lyrics.",
     "tracks": "Tracks",
     "albums": "Albums",
     "chooseTrack": "Choose a song…",

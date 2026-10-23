@@ -663,14 +663,27 @@ module.exports = client => {
       const player = client.shoukaku?.players?.get(guildId)
       if (!player) throw new Error('No hay reproductor activo.')
       const state = getState(guildId)
+      const requestEpoch = state.requestEpoch || 0
+      const playbackId = state.playbackId, track = state.currentTrack
       const len = state.currentTrack?.info?.length || state.currentTrack?.length || 0
       if (!Number.isFinite(ms) || ms < 0) throw new Error('Tiempo inválido.')
-      if (state.currentTrack?.info?.isStream || !len) throw new Error('Esta pista no permite adelantar o retroceder.')
+      if (state.currentTrack?.info?.isStream || (state.currentTrack?.info || state.currentTrack)?.isSeekable === false || !len) throw new Error('Esta pista no permite adelantar o retroceder.')
       const pos = Math.max(0, Math.min(len, ms))
       const response = await player.seekTo(pos)
+      if (getState(guildId) !== state || state.currentTrack !== track || state.playbackId !== playbackId ||
+          (state.requestEpoch || 0) !== requestEpoch || response?.playbackId && response.playbackId !== playbackId) {
+        throw new Error('La reproducción cambió. Vuelve a solicitar el cambio de posición.')
+      }
       state.positionChangeAt = Date.now()
       anchorFromNode(state, response, pos, pos)
       emitState(guildId)
+      return { positionMs: Math.round(clock.position(state)), durationMs: len, paused: Boolean(state.paused) }
+    },
+
+    async seekRelative(guildId, offsetMs) {
+      if (!Number.isFinite(offsetMs)) throw new Error('Tiempo inválido.')
+      const state = getState(guildId)
+      return this.seek(guildId, Math.max(0, elapsedForState(guildId, state) + offsetMs))
     },
 
     async setFilter(guildId, preset) {
@@ -836,11 +849,12 @@ module.exports = client => {
     }
   }
 
-  for (const name of ['setNodePreference', 'enqueue', 'setAudioParameter', 'joinChannel', '_playNext', '_recoverFailedTrack', 'skip', 'previous', 'stop', 'pause', 'shuffle', 'jump', 'remove', 'move', 'seek', 'setFilter']) {
+  for (const name of ['setNodePreference', 'enqueue', 'setAudioParameter', 'joinChannel', '_playNext', '_recoverFailedTrack', 'skip', 'previous', 'stop', 'pause', 'shuffle', 'jump', 'remove', 'move', 'seek', 'seekRelative', 'setFilter']) {
     const operation = client.music[name]
     if (typeof operation !== 'function') continue
     client.music[name] = function (guildId, ...args) {
       const state = getState(guildId)
+      const seekRequest = ['seek', 'seekRelative'].includes(name) ? { track: state.currentTrack, playbackId: state.playbackId, epoch: state.requestEpoch || 0 } : null
       if (name === 'stop') {
         recovery.cancel(guildId)
         state.autoplayLookup?.abort()
@@ -849,7 +863,13 @@ module.exports = client => {
       }
       const waitingEnqueue = name === 'enqueue' && state.autoplaySearching && Array.isArray(args[0]) && args[0].length > 0 && args[0].every(allowedMusicTrack)
       if (waitingEnqueue) state.pendingEnqueues = (state.pendingEnqueues || 0) + 1
-      return actions.run(guildId, () => operation.call(this, guildId, ...args))
+      return actions.run(guildId, () => {
+        if (seekRequest && (getState(guildId) !== state || state.currentTrack !== seekRequest.track ||
+            state.playbackId !== seekRequest.playbackId || (state.requestEpoch || 0) !== seekRequest.epoch)) {
+          throw new Error('La reproducción cambió. Vuelve a solicitar el cambio de posición.')
+        }
+        return operation.call(this, guildId, ...args)
+      })
         .finally(() => { if (waitingEnqueue) state.pendingEnqueues-- })
     }
   }

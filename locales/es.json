@@ -8,6 +8,16 @@
     "commandError": "Ocurrió un error al ejecutar el comando."
   },
   "music": {
+    "seekLoading": "Comprobando la posición…",
+    "seekInvalid": "Tiempo inválido. Usa segundos, mm:ss o hh:mm:ss.",
+    "seekSecondsInvalid": "Indica una cantidad entera positiva de segundos.",
+    "seekUnconfirmed": "No pude confirmar el cambio de posición. Vuelve a intentarlo.",
+    "seekPosition": "Posición cambiada a **{position}**.",
+    "lyricsLoading": "Buscando letras de la grabación…",
+    "lyricsMissing": "No encontré letras para esta grabación.",
+    "lyricsUnavailable": "El proveedor de letras no está disponible. Inténtalo de nuevo.",
+    "lyricsTrackChanged": "La canción cambió. Vuelve a solicitar sus letras.",
+    "lyricsStream": "Esta emisión en directo no tiene letras sincronizadas.",
     "tracks": "Pistas",
     "albums": "Álbumes",
     "chooseTrack": "Elige una canción…",
