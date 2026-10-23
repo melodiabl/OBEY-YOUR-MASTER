@@ -1,7 +1,7 @@
 function sessionAuth(refreshSession) {
   return async (req, res, next) => {
     const reject = (reason, error) => req.path?.startsWith('/api/')
-      ? res.status(401).json({ error }) : res.redirect(`/login?reason=${reason}`)
+      ? res.status(401).json({ error }) : res.redirect(`/login?reason=${reason}${req.path === '/app' || req.path?.startsWith('/app/') ? '&returnTo=%2Fapp' : ''}`)
     const user = req.session?.user
     if (!user?.id || !Number.isFinite(user.expires_at)) return reject('not_logged_in', 'not_authenticated')
     if (Date.now() > user.expires_at - 3600000) {
@@ -23,4 +23,5 @@ async function establishSession(req, user) {
   await new Promise((resolve, reject) => req.session.save(error => error ? reject(error) : resolve()))
 }
 
-module.exports = { sessionAuth, establishSession }
+const dashboardReturnTo = value => value === '/app' ? '/app' : '/dashboard'
+module.exports = { sessionAuth, establishSession, dashboardReturnTo }

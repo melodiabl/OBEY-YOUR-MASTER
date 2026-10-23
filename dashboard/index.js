@@ -10,7 +10,7 @@ const { PermissionFlagsBits } = require('discord.js')
 const { freshGuildPermissions } = require('./permissions')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
-const { sessionAuth, establishSession } = require('./auth')
+const { sessionAuth, establishSession, dashboardReturnTo } = require('./auth')
 
 module.exports = async client => {
   const app    = express()
@@ -102,6 +102,7 @@ module.exports = async client => {
     return response.data
   }
   const requireFreshGuildPermissions = freshGuildPermissions(fetchDiscordGuilds)
+  require('./frontend-routes')(app, client, { requireAuth, fetchGuilds: fetchDiscordGuilds })
 
   require('../handlers/music/apiRoutes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
   require('./nodes-routes')(app, client, { canManageGuild, requireAuth, requireFreshGuildPermissions })
@@ -126,6 +127,7 @@ module.exports = async client => {
   app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))
 
   app.get('/login', (req, res) => {
+    req.session.oauthReturnTo = dashboardReturnTo(req.query.returnTo)
     const state = crypto.randomBytes(24).toString('hex')
     req.session.oauthState = state
     const params = new URLSearchParams({
@@ -149,6 +151,7 @@ module.exports = async client => {
     if (error) return res.redirect(`/?error=${encodeURIComponent(error)}`)
     if (!code) return res.redirect('/?error=no_code')
     if (!state || state !== req.session?.oauthState) return res.redirect('/?error=invalid_state')
+    const returnTo = dashboardReturnTo(req.session.oauthReturnTo)
     delete req.session.oauthState
     try {
       const tokenRes = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
@@ -172,7 +175,7 @@ module.exports = async client => {
         expires_at:    Date.now() + expires_in * 1000,
         logged_in_at:  Date.now(),
       })
-      res.redirect('/dashboard')
+      res.redirect(returnTo)
     } catch (e) {
       res.redirect('/?error=auth_failed')
     }
