@@ -4,7 +4,7 @@ Decisión expresa del usuario, 23/10/2026: Next.js con React y TypeScript. La mi
 
 ## Primera pantalla
 
-`/app/` incorpora selector de servidores administrables con OBEY, estado musical en vivo, cola de las cinco siguientes canciones, pausa/reanudación, anterior, siguiente, detener y volumen. Configuración y bienvenida incorporan el recorrido descrito abajo. Registros, biblioteca, ayuda y reproductor completo enlazan sus recorridos existentes y siguen usando EJS. La landing continúa en `/`.
+`/app/` incorpora selector de servidores administrables con OBEY, estado musical en vivo, cola de las cinco siguientes canciones, pausa/reanudación, anterior, siguiente, detener y volumen. Configuración y bienvenida incorporan el recorrido descrito abajo. La biblioteca incorpora el recorrido descrito abajo. Registros, ayuda y reproductor completo enlazan sus recorridos existentes y siguen usando EJS. La landing continúa en `/`.
 
 El paquete aislado `dashboard/frontend` fija Next 16.4.3, React/React DOM 19.3.1, TypeScript 5.9.3 y Socket.IO Client 4.8.3 en su propio lock. No instala React ni Next entre las dependencias del proceso del bot. Node mínimo del paquete: 22.12.0.
 
@@ -32,6 +32,18 @@ Cambiar de sección o servidor con edición sin guardar abre una confirmación q
 
 La verificación usa el servicio real con repositorios/políticas de prueba en un servidor aislado; no modifica Mongo ni servidores de usuarios. Evidencia: `evidence/frontend-welcome-20261023.json`. Esta unidad migra canal/mensaje/borrador/revisión de bienvenida, no tarjetas, DM, despedida ni los demás ajustes generales.
 
+## Biblioteca y Tus Me gusta
+
+`/app/?server=ID&view=library` reúne Tus Me gusta, playlists, recientes personales y top del servidor. Tus Me gusta figura también como playlist automática y privada, calculada desde los mismos corazones de Discord, sin copiar las canciones a una segunda colección. Las entradas compartidas y el resumen enlazan el nuevo recorrido. El listado admite filtro por título/artista y páginas de veinte filas; en móvil todas las secciones permanecen visibles.
+
+Un GET `/api/music/library/:guildId` agrupa las lecturas del repositorio musical existente con una comprobación fresca de permisos. El usuario se deriva de la sesión; el servidor, de su acceso autorizado. Solo se proyectan campos de visualización y claves necesarias para los corazones. El detalle `/api/music/library/:guildId/playlists/:playlistId` valida el ID y la propiedad antes de devolver canciones. Las lecturas del nuevo recorrido activan errores estrictos en el mismo repositorio; las lecturas anteriores conservan su comportamiento. Los datos de otras cuentas/servidores y respuestas tardías se rechazan en el cliente.
+
+Quitar un corazón envía `liked:false`, y su confirmación actualiza el listado y el contador de la colección automática. Los favoritos históricos de proveedores retirados siguen visibles y se pueden quitar, con reproducción deshabilitada. El envío individual y de Tus Me gusta reutiliza las API musicales y el player existentes, sin otro gestor de cola. El backend comprueba sesión, CSRF y permisos de reproducción. Se bloquean activaciones simultáneas; errores y resultados inciertos no disparan reintentos automáticos. Antes de repetir un envío no confirmado, se indica revisar la cola. Si no hay canal de voz, se pide elegirlo desde el reproductor.
+
+El listado toma la fotografía actual al abrir o actualizar, y confirma inmediatamente las retiradas hechas en esta pantalla; no incorpora un canal de eventos de corazones entre clientes. La paginación es de presentación: el repositorio existente carga los favoritos y playlists completos; recientes se limita a cien entradas y top a diez canciones/cinco oyentes. El detalle de playlists es de consulta/reproducción, no un nuevo editor de creación o borrado. El reproductor EJS y los comandos existentes siguen disponibles.
+
+La verificación usa el servicio real de corazones con almacenamiento de prueba aislado y contratos HTTP reales; no escribe datos ni inicia audio en servidores de usuarios. Evidencia: `evidence/frontend-library-20261023.json`. La migración completa del reproductor y del cliente musical sigue pendiente.
+
 ## Desarrollo y compilación
 
 Desde la raíz:
@@ -48,6 +60,6 @@ El arranque normal del bot sirve el resultado en `/app/`. `npm run web:dev` abre
 
 La aceptación de esta unidad comprende compilación limpia local y Docker, tipos, pruebas originales, autorización HTTP/CSRF, descarte de revisiones antiguas, navegador con desconexión/revocación/cambio de servidor y disposición a 1440/768/320 px. Las comprobaciones usan un servidor local aislado y no una cuenta Discord real; la aceptación OAuth autenticada y la escucha real siguen pendientes del recorrido del usuario.
 
-El siguiente recorrido web es biblioteca/Me gusta y después reproductor completo. Configuración general, tarjetas y los otros ajustes de bienvenida siguen sus tareas de dominio. No cerrar T10/T16/T17 globalmente con esta pantalla ni dar por migrado todo EJS. La migración musical a lavalink-client, setups y logs conservan sus pendientes en el plan maestro.
+El siguiente recorrido web es el reproductor completo. Configuración general, tarjetas y los otros ajustes de bienvenida siguen sus tareas de dominio. No cerrar T10/T16/T17 globalmente con esta pantalla ni dar por migrado todo EJS. La migración musical a lavalink-client, setups y logs conservan sus pendientes en el plan maestro.
 
 La evidencia de verificación y el resultado operativo se registran en `evidence/frontend-next-20261023.json` y en el checkpoint vigente. Los verificadores temporales se retiran al cerrar la entrega, conservando los tres archivos originales de tests.

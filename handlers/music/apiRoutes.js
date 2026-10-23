@@ -64,6 +64,23 @@ module.exports = (app, client, {
   }))
 
   // ── Privado (userId SIEMPRE de la sesión) ────────────────────────────────────
+  app.get('/api/music/library/:guildId', apiAuth, requireFreshGuildPermissions, guildAccess, wrap(async (req, res) => {
+    const userId = uid(req), guildId = req.params.guildId
+    const [liked, playlists, recent, tracks, users] = await Promise.all([
+      repository.getLikedSongs(userId), repository.getPlaylists(userId, { strict: true }),
+      repository.getRecentlyPlayed(userId, 100, { strict: true }), repository.getTopTracks(guildId, 10, { strict: true }),
+      repository.getTopUsers(guildId, 5, { strict: true }),
+    ])
+    ok(res, require('./library-view').librarySnapshot(userId, guildId, liked, playlists, recent, tracks, users))
+  }))
+  app.get('/api/music/library/:guildId/playlists/:playlistId', apiAuth, requireFreshGuildPermissions, guildAccess, wrap(async (req, res) => {
+    if (!/^[a-f0-9]{24}$/i.test(req.params.playlistId)) return bad(res, 400, 'invalid_playlist')
+    const playlist = await repository.getPlaylistById(req.params.playlistId, { strict: true })
+    if (!playlist) return bad(res, 404, 'not_found')
+    if (playlist.userId !== uid(req)) return bad(res, 403, 'forbidden')
+    const { playlistSummary, libraryTrack } = require('./library-view')
+    ok(res, { userId: uid(req), guildId: req.params.guildId, playlist: { ...playlistSummary(playlist), tracks: playlist.tracks.map(libraryTrack) } })
+  }))
   app.get('/api/music/liked', apiAuth, wrap(async (req, res) => {
     res.set('Cache-Control', 'private, no-store')
     ok(res, await repository.getLikedSongs(uid(req)))
@@ -96,7 +113,7 @@ module.exports = (app, client, {
     }
     ok(res, { basis: likes.length ? 'likes' : seeds.length ? 'guild_history' : 'none', tracks })
   }))
-  app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await database.getRecentlyPlayed(uid(req), Math.max(1, Math.min(100, Number(req.query.limit) || 20))))))
+  app.get('/api/music/recent', apiAuth, wrap(async (req, res) => ok(res, await repository.getRecentlyPlayed(uid(req), Math.max(1, Math.min(100, Number(req.query.limit) || 20))))))
 
   app.post('/api/music/like', apiAuth, wrap(async (req, res) => {
     const userId = uid(req)                       // ← de la sesión, NO del body
@@ -108,7 +125,7 @@ module.exports = (app, client, {
         isStream !== undefined && typeof isStream !== 'boolean') return bad(res, 400, 'invalid_track')
     if (uri !== undefined && !validURL(uri) || artwork != null && !validURL(artwork) || liked === true && !uri) return bad(res, 400, 'invalid_track')
     const track = { trackId, info: { title, author, uri, artworkUrl: artwork, length, isStream, sourceName } }
-    if (uri && !require('./nodes-config').allowedMusicTrack(track)) return bad(res, 400, 'source_not_allowed')
+    if (liked !== false && uri && !require('./nodes-config').allowedMusicTrack(track)) return bad(res, 400, 'source_not_allowed')
     const result = await repository.setLikedSong(userId, track, liked)
     if (!result) return bad(res, 400, 'invalid_track')
     ok(res, { liked: result.liked })
@@ -133,10 +150,10 @@ module.exports = (app, client, {
   }))
 
   // ── Playlist (privado, con verificación de propiedad) ────────────────────────
-  app.get('/api/playlist/list', apiAuth, wrap(async (req, res) => ok(res, await database.getPlaylists(uid(req)))))
+  app.get('/api/playlist/list', apiAuth, wrap(async (req, res) => ok(res, await repository.getPlaylists(uid(req)))))
 
   app.get('/api/playlist/view/:playlistId', apiAuth, wrap(async (req, res) => {
-    const p = await database.getPlaylistById(req.params.playlistId)
+    const p = await repository.getPlaylistById(req.params.playlistId)
     if (!p) return bad(res, 404, 'not found')
     if (p.userId !== uid(req)) return bad(res, 403, 'forbidden')
     ok(res, p)
@@ -145,14 +162,14 @@ module.exports = (app, client, {
   app.post('/api/playlist/create', apiAuth, wrap(async (req, res) => {
     const { name } = req.body || {}
     if (!name) return bad(res, 400, 'missing name')
-    ok(res, { created: await database.createPlaylist(uid(req), name) })
+    ok(res, { created: await repository.createPlaylist(uid(req), name) })
   }))
 
   // Verifica que la playlist pertenezca al usuario de la sesión antes de modificar
   const ownPlaylist = async (req, res) => {
     const id = req.body?.playlistId
     if (!id) { bad(res, 400, 'missing playlistId'); return null }
-    const p = await database.getPlaylistById(id)
+    const p = await repository.getPlaylistById(id)
     if (!p) { bad(res, 404, 'not found'); return null }
     if (p.userId !== uid(req)) { bad(res, 403, 'forbidden'); return null }
     return p
@@ -160,19 +177,19 @@ module.exports = (app, client, {
 
   app.post('/api/playlist/add', apiAuth, wrap(async (req, res) => {
     if (!(await ownPlaylist(req, res))) return
-    ok(res, { added: await database.addTracksToPlaylist(req.body.playlistId, req.body.tracks) })
+    ok(res, { added: await repository.addTracksToPlaylist(req.body.playlistId, req.body.tracks) })
   }))
 
   app.post('/api/playlist/remove', apiAuth, wrap(async (req, res) => {
     if (!(await ownPlaylist(req, res))) return
-    await database.removeSong(req.body.playlistId, req.body.trackId)
+    await repository.removeSong(req.body.playlistId, req.body.trackId)
     ok(res, { removed: true })
   }))
 
   app.post('/api/playlist/delete', apiAuth, wrap(async (req, res) => {
     const { id } = req.body || {}
     if (!id) return bad(res, 400, 'missing id')
-    ok(res, { deleted: await database.deletePlaylist(uid(req), id) }) // deletePlaylist filtra por userId
+    ok(res, { deleted: await repository.deletePlaylist(uid(req), id) }) // deletePlaylist filtra por userId
   }))
 
   console.log('[Music] Endpoints API montados en el dashboard (/api/music, /api/top, /api/playlist)')

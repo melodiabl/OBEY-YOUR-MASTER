@@ -5,7 +5,7 @@ const labels = { loading: 'Conectando…', ready: 'Estado actualizado', live: 'E
 export function Glyph({ name }: { name: string }) {
   return <img className="glyph" src={`/obey-icons/icon_${name}.svg`} alt="" width={20} height={20} />
 }
-export function MusicPanel({ guild, csrfToken, verify }: { guild: Guild; csrfToken: string; verify: () => void }) {
+export function MusicPanel({ guild, csrfToken, verify, openLibrary }: { guild: Guild; csrfToken: string; verify: () => void; openLibrary?: () => void }) {
   const { state, connection, error, pending, action, reconnect } = useMusic(guild.id, csrfToken)
   const elapsed = useElapsed(state)
   const available = !!state?.active && ['ready', 'live'].includes(connection) && !pending
@@ -32,6 +32,6 @@ export function MusicPanel({ guild, csrfToken, verify }: { guild: Guild; csrfTok
         <div className="queue-heading"><h3>A continuación</h3><a href={`/music/${guild.id}`}>Ver toda la cola</a></div>
         {state.queue.length ? <ol className="queue-preview">{state.queue.map((track, i) => <li key={`${i}:${track.title}`}><span className="queue-number">{i + 1}</span><div><strong>{track.title}</strong><span>{track.author}</span></div><span>{duration(track.length)}</span></li>)}</ol> : <p className="muted queue-empty">No hay más canciones en cola.</p>}
       </>}
-    <footer className="music-footer"><a href={`/music/${guild.id}`}>Reproductor completo</a><a href={`/library/${guild.id}`}>Tu biblioteca y Me gusta</a></footer>
+    <footer className="music-footer"><a href={`/music/${guild.id}`}>Reproductor completo</a><a href={`/app/?server=${guild.id}&view=library`} onClick={event => { if (openLibrary && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); openLibrary() } }}>Tu biblioteca y Me gusta</a></footer>
   </section>
 }

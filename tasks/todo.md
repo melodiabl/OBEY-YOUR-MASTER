@@ -1795,3 +1795,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Desplegar con respaldo/reversión y registrar el alcance; otros ajustes EJS y matriz global permanecen pendientes.
 
 - [ ] Completar ajustes generales y tarjetas/DM/despedida conforme a sus tareas; no cerrar el dominio de bienvenida por este editor.
+
+## Frontend · biblioteca y Me gusta
+
+- [ ] Migrar favoritos, playlists/detalle, recientes y top a React, con Tus Me gusta visible como colección automática de los corazones existentes.
+- [ ] Proyectar solo datos de sesión/servidor autorizado; distinguir fallos de almacenamiento y vacíos, sin alterar las lecturas legacy.
+- [ ] Quitar corazones con estado explícito y reproducción por las API existentes; CSRF, confirmación y bloqueo de duplicados, sin reintentos automáticos.
+- [ ] Verificar búsqueda/páginas, datos de dos usuarios/servidores, errores, móvil/teclado y artefacto Docker; retirar pruebas temporales y conservar tres archivos originales.
+- [ ] Desplegar con respaldo/reversión y actualizar el plan; reproductor completo y demás ámbitos siguen pendientes.

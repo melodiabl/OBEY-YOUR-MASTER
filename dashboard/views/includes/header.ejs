@@ -62,7 +62,7 @@
       ['stats', '/stats/', 'fa-chart-line', 'Estadísticas'],
       ['help', '/help/', 'fa-book-open', 'Ayuda y comandos']
     ].forEach(([id, route, icon, label]) => { %>
-      <a href="<%= ['settings', 'welcome'].includes(id) ? '/app/?server=' + serverPath + '&view=' + (id === 'settings' ? 'configuration' : 'welcome') : route + serverPath %>" class="nav-link <%= section === id ? 'active' : '' %>" <%- section === id ? 'aria-current="page"' : '' %>><i class="fas <%= icon %>" aria-hidden="true"></i><%= label %></a>
+      <a href="<%= ['settings', 'welcome', 'library'].includes(id) ? '/app/?server=' + serverPath + '&view=' + (id === 'settings' ? 'configuration' : id === 'welcome' ? 'welcome' : 'library') : route + serverPath %>" class="nav-link <%= section === id ? 'active' : '' %>" <%- section === id ? 'aria-current="page"' : '' %>><i class="fas <%= icon %>" aria-hidden="true"></i><%= label %></a>
     <% }) %>
     <% } %>
 

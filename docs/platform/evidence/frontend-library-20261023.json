@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-23",
+  "status": "verified_deployment_pending",
+  "scope": "React personal library, automatic likes playlist, playlist detail, recent history and guild top",
+  "verification": {
+    "originalTests": 25,
+    "temporaryContractTests": 12,
+    "browser": {
+      "fixture": true,
+      "productionAccountUsed": false,
+      "realLikedService": true,
+      "results": [
+        {
+          "name": "private likes load, 20-row pagination and existing typography",
+          "pass": true
+        },
+        {
+          "name": "title/artist filtering and honest no-results state",
+          "pass": true
+        },
+        {
+          "name": "explicit unlike ignores rapid duplicates and updates automatic collection count",
+          "pass": true
+        },
+        {
+          "name": "Tus Me gusta appears as a playlist from the same hearts",
+          "pass": true
+        },
+        {
+          "name": "single track and liked collection use existing playback contracts once",
+          "pass": true
+        },
+        {
+          "name": "owned playlists open their actual tracks",
+          "pass": true
+        },
+        {
+          "name": "recent personal activity and server top retain separate scopes",
+          "pass": true
+        },
+        {
+          "name": "keyboard input focus and mobile layout",
+          "pass": true
+        },
+        {
+          "name": "normal flows have zero browser warnings/errors and failed assets",
+          "pass": true
+        },
+        {
+          "name": "retired provider like stays visible, cannot play and can be removed",
+          "pass": true
+        },
+        {
+          "name": "empty likes retain the automatic playlist",
+          "pass": true
+        },
+        {
+          "name": "storage failure is shown as an error, not an empty personal library",
+          "pass": true
+        },
+        {
+          "name": "uncertain unlike is reconciled without toggling the heart back on",
+          "pass": true
+        },
+        {
+          "name": "voice channel is explicitly requested when none is selected",
+          "pass": true
+        },
+        {
+          "name": "failed playback is not retried automatically or by double click",
+          "pass": true
+        },
+        {
+          "name": "revoked permissions clear library and playlist contents",
+          "pass": true
+        },
+        {
+          "name": "expired session and CSRF failure clear private data",
+          "pass": true
+        },
+        {
+          "name": "foreign account response cannot enter the rendered library",
+          "pass": true
+        },
+        {
+          "name": "playlist ownership error never renders its songs",
+          "pass": true
+        },
+        {
+          "name": "late playlist responses are ignored after opening another collection",
+          "pass": true
+        },
+        {
+          "name": "switching servers during load does not mix server tops",
+          "pass": true
+        },
+        {
+          "name": "write in progress blocks internal navigation",
+          "pass": true
+        }
+      ],
+      "expectedHttpFailures": [
+        {
+          "path": "/api/music/library/100000000000000002",
+          "status": 500
+        },
+        {
+          "path": "/api/music/like",
+          "status": 500
+        },
+        {
+          "path": "/api/music/liked/play/100000000000000002",
+          "status": 400
+        },
+        {
+          "path": "/api/player/100000000000000002/add",
+          "status": 503
+        },
+        {
+          "path": "/api/music/library/100000000000000002",
+          "status": 403
+        },
+        {
+          "path": "/api/music/library/100000000000000002",
+          "status": 401
+        },
+        {
+          "path": "/api/music/like",
+          "status": 403
+        },
+        {
+          "path": "/api/music/library/100000000000000002/playlists/123456789012345678901234",
+          "status": 403
+        }
+      ],
+      "uncaughtErrors": []
+    },
+    "viewports": [
+      1440,
+      768,
+      320
+    ],
+    "localBuild": true,
+    "welcomeTypes": true,
+    "welcomeBoundaries": true,
+    "freshPermissionChecksPerBootstrap": 1,
+    "frontendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "backendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "limits": [
+    "No authenticated production OAuth or live playback test",
+    "Likes and playlists are loaded fully by existing repository; client pages contain 20 rows",
+    "Other client heart changes appear after refresh, not a new realtime event stream",
+    "Playlist creation/editing/deletion and full player migration retain existing flows"
+  ],
+  "deployment": null
+}

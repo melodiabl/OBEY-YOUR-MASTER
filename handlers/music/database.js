@@ -138,8 +138,8 @@ class MusicDatabase {
     ).catch(() => {})
   }
 
-  async getTopUsers(guildId, limit = 10) {
-    return UserStats.find({ guildId }).sort({ playCount: -1 }).limit(limit).lean().catch(() => [])
+  async getTopUsers(guildId, limit = 10, options = {}) {
+    return UserStats.find({ guildId }).sort({ playCount: -1 }).limit(limit).lean().catch(error => { if (options.strict) throw error; return [] })
   }
 
   async getTopGuilds(limit = 10, guildIds = null) {
@@ -150,18 +150,18 @@ class MusicDatabase {
     ]).catch(() => [])
   }
 
-  async getTopTracks(guildId, limit = 10) {
+  async getTopTracks(guildId, limit = 10, options = {}) {
     return TrackStats.aggregate([
       { $match: { guildId } },
       { $group: { _id: '$trackId', title: { $first: '$title' }, author: { $first: '$author' },
                   uri: { $first: '$uri' }, artwork: { $first: '$artwork' },
                   playCount: { $sum: '$playCount' } } },
       { $sort: { playCount: -1 } }, { $limit: limit },
-    ]).catch(() => [])
+    ]).catch(error => { if (options.strict) throw error; return [] })
   }
 
-  async getRecentlyPlayed(userId, limit = 10) {
-    return TrackStats.find({ userId }).sort({ lastPlayed: -1 }).limit(limit).lean().catch(() => [])
+  async getRecentlyPlayed(userId, limit = 10, options = {}) {
+    return TrackStats.find({ userId }).sort({ lastPlayed: -1 }).limit(limit).lean().catch(error => { if (options.strict) throw error; return [] })
   }
 
   async clearRecentlyPlayed(userId) {
@@ -173,12 +173,12 @@ class MusicDatabase {
     return Playlist.findOne({ userId, name }).lean().catch(() => null)
   }
 
-  async getPlaylistById(playlistId) {
-    return Playlist.findById(playlistId).lean().catch(() => null)
+  async getPlaylistById(playlistId, options = {}) {
+    return Playlist.findById(playlistId).lean().catch(error => { if (options.strict) throw error; return null })
   }
 
-  async getPlaylists(userId) {
-    return Playlist.find({ userId }).lean().catch(() => [])
+  async getPlaylists(userId, options = {}) {
+    return Playlist.find({ userId }).lean().catch(error => { if (options.strict) throw error; return [] })
   }
 
   async createPlaylist(userId, name) {

@@ -6,7 +6,8 @@ import { Glyph, MusicPanel } from './music-panel'
 import { WelcomeEditor } from './welcome-editor'
 import { SettingsPanel } from './settings-panel'
 import { NavigationConfirm } from './navigation-confirm'
-type PanelView = 'overview' | 'configuration' | 'welcome'
+import { LibraryPanel } from './library-panel'
+type PanelView = 'overview' | 'configuration' | 'welcome' | 'library'
 export function Dashboard() {
   const [context, setContext] = useState<PanelContext | null>(null)
   const [selected, setSelected] = useState<string | null>(null)
@@ -26,7 +27,7 @@ export function Dashboard() {
       if (!Array.isArray(data.guilds) || !data.user?.id || typeof data.csrfToken !== 'string') throw new Error('invalid_context')
       const query = new URLSearchParams(window.location.search)
       const requested = query.get('server'), page = query.get('view')
-      setView(page === 'welcome' || page === 'configuration' ? page : 'overview')
+      setView(page === 'welcome' || page === 'configuration' || page === 'library' ? page : 'overview')
       setContext(data)
       setSelected(requested && data.guilds.some(g => g.id === requested) ? requested : requested ? null : data.guilds[0]?.id || null)
       setUnavailable(!!requested && !data.guilds.some(g => g.id === requested))
@@ -68,8 +69,8 @@ export function Dashboard() {
       <div className="mobile-server"><label htmlFor="server-select">Servidor</label><select id="server-select" disabled={editorState.pending} value={selected || ''} onChange={event => choose(event.target.value)}><option value="" disabled>Elige un servidor</option>{context.guilds.map(item => <option value={item.id} key={item.id}>{item.name}</option>)}</select></div>
       {!context.guilds.length ? <section className="empty-workspace"><h1>Tu comunidad empieza aquí</h1><p>No hay servidores con OBEY que puedas administrar con esta cuenta.</p><a className="primary" href="/dashboard">Ver mis servidores</a></section> : !guild ? <section className="empty-workspace"><h1>{unavailable ? 'Este servidor no está disponible' : 'Elige tu servidor'}</h1><p>Selecciona uno de tus servidores para consultar su música y configuración.</p></section> : <>
         <header className="workspace-heading"><ServerAvatar guild={guild} /><div><h1>{guild.name}</h1><p><span>{guild.memberCount === null ? 'Tu espacio de comunidad' : `${new Intl.NumberFormat('es').format(guild.memberCount)} miembros`}</span><span className="dot-separator" aria-hidden="true">·</span><span>Administración de OBEY</span></p></div></header>
-        <nav className="page-navigation" aria-label="Secciones del panel">{([{ id: 'overview', label: 'Resumen' }, { id: 'configuration', label: 'Configuración' }, { id: 'welcome', label: 'Bienvenida' }] as const).map(page => <button key={page.id} aria-current={view === page.id ? 'page' : undefined} disabled={editorState.pending} onClick={() => choose(guild.id, page.id)}>{page.label}</button>)}</nav>
-        {view === 'overview' ? <div className="workspace-grid"><MusicPanel key={guild.id} guild={guild} csrfToken={context.csrfToken} verify={verify} /><Tools guild={guild} open={page => choose(guild.id, page)} /></div> : view === 'configuration' ? <SettingsPanel guild={guild} openWelcome={() => choose(guild.id, 'welcome')} /> : <WelcomeEditor key={guild.id} guildId={guild.id} csrfToken={context.csrfToken} verify={verify} onEditingChange={editingChanged} />}
+        <nav className="page-navigation" aria-label="Secciones del panel">{([{ id: 'overview', label: 'Resumen' }, { id: 'configuration', label: 'Configuración' }, { id: 'welcome', label: 'Bienvenida' }, { id: 'library', label: 'Biblioteca' }] as const).map(page => <button key={page.id} aria-current={view === page.id ? 'page' : undefined} disabled={editorState.pending} onClick={() => choose(guild.id, page.id)}>{page.label}</button>)}</nav>
+        {view === 'overview' ? <div className="workspace-grid"><MusicPanel key={guild.id} guild={guild} csrfToken={context.csrfToken} verify={verify} openLibrary={() => choose(guild.id, 'library')} /><Tools guild={guild} open={page => choose(guild.id, page)} /></div> : view === 'configuration' ? <SettingsPanel guild={guild} openWelcome={() => choose(guild.id, 'welcome')} /> : view === 'library' ? <LibraryPanel key={guild.id} userId={context.user.id} guild={guild} csrfToken={context.csrfToken} verify={verify} onEditingChange={editingChanged} /> : <WelcomeEditor key={guild.id} guildId={guild.id} csrfToken={context.csrfToken} verify={verify} onEditingChange={editingChanged} />}
 
       </>}
       <footer className="workspace-footer"><span>OBEY Your Master</span><a href={guild ? `/help/${guild.id}` : '/dashboard'}>Ayuda y comandos</a></footer>
@@ -85,7 +86,7 @@ function Tools({ guild, open }: { guild: Guild; open: (page: PanelView) => void 
     { name: 'Configuración', text: 'Canales, permisos y preferencias.', icon: 'settings', url: `/app/?server=${guild.id}&view=configuration`, view: 'configuration' as const },
     { name: 'Bienvenida', text: 'Mensaje, canal y vista previa.', icon: 'profile', url: `/app/?server=${guild.id}&view=welcome`, view: 'welcome' as const },
     { name: 'Registros', text: 'Destinos y categorías de eventos.', icon: 'transcript', url: `/dashboard/${guild.id}?tab=logs` },
-    { name: 'Biblioteca', text: 'Tus listas y canciones favoritas.', icon: 'play', url: `/library/${guild.id}` },
+    { name: 'Biblioteca', text: 'Tus listas y canciones favoritas.', icon: 'play', url: `/app/?server=${guild.id}&view=library`, view: 'library' as const },
   ]
   return <aside className="tools" aria-labelledby="tools-title"><h2 id="tools-title">Configuración del servidor</h2><p>Accede a los ajustes y contenidos del servidor.</p><div className="tool-list">{links.map(link => <a href={link.url} key={link.name} onClick={event => { if ('view' in link && link.view && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); open(link.view) } }}><Glyph name={link.icon} /><div><strong>{link.name}</strong><span>{link.text}</span></div><span aria-hidden="true">›</span></a>)}</div><div className="server-note"><h3>Un mismo servidor</h3><p>Los cambios que hagas aquí también se aplican al bot en Discord.</p></div></aside>
 }
