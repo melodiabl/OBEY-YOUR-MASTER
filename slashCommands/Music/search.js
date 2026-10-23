@@ -1,9 +1,7 @@
+const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
 const { localeFor } = require('../../handlers/i18n')
 // /music search estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes + menú para elegir.
-const { EmbedBuilder } = require('discord.js')
-const { searchDiscordCatalog, enqueueCatalogItem, itemInfo } = require('../../handlers/discordmusiccatalog')
-const { config } = require('../../handlers/music/config')
-const { E, err, catEmbed, catRows, addedEmbed } = require('../../handlers/music/playui')
+const { err } = require('../../handlers/music/playui')
 
 module.exports = {
   name: 'search',
@@ -18,38 +16,9 @@ module.exports = {
     if (!client.music) return interaction.reply({ embeds: [err('Sistema de música no disponible.')], ephemeral: true })
 
     await interaction.deferReply()
-    const results = await searchDiscordCatalog(client, query, { guildId: interaction.guildId }).catch(() => ({ tracks: [], albums: [] }))
-    if (!(results.tracks?.length) && !(results.albums?.length)) {
-      return interaction.editReply({ embeds: [err(`Sin resultados para **${query}**`)] }).catch(() => {})
-    }
+    return searchCatalogPicker({ client, query, actor: interaction.user, guild: interaction.guild,
+      channelId: interaction.channelId, prefix: 'srch', locale: localeFor(client, interaction.guild.id),
+      commandName: 'search', edit: payload => interaction.editReply(payload) })
 
-    let tab = 'tracks'
-    let items = results.tracks || []
-    const fakeMsg = { guild: interaction.guild, author: interaction.user, channel: { id: interaction.channelId } }
-    const reply = await interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, interaction.guild.id)) })
-    const collector = reply.createMessageComponentCollector({ time: 60_000 })
-
-    collector.on('collect', async i => {
-      if (i.user.id !== interaction.user.id) return i.reply({ content: 'No es tu búsqueda.', ephemeral: true }).catch(() => {})
-      if (i.customId.startsWith('srch_tab:')) {
-        await i.deferUpdate(); tab = i.customId.split(':')[1]; items = results[tab] || []
-        return interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, interaction.guild.id)) }).catch(() => {})
-      }
-      if (i.customId === 'srch_cancel') { await i.deferUpdate(); collector.stop('cancel'); return interaction.deleteReply().catch(() => {}) }
-      if (i.customId === 'srch_pick') {
-        const voiceChannel = i.member?.voice?.channel
-        if (!voiceChannel) return i.reply({ embeds: [err('Debes estar en un canal de voz.')], ephemeral: true }).catch(() => {})
-        await i.deferUpdate(); collector.stop('picked')
-        const item = items[parseInt(i.values?.[0] ?? '0')]
-        const info = itemInfo(item)
-        try {
-          const queued = await enqueueCatalogItem(client, fakeMsg, voiceChannel, item)
-          await interaction.editReply({ embeds: [addedEmbed(info, queued, interaction.user.id, localeFor(client, interaction.guild.id))], components: [] }).catch(() => {})
-        } catch (e) {
-          await interaction.editReply({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
-        }
-      }
-    })
-    collector.on('end', (_, reason) => { if (!['cancel', 'picked'].includes(reason)) interaction.editReply({ components: [] }).catch(() => {}) })
   },
 }

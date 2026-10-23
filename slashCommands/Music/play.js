@@ -1,9 +1,9 @@
+const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
 const { localeFor } = require('../../handlers/i18n')
 // /music play estilo Soundy: muestra resultados (🎵 Pistas / 💿 Álbumes) para elegir; URL directa.
 const { EmbedBuilder } = require('discord.js')
-const { searchDiscordCatalog, enqueueCatalogItem, itemInfo } = require('../../handlers/discordmusiccatalog')
 const { config } = require('../../handlers/music/config')
-const { E, err, catEmbed, catRows, addedEmbed, playlistAdded } = require('../../handlers/music/playui')
+const { err, addedEmbed, playlistAdded } = require('../../handlers/music/playui')
 
 const isUrl = s => /^https?:\/\//i.test(s)
 
@@ -22,7 +22,6 @@ module.exports = {
     if (!client.music) return interaction.reply({ embeds: [err('Sistema de música no disponible.')], ephemeral: true })
 
     await interaction.deferReply()
-    const fakeMsg = { guild: interaction.guild, author: interaction.user, channel: { id: interaction.channelId } }
 
     // URL directa
     if (isUrl(query)) {
@@ -45,34 +44,9 @@ module.exports = {
     }
 
     // Nombre → picker con pestañas
-    const results = await searchDiscordCatalog(client, query, { guildId: interaction.guildId }).catch(() => ({ tracks: [], albums: [] }))
-    if (!(results.tracks?.length) && !(results.albums?.length)) {
-      return interaction.editReply({ embeds: [err(`Sin resultados para **${query}**`)] }).catch(() => {})
-    }
-    let tab = 'tracks'
-    let items = results.tracks || []
-    const reply = await interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'pplay', localeFor(client, interaction.guild.id)) })
-    const collector = reply.createMessageComponentCollector({ time: 60_000 })
+    return searchCatalogPicker({ client, query, actor: interaction.user, guild: interaction.guild,
+      channelId: interaction.channelId, prefix: 'pplay', locale: localeFor(client, interaction.guild.id),
+      commandName: 'play', edit: payload => interaction.editReply(payload) })
 
-    collector.on('collect', async i => {
-      if (i.user.id !== interaction.user.id) return i.reply({ content: 'No es tu búsqueda.', ephemeral: true }).catch(() => {})
-      if (i.customId.startsWith('pplay_tab:')) {
-        await i.deferUpdate(); tab = i.customId.split(':')[1]; items = results[tab] || []
-        return interaction.editReply({ embeds: [catEmbed(tab, items, query, localeFor(client, interaction.guild.id))], components: catRows(tab, items, 'pplay', localeFor(client, interaction.guild.id)) }).catch(() => {})
-      }
-      if (i.customId === 'pplay_cancel') { await i.deferUpdate(); collector.stop('cancel'); return interaction.deleteReply().catch(() => {}) }
-      if (i.customId === 'pplay_pick') {
-        await i.deferUpdate(); collector.stop('picked')
-        const item = items[parseInt(i.values?.[0] ?? '0')]
-        const info = itemInfo(item)
-        try {
-          const queued = await enqueueCatalogItem(client, fakeMsg, voiceChannel, item)
-          await interaction.editReply({ embeds: [addedEmbed(info, queued, interaction.user.id, localeFor(client, interaction.guild.id))], components: [] }).catch(() => {})
-        } catch (e) {
-          await interaction.editReply({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
-        }
-      }
-    })
-    collector.on('end', (_, reason) => { if (!['cancel', 'picked'].includes(reason)) interaction.editReply({ components: [] }).catch(() => {}) })
   },
 }

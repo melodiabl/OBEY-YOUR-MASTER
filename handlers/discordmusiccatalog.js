@@ -1,8 +1,8 @@
 // Shim de compatibilidad: los comandos prefix (play/search) siguen llamando
 // searchDiscordCatalog/enqueueCatalogItem, pero ahora todo resuelve vía
-// client.music.search (Lavalink: spsearch→ytmsearch→ytsearch) y LEO solo para álbumes.
+// client.music.search (catálogo combinado Lavalink) y respaldo legado de álbumes.
 const http = require('http')
-const { sameRecording } = require('./music/recordings')
+const { sameRecording, rankMusicTracks, recordingArtist, recordingTitle } = require('./music/recordings')
 
 const CATALOG_LIMIT = 20
 const LEO = 'http://140.245.242.153:8081'
@@ -35,26 +35,22 @@ function toQueueTrack(item, requester) {
 
 function leoGet(path) {
   return new Promise(resolve => {
-    http.get(`${LEO}${path}`, { timeout: 6000 }, r => {
+    const request = http.get(`${LEO}${path}`, { timeout: 1500, signal: AbortSignal.timeout(1500) }, r => {
+      if (r.statusCode !== 200) { r.resume(); return resolve(null) }
       let d = ''
-      r.on('data', c => d += c)
+      r.on('data', c => { d += c; if (Buffer.byteLength(d) > 1000000) { request.destroy(); resolve(null) } })
+      r.on('error', () => resolve(null))
       r.on('end', () => { try { resolve(JSON.parse(d)) } catch { resolve(null) } })
-    }).on('error', () => resolve(null)).on('timeout', () => resolve(null))
+    }).on('error', () => resolve(null)).on('timeout', () => { request.destroy(); resolve(null) })
   })
 }
 
-async function searchDiscordCatalog(client, query, context) {
-  const [result, albumsRaw] = await Promise.all([
-    client.music.search(query, 'Búsqueda', { ...context, multiple: true }).catch(() => null),
-    leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`),
-  ])
-
-  const tracks = (result?.tracks || []).slice(0, CATALOG_LIMIT)
-
+async function legacyAlbums(query) {
+  const albumsRaw = await leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`)
   // LEO /search/albums devuelve también "singles" (1 pista) sin distinguir.
   // Resolvemos cada uno en paralelo para saber su nº de pistas + carátula,
   // y descartamos los de 1 sola pista (esos son tracks, no álbumes reales).
-  const albumsBasic = (Array.isArray(albumsRaw) ? albumsRaw : []).slice(0, 8)
+  const albumsBasic = (Array.isArray(albumsRaw) ? albumsRaw : []).filter(a => /^[A-Za-z0-9]{22}$/.test(a.id)).slice(0, 8)
   const albumsResolved = await Promise.all(albumsBasic.map(async a => {
     const meta  = await leoGet(`/api/resolve?url=https://open.spotify.com/album/${a.id}`).catch(() => null)
     const total = Number(meta?.total) || (meta?.items?.length || 0)
@@ -68,15 +64,32 @@ async function searchDiscordCatalog(client, query, context) {
       totalTracks: total,
     }
   }))
-  const albums = albumsResolved.filter(a => a.totalTracks >= 2)
+  return albumsResolved.filter(a => a.totalTracks >= 2)
+}
+
+async function searchDiscordCatalog(client, query, context = {}) {
+  const [result, legacy] = await Promise.all([
+    client.music.search(query, 'Búsqueda', { ...context, multiple: true }),
+    legacyAlbums(query),
+  ])
+  const limit = Math.max(1, Math.min(50, Number(context.limit) || CATALOG_LIMIT))
+  const tracks = (result?.tracks || []).slice(0, limit)
+  const exact = tracks.filter(track => recordingArtist(itemInfo(track).author) === recordingArtist(query))
+  const artistSearch = new Set(exact.map(track => recordingTitle(itemInfo(track)))).size >= 2
+  const seen = new Set()
+  const albums = [...(result?.albums || []), ...legacy].filter(album => {
+    if (seen.has(album.uri) || artistSearch && recordingArtist(album.author) !== recordingArtist(query)) return false
+    if (!rankMusicTracks([{ info: { title: album.title, author: album.author } }], query).length) return false
+    seen.add(album.uri); return true
+  }).slice(0, 20)
 
   return { tracks, albums, playlists: [] }
 }
 
-async function enqueueCatalogItem(client, message, voiceChannel, item) {
+async function enqueueCatalogItem(client, message, voiceChannel, item, { authorize } = {}) {
   const info   = itemInfo(item)
-  const player = await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
   const state  = client.music.getState(message.guild.id)
+  const epoch = state.requestEpoch || 0
   let tracks
 
   if (info.type === 'album' || info.type === 'playlist') {
@@ -88,8 +101,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
     if (!tracks.length) throw new Error('No se pudieron cargar las pistas de esta colección.')
   } else if (item?.encoded) {
     // Track real de Lavalink — encolar tal cual
-    if (item.info) item.info.requester = message.author?.username || 'Unknown'
-    tracks = [item]
+    tracks = [{ ...item, info: { ...item.info, requester: message.author?.username || 'Unknown', requesterId: message.author?.id } }]
   } else {
     // Item plano sin encoded — resolver por URI o por título
     const q = info.uri || `${info.title || ''} ${info.author || ''}`.trim()
@@ -99,7 +111,17 @@ async function enqueueCatalogItem(client, message, voiceChannel, item) {
     tracks = [first]
   }
 
+  const current = () => !client._shuttingDown && client.music.getState(message.guild.id) === state && (state.requestEpoch || 0) === epoch
+  if (!current()) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')
+  if (authorize) voiceChannel = await authorize()
+  if (!current()) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')
   const wasIdle = !state.currentTrack
+  if (typeof client.music.playCollection === 'function') {
+    await client.music.playCollection(message.guild.id, voiceChannel.id, message.channel.id, tracks, message.author)
+    return { added: tracks.length, isNow: wasIdle, state }
+  }
+  await client.music.joinChannel(message.guild.id, voiceChannel.id, message.channel.id)
+  if (!current()) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')
   await client.music.enqueue(message.guild.id, tracks)
 
   return { added: tracks.length, isNow: wasIdle, state }

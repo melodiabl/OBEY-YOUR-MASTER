@@ -753,39 +753,14 @@ module.exports = async client => {
     const music = client.music
     if (!music) return res.json({ results: [] })
     try {
+      if (typeof query !== 'string' || query.length > 2000) return res.status(400).json({ results: [], error: 'invalid_query' })
       const { normalizePublicTrack } = require('../handlers/music/utils')
-      const LEO = 'http://140.245.242.153:8081'
-
-      function leoGet(path) {
-        return new Promise((resolve, reject) => {
-          http.get(`${LEO}${path}`, { timeout: 6000 }, r => {
-            let d = ''; r.on('data', c => d += c)
-            r.on('end', () => { try { resolve(JSON.parse(d)) } catch { resolve([]) } })
-          }).on('error', () => resolve([])).on('timeout', () => resolve([]))
-        })
-      }
-
-      const [result, albumsRaw] = await Promise.all([
-        music.search(query, req.session.user.username, { guildId }),
-        leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`),
-      ])
-
-      const tracks = (result?.tracks || []).map(t => normalizePublicTrack(t))
-
-      const albumList = Array.isArray(albumsRaw) ? albumsRaw : []
-      const resolved  = await Promise.all(
-        albumList.map(a => leoGet(`/api/resolve?url=https://open.spotify.com/album/${a.id}`))
-      )
-      const albums = albumList.map((a, i) => ({
-        type: 'album', title: a.name, author: a.author,
-        uri: `https://open.spotify.com/album/${a.id}`,
-        artworkUrl: resolved[i]?.artwork || null,
-        sourceName: 'spotify',
-      }))
-
-      res.json({ results: tracks, tracks, albums })
+      const { searchDiscordCatalog } = require('../handlers/discordmusiccatalog')
+      const result = await searchDiscordCatalog(client, query, { guildId, limit: 50 })
+      const tracks = result.tracks.map(t => normalizePublicTrack(t))
+      res.json({ results: tracks, tracks, albums: result.albums })
     } catch (e) {
-      res.json({ results: [], tracks: [], albums: [], error: e.message })
+      res.status(e.code === 'music_search_busy' ? 429 : 503).json({ results: [], tracks: [], albums: [], error: e.code === 'music_search_busy' ? 'search_busy' : 'search_unavailable' })
     }
   })
 

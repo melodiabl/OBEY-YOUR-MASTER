@@ -6,6 +6,8 @@ const { rankMusicTracks, recordingArtist, recordingTitle } = require('./recordin
 const catalogs = new WeakMap()
 const PREFIXES = ['spsearch:', 'ytmsearch:', 'ytsearch:', 'amsearch:']
 const cleanQuery = query => query.replace(/^(?:spsearch|ytmsearch|ytsearch|amsearch):/i, '')
+const creditedArtist = name => String(name || '').normalize('NFC').toLowerCase()
+  .replace(/\s+-\s+topic$|vevo$/i, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
 const spotifyURL = (value, kind) => typeof value === 'string' &&
   new RegExp('^https://open\\.spotify\\.com/' + kind + '/[A-Za-z0-9]{22}$').test(value)
 
@@ -32,6 +34,7 @@ async function collect(client, nodes, query) {
   // Stable source/node order matters: completion time must not decide the winner.
   for (const node of nodes.slice(0, 2)) rows.push(...(successful.find(batch => batch.node === node)?.tracks || []))
   const albums = []
+  let artistIdentity = null
   const exact = rows.filter(track => recordingArtist(track.info?.author) === recordingArtist(phrase))
   const artistSearch = new Set(exact.map(track => recordingTitle(track.info))).size >= 2
   const metadataNodes = successful.filter(batch => batch.node.rest.fetch).sort((a, b) =>
@@ -59,6 +62,7 @@ async function collect(client, nodes, query) {
         .map(item => [item.pluginInfo.url, item])).values()]
       // A name shared by several Spotify identities is not an artist selection.
       const enrich = artistSearch && artists.length === 1 ? [artists[0], ...candidates.slice(0, 1)] : []
+      if (enrich.length) artistIdentity = artists[0].pluginInfo.author
       const expanded = await Promise.all(enrich.map(async item => {
         try {
           const resolved = await bounded(() => metadataNode.node.rest.resolve(item.pluginInfo.url), 2000)
@@ -76,7 +80,14 @@ async function collect(client, nodes, query) {
       }
     } catch { /* LavaSearch is optional; missing plugins retain basic search. */ }
   }
-  const tracks = rankMusicTracks(rows, phrase).slice(0, 50)
+  // Accent folding finds candidates, but cannot establish that ADÉLA and a
+  // homonymous AdELA are the same artist. Anchor uncertain credits to songs
+  // observed in the confirmed catalog, instead of importing their discography.
+  const knownTitles = new Set(rows.filter(track => /^(?:spotify|applemusic)$/.test(track.info?.sourceName || '') &&
+    creditedArtist(track.info.author) === creditedArtist(artistIdentity)).map(track => recordingTitle(track.info)))
+  const tracks = rankMusicTracks(rows.filter(track => !artistIdentity || knownTitles.has(recordingTitle(track.info)) ||
+    String(track.info?.author || '').split(/\s+(?:feat\.?|ft\.?|with|and|x)\s+|[,/&]/i)
+      .some(credit => creditedArtist(credit) === creditedArtist(artistIdentity))), phrase).slice(0, 50)
   if (!tracks.length && !albums.length && failures && !successful.length) throw new Error('No se pudo consultar la música. Reintenta en unos minutos.')
   return { loadType: 'search', tracks, albums, playlistName: null }
 }

@@ -23,7 +23,13 @@ function totalFmt(tracks) { return fmtMs(tracks.reduce((a, t) => a + (t.info?.le
 const err = d => new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(`${E.no} ${d}`, 4096))
 
 // Lista limpia de la categoría activa (pistas o álbumes)
-function catEmbed(tabId, items, query, locale = 'es') {
+function catalogPage(items, page = 0) {
+  const pages = Math.max(1, Math.ceil(items.length / 10))
+  const current = Math.max(0, Math.min(pages - 1, Number.isInteger(page) ? page : 0))
+  return { page: current, pages, offset: current * 10, items: items.slice(current * 10, current * 10 + 10) }
+}
+
+function catEmbed(tabId, items, query, locale = 'es', page = 0) {
   const tab = TABS.find(t => t.id === tabId) || TABS[0]
   if (!items.length) {
     return new EmbedBuilder().setColor(0x4f545c)
@@ -32,35 +38,37 @@ function catEmbed(tabId, items, query, locale = 'es') {
       .setDescription(obeyUi.limit(translate(locale, tab.id === 'albums' ? 'music.noAlbums' : 'music.noTracks'), 4096))
       .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.emptyFooter') }))
   }
-  const first = itemInfo(items[0])
-  const lines = items.slice(0, 10).map((t, i) => {
+  const view = catalogPage(items, page)
+  const first = itemInfo(view.items[0])
+  const lines = view.items.map((t, i) => {
     const info = itemInfo(t)
     const title = (info?.title || '?').slice(0, 55), author = (info?.author || '?').slice(0, 40)
     if (tab.id === 'albums') {
-      return `**${i + 1}.** **[${title}](${info?.uri || ''})**\n┗ ${E.music} ${author}${info.totalTracks ? ` · ${translate(locale, 'music.trackCount', { count: info.totalTracks })}` : ''}`
+      return `**${view.offset + i + 1}.** **[${title}](${info?.uri || ''})**\n┗ ${E.music} ${author}${info.totalTracks ? ` · ${translate(locale, 'music.trackCount', { count: info.totalTracks })}` : ''}`
     }
-    return `**${i + 1}.** **[${title}](${info?.uri || ''})** \`${fmtMs(info?.length)}\`\n┗ ${E.artist} ${author}`
+    return `**${view.offset + i + 1}.** **[${title}](${info?.uri || ''})** \`${fmtMs(info?.length)}\`\n┗ ${E.artist} ${author}`
   })
   return new EmbedBuilder().setColor(config.color.primary)
     .setAuthor(obeyMeta.asAuthor({ name: translate(locale, 'music.resultsFor', { query: query.slice(0, 50) }), iconURL: DISK }))
     .setTitle(obeyUi.limit(`${registry.markup(tab.asset)} ${translate(locale, `music.${tab.id}`)}`, 256))
     .setDescription(obeyUi.limit(lines.join('\n\n'), 4096))
     .setThumbnail(first?.artworkUrl || first?.thumbnail || null)
-    .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.resultsFooter', { count: items.length, category: translate(locale, `music.${tab.id}`).toLowerCase() }) }))
+    .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.resultsPage', { count: items.length, page: view.page + 1, pages: view.pages }) }))
 }
 
-function catRows(tabId, items, cid = 'srch', locale = 'es') {
+function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0) {
+  const view = catalogPage(items, page)
   const rows = []
   if (items.length) {
     rows.push(new ActionRowBuilder().addComponents(
       new StringSelectMenuBuilder().setCustomId(`${cid}_pick`)
         .setPlaceholder(obeyUi.plain(translate(locale, tabId === 'albums' ? 'music.chooseAlbum' : 'music.chooseTrack')))
-        .addOptions(items.slice(0, 10).map((t, i) => {
+        .addOptions(view.items.map((t, i) => {
           const info = itemInfo(t)
           const desc = tabId === 'albums'
             ? `${(info?.author || '?').slice(0, 40)}${info.totalTracks ? ` · ${translate(locale, 'music.trackCount', { count: info.totalTracks })}` : ''}`
             : `${(info?.author || '?').slice(0, 45)} · ${fmtMs(info?.length)}`
-          const o = { label: `${i + 1}. ${info?.title || '?'}`.slice(0, 100), description: desc.slice(0, 100), value: String(i) }
+          const o = { label: `${view.offset + i + 1}. ${info?.title || '?'}`.slice(0, 100), description: desc.slice(0, 100), value: String(view.offset + i) }
           o.emoji = registry.emoji(tabId === 'albums' ? 'icon.album' : 'icon.music')
           return o
         })),
@@ -70,6 +78,10 @@ function catRows(tabId, items, cid = 'srch', locale = 'es') {
     ...TABS.map(tab => new ButtonBuilder().setCustomId(`${cid}_tab:${tab.id}`).setLabel(obeyUi.plain(translate(locale, `music.${tab.id}`))).setEmoji(obeyUi.component(registry.emoji(tab.asset)))
       .setStyle(tab.id === tabId ? ButtonStyle.Primary : ButtonStyle.Secondary)),
     new ButtonBuilder().setCustomId(`${cid}_cancel`).setLabel(obeyUi.plain(translate(locale, 'common.cancel'))).setStyle(ButtonStyle.Danger).setEmoji(obeyUi.component(registry.emoji('icon.close'))),
+  ))
+  if (view.pages > 1) rows.push(new ActionRowBuilder().addComponents(
+    new ButtonBuilder().setCustomId(`${cid}_page:${view.page - 1}`).setLabel(translate(locale, 'common.previous')).setStyle(ButtonStyle.Secondary).setDisabled(view.page === 0),
+    new ButtonBuilder().setCustomId(`${cid}_page:${view.page + 1}`).setLabel(translate(locale, 'common.next')).setStyle(ButtonStyle.Secondary).setDisabled(view.page === view.pages - 1),
   ))
   return rows
 }
@@ -112,4 +124,4 @@ function playlistAdded(result, query, userId, locale = 'es') {
     .setTimestamp()
 }
 
-module.exports = { E, TABS, fmtMs, totalFmt, err, catEmbed, catRows, addedEmbed, playlistAdded, itemInfo }
+module.exports = { E, TABS, fmtMs, totalFmt, err, catEmbed, catRows, catalogPage, addedEmbed, playlistAdded, itemInfo }

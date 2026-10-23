@@ -19,7 +19,8 @@ module.exports = (app, client, {
   const music = () => client.music
   const ok  = (res, data) => res.json({ success: true, data })
   const bad = (res, code, msg) => res.status(code).json({ success: false, error: msg })
-  const wrap = fn => (req, res) => Promise.resolve(fn(req, res)).catch(() => bad(res, 500, 'internal_error'))
+  const wrap = fn => (req, res) => Promise.resolve(fn(req, res)).catch(error =>
+    bad(res, error.code === 'music_search_busy' ? 429 : 500, error.code === 'music_search_busy' ? 'search_busy' : 'internal_error'))
 
   // Requiere sesión del dashboard (OAuth Discord). Devuelve 401 JSON si no.
   const apiAuth = requireAuth
@@ -46,7 +47,8 @@ module.exports = (app, client, {
   app.get('/api/music/search', wrap(async (req, res) => {
     const q = req.query.q
     if (!q) return bad(res, 400, 'missing q')
-    const r = await music().search(String(q), 'WebAPI')
+    if (typeof q !== 'string' || q.length > 2000) return bad(res, 400, 'invalid_query')
+    const r = await music().search(q, 'WebAPI', { multiple: true })
     ok(res, (r?.tracks || []).map(t => require('./utils').normalizePublicTrack(t)))
   }))
 

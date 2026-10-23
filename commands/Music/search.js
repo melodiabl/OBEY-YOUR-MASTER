@@ -1,10 +1,10 @@
+const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
 const obeyUi = require("../../handlers/assets/system")
 const { localeFor } = require('../../handlers/i18n')
 // Búsqueda estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes (clasificadas) + menú para elegir.
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
-const { searchDiscordCatalog, enqueueCatalogItem, itemInfo } = require('../../handlers/discordmusiccatalog')
 const { config } = require('../../handlers/music/config')
-const { E, err, catEmbed, catRows, addedEmbed } = require('../../handlers/music/playui')
+const { E, err } = require('../../handlers/music/playui')
 
 module.exports = {
   name: 'search',
@@ -33,41 +33,9 @@ module.exports = {
     const loading = await message.reply({ embeds: [new EmbedBuilder().setColor(config.color.primary).setDescription(obeyUi.limit(`${E.music} Buscando **${query.slice(0, 60)}**…`, 4096))] }).catch(() => null)
     if (!loading) return
 
-    const results = await searchDiscordCatalog(client, query, { guildId: message.guild.id }).catch(() => ({ tracks: [], albums: [] }))
-    if (!(results.tracks?.length) && !(results.albums?.length)) {
-      return loading.edit({ embeds: [err(`Sin resultados para **${query.slice(0, 60)}**`)] }).catch(() => {})
-    }
+    return searchCatalogPicker({ client, query, actor: message.author, guild: message.guild,
+      channelId: message.channel.id, prefix: 'srch', locale: localeFor(client, message.guild.id),
+      commandName: 'search', edit: payload => loading.edit(payload) })
 
-    let tab = 'tracks'
-    let items = results.tracks || []
-    await loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, message.guild.id)) }).catch(() => {})
-
-    const collector = loading.createMessageComponentCollector({ filter: i => i.user.id === message.author.id, time: 60_000 })
-    collector.on('collect', async i => {
-      if (i.customId.startsWith('srch_tab:')) {
-        await i.deferUpdate()
-        tab = i.customId.split(':')[1]
-        items = results[tab] || []
-        return loading.edit({ embeds: [catEmbed(tab, items, query, localeFor(client, message.guild.id))], components: catRows(tab, items, 'srch', localeFor(client, message.guild.id)) }).catch(() => {})
-      }
-      if (i.customId === 'srch_cancel') {
-        await i.deferUpdate(); collector.stop('cancel')
-        return loading.edit({ embeds: [new EmbedBuilder().setColor(0x5865F2).setDescription(obeyUi.limit(obeyUi.owned('🚫 Búsqueda cancelada.'), 4096))], components: [] }).catch(() => {})
-      }
-      if (i.customId === 'srch_pick') {
-        await i.deferUpdate(); collector.stop('picked')
-        const item = items[parseInt(i.values[0])]
-        const info = itemInfo(item)
-        try {
-          const queued = await enqueueCatalogItem(client, message, voiceChannel, item)
-          await loading.edit({ embeds: [addedEmbed(info, queued, message.author.id, localeFor(client, message.guild.id))], components: [] }).catch(() => {})
-        } catch (e) {
-          await loading.edit({ embeds: [err(e.message || String(e))], components: [] }).catch(() => {})
-        }
-      }
-    })
-    collector.on('end', (_, reason) => {
-      if (!['cancel', 'picked'].includes(reason)) loading.edit({ components: [] }).catch(() => {})
-    })
   },
 }
