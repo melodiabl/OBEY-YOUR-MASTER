@@ -1783,13 +1783,15 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Comprobar seguridad, estados reales, responsive y navegador; conservar tres tests originales y retirar verificadores temporales.
 - [x] Registrar despliegue/reversión y siguientes pantallas; no declarar migración frontend completa.
 
-- [ ] Migrar configuración/bienvenida al nuevo frontend con el contrato/servicio actuales y aceptación de guardado, permisos y errores.
+- [x] Migrar navegación de configuración y canal/mensaje de bienvenida con el contrato/servicio actuales y aceptación de guardado, permisos y errores; otros ajustes siguen pendientes.
 - [ ] Continuar biblioteca/Me gusta y reproductor completo; aceptación OAuth/escucha real y tareas musicales globales siguen abiertas.
 
 ## Frontend · configuración y bienvenida
 
-- [ ] Añadir navegación de configuración/bienvenida en /app sin mezclar el asistente con música.
-- [ ] Consumir descriptor y servicio existentes: canales visibles, límites del contrato, borrador, vista previa, revisión y publicación CAS.
-- [ ] Proteger cambios locales y operaciones pendientes al navegar; recuperación explícita de conflictos/resultados inciertos, sin reintento automático de publicación.
-- [ ] Verificar acceso retirado, dos servidores, errores de campo, móvil/teclado y artefacto Docker; retirar verificadores temporales y conservar tres tests originales.
-- [ ] Desplegar con respaldo/reversión y registrar el alcance; otros ajustes EJS y matriz global permanecen pendientes.
+- [x] Añadir navegación de configuración/bienvenida en /app sin mezclar el asistente con música.
+- [x] Consumir descriptor y servicio existentes: canales visibles, límites del contrato, borrador, vista previa, revisión y publicación CAS.
+- [x] Proteger cambios locales y operaciones pendientes al navegar; recuperación explícita de conflictos/resultados inciertos, sin reintento automático de publicación.
+- [x] Verificar acceso retirado, dos servidores, errores de campo, móvil/teclado y artefacto Docker; retirar verificadores temporales y conservar tres tests originales.
+- [x] Desplegar con respaldo/reversión y registrar el alcance; otros ajustes EJS y matriz global permanecen pendientes.
+
+- [ ] Completar ajustes generales y tarjetas/DM/despedida conforme a sus tareas; no cerrar el dominio de bienvenida por este editor.

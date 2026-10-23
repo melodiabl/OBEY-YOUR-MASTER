@@ -1,6 +1,6 @@
 # Guía de migración del módulo welcome
 
-Tarea `MOD-WELCOME`. Estado `configuration_pilot_local; full_module_pending`. Destino propuesto `src/modules/welcome`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
+Tarea `MOD-WELCOME`. Estado `configuration_pilot_deployed; full_module_pending`. Destino propuesto `src/modules/welcome`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
 
 
 Dependencias de arquitectura: `ARCH-03`, `ARCH-05`, `ARCH-07`.
@@ -179,3 +179,7 @@ El [capítulo 22](../sistema/22_COMUNIDAD_Y_GITHUB.md) y [mapa de canales](../co
 ## Conciliación de investigación 0.14
 
 El alcance de welcome se relaciona con referencias, recorrido, material y aceptación en [plan de ejecución](../investigacion-20261022/08_PLAN_DE_EJECUCION.md) y modulos.json. No se marca implementado ni se cambia su contrato operativo por añadir esta referencia. Las ampliaciones solicitadas se ejecutan por etapas, conservando datos y restricciones vigentes.
+
+## 23/10/2026 · editor React del piloto
+
+Canal/mensaje, borrador, preview sintético, revisión y publicación conectados al servicio existente desde `/app/?server=ID&view=welcome`. Bootstrap autorizado único; CAS, recuperación de resultado incierto y permisos conservados. Diez casos temporales, 22 escenarios de navegador sobre Docker y 25 originales verificados. [Alcance y evidencia](../../platform/FRONTEND-NEXT.md). Esta entrega no cierra tarjetas, DM, despedida, procesamiento idempotente de ingresos ni el inventario global de consumidores.

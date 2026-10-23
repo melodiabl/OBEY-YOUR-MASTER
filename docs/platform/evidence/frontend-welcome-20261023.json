@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "status": "verified_deployment_pending",
+  "status": "deployed_healthy",
   "scope": "React configuration navigation and welcome channel/message editor; other settings remain on existing screens",
   "verification": {
     "originalTests": 25,
@@ -159,6 +159,20 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "browserArtifact": "Static export extracted from final Docker runtime image",
+    "imageChecks": {
+      "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+      "sourceHashes": 91,
+      "compiledFiles": 24,
+      "originalTests": 25,
+      "uid": 1000
+    },
+    "typecheck": true,
+    "screenshots": {
+      "fixturesOnly": true,
+      "desktop": "frontend-welcome-desktop-20261023.png",
+      "mobile": "frontend-welcome-mobile-20261023.png"
     }
   },
   "limits": [
@@ -166,5 +180,171 @@
     "Welcome cards/DM/farewell and general settings not migrated",
     "Music SDK/queue migration remains separate"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "d5897e3533b1ba9e18b033476140c47501f6715d",
+    "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+    "tag": "localhost/obey-your-master_bot:release-next-welcome-20261023-d5897e3",
+    "previousCode": "687782991216687d6d28afbd8a7f9e512fdd3302",
+    "previousImage": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-23T18-49-47-279Z",
+      "bytes": 59256820,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "07231a273f0d2952a82d20c6d2c91ad4cce02413b2eb86808a762ccb89a7bd10",
+      "successfulDetachedRetry": true
+    },
+    "firstBackupAttemptIncompleteAndPreserved": true,
+    "runtimeVerification": {
+      "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+      "verified": 115,
+      "routes": {
+        "local": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/api/guilds/100000000000000001/modules/welcome/editor": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          }
+        },
+        "public": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/api/guilds/100000000000000001/modules/welcome/editor": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          }
+        }
+      }
+    },
+    "publicAssets": [
+      {
+        "path": "/app/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "contentType": "application/javascript; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+      },
+      {
+        "path": "/app/_next/static/chunks/0kzt14eza82gd.css",
+        "status": 200,
+        "contentType": "text/css; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "935bef3e9b614dd452d1b430d7c1703856af6026c6214fb00a017c6410c8469c"
+      }
+    ],
+    "observations": [
+      {
+        "at": "2026-10-23T18:58:18.959Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:23.069Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:27.182Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:31.319Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:35.439Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:39.547Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:43.641Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:47.743Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:51.836Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      },
+      {
+        "at": "2026-10-23T18:58:55.964Z",
+        "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200
+      }
+    ],
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16
+    },
+    "privateNodeEnabled": false,
+    "rollbackPreserved": true,
+    "testDiscordMessages": 0,
+    "testMemberJoins": 0,
+    "newVoiceTestJoins": 0,
+    "pushed": false
+  },
+  "cleanup": {
+    "temporaryTestsScriptsAndBrowserPackageRemoved": true,
+    "isolatedPreviewStopped": true,
+    "originalTestFiles": 3,
+    "rollbackAndBackupPreserved": true
+  }
 }

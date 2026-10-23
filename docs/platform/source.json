@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "687782991216687d6d28afbd8a7f9e512fdd3302",
-    "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
+    "code": "d5897e3533b1ba9e18b033476140c47501f6715d",
+    "image": "f87f26ce64313c8a9c53692e09f6d54710f9bddf4265a1ccffe358566ab736bc",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,8 +36,8 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/frontend-next-20261023.json",
-    "change": "First Next.js/React/TypeScript panel screen deployed under /app; existing backend and remaining EJS screens retained",
+    "evidence": "evidence/frontend-welcome-20261023.json",
+    "change": "React configuration navigation and welcome draft/preview/review/publication, using existing canonical services",
     "tag": "release-music-boundary-20261023-7801061",
     "status": "healthy",
     "statusEvidence": "../guia-arquitectura/modulos/music.md",
@@ -339,6 +339,9 @@
     "mode": "static export served by Express under /app",
     "firstScreenDeployed": true,
     "fullMigrationComplete": false,
-    "evidence": "evidence/frontend-next-20261023.json"
+    "evidence": "evidence/frontend-welcome-20261023.json",
+    "welcomeEditorDeployed": true,
+    "configurationNavigationDeployed": true,
+    "next": "Library and liked tracks; full music player and remaining general settings follow existing tasks"
   }
 }
