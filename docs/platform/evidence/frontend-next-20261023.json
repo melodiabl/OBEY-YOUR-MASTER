@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "status": "verified_locally_deployment_pending",
+  "status": "deployed_healthy",
   "scope": "First Next.js panel screen under /app; other screens remain EJS",
   "versions": {
     "next": "16.4.3",
@@ -133,7 +133,17 @@
     "welcomeTypes": true,
     "welcomeBoundaries": true,
     "localBuild": true,
-    "frontendDockerBuild": true
+    "frontendDockerBuild": true,
+    "browserArtifact": "Actual Next static export extracted from final Docker image",
+    "fullRuntimeDockerBuild": true,
+    "imageChecks": {
+      "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
+      "sourceHashes": 84,
+      "compiledHashes": 24,
+      "originalTests": 25,
+      "uid": 1000,
+      "productionDependenciesOnly": true
+    }
   },
   "screenshots": {
     "fixturesOnly": true,
@@ -145,5 +155,177 @@
     "Only first panel screen migrated; existing settings/library/music screens remain EJS",
     "Lavalink client and latency acceptance remain separate work"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "687782991216687d6d28afbd8a7f9e512fdd3302",
+    "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
+    "tag": "localhost/obey-your-master_bot:release-next-panel-20261023-6877829",
+    "previousCode": "780106183160460eaf57335f8ca907f75724fe23",
+    "previousImage": "10db2498e9bdddb45c0ce0f01e349f95f0875b0f98408f13cbfc7cafdab32e5c",
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-23T18-07-19-874Z",
+      "bytes": 59256017,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "3168fafaad28e2b86c86ef2d920ad8d5689322c91c1779b12400851ae8fe7da4"
+    },
+    "runtimeVerification": {
+      "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
+      "verified": 108,
+      "routes": {
+        "local": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          },
+          "/app/.env": {
+            "status": 404
+          },
+          "/css/fonts.css": {
+            "status": 200
+          },
+          "/bot.png": {
+            "status": 200
+          }
+        },
+        "public": {
+          "/health": {
+            "status": 200
+          },
+          "/": {
+            "status": 200
+          },
+          "/app/": {
+            "status": 302,
+            "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+          },
+          "/api/panel/context": {
+            "status": 401
+          },
+          "/app/package.json": {
+            "status": 404
+          },
+          "/app/.env": {
+            "status": 404
+          },
+          "/css/fonts.css": {
+            "status": 200
+          },
+          "/bot.png": {
+            "status": 200
+          }
+        }
+      }
+    },
+    "assetChecks": [
+      {
+        "path": "/app/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "contentType": "application/javascript; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683"
+      },
+      {
+        "path": "/app/_next/static/chunks/37zrvy8a19vau.css",
+        "status": 200,
+        "contentType": "text/css; charset=UTF-8",
+        "cache": "public, max-age=31536000, immutable",
+        "sha256": "6ded92a4b0f0bfe3e834e11cbd1305bf7d2e71295ed9e7065e2fbf95326e508f"
+      }
+    ],
+    "observations": [
+      {
+        "at": "2026-10-23T18:19:53.995Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:19:58.080Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:02.494Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:06.650Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:10.754Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:14.862Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:18.945Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:23.032Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:27.127Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      },
+      {
+        "at": "2026-10-23T18:20:31.215Z",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48"
+      }
+    ],
+    "publicPanel": "https://obey.melodiaauris.qzz.io/app/",
+    "privateNodeEnabled": false,
+    "testDiscordMessages": 0,
+    "newVoiceTestJoins": 0,
+    "pushed": false,
+    "rollbackPreserved": true
+  },
+  "cleanup": {
+    "temporaryTestsScriptsBrowserPackageAndExtractedArtifactRemoved": true,
+    "isolatedPreviewStopped": true,
+    "originalTestFiles": 3,
+    "rollbackAndBackupPreserved": true
+  }
 }

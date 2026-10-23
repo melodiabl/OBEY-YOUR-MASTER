@@ -1781,4 +1781,7 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Servir /app desde el origen existente y recuperar sesión/servidores con proyección segura; retorno OAuth limitado.
 - [x] Implementar selector, controles musicales básicos en vivo y enlaces a recorridos existentes, con identidad/fuentes actuales.
 - [x] Comprobar seguridad, estados reales, responsive y navegador; conservar tres tests originales y retirar verificadores temporales.
-- [ ] Registrar despliegue/reversión y siguientes pantallas; no declarar migración frontend completa.
+- [x] Registrar despliegue/reversión y siguientes pantallas; no declarar migración frontend completa.
+
+- [ ] Migrar configuración/bienvenida al nuevo frontend con el contrato/servicio actuales y aceptación de guardado, permisos y errores.
+- [ ] Continuar biblioteca/Me gusta y reproductor completo; aceptación OAuth/escucha real y tareas musicales globales siguen abiertas.

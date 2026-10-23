@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "780106183160460eaf57335f8ca907f75724fe23",
-    "image": "10db2498e9bdddb45c0ce0f01e349f95f0875b0f98408f13cbfc7cafdab32e5c",
+    "code": "687782991216687d6d28afbd8a7f9e512fdd3302",
+    "image": "2f3f933b3c8236c30989e9a5aa54ed5a1d1d5d3ef05012abbfd2e01c6a689b48",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,8 +36,8 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/music-boundary-deployment-20261023.json",
-    "change": "Shared confirmed seek clock and lyric commands; loaded music operation registry reconciled",
+    "evidence": "evidence/frontend-next-20261023.json",
+    "change": "First Next.js/React/TypeScript panel screen deployed under /app; existing backend and remaining EJS screens retained",
     "tag": "release-music-boundary-20261023-7801061",
     "status": "healthy",
     "statusEvidence": "../guia-arquitectura/modulos/music.md",
@@ -332,5 +332,13 @@
       "Real listening and two-guild acceptance"
     ],
     "pushed": false
+  },
+  "frontend": {
+    "decisionDate": "2026-10-23",
+    "stack": "Next.js + React + TypeScript",
+    "mode": "static export served by Express under /app",
+    "firstScreenDeployed": true,
+    "fullMigrationComplete": false,
+    "evidence": "evidence/frontend-next-20261023.json"
   }
 }
