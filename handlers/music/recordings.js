@@ -38,7 +38,11 @@ function recordingPreference(track, query) {
 function rankMusicTracks(tracks, query) {
   const normalizedQuery = text(String(query || '').replace(/^(?:ytsearch|ytmsearch|spsearch|amsearch):/i, ''))
   const tokens = [...new Set(normalizedQuery.split(' ').filter(Boolean))]
-  const rows = tracks.filter(track => !isYouTubeShort(track) && !isYouTubeChannel(track)).map((track, index) => {
+  const rows = tracks.filter(track => {
+    const title = String(infoFor(track).title || '')
+    const annotations = (title.match(/\([^)]*\)|\[[^\]]*\]|\s[-|]\s(?:live|cover|karaoke|remix|nightcore|slowed|sped)[^|]*/gi) || []).join(' ')
+    return !isYouTubeShort(track) && !isYouTubeChannel(track) && !hasUnrequestedVersion({ info: { title: annotations } }, query)
+  }).map((track, index) => {
     const info = infoFor(track), title = text(info.title), words = text(`${info.title || ''} ${info.author || ''}`).split(' ')
     const matches = tokens.filter(token => words.includes(token)).length
     const relevance = tokens.length ? matches / tokens.length * 1000 : 0
@@ -48,13 +52,23 @@ function rankMusicTracks(tracks, query) {
   // search. Do not pad that list with unrelated artists or homonymous titles.
   const exactArtistTitles = new Set(rows.filter(row => row.artist === normalizedQuery).map(row => recordingTitle(infoFor(row.track))))
   const artistSearch = Boolean(normalizedQuery && exactArtistTitles.size >= 2)
+  const namedArtists = new Set(rows.filter(row => {
+    const info = infoFor(row.track), title = recordingTitle(info).split(' ').filter(Boolean)
+    return /^(?:spotify|applemusic)$/i.test(info.sourceName || '') && row.artist && title.length &&
+      row.artist.split(' ').every(word => tokens.includes(word)) && title.every(word => tokens.includes(word))
+  }).map(row => row.artist))
+  const artist = artistSearch ? normalizedQuery : namedArtists.size === 1 ? [...namedArtists][0] : null
   const ranked = rows.filter(row => (!tokens.length || row.matches >= Math.ceil(tokens.length * 0.7)) &&
-    (!artistSearch || row.artist === normalizedQuery || String(infoFor(row.track).author || '')
-      .split(/\s+(?:feat\.?|ft\.?|with|and|x)\s+|[,/&]/i).some(artist => recordingArtist(artist) === normalizedQuery)))
+    (!artist || row.artist === artist || String(infoFor(row.track).author || '')
+      .split(/\s+(?:feat\.?|ft\.?|with|and|x)\s+|[,/&]/i).some(credit => recordingArtist(credit) === artist)))
     .sort((a, b) => b.score - a.score || a.index - b.index)
   const result = []
   for (const { track } of ranked) {
-    if (!result.some(existing => infoFor(existing).uri && infoFor(existing).uri === infoFor(track).uri || sameRecording(existing, track))) result.push(track)
+    // Group a song's album editions/videos in discovery. Playback matching below
+    // remains stricter about duration and ISRC when resolving on another node.
+    if (!result.some(existing => infoFor(existing).uri && infoFor(existing).uri === infoFor(track).uri || sameRecording(existing, track) ||
+      recordingTitle(infoFor(existing)) && recordingTitle(infoFor(existing)) === recordingTitle(infoFor(track)) &&
+      recordingArtist(infoFor(existing).author) === recordingArtist(infoFor(track).author))) result.push(track)
   }
   return result
 }
@@ -85,4 +99,4 @@ function sameRecording(reference, candidate) {
       ` ${artist} `.includes(` ${otherArtist} `) || ` ${otherArtist} `.includes(` ${artist} `)))
 }
 
-module.exports = { isYouTubeShort, isYouTubeChannel, hasUnrequestedVersion, recordingPreference, rankMusicTracks, sameRecording }
+module.exports = { isYouTubeShort, isYouTubeChannel, hasUnrequestedVersion, recordingPreference, rankMusicTracks, sameRecording, recordingArtist, recordingTitle }

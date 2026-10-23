@@ -8,9 +8,13 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
   if (!nodes.length) throw new Error('No hay conexiones de música disponibles.')
   const name = typeof requester === 'string' ? requester : requester?.username || requester?.tag || 'Unknown'
   const url = /^https?:\/\//i.test(query)
+  if (multiple && !url) {
+    const result = await require('./catalog-search').searchCatalogNodes(client, nodes, query, signal)
+    return { ...result, tracks: result.tracks.map(track => ({ ...track, info: { ...track.info,
+      requester: name, requesterId: typeof requester === 'object' ? requester.id : null } })) }
+  }
   const identifiers = url || /^(?:ytsearch|ytmsearch|spsearch|amsearch):/i.test(query) ? [query] : ['spsearch:' + query, 'ytmsearch:' + query, 'ytsearch:' + query, 'amsearch:' + query]
   let failed = false
-  let sparse = null
   for (const node of nodes) {
     let single = null, nodeFailed = false
     for (const identifier of identifiers) {
@@ -22,11 +26,6 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
         const tracks = (url || collection ? resolved : rankMusicTracks(resolved, query)).map(track => ({ ...track, _resolvedNode: node.name,
           info: { ...track.info, requester: name, requesterId: typeof requester === 'object' ? requester.id : track.info?.requesterId || null } }))
         if (!tracks.length) continue
-        // A search result containing one item is still sparse. Pickers need a
-        // list; direct playback can keep its existing first-match behavior.
-        if (multiple && !url && response.loadType === 'search' && tracks.length === 1 && identifiers.length > 1) {
-          single = { loadType: 'search', tracks, playlistName: null }; continue
-        }
         if (response.loadType === 'track' && !url) { single = { loadType: response.loadType, tracks, playlistName: null }; continue }
         if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
         const combined = single && !collection ? [...tracks, single.tracks[0]] : tracks
@@ -34,15 +33,10 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
       } catch (error) { if (signal?.aborted) throw error; failed = true; nodeFailed = true }
     }
     if (single) {
-      if (multiple) { sparse ||= { result: single, node }; continue }
       if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
       return single
     }
     if (nodeFailed) client.nodePool?.fail(node.name)
-  }
-  if (sparse) {
-    if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, sparse.node.name)
-    return sparse.result
   }
   if (failed) throw new Error('No se pudo consultar la música. Reintenta en unos minutos.')
   return null
