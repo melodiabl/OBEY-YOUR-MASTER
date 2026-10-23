@@ -63,7 +63,9 @@ jobs:
           const client = { commands, aliases: aliases.aliases, slashCommands: new Map(), allCommands: [], settings: {}, guilds: { cache: new Map() } }
           const music = require('./handlers/music/manifest')(client)
           require('./handlers/configuration')(client)
-          for (const manifest of [music, client.modules.get('welcome').manifest]) for (const route of manifest.api) {
+          require('./handlers/utilities')(client)
+          require('./handlers/architect')(client)
+          for (const manifest of [music, ...client.modules.list()]) for (const route of manifest.api) {
             const registered = route.replace('/modules/welcome/', '/modules/:moduleId/').replace('/configuration/:guildId/welcome', '/configuration/:guildId/:moduleId')
             assert(routes.has(registered), `Manifest route is not registered: ${route}`)
           }

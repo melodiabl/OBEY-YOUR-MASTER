@@ -8,7 +8,7 @@ module.exports = client => {
     permissions: { read: 'current-guild-member', configure: 'ManageGuild' },
     commands: { prefix: ['help'], slash: ['info.help'] }, interactions: ['hm_select', 'hm_home', 'hm_prev', 'hm_next', 'hm_categories_prev', 'hm_categories_next'],
     events: { consumed: ['interactionCreate', 'messageCreate'], emitted: [] }, jobs: [],
-    api: ['GET /api/help/:guildId'], realtime: { emitted: [], consumed: [] }, dependencies: ['discord.js'],
+    api: ['GET /help/:guildId', 'GET /api/help/:guildId', 'GET /api/help/:guildId/channels'], realtime: { emitted: [], consumed: [] }, dependencies: ['discord.js'],
     capabilities: { contextualHelp: 'available', guildPreferences: 'pending', commandToggles: 'pending' },
   }, client.helpService)
   initialized.add(client)

@@ -23,7 +23,7 @@ module.exports = client => {
   client.modules.register({
     id: 'architect', version: '1.0.0', defaults: { preserveExisting: true }, permissions: { read: 'ManageGuild', draft: 'ManageGuild' },
     commands: { slash: ['config.architect'], prefix: [] }, interactions: [], events: { consumed: [], emitted: [] }, jobs: ['architect.snapshot', 'architect.backup', 'architect.apply'],
-    api: ['GET /api/architect/:guildId', 'GET /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates/import',
+    api: ['GET /architect/:guildId', 'GET /api/architect/:guildId', 'GET /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates', 'POST /api/architect/:guildId/templates/import',
       'GET /api/architect/:guildId/templates/:templateId', 'POST /api/architect/:guildId/templates/:templateId/preview', 'POST /api/architect/:guildId/templates/:templateId/delete',
       'POST /api/architect/:guildId/generate', 'POST /api/architect/:guildId/decorate', 'POST /api/architect/:guildId/preview', 'POST /api/architect/:guildId/draft',
       'GET /api/architect/:guildId/jobs', 'POST /api/architect/:guildId/jobs', 'GET /api/architect/:guildId/jobs/:jobId', 'POST /api/architect/:guildId/jobs/:jobId/cancel',
