@@ -2,8 +2,14 @@
 
 ## Orden de ejecución vigente · corrección del usuario
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): completar P0 pendiente, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad revisa las intenciones compartidas entre prefix/slash/web y las responsabilidades de políticas, servicios y stores legacy.** La conciliación de adaptadores, aliases, dependencias y CI ya tiene evidencia en la entrega P0 del 24/10. G01/G02 siguen parciales: cargar una entrada no acepta su negocio. El reproductor React completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad amplía la revisión de intenciones compartidas, empezando por las diferencias de validación/persistencia del prefijo.** Nueve grupos (25 entradas y 19 rutas) ya están trazados y el idioma está corregido; faltan 650 entradas y 76 rutas por revisar. G01/G02 siguen parciales. El reproductor completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
 
+
+## 24/10/2026 · idioma compartido y nueve grupos revisados en P0
+
+Código `f92bc40`, imagen `27c1b75`, saludable y cero reinicios en diez muestras. Setup, `/config idioma` y web guardan mediante el mismo servicio versionado y esperan persistencia confirmada. Slash revalida permisos y usa el catálogo soportado; el formulario web conserva el valor actual, guarda solo el idioma y rechaza revisiones antiguas. Catorce casos aislados, formulario EJS completo en Chromium y 25 originales en imagen pasan; 1.027 hashes, HTTP local/público y JS/CSS comprobados. Respaldo completo con CRC y reversión `1f4a7ae` conservados. Herramientas, perfil y servidor de prueba retirados, tres archivos originales de tests conservados; sin push.
+
+El [mapa de intenciones](shared-intents.json) revisa nueve grupos, 25 entradas y 19 rutas. Registra diferencias de prefijo (T12), playlists (T19/T20), advertencias con historias separadas (T35) y pagos (T46). El recorrido autenticado real permanece pendiente. **P0 sigue activo: revisar las 650 entradas y 76 rutas restantes, empezando por prefijo.** G01/G02 no se cierran por esta muestra. [Evidencia y límites](evidence/p0-shared-intents-20261024.json).
 
 ## 24/10/2026 · conciliación de P0 desplegada, puertas globales pendientes
 

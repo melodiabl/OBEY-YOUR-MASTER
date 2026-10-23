@@ -24,6 +24,15 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 - [x] Desplegar con respaldo verificado, referencias de runtime conciliadas y 25 tests originales aprobados.
 - [ ] Revisar intenciones compartidas, políticas, servicios y stores de prefix/slash/web; conciliar G01/G02 globales antes de pasar a P1.
 
+## P0 · intenciones compartidas, 24/10/2026
+
+- [x] Trazar nueve grupos y sus servicios/políticas/stores: 25 entradas y 19 rutas; diferencias conservadas con tareas T12/T19/T20/T35/T46.
+- [x] Corregir idioma en slash y web para usar el servicio versionado del setup, guardar solo el idioma desde web y esperar confirmación de almacenamiento.
+- [x] Verificar 14 casos aislados, formulario EJS completo en Chromium y 25 tests originales sobre la imagen final; conservar controles de sesión/CSRF.
+- [ ] Revisar las 650 entradas y 76 rutas restantes; empezar por prefijo. No cerrar P0 ni aceptar todos los negocios por esta muestra.
+
+[Mapa](../docs/platform/shared-intents.json) y [evidencia](../docs/platform/evidence/p0-shared-intents-20261024.json).
+
 ## Tareas y checkpoints conservados
 
 

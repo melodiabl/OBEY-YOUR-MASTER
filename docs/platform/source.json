@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
-    "image": "becbefb2bbc6b05c16e11eb221b75b2476b44d612bc8fdfc2d489943216ae1f4",
+    "code": "f92bc406ce82179a31a4f07074d1fe5a066aa0c0",
+    "image": "27c1b75741b47c92d24c3c44f6128c59cbc330cd35cb76368ee35be23ed60ccf",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,12 +36,12 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-reconciliation-20261023.json",
-    "change": "P0 current adapter ownership, explicit alias policy, unchanged dependency graph and reconciled route manifests",
-    "tag": "localhost/obey-your-master_bot:release-p0-20261024-1f4a7ae",
+    "evidence": "evidence/p0-shared-intents-20261024.json",
+    "change": "Shared awaited language configuration for setup, slash and web; nine shared-intent groups traced",
+    "tag": "localhost/obey-your-master_bot:release-p0-language-20261024-f92bc40",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-reconciliation-20261023.json",
-    "deploymentKind": "application_only_p0_reconciliation_release"
+    "statusEvidence": "evidence/p0-shared-intents-20261024.json",
+    "deploymentKind": "application_only_p0_language_reconciliation_release"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -348,7 +348,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Review shared prefix/slash/web intents and legacy policy/service/store responsibilities before globally closing G01/G02; remain in P0",
+    "nextUnit": "Continue P0 shared-intent review beyond the 25 command entries and 19 HTTP routes already traced; start with prefix configuration validation/persistence and preserve recorded T35/T46 data migrations",
     "sequence": [
       "P0",
       "P1",
@@ -373,6 +373,20 @@
       "Shared-intent policy/service/store reconciliation across prefix, slash and web",
       "Global G01/G02 acceptance"
     ],
+    "pushed": false
+  },
+  "p0SharedIntents": {
+    "implementationCode": "f92bc406ce82179a31a4f07074d1fe5a066aa0c0",
+    "report": "P0-CONCILIACION.md",
+    "inventory": "shared-intents.json",
+    "evidence": "evidence/p0-shared-intents-20261024.json",
+    "deployed": true,
+    "reviewedGroups": 9,
+    "commandEntriesReviewed": 25,
+    "httpRoutesReviewed": 19,
+    "remainingCommandEntries": 650,
+    "remainingHttpRoutes": 76,
+    "globalG01G02Accepted": false,
     "pushed": false
   }
 }

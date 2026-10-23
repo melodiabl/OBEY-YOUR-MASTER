@@ -1,7 +1,7 @@
 {
   "date": "2026-10-24",
   "phase": "P0",
-  "status": "local_verification_passed_deployment_pending",
+  "status": "deployed_healthy_increment_global_gates_pending",
   "inventory": "../shared-intents.json",
   "coverage": {
     "reviewedGroups": 9,
@@ -46,5 +46,127 @@
     "P1 single-queue client migration and music acceptance",
     "Authenticated user walkthrough"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "f92bc406ce82179a31a4f07074d1fe5a066aa0c0",
+    "image": "27c1b75741b47c92d24c3c44f6128c59cbc330cd35cb76368ee35be23ed60ccf",
+    "tag": "localhost/obey-your-master_bot:release-p0-language-20261024-f92bc40",
+    "cutoverAt": "2026-10-23T23:38:39.277Z",
+    "health": "healthy",
+    "restarts": 0,
+    "sourceFilesVerified": 1003,
+    "compiledFilesVerified": 24,
+    "runtimeFilesVerified": 1027,
+    "node": "v22.23.2",
+    "uid": 1000,
+    "lavalinkClientInstalled": false,
+    "privateLavalinkEnabled": false,
+    "environmentPreserved": true,
+    "http": {
+      "local": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      },
+      "public": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      }
+    },
+    "observation": {
+      "samples": 10,
+      "firstAt": "2026-10-23T23:39:28.353Z",
+      "lastAt": "2026-10-23T23:40:05.097Z",
+      "allHealthy": true,
+      "restarts": 0
+    },
+    "publicAssetsVerified": 2,
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16
+    },
+    "imageOriginalTestsPassed": 25,
+    "imageInventoryGatePassed": true,
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-23T23-35-49-847Z",
+      "bytes": 59266151,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "fca6f43b0f676e629a3198580f6239d6d41ec1dee2707ecdc2404a47786c8088"
+    },
+    "rollback": {
+      "code": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
+      "image": "becbefb2bbc6b05c16e11eb221b75b2476b44d612bc8fdfc2d489943216ae1f4",
+      "tag": "localhost/obey-your-master_bot:release-p0-20261024-1f4a7ae",
+      "imageAndArgumentsPreserved": true
+    },
+    "privateEvidence": ".runtime/deploy-p0-language-20261024",
+    "localReleaseAndRecoveryReferencesUpdated": true,
+    "pushed": false,
+    "remoteCiRun": false
+  },
+  "cleanup": {
+    "temporaryHelpersRemoved": [
+      "browser-check.cjs",
+      "browser-fixture.cjs",
+      "ci-image-check.cjs",
+      "language-check.cjs",
+      "refresh-inventory.cjs",
+      "release.cjs"
+    ],
+    "isolatedBrowserAndFixtureStopped": true,
+    "browserProfileRemoved": true,
+    "proofFilesRetained": 13,
+    "originalTestFilesRetained": 3,
+    "temporaryCandidateTagRemoved": true,
+    "rollbackAndBackupsPreserved": true
+  },
+  "review": {
+    "correctness": "Language save awaits atomic store result and conflict handling; source and artifact hashes match",
+    "security": "Existing access gates preserved; actor from trusted session/interaction; real CSRF verified on isolated form; no new permissions",
+    "architecture": "Existing language-settings service reused; no new store or queue. Dedicated form branch remains in the legacy dashboard POST until T12 migration",
+    "performance": "Bounded language catalog and one language read/write; fresh permission checks on slash; no new background jobs",
+    "limitations": "Synthetic behavior and browser acceptance do not accept authenticated real guild flows"
+  }
 }
