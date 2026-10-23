@@ -680,6 +680,7 @@ module.exports = client => {
       state.positionChangeAt = Date.now()
       anchorFromNode(state, response, pos, pos)
       emitState(guildId)
+      scheduleNpUpdate(client, guildId)
       return { positionMs: Math.round(clock.position(state)), durationMs: len, paused: Boolean(state.paused) }
     },
 
