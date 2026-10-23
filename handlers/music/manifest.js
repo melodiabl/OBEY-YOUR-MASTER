@@ -1,4 +1,7 @@
-module.exports = client => ({
+module.exports = client => {
+  const commands = require('../command-registry').buildCommandCatalog(client)
+    .filter(command => command.parameters.type === 'music' || command.category.toLowerCase().includes('music'))
+  return {
   id: 'music',
   version: '1.0.0',
   defaults: { volume: 100, loop: 'none', autoplay: false, filter: 'none' },
@@ -8,10 +11,8 @@ module.exports = client => ({
     configure: 'ManageGuild',
   },
   commands: {
-    slash: (client.allCommands?.find(command => command.name === 'music')?.options || [])
-      .map(option => `music.${option.name}`),
-    prefix: [...(client.commands?.values?.() || [])]
-      .filter(command => command.category?.toLowerCase().includes('music')).map(command => command.name),
+    slash: commands.filter(command => command.transport === 'slash').map(command => command.id.slice('slash:'.length)),
+    prefix: commands.filter(command => command.transport === 'prefix').map(command => command.name),
   },
   interactions: ['mp_shuffle', 'mp_prev', 'mp_toggle', 'mp_skip', 'mp_loop', 'mp_lyrics',
     'mp_voldown', 'mp_stop', 'mp_volup', 'mp_queue', 'mp_like', 'mp_autoplay'],
@@ -31,4 +32,5 @@ module.exports = client => ({
     lyricsRealtime: 'pending',
     durableJobs: 'unavailable',
   },
-})
+  }
+}
