@@ -13,8 +13,8 @@ El [inventario vigente](operation-ownership.json) conserva propietarios actuales
 - Los 26 aliases con colisiones tienen una política explícita. Se conservan los 779 destinos efectivos, con precedencia de nombres reales sobre aliases; no se cambian permisos ni comandos de destino.
 - Se declaran seis dependencias importadas directamente con las mismas versiones e integridades que ya estaban en el lock: builders/rest de Discord, form-data, node-fetch, request y ws. No se actualiza el grafo instalado. `request` sigue siendo legacy y conserva su deuda; no se reemplazan setenta consumidores durante una conciliación de base.
 - El handler opcional de Epic importa `fortnite`, pero no se carga al arrancar. Queda como excepción localizada y no activada; sus comandos/flujo no se dan por funcionales.
-- Los manifests de música y bienvenida describen 34 y nueve rutas existentes, respectivamente, incluidos biblioteca/editor y compatibilidad. Todas tienen una ruta registrada equivalente; no se crean endpoints por ampliar el manifest.
-- El documento de runtime conservaba una etiqueta/kind de la entrega musical anterior pese a tener código e imagen nuevos. La referencia se concilia con la imagen y evidencia operativas al cerrar la entrega.
+- Los manifests de música, bienvenida, ayuda y Architect describen 34, nueve, tres y 21 rutas existentes, respectivamente, incluidas las páginas y API de biblioteca/editor, ayuda y Architect. Todas tienen una ruta registrada equivalente; no se crean endpoints por ampliar el manifest.
+- El documento de runtime conservaba una etiqueta/kind de la entrega musical anterior pese a tener código e imagen nuevos. La referencia queda conciliada con el código, la etiqueta y la evidencia de esta entrega.
 
 ## Instalación y CI
 
@@ -23,6 +23,12 @@ El CI existente verifica hashes, cobertura de archivos de comandos, export `run`
 El [contrato de instalación musical](music-client-installation.json) contiene package y lock de un paquete aislado usado por CI para preparar P1. Una instalación limpia de lavalink-client 2.11.0 resuelve ws 8.22.0, satisface su requisito ^8.21.3 y carga el export CommonJS con Node 22. No usa el ws 8.21.0 del proyecto para simular compatibilidad. No se instala lavalink-client en producción ni se crea otro player/cola. El lock de este entorno aislado no reemplaza los locks del bot o del frontend.
 
 `autoSkip:false` sigue permitiendo que el cliente avance su cola interna. P1 debe transferir la autoridad y snapshots; una biblioteca importada no acredita esa migración. La instalación definitiva se conectará al consumidor real y se conciliará con el lock principal en ese corte.
+
+## Despliegue verificado · 24/10/2026
+
+Código `1f4a7ae`, imagen `becbefb`, diez muestras saludables y cero reinicios. Los 25 tests originales y gates del CI ejecutados localmente sobre la imagen final pasan; no hay ejecución remota del CI. Se verifican 1.002 fuentes y 24 archivos compilados en imagen/runtime, respuestas HTTP locales/públicas y hashes JS/CSS públicos. El arranque no muestra patrones de error fatal. Respaldo completo con CRC, imagen/argumentos de reversión `b31c65b` y configuración operativa preservados. La etiqueta y evidencia del runtime ya coinciden con esta versión.
+
+Se retiran seis verificadores/operadores temporales y dos paquetes aislados, conservando evidencia privada, los tres archivos originales de tests y sus 25 casos. El cliente musical nuevo sigue fuera de producción; no se dan por aceptadas reproducción ni acciones autenticadas por estos controles.
 
 ## Aceptación pendiente de P0
 

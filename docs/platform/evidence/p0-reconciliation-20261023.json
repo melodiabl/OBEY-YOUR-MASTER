@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
   "phase": "P0",
-  "status": "candidate_checks_passed_deployment_pending",
+  "status": "increment_deployed_healthy_p0_global_gates_pending",
   "scope": "Effective command/route implementation ownership, explicit alias policy, declared dependencies and reproducible migration-client compatibility",
   "baseRuntime": {
     "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
@@ -76,7 +76,9 @@
     "music": 34,
     "welcome": 9,
     "registeredTotal": 95,
-    "allDeclaredRoutesMatched": true
+    "allDeclaredRoutesMatched": true,
+    "utilities": 3,
+    "architect": 21
   },
   "verification": {
     "realLoadersInNetworkDisabledContainer": true,
@@ -94,7 +96,12 @@
       "high": 0,
       "critical": 0,
       "total": 36
-    }
+    },
+    "finalImageTestsPassed": 25,
+    "finalImageInventoryGatePassed": true,
+    "finalImageActualCompositionCompared": true,
+    "commandDispatchUnchanged": true,
+    "isolatedClientCiStepPassed": true
   },
   "limits": [
     "Adapters are located; this does not accept all commands or domain migrations",
@@ -102,5 +109,108 @@
     "Shoukaku remains active; P1 queue transfer and real music acceptance are pending",
     "No login, command invocation, Discord messages, database writes or voice joins were used for the inventory"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
+    "image": "becbefb2bbc6b05c16e11eb221b75b2476b44d612bc8fdfc2d489943216ae1f4",
+    "tag": "localhost/obey-your-master_bot:release-p0-20261024-1f4a7ae",
+    "cutoverAt": "2026-10-23T23:21:01.643Z",
+    "health": "healthy",
+    "restarts": 0,
+    "sourceFilesVerified": 1002,
+    "compiledFilesVerified": 24,
+    "runtimeFilesVerified": 1026,
+    "uid": 1000,
+    "node": "v22.23.2",
+    "lavalinkClientInstalled": false,
+    "http": {
+      "local": {
+        "/health": {
+          "status": 200
+        },
+        "/": {
+          "status": 200
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401
+        },
+        "/api/guilds/100000000000000001/modules": {
+          "status": 401
+        },
+        "/app/package.json": {
+          "status": 404
+        }
+      },
+      "public": {
+        "/health": {
+          "status": 200
+        },
+        "/": {
+          "status": 200
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401
+        },
+        "/api/guilds/100000000000000001/modules": {
+          "status": 401
+        },
+        "/app/package.json": {
+          "status": 404
+        }
+      }
+    },
+    "observation": {
+      "samples": 10,
+      "firstAt": "2026-10-23T23:21:39.416Z",
+      "lastAt": "2026-10-23T23:22:16.095Z",
+      "allHealthy": true,
+      "restarts": 0
+    },
+    "publicAssetsVerified": 2,
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16
+    },
+    "environmentPreserved": true,
+    "privateLavalinkEnabled": false,
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-23T23-15-20-981Z",
+      "bytes": 59272938,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "dea1f249dccfac3dbd8b6c7ccb419c5b68dad12ffd1ae26b1945074970e96b53"
+    },
+    "rollback": {
+      "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
+      "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+      "tag": "localhost/obey-your-master_bot:release-next-library-20261023-b31c65b",
+      "imageAndArgumentsPreserved": true
+    },
+    "localReleaseAndRecoveryReferencesUpdated": true,
+    "privateEvidence": ".runtime/deploy-p0-20261024",
+    "pushed": false
+  },
+  "verifiedDate": "2026-10-24",
+  "cleanup": {
+    "temporaryHelpersRemoved": [
+      "analyze.cjs",
+      "ci-image-check.cjs",
+      "ci-migration-check.sh",
+      "loaders.cjs",
+      "routes.cjs",
+      "release.cjs"
+    ],
+    "temporaryPackageDirectoriesRemoved": 2,
+    "privateProofFilesPreserved": 32,
+    "temporaryCandidateTagRemoved": true,
+    "unusedEarlierCandidateImageRemoved": false,
+    "originalTestFilesRetained": 3,
+    "backupsAndRollbackPreserved": true
+  }
 }

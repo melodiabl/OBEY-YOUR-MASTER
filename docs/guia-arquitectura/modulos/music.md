@@ -254,3 +254,9 @@ Quedan 19 archivos/61 accesos directos estáticos a constructor/client.shoukaku;
 ## 23/10/2026 · biblioteca React
 
 Colecciones personales y top de guild conectados a repositorios actuales, con proyección privada y propiedad de playlists. Tus Me gusta usa los corazones existentes; retirada explícita, metadatos antiguos y reproducción por las API actuales verificados. Doce casos temporales, 22 escenarios Chromium sobre Docker y 25 originales pasan. [Alcance y evidencia](../../platform/FRONTEND-NEXT.md). No reemplaza Shoukaku, transfiere la cola ni acredita escucha real o aceptación global de P1.
+
+## 24/10/2026 · compatibilidad de instalación conciliada en P0
+
+La prueba de importación anterior se complementa con una instalación limpia mediante npm ci del [contrato fijado](../../platform/music-client-installation.json): lavalink-client 2.11.0 resuelve ws 8.22.0 y tslib 2.8.1, carga CommonJS con Node 22.23.2 y su auditoría aislada no informa vulnerabilidades. Este entorno ya satisface ^8.21.3; no reutiliza el ws 8.21.0 del bot. El CI ejecuta el mismo contrato en aislamiento. [Conciliación y evidencia](../../platform/P0-CONCILIACION.md).
+
+Producción conserva Shoukaku, una cola legacy y el cliente nuevo sin instalar. La transferencia de autoridad, snapshots, eventos y matriz de aceptación sigue dentro de P1, después de la conciliación pendiente de intenciones compartidas de P0. No se acepta audio real por comprobar la instalación.

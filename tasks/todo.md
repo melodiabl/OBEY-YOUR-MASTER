@@ -12,6 +12,18 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 
 La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproductor completo continúa pendiente dentro de P1, sin desplazar la conciliación actual de P0. No se marcan etapas completas por reordenar esta lista.
 
+## P0 · unidad conciliada el 24/10/2026
+
+[Informe](../docs/platform/P0-CONCILIACION.md) y [evidencia](../docs/platform/evidence/p0-reconciliation-20261023.json).
+
+- [x] Localizar los adaptadores actuales de 675 entradas y 95 rutas; registrar hashes de 963 fuentes.
+- [x] Hacer explícitas 26 políticas de colisión conservando los 779 destinos de aliases.
+- [x] Declarar seis dependencias directas sin cambiar versiones o integridades instaladas.
+- [x] Conciliar manifests de música/bienvenida/ayuda/Architect y ejecutar los gates del CI localmente sobre la imagen final.
+- [x] Verificar instalación limpia y fijada de lavalink-client 2.11.0/CommonJS con ws 8.22.0 en aislamiento; sin instalarlo en producción.
+- [x] Desplegar con respaldo verificado, referencias de runtime conciliadas y 25 tests originales aprobados.
+- [ ] Revisar intenciones compartidas, políticas, servicios y stores de prefix/slash/web; conciliar G01/G02 globales antes de pasar a P1.
+
 ## Tareas y checkpoints conservados
 
 

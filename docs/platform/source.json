@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
-    "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+    "code": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
+    "image": "becbefb2bbc6b05c16e11eb221b75b2476b44d612bc8fdfc2d489943216ae1f4",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,12 +36,12 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/frontend-library-20261023.json",
-    "change": "React personal library and automatic liked playlist, using existing repositories and player APIs",
-    "tag": "release-music-boundary-20261023-7801061",
+    "evidence": "evidence/p0-reconciliation-20261023.json",
+    "change": "P0 current adapter ownership, explicit alias policy, unchanged dependency graph and reconciled route manifests",
+    "tag": "localhost/obey-your-master_bot:release-p0-20261024-1f4a7ae",
     "status": "healthy",
-    "statusEvidence": "../guia-arquitectura/modulos/music.md",
-    "deploymentKind": "application_only_music_facade_release"
+    "statusEvidence": "evidence/p0-reconciliation-20261023.json",
+    "deploymentKind": "application_only_p0_reconciliation_release"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -348,7 +348,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Reconcile remaining operation owners and effective command/route/alias discrepancies; complete pending base/version/lock/CI evidence",
+    "nextUnit": "Review shared prefix/slash/web intents and legacy policy/service/store responsibilities before globally closing G01/G02; remain in P0",
     "sequence": [
       "P0",
       "P1",
@@ -359,5 +359,20 @@
     ],
     "transversal": "P3 resources and localization accompany each capability",
     "completedStagesNotImplied": true
+  },
+  "p0Reconciliation": {
+    "implementationCode": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
+    "report": "P0-CONCILIACION.md",
+    "evidence": "evidence/p0-reconciliation-20261023.json",
+    "deployed": true,
+    "commands": 675,
+    "routes": 95,
+    "aliases": 779,
+    "canonicalBusinessOwnershipAccepted": false,
+    "remaining": [
+      "Shared-intent policy/service/store reconciliation across prefix, slash and web",
+      "Global G01/G02 acceptance"
+    ],
+    "pushed": false
   }
 }

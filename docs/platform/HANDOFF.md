@@ -2,8 +2,16 @@
 
 ## Orden de ejecución vigente · corrección del usuario
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): completar P0 pendiente, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad es conciliar propietarios/discrepancias del registro efectivo y las verificaciones de base pendientes de P0.** El reproductor React completo queda dentro de P1, conectado a su contrato musical; no se continúa por pantallas independientes. Se conservan runtime, avances y evidencias. Esta corrección cambia la planificación, no despliega ni cierra etapas. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): completar P0 pendiente, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad revisa las intenciones compartidas entre prefix/slash/web y las responsabilidades de políticas, servicios y stores legacy.** La conciliación de adaptadores, aliases, dependencias y CI ya tiene evidencia en la entrega P0 del 24/10. G01/G02 siguen parciales: cargar una entrada no acepta su negocio. El reproductor React completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
 
+
+## 24/10/2026 · conciliación de P0 desplegada, puertas globales pendientes
+
+Código `1f4a7ae`, imagen `becbefb`, saludable y cero reinicios en diez muestras. Inventario efectivo: 675 entradas y 95 rutas con adaptador actual localizado, 779 aliases preservados y 26 políticas de colisión explícitas. Se declaran seis dependencias directas sin cambiar versiones/integridades instaladas; manifests de música/bienvenida/ayuda/Architect conciliados. El CI verifica cobertura, hashes y aliases; contrato aislado de lavalink-client 2.11.0 con ws 8.22.0 comprobado mediante instalación limpia y CommonJS. Shoukaku sigue activo y el cliente nuevo no se instala en producción.
+
+Los 25 tests originales y gates ejecutados localmente sobre la imagen final pasan; 1.026 hashes, HTTP local/público y JS/CSS públicos comprobados. Respaldo completo con CRC y reversión `b31c65b` conservados. Verificadores y dos paquetes temporales retirados, tres archivos originales de tests conservados; sin push ni CI remoto. [Informe y límites](P0-CONCILIACION.md), [evidencia](evidence/p0-reconciliation-20261023.json).
+
+**Siguiente unidad: seguir en P0 revisando intenciones compartidas prefix/slash/web y políticas/servicios/stores.** G01/G02 siguen parciales; localizar adaptadores no acepta el negocio ni todas las operaciones. P1 musical conserva su cola única y matriz pendientes.
 
 ## 23/10/2026 · biblioteca y Me gusta en React desplegados
 

@@ -16,10 +16,10 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 ### Unidad inmediata: completar la conciliación de P0
 
-1. Partir del registro efectivo y los aliases ya comprobados en `7801061`, la [ficha musical](../docs/guia-arquitectura/modulos/music.md) y la evidencia vigente; conservar el runtime `b31c65b` y los avances posteriores.
-2. Conciliar las operaciones que aún no tienen propietario: entrada real, servicio, repositorio, permisos y consumidores. Identificar discrepancias y resolverlas por capacidad, sin duplicar autoridades.
-3. Completar las discrepancias de versiones, lock e instalación/CI exigidas por la guía; una dependencia instalada sin consumidor no cuenta como migración.
-4. Registrar qué criterios de P0 quedan satisfechos y cuáles siguen abiertos. No cerrar la etapa por documentación ni por un loader que solo acredita carga.
+1. Partir del [inventario conciliado](../docs/platform/operation-ownership.json) y la [evidencia P0](../docs/platform/evidence/p0-reconciliation-20261023.json): 675 entradas con adaptador actual, 95 rutas y 779 aliases preservados; runtime `1f4a7ae`.
+2. Revisar por intención compartida prefix/slash/web la autoridad de permisos, servicio y repositorio. Registrar diferencias deliberadas y tareas de migración; un adaptador localizado no equivale a servicio canónico ni aceptación funcional.
+3. Mantener las comprobaciones de fuentes, aliases y manifests en CI y el contrato aislado de instalación musical. Las seis dependencias directas se declararon sin cambiar versiones/integridades instaladas; lavalink-client aún no está en producción.
+4. Conciliar G01/G02 con los IDs originales y su evidencia antes de cerrar P0 y avanzar a P1.
 
 **Aceptación de esta unidad:** propietarios/discrepancias trazables y evidencia vinculada a los IDs existentes; instalación y comprobaciones apropiadas de la base; ninguna capacidad marcada funcional solo por aparecer en el inventario. Después se ejecuta el primer recorrido de migración de P1.
 
