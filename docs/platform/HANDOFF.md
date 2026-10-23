@@ -1,5 +1,10 @@
 # Estado entregado · 17/10/2026
 
+## Orden de ejecución vigente · corrección del usuario
+
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): completar P0 pendiente, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad es conciliar propietarios/discrepancias del registro efectivo y las verificaciones de base pendientes de P0.** El reproductor React completo queda dentro de P1, conectado a su contrato musical; no se continúa por pantallas independientes. Se conservan runtime, avances y evidencias. Esta corrección cambia la planificación, no despliega ni cierra etapas. Los «siguientes» fechados debajo son históricos.
+
+
 ## 23/10/2026 · biblioteca y Me gusta en React desplegados
 
 Código `b31c65b`, imagen `271e2ef`, saludable y cero reinicios. Biblioteca con Tus Me gusta, playlists/detalle, recientes personales y top del servidor; colección automática visible junto a playlists desde los mismos corazones de Discord. Un bootstrap autorizado proyecta datos del repositorio existente; detalle comprueba propiedad. Lecturas estrictas del nuevo recorrido distinguen errores/vacíos, manteniendo compatibilidad legacy. Quitar corazón envía false explícito y actualiza el contador; favoritos retirados permanecen consultables y eliminables sin reproducción. Envíos musicales usan API/player existentes, con CSRF, permisos, bloqueo de duplicados y aviso ante resultado incierto. Doce casos temporales, 22 escenarios Chromium sobre Docker, 25 originales locales/en imagen, tipos/fronteras y 120 hashes pasan. Diez muestras saludables y HTTP local/público/JS/CSS comprobados. Respaldo completo con CRC y reversión `d5897e3` conservados. [Alcance y límites](FRONTEND-NEXT.md), [evidencia](evidence/frontend-library-20261023.json).

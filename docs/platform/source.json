@@ -342,7 +342,22 @@
     "evidence": "evidence/frontend-library-20261023.json",
     "welcomeEditorDeployed": true,
     "configurationNavigationDeployed": true,
-    "next": "Full music player; remaining settings retain their domain tasks",
+    "next": "Full player within P1 after P0 reconciliation and canonical music/queue contracts; follow the active plan, not an independent screen sequence",
     "libraryDeployed": true
+  },
+  "executionOrder": {
+    "authority": "../../tasks/plan.md#orden-activo--23102026",
+    "activeStage": "P0",
+    "nextUnit": "Reconcile remaining operation owners and effective command/route/alias discrepancies; complete pending base/version/lock/CI evidence",
+    "sequence": [
+      "P0",
+      "P1",
+      "P2",
+      "P4",
+      "P5",
+      "P6"
+    ],
+    "transversal": "P3 resources and localization accompany each capability",
+    "completedStagesNotImplied": true
   }
 }

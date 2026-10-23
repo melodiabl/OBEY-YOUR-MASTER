@@ -1,5 +1,20 @@
 # Tareas y checkpoints de OBEY
 
+## Prioridad activa única
+
+Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 → P2 → P4 → P5 → P6**, con **P3 transversal** a cada recorrido. Los checkpoints y tareas posteriores conservan su evidencia; no definen por sí solos qué se hace a continuación.
+
+- [ ] **Ahora · P0:** completar propietarios y discrepancias del inventario efectivo de comandos/rutas/aliases y las verificaciones pendientes de base/versiones/lock/CI, conforme a las puertas del maestro.
+- [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
+- [ ] **Luego · P2:** completar configuración/setups, bienvenida, tickets, moderación y logs por recorrido, con aceptación entre dos guilds.
+- [ ] **En cada recorrido · P3:** recursos, IDs/fallbacks, idiomas y evidencia visual de esa capacidad.
+- [ ] **Tras las dependencias anteriores · P4/P5/P6:** sandbox de votos/derechos; escalado/recuperación; ampliaciones con sus contratos.
+
+La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproductor completo continúa pendiente dentro de P1, sin desplazar la conciliación actual de P0. No se marcan etapas completas por reordenar esta lista.
+
+## Tareas y checkpoints conservados
+
+
 Estado del checkpoint: T01 completa como auditoría estática; T02–T04 implementadas localmente, aceptación Discord pendiente; T19 parcial (Discord implementado; web pendiente). Consultar docs/platform/CHECKPOINT.md. Mantener todos los requisitos pendientes sin borrarlos.
 
 ## T01

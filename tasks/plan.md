@@ -1,5 +1,41 @@
 # Plan de implementación de la plataforma OBEY
 
+## Orden activo · 23/10/2026
+
+La corrección del usuario «sigue un orden en el plan» fija una única secuencia de ejecución. Gobierna el [maestro 0.15](../docs/guia-arquitectura/investigacion-20261022/08_PLAN_DE_EJECUCION.md); los IDs T/ARCH/MOD existentes conservan alcance, dependencias y evidencias. Las entregas siguientes son historial y no cambian la prioridad activa.
+
+| Orden | Etapa | Trabajo y condición de avance |
+| --- | --- | --- |
+| 1 · activa | P0 · base e inventario | Completar conciliación de comandos, rutas, aliases y propietarios; resolver discrepancias de versiones/lock/CI. Cerrar con evidencia de la base y registro efectivos, no solo inventario de archivos. |
+| 2 | P1 · música consistente | Migrar a lavalink-client con una sola autoridad de cola y snapshots compatibles. Verificar fin/skip/stop, modos, autoplay/manual, errores y recuperación; conservar doce controles, favoritos y reloj. |
+| 3 | P2 · configuración y gestión | Completar recorridos de setups/configuración, bienvenida, tickets, moderación y logs con permisos y datos reales por recorrido. Aceptación en dos guilds y permisos distintos. |
+| Transversal | P3 · recursos e idiomas | Integrar materiales, IDs reales, fallbacks y textos con cada recorrido de P1/P2 y siguientes. No reservarlo para una renovación global al final. |
+| 4 | P4 · votos y premium | Contratos, deduplicación, conciliación y derechos en sandbox; sin venta pública automática. |
+| 5 | P5 · escalado y recuperación | Drain/takeover, caída de proceso y restauración de datos comprobados antes de ampliar infraestructura. |
+| 6 | P6 · ampliaciones | Comunidad, colecciones y automatización con contratos, cuotas, privacidad y aceptación por capacidad. |
+
+### Unidad inmediata: completar la conciliación de P0
+
+1. Partir del registro efectivo y los aliases ya comprobados en `7801061`, la [ficha musical](../docs/guia-arquitectura/modulos/music.md) y la evidencia vigente; conservar el runtime `b31c65b` y los avances posteriores.
+2. Conciliar las operaciones que aún no tienen propietario: entrada real, servicio, repositorio, permisos y consumidores. Identificar discrepancias y resolverlas por capacidad, sin duplicar autoridades.
+3. Completar las discrepancias de versiones, lock e instalación/CI exigidas por la guía; una dependencia instalada sin consumidor no cuenta como migración.
+4. Registrar qué criterios de P0 quedan satisfechos y cuáles siguen abiertos. No cerrar la etapa por documentación ni por un loader que solo acredita carga.
+
+**Aceptación de esta unidad:** propietarios/discrepancias trazables y evidencia vinculada a los IDs existentes; instalación y comprobaciones apropiadas de la base; ninguna capacidad marcada funcional solo por aparecer en el inventario. Después se ejecuta el primer recorrido de migración de P1.
+
+### Reglas para las próximas entregas
+
+- Una unidad activa a la vez; verificar, registrar resultado y pendientes, y después avanzar según dependencias.
+- Las pantallas Next.js/React se completan junto a su capacidad. El reproductor completo pertenece a P1 y se conectará al contrato y cola canónicos; no inicia ahora una cadena independiente de rediseños.
+- Conservar el frontend ya desplegado, datos, identidad y tipografía. La elección de Next.js + React + TypeScript sigue vigente.
+- Mantener los tres archivos originales de tests y retirar los verificadores temporales al cerrar cada entrega. Conservar respaldos/reversión y las autorizaciones del usuario; no provocar mensajes, eventos o entradas de voz de prueba fuera del alcance autorizado.
+- Una incidencia real se corrige y se registra como excepción concreta; después se retoma la unidad activa. No sustituir el orden por la última pantalla modificada.
+
+## Entregas e instrucciones históricas
+
+Los «siguientes» de este historial describen su momento. La prioridad actual se consulta únicamente en **Orden activo** y en la cabecera de `tasks/todo.md`.
+
+
 Decisión del usuario 23/10/2026: frontend Next.js + React + TypeScript. Migración por pantalla bajo /app, conservando backend Express, OAuth, CSRF, servicios, Socket.IO, tipografía y landing. Primera unidad: contexto de sesión/servidores autorizado, selector, estado/controles básicos de música en vivo y accesos a recorridos existentes. Next compila salida estática servida en el mismo origen; el backend mantiene la autoridad. No exige reescribir el bot ni activa un segundo gestor musical. Aceptación: build/tipos, sesión ausente y permiso retirado, sin datos de otras guilds o tokens OAuth, CSRF, desconexión, cambio de servidor, móvil/teclado y navegador real.
 
 Biblioteca/Me gusta desplegados en `b31c65b`: [alcance y evidencia](../docs/platform/FRONTEND-NEXT.md). Colecciones personales y top autorizado, corazones y reproducción por servicios existentes; doce casos temporales, 22 escenarios de navegador sobre Docker y 25 originales pasan. Siguiente frontend: reproductor completo. El resto del plan y P0/P1 musical conservan su alcance.
@@ -32,11 +68,11 @@ Segunda entrega: normalizar capacidades del registro actual sin inicializar hand
 
 Workspace activo: `/home/OBEY-YOUR-MASTER`, rama `feature/obey-main-implementation`. La copia `/home/obey-platform-work` es histórica; continuar directamente en el proyecto principal según la corrección del usuario. Estado exacto en `docs/platform/CHECKPOINT.md`.
 
-El maestro integral gobierna los siete antecedentes y recursos aprobados. El trabajo autorizado comprende desarrollo incremental, documentación, pruebas y PR hacia `feat/motor-soundy`; no comprende merge/deploy, cambios sobre servidores reales de usuarios, restauraciones reales ni gasto externo. Landing conservado; identidad web existente y personaje aprobado dentro de Discord.
+Alcance inicial, anterior a las autorizaciones posteriores de despliegue y migración frontend del usuario: el maestro integral gobierna los siete antecedentes y recursos aprobados. El trabajo autorizado en ese momento comprendía desarrollo incremental, documentación, pruebas y PR hacia `feat/motor-soundy`; no comprende merge/deploy, cambios sobre servidores reales de usuarios, restauraciones reales ni gasto externo. Landing conservado; identidad web existente y personaje aprobado dentro de Discord.
 
 ## Decisiones y dependencias
 
-CommonJS/EJS/Mongo se conservan. Shoukaku sigue en producción como origen de la migración a lavalink-client fijada en la edición 0.15. Manifest/servicios/repositorios/contratos se introducen en la parte modificada; sin reorganización masiva ni adapters vacíos. Discord mantiene autoridad de recursos; Mongo mantiene configuración/datos OBEY; Redis coordina estado temporal, locks y cola durable tras ADR. Los handlers Discord y HTTP llaman al mismo servicio y proyección de estado. Cada slice conecta permisos, persistencia, errores, HTTP/eventos/web y tests de ese dominio.
+CommonJS/Express/Mongo se conservan. El frontend migra por capacidad a Next.js + React + TypeScript; EJS mantiene las pantallas pendientes. Shoukaku sigue en producción como origen de la migración a lavalink-client fijada en la edición 0.15. Manifest/servicios/repositorios/contratos se introducen en la parte modificada; sin reorganización masiva ni adapters vacíos. Discord mantiene autoridad de recursos; Mongo mantiene configuración/datos OBEY; Redis coordina estado temporal, locks y cola durable tras ADR. Los handlers Discord y HTTP llaman al mismo servicio y proyección de estado. Cada slice conecta permisos, persistencia, errores, HTTP/eventos/web y tests de ese dominio.
 
 ```mermaid
 flowchart TD
