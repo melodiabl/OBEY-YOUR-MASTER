@@ -1756,3 +1756,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Desplegar y guardar [evidencia](../docs/platform/evidence/music-continuity-deployment-20261023.json); temporales retirados, reversión conservada.
 - [ ] Conciliar consumidores/autoridad de cola y reemplazar Shoukaku por lavalink-client conforme al maestro 0.15.
 - [ ] Completar matriz musical: fin/skip simultáneo, cola manual/autoplay, repeat/shuffle, stop/búsqueda, seek/pausa, reinicio/recuperación y dos guilds; escucha real pendiente.
+
+## 23/10/2026 · auditoría y arreglo de búsquedas
+
+- [x] Combinar cuatro fuentes y respaldo acotado, ampliar identidad Spotify y filtrar versiones/homónimos sin debilitar matching de audio.
+- [x] Páginas de diez hasta cincuenta pistas; servicio común prefix/slash/web; selección única con permisos frescos y resolución antes de voz.
+- [x] Corregir enfriamiento del audio por consultas fallidas, visto durante verificación; caché estable comprobada.
+- [x] Desplegar `ce546e8`; 25 casos temporales, 25 originales, 51 hashes y salud 200. [Evidencia](../docs/platform/evidence/music-search-audit-deployment-20261023.json). Respaldo/reversión conservados y temporales retirados.
+- [ ] Recorrido Discord/escucha real; proveedores públicos y expansión acotada no equivalen a discografía completa. Migración/aceptación global P1 permanecen abiertas.

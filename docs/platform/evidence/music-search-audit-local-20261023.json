@@ -1,0 +1,271 @@
+{
+  "date": "2026-10-23",
+  "implementationCode": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+  "searchCommit": "3290978",
+  "scope": [
+    "prefix play/search",
+    "slash music play/search",
+    "Soundy picker",
+    "GET /api/music/search",
+    "POST /api/player/:guildId/search",
+    "node search, artist expansion and collection selection"
+  ],
+  "findings": [
+    "Early return on two or more results hid other providers",
+    "Serial provider waits accumulated",
+    "Search response from a sparse primary hid backup recordings",
+    "Only ten picker items were reachable despite a larger result count",
+    "Artist plus title queries retained unrelated versions",
+    "Accent folding mixed homonymous artists",
+    "Search grouping confused edition/video duplicates with strict playback identity",
+    "Repeated identical requests duplicated provider work",
+    "Picker selection needed fresh membership and single consumption",
+    "Collection lookup joined voice before resolution and could outlive stop",
+    "Dashboard search used a separate truncated catalog path",
+    "Optional plugin and legacy HTTP failure handling lacked bounded fallback",
+    "Deployment check caught search failures cooling the audio pool; final fix isolates transport health from query availability"
+  ],
+  "changes": {
+    "providers": [
+      "spotify",
+      "youtube",
+      "youtube_music",
+      "apple_music"
+    ],
+    "nodesPerLookup": 2,
+    "providerWaitMs": 3500,
+    "catalogDeadlineMs": 6500,
+    "cacheMs": 20000,
+    "cacheEntries": 100,
+    "simultaneousCatalogJobs": 4,
+    "resultLimit": 50,
+    "pageSize": 10,
+    "artistExpansion": "One exact Spotify identity and up to one matching album; ambiguous identities are not expanded",
+    "playbackMatching": "Strict ISRC/duration matching preserved; discovery song grouping is separate",
+    "selection": "Fresh permissions after resolution; playback delegates to existing playCollection authority"
+  },
+  "verification": {
+    "temporaryCases": 25,
+    "temporaryPassed": 25,
+    "regressionsReproducedBeforeFix": 14,
+    "originalFiles": 3,
+    "originalCases": 25,
+    "originalPassed": 25,
+    "originalSkipped": 0,
+    "typecheckPassed": true,
+    "dependencyBoundariesPassed": true,
+    "newPermanentTests": 0
+  },
+  "providerObservation": [
+    {
+      "query": "adela",
+      "ms": 4914,
+      "count": 15,
+      "spotify": 10,
+      "artists": [
+        "ADÉLA"
+      ],
+      "tracks": [
+        {
+          "title": "Nicole Kidman",
+          "artist": "ADÉLA",
+          "source": "applemusic",
+          "node": "trinium-02"
+        },
+        {
+          "title": "Ain't In LA",
+          "artist": "ADÉLA",
+          "source": "applemusic",
+          "node": "trinium-02"
+        },
+        {
+          "title": "Boys",
+          "artist": "ADÉLA",
+          "source": "applemusic",
+          "node": "trinium-02"
+        },
+        {
+          "title": "I'm The Man",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "KGB",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "SUPERSCAR",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "SexOnTheBeat",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Red Bottoms",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Marijuana",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Fantasize",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Starving Artist",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Hitachi",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "Therapy",
+          "artist": "ADÉLA",
+          "source": "spotify",
+          "node": "serenetia"
+        },
+        {
+          "title": "ADÉLA - MACHINE GIRL (Official Music Video)",
+          "artist": "ADÉLA",
+          "source": "youtube",
+          "node": "serenetia"
+        },
+        {
+          "title": "ADÉLA - DeathByDevotion",
+          "artist": "ADÉLA",
+          "source": "youtube",
+          "node": "serenetia"
+        }
+      ],
+      "albums": [
+        {
+          "title": "PRIMA",
+          "author": "ADÉLA",
+          "total": 11
+        },
+        {
+          "title": "Ain't In LA",
+          "author": "ADÉLA",
+          "total": 3
+        },
+        {
+          "title": "Ain't In LA",
+          "author": "ADÉLA",
+          "total": 3
+        },
+        {
+          "title": "The Provocateur",
+          "author": "ADÉLA",
+          "total": 7
+        },
+        {
+          "title": "PRIMA",
+          "author": "ADÉLA",
+          "total": 11
+        }
+      ]
+    },
+    {
+      "query": "adela cache",
+      "ms": 0,
+      "count": 15
+    }
+  ],
+  "providerRequests": [
+    {
+      "node": "trinium-02",
+      "endpoint": "/loadtracks",
+      "query": "amsearch:adela",
+      "ms": 805,
+      "loadType": "search"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "ytmsearch:adela",
+      "ms": 1303,
+      "loadType": "search"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "spsearch:adela",
+      "ms": 1473,
+      "loadType": "search"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "ytsearch:adela",
+      "ms": 1488,
+      "loadType": "search"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "amsearch:adela",
+      "ms": 1494,
+      "loadType": "search"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadsearch",
+      "query": "spsearch:adela",
+      "ms": 842
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "https://open.spotify.com/album/2yDFVH9CeOHt0sc9eI0aBs",
+      "ms": 473,
+      "loadType": "playlist"
+    },
+    {
+      "node": "serenetia",
+      "endpoint": "/loadtracks",
+      "query": "https://open.spotify.com/artist/2qanRMyA5bNuTvz1dK45OP",
+      "ms": 539,
+      "loadType": "playlist"
+    }
+  ],
+  "providerVerificationKind": "Separate Node process using candidate modules and real provider requests; no changes to the running process files/cache",
+  "limits": [
+    "Counts are provider samples, not a complete Spotify discography guarantee",
+    "Artist endpoint returns top tracks and album expansion is bounded",
+    "Public provider limits and unavailable tracks remain external constraints",
+    "No Discord test messages, synthetic guild events or new voice test joins; no listening verification",
+    "Shoukaku remains active; lavalink-client migration and full P1 acceptance remain open"
+  ],
+  "deployed": false,
+  "temporaryVerifiersRetained": false,
+  "sources": [
+    "https://github.com/topi314/LavaSrc/blob/master/main/src/main/java/com/github/topi314/lavasrc/spotify/SpotifySourceManager.java",
+    "https://github.com/topi314/LavaSearch",
+    "https://docs.discord.com/developers/components/reference"
+  ],
+  "initialDeploymentRegression": {
+    "observed": true,
+    "repeatedQueryChangedCatalog": true,
+    "finalFix": "Only transport/recovery owns node cooldown; search failures do not call nodePool.fail"
+  }
+}

@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "6d5b6660d9b38e5e506347e671ee95fd20ce7e71",
-    "image": "6191934a7e718b50cc6bbdf60742540a18fbb771d4f8c414813c899579b9da05",
+    "code": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+    "image": "a6fc1d60b4710cf78df71a648130dec77c502a3063810dc3e2a89899f7593d3a",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,14 +36,12 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/music-continuity-deployment-20261023.json",
-    "change": "Bounded music recovery preserves valid Discord voice connection and cancels stale restore work",
-    "tag": "release-music-continuity-20261023-6d5b666",
+    "evidence": "evidence/music-search-audit-deployment-20261023.json",
+    "change": "Combined provider/artist search, bounded lookup/cache, paginated Soundy picker and fresh single-use selection",
+    "tag": "release-search-catalog-20261023-ce546e8",
     "status": "healthy",
-    "statusEvidence": "../guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md",
-    "deploymentKind": "application_only_continuity_release",
-    "activeSessionObservedNode": "serenetia",
-    "nodeObservationAt": "2026-10-22T23:57:39.147349+00:00"
+    "statusEvidence": "../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md",
+    "deploymentKind": "application_only_search_catalog_release"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -295,6 +293,26 @@
     "remaining": [
       "lavalink-client migration with one authoritative queue",
       "Full music acceptance matrix and real listening"
+    ],
+    "pushed": false
+  },
+  "musicSearchAudit": {
+    "implementationCode": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+    "commits": [
+      "3290978",
+      "4311148",
+      "ce546e8"
+    ],
+    "deployed": true,
+    "report": "docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md",
+    "localEvidence": "evidence/music-search-audit-local-20261023.json",
+    "deploymentEvidence": "evidence/music-search-audit-deployment-20261023.json",
+    "temporaryCases": 25,
+    "originalCases": 25,
+    "remaining": [
+      "User Discord walkthrough/listening",
+      "Provider quotas and bounded expansion do not guarantee complete artist discography",
+      "Full P1 client migration and acceptance remain open"
     ],
     "pushed": false
   }

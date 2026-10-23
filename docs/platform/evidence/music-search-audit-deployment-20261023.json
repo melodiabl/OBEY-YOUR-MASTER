@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-23",
+  "code": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+  "image": "a6fc1d60b4710cf78df71a648130dec77c502a3063810dc3e2a89899f7593d3a",
+  "imageTag": "localhost/obey-your-master_bot:release-search-catalog-20261023-ce546e8",
+  "cutoverAt": "2026-10-23T02:57:32.399051+00:00",
+  "deployed": true,
+  "imageVerification": {
+    "hashes": 51,
+    "mismatch": [],
+    "tests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "testExit": 0
+  },
+  "runtimeVerification": {
+    "hashes": 51,
+    "mismatch": [],
+    "health": {
+      "local": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 34
+        }
+      },
+      "public": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 34
+        }
+      }
+    },
+    "searches": [
+      {
+        "query": "adela",
+        "http": 200,
+        "ms": 4679,
+        "count": 9,
+        "spotify": 4,
+        "artists": [
+          "ADÉLA"
+        ],
+        "tracks": [
+          {
+            "title": "Nicole Kidman",
+            "artist": "ADÉLA",
+            "source": "applemusic"
+          },
+          {
+            "title": "Ain't In LA",
+            "artist": "ADÉLA",
+            "source": "applemusic"
+          },
+          {
+            "title": "Boys",
+            "artist": "ADÉLA",
+            "source": "applemusic"
+          },
+          {
+            "title": "I'm The Man",
+            "artist": "ADÉLA",
+            "source": "spotify"
+          },
+          {
+            "title": "KGB",
+            "artist": "ADÉLA",
+            "source": "spotify"
+          },
+          {
+            "title": "SUPERSCAR",
+            "artist": "ADÉLA",
+            "source": "spotify"
+          },
+          {
+            "title": "SexOnTheBeat",
+            "artist": "ADÉLA",
+            "source": "spotify"
+          },
+          {
+            "title": "ADÉLA - MACHINE GIRL (Official Music Video)",
+            "artist": "ADÉLA",
+            "source": "youtube"
+          },
+          {
+            "title": "ADÉLA - Red Bottoms",
+            "artist": "ADÉLA",
+            "source": "youtube"
+          }
+        ]
+      },
+      {
+        "query": "adela Nicole Kidman",
+        "http": 200,
+        "ms": 3658,
+        "count": 1,
+        "spotify": 0,
+        "artists": [
+          "ADÉLA"
+        ],
+        "tracks": [
+          {
+            "title": "Nicole Kidman",
+            "artist": "ADÉLA",
+            "source": "ytmusic"
+          }
+        ]
+      },
+      {
+        "query": "adela cache",
+        "http": 200,
+        "ms": 7,
+        "count": 9
+      }
+    ],
+    "privateWithoutSession": 401,
+    "defaultNode": "trinium-02",
+    "privateEnabled": "false"
+  },
+  "startup": {
+    "connectedNodes": [
+      "millohost",
+      "serenetia",
+      "trinium-02"
+    ],
+    "musicRecoveryErrors": 0,
+    "uncaughtException": false
+  },
+  "backup": {
+    "backup": "/home/backups/obey-releases/2026-10-23T02-44-22-292Z",
+    "bytes": 59251954,
+    "dumpExitCode": 0,
+    "gzipCrcVerified": true,
+    "uncompressedBytes": 120590523
+  },
+  "rollback": {
+    "code": "6d5b6660d9b38e5e506347e671ee95fd20ce7e71",
+    "image": "6191934a7e718b50cc6bbdf60742540a18fbb771d4f8c414813c899579b9da05",
+    "privateArgumentsPreserved": true,
+    "containerName": "obey_bot"
+  },
+  "initialDeploymentRegression": {
+    "code": "4311148",
+    "observedRepeatedCatalogCounts": [
+      14,
+      4
+    ],
+    "correctiveCode": "ce546e81aa2a29ef9a7df55a6de5531c08cbaab8",
+    "reason": "Search failures incorrectly cooled the audio pool. Search now leaves transport cooldown ownership unchanged."
+  },
+  "localEvidence": "music-search-audit-local-20261023.json",
+  "limits": [
+    "Provider samples vary; expansion is bounded, not a complete Spotify discography",
+    "Candidate process observed 15 artist tracks/10 Spotify; final HTTP runtime sample observed 9/4 after grouping and provider availability",
+    "Cache verification uses the same live node set; a transport availability change can require a fresh catalog",
+    "No Discord messages, artificial guild events or new voice joins for testing; no listening verification",
+    "Shoukaku still active; full P1 and lavalink-client migration remain open"
+  ],
+  "temporaryVerifiersRetained": false,
+  "pushed": false,
+  "observation": {
+    "samples": [
+      {
+        "at": "2026-10-23T02:59:51.740293+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T02:59:56.891139+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:02.206258+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:08.556775+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:13.676190+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:18.787439+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:23.930969+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:29.025386+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:34.117046+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      },
+      {
+        "at": "2026-10-23T03:00:39.199201+00:00",
+        "state": "running",
+        "health": "healthy",
+        "restarts": 0,
+        "http": 200,
+        "database": true,
+        "music": true
+      }
+    ]
+  }
+}

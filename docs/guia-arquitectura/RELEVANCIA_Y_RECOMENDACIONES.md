@@ -23,3 +23,30 @@ Verificación de esta parte: nueve casos temporales, incluyendo rechazo de acces
 Navegador Chromium 151 por CDP en preview aislada con fixtures: sección, tarjeta relacionada y texto de Me gusta renderizados; cero excepciones/runtime o fallos de red. Chrome DevTools MCP no pudo iniciar como root; la comprobación se realizó con un perfil local separado. No sustituye un recorrido con sesión real.
 
 [Evidencia local](../platform/evidence/music-relevance-local-20261023.json). Estado: desplegado `c5033b7`, imagen `c296f83`, saludable, cero reinicios automáticos. Cuarenta hashes y 25 tests pasan en la imagen; consultas reales en contenedor: seis pistas de Adele, todas de la artista, y veinte relacionadas; salud local/pública HTTP 200, endpoint privado sin sesión 401. La muestra varía entre consultas. [Evidencia de despliegue](../platform/evidence/music-relevance-deployment-20261023.json). Respaldo de 59.239.821 bytes y argumentos de reversión conservados. La primera recreación usó el nombre candidato histórico: se corrigió a obey_bot y se comprobaron Gateway/Mongo/heartbeat antes del cierre. No acredita escucha real en Discord ni migración a lavalink-client.
+
+## Auditoría y corrección integral de búsquedas · 23/10/2026
+
+Alcance: búsquedas activas prefix/slash de play/search, selector Soundy, GET /api/music/search y POST /api/player/:guildId/search, resolución y selección de colecciones. Se conserva el servicio de reproducción, doce controles, privacidad, datos y filtros de fuentes/Shorts. El helper legacy musiccatalog conserva sus contratos originales; no es el propietario del nuevo recorrido activo.
+
+| Hallazgo | Corrección verificada |
+| --- | --- |
+| Retorno anticipado con 2–3 pistas | Combinar las cuatro fuentes elegidas antes de ordenar |
+| Esperas en serie y lista escasa del principal | Dos nodos consultados en paralelo; espera por fuente 3,5 s y presupuesto de catálogo 6,5 s |
+| Diez opciones visibles y resultados restantes inaccesibles | Páginas de diez, hasta cincuenta pistas, índice global y contador real |
+| Búsqueda de nombre sin catálogo del artista | LavaSearch identifica una única URL Spotify del artista y consulta sus principales y un álbum pertinente |
+| Homónimos y versiones ajenas en consulta artista+título | Ancla por créditos y título, identidad Spotify y canciones observadas; no ampliar una identidad ambigua |
+| Ediciones/videoclips repetidos | Agrupar para descubrimiento sin debilitar ISRC/duración al resolver audio |
+| Peticiones repetidas | Caché pública de 20 s, coalescencia, máximo cien entradas y cuatro trabajos simultáneos |
+| Selector viejo, doble clic o permiso retirado | Consumo único y pertenencia/voz/DJ revalidados antes del efecto |
+| Entrada a voz antes de resolver un álbum; stop durante carga | Resolver primero, comprobar generación y delegar a playCollection existente |
+| Catálogo web divergente | Mismo servicio; consultas inválidas rechazadas y saturación identificada como reintentable |
+| Un fallo de búsqueda enfriaba el nodo y cambiaba el catálogo siguiente | La disponibilidad de audio pertenece solo al transporte/recuperador; la búsqueda no llama nodePool.fail |
+| Plugin opcional o HTTP legado fallidos | Respaldo de metadata y límites de tiempo/tamaño; conservar resultados válidos |
+
+La búsqueda no cambia el nodo del audio solo por abrir resultados. La caché no contiene actor, favoritos o historial; cada respuesta adjunta su solicitante fuera de ella. La coincidencia de playback sigue comprobando ISRC/duración; la agrupación de presentación no autoriza una grabación distinta. Los enlaces/colecciones directos conservan orden y resolución. No se hace un reemplazo global de recursos ni una migración de cliente como parte de este arreglo.
+
+Spotify: la consulta spsearch del upstream consultado usa diez resultados; los nodos públicos observados entregan muestras limitadas y su configuración no se administra desde OBEY. No se promete paginación remota cambiando un número local. La ampliación usa APIs del nodo y URLs Spotify validadas, no IDs inventadas o una cuenta Spotify ajena. Los principales del artista y un álbum son una ampliación acotada, no discografía exhaustiva. [LavaSrc](https://github.com/topi314/LavaSrc/blob/master/main/src/main/java/com/github/topi314/lavasrc/spotify/SpotifySourceManager.java), [LavaSearch](https://github.com/topi314/LavaSearch), [componentes Discord](https://docs.discord.com/developers/components/reference).
+
+Evidencia: 25 casos temporales (catorce regresiones reproducidas antes de corregir) y 25 originales, sin omisiones. Tipos y fronteras de dependencias pasan. El candidato consultado en un proceso separado devuelve quince pistas para adela, diez de Spotify, todas acreditadas a ADÉLA; PRIMA contiene once pistas y la consulta repetida responde en menos de un milisegundo medido. Los conteos varían con el proveedor. Sin mensajes/eventos/voz artificiales o escucha acreditada. [Evidencia local](../platform/evidence/music-search-audit-local-20261023.json). Desplegado en `ce546e8`, imagen `a6fc1d6`; la entrega c5033b7 anterior conserva su evidencia histórica. [Evidencia del despliegue](../platform/evidence/music-search-audit-deployment-20261023.json).
+
+La primera comprobación desplegada detectó un fallo adicional: errores de consulta marcaban el pool completo y la repetición pasó de catorce a cuatro pistas. `ce546e8` retira esa mutación; transporte/recuperación conservan su autoridad. Verificación final HTTP: nueve pistas, cuatro de Spotify y todas ADÉLA; Nicole Kidman devuelve una. Repetición: las mismas nueve en 7 ms. La muestra candidata de quince/diez corresponde a otra consulta/disponibilidad, no a una cantidad garantizada. Salud local/pública 200, privados sin sesión 401, cero reinicios automáticos y 51 hashes coincidentes. Respaldo Mongo 59.251.954 bytes con exit 0/CRC gzip válido; reversión 6d5b666 conservada.
