@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-23",
+  "code": "6d5b6660d9b38e5e506347e671ee95fd20ce7e71",
+  "image": "6191934a7e718b50cc6bbdf60742540a18fbb771d4f8c414813c899579b9da05",
+  "imageTag": "localhost/obey-your-master_bot:release-music-continuity-20261023-6d5b666",
+  "cutoverAt": "2026-10-22T23:55:19.695016+00:00",
+  "deployed": true,
+  "planStage": "P1 partial continuity; client migration open",
+  "musicClient": "Shoukaku 4.3.0",
+  "imageVerification": {
+    "hashes": 42,
+    "mismatch": [],
+    "tests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "testExit": 0
+  },
+  "runtimeVerification": {
+    "hashes": 42,
+    "mismatch": [],
+    "health": {
+      "local": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 97
+        }
+      },
+      "public": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 97
+        }
+      }
+    },
+    "defaultNode": "trinium-02",
+    "privateEnabled": "false"
+  },
+  "observation": {
+    "start": "2026-10-22T23:55:39.541778+00:00",
+    "end": "2026-10-22T23:57:39.147349+00:00",
+    "samples": 12,
+    "state": "running",
+    "health": "healthy",
+    "automaticRestarts": 0,
+    "botVoiceDepartures": 0,
+    "recoveryErrors": 0,
+    "sessionRestores": [
+      "node=serenetia status=playing volume=100 queue=0 position=90"
+    ],
+    "playStarts": 3,
+    "playbackHealth": [
+      {
+        "event": "music_playback_health",
+        "entryPoint": "player_update",
+        "guild": "987bace59463",
+        "node": "trinium-02",
+        "connected": true,
+        "voicePingMs": null,
+        "positionMs": 320,
+        "nodeCpuPercent": null,
+        "nodeFrames": null
+      },
+      {
+        "event": "music_playback_health",
+        "entryPoint": "player_update",
+        "guild": "987bace59463",
+        "node": "trinium-02",
+        "connected": true,
+        "voicePingMs": 140,
+        "positionMs": 30320,
+        "nodeCpuPercent": null,
+        "nodeFrames": {
+          "sent": 0,
+          "deficit": 0,
+          "nulled": 0
+        }
+      },
+      {
+        "event": "music_playback_health",
+        "entryPoint": "player_update",
+        "guild": "987bace59463",
+        "node": "serenetia",
+        "connected": true,
+        "voicePingMs": 134,
+        "positionMs": 11440,
+        "nodeCpuPercent": 4.78,
+        "nodeFrames": null
+      }
+    ],
+    "gatewayReady": true,
+    "databaseReady": true
+  },
+  "backup": {
+    "backup": "/home/backups/obey-releases/2026-10-22T23-51-40-551Z",
+    "bytes": 59234772,
+    "dumpExitCode": 0,
+    "gzipCrcVerified": true,
+    "uncompressedBytes": 120528422,
+    "note": "Node wrapper reached its wait deadline; underlying mongodump finished successfully. Exit 0 verified through Podman event and archive CRC."
+  },
+  "rollback": {
+    "code": "c5033b70f65f9a9e6243b1a2e9b14e7e1eab9a9f",
+    "image": "c296f838b75f35ac58ecc63b055475208ec03e4488ec5bae2ea1eeed7957a480",
+    "imageName": "localhost/obey-your-master_bot:release-music-relevance-20261023-c5033b7",
+    "containerName": "obey_bot",
+    "privateArgumentsPreserved": true
+  },
+  "verificationLimits": [
+    "Runtime observation uses existing session and real activity; no synthetic Discord events/messages or new voice channels for tests",
+    "Ten temporary simulated regression cases are separate from real runtime observation",
+    "No listening verification or full P1 acceptance; no lavalink-client cutover",
+    "Configured default trinium-02 differs from observed active session restored on serenetia"
+  ],
+  "localEvidence": "music-continuity-local-20261023.json",
+  "temporaryVerifiersRetained": false,
+  "pushed": false
+}

@@ -1,5 +1,7 @@
 # Plan de implementación de la plataforma OBEY
 
+P1 parcial desplegado en `6d5b666`: [continuidad y recuperación](../docs/guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md), sin ciclos de voz durante la ventana observada. La siguiente unidad es inventariar consumidores de Shoukaku y migrar al cliente elegido con cola única y paridad comprobada; siguen abiertas aceptación P0/P1 y escucha real.
+
 Prioridad vigente del 23/10/2026: [entrega 0.15 conciliada](../docs/guia-arquitectura/CONCILIACION_2026-10-23.md), con P0 de base/inventario parcialmente comprobado y P1 de continuidad/migración a lavalink-client como siguiente unidad. Los checkpoints anteriores conservan avances y fechas.
 
 Corrección urgente solicitada después de la recepción: [relevancia y gustos](../docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), desplegada en c5033b7. Cuatro proveedores, listas pertinentes y recomendaciones por semilla/Me gusta; conservar pendientes de escucha real y continuar P0/P1 del maestro.

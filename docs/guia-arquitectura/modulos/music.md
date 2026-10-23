@@ -209,3 +209,9 @@ El [capítulo 22](../sistema/22_COMUNIDAD_Y_GITHUB.md) y [mapa de canales](../co
 ## Conciliación de investigación 0.14
 
 El alcance de music se relaciona con referencias, recorrido, material y aceptación en [plan de ejecución](../investigacion-20261022/08_PLAN_DE_EJECUCION.md) y modulos.json. No se marca implementado ni se cambia su contrato operativo por añadir esta referencia. Las ampliaciones solicitadas se ejecutan por etapas, conservando datos y restricciones vigentes.
+
+## Ejecución vigente · 23/10/2026 · P1 parcial
+
+Implementación `6d5b666`, desplegada: conexión de voz válida reutilizada al reconstruir player/cambiar nodo, presupuesto de cinco intentos, cancelación por generación y descarte de eventos de player retirado. El panel no gobierna la recuperación del audio. [Informe y límites](../CONTINUIDAD_Y_RECUPERACION.md), [evidencia local](../../platform/evidence/music-continuity-local-20261023.json), [runtime](../../platform/evidence/music-continuity-deployment-20261023.json). Diez casos simulados y 25 originales pasan; en dos minutos de actividad existente se observó restauración en Serenetia sin salidas de voz. No acredita escucha ni aceptación completa de esta ficha.
+
+Shoukaku 4.3.0 sigue activo. La siguiente unidad inventaría `client.shoukaku`, Player/Rest, enrutado de eventos/voz, apagado, cola/snapshot/cancelación y consumidores Discord/web; después migra a lavalink-client conservando una sola autoridad de cola. Fijar versión publicada compatible con CommonJS/Node y capacidades reales del nodo. Comprobar la matriz del capítulo 07 antes de retirar el puente. Mantener Soundy, doce controles, favoritos, reloj de letras, cuatro fuentes y privados apagados. Casillas MOD-MUSIC/ARCH siguen pendientes hasta su aceptación.

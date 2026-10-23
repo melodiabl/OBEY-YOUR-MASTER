@@ -1,5 +1,7 @@
 > Actualización 0.15 conciliada el 23/10/2026: conservar los cierres parciales y evidencias de este plan. La nueva secuencia P0–P6 está en [investigación](investigacion-20261022/08_PLAN_DE_EJECUCION.md); P1 exige lavalink-client, todavía no instalado. [Estado real](CONCILIACION_2026-10-23.md).
 
+> P1 parcial desplegado `6d5b666`: [continuidad sin ciclos de voz](CONTINUIDAD_Y_RECUPERACION.md). Cinco intentos, cancelación y player retirado comprobados; migración a lavalink-client y matriz completa siguen abiertas en `MOD-MUSIC`. No modifica los cierres ARCH/MOD.
+
 # Plan por etapas
 
 Los IDs expresan dependencias técnicas, no fechas prometidas ni permiso de despliegue. Cada tarea debe cerrar una diferencia concreta y mantener estado/evidencia.

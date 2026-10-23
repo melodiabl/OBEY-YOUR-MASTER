@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 23/10/2026 · continuidad musical desplegada, P1 parcial
+
+Código `6d5b666`, imagen `6191934`, bot saludable y cero reinicios automáticos. Se reutiliza la conexión Discord válida para reconstruir/cambiar player remoto; cinco intentos con espera creciente, cancelación por stop y rechazo de eventos retirados. Diez casos temporales y 25 originales pasan; 42 hashes coinciden en imagen/runtime. En doce muestras durante dos minutos: cero salidas de voz, cero errores de recuperación y una sesión restaurada en Serenetia, conectada y con posición confirmada por el nodo. Trinium 02 sigue predeterminado, privado apagado. Backup y reversión c5033b7 conservados; temporales retirados. [Alcance](../guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md), [evidencia](evidence/music-continuity-deployment-20261023.json). Sin prueba de escucha, push o cierre global de P1.
+
+Lectura del maestro 0.15 y contratos: P0 conserva conciliación de comandos/propietarios pendiente; P1 exige migración real de Shoukaku a lavalink-client y una sola cola por guild. Siguiente: inventariar consumidores y paridad de controles/eventos/REST antes del corte. P2 mantiene configuración/bienvenida/tickets/moderación/logs; recursos e idiomas se integran por recorrido. No instalar un cliente sin conectar sus consumidores ni dar por terminado un dominio por renovar su menú.
+
 ## 23/10/2026 · búsquedas y afinidad musical desplegadas
 
 Código c5033b7, imagen c296f83, bot saludable y cero reinicios automáticos; Trinium 02, respaldos públicos y privado apagado. Cuatro fuentes elegidas: Spotify/YouTube/YouTube Music/Apple. Filtro de artista, duplicados/canales y recuperación sin JioSaavn; autoplay/playmusicmix usan mix de grabación confirmada. Panel con recomendaciones privadas por Me gusta de sesión o historial de guild, sin inventar gustos. 20 casos temporales, 25 originales, Chromium aislado, 40 hashes y consultas reales desde contenedor pasan. [Alcance y límites](../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), [despliegue](evidence/music-relevance-deployment-20261023.json). Reversión conservada; el primer arranque conservaba un nombre candidato antiguo y se corrigió a obey_bot. No hubo mensajes/voz de prueba, push ni migración a lavalink-client. Las recepciones siguientes conservan su contexto histórico.

@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "c5033b70f65f9a9e6243b1a2e9b14e7e1eab9a9f",
-    "image": "c296f838b75f35ac58ecc63b055475208ec03e4488ec5bae2ea1eeed7957a480",
+    "code": "6d5b6660d9b38e5e506347e671ee95fd20ce7e71",
+    "image": "6191934a7e718b50cc6bbdf60742540a18fbb771d4f8c414813c899579b9da05",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,21 +36,14 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/music-relevance-deployment-20261023.json",
-    "change": "Relevant artist searches, four music providers, related autoplay/mix and private likes/history discovery",
-    "tag": "release-music-relevance-20261023-c5033b7",
+    "evidence": "evidence/music-continuity-deployment-20261023.json",
+    "change": "Bounded music recovery preserves valid Discord voice connection and cancels stale restore work",
+    "tag": "release-music-continuity-20261023-6d5b666",
     "status": "healthy",
-    "statusEvidence": "../guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md",
-    "connectedPublicNodes": [
-      "trinium-02",
-      "serenetia",
-      "millohost"
-    ],
-    "unconnectedConfiguredBackupNodes": [
-      "gdjkhp"
-    ],
-    "selectedNodeConnected": true,
-    "deploymentKind": "application_only_layer_on_07da107"
+    "statusEvidence": "../guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md",
+    "deploymentKind": "application_only_continuity_release",
+    "activeSessionObservedNode": "serenetia",
+    "nodeObservationAt": "2026-10-22T23:57:39.147349+00:00"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -291,5 +284,18 @@
     "deployed": true,
     "musicClientMigrated": false,
     "remaining": "Actual Discord walkthrough/listening; genres use provider seed affinity, not demographic or guaranteed genre classification"
+  },
+  "musicContinuity": {
+    "implementationCode": "6d5b6660d9b38e5e506347e671ee95fd20ce7e71",
+    "deployed": true,
+    "planStage": "P1 partial",
+    "report": "docs/guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md",
+    "localEvidence": "evidence/music-continuity-local-20261023.json",
+    "deploymentEvidence": "evidence/music-continuity-deployment-20261023.json",
+    "remaining": [
+      "lavalink-client migration with one authoritative queue",
+      "Full music acceptance matrix and real listening"
+    ],
+    "pushed": false
   }
 }

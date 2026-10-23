@@ -1,4 +1,4 @@
-> Checkout vigente: esta entrega se concilió el 23/10/2026 sobre `cea13f0`; el bot desplegado está en `c5033b7`, con Trinium 02, cuatro proveedores y [relevancia/recomendaciones](docs/guia-arquitectura/RELEVANCIA_Y_RECOMENDACIONES.md), conservando las correcciones de álbumes/radio. `ENTREGA.json` describe el paquete recibido, no certifica este checkout. Estado y siguiente etapa en [conciliación](docs/guia-arquitectura/CONCILIACION_2026-10-23.md).
+> Checkout vigente: esta entrega se concilió el 23/10/2026 sobre `cea13f0`; el bot desplegado está en `6d5b666`, con [continuidad y recuperación](docs/guia-arquitectura/CONTINUIDAD_Y_RECUPERACION.md), cuatro proveedores y relevancia/recomendaciones, conservando las correcciones de álbumes/radio. Trinium 02 es el predeterminado y una sesión se observó recuperada en Serenetia. `ENTREGA.json` describe el paquete recibido, no certifica este checkout. Estado y siguiente etapa en [conciliación](docs/guia-arquitectura/CONCILIACION_2026-10-23.md).
 
 # OBEY · Proyecto y guía vigentes
 

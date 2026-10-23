@@ -1748,3 +1748,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Conectar mix relacionado a autoplay/playmusicmix y descubrimiento privado por Me gusta/historial; identidad de sesión, permisos de guild, cancelación y vacío honesto.
 - [x] Veinte casos temporales y 25 originales; Chromium aislado y proveedor real. Desplegar c5033b7: 40 hashes, salud HTTP local/pública 200, acceso privado sin sesión 401, respaldo/reversión conservados. [Evidencia](../docs/platform/evidence/music-relevance-deployment-20261023.json).
 - [ ] Recorrido y escucha reales del usuario en Discord/panel; conservar incidentes y etapas del plan 0.15 abiertas. Afinidad del proveedor no garantiza clasificación exacta de géneros.
+
+## 23/10/2026 · P1 continuidad, alcance parcial
+
+- [x] Corregir pérdida de player remoto sin forzar salida de voz cuando la conexión sigue válida (`6d5b666`).
+- [x] Acotar recuperación, cancelar por stop e ignorar player retirado; diez casos temporales y 25 originales pasan.
+- [x] Desplegar y guardar [evidencia](../docs/platform/evidence/music-continuity-deployment-20261023.json); temporales retirados, reversión conservada.
+- [ ] Conciliar consumidores/autoridad de cola y reemplazar Shoukaku por lavalink-client conforme al maestro 0.15.
+- [ ] Completar matriz musical: fin/skip simultáneo, cola manual/autoplay, repeat/shuffle, stop/búsqueda, seek/pausa, reinicio/recuperación y dos guilds; escucha real pendiente.
