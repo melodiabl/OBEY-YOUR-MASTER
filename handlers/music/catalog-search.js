@@ -28,8 +28,9 @@ async function collect(client, nodes, query) {
           .map(track => ({ ...track, _resolvedNode: node.name }))
       } catch { failures++; errors++; return [] }
     }))
-    if (errors === identifiers.length) client.nodePool?.fail(node.name)
-    else successful.push({ node, tracks: batches.flat() })
+    // A failed query or provider quota says nothing about voice availability.
+    // Only the node transport/recovery owner changes the audio pool cooldown.
+    if (errors < identifiers.length) successful.push({ node, tracks: batches.flat() })
   }))
   // Stable source/node order matters: completion time must not decide the winner.
   for (const node of nodes.slice(0, 2)) rows.push(...(successful.find(batch => batch.node === node)?.tracks || []))
