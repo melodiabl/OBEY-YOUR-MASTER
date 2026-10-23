@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-23",
+  "phase": "P0",
+  "status": "candidate_checks_passed_deployment_pending",
+  "scope": "Effective command/route implementation ownership, explicit alias policy, declared dependencies and reproducible migration-client compatibility",
+  "baseRuntime": {
+    "code": "b31c65bffe3f95ad4a5802d96f18c5384d308fd8",
+    "image": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
+    "tag": "localhost/obey-your-master_bot:release-next-library-20261023-b31c65b",
+    "health": "healthy",
+    "restarts": 0
+  },
+  "metadataDiscrepanciesFound": {
+    "storedTag": "release-music-boundary-20261023-7801061",
+    "actualTag": "localhost/obey-your-master_bot:release-next-library-20261023-b31c65b",
+    "storedDeploymentKind": "application_only_music_facade_release",
+    "storedStatusEvidence": "../guia-arquitectura/modulos/music.md"
+  },
+  "inventory": {
+    "source": "../operation-ownership.json",
+    "commands": 675,
+    "prefix": 531,
+    "slashHandlers": 144,
+    "slashTopLevel": 20,
+    "aliases": 779,
+    "httpRoutes": 95,
+    "sourceFiles": 963,
+    "unlocatedCommands": 0,
+    "unlocatedRoutes": 0,
+    "ownerMeaning": "Current orchestration adapter file; canonical business-service ownership and behavior acceptance are not inferred"
+  },
+  "aliases": {
+    "aliasesCompared": 779,
+    "collisionAliases": 26,
+    "winnersUnchanged": true,
+    "preferredRulesFrozen": true
+  },
+  "dependencyChanges": {
+    "explicitDirectPackages": {
+      "@discordjs/builders": "1.14.1",
+      "@discordjs/rest": "2.6.3",
+      "form-data": "4.0.6",
+      "node-fetch": "2.7.0",
+      "request": "2.88.2",
+      "ws": "8.21.0"
+    },
+    "installedVersionsChanged": 0,
+    "installedIntegrityChanged": 0,
+    "legacyException": {
+      "name": "fortnite",
+      "entrypoint": "handlers/epicgamesverification.js",
+      "startupEnabled": false,
+      "functionalAcceptance": "pending"
+    }
+  },
+  "migrationClient": {
+    "node": "v22.23.2",
+    "package": "lavalink-client",
+    "version": "2.11.0",
+    "integrity": "sha512-x4mobBpwSjJ+jC2XDevcMc8Mj454Bx3cTfmWgtLHisY+U/HlK7ubWkdHawZrEwBW5E6zIDjoiBvVBR8FDIUdkw==",
+    "requiredWs": "^8.21.3",
+    "resolvedWs": "8.22.0",
+    "commonJs": true,
+    "cleanFrozenInstall": true,
+    "productionInstalled": false,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "manifestRoutes": {
+    "music": 34,
+    "welcome": 9,
+    "registeredTotal": 95,
+    "allDeclaredRoutesMatched": true
+  },
+  "verification": {
+    "realLoadersInNetworkDisabledContainer": true,
+    "realExpressCompositionWithoutRequests": true,
+    "ciInventoryGatePassedLocally": true,
+    "originalTests": 25,
+    "welcomeTypes": true,
+    "welcomeBoundaries": true,
+    "frontendTypes": true,
+    "remoteCiRun": false,
+    "rootAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "limits": [
+    "Adapters are located; this does not accept all commands or domain migrations",
+    "Prefix/slash/web shared-intent and policy/storage reconciliation remain to be reviewed before declaring G01/G02 globally closed",
+    "Shoukaku remains active; P1 queue transfer and real music acceptance are pending",
+    "No login, command invocation, Discord messages, database writes or voice joins were used for the inventory"
+  ],
+  "deployment": null
+}

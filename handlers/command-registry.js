@@ -1,6 +1,34 @@
 // Command names always take precedence over aliases. Resolve legacy aliases once.
 const { isRestrictedCommand } = require('./command-policy')
-const PREFERRED_ALIASES = { awayfromkeyboard: 'afk', cmdlog: 'setup-admincmdlog', 'setup-caps': 'setup-anticaps', setupcaps: 'setup-anticaps', givemoney: 'pay', tobank: 'deposit', uinfo: 'userinfo', quickcl: 'instantclose', banhammer: 'ban', tempban: 'ban', ap: 'autoplay', p: 'play', mix: 'playmusicmix', prev: 'playprevious', slow: 'slowmode', pruning: 'togglepruning', toggleplaymsg: 'toggleplaymessage' }
+// Preserve the effective winners for all known collisions; command names still win.
+const PREFERRED_ALIASES = Object.freeze({
+  "ap": "autoplay",
+  "awayfromkeyboard": "afk",
+  "banhammer": "ban",
+  "cf": "cleareq",
+  "cmdlog": "setup-admincmdlog",
+  "ecoaddmoney": "addmoney",
+  "ecoremovemoney": "ownerremovemoney",
+  "givemoney": "pay",
+  "hardreset": "reset",
+  "lockch": "channellock",
+  "mix": "playmusicmix",
+  "nofilter": "cleareq",
+  "p": "play",
+  "prev": "playprevious",
+  "pruning": "togglepruning",
+  "quickcl": "instantclose",
+  "setup-caps": "setup-anticaps",
+  "setup-mod": "setup-admin",
+  "setupcaps": "setup-anticaps",
+  "setupmod": "setup-admin",
+  "slow": "slowmode",
+  "tempban": "ban",
+  "tobank": "deposit",
+  "toggleplaymsg": "toggleplaymessage",
+  "uinfo": "userinfo",
+  "unlockch": "channelunlock",
+})
 function buildAliases(commands) {
   const aliases = new Map(), conflicts = []
   for (const command of [...commands.values()].sort((a, b) => a.name.localeCompare(b.name))) {
@@ -76,4 +104,4 @@ function buildCommandCatalog(client) {
   }
   return entries.sort((a, b) => a.id.localeCompare(b.id))
 }
-module.exports = { buildAliases, buildCommandCatalog }
+module.exports = { buildAliases, buildCommandCatalog, PREFERRED_ALIASES }

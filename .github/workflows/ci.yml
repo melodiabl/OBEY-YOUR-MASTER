@@ -34,3 +34,63 @@ jobs:
       - run: node scripts/obey-assets.js
       - name: Build Next.js panel and runtime image without starting services
         run: docker build -t obey-platform-check .
+      - name: Validate effective inventory, owners and alias policy in the image
+        run: |
+          docker run --rm --network none -i --entrypoint node obey-platform-check <<'NODE'
+          const fs = require('node:fs'), crypto = require('node:crypto'), assert = require('node:assert/strict')
+          const inventory = require('./docs/platform/operation-ownership.json')
+          for (const [file, expected] of Object.entries(inventory.sourceHashes)) {
+            assert(!file.includes('..') && !file.startsWith('/'))
+            assert.equal(crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex'), expected, `Refresh inventory for ${file}`)
+          }
+          const commands = new Map(), ids = new Set(), entryFiles = new Set()
+          for (const entry of inventory.commands) {
+            assert(!ids.has(entry.id)); ids.add(entry.id); entryFiles.add(entry.owner)
+            assert.equal(inventory.owners[entry.owner].kind, 'current-command-adapter')
+            const command = require('./' + entry.owner)
+            assert.equal(typeof command.run, 'function'); assert.equal(command.name, entry.name)
+            if (entry.transport === 'prefix') commands.set(command.name, command)
+          }
+          const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(item => item.isDirectory() ? walk(`${directory}/${item.name}`) : item.name.endsWith('.js') ? [`${directory}/${item.name}`] : [])
+          assert.deepEqual([...entryFiles].sort(), [...walk('commands'), ...walk('slashCommands')].sort())
+          const { buildAliases, PREFERRED_ALIASES } = require('./handlers/command-registry')
+          const aliases = buildAliases(commands)
+          assert.deepEqual([...aliases.aliases].sort(([a], [b]) => a.localeCompare(b)), inventory.aliases.map(entry => [entry.alias, entry.target]))
+          for (const { alias } of aliases.conflicts) assert.equal(PREFERRED_ALIASES[alias], aliases.aliases.get(alias), `Explicit policy required for ${alias}`)
+          const routes = new Set(inventory.routes.map(route => route.id))
+          assert.equal(routes.size, inventory.routes.length)
+          for (const route of inventory.routes) assert.equal(inventory.owners[route.owner].kind, 'current-http-adapter')
+          const client = { commands, aliases: aliases.aliases, slashCommands: new Map(), allCommands: [], settings: {}, guilds: { cache: new Map() } }
+          const music = require('./handlers/music/manifest')(client)
+          require('./handlers/configuration')(client)
+          for (const manifest of [music, client.modules.get('welcome').manifest]) for (const route of manifest.api) {
+            const registered = route.replace('/modules/welcome/', '/modules/:moduleId/').replace('/configuration/:guildId/welcome', '/configuration/:guildId/:moduleId')
+            assert(routes.has(registered), `Manifest route is not registered: ${route}`)
+          }
+          const dependencies = require('./package.json').dependencies
+          for (const dependency of inventory.externalImports) if (!dependencies[dependency.name]) {
+            const exception = inventory.dependencyExceptions.find(item => item.name === dependency.name && item.activated === false)
+            assert(exception && dependency.sites.every(site => site.file === exception.file), `Undeclared runtime dependency: ${dependency.name}`)
+          }
+          console.log(JSON.stringify({ commands: ids.size, aliases: aliases.aliases.size, routes: routes.size, node: process.version }))
+          NODE
+      - name: Install the frozen migration client in isolation
+        run: |
+          task_dir="$RUNNER_TEMP/obey-music-client-compatibility"
+          node - "$task_dir" <<'NODE'
+          const fs = require('node:fs'), path = require('node:path'), contract = require('./docs/platform/music-client-installation.json')
+          const directory = process.argv[2]
+          fs.mkdirSync(directory, { recursive: true })
+          fs.writeFileSync(path.join(directory, 'package.json'), JSON.stringify(contract.package))
+          fs.writeFileSync(path.join(directory, 'package-lock.json'), JSON.stringify(contract.lockfile))
+          NODE
+          npm ci --prefix "$task_dir" --ignore-scripts --no-fund --no-audit
+          node - "$task_dir" <<'NODE'
+          const path = require('node:path'), assert = require('node:assert/strict'), contract = require('./docs/platform/music-client-installation.json')
+          const directory = process.argv[2], installed = path.join(directory, 'node_modules/lavalink-client')
+          assert.equal(require(installed + '/package.json').version, contract.package.dependencies['lavalink-client'])
+          assert.equal(typeof require(installed).LavalinkManager, 'function')
+          const ws = require.resolve('ws/package.json', { paths: [installed] })
+          assert.equal(require(ws).version, contract.lockfile.packages['node_modules/ws'].version)
+          console.log(JSON.stringify({ client: require(installed + '/package.json').version, ws: require(ws).version, node: process.version, productionInstalled: false }))
+          NODE
