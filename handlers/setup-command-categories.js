@@ -3,6 +3,7 @@ const { t, localeFor, normalizeLocale } = require('./i18n')
 const { requireSetupAccess } = require('./setup-access')
 const { attachSetupSession } = require('./setup-session')
 const { createSetupSettings } = require('./setup-settings')
+const { createCommandCategorySettings } = require('./command-category-settings')
 const { TOGGLE_GROUPS } = require('./setup-definitions')
 
 const copy = (locale, key, variables) => t(locale, `setup.categories.${key}`, variables)
@@ -28,7 +29,8 @@ async function openToggleSetup(client, origin, id) {
   const context = { guildId: origin.guild?.id, actorId: origin.author.id, channelId: origin.channelId || origin.channel?.id }
   const locale = normalizeLocale(localeFor(client, context.guildId)) === 'en' ? 'en' : 'es'
   const notice = key => ({ content: t(locale, `setup.editor.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
-  const service = createSetupSettings(client.settings, definition.fields, () => Boolean(client._shuttingDown))
+  const service = id === 'commands' ? createCommandCategorySettings(client)
+    : createSetupSettings(client.settings, definition.fields, () => Boolean(client._shuttingDown))
   const checkAccess = async () => { const access = await requireSetupAccess(client, context); await authorize?.(access, context) }
   let message
   try {

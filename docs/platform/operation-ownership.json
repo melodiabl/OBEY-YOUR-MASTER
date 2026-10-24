@@ -461,7 +461,7 @@
     "commands/Setup/setup-embed.js": "af678a6f98e157952fbb7e5259b2f90485880adea361717e9234a3a8e343e668",
     "commands/Setup/setup-epicgamesverify.js": "49915876710e34fc01b5fe0e57189bb2cd27ac2640199cbb771ddda7fdf95137",
     "commands/Setup/setup-ghost-ping-detector.js": "715b57fd12ecf7500f11999b44965416c0d51d2831d1ea8e4ec281c13ebe23c7",
-    "commands/Setup/setup-joinlist.js": "d42ac416e9593afa5da83531d1f1028fd63f4ad63159eb85fa59df3963f20215",
+    "commands/Setup/setup-joinlist.js": "18032a90b925bab60ba8c66a382e61e64a7c228bfc06a56d8e089795aa428683",
     "commands/Setup/setup-joinvc.js": "302d9970662eb32b6b8b9a790a2c4ff804f7eca5e5a8134524ee8579bc5090f8",
     "commands/Setup/setup-jtc.js": "c8e7bfd4025d697769ddff95fb068d4b633d4efd0d06e6c61bb296838da6ad3e",
     "commands/Setup/setup-keyword.js": "77a6a053bd1f77e6b00210575921b8f5f0648a540627f063e0ddea11603f97aa",
@@ -628,6 +628,7 @@
     "handlers/cards/leaderboard.js": "f371889f4f87f3dc1718a9ec79355b249f7882af032e39cd3ec2a0dbbb3e3b69",
     "handlers/cards/rankcard.js": "b0cfb75bfa49346edb77d40b1e8d1223f9da795d0e9819df2d2c8b108d248859",
     "handlers/clientvariables.js": "071f2605013834b1821f9330007a5b1fee9b4356c9dbc2290d4bdc1bc23c737f",
+    "handlers/command-category-settings.js": "8a3526df0dcf2a8e312bbf7969c11bfdeffffbd5d1ff4632824e073da4cd1d76",
     "handlers/command-execution.js": "553237b6797909a4a5efdab2aa4f81de90cad43d57440f6870e7575d4771e9d9",
     "handlers/command-policy.js": "5b1a59d511961e32916f52fb52b459965811e41b1ca3f70b2fa3dfc709d8724c",
     "handlers/command-registry.js": "624b1fc3276fd369c245cc2a8c60d7ba80325d76682e051f724c852d6f9fd97d",
@@ -635,6 +636,7 @@
     "handlers/config-service.js": "137ea42d9192aa31da808646e7267f0ecdb6a2029d3727359320c29e5f3c6ac4",
     "handlers/configuration-roles.js": "94f3a19f481423413b7adebf9486a9d6d9dec4bb0fc15414a7d99240cc5266f6",
     "handlers/configuration-service.js": "ea9215dd72ff54b45886bab3c6fb8ba2fec89c186e69e0f568cb821d0b675df2",
+    "handlers/configuration-summary.js": "f94e49d21da9dae33830bee402dc403d73876b0645df0c3bc9610a9bbc196888",
     "handlers/configuration.js": "d2d5c76734cbb13e094da59f850ed0a7aae380028c0396567d6bb69e86cc77de",
     "handlers/counter.js": "96d0182015ae87a2e6c1bf3b8db56e8d229bfc80108d6b6121bd48d0b7577f79",
     "handlers/dailyfact.js": "7e4e3c9275e40bb2329f80cdbf09dd84b63c7e346062c6fc0b04a4ee0fa0c3e7",
@@ -765,13 +767,13 @@
     "handlers/roster-publication.js": "a3d2f8fa6b274ae5d54f6adde4aa765251197df41b4437c230e92da03d73d1ef",
     "handlers/roster.js": "ad08a9bf5e9369c3d7dc2b75846c2d53e950585b3e3fc2fb525dd4e078be22cd",
     "handlers/settings-view.js": "1be82b59c5a922b9a30371ece5e071c114f0dac33abbd6af89004b7c1d0f229e",
-    "handlers/setup-access.js": "43de6b9c7b11ac3f795a451d06aa36ebcb9dbcd1273ba82bf075f9b3e613ec5d",
+    "handlers/setup-access.js": "86d7c7d134eabdea6045682f98dde6e691f12584cd47b5922a19e80c6f520cc2",
     "handlers/setup-advanced-security.js": "2bf6ce60fcaa02a4e25ef483ced34b826c2f4d79c36096f8782165636b81efd9",
     "handlers/setup-automation.js": "53433db2eff1312ec9d14155276691efd593d8c0d4c0b8197b688aadce12d80c",
     "handlers/setup-channel-creation.js": "78d07567b2e852e9e9a8d41d7120b70518e0edd7df7b64d035cf5e25e9ce6e25",
     "handlers/setup-channel.js": "55ab8f8d7ac05d6c2105d2a9af8492762497cfdd362d7ec48d8d24cdabcc2d71",
     "handlers/setup-choices.js": "70501380b70d24bde2e95f686e3222ff28f2ee475a50198301cc629d84e2652e",
-    "handlers/setup-command-categories.js": "cc866357063b45ec7a729be654dfaeb21c1859c54fd36f6ea253bccd90739709",
+    "handlers/setup-command-categories.js": "ec9fc7437a18de95616c421d59a6d0a128136616ecaf6d967a723c3eb6fc6894",
     "handlers/setup-community.js": "b408842b5ad89353a94ab18250e58046044c75939c9190a34bd32a9d76fc7b5e",
     "handlers/setup-definitions.js": "f23b3667cde52bddc8f1ec744051b16e0fa18e4a4655796c2568ac6e06bd9edd",
     "handlers/setup-embed.js": "25baa711225fe7bf7a2599f62f60a7dedc8a85cd3388718623f698dcf0d5ca06",
@@ -797,7 +799,7 @@
     "handlers/setup-role-settings.js": "67fca3262f7b4924485babd2986bd711ca144d8d7516a016700bf38f39b948fd",
     "handlers/setup-security.js": "7629a0d22a52db60a2abd36224cb84afb700502db77afda5cf07f37ecfd649bd",
     "handlers/setup-session.js": "79f0383f6382e549749d4aad0a5976c945f38854b11cee25d8200fa5448e71c9",
-    "handlers/setup-settings.js": "5e2d219f3dd29c67b2267b7ff5acb9513977f98ee4573720e1b9c385b555d4e5",
+    "handlers/setup-settings.js": "434608a1aaec7f5bbf0682d5a66e3fc092626fcc50fef91828ae1c01944aa06b",
     "handlers/setup-slots.js": "8b65ef11d47c43f2cb596ed529a54a720552b66e715954f981b6a9af518f2731",
     "handlers/setup-support-menus.js": "de975956e394ef4835809494bacd241bd4d08e958b77ccb97565c135bbcef6d0",
     "handlers/setup-support.js": "14c5e2edee1d2410b99f0a800f5bb5848a0c503d79b14d86dbb0262b22222681",
@@ -846,10 +848,10 @@
     "slashCommands/Config/autorole.js": "483d815ef1b155382c5c170d0c80f37b8f761123e10caf15bdb8829aa0c06f8c",
     "slashCommands/Config/idioma.js": "1d3981d7af6d686b277e019e2eed693d9bd52a094700767c4468a018d80e8ef8",
     "slashCommands/Config/logs.js": "c270500e1118431b0bfad0e547f69cde2f1e44d0ef9c01a6f07efd683794e927",
-    "slashCommands/Config/musica.js": "3c8768fc417c0bda48f105ff900eadbfbfc1be22375f85838e117b2da65c61e9",
+    "slashCommands/Config/musica.js": "d146fee41064185d0f7536598ec88875f8b67502a54e3e0229101dcfe38d6301",
     "slashCommands/Config/prefix.js": "22a52cee18e8ab5b9f959426e4940b5b80888e11df4592e43f88055e04f6cfa9",
     "slashCommands/Config/setupmusic.js": "686c5cf7da0b2b2aa9e625af4d8bcbd95f8134af991338b063a80326fdc81f77",
-    "slashCommands/Config/ver.js": "1b298a904b369338167c6b2976ea74978563a5a183f9e18925558349798b6a63",
+    "slashCommands/Config/ver.js": "ffa57a4df2a5a5206a2f6acb3bc8221a17535178a3829f98ba4b674aff17fbb2",
     "slashCommands/Economy/balance.js": "c0cf238ce6e8648b339a57bfe5d0ea436b3ce57c3ff09489242721af9a013a13",
     "slashCommands/Economy/coinflip.js": "b51a2ffd622dd2d23a9fd4265772e493b8b44ec6a2898236e14969f3c4247d70",
     "slashCommands/Economy/daily.js": "869ba8ce442e4657d3482cca8f56a4a5fad8d53816c5521be100a18762e7e272",
@@ -976,7 +978,9 @@
     "slashCommands/Welcome/ver.js": "289b90e77c320bc3e109f81a280f8ec60e4c9b3bd7322e939dec9dcfc7147c65",
     "slashCommands/chat.js": "67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931",
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
-    "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a"
+    "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
+    "locales/es.json": "59bee915096044766345b086444f6199e881dbfae6779737fd6388f523313bef",
+    "locales/en.json": "53b15d11391f382f92e047461eb33c19c814c6003f605f61940a18179f5b6dff"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -22839,19 +22843,8 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Config/musica.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 29
-        },
-        {
-          "call": "client.settings.set",
-          "line": 39
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "slashCommands/Config/prefix.js": {
       "kind": "current-command-adapter",
@@ -22871,39 +22864,8 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Config/ver.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "slashCommands/Economy/balance.js": {
       "kind": "current-command-adapter",
@@ -28832,7 +28794,9 @@
       "transport": "prefix",
       "owner": "commands/Setup/setup-joinlist.js",
       "category": "Setup",
-      "permissionsMetadata": [],
+      "permissionsMetadata": [
+        "Administrator"
+      ],
       "behaviorAcceptance": "pending"
     },
     {
@@ -41073,7 +41037,7 @@
     "slashTopLevel": 20,
     "aliases": 779,
     "httpRoutes": 95,
-    "sourceFiles": 966,
+    "sourceFiles": 968,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

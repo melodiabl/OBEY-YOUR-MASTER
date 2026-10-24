@@ -1,6 +1,11 @@
 const obeyMeta = require("../../handlers/presentation/metadata")
 const obeyUi = require("../../handlers/assets/system")
-const { EmbedBuilder } = require('discord.js')
+const { EmbedBuilder, PermissionFlagsBits: F } = require('discord.js')
+const { createConfigurationSummary } = require('../../handlers/configuration-summary')
+const { requireSetupAccess } = require('../../handlers/setup-access')
+const { setupFailureNotice } = require('../../handlers/setup-errors')
+const { CATEGORIES } = require('../../handlers/logs/policy')
+const { t, localeFor, normalizeLocale } = require('../../handlers/i18n')
 
 module.exports = {
   name: 'ver',
@@ -10,34 +15,53 @@ module.exports = {
 
   run: async (client, interaction) => {
     const gid = interaction.guild.id
-    const g   = interaction.guild
+    const g = interaction.guild
+    const fallbackLocale = localeFor(client, gid)
+    const context = {
+      guildId: gid, actorId: interaction.user.id, channelId: interaction.channelId,
+      actorPermission: F.ManageGuild,
+    }
+    const notice = key => ({ content: t(fallbackLocale, `setup.summary.${key}`), embeds: [], components: [], allowedMentions: { parse: [] } })
 
-    const prefix     = client.settings.get(gid, 'prefix')     || '!'
-    const language   = client.settings.get(gid, 'language')   || 'es'
-    const musicOn    = !!client.settings.get(gid, 'MUSIC')
-    const logCh      = client.settings.get(gid, 'logger.channel')
-    const adminroles = client.settings.get(gid, 'adminroles') || []
-    const autoroles  = client.settings.get(gid, 'welcome.roles') || []
-    const welcomeCh  = client.settings.get(gid, 'welcome.channel')
+    await interaction.deferReply({ ephemeral: true })
+    try {
+      await requireSetupAccess(client, context)
+      const summary = await createConfigurationSummary(client).read(gid)
+      await requireSetupAccess(client, context)
+      const locale = normalizeLocale(summary.language)
+      const copy = (key, variables) => t(locale, `setup.summary.${key}`, variables)
+      const roleValue = roles => roles.length ? roles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : copy('none')
+      const channelValue = channelId => channelId ? `<#${channelId}>` : copy('notConfigured')
+      const musicValue = summary.music.enabled
+        ? (summary.music.configured ? copy('musicEnabled') : copy('musicDefault'))
+        : copy('musicDisabled')
+      const logRouting = CATEGORIES.map(category => {
+        const route = summary.logs.routing[category]
+        const value = route.state === 'disabled' ? copy('logsDisabled') : route.channelId ? `<#${route.channelId}>` : copy('logsNotConfigured')
+        const inherited = route.state === 'inherited' ? ` (${copy('logsGeneral')})` : ''
+        return `${copy(`log_${category}`)}: ${value}${inherited}`
+      }).join('\n')
 
-    const LANG_LABEL = { es: obeyUi.owned('🇪🇸 Español'), en: obeyUi.owned('🇬🇧 English'), de: obeyUi.owned('🇩🇪 Deutsch'), fr: obeyUi.owned('🇫🇷 Français'), it: obeyUi.owned('🇮🇹 Italiano'), nl: obeyUi.owned('🇳🇱 Dutch'), tr: obeyUi.owned('🇹🇷 Türkçe') }
+      const embed = new EmbedBuilder()
+        .setColor(0x5865F2)
+        .setTitle(obeyUi.limit(`${obeyUi.markup("icon.settings")} ${copy('title', { guild: g.name })}`, 256))
+        .setThumbnail(g.iconURL())
+        .addFields(
+          { name: obeyUi.owned(copy('prefix')),    value: `\`${summary.prefix.replace(/`/g, '\\`')}\``, inline: true },
+          { name: obeyUi.owned(copy('language')),  value: summary.languageLabel,                        inline: true },
+          { name: obeyUi.owned(copy('music')),     value: musicValue,                                  inline: true },
+          { name: obeyUi.owned(copy('logs')),      value: channelValue(summary.logs.defaultChannel),    inline: true },
+          { name: obeyUi.owned(copy('logsRouting')), value: logRouting,                                inline: false },
+          { name: obeyUi.owned(copy('welcome')),   value: channelValue(summary.welcome.channelId),      inline: true },
+          { name: obeyUi.owned(copy('autoroles')), value: roleValue(summary.autoroles),                 inline: true },
+          { name: obeyUi.owned(copy('adminRoles')), value: roleValue(summary.adminRoles),               inline: false },
+        )
+        .setFooter(obeyMeta.asFooter({ text: copy('footer') }))
+        .setTimestamp()
 
-    const embed = new EmbedBuilder()
-      .setColor(0x5865F2)
-      .setTitle(obeyUi.limit(`${obeyUi.markup("icon.settings")} Configuración — ${g.name}`, 256))
-      .setThumbnail(g.iconURL())
-      .addFields(
-        { name: obeyUi.owned('🔤 Prefijo'),    value: `\`${prefix}\``,                                                      inline: true },
-        { name: obeyUi.owned('🌐 Idioma'),     value: LANG_LABEL[language] || language,                                      inline: true },
-        { name: obeyUi.owned('🎵 Música'),     value: musicOn ? obeyUi.owned('✅ Activada') : obeyUi.owned('❌ Desactivada'),                            inline: true },
-        { name: obeyUi.owned('📋 Canal logs'), value: logCh && logCh !== 'no' ? `<#${logCh}>` : '*(no configurado)*',       inline: true },
-        { name: obeyUi.owned('👋 Bienvenida'), value: welcomeCh && welcomeCh !== 'nochannel' ? `<#${welcomeCh}>` : '*(no configurado)*', inline: true },
-        { name: obeyUi.owned('🎭 Autoroles'),  value: autoroles.length ? autoroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: true },
-        { name: obeyUi.owned('👑 Roles admin'), value: adminroles.length ? adminroles.slice(0, 5).map(id => `<@&${id}>`).join(', ') : '*(ninguno)*', inline: false },
-      )
-      .setFooter({ text: 'Usa /config para consultar las opciones y cambiar ajustes' })
-      .setTimestamp()
-
-    await interaction.reply({ embeds: [embed], ephemeral: true })
+      await interaction.editReply({ embeds: [embed] })
+    } catch (error) {
+      return interaction.editReply(setupFailureNotice(fallbackLocale, error, notice('unavailable'), 'config/ver'))
+    }
   },
 }

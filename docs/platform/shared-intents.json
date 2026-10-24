@@ -308,11 +308,40 @@
         "slash:config.musica"
       ],
       "routes": [],
-      "service": "Prefix openCategorySetup/setup-settings; slash currently has inline settings writes",
-      "store": "Guild.MUSIC command-category flag",
-      "status": "divergence_recorded",
-      "finding": "Prefix stages category changes with revision and explicit Save. Slash uses cached status and background set, and treats unknown state as off. This flag does not certify the state or health of an existing music session.",
-      "nextTask": "T11 / T12; next P0 correction"
+      "service": "handlers/command-category-settings.js#createCommandCategorySettings over handlers/setup-settings.js; prefix openCategorySetup",
+      "store": "Guild.MUSIC command-category flag in client.settings.model, shared SyncMap exclusive queue and cache patch",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member authenticated by Gateway",
+      "permissions": {
+        "discord": "ManageGuild at invocation and again at save, plus fresh member/channel/bot access; prefix setup root keeps its existing gate"
+      },
+      "permissionDifference": "Preserve existing narrower slash setup access; no new privilege grants",
+      "parameters": {
+        "estado": [
+          "on",
+          "off",
+          "status"
+        ],
+        "expectedRevision": "SHA256 snapshot from persisted command-category fields"
+      },
+      "confirmation": "explicit slash invocation or setup Save; status is read-only",
+      "result": "success only after awaited conditional persistence; conflict or storage failure never reports success",
+      "errors": {
+        "invalid": "localized notice",
+        "conflict": "localized notice, current state must be read",
+        "storageOrStopping": "localized unavailable notice"
+      },
+      "cooldown": "existing Discord dispatch cooldown",
+      "idempotency": "CAS rejects stale retry; setting the same value with a matching revision is a no-op; no durable cross-transport operation receipt",
+      "effects": [
+        "update Guild.MUSIC",
+        "publish committed flag to cache when no newer legacy write exists"
+      ],
+      "i18n": "setup.musicCategory.* in es/en; other loaded legacy languages use the existing Spanish fallback",
+      "material": "native Discord embed and existing prefix setup category control",
+      "recovery": "read current persisted state after an uncertain result; no blind retry",
+      "evidence": "evidence/p0-config-summary-music-20261024.json",
+      "remaining": "Authenticated real Discord walkthrough; the category flag does not certify music session health; P1/T19 acceptance remains"
     },
     {
       "id": "music.always_on.configure",
@@ -333,11 +362,39 @@
         "slash:config.ver"
       ],
       "routes": [],
-      "service": "Current inline cache projection",
-      "store": "client.settings cache",
-      "status": "divergence_recorded",
-      "finding": "Reads cached current default log channel (logger.channel) without category routing detail. Prefix falls back to ! instead of client configuration; language labels use a separate list that omits the supported in locale. Read projection does not use the versioned prefix/language or published welcome services and does not distinguish pending persistence/storage failure.",
-      "nextTask": "T12; next P0 correction"
+      "service": "handlers/configuration-summary.js#createConfigurationSummary over prefix-settings, language-settings, setup-settings, logs/policy and welcome-configuration",
+      "store": "client.settings.model persisted Guild document; prefix, language, MUSIC, log and welcome revisions",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member authenticated by Gateway",
+      "permissions": {
+        "discord": "ManageGuild at invocation plus fresh member/channel/bot access"
+      },
+      "permissionDifference": "Preserve existing ManageGuild gate; no new privilege grants",
+      "parameters": {
+        "output": [
+          "prefix",
+          "language label",
+          "MUSIC",
+          "log routing",
+          "welcome",
+          "join roles",
+          "admin roles"
+        ]
+      },
+      "confirmation": "read-only; no writes",
+      "result": "renders only after persisted/versioned reads; storage failure returns a localized unavailable notice",
+      "errors": {
+        "access": "existing localized denial",
+        "storageOrStopping": "localized unavailable notice; no cached/default substitution"
+      },
+      "cooldown": "existing Discord dispatch cooldown",
+      "idempotency": "read-only; no persistence or cache writes",
+      "effects": [],
+      "i18n": "setup.summary.* in es/en; locale comes from the persisted language and includes the supported in label",
+      "material": "native Discord embed",
+      "recovery": "retry after storage recovers; no blind write",
+      "evidence": "evidence/p0-config-summary-music-20261024.json",
+      "remaining": "Authenticated real Discord walkthrough; global G01/G02 and durable cross-transport receipt remain T12/T13"
     },
     {
       "id": "music.request_setup",
@@ -367,15 +424,102 @@
       "status": "shared_owner_observed",
       "finding": "Slash consult path and web bootstrap reuse current Architect service; fresh ManageGuild access. Slash analysis/backup alternatives submit existing jobs with discord interaction idempotency keys. No analysis job, backup or apply was submitted in this review.",
       "nextTask": "T22 / T26 / T30"
+    },
+    {
+      "id": "configuration.setup.legacy",
+      "commands": [
+        "prefix:setup-admincmdlog",
+        "prefix:setup-aichat",
+        "prefix:setup-anticaps",
+        "prefix:setup-antidiscord",
+        "prefix:setup-antilink",
+        "prefix:setup-antimassmention",
+        "prefix:setup-antimasspings",
+        "prefix:setup-antimention",
+        "prefix:setup-antinewaccount",
+        "prefix:setup-antinuke",
+        "prefix:setup-antipings",
+        "prefix:setup-antispam",
+        "prefix:setup-apply",
+        "prefix:setup-auditlog",
+        "prefix:setup-autobackup",
+        "prefix:setup-autodelete",
+        "prefix:setup-autoembed",
+        "prefix:setup-automeme",
+        "prefix:setup-autosupport",
+        "prefix:setup-autowarn",
+        "prefix:setup-blacklist",
+        "prefix:setup-boost",
+        "prefix:setup-boostlog",
+        "prefix:setup-counter",
+        "prefix:setup-customcommand",
+        "prefix:setup-dailyfact",
+        "prefix:setup-embed",
+        "prefix:setup-epicgamesverify",
+        "prefix:setup-ghost-ping-detector",
+        "prefix:setup-joinlist",
+        "prefix:setup-joinvc",
+        "prefix:setup-jtc",
+        "prefix:setup-keyword",
+        "prefix:setup-leave",
+        "prefix:setup-membercount",
+        "prefix:setup-menuapply",
+        "prefix:setup-menuticket",
+        "prefix:setup-mute",
+        "prefix:setup-radio",
+        "prefix:setup-rank",
+        "prefix:setup-reactionrole",
+        "prefix:setup-reportlog",
+        "prefix:setup-roster",
+        "prefix:setup-serverstats",
+        "prefix:setup-suggestion",
+        "prefix:setup-ticket",
+        "prefix:setup-tiktok",
+        "prefix:setup-twitch",
+        "prefix:setup-twitter",
+        "prefix:setup-validcode",
+        "prefix:setup-warn",
+        "prefix:setup-youtube"
+      ],
+      "routes": [],
+      "service": "commands/Setup/* adapters delegating to handlers/setup-*.js openFormSetup/openRecordsSetup/openSetupChoices/openSetupSlots and createSetupSettings",
+      "store": "Existing setup stores (client.settings, setups, social_log, joinvc, blacklist, points, etc.) through setup-settings CAS or SyncMap exclusive queue",
+      "status": "distinct_legacy_intent_recorded",
+      "actor": "guild member authenticated by Gateway",
+      "permissions": {
+        "discord": "Administrator from prefix dispatcher metadata plus fresh member/channel/bot access in requireSetupAccess"
+      },
+      "permissionDifference": "Preserve existing Administrator setup gate; no new grants",
+      "parameters": {
+        "entry": "setup command name; each adapter delegates to its existing form, records or choice page"
+      },
+      "confirmation": "explicit setup Save or Publish inside the opened form; invocation itself does not mutate",
+      "result": "opens the canonical setup flow; persistence happens only after awaited form service save",
+      "errors": {
+        "access": "existing localized setup denial",
+        "conflict": "existing form conflict/reload",
+        "storageOrStopping": "existing localized unavailable notice"
+      },
+      "cooldown": "per-command cooldown of 4–10 seconds enforced by prefix dispatcher and setup navigation",
+      "idempotency": "no mutation on open; form services use revision/CAS; publication actions keep their existing idempotency",
+      "effects": [
+        "opens an existing setup form, records list or choice page",
+        "resource creation remains an explicit later publish/action and was not executed in review"
+      ],
+      "i18n": "existing setup form dictionaries; prefix command descriptions remain Spanish",
+      "material": "native Discord embeds, select menus, buttons and modals",
+      "recovery": "existing form conflict, blocked-state and uncertain-publication handling",
+      "evidence": "evidence/p0-setup-block-20261024.json",
+      "remaining": "P2 authenticated walkthrough of each form; no resources/messages created in this review; slash/web parity is not claimed"
     }
   ],
   "coverage": {
-    "reviewedGroups": 19,
-    "commandEntriesReviewed": 41,
+    "reviewedGroups": 20,
+    "commandEntriesReviewed": 93,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 634,
+    "remainingCommandEntries": 582,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

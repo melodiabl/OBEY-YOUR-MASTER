@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-24",
+  "phase": "P0",
+  "status": "verified_in_isolation_deployment_pending",
+  "inventory": "../shared-intents.json",
+  "coverage": {
+    "reviewedGroups": 19,
+    "commandEntriesReviewed": 41,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 634,
+    "remainingHttpRoutes": 74
+  },
+  "change": "Config summary now projects persisted and versioned prefix, language, MUSIC, log routing and welcome state plus persisted roles. MUSIC slash shares the setup category service, revision check and confirmed save instead of an inline background write.",
+  "verification": {
+    "isolatedCases": 17,
+    "isolatedPassed": 17,
+    "isolatedFailed": 0,
+    "originalTestsPassed": 25,
+    "originalTestFilesRetained": 3,
+    "combinedTestsPassed": 42,
+    "isolatedVerifier": "test/tmp-p0-config.test.js",
+    "gatewayOrRealDatabaseUsed": false,
+    "types": true,
+    "dependencyBoundaries": true,
+    "dependencyModules": 1114,
+    "inventoryGatePassed": true,
+    "inventorySourceHashes": 968,
+    "assetCheckPassed": true,
+    "nodesOfVerification": "local Node v22.23.2; CI/runtime target v22.23.4",
+    "observations": [
+      "The first isolated command run exposed a malformed embed payload; the adapter now sends embeds explicitly and the corrected cases pass.",
+      "Summary reads are side-effect free and fail closed on storage errors; status reads do not write.",
+      "Slash MUSIC keeps ManageGuild, disables the flag through CAS, rejects stale revisions and treats an unset flag as enabled by default."
+    ],
+    "finalOriginalTestsPassed": 25,
+    "temporaryVerifierRemoved": true
+  },
+  "preserved": [
+    "No music engine, client, queue, voice or channel mutation",
+    "Existing ManageGuild slash access; prefix setup keeps its current access policy",
+    "No new dependencies or privilege grants",
+    "No Gateway, real MongoDB, OAuth, Discord messages or test voice sessions"
+  ],
+  "remaining": [
+    "Authenticated real Discord walkthrough for both commands",
+    "Global G01/G02 and the remaining 634 command entries/74 routes",
+    "MUSIC category flag remains separate from music session health and P1/T19 continuity acceptance",
+    "Durable cross-transport operation receipt remains T12/T13"
+  ],
+  "deployment": {
+    "performed": false,
+    "reason": "Historical isolated verification on 24 October; final image verification and deployment are now proceeding under the standing session authorization."
+  }
+}

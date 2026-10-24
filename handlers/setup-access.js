@@ -6,7 +6,7 @@ async function requireSetupAccess(client, context) {
   if (!guild || guild.available === false) throw new Error('setup_denied')
   const [member, bot, channel] = await Promise.all([
     guild.members.fetch({ user: context.actorId, force: true }), guild.members.fetchMe({ force: true }),
-    guild.channels.fetch(context.channelId),
+    guild.channels.fetch(context.channelId, { force: true }),
   ])
   if (member?.id !== context.actorId || member.guild?.id !== guild.id ||
     channel?.id !== context.channelId || channel.guildId !== guild.id) throw new Error('setup_denied')

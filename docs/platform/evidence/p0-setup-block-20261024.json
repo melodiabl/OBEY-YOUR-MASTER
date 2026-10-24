@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-24",
+  "phase": "P0",
+  "status": "verified_in_isolation_deployment_pending",
+  "inventory": "../shared-intents.json",
+  "coverage": {
+    "reviewedGroups": 20,
+    "commandEntriesReviewed": 93,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 582,
+    "remainingHttpRoutes": 74
+  },
+  "change": "The 52 previously untraced legacy commands/Setup adapters are recorded as one prefix-only intent. All delegate to existing setup form, records or choice services; setup-joinlist receives the Administrator metadata its handler already enforced.",
+  "review": {
+    "setupAdaptersTotal": 59,
+    "previouslyReviewed": 7,
+    "reviewedIncrement": 52,
+    "loadableAdapters": 52,
+    "administratorMetadata": 52,
+    "delegationsToExistingHandlers": 52,
+    "directSettingsOrStoreWrites": 0,
+    "missingPermissionMetadataBeforeFix": 1,
+    "missingPermissionMetadataAfterFix": 0,
+    "handlerFamilies": {
+      "setup-advanced-security": 2,
+      "setup-automation": 3,
+      "setup-channel": 5,
+      "setup-command-categories": 3,
+      "setup-community": 5,
+      "setup-embed": 1,
+      "setup-feeds": 4,
+      "setup-logs": 1,
+      "setup-membership": 1,
+      "setup-radio-resources": 1,
+      "setup-reaction-roles": 1,
+      "setup-role-resources": 3,
+      "setup-role-settings": 2,
+      "setup-security": 12,
+      "setup-support": 2,
+      "setup-support-menus": 3,
+      "setup-voice-resources": 1,
+      "setup-voice-rules": 2
+    },
+    "intentionalSynonyms": [
+      "setup-antipings / setup-antimasspings / setup-antimassmention -> antimention",
+      "setup-logger / setup-auditlog -> logs",
+      "setup-serverstats / setup-membercount -> membercount",
+      "setupmusic / setup-music -> music"
+    ],
+    "aliasObservation": "The setup-auditlog alias declared by setup-logger is shadowed by the real setup-auditlog command; the registry already prefers real names, so no destination changes.",
+    "corrections": [
+      "commands/Setup/setup-joinlist.js now declares memberpermissions: ['Administrador'], matching requireSetupAccess and the other 58 Setup adapters."
+    ]
+  },
+  "verification": {
+    "isolatedCases": 3,
+    "isolatedPassed": 3,
+    "isolatedFailed": 0,
+    "isolatedVerifier": "test/tmp-p0-setup-block.test.js",
+    "originalTestsPassed": 25,
+    "originalTestFilesRetained": 3,
+    "temporaryVerifierRemoved": true,
+    "types": true,
+    "dependencyBoundaries": true,
+    "dependencyModules": 1114,
+    "inventoryGatePassed": true,
+    "inventorySourceHashes": 968,
+    "assetCheckPassed": true,
+    "nodesOfVerification": "local Node v22.23.2; CI/runtime target v22.23.4",
+    "observations": [
+      "Every reviewed adapter loads, exposes run and a unique in-file alias set, imports an existing setup handler and calls its exported open function.",
+      "Every adapter uses the same Administrator metadata as its fresh requireSetupAccess check; setup-joinlist was the only mismatch.",
+      "No reviewed adapter reads or writes client.settings, and no target identifier is absent from its handler source.",
+      "No form, button, modal or save path was executed; the review covers adapter metadata and service delegation only."
+    ]
+  },
+  "preserved": [
+    "No music engine, client, queue, voice, message, channel, role or guild resource was mutated",
+    "Existing setup access policy and per-command cooldowns; no new privilege grants",
+    "No new dependencies or storage services",
+    "No Gateway, real MongoDB, OAuth, Discord interaction or test voice session",
+    "No push and no deployment"
+  ],
+  "remaining": [
+    "P2 authenticated walkthrough of each setup form, including explicit Save/Publish and resource creation",
+    "Global G01/G02 and the remaining 582 command entries/74 routes",
+    "Slash/web parity for most of these prefix-only setup forms is not claimed",
+    "Behavior acceptance for the reviewed adapters remains pending"
+  ],
+  "deployment": {
+    "performed": false,
+    "reason": "Historical isolated verification on 24 October; final image verification and deployment are now proceeding under the standing session authorization."
+  }
+}

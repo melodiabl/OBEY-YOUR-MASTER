@@ -29,10 +29,12 @@ function createSetupSettings(store, fields, isStopping = () => false, defaults =
     if (typeof guildId !== 'string' || !/^[a-zA-Z0-9_:-]{1,100}$/.test(guildId)) fail('invalid_setup')
   }
   function snapshot(doc = {}) {
-    return { values: Object.fromEntries(ids.map(id => {
-      const found = lookup(doc, fields[id].path)
-      return [id, structuredClone(found.present ? found.value : fields[id].default)]
-    })), revision: createHash('sha256').update(JSON.stringify(roots.map(root => [root, lookup(doc, root)]))).digest('hex') }
+    const found = Object.fromEntries(ids.map(id => [id, lookup(doc, fields[id].path)]))
+    return {
+      values: Object.fromEntries(ids.map(id => [id, structuredClone(found[id].present ? found[id].value : fields[id].default)])),
+      present: Object.fromEntries(ids.map(id => [id, found[id].present])),
+      revision: createHash('sha256').update(JSON.stringify(roots.map(root => [root, lookup(doc, root)]))).digest('hex'),
+    }
   }
   const stored = guildId => store.model.findOne({ [store.guildKey]: guildId }).lean()
   function cached(guildId) { return Object.fromEntries(trackedPaths.map(path => [path, structuredClone(store.get(guildId, path))])) }
