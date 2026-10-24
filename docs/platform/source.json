@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "f92bc406ce82179a31a4f07074d1fe5a066aa0c0",
-    "image": "27c1b75741b47c92d24c3c44f6128c59cbc330cd35cb76368ee35be23ed60ccf",
+    "code": "973ff242c2d5ba14c39ed96796af2e8d0ec25743",
+    "image": "78c24d245e41e7f1105ac5d5b9ceb959bd3d41985b90f00fe2b8df1aa628c88e",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,12 +36,12 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-shared-intents-20261024.json",
-    "change": "Shared awaited language configuration for setup, slash and web; nine shared-intent groups traced",
-    "tag": "localhost/obey-your-master_bot:release-p0-language-20261024-f92bc40",
+    "evidence": "evidence/p0-prefix-20261024.json",
+    "change": "Shared validation and confirmed versioned persistence for guild prefix across text, slash and web",
+    "tag": "localhost/obey-your-master_bot:release-p0-prefix-20261024-973ff24",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-shared-intents-20261024.json",
-    "deploymentKind": "application_only_p0_language_reconciliation_release"
+    "statusEvidence": "evidence/p0-prefix-20261024.json",
+    "deploymentKind": "application_only_p0_prefix_reconciliation_release"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -348,7 +348,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Continue P0 shared-intent review beyond the 25 command entries and 19 HTTP routes already traced; start with prefix configuration validation/persistence and preserve recorded T35/T46 data migrations",
+    "nextUnit": "Continue P0 with central setup navigation and remaining Config options; 11 intent groups / 27 entries / 19 HTTP routes traced, 648 entries and 76 routes remain; global G01/G02 still open",
     "sequence": [
       "P0",
       "P1",
@@ -385,6 +385,21 @@
     "commandEntriesReviewed": 25,
     "httpRoutesReviewed": 19,
     "remainingCommandEntries": 650,
+    "remainingHttpRoutes": 76,
+    "globalG01G02Accepted": false,
+    "pushed": false
+  },
+  "p0Prefix": {
+    "implementationCode": "973ff242c2d5ba14c39ed96796af2e8d0ec25743",
+    "evidence": "evidence/p0-prefix-20261024.json",
+    "inventory": "shared-intents.json",
+    "deployed": true,
+    "isolatedCases": 23,
+    "originalTests": 25,
+    "reviewedGroups": 11,
+    "commandEntriesReviewed": 27,
+    "httpRoutesReviewed": 19,
+    "remainingCommandEntries": 648,
     "remainingHttpRoutes": 76,
     "globalG01G02Accepted": false,
     "pushed": false

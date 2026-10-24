@@ -29,9 +29,20 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 - [x] Trazar nueve grupos y sus servicios/políticas/stores: 25 entradas y 19 rutas; diferencias conservadas con tareas T12/T19/T20/T35/T46.
 - [x] Corregir idioma en slash y web para usar el servicio versionado del setup, guardar solo el idioma desde web y esperar confirmación de almacenamiento.
 - [x] Verificar 14 casos aislados, formulario EJS completo en Chromium y 25 tests originales sobre la imagen final; conservar controles de sesión/CSRF.
-- [ ] Revisar las 650 entradas y 76 rutas restantes; empezar por prefijo. No cerrar P0 ni aceptar todos los negocios por esta muestra.
+- [ ] Ampliar la revisión: ahora quedan 648 entradas y 76 rutas; seguir con navegación setup y opciones Config restantes. No cerrar P0 ni aceptar todos los negocios por esta muestra.
 
 [Mapa](../docs/platform/shared-intents.json) y [evidencia](../docs/platform/evidence/p0-shared-intents-20261024.json).
+
+## P0 · prefijo de guild, 24/10/2026
+
+- [x] Compartir validación y guardado versionado entre texto, slash y web; mantener permisos existentes y revalidar acceso Discord.
+- [x] Esperar persistencia confirmada, rechazar conflicto/fallo y reutilizar flush/no-op de la cola existente.
+- [x] Aislar el formulario de prefijo; verificar móvil, teclado, CSRF y conservación de idioma/otros ajustes con estado sintético.
+- [x] Trazar prefijo global del owner y reset completo como intenciones distintas, sin ejecutarlas ni migrarlas.
+- [x] Pasar 23 casos aislados y 25 originales en la imagen final; conservar los tres archivos originales.
+- [ ] Aceptación autenticada en guilds reales y puertas globales G01/G02; continuar la revisión P0 pendiente.
+
+[Evidencia](../docs/platform/evidence/p0-prefix-20261024.json).
 
 ## Tareas y checkpoints conservados
 

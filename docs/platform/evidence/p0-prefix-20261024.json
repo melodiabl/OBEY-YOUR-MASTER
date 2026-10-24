@@ -1,7 +1,7 @@
 {
   "date": "2026-10-24",
   "phase": "P0",
-  "status": "local_verification_passed_deployment_pending",
+  "status": "deployed_healthy_increment_global_gates_pending",
   "scope": "Guild-prefix validation and confirmed persistence shared between text, slash and web; global prefix and full reset traced as separate legacy intents",
   "inventory": "../shared-intents.json",
   "coverage": {
@@ -54,5 +54,127 @@
     "Global owner configuration and full reset recorded without execution or migration",
     "No durable cross-transport operation receipt; stale replay must reread revision"
   ],
-  "deployment": null
+  "deployment": {
+    "code": "973ff242c2d5ba14c39ed96796af2e8d0ec25743",
+    "image": "78c24d245e41e7f1105ac5d5b9ceb959bd3d41985b90f00fe2b8df1aa628c88e",
+    "tag": "localhost/obey-your-master_bot:release-p0-prefix-20261024-973ff24",
+    "cutoverAt": "2026-10-24T00:10:52.057Z",
+    "health": "healthy",
+    "restarts": 0,
+    "sourceFilesVerified": 1005,
+    "compiledFilesVerified": 24,
+    "runtimeFilesVerified": 1029,
+    "node": "v22.23.2",
+    "uid": 1000,
+    "lavalinkClientInstalled": false,
+    "privateLavalinkEnabled": false,
+    "environmentPreserved": true,
+    "http": {
+      "local": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      },
+      "public": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      }
+    },
+    "observation": {
+      "samples": 10,
+      "firstAt": "2026-10-24T00:12:39.996Z",
+      "lastAt": "2026-10-24T00:13:16.732Z",
+      "allHealthy": true,
+      "restarts": 0
+    },
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16
+    },
+    "publicAssetsVerified": 2,
+    "imageOriginalTestsPassed": 25,
+    "imageInventoryGatePassed": true,
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-24T00-08-40-121Z",
+      "bytes": 59266587,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "202b7a619ce31c808dd9720b4921bcea34f78f6734bc922006d4325fe0f0bb4c"
+    },
+    "rollback": {
+      "code": "f92bc406ce82179a31a4f07074d1fe5a066aa0c0",
+      "image": "27c1b75741b47c92d24c3c44f6128c59cbc330cd35cb76368ee35be23ed60ccf",
+      "tag": "localhost/obey-your-master_bot:release-p0-language-20261024-f92bc40",
+      "imageAndArgumentsPreserved": true
+    },
+    "privateEvidence": ".runtime/deploy-p0-prefix-20261024",
+    "localReleaseAndRecoveryReferencesUpdated": true,
+    "pushed": false,
+    "remoteCiRun": false
+  },
+  "cleanup": {
+    "temporaryHelpersRemoved": [
+      "browser-check.cjs",
+      "browser-fixture.cjs",
+      "check.cjs",
+      "ci.cjs",
+      "refresh.cjs",
+      "release.cjs"
+    ],
+    "browserAndFixtureStopped": true,
+    "browserProfileRemoved": true,
+    "proofFilesRetained": 14,
+    "temporaryCandidateTagRemoved": true,
+    "originalTestFilesRetained": 3,
+    "rollbackAndBackupsPreserved": true
+  },
+  "review": {
+    "correctness": "Validation and conditional storage shared; concurrency, flush, no-op and failure outcomes verified against real store implementation over synthetic state",
+    "architecture": "Reuses setup-settings without new store/queue; common Discord orchestration; legacy dashboard POST keeps one isolated field-save branch pending T12 migration",
+    "security": "Existing surface-specific access preserved; fresh Discord checks, trusted actor ID, allowedMentions disabled, real CSRF verification in isolated browser",
+    "performance": "Bounded prefix parsing and one shared-store read/write; no playback path changes or new jobs",
+    "limits": "Synthetic acceptance is not a real authenticated guild walkthrough or global P0 acceptance"
+  }
 }

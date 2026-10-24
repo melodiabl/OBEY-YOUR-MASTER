@@ -2,8 +2,16 @@
 
 ## Orden de ejecución vigente · corrección del usuario
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6 según sus puertas. **La próxima unidad amplía la revisión de intenciones compartidas, empezando por las diferencias de validación/persistencia del prefijo.** Nueve grupos (25 entradas y 19 rutas) ya están trazados y el idioma está corregido; faltan 650 entradas y 76 rutas por revisar. G01/G02 siguen parciales. El reproductor completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La próxima unidad revisa navegación central de setup y opciones Config restantes.** Idioma y prefijo de guild ya comparten servicios y guardado confirmado. El mapa traza once grupos/27 entradas/19 rutas; quedan 648 entradas y 76 rutas por revisar. G01/G02 siguen abiertos. El reproductor completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
 
+
+## 24/10/2026 · prefijo de guild unificado y desplegado
+
+Código `973ff24`, imagen `78c24d2`, saludable y cero reinicios automáticos en diez muestras. Texto, `/config prefix` y web comparten validación y persistencia versionada. Se rechazan prefijos vacíos/largos, espacios y caracteres invisibles sin truncar; éxito solo tras guardar, conflicto con revisión antigua y acceso Discord revalidado. El formulario propio guarda únicamente el prefijo y conserva idioma/otros ajustes.
+
+Veintitrés casos aislados y 25 originales en la imagen final pasan; formulario EJS completo comprobado en Chromium con teclado, móvil, CSRF y segunda pestaña. 1.029 hashes, HTTP local/público y JS/CSS públicos coinciden. Respaldo CRC y reversión `f92bc40` conservados; verificadores, navegador y servidor sintéticos retirados. [Evidencia y límites](evidence/p0-prefix-20261024.json).
+
+El mapa traza once grupos/27 entradas/19 rutas; prefijo global del owner y reset completo quedan localizados como intenciones distintas, sin ejecutarse ni migrarse. P0 sigue activo: 648 entradas y 76 rutas pendientes de revisión; siguiente unidad, navegación central de setup y opciones Config restantes. G01/G02 y recorrido autenticado real siguen abiertos. Sin push ni CI remoto.
 
 ## 24/10/2026 · idioma compartido y nueve grupos revisados en P0
 
