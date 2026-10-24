@@ -27,6 +27,9 @@ module.exports = client => {
   const panels = require('./action-queue').createActionQueue()
   const panelPublications = new Map()
   const recovery = require('./recovery-policy').createRecoveryPolicy()
+  const autoplay = require('./autoplay-session').createAutoplaySessions(client, {
+    actions, elapsedForState, emitState, rememberTrack, playTrack: playQueuedTrack, idle: idlePlayer,
+  })
 
   function anchorFromNode(state, response, fallback, requestedPosition = null) {
     let position = clock.nodePosition(state, response?.state)
@@ -64,8 +67,8 @@ module.exports = client => {
     return response
   }
 
-  async function playQueuedTrack(guildId, player, state, encoded) {
-    try { await playTrack(player, state, encoded) }
+  async function playQueuedTrack(guildId, player, state, encoded, options = {}) {
+    try { await playTrack(player, state, encoded, options) }
     catch (error) {
       await client.music._recoverFailedTrack(guildId, player, 'play_request_failed')
     }
@@ -172,6 +175,17 @@ module.exports = client => {
     } catch {}
   }
 
+  async function idlePlayer(guildId, player) {
+    const state = getState(guildId)
+    state.currentTrack = null; state.startedAt = null; state.lastPosition = 0; state.paused = false
+    await stopLiveUpdate(guildId)
+    liveMessages.delete(guildId)
+    await player.stopTrack()
+    try { await require('./lyricsLive').stop(guildId, client) } catch {}
+    try { await require('./setup').resetToIdle(client, guildId) } catch (error) { console.warn('[Music] Idle panel:', error.message) }
+    emitState(guildId)
+  }
+
   client.music = {
     getState,
     getPublicState: serializeState,
@@ -204,6 +218,7 @@ module.exports = client => {
     async play(guildId, voiceChannelId, textChannelId, query, requester) {
       const requestedState = getState(guildId)
       const requestEpoch = requestedState.requestEpoch || 0
+      const release = autoplay.reserveManual(guildId)
       return playRequests.run(guildId, async () => {
         const result = await this.search(query, requester, { guildId })
         if (!result?.tracks?.length) return null
@@ -214,14 +229,13 @@ module.exports = client => {
           await this.enqueue(guildId, toAdd)
           return { result, state: getState(guildId) }
         })
-      })
+      }).finally(release)
     },
 
     async playCollection(guildId, voiceChannelId, textChannelId, tracks, requester) {
       const state = getState(guildId), epoch = state.requestEpoch || 0
       if (!Array.isArray(tracks) || !tracks.length || tracks.some(track => !allowedMusicTrack(track))) throw new Error('invalid_collection')
-      const waitingForAutoplay = Boolean(state.autoplaySearching)
-      if (waitingForAutoplay) state.pendingEnqueues = (state.pendingEnqueues || 0) + 1
+      const release = autoplay.reserveManual(guildId)
       return actions.run(guildId, async () => {
         const current = () => !client._shuttingDown && getState(guildId) === state && (state.requestEpoch || 0) === epoch
         if (!current()) throw new Error('collection_cancelled')
@@ -231,12 +245,13 @@ module.exports = client => {
         const rows = tracks.map(track => ({ ...track, info: { ...(track.info || track),
           requester: requester?.username || 'Usuario', requesterId: requester?.id } }))
         return this.enqueue(guildId, rows)
-      }).finally(() => { if (waitingForAutoplay) state.pendingEnqueues-- })
+      }).finally(release)
     },
 
     async enqueue(guildId, tracks, { front = false, skip = false } = {}) {
       if (!Array.isArray(tracks) || !tracks.length) throw new Error('No hay pistas para añadir.')
       if (tracks.some(track => !allowedMusicTrack(track))) throw new Error('source_not_allowed')
+      autoplay.cancel(guildId, { manual: true })
       const state = getState(guildId)
       if (front) state.queue.unshift(...tracks)
       else state.queue.push(...tracks)
@@ -347,49 +362,14 @@ module.exports = client => {
       while (next && !allowedMusicTrack(next)) next = takeNext()
 
       if (!next) {
-        if (state.autoplay && state.currentTrack) {
-          const seed = state.currentTrack, playbackId = state.playbackId, stopEpoch = state.stopRequestEpoch || 0
-          const isCurrent = () => playerStates.get(guildId) === state && state.currentTrack === seed &&
-            state.playbackId === playbackId && (state.stopRequestEpoch || 0) === stopEpoch && state.status !== 'stopping' && !client._shuttingDown &&
-            client.shoukaku.players.get(guildId) === player
-          state.lastPosition = elapsedForState(guildId, state)
-          state.startedAt = null; state.status = 'loading'
-          emitState(guildId)
-          let pick
-          const lookup = new AbortController()
-          state.autoplayLookup = lookup
-          state.autoplaySearching = true
-          try { pick = await require('./autoplay').findAutoplayTrack(this, guildId, seed, state.history, () => isCurrent() && state.autoplay && !state.queue.length && !state.pendingEnqueues, lookup.signal) }
-          finally { state.autoplaySearching = false; if (state.autoplayLookup === lookup) state.autoplayLookup = null }
-          if (!isCurrent()) return
-          if (state.pendingEnqueues) {
-            state.history.unshift(seed); if (state.history.length > 10) state.history.pop()
-            state.currentTrack = null; state.lastPosition = 0
-            emitState(guildId)
-            return
-          }
-          if (state.queue.length) return this._playNext(guildId, player, { rotate: false })
-          if (pick && state.autoplay) {
-            pick.info.requester = state.radioMode ? 'Radio' : 'Autoplay'
-            state.history.unshift(seed); if (state.history.length > 10) state.history.pop()
-            state.currentTrack = pick; state.lastPosition = 0; state.paused = false
-            rememberTrack(guildId, pick)
-            await playQueuedTrack(guildId, player, state, pick.encoded)
-            emitState(guildId)
-            return
-          }
-          console.warn('[Music] Autoplay: no playable new candidates')
+        if (state.autoplay && state.currentTrack && !state.pendingEnqueues) {
+          autoplay.start(guildId, player)
+          return
         }
-
-        state.currentTrack = null; state.startedAt = null; state.lastPosition = 0; state.paused = false
-        await stopLiveUpdate(guildId)
-        liveMessages.delete(guildId)
-        await player.stopTrack()
-        try { await require('../music/lyricsLive').stop(guildId, client) } catch {}
-        try { await require('../music/setup').resetToIdle(client, guildId) } catch (error) { console.warn('[Music] Idle panel:', error.message) }
-        emitState(guildId)
-        return
+        autoplay.cancel(guildId)
+        return idlePlayer(guildId, player)
       }
+      autoplay.cancel(guildId)
 
       // Resolución lazy: tracks de playlists guardadas vienen sin encoded
       if (!next.encoded) {
@@ -859,22 +839,26 @@ module.exports = client => {
     client.music[name] = function (guildId, ...args) {
       const state = getState(guildId)
       const seekRequest = ['seek', 'seekRelative'].includes(name) ? { track: state.currentTrack, playbackId: state.playbackId, epoch: state.requestEpoch || 0 } : null
+      const transition = ['_playNext', '_recoverFailedTrack'].includes(name)
+        ? { track: state.currentTrack, playbackId: state.playbackId, player: client.shoukaku?.players?.get(guildId) } : null
       if (name === 'stop') {
         recovery.cancel(guildId)
         state.autoplayLookup?.abort()
         state.requestEpoch = (state.requestEpoch || 0) + 1
         state.stopRequestEpoch = (state.stopRequestEpoch || 0) + 1
       }
-      const waitingEnqueue = name === 'enqueue' && state.autoplaySearching && Array.isArray(args[0]) && args[0].length > 0 && args[0].every(allowedMusicTrack)
-      if (waitingEnqueue) state.pendingEnqueues = (state.pendingEnqueues || 0) + 1
+      const release = name === 'enqueue' && Array.isArray(args[0]) && args[0].length > 0 && args[0].every(allowedMusicTrack)
+        ? autoplay.reserveManual(guildId) : () => {}
       return actions.run(guildId, () => {
+        if (transition && (playerStates.get(guildId) !== state || state.currentTrack !== transition.track ||
+            state.playbackId !== transition.playbackId || client.shoukaku?.players?.get(guildId) !== transition.player)) return
         if (seekRequest && (getState(guildId) !== state || state.currentTrack !== seekRequest.track ||
             state.playbackId !== seekRequest.playbackId || (state.requestEpoch || 0) !== seekRequest.epoch)) {
           throw new Error('La reproducción cambió. Vuelve a solicitar el cambio de posición.')
         }
         return operation.call(this, guildId, ...args)
       })
-        .finally(() => { if (waitingEnqueue) state.pendingEnqueues-- })
+        .finally(release)
     }
   }
 
@@ -1006,8 +990,9 @@ module.exports = client => {
   }
   client.music.restoreSessions = restoreSessions
   client.music.flushSessions = async () => {
-    if (client._shuttingDown) { clearInterval(checkpoint); clearTimeout(restoreRetry); require('./lyricsLive').suspend() }
+    if (client._shuttingDown) { clearInterval(checkpoint); clearTimeout(restoreRetry); require('./lyricsLive').suspend(); autoplay.suspend() }
     await require('./lyricsLive').flush()
+    await autoplay.drain()
     await actions.drain()
     await Promise.allSettled([...volumeWrites.values()])
     await panels.drain()
