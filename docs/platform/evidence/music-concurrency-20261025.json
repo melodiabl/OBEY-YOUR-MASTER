@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "music_incident_exception_during_P0",
+  "status": "deployed_verified_increment_global_gates_open",
+  "code": "64796831efc3f55f97b335b9db970df0457c04b4",
+  "image": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+  "tag": "localhost/obey-your-master_bot:release-music-stability-20261025-6479683",
+  "sourceCommits": [
+    "db635cd",
+    "526853c",
+    "6479683"
+  ],
+  "scope": [
+    "Autoplay lookup outside serialized mutations",
+    "Uniform pending manual intent and cancellation",
+    "Fresh playback identity at queued end/error execution",
+    "Fresh connected-playback check before applying queued restoration",
+    "Invalid query validation before autoplay cancellation"
+  ],
+  "nodes": {
+    "default": "serenetia",
+    "backups": [
+      "millohost"
+    ],
+    "temporarilyDisabled": {
+      "gdjkhp": "Configured credentials rejected with HTTP/WebSocket 401",
+      "trinium-02": "Remote player missing recurred in the intermediate rollout; exact cause unconfirmed"
+    },
+    "privateEnabled": false,
+    "warpEnabled": false
+  },
+  "verification": {
+    "originalTests": 25,
+    "temporaryCases": 23,
+    "finalImage": {
+      "exitCode": 0,
+      "image": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+      "results": {
+        "tests": 48,
+        "pass": 48,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "failures": []
+    },
+    "originalTestFiles": 3,
+    "baseline14": {
+      "tests": 14,
+      "pass": 6,
+      "fail": 8,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "lateEventBaselineFailed": true,
+    "restoreBaseline": {
+      "tests": 6,
+      "pass": 5,
+      "fail": 1,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "manualRestoreBaselineFailed": true,
+    "invalidQueryBaselineFailed": true,
+    "fixtureSha256": "cfe4d9e6374b0525f2b2cc65ca7bf63902f0adba83a7fb545c8ddf5de6976390",
+    "typesAndBoundaries": true,
+    "frontendBuild": true,
+    "effectiveInventory": {
+      "commands": 675,
+      "aliases": 779,
+      "httpRoutes": 95
+    },
+    "liveHashes": {
+      "checked": 991,
+      "failed": [],
+      "node": "v22.23.4",
+      "bundledUndici": "6.29.1",
+      "user": 1000
+    },
+    "httpPassed": 7,
+    "httpTotal": 7,
+    "publicAssetHashesMatched": 12,
+    "publicAssetsTotal": 12,
+    "temporaryHelperRetired": true,
+    "isolatedBuildCheckoutRetired": true,
+    "unusedCandidateRetired": true,
+    "preexistingPendingFilesPreserved": 16
+  },
+  "observation": {
+    "first": "2026-10-24T22:32:11.658000+00:00",
+    "last": "2026-10-24T22:34:23.341477+00:00",
+    "samples": 14,
+    "healthySamples": 14,
+    "automaticRestarts": 0,
+    "startup": {
+      "at": "2026-10-24T22:35:02.493078+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "millohost",
+        "serenetia"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "sessionRestoredLogEvents": 1,
+      "recoveryFailures": 0,
+      "voiceHealthSamples": 7,
+      "voicePingByNode": {
+        "serenetia": {
+          "samples": 6,
+          "minMs": 130,
+          "maxMs": 131
+        }
+      },
+      "slowRequests": [],
+      "autoplayTransitionFailureEvents": 0
+    }
+  },
+  "backup": {
+    "bytes": 59270687,
+    "gzipCrcVerified": true
+  },
+  "rollback": {
+    "immediateImage": "455c0567f4a17ac15d48889661a0106a49e53d32e52e388b2ae25a9d3fc5c9c5",
+    "recipes": ".runtime/music-stability-20261025/",
+    "olderImage": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
+    "olderRecipes": ".runtime/music-concurrency-20261024/",
+    "databaseRestored": false
+  },
+  "rollout": {
+    "intermediateImage": "455c0567f4a17ac15d48889661a0106a49e53d32e52e388b2ae25a9d3fc5c9c5",
+    "finalImage": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+    "onlyBotRecreated": true,
+    "newVoiceTestSessions": 0,
+    "discordTestMessages": 0,
+    "remotePush": false,
+    "remoteCI": false
+  },
+  "limits": [
+    "No audio listening or authenticated manual button verification.",
+    "Node latency/connectivity observations are bounded and do not prove uninterrupted playback.",
+    "Lavalink-client migration, SDK isolation and NodeLink native capabilities remain pending.",
+    "P0 and P1 global gates remain open; pending Config/setup changes were preserved outside these images.",
+    "Backup preference alone was not the restore bug: getNode already keeps the active player. The reproduced bug was missing a fresh check after waiting for actions.",
+    "An early public HTTP probe used urllib default User-Agent and received 403; corrected invocation passed."
+  ],
+  "report": "../MUSIC-CONCURRENCY-2026-10-25.md",
+  "finalCheck": {
+    "at": "2026-10-24T22:45:02.907077+00:00",
+    "image": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+    "containerHealth": "healthy",
+    "automaticRestarts": 0,
+    "httpHealth": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 833
+    },
+    "recoveryFailureLogEvents": 0,
+    "unavailableNodeLogEvents": 0,
+    "autoplayTransitionFailureLogEvents": 0
+  }
+}

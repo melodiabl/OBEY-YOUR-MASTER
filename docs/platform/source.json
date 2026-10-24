@@ -27,21 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "8e7b9ea366dd7c70f3892b8fa80a265a478951a5",
-    "image": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
-    "selectedPublicNode": "trinium-02",
+    "code": "64796831efc3f55f97b335b9db970df0457c04b4",
+    "image": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+    "selectedPublicNode": "serenetia",
     "backupOrder": [
-      "serenetia",
-      "gdjkhp",
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-setup-config-20261024.json",
-    "change": "Setup selection/page parity, shared role setup policies/persistence, patched HTTP/validation dependencies and Node runtime",
-    "tag": "localhost/obey-your-master_bot:release-p0-setup-config-20261024-8e7b9ea",
+    "evidence": "evidence/music-concurrency-20261025.json",
+    "change": "Autoplay outside mutations, manual priority, stale transition/restore fences and verified public node selection",
+    "tag": "localhost/obey-your-master_bot:release-music-stability-20261025-6479683",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-setup-config-20261024.json",
-    "deploymentKind": "application_only_p0_setup_config_security_release",
+    "statusEvidence": "evidence/music-concurrency-20261025.json",
+    "deploymentKind": "application_music_concurrency_and_public_node_selection",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -50,6 +48,16 @@
       "report": "MUSIC-AUDIT-2026-10-24.md",
       "verdict": "degraded_music_despite_basic_health",
       "runtimeChanged": false
+    },
+    "musicCorrection": {
+      "date": "2026-10-25",
+      "report": "MUSIC-CONCURRENCY-2026-10-25.md",
+      "evidence": "evidence/music-concurrency-20261025.json",
+      "globalMigrationAccepted": false,
+      "temporarilyDisabledPublicNodes": [
+        "gdjkhp",
+        "trinium-02"
+      ]
     }
   },
   "preserve": [

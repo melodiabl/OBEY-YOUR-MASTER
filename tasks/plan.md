@@ -16,7 +16,7 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 ### Incidencia musical auditada · 24/10/2026
 
-El usuario solicitó una auditoría y cuestionó la arquitectura durante la unidad Config. [Informe](../docs/platform/MUSIC-AUDIT-2026-10-24.md) y [evidencia](../docs/platform/evidence/music-architecture-audit-20261024.json): respaldos actualmente fallidos, recuperación agotada, pausa retenida por autoplay y prioridad manual incompleta reproducidas. Diagnóstico terminado; correcciones y migración continúan pendientes. No hubo cambios operativos ni se cerró P0/P1. Config conserva su unidad pendiente; los hallazgos se vinculan a P0/P1 sin sustituir la secuencia global.
+El usuario solicitó una auditoría y cuestionó la arquitectura durante la unidad Config. [Informe](../docs/platform/MUSIC-AUDIT-2026-10-24.md) y [evidencia](../docs/platform/evidence/music-architecture-audit-20261024.json): respaldos actualmente fallidos, recuperación agotada, pausa retenida por autoplay y prioridad manual incompleta reproducidas. Diagnóstico terminado; [concurrencia y restauración corregidas](../docs/platform/MUSIC-CONCURRENCY-2026-10-25.md) y desplegadas en `6479683`. La migración y los demás hallazgos siguen pendientes. No hubo cambios operativos ni se cerró P0/P1. Config conserva su unidad pendiente; los hallazgos se vinculan a P0/P1 sin sustituir la secuencia global.
 
 ### Unidad inmediata: completar la conciliación de P0
 

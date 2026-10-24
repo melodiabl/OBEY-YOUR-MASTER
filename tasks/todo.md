@@ -1869,7 +1869,7 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Auditar runtime, respaldos, recuperación, salud y consumidores; reproducir bloqueo de controles y prioridad manual sin tocar voz real.
 - [x] Conservar evidencia redactada, 25 tests originales y diagnóstico sin scripts/tests permanentes nuevos.
 - [ ] Conciliar errores HTTP/sesión/voz y respaldos utilizables antes de reintentar la sesión agotada.
-- [ ] Corregir autoplay fuera de la sección de mutación e intención manual uniforme en todas las entradas; comprobar cancelación y resultados tardíos.
+- [x] Corregir autoplay fuera de la sección de mutación e intención manual uniforme en todas las entradas; comprobar cancelación y resultados tardíos. [Entrega desplegada y límites](../docs/platform/MUSIC-CONCURRENCY-2026-10-25.md).
 - [ ] Completar fachada musical, capacidades NodeLink y migración de cola única en P1 con los casos de aceptación del maestro.
 
 [Auditoría y límites](../docs/platform/MUSIC-AUDIT-2026-10-24.md). Sin cambios de runtime en esta auditoría; P0 y Config siguen pendientes.

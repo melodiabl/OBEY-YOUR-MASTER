@@ -1,5 +1,9 @@
 # Estado entregado · 17/10/2026
 
+## 25/10/2026 · concurrencia musical corregida y desplegada
+
+Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de controles; intención manual uniforme y resultados/eventos/restauraciones antiguos protegidos al ejecutar. Cuarenta y ocho casos en imagen pasan; 991 hashes, HTTP y assets comprobados. Catorce muestras saludables, cero reinicios y cero fallos de recuperación en la ventana observada. Serenetia principal, MilloHost respaldo; GDjkhp y Trinium 02 apartados temporalmente. Respaldo CRC y reversión conservados. [Entrega y límites](MUSIC-CONCURRENCY-2026-10-25.md). Sin voz/mensajes de prueba ni push; verificadores y checkout propios retirados. La migración musical y G01/G02 siguen abiertos. Los cambios locales pendientes de Config/setups se conservan; la siguiente unidad P0 mantiene su lugar.
+
 ## Orden de ejecución vigente · corrección del usuario
 
 **Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
