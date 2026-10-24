@@ -67,12 +67,26 @@
       "routes": [
         "POST /dashboard/:guildId"
       ],
-      "service": null,
+      "service": "handlers/prefix-settings.js#createPrefixSettings delegates to the existing setup-settings CAS; handlers/prefix-command.js shares Discord orchestration",
       "store": "client.settings SyncMap prefix",
-      "status": "divergence_recorded",
-      "finding": "All write the same field independently. Discord rejects length >5; web truncates to5, whitespace validation differs. Cache-first background writes can acknowledge before persistence.",
+      "status": "corrected_and_verified_in_isolation",
+      "finding": "All three guild interfaces share one validator and awaited conditional persistence; web saves prefix alone, without truncation or unrelated settings writes.",
       "nextTask": "T12",
-      "phase": "P2"
+      "phase": "P2",
+      "parameters": {
+        "prefix": "1–5 UTF-16 code units; reject whitespace, control and format characters",
+        "revision": "SHA256 snapshot over persisted prefix field presence/value"
+      },
+      "permissions": {
+        "discord": "Existing Administrator metadata plus fresh requireSetupAccess before save",
+        "web": "Existing OAuth owner/ManageGuild/Administrator plus fresh guild permission middleware and CSRF"
+      },
+      "result": "Success only after conditional persistence; stale revision conflict; failure does not acknowledge success",
+      "idempotency": "Matching unchanged value is a no-op; stale revision rejected; no durable operation receipt",
+      "i18n": "setup.prefix.* es/en with existing fallback for other languages",
+      "evidence": "evidence/p0-prefix-20261024.json",
+      "scope": "Guild override only; global owner default and full reset are separate intents",
+      "remaining": "Authenticated real Discord/OAuth walkthrough; T12 global configuration migration remains open"
     },
     {
       "id": "music.likes.set",
@@ -212,21 +226,49 @@
       "finding": "Independent check/debit/credit operations; slash validates a safe integer and self-payment, prefix accepts Number. Shared cache does not make two-account transfer atomic or durable.",
       "nextTask": "T46",
       "phase": "P6"
+    },
+    {
+      "id": "configuration.prefix.global.set",
+      "commands": [
+        "prefix:changeprefix"
+      ],
+      "routes": [],
+      "service": null,
+      "store": "botconfig/config.json in memory and fs.writeFile",
+      "status": "distinct_legacy_intent_recorded",
+      "scope": "Global default, used when a guild has no prefix override",
+      "permissions": "Legacy bot-owner-list guard plus Administrator metadata",
+      "finding": "Separate from guild override; asynchronous file write and legacy owner-list substring check require explicit owner-configuration review. Not migrated or executed by this increment.",
+      "nextTask": "T12 / T55"
+    },
+    {
+      "id": "configuration.guild.reset",
+      "commands": [
+        "prefix:resetsettings"
+      ],
+      "routes": [],
+      "service": null,
+      "store": "Multiple guild stores deleted through legacy SyncMaps",
+      "status": "distinct_legacy_intent_recorded",
+      "scope": "Full guild configuration/data reset, not a prefix change",
+      "permissions": "Legacy bot-owner-list guard and explicit yes confirmation",
+      "finding": "Deletes whole settings including prefix and other stores. Kept separate from individual field saves; no reset invoked and no recovery acceptance claimed.",
+      "nextTask": "T12 / T29"
     }
   ],
   "coverage": {
-    "reviewedGroups": 9,
-    "commandEntriesReviewed": 25,
+    "reviewedGroups": 11,
+    "commandEntriesReviewed": 27,
     "httpRoutesReviewed": 19,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 650,
+    "remainingCommandEntries": 648,
     "remainingHttpRoutes": 76
   },
   "globalG01G02Accepted": false,
   "limits": [
     "Source tracing establishes current authorities, not end-to-end acceptance",
-    "Only language write behavior was executed against synthetic state in this increment",
+    "Language and guild-prefix behavior were executed only against synthetic state; remaining groups establish source ownership, not business acceptance",
     "No moderation actions, Discord messages, real database writes or voice joins used for this review"
   ]
 }

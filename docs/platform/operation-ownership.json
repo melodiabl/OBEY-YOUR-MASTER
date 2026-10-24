@@ -418,7 +418,7 @@
     "commands/Settings/defaultequalizer.js": "d43e4151dabfd95504aaac4ed3ec8f4cece848051d3dc9b844d90863aea01245",
     "commands/Settings/defaultvolume.js": "b5b7a1775b0d2ccd4a41c6c65977584e227269f57257e799e5c5d30d2a535cd3",
     "commands/Settings/playmsg.js": "fe8861ffc33b3e6ac28e0f0b74259afa3d1560dd3d692803da92b347696e17eb",
-    "commands/Settings/prefix.js": "97836486bf59f4b511ba2e8fe374bac1775d37f7027ef2153dd8f30891b22fce",
+    "commands/Settings/prefix.js": "25d2f65f249f31c459583dcffde428b1c158c507b57379cadc8a2d747dbb0061",
     "commands/Settings/removebotchat.js": "ad87a4bfd037f031198d5a6735063342f02f4bdccdb9f894227118caff35316e",
     "commands/Settings/removedj.js": "c48058ecfa9c80fb5b263f6d2420d4e24c7ec6e1dced641ea7d6d1605a4995ca",
     "commands/Settings/removemoney.js": "1b6e684421a0c93bb83fc3e8c82ac4d0c586ba0129cf790967ed0fdc97770e86",
@@ -547,7 +547,7 @@
     "dashboard/configuration-routes.js": "6637add63b556cf4a08431a3dd2f8e6e458391a7f00542fa1c137e60d9bb5fb2",
     "dashboard/frontend-routes.js": "4e68b61fff7adceff7729f981cc5908454bcddce1b3b01517a1e8f0f50c7f434",
     "dashboard/help-routes.js": "bb0056da7c903c2a060ae37a70e00f2e64e25b311600f6f0c55a65f641501d55",
-    "dashboard/index.js": "0e65f00144474bff6d1b4c48524f06eb213b6efde6c6c19994fb04298d9e7f03",
+    "dashboard/index.js": "30facbf86c5c05611bb71572aa43527ecaf65d27ccf06ba46e25559df0a52db4",
     "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
     "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
     "dashboard/music-visibility.js": "69ccb986fef629933848cf9baac403e7e672b3a29f28182bf8d5e2214bd5c927",
@@ -749,6 +749,8 @@
     "handlers/permissions.js": "dfd543e3fb6e1420e0663210a308ec03d1e0eb85d7db04dfd583f522232fc078",
     "handlers/pokemon-game.js": "f96367b81f1e7f92cc0699ff150b34c352e6defcc2de26c53d93fe248f58429e",
     "handlers/position.js": "28a486d88685edf74ac52fb9bcfc83b36cbf669d0b8c90c8fa706b12630f17dc",
+    "handlers/prefix-command.js": "90a21e53fd480cb8e22dbb5396cf96304245bf3be70ea2ea1fefe360cf0bed3e",
+    "handlers/prefix-settings.js": "739018a9133764622402a707e93236e7bc211aec8e3b4b95f0a5e25b3a5b9272",
     "handlers/presentation/metadata.js": "adea78322c7b811a8c873043f2703f9cd41671f61a1cbc62a09076c042338757",
     "handlers/presentation/modules.js": "67e0c67af905d3f4406098a840712176503a1b9a062855d9535ff0352ff31241",
     "handlers/project/bot-info.js": "588033d2b87b3074f6fa9619e629f357ba4a5f896f967c3e7f72ce29ee9b01ce",
@@ -843,7 +845,7 @@
     "slashCommands/Config/idioma.js": "1d3981d7af6d686b277e019e2eed693d9bd52a094700767c4468a018d80e8ef8",
     "slashCommands/Config/logs.js": "c270500e1118431b0bfad0e547f69cde2f1e44d0ef9c01a6f07efd683794e927",
     "slashCommands/Config/musica.js": "3c8768fc417c0bda48f105ff900eadbfbfc1be22375f85838e117b2da65c61e9",
-    "slashCommands/Config/prefix.js": "676f202a0d14f2e1e7e9e493f1a1f06155c0f611b34b2808a7e766ff883d7bc6",
+    "slashCommands/Config/prefix.js": "22a52cee18e8ab5b9f959426e4940b5b80888e11df4592e43f88055e04f6cfa9",
     "slashCommands/Config/setupmusic.js": "686c5cf7da0b2b2aa9e625af4d8bcbd95f8134af991338b063a80326fdc81f77",
     "slashCommands/Config/ver.js": "1b298a904b369338167c6b2976ea74978563a5a183f9e18925558349798b6a63",
     "slashCommands/Economy/balance.js": "c0cf238ce6e8648b339a57bfe5d0ea436b3ce57c3ff09489242721af9a013a13",
@@ -8761,7 +8763,7 @@
           "line": 377
         },
         {
-          "call": "client.giveawaysManager .edit(giveaway.messageId, { setEndTimestamp: Date.now(), }) .then(() => { message.reply({ content: \"¡El sorteo terminará en menos de 10 Segundos!\" }); }) .catch",
+          "call": "client.giveawaysManager .edit(giveaway.messageId, { setEndTimestamp: Date.now(), }) .then(() => { message.reply({ content: \"\u00a1El sorteo terminar\u00e1 en menos de 10 Segundos!\" }); }) .catch",
           "line": 383
         },
         {
@@ -8781,7 +8783,7 @@
           "line": 406
         },
         {
-          "call": "client.giveawaysManager .reroll(giveaway.messageId, { winnerCount: !isNaN(args[1]) ? Number(args[1]) : 1 }) .then(() => { message.reply({ content: eval(client.la[ls][\"cmds\"][\"administration\"][\"giveaway\"][\"variable35\"]) + \"¡Consejo!\\n¡Agrega la cantidad de ganadores para repetir al final!\", }); }) .catch",
+          "call": "client.giveawaysManager .reroll(giveaway.messageId, { winnerCount: !isNaN(args[1]) ? Number(args[1]) : 1 }) .then(() => { message.reply({ content: eval(client.la[ls][\"cmds\"][\"administration\"][\"giveaway\"][\"variable35\"]) + \"\u00a1Consejo!\\n\u00a1Agrega la cantidad de ganadores para repetir al final!\", }); }) .catch",
           "line": 410
         },
         {
@@ -8797,7 +8799,7 @@
           "line": 437
         },
         {
-          "call": "client.giveawaysManager .pause(giveaway.messageId) .then(() => { message.reply({ content: \"¡Éxito! Sorteo Pausado\" }); }) .catch",
+          "call": "client.giveawaysManager .pause(giveaway.messageId) .then(() => { message.reply({ content: \"\u00a1\u00c9xito! Sorteo Pausado\" }); }) .catch",
           "line": 441
         },
         {
@@ -8817,7 +8819,7 @@
           "line": 466
         },
         {
-          "call": "client.giveawaysManager .unpause(giveaway.messageId) .then(() => { message.reply({ content: \"¡Éxito! Sorteo Reanudado\" }); }) .catch",
+          "call": "client.giveawaysManager .unpause(giveaway.messageId) .then(() => { message.reply({ content: \"\u00a1\u00c9xito! Sorteo Reanudado\" }); }) .catch",
           "line": 470
         },
         {
@@ -13996,47 +13998,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Settings/prefix.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 14
-        },
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.getFooter",
-          "line": 23
-        },
-        {
-          "call": "client.getFooter",
-          "line": 34
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.settings.set",
-          "line": 49
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 59
-        },
-        {
-          "call": "client.getFooter",
-          "line": 62
-        },
-        {
-          "call": "client.getFooter",
-          "line": 72
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Economy/profile.js": {
       "kind": "current-command-adapter",
@@ -22926,15 +22889,8 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Config/prefix.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.set",
-          "line": 21
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "slashCommands/Config/setupmusic.js": {
       "kind": "current-command-adapter",
@@ -25033,99 +24989,99 @@
       "observedClientCalls": [
         {
           "call": "client.shoukaku?.options?.nodeResolver",
-          "line": 123
+          "line": 124
         },
         {
           "call": "client.guilds.cache.reduce",
-          "line": 236
+          "line": 237
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 277
+          "line": 278
         },
         {
           "call": "client.invitesdb?.array",
-          "line": 280
+          "line": 281
         },
         {
           "call": "client.guilds.cache.has",
-          "line": 327
+          "line": 328
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 340
+          "line": 341
         },
         {
           "call": "client.welcomeConfiguration.readPublished",
-          "line": 349
+          "line": 350
         },
         {
           "call": "client.settings.get",
-          "line": 358
+          "line": 362
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 386
+          "line": 392
         },
         {
           "call": "client.welcomeConfiguration.savePublished",
-          "line": 445
+          "line": 464
         },
         {
           "call": "client.musicsettings.set",
-          "line": 508
+          "line": 525
         },
         {
           "call": "client.music?.setAutoplay",
-          "line": 511
+          "line": 528
         },
         {
           "call": "client.settings.flush",
-          "line": 518
+          "line": 535
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 526
+          "line": 543
         },
         {
           "call": "client.invitesdb?.array",
-          "line": 553
+          "line": 570
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 602
+          "line": 619
         },
         {
           "call": "client.settings.get",
-          "line": 611
+          "line": 628
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 622
+          "line": 639
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 640
+          "line": 657
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 650
+          "line": 667
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 715
+          "line": 732
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 793
+          "line": 810
         },
         {
           "call": "client.on",
-          "line": 855
+          "line": 872
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 856
+          "line": 873
         }
       ]
     }
@@ -32104,7 +32060,7 @@
       "method": "GET",
       "path": "/health",
       "owner": "dashboard/index.js",
-      "line": 121,
+      "line": 122,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32113,7 +32069,7 @@
       "method": "GET",
       "path": "/",
       "owner": "dashboard/index.js",
-      "line": 129,
+      "line": 130,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32122,7 +32078,7 @@
       "method": "GET",
       "path": "/login",
       "owner": "dashboard/index.js",
-      "line": 131,
+      "line": 132,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32131,7 +32087,7 @@
       "method": "GET",
       "path": "/auth/callback",
       "owner": "dashboard/index.js",
-      "line": 151,
+      "line": 152,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32140,7 +32096,7 @@
       "method": "POST",
       "path": "/logout",
       "owner": "dashboard/index.js",
-      "line": 186,
+      "line": 187,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32149,7 +32105,7 @@
       "method": "GET",
       "path": "/panel",
       "owner": "dashboard/index.js",
-      "line": 202,
+      "line": 203,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32158,7 +32114,7 @@
       "method": "POST",
       "path": "/api/refresh-guilds",
       "owner": "dashboard/index.js",
-      "line": 213,
+      "line": 214,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32167,7 +32123,7 @@
       "method": "GET",
       "path": "/api/sse",
       "owner": "dashboard/index.js",
-      "line": 249,
+      "line": 250,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32176,7 +32132,7 @@
       "method": "GET",
       "path": "/api/stats",
       "owner": "dashboard/index.js",
-      "line": 266,
+      "line": 267,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -32185,7 +32141,7 @@
       "method": "GET",
       "path": "/api/invites/:guildId",
       "owner": "dashboard/index.js",
-      "line": 273,
+      "line": 274,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32194,7 +32150,7 @@
       "method": "GET",
       "path": "/dashboard",
       "owner": "dashboard/index.js",
-      "line": 303,
+      "line": 304,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32203,7 +32159,7 @@
       "method": "GET",
       "path": "/dashboard/:guildId",
       "owner": "dashboard/index.js",
-      "line": 339,
+      "line": 340,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32212,7 +32168,7 @@
       "method": "POST",
       "path": "/dashboard/:guildId",
       "owner": "dashboard/index.js",
-      "line": 385,
+      "line": 391,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -32221,7 +32177,7 @@
       "method": "GET",
       "path": "/stats/:guildId",
       "owner": "dashboard/index.js",
-      "line": 525,
+      "line": 542,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32230,7 +32186,7 @@
       "method": "GET",
       "path": "/player/:guildId",
       "owner": "dashboard/index.js",
-      "line": 598,
+      "line": 615,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32239,7 +32195,7 @@
       "method": "GET",
       "path": "/music/:guildId",
       "owner": "dashboard/index.js",
-      "line": 601,
+      "line": 618,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32248,7 +32204,7 @@
       "method": "GET",
       "path": "/library/:guildId",
       "owner": "dashboard/index.js",
-      "line": 621,
+      "line": 638,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32257,7 +32213,7 @@
       "method": "GET",
       "path": "/api/player/:guildId",
       "owner": "dashboard/index.js",
-      "line": 639,
+      "line": 656,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32266,7 +32222,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/action",
       "owner": "dashboard/index.js",
-      "line": 648,
+      "line": 665,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -32275,7 +32231,7 @@
       "method": "GET",
       "path": "/api/player/:guildId/top-tracks",
       "owner": "dashboard/index.js",
-      "line": 683,
+      "line": 700,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32284,7 +32240,7 @@
       "method": "GET",
       "path": "/api/player/:guildId/voice-channels",
       "owner": "dashboard/index.js",
-      "line": 711,
+      "line": 728,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -32293,7 +32249,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/preview",
       "owner": "dashboard/index.js",
-      "line": 724,
+      "line": 741,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -32302,7 +32258,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/search",
       "owner": "dashboard/index.js",
-      "line": 771,
+      "line": 788,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -32311,7 +32267,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/add",
       "owner": "dashboard/index.js",
-      "line": 791,
+      "line": 808,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     }
@@ -36178,10 +36134,6 @@
           "line": 4
         },
         {
-          "file": "dashboard/index.js",
-          "line": 5
-        },
-        {
           "file": "handlers/card-delivery.js",
           "line": 1
         },
@@ -36192,6 +36144,10 @@
         {
           "file": "handlers/musiccatalog.js",
           "line": 1
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 5
         }
       ]
     },
@@ -39074,10 +39030,6 @@
           "line": 3
         },
         {
-          "file": "slashCommands/Config/prefix.js",
-          "line": 3
-        },
-        {
           "file": "slashCommands/Config/ver.js",
           "line": 3
         },
@@ -39590,10 +39542,6 @@
           "line": 2
         },
         {
-          "file": "dashboard/index.js",
-          "line": 9
-        },
-        {
           "file": "events/guild/interactionCreate.js",
           "line": 12
         },
@@ -40044,6 +39992,14 @@
         {
           "file": "index.js",
           "line": 8
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/prefix-command.js",
+          "line": 1
         }
       ]
     },
@@ -40332,10 +40288,6 @@
       "declared": true,
       "sites": [
         {
-          "file": "dashboard/index.js",
-          "line": 120
-        },
-        {
           "file": "handlers/jobs.js",
           "line": 5
         },
@@ -40350,6 +40302,10 @@
         {
           "file": "index.js",
           "line": 28
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 123
         }
       ]
     },
@@ -41130,6 +41086,10 @@
         {
           "file": "handlers/welcome/contract.js",
           "line": 2
+        },
+        {
+          "file": "handlers/prefix-settings.js",
+          "line": 1
         }
       ]
     }
@@ -41149,7 +41109,7 @@
     "slashTopLevel": 20,
     "aliases": 779,
     "httpRoutes": 95,
-    "sourceFiles": 963,
+    "sourceFiles": 965,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

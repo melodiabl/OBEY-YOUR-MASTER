@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="/css/log-settings.css">
 
 <!-- Saved/error alert -->
+<% if (typeof prefixSaved !== 'undefined' && prefixSaved) { %>
+  <div class="alert alert-success" role="status" style="margin-bottom:14px">Prefijo guardado correctamente.</div>
+<% } %>
 <% if (typeof languageSaved !== 'undefined' && languageSaved) { %>
   <div class="alert alert-success" role="status" style="margin-bottom:14px">Idioma guardado correctamente.</div>
 <% } %>
@@ -71,9 +74,10 @@
         <div class="card-body">
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Prefijo de comandos</label>
-              <span class="form-help">Usado para comandos legacy (texto)</span>
-              <input type="text" name="prefix" value="<%= settings.prefix || '!' %>" maxlength="5" class="form-input sm">
+              <label class="form-label" for="guild-prefix">Prefijo de comandos</label>
+              <span class="form-help" id="guild-prefix-help">De 1 a 5 caracteres sin espacios. Se guarda con su propio botón.</span>
+              <input id="guild-prefix" type="text" name="prefix" form="prefix-settings-form" value="<%= settings.prefix %>" maxlength="5" minlength="1" required aria-describedby="guild-prefix-help" class="form-input sm">
+              <button type="submit" form="prefix-settings-form" class="btn btn-p btn-sm">Guardar prefijo</button>
             </div>
             <div class="form-group">
               <label class="form-label" for="guild-language">Idioma</label>
@@ -489,6 +493,10 @@
 <form id="language-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
   <input type="hidden" name="_intent" value="language">
   <input type="hidden" name="languageRevision" value="<%= settings.languageRevision %>">
+</form>
+<form id="prefix-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
+  <input type="hidden" name="_intent" value="prefix">
+  <input type="hidden" name="prefixRevision" value="<%= settings.prefixRevision %>">
 </form>
 <script src="/js/log-settings.js" defer></script>
 

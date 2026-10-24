@@ -1607,6 +1607,13 @@
       "unpublished": "Publicación retirada o vínculo desactivado.",
       "publishFailed": "No se confirmó toda la publicación. Revisa el canal, los permisos y los emojis antes de volver a intentarlo.",
       "publicationUncertain": "No se confirmó la creación. Revisa Discord y selecciona el mensaje o canal que se creó antes de publicar otra vez."
+    },
+    "prefix": {
+      "saved": "Prefijo guardado.",
+      "current": "Prefijo actual: {prefix}",
+      "invalid": "Usa de 1 a 5 caracteres, sin espacios ni caracteres invisibles.",
+      "conflict": "El prefijo cambió desde otra entrada. Consulta el valor actual antes de intentarlo de nuevo.",
+      "unavailable": "No pude confirmar el guardado. Consulta el prefijo actual antes de volver a intentarlo."
     }
   },
   "logs": {

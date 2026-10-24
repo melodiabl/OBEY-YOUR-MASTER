@@ -1607,6 +1607,13 @@
       "unpublished": "Publication removed or binding disabled.",
       "publishFailed": "The full publication was not confirmed. Check the channel, permissions and emojis before retrying.",
       "publicationUncertain": "Creation was not confirmed. Check Discord and select the message or channel that was created before publishing again."
+    },
+    "prefix": {
+      "saved": "Prefix saved.",
+      "current": "Current prefix: {prefix}",
+      "invalid": "Use 1 to 5 characters, without whitespace or invisible characters.",
+      "conflict": "The prefix changed elsewhere. Check its current value before trying again.",
+      "unavailable": "The save could not be confirmed. Check the current prefix before trying again."
     }
   },
   "logs": {

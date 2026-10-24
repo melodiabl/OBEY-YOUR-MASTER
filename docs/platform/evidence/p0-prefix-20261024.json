@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-24",
+  "phase": "P0",
+  "status": "local_verification_passed_deployment_pending",
+  "scope": "Guild-prefix validation and confirmed persistence shared between text, slash and web; global prefix and full reset traced as separate legacy intents",
+  "inventory": "../shared-intents.json",
+  "coverage": {
+    "reviewedGroups": 11,
+    "commandEntriesReviewed": 27,
+    "httpRoutesReviewed": 19,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 648,
+    "remainingHttpRoutes": 76
+  },
+  "verification": {
+    "baselineAdapterCases": 20,
+    "baselinePassed": 4,
+    "baselineFailed": 16,
+    "fixedAdapterCasesPassed": 20,
+    "additionalSharedStoreCasesPassed": 3,
+    "originalTestsPassed": 25,
+    "originalTestFilesRetained": 3,
+    "storage": "Real SyncMap and setup-settings CAS over synthetic model; no real database",
+    "handler": "Actual dashboard POST handler extracted from source AST",
+    "types": true,
+    "dependencyBoundaries": true,
+    "browser": {
+      "browser": "Chrome/151.0.7922.34",
+      "fullEjsRendered": true,
+      "labelAssociation": true,
+      "mobileControlFits": true,
+      "keyboardSave": true,
+      "separateForms": true,
+      "languageAndOtherSettingsPreserved": true,
+      "csrfIncluded": true,
+      "csrfForgeryStatus": 403,
+      "staleSecondTabRejected": true,
+      "syntheticWrites": 1,
+      "uncaughtBrowserErrors": 0,
+      "realDiscordOrDatabase": false
+    }
+  },
+  "changes": [
+    "Shared 1–5 UTF-16 unit validator; reject whitespace/control/format characters without truncation",
+    "Existing setup-settings queue, conditional update, no-op and shutdown behavior reused",
+    "Same Discord orchestration, fresh Administrator/channel/bot checks before save",
+    "Web prefix form owns only its field/revision/CSRF; rejects old mixed or unversioned writes",
+    "Messages es/en; existing fallback for other languages"
+  ],
+  "limitations": [
+    "Authenticated real Discord/OAuth walkthrough pending",
+    "G01/G02 global acceptance remains open",
+    "Global owner configuration and full reset recorded without execution or migration",
+    "No durable cross-transport operation receipt; stale replay must reread revision"
+  ],
+  "deployment": null
+}

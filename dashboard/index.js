@@ -13,6 +13,7 @@ const { canManageGuild } = require('../handlers/permissions')
 const { sessionAuth, establishSession, dashboardReturnTo } = require('./auth')
 const { createLanguageSettings } = require('../handlers/language-settings')
 const { availableLanguages } = require('../handlers/setup-language')
+const { createPrefixSettings } = require('../handlers/prefix-settings')
 
 module.exports = async client => {
   const app    = express()
@@ -355,7 +356,11 @@ module.exports = async client => {
     let language
     try { language = await createLanguageSettings(client.settings, () => Boolean(client._shuttingDown)).read(guild.id) }
     catch { return res.status(503).json({ error: 'language_storage' }) }
-    const settings = { ...(client.settings.get(guild.id) || {}), language: language.language, languageRevision: language.revision,
+    let prefix
+    try { prefix = await createPrefixSettings(client).read(guild.id) }
+    catch { return res.status(503).json({ error: 'setup_storage' }) }
+    const settings = { ...(client.settings.get(guild.id) || {}), prefix: prefix.values.prefix || client.config?.prefix || '!', prefixRevision: prefix.revision,
+      language: language.language, languageRevision: language.revision,
       welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
     const logActor = guild.members.cache.get(req.session.user.id)
@@ -367,6 +372,7 @@ module.exports = async client => {
       settings,
       languages: availableLanguages(client),
       languageSaved: req.query.languageSaved === '1',
+      prefixSaved: req.query.prefixSaved === '1',
       logsConfiguration,
       logDestinationChannels: visibleLogChannels.filter(channel => [0, 5].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
       logSourceChannels: visibleLogChannels.filter(channel => [0, 2, 4, 5, 13, 15, 16].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
@@ -390,6 +396,20 @@ module.exports = async client => {
       return res.status(403).json({ error: 'No permission' })
 
     const b     = req.body
+    if (b._intent === 'prefix') {
+      if (Object.keys(b).some(key => !['_intent', 'prefix', 'prefixRevision', '_csrf'].includes(key)))
+        return res.status(400).json({ error: 'invalid_setup' })
+      try {
+        await createPrefixSettings(client).save(guild.id, { prefix: b.prefix }, b.prefixRevision)
+        return res.redirect(303, `/dashboard/${guild.id}?prefixSaved=1`)
+      } catch (error) {
+        const codes = { invalid_setup: 400, setup_conflict: 409, setup_unavailable: 503, setup_storage: 503 }
+        const code = Object.hasOwn(codes, error?.code) ? error.code : 'setup_storage'
+        return res.status(codes[code]).json({ error: code })
+      }
+    }
+    if (Object.hasOwn(b, 'prefix') || Object.hasOwn(b, 'prefixRevision'))
+      return res.status(409).json({ error: 'prefix_configuration_moved', configurationUrl: `/dashboard/${guild.id}` })
     if (b._intent === 'language') {
       if (Object.keys(b).some(key => !['_intent', 'language', 'languageRevision', '_csrf'].includes(key)) ||
           !availableLanguages(client).some(item => item.code === b.language))
@@ -411,7 +431,6 @@ module.exports = async client => {
     const patch = {}
 
     // General
-    if (b.prefix)                patch.prefix   = String(b.prefix).slice(0, 5)
     if (b.memberCount !== undefined) patch.memberCount = b.memberCount || null
     patch.autoEmbed = b.autoEmbed === 'on'
     patch.autoMeme  = b.autoMeme  === 'on'
@@ -463,7 +482,6 @@ module.exports = async client => {
 
     // Build bot-format paths
     const botPatch = {}
-    if (patch.prefix   !== undefined) botPatch.prefix   = patch.prefix
     if (patch.leaveChannel   !== undefined) botPatch['leave.channel']   = patch.leaveChannel   || 'nochannel'
     if (patch.leaveMessage   !== undefined) botPatch['leave.msg']       = patch.leaveMessage
     if (patch.muteRole       !== undefined) botPatch['mute.roleId']     = patch.muteRole       || null
@@ -483,7 +501,6 @@ module.exports = async client => {
     const s   = client.settings
     for (const [key, value] of Object.entries({ ...patch, ...botPatch })) s.set(gid, value, key)
 
-    if (patch.prefix   !== undefined) s.set(gid, patch.prefix,   'prefix')
     if (patch.leaveChannel   !== undefined) s.set(gid, patch.leaveChannel   || 'nochannel', 'leave.channel')
     if (patch.leaveMessage   !== undefined) s.set(gid, patch.leaveMessage,   'leave.msg')
     if (patch.muteRole       !== undefined) s.set(gid, patch.muteRole        || null, 'mute.roleId')
