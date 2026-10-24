@@ -254,21 +254,134 @@
       "permissions": "Legacy bot-owner-list guard and explicit yes confirmation",
       "finding": "Deletes whole settings including prefix and other stores. Kept separate from individual field saves; no reset invoked and no recovery acceptance claimed.",
       "nextTask": "T12 / T29"
+    },
+    {
+      "id": "configuration.setup.navigate",
+      "commands": [
+        "prefix:setup",
+        "slash:setup"
+      ],
+      "routes": [],
+      "service": "handlers/setup-navigation.js#openSetup / openSlashSetup; setup-flow and individual current setup adapters",
+      "store": "No configuration writes; local view, per-actor cooldown and message collectors",
+      "status": "corrected_and_verified_in_isolation",
+      "finding": "Render and selection share normalized category/page state. Removed initial category falls back; page outside range clamps consistently. Component type and one selected value are checked. Child setup and back reuse the original message; slash remains ephemeral.",
+      "permissions": "Fresh Administrator membership and channel/bot access before view and launch; existing help/catalog filtering and category settings preserved",
+      "evidence": "evidence/p0-setup-config-20261024.json",
+      "nextTask": "T08 / T11 / P0 remaining review"
+    },
+    {
+      "id": "configuration.admin_roles",
+      "commands": [
+        "prefix:setup-admin",
+        "slash:config.adminrol"
+      ],
+      "routes": [],
+      "service": "handlers/configuration-roles.js#configureRoles; existing adminDefinition/checkResources/setup-settings",
+      "store": "Guild.adminroles; per-command admin settings retained",
+      "status": "corrected_and_verified_in_isolation",
+      "finding": "Same field definitions, resource policy and CAS as setup. Slash uses fresh Administrator access, awaits persistence, does not mutate cached arrays before confirmation, and refuses everyone as a general admin role.",
+      "permissionPolicy": "Permission-only configuration does not assign a Discord role; existing setup policy permits higher or managed roles. It is deliberately different from autorole assignment policy.",
+      "evidence": "evidence/p0-setup-config-20261024.json",
+      "nextTask": "T12 / T35"
+    },
+    {
+      "id": "welcome.autoroles.configure",
+      "commands": [
+        "prefix:setup-welcome",
+        "slash:config.autorole"
+      ],
+      "routes": [],
+      "service": "handlers/configuration-roles.js#configureRoles; existing welcome/general definition, checkResources and setup-settings",
+      "store": "Guild.welcome.roles; same missing-field defaults as welcome/general setup; existing welcome values preserved",
+      "status": "corrected_and_verified_in_isolation",
+      "finding": "New grants fetch the current guild role and apply setup constraints: below the bot, not managed/everyone/Administrator, bot ManageRoles. Removal/clear can clean stale or unsafe existing grants. Persistence is conditional and awaited.",
+      "permissions": "Existing slash ManageGuild and prefix setup Administrator remain distinct; current actor checked before mutation. No Discord role assignments or synthetic joins executed.",
+      "display": "Replies ephemeral with mentions disabled; up to20 saved role references and actual total, without silently removing stale configured IDs",
+      "evidence": "evidence/p0-setup-config-20261024.json",
+      "nextTask": "T39"
+    },
+    {
+      "id": "configuration.music_category",
+      "commands": [
+        "prefix:setup-commands",
+        "slash:config.musica"
+      ],
+      "routes": [],
+      "service": "Prefix openCategorySetup/setup-settings; slash currently has inline settings writes",
+      "store": "Guild.MUSIC command-category flag",
+      "status": "divergence_recorded",
+      "finding": "Prefix stages category changes with revision and explicit Save. Slash uses cached status and background set, and treats unknown state as off. This flag does not certify the state or health of an existing music session.",
+      "nextTask": "T11 / T12; next P0 correction"
+    },
+    {
+      "id": "music.always_on.configure",
+      "commands": [
+        "prefix:247",
+        "slash:config.247"
+      ],
+      "routes": [],
+      "service": "Duplicated adapters using handlers/music/database.js get247Mode/set247Mode and music.joinChannel",
+      "store": "MusicGuild enabled247/channel247Id/text247Id; separate from Guild.MUSIC category flag",
+      "status": "divergence_recorded",
+      "finding": "Join failures are swallowed and database helpers swallow read/write errors, allowing an unconfirmed success. Toggle is not a shared serialized desired-state operation. Record for musical continuity acceptance; no voice join or flag mutation during review.",
+      "nextTask": "P1 / T19 / T55"
+    },
+    {
+      "id": "configuration.summary.read",
+      "commands": [
+        "slash:config.ver"
+      ],
+      "routes": [],
+      "service": "Current inline cache projection",
+      "store": "client.settings cache",
+      "status": "divergence_recorded",
+      "finding": "Uses old logger.channel, cached welcome.channel and a separate language-name list. Does not reuse current log/welcome/prefix/language services, so view may diverge from published state.",
+      "nextTask": "T12; next P0 correction"
+    },
+    {
+      "id": "music.request_setup",
+      "commands": [
+        "prefix:setupmusic",
+        "prefix:setup-music",
+        "slash:config.setupmusic"
+      ],
+      "routes": [],
+      "service": "handlers/setup-music-resources.js#openMusicSetup / openMusicSlashSetup",
+      "store": "Existing music setup configuration and resource-creation workflow",
+      "status": "shared_owner_observed",
+      "finding": "All reuse the same resource setup. Direct entry permissions differ: ManageChannels-based resource workflow, stricter Administrator legacy setup adapter and root setup. Existing contracts and canary acceptance remain open; no channel created/deleted.",
+      "nextTask": "P1 / T19 / T21"
+    },
+    {
+      "id": "architect.current_structure.read",
+      "commands": [
+        "slash:config.architect"
+      ],
+      "routes": [
+        "GET /architect/:guildId",
+        "GET /api/architect/:guildId"
+      ],
+      "service": "client.architect.read; existing architect service and scoped job submissions",
+      "store": "Discord snapshot and existing actor-scoped Architect draft/job stores",
+      "status": "shared_owner_observed",
+      "finding": "Slash consult path and web bootstrap reuse current Architect service; fresh ManageGuild access. Slash analysis/backup alternatives submit existing jobs with discord interaction idempotency keys. No analysis job, backup or apply was submitted in this review.",
+      "nextTask": "T22 / T26 / T30"
     }
   ],
   "coverage": {
-    "reviewedGroups": 11,
-    "commandEntriesReviewed": 27,
-    "httpRoutesReviewed": 19,
+    "reviewedGroups": 19,
+    "commandEntriesReviewed": 41,
+    "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 648,
-    "remainingHttpRoutes": 76
+    "remainingCommandEntries": 634,
+    "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
   "limits": [
     "Source tracing establishes current authorities, not end-to-end acceptance",
-    "Language and guild-prefix behavior were executed only against synthetic state; remaining groups establish source ownership, not business acceptance",
+    "Behavioral acceptance is scoped to synthetic tests in each linked increment; source ownership alone does not accept business behavior",
     "No moderation actions, Discord messages, real database writes or voice joins used for this review"
   ]
 }

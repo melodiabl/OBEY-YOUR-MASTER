@@ -29,7 +29,13 @@ const safe = (value, limit) => escapeMarkdown(String(value)).slice(0, limit)
 function commandPresentation(name, locale) {
   return catalogs[locale]?.setup.navigation.commands[name] || { title: name.replace(/^setup-?/, '').replaceAll('-', ' '), description: copy(locale, 'openDescription') }
 }
+function setupState(view, state = {}) {
+  const group = view.commands.some(entry => entry.group === state.group) ? state.group : null
+  const pages = Math.max(1, Math.ceil(view.commands.filter(entry => entry.group === group).length / PAGE_SIZE))
+  return { group, page: Math.max(0, Math.min(pages - 1, Number.isInteger(state.page) ? state.page : 0)), browse: Boolean(state.browse || group) }
+}
 function shownCommands(view, state) {
+  state = setupState(view, state)
   return state.group ? view.commands.filter(entry => entry.group === state.group).slice(state.page * PAGE_SIZE, (state.page + 1) * PAGE_SIZE)
     : state.browse ? [] : QUICK_COMMANDS.flatMap(name => view.commands.filter(entry => entry.name === name))
 }
@@ -49,11 +55,9 @@ async function readSetupView(client, context) {
 
 function buildSetupMessage(view, state = {}) {
   const locale = view.locale, categoryIds = GROUP_ORDER.filter(id => view.commands.some(entry => entry.group === id))
-  const group = categoryIds.includes(state.group) ? state.group : null
+  const { group, page, browse } = setupState(view, state)
   const commands = group ? view.commands.filter(entry => entry.group === group) : []
   const pages = Math.max(1, Math.ceil(commands.length / PAGE_SIZE))
-  const page = Math.max(0, Math.min(pages - 1, Number.isInteger(state.page) ? state.page : 0))
-  const browse = Boolean(state.browse || group)
   const shown = shownCommands(view, { group, page, browse })
   const embed = new EmbedBuilder().setColor(0xFFD36F).setTitle(group ? copy(locale, `groups.${group}`) : copy(locale, 'title'))
     .setDescription(!categoryIds.length ? copy(locale, 'empty') : group ? copy(locale, `groupDescriptions.${group}`) : copy(locale, browse ? 'browseDescription' : 'description'))
@@ -82,14 +86,16 @@ async function openSetup(client, origin, initialState = {}) {
   try {
     let view = await readSetupView(client, context)
     locale = view.locale
-    const state = { group: initialState.group || null, page: initialState.page || 0, browse: Boolean(initialState.browse || initialState.group) }
+    let state = setupState(view, initialState)
     message = await origin.reply(buildSetupMessage(view, state))
     const collector = message.createMessageComponentCollector({ time: 180000, idle: 90000 })
     const controls = new Set(['setup_group', 'setup_command', 'setup_prev', 'setup_next', 'setup_home', 'setup_browse', 'setup_close'])
     let closed = false, queue = Promise.resolve()
     collector.on('collect', interaction => {
+      const validType = ['setup_group', 'setup_command'].includes(interaction.customId)
+        ? interaction.isStringSelectMenu() && interaction.values?.length === 1 : interaction.isButton()
       if (closed || interaction.user.id !== context.actorId || interaction.guildId !== context.guildId || interaction.message?.id !== message.id ||
-        !controls.has(interaction.customId) || !interaction.isButton() && !interaction.isStringSelectMenu()) {
+        !controls.has(interaction.customId) || !validType) {
         void interaction.reply({ content: copy(locale, 'notYours'), ephemeral: true, allowedMentions: { parse: [] } }).catch(() => {})
         return
       }
@@ -141,9 +147,7 @@ async function openSetup(client, origin, initialState = {}) {
         } else if (interaction.customId === 'setup_home') { state.group = null; state.page = 0; state.browse = false }
         else if (interaction.customId === 'setup_browse') { state.group = null; state.page = 0; state.browse = true }
         else state.page += interaction.customId === 'setup_next' ? 1 : -1
-        const pages = Math.max(1, Math.ceil(view.commands.filter(entry => entry.group === state.group).length / PAGE_SIZE))
-        state.page = Math.max(0, Math.min(pages - 1, state.page))
-        if (!view.commands.some(entry => entry.group === state.group)) state.group = null
+        state = setupState(view, state)
         if (!closed) await interaction.editReply(buildSetupMessage(view, state))
       }).catch(async error => {
         collector.stop('unavailable')

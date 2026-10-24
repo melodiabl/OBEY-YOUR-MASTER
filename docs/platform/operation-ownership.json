@@ -633,6 +633,7 @@
     "handlers/command-registry.js": "624b1fc3276fd369c245cc2a8c60d7ba80325d76682e051f724c852d6f9fd97d",
     "handlers/command.js": "c9b33d598887dbbeab9472785a6e39ccbeac38451b9278494bae2a58fb956d73",
     "handlers/config-service.js": "137ea42d9192aa31da808646e7267f0ecdb6a2029d3727359320c29e5f3c6ac4",
+    "handlers/configuration-roles.js": "94f3a19f481423413b7adebf9486a9d6d9dec4bb0fc15414a7d99240cc5266f6",
     "handlers/configuration-service.js": "ea9215dd72ff54b45886bab3c6fb8ba2fec89c186e69e0f568cb821d0b675df2",
     "handlers/configuration.js": "d2d5c76734cbb13e094da59f850ed0a7aae380028c0396567d6bb69e86cc77de",
     "handlers/counter.js": "96d0182015ae87a2e6c1bf3b8db56e8d229bfc80108d6b6121bd48d0b7577f79",
@@ -783,7 +784,7 @@
     "handlers/setup-logs.js": "430e8490537d24c395fccef9b8c01b1684f2de972c694a9df0dbbb3b3f8de708",
     "handlers/setup-membership.js": "51a7007820f2a08e9e130e62e5227f267da16097caa8ee024789495e08495f59",
     "handlers/setup-music-resources.js": "8e916f197ca97682e7548f61f6bf6f88aa6ed61497e10d94083e33c9944b6a1d",
-    "handlers/setup-navigation.js": "e0c11222d849a896be4096c0a936302b2ca307d6b4dbcd5707490d6dfdbbcfd1",
+    "handlers/setup-navigation.js": "af7eaafedbca35ba567e50297bf0079b0ef738f48165d16e82a4fd431e0ee0a6",
     "handlers/setup-operations.js": "3e29529644ccd8ccb409f7a6bda76c30919700fdbbcbfb1093be1b5bd97873ba",
     "handlers/setup-owner-settings.js": "77669ba375940e02c5514d8f71a017b41506511cc044f92d704c93610742a700",
     "handlers/setup-panels.js": "f49e70d42732d178cb9e0377596cd5d085df30ffc503e3569f14f9884d2b1f16",
@@ -839,9 +840,9 @@
     "slashCommands/Birthday/remove.js": "da8dd691c079eeb4460687fd4d448013ae87d6269cd1ac2a2810373d7b0bc147",
     "slashCommands/Birthday/set.js": "54585d97d3a7eafab7b3c3b21d32367308c7e2f40ba48e14e84049d14ccf34f7",
     "slashCommands/Config/247.js": "0afcabde4f98bcc9e752e45d9e1e1e72e8611d70a3665488dcf2863a2fc3880c",
-    "slashCommands/Config/adminrol.js": "02452e109fff8d33701fd21b247767d215448d0db3ca07ff5fd62d0e97c889cc",
+    "slashCommands/Config/adminrol.js": "7cd4c453fe5a07de62dda75145bca40133d9cface75423da7f65ce9895d0a009",
     "slashCommands/Config/architect.js": "25c0d320dee64fc675a3a4beae99dad3af50f70f7753ad6035fba709cb8dedcf",
-    "slashCommands/Config/autorole.js": "07baf4deee47a77689ae192f948cca73751d5a8cf9b473eb517665336b31623f",
+    "slashCommands/Config/autorole.js": "483d815ef1b155382c5c170d0c80f37b8f761123e10caf15bdb8829aa0c06f8c",
     "slashCommands/Config/idioma.js": "1d3981d7af6d686b277e019e2eed693d9bd52a094700767c4468a018d80e8ef8",
     "slashCommands/Config/logs.js": "c270500e1118431b0bfad0e547f69cde2f1e44d0ef9c01a6f07efd683794e927",
     "slashCommands/Config/musica.js": "3c8768fc417c0bda48f105ff900eadbfbfc1be22375f85838e117b2da65c61e9",
@@ -8763,7 +8764,7 @@
           "line": 377
         },
         {
-          "call": "client.giveawaysManager .edit(giveaway.messageId, { setEndTimestamp: Date.now(), }) .then(() => { message.reply({ content: \"\u00a1El sorteo terminar\u00e1 en menos de 10 Segundos!\" }); }) .catch",
+          "call": "client.giveawaysManager .edit(giveaway.messageId, { setEndTimestamp: Date.now(), }) .then(() => { message.reply({ content: \"¡El sorteo terminará en menos de 10 Segundos!\" }); }) .catch",
           "line": 383
         },
         {
@@ -8783,7 +8784,7 @@
           "line": 406
         },
         {
-          "call": "client.giveawaysManager .reroll(giveaway.messageId, { winnerCount: !isNaN(args[1]) ? Number(args[1]) : 1 }) .then(() => { message.reply({ content: eval(client.la[ls][\"cmds\"][\"administration\"][\"giveaway\"][\"variable35\"]) + \"\u00a1Consejo!\\n\u00a1Agrega la cantidad de ganadores para repetir al final!\", }); }) .catch",
+          "call": "client.giveawaysManager .reroll(giveaway.messageId, { winnerCount: !isNaN(args[1]) ? Number(args[1]) : 1 }) .then(() => { message.reply({ content: eval(client.la[ls][\"cmds\"][\"administration\"][\"giveaway\"][\"variable35\"]) + \"¡Consejo!\\n¡Agrega la cantidad de ganadores para repetir al final!\", }); }) .catch",
           "line": 410
         },
         {
@@ -8799,7 +8800,7 @@
           "line": 437
         },
         {
-          "call": "client.giveawaysManager .pause(giveaway.messageId) .then(() => { message.reply({ content: \"\u00a1\u00c9xito! Sorteo Pausado\" }); }) .catch",
+          "call": "client.giveawaysManager .pause(giveaway.messageId) .then(() => { message.reply({ content: \"¡Éxito! Sorteo Pausado\" }); }) .catch",
           "line": 441
         },
         {
@@ -8819,7 +8820,7 @@
           "line": 466
         },
         {
-          "call": "client.giveawaysManager .unpause(giveaway.messageId) .then(() => { message.reply({ content: \"\u00a1\u00c9xito! Sorteo Reanudado\" }); }) .catch",
+          "call": "client.giveawaysManager .unpause(giveaway.messageId) .then(() => { message.reply({ content: \"¡Éxito! Sorteo Reanudado\" }); }) .catch",
           "line": 470
         },
         {
@@ -22783,23 +22784,8 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Config/adminrol.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 33
-        },
-        {
-          "call": "client.settings.set",
-          "line": 56
-        },
-        {
-          "call": "client.settings.set",
-          "line": 63
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "slashCommands/Config/architect.js": {
       "kind": "current-command-adapter",
@@ -22829,27 +22815,8 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Config/autorole.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 34
-        },
-        {
-          "call": "client.settings.set",
-          "line": 51
-        },
-        {
-          "call": "client.settings.set",
-          "line": 64
-        },
-        {
-          "call": "client.settings.set",
-          "line": 71
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "slashCommands/Config/idioma.js": {
       "kind": "current-command-adapter",
@@ -39006,15 +38973,7 @@
           "line": 2
         },
         {
-          "file": "slashCommands/Config/adminrol.js",
-          "line": 3
-        },
-        {
           "file": "slashCommands/Config/architect.js",
-          "line": 3
-        },
-        {
-          "file": "slashCommands/Config/autorole.js",
           "line": 3
         },
         {
@@ -39730,10 +39689,6 @@
           "line": 3
         },
         {
-          "file": "handlers/setup-navigation.js",
-          "line": 2
-        },
-        {
           "file": "handlers/clientvariables.js",
           "line": 2
         },
@@ -39999,6 +39954,14 @@
         },
         {
           "file": "handlers/prefix-command.js",
+          "line": 1
+        },
+        {
+          "file": "handlers/setup-navigation.js",
+          "line": 2
+        },
+        {
+          "file": "handlers/configuration-roles.js",
           "line": 1
         }
       ]
@@ -41109,7 +41072,7 @@
     "slashTopLevel": 20,
     "aliases": 779,
     "httpRoutes": 95,
-    "sourceFiles": 965,
+    "sourceFiles": 966,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

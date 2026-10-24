@@ -1614,6 +1614,17 @@
       "invalid": "Use 1 to 5 characters, without whitespace or invisible characters.",
       "conflict": "The prefix changed elsewhere. Check its current value before trying again.",
       "unavailable": "The save could not be confirmed. Check the current prefix before trying again."
+    },
+    "roleConfiguration": {
+      "adminTitle": "Administration roles",
+      "autoroleTitle": "Join roles",
+      "saved": "Role configuration saved.",
+      "empty": "No roles configured.",
+      "count": "{count} roles configured; showing up to 20.",
+      "invalid": "Choose a valid action and a role when required.",
+      "conflict": "The configuration changed. Check the current list before trying again.",
+      "resource": "That role does not meet the setup requirements. Check its server, hierarchy and permissions.",
+      "unavailable": "The save could not be confirmed. Check the current list before trying again."
     }
   },
   "logs": {

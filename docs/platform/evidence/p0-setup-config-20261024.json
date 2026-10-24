@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-24",
+  "phase": "P0",
+  "status": "local_verification_passed_deployment_pending",
+  "scope": "Central setup navigation and remaining Config owners; correct selection/page parity and unify admin-role/autorole persistence using existing setup definitions, policy and CAS",
+  "inventory": "../shared-intents.json",
+  "coverage": {
+    "reviewedGroups": 19,
+    "commandEntriesReviewed": 41,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 634,
+    "remainingHttpRoutes": 74
+  },
+  "verification": {
+    "isolatedCases": 33,
+    "passed": 33,
+    "failed": 0,
+    "baselinePassed": 14,
+    "baselineFailed": 19,
+    "originalTestsPassed": 25,
+    "originalTestFilesRetained": 3,
+    "gatewayOrRealDatabaseUsed": false,
+    "navigation": "Actual setup-navigation implementation and Discord builders with synthetic collectors and fresh-access fixtures",
+    "roles": "Actual slash adapters, setup resource validators, field definitions and SyncMap/setup-settings over synthetic model",
+    "types": true,
+    "dependencyBoundaries": true
+  },
+  "preserved": [
+    "Slash setup ephemeral; same message for child/back; actor/channel checks and cooldown",
+    "Existing role policy difference: OBEY admin role delegation versus Discord autorole assignment",
+    "Existing ManageGuild slash autorole and Administrator prefix setup access",
+    "Removal and clear can clean unsafe legacy autoroles without requesting a new grant",
+    "No music engine/client/queue changes"
+  ],
+  "remaining": [
+    "Authenticated real Discord canary and role assignment lifecycle",
+    "Global G01/G02 and remaining command/route review",
+    "Config summary and music category divergence",
+    "24/7 connection/storage failures remain P1 acceptance"
+  ],
+  "deployment": null
+}

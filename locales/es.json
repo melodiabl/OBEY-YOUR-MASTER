@@ -1614,6 +1614,17 @@
       "invalid": "Usa de 1 a 5 caracteres, sin espacios ni caracteres invisibles.",
       "conflict": "El prefijo cambió desde otra entrada. Consulta el valor actual antes de intentarlo de nuevo.",
       "unavailable": "No pude confirmar el guardado. Consulta el prefijo actual antes de volver a intentarlo."
+    },
+    "roleConfiguration": {
+      "adminTitle": "Roles de administración",
+      "autoroleTitle": "Roles de entrada",
+      "saved": "Configuración de roles guardada.",
+      "empty": "No hay roles configurados.",
+      "count": "{count} roles configurados; se muestran hasta 20.",
+      "invalid": "Elige una acción válida y un rol cuando sea necesario.",
+      "conflict": "La configuración cambió. Consulta la lista actual antes de intentarlo de nuevo.",
+      "resource": "Ese rol no cumple los requisitos del setup: comprueba su servidor, jerarquía y permisos.",
+      "unavailable": "No pude confirmar el guardado. Consulta la lista actual antes de volver a intentarlo."
     }
   },
   "logs": {
