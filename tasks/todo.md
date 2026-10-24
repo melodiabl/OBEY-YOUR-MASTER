@@ -29,7 +29,7 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 - [x] Trazar nueve grupos y sus servicios/políticas/stores: 25 entradas y 19 rutas; diferencias conservadas con tareas T12/T19/T20/T35/T46.
 - [x] Corregir idioma en slash y web para usar el servicio versionado del setup, guardar solo el idioma desde web y esperar confirmación de almacenamiento.
 - [x] Verificar 14 casos aislados, formulario EJS completo en Chromium y 25 tests originales sobre la imagen final; conservar controles de sesión/CSRF.
-- [ ] Ampliar la revisión: ahora quedan 648 entradas y 76 rutas; seguir con navegación setup y opciones Config restantes. No cerrar P0 ni aceptar todos los negocios por esta muestra.
+- [ ] Ampliar la revisión: ahora quedan 634 entradas y 74 rutas; seguir con resumen Config y categoría MUSIC. No cerrar P0 ni aceptar todos los negocios por esta muestra.
 
 [Mapa](../docs/platform/shared-intents.json) y [evidencia](../docs/platform/evidence/p0-shared-intents-20261024.json).
 
@@ -43,6 +43,18 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 - [ ] Aceptación autenticada en guilds reales y puertas globales G01/G02; continuar la revisión P0 pendiente.
 
 [Evidencia](../docs/platform/evidence/p0-prefix-20261024.json).
+
+## P0 · navegación setup, roles y seguridad, 24/10/2026
+
+- [x] Compartir estado normalizado entre navegación, render, selección y regreso; validar actor, tipo de componente y selección única.
+- [x] Reutilizar definiciones, comprobaciones de roles y CAS existentes para adminrol/autorole slash; esperar persistencia y revalidar acceso.
+- [x] Impedir nuevos autoroles por encima/igual al bot, administrados, everyone o Administrator; permitir limpiar concesiones legacy sin una nueva asignación.
+- [x] Trazar todas las entradas Config restantes y sus diferencias; conservar 24/7 para P1 y registrar resumen/categoría para la siguiente corrección P0.
+- [x] Parchar seis ubicaciones de paquetes y fijar Node/CI 22.23.4; auditoría sin altos/críticos y contrato de bienvenida idéntico.
+- [x] Validar 33 casos de setup/roles, 10 de seguridad y 25 originales en la imagen final; prueba limpia del cliente musical aislado con Node actualizado.
+- [ ] Recorrido real autenticado y asignación de roles; G01/G02 y revisión de las entradas/rutas restantes siguen abiertos.
+
+[Evidencia](../docs/platform/evidence/p0-setup-config-20261024.json).
 
 ## Tareas y checkpoints conservados
 

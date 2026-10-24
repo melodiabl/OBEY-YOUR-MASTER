@@ -27,8 +27,8 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "973ff242c2d5ba14c39ed96796af2e8d0ec25743",
-    "image": "78c24d245e41e7f1105ac5d5b9ceb959bd3d41985b90f00fe2b8df1aa628c88e",
+    "code": "8e7b9ea366dd7c70f3892b8fa80a265a478951a5",
+    "image": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
     "selectedPublicNode": "trinium-02",
     "backupOrder": [
       "serenetia",
@@ -36,12 +36,14 @@
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-prefix-20261024.json",
-    "change": "Shared validation and confirmed versioned persistence for guild prefix across text, slash and web",
-    "tag": "localhost/obey-your-master_bot:release-p0-prefix-20261024-973ff24",
+    "evidence": "evidence/p0-setup-config-20261024.json",
+    "change": "Setup selection/page parity, shared role setup policies/persistence, patched HTTP/validation dependencies and Node runtime",
+    "tag": "localhost/obey-your-master_bot:release-p0-setup-config-20261024-8e7b9ea",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-prefix-20261024.json",
-    "deploymentKind": "application_only_p0_prefix_reconciliation_release"
+    "statusEvidence": "evidence/p0-setup-config-20261024.json",
+    "deploymentKind": "application_only_p0_setup_config_security_release",
+    "node": "22.23.4",
+    "bundledUndici": "6.29.1"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -348,7 +350,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Continue P0 with central setup navigation and remaining Config options; 11 intent groups / 27 entries / 19 HTTP routes traced, 648 entries and 76 routes remain; global G01/G02 still open",
+    "nextUnit": "Continue P0 with Config summary projection and MUSIC category settings; 19 groups / 41 entries / 21 routes traced; 634 entries and 74 routes remain. 24/7 failures remain P1 acceptance.",
     "sequence": [
       "P0",
       "P1",
@@ -401,6 +403,22 @@
     "httpRoutesReviewed": 19,
     "remainingCommandEntries": 648,
     "remainingHttpRoutes": 76,
+    "globalG01G02Accepted": false,
+    "pushed": false
+  },
+  "p0SetupConfig": {
+    "implementationCode": "8e7b9ea366dd7c70f3892b8fa80a265a478951a5",
+    "evidence": "evidence/p0-setup-config-20261024.json",
+    "inventory": "shared-intents.json",
+    "deployed": true,
+    "isolatedCases": 33,
+    "securityCases": 10,
+    "originalTests": 25,
+    "reviewedGroups": 19,
+    "commandEntriesReviewed": 41,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 634,
+    "remainingHttpRoutes": 74,
     "globalG01G02Accepted": false,
     "pushed": false
   }

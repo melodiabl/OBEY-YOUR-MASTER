@@ -2,8 +2,18 @@
 
 ## Orden de ejecución vigente · corrección del usuario
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La próxima unidad revisa navegación central de setup y opciones Config restantes.** Idioma y prefijo de guild ya comparten servicios y guardado confirmado. El mapa traza once grupos/27 entradas/19 rutas; quedan 648 entradas y 76 rutas por revisar. G01/G02 siguen abiertos. El reproductor completo pertenece a P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La próxima unidad concilia resumen Config y categoría MUSIC.** Navegación setup y guardado de roles se corrigieron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza diecinueve grupos/41 entradas/21 rutas; quedan 634 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
+
+## 24/10/2026 · setup/roles y seguridad conciliados, desplegados
+
+Código `8e7b9ea`, imagen `41c57b9`, saludable y cero reinicios automáticos en diez muestras. Navegación setup usa el mismo estado normalizado al mostrar, seleccionar y volver; valida componente/selección y conserva acceso fresco/cooldown. Adminrol/autorole slash comparten definiciones, comprobaciones de recursos y CAS de los setups; guardado confirmado, sin mutar caché antes de persistir. Nuevos autoroles inválidos por jerarquía, servidor, gestión o Administrator se rechazan; limpieza de roles legacy sigue disponible.
+
+La auditoría detectó avisos nuevos respecto a la revisión anterior. Se parchearon seis ubicaciones existentes del lock y se fijó runtime/CI en Node 22.23.4 con Undici integrado 6.29.1. La auditoría vuelve a 36 moderate y cero low/high/critical; frontend cero. Diez casos de seguridad —incluido fetch nativo— y 33 de setup/roles pasan en la imagen final, además de los 25 originales. JSON Schema de bienvenida idéntico y cliente musical aislado verificado en el nuevo Node, sin instalarlo en producción.
+
+Los 1.031 hashes y HTTP/assets locales/públicos coinciden; Gateway listo y veinte comandos slash confirmados. Respaldo CRC y reversión `973ff24` conservados; verificadores y candidatos propios sin uso retirados, tres archivos originales de tests conservados. Sin mensajes/asignaciones de roles/canales/voz de prueba, push ni CI remoto. [Evidencia y límites](evidence/p0-setup-config-20261024.json).
+
+El mapa cubre diecinueve grupos/41 entradas/21 rutas. **Siguiente P0: resumen Config y categoría MUSIC; quedan 634 entradas y 74 rutas por revisar.** G01/G02 y aceptación autenticada real siguen abiertos; 24/7 conserva sus fallos de conexión/almacenamiento para P1.
 
 ## 24/10/2026 · prefijo de guild unificado y desplegado
 

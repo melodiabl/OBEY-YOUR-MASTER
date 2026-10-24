@@ -16,8 +16,8 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 ### Unidad inmediata: completar la conciliación de P0
 
-1. Partir del [inventario conciliado](../docs/platform/operation-ownership.json) y la [evidencia P0](../docs/platform/evidence/p0-reconciliation-20261023.json): 675 entradas con adaptador actual, 95 rutas y 779 aliases preservados; runtime `973ff24`.
-2. Ampliar el [mapa de once grupos revisados](../docs/platform/shared-intents.json), empezando por la navegación central de setup y las opciones Config restantes. Idioma y prefijo de guild comparten servicios y confirmación persistente. Quedan 648 entradas y 76 rutas por revisar. Revisar por intención compartida prefix/slash/web la autoridad de permisos, servicio y repositorio. Registrar diferencias deliberadas y tareas de migración; un adaptador localizado no equivale a servicio canónico ni aceptación funcional.
+1. Partir del [inventario conciliado](../docs/platform/operation-ownership.json) y la [evidencia P0](../docs/platform/evidence/p0-reconciliation-20261023.json): 675 entradas con adaptador actual, 95 rutas y 779 aliases preservados; runtime `8e7b9ea`.
+2. Ampliar el [mapa de diecinueve grupos revisados](../docs/platform/shared-intents.json), empezando por el resumen Config y la categoría MUSIC. Idioma, prefijo y roles usan guardado confirmado; la navegación setup está conciliada en aislamiento. Quedan 634 entradas y 74 rutas por revisar. El modo 24/7 mantiene sus casos de conexión/almacenamiento en P1. Revisar por intención compartida prefix/slash/web la autoridad de permisos, servicio y repositorio. Registrar diferencias deliberadas y tareas de migración; un adaptador localizado no equivale a servicio canónico ni aceptación funcional.
 3. Mantener las comprobaciones de fuentes, aliases y manifests en CI y el contrato aislado de instalación musical. Las seis dependencias directas se declararon sin cambiar versiones/integridades instaladas; lavalink-client aún no está en producción.
 4. Conciliar G01/G02 con los IDs originales y su evidencia antes de cerrar P0 y avanzar a P1.
 

@@ -1,7 +1,7 @@
 {
   "date": "2026-10-24",
   "phase": "P0",
-  "status": "local_verification_passed_deployment_pending",
+  "status": "deployed_healthy_increment_global_gates_pending",
   "scope": "Central setup navigation and remaining Config owners; correct selection/page parity and unify admin-role/autorole persistence using existing setup definitions, policy and CAS",
   "inventory": "../shared-intents.json",
   "coverage": {
@@ -25,7 +25,61 @@
     "navigation": "Actual setup-navigation implementation and Discord builders with synthetic collectors and fresh-access fixtures",
     "roles": "Actual slash adapters, setup resource validators, field definitions and SyncMap/setup-settings over synthetic model",
     "types": true,
-    "dependencyBoundaries": true
+    "dependencyBoundaries": true,
+    "finalImageSetupCases": {
+      "passed": 33,
+      "failed": 0
+    },
+    "finalImageSecurityCases": {
+      "passed": 10,
+      "failed": 0,
+      "results": [
+        {
+          "name": "http parser survives malformed input",
+          "passed": true
+        },
+        {
+          "name": "http undici survives malformed input",
+          "passed": true
+        },
+        {
+          "name": "http rest survives malformed input",
+          "passed": true
+        },
+        {
+          "name": "http discord survives malformed input",
+          "passed": true
+        },
+        {
+          "name": "http native survives malformed input",
+          "passed": true
+        },
+        {
+          "name": "zod array rejects size before element work",
+          "passed": true
+        },
+        {
+          "name": "zod set rejects size before element work",
+          "passed": true
+        },
+        {
+          "name": "zod map rejects size before element work",
+          "passed": true
+        },
+        {
+          "name": "serializer escapes unterminated script token",
+          "passed": true
+        },
+        {
+          "name": "welcome JSON schema contract unchanged",
+          "passed": true
+        }
+      ]
+    },
+    "finalImageOriginalTestsPassed": 25,
+    "finalImageInventoryGatePassed": true,
+    "frozenMigrationClientOnNode": "v22.23.4",
+    "migrationClientProductionInstalled": false
   },
   "preserved": [
     "Slash setup ephemeral; same message for child/back; actor/channel checks and cooldown",
@@ -40,7 +94,114 @@
     "Config summary and music category divergence",
     "24/7 connection/storage failures remain P1 acceptance"
   ],
-  "deployment": null,
+  "deployment": {
+    "code": "8e7b9ea366dd7c70f3892b8fa80a265a478951a5",
+    "image": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
+    "tag": "localhost/obey-your-master_bot:release-p0-setup-config-20261024-8e7b9ea",
+    "cutoverAt": "2026-10-24T00:49:00.235Z",
+    "health": "healthy",
+    "restarts": 0,
+    "sourceFilesVerified": 1007,
+    "compiledFilesVerified": 24,
+    "runtimeFilesVerified": 1031,
+    "node": "v22.23.4",
+    "bundledUndici": "6.29.1",
+    "uid": 1000,
+    "applicationEnvironmentPreserved": true,
+    "runtimeEnvironmentChanges": {
+      "NODE_VERSION": {
+        "before": "22.23.2",
+        "after": "22.23.4"
+      }
+    },
+    "lavalinkClientInstalled": false,
+    "privateLavalinkEnabled": false,
+    "http": {
+      "local": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      },
+      "public": {
+        "/health": {
+          "status": 200,
+          "location": null
+        },
+        "/": {
+          "status": 200,
+          "location": null
+        },
+        "/app/": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in&returnTo=%2Fapp"
+        },
+        "/api/panel/context": {
+          "status": 401,
+          "location": null
+        },
+        "/dashboard/100000000000000001": {
+          "status": 302,
+          "location": "/login?reason=not_logged_in"
+        },
+        "/app/package.json": {
+          "status": 404,
+          "location": null
+        }
+      }
+    },
+    "observation": {
+      "samples": 10,
+      "firstAt": "2026-10-24T00:51:12.144Z",
+      "lastAt": "2026-10-24T00:51:48.843Z",
+      "allHealthy": true,
+      "restarts": 0
+    },
+    "publicAssetsVerified": 2,
+    "startup": {
+      "fatalPatterns": 0,
+      "readySignals": 16,
+      "gatewayReady": true,
+      "slashRegistrationSucceeded": true
+    },
+    "backup": {
+      "backup": "/home/backups/obey-releases/2026-10-24T00-28-06-893Z",
+      "bytes": 59266207,
+      "gzipCrcVerified": true,
+      "uncompressedSha256": "d8f717d944c5aaee73c2813e3f5ff2f98e440d1b8da645e29a9ce9fddb3cc3b6"
+    },
+    "rollback": {
+      "code": "973ff242c2d5ba14c39ed96796af2e8d0ec25743",
+      "image": "78c24d245e41e7f1105ac5d5b9ceb959bd3d41985b90f00fe2b8df1aa628c88e",
+      "tag": "localhost/obey-your-master_bot:release-p0-prefix-20261024-973ff24",
+      "imageAndArgumentsPreserved": true,
+      "securityNote": "Rollback retains previous Node/dependency versions; patched release is the healthy active image"
+    },
+    "privateEvidence": ".runtime/deploy-p0-setup-config-20261024",
+    "localReleaseAndRecoveryReferencesUpdated": true,
+    "pushed": false,
+    "remoteCiRun": false
+  },
   "security": {
     "auditBefore": {
       "info": 0,
@@ -120,5 +281,29 @@
       "https://github.com/advisories/GHSA-m5mm-p8h7-m29v",
       "https://github.com/nodejs/node/releases/tag/v22.23.4"
     ]
+  },
+  "cleanup": {
+    "temporaryHelpersRemoved": [
+      "check.cjs",
+      "ci.cjs",
+      "migration-ci.sh",
+      "refresh.cjs",
+      "security-check.cjs"
+    ],
+    "temporaryCandidateTagRemoved": true,
+    "unusedIntermediateImagesRemoved": [
+      "2d609c8387b376a9158945f7274247b08ab308674f8b22a52673dc1d7ca8d928",
+      "80fd1ca06cb2a08b7ec4017c8c809d879502b82f59f8087cecb027d418d5cdf7"
+    ],
+    "privateProofFilesPreserved": 30,
+    "originalTestFilesRetained": 3,
+    "backupsAndRollbackPreserved": true
+  },
+  "review": {
+    "correctness": "Same normalized view for displayed/accepted setup commands; role changes use conditional persistence and fresh resources; 33 domain cases pass inside final image",
+    "security": "Native Node fetch and npm HTTP copies patched; fresh authorization and existing permission-only versus autorole policies retained; malformed input checks only in isolated containers",
+    "architecture": "Existing setup field definitions, resource validation and CAS reused; no new stores, music clients or queues",
+    "performance": "Bounded rendering of20 roles and one fresh role lookup for grants; size-validation bounds avoid per-element work on oversized collections",
+    "limitations": "Synthetic collectors and storage do not accept real Discord resource lifecycle; pending Config summary/MUSIC category and global gates retain their tasks"
   }
 }
