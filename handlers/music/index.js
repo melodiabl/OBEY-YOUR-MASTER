@@ -887,6 +887,10 @@ module.exports = client => {
     restoreRetry = setTimeout(() => { restoreRetry = null; restoreRetryAt = 0; restoreSessions() }, Math.max(100, delayMs))
     restoreRetry.unref?.()
   }
+  function hasConnectedPlayback(guildId) {
+    const player = client.shoukaku.players.get(guildId), state = playerStates.get(guildId)
+    return player?.node?.state === 1 && ['playing', 'paused', 'loading'].includes(state?.status) && !state.reconnectVoice
+  }
   async function restoreSessions() {
     if (!client._dbReady || client._shuttingDown) return
     if (restoring || !getNode()) { scheduleRestore(); return }
@@ -908,8 +912,7 @@ module.exports = client => {
           continue
         }
         if (!client.guilds?.cache?.has(saved.guildId) || !client.channels.cache.has(saved.voiceChannelId)) continue
-        const existing = client.shoukaku.players.get(saved.guildId)
-        if (existing && existing.node === getNode(saved.guildId) && ['playing', 'paused', 'loading'].includes(getState(saved.guildId).status) && !getState(saved.guildId).reconnectVoice) continue
+        if (hasConnectedPlayback(saved.guildId)) continue
         const generation = recovery.generation(saved.guildId)
         const isCurrent = () => !client._shuttingDown && recovery.generation(saved.guildId) === generation
         const assertCurrent = () => { if (!isCurrent()) throw new Error('restore_cancelled') }
@@ -917,6 +920,7 @@ module.exports = client => {
         try {
           await actions.run(saved.guildId, async () => {
             assertCurrent()
+            if (hasConnectedPlayback(saved.guildId)) return
             const state = getState(saved.guildId)
             state.nodeTransition = true
             state.status = 'recovering'
