@@ -185,7 +185,7 @@ Para crear el panel de tickets: `!setup-ticket #canal` o `!setup-menuticket #can
 
 ### Requisitos previos
 
-- **Node.js** v18+ (recomendado v22)
+- **Node.js** v22.23.4 o superior; Docker y CI usan v22.23.4.
 - **MongoDB** local o [Atlas](https://mongodb.com/atlas) (gratuito)
 - **Lavalink v4** para la función de música
 - **Docker** (recomendado) o ejecución directa con Node.js
@@ -577,7 +577,7 @@ npm install && pm2 restart obey-bot  # Si usas PM2
 | [Express](https://expressjs.com/) | v4 | Servidor web del dashboard |
 | [EJS](https://ejs.co/) | v3 | Templates del dashboard |
 | [@napi-rs/canvas](https://github.com/Brooooooklyn/canvas) | latest | Cards canvas (level-up, welcome) |
-| [Node.js](https://nodejs.org/) | v22 | Runtime JavaScript |
+| [Node.js](https://nodejs.org/) | v22.23.4 | Runtime JavaScript |
 | [Docker](https://docker.com/) | latest | Containerización |
 
 ---

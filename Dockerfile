@@ -1,4 +1,4 @@
-FROM node:22-slim AS frontend
+FROM node:22.23.4-slim AS frontend
 WORKDIR /web
 COPY dashboard/frontend/package*.json ./
 RUN npm ci --ignore-scripts --no-fund
@@ -6,7 +6,7 @@ COPY dashboard/frontend/ ./
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-FROM node:22-slim AS runtime
+FROM node:22.23.4-slim AS runtime
 
 RUN apt-get update && apt-get install -y \
     build-essential pkg-config libcairo2-dev libpango1.0-dev \

@@ -40,5 +40,85 @@
     "Config summary and music category divergence",
     "24/7 connection/storage failures remain P1 acceptance"
   ],
-  "deployment": null
+  "deployment": null,
+  "security": {
+    "auditBefore": {
+      "info": 0,
+      "low": 2,
+      "moderate": 36,
+      "high": 3,
+      "critical": 0,
+      "total": 41
+    },
+    "auditAfter": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    },
+    "frontendAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "packageChanges": [
+      {
+        "path": "node_modules/@discordjs/rest/node_modules/undici",
+        "before": "6.29.0",
+        "after": "6.29.1"
+      },
+      {
+        "path": "node_modules/body-parser",
+        "before": "1.20.8",
+        "after": "1.20.9"
+      },
+      {
+        "path": "node_modules/discord.js/node_modules/undici",
+        "before": "6.29.0",
+        "after": "6.29.1"
+      },
+      {
+        "path": "node_modules/serialize-javascript",
+        "before": "7.1.2",
+        "after": "7.1.3"
+      },
+      {
+        "path": "node_modules/undici",
+        "before": "7.29.1",
+        "after": "7.30.1"
+      },
+      {
+        "path": "node_modules/zod",
+        "before": "4.1.12",
+        "after": "4.6.7"
+      }
+    ],
+    "runtimeBefore": {
+      "node": "22.23.2",
+      "bundledUndici": "6.28.0"
+    },
+    "runtimeTarget": {
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "rootEngineMinimum": "22.23.4",
+    "sourceNotes": [
+      "Node native fetch tested separately from npm undici packages; older bundled implementation also failed the isolated malformed-response case",
+      "Welcome JSON schema unchanged after Zod update",
+      "Six existing package locations changed versions; no new installed package identities or major-version migration"
+    ],
+    "sources": [
+      "https://github.com/expressjs/body-parser/releases/tag/1.20.9",
+      "https://github.com/nodejs/undici/releases/tag/v7.30.1",
+      "https://github.com/nodejs/undici/security/advisories/GHSA-xjj6-f33q-929c",
+      "https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd",
+      "https://github.com/advisories/GHSA-m5mm-p8h7-m29v",
+      "https://github.com/nodejs/node/releases/tag/v22.23.4"
+    ]
+  }
 }
