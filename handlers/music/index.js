@@ -1,7 +1,7 @@
 const obeyUi = require("../assets/system")
 const { configureSponsorBlock } = require('./nodes-runtime')
 const { searchNodes, trackOnNode } = require('./node-search')
-const { allowedMusicTrack } = require('./nodes-config')
+const { allowedMusicTrack, assertMusicQuery } = require('./nodes-config')
 const { sameRecording } = require('./recordings')
 const MusicHistory = require('../../database/schemas/MusicHistorySchema')
 
@@ -216,6 +216,7 @@ module.exports = client => {
 
     // ── High-level play ────────────────────────────────────────────────────
     async play(guildId, voiceChannelId, textChannelId, query, requester) {
+      assertMusicQuery(query)
       const requestedState = getState(guildId)
       const requestEpoch = requestedState.requestEpoch || 0
       const release = autoplay.reserveManual(guildId)

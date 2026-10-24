@@ -699,7 +699,7 @@
     "handlers/music/database.js": "354757d024f98657c4faf1281c11874b7611e696da6ad32c90b43db69e500b83",
     "handlers/music/embeds.js": "af5a2078f99e780f107fd2e3461fb412477fde5b488e387557f6bde2513df222",
     "handlers/music/filters.js": "bd2eb7db6392faa5a2f4168f535e6f44ccad4d2ffacc43216a3d13747851d024",
-    "handlers/music/index.js": "f08d025b8d7f8595edd093fcb9f185e7937190f861e78ddb244ed018ba0434d7",
+    "handlers/music/index.js": "ea91f7101a6aa439662330ac8c69ebdddc828982bfdaafce85f843250ab78646",
     "handlers/music/library-view.js": "92ff1e24304ebc175460a82886bf2863716b6f345b5f62e1476b270dd56bc72a",
     "handlers/music/liked-playlist.js": "f772b8dde9f9f24a981343dce0cef43b7d3d71a07133e9b0f695021e51f648f6",
     "handlers/music/likes.js": "b9c185b29d73c63d58b8c26e92ff7ebf83bb26d896555cf42d12a21c720baf34",
