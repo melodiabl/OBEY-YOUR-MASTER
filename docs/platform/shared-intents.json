@@ -336,7 +336,7 @@
       "service": "Current inline cache projection",
       "store": "client.settings cache",
       "status": "divergence_recorded",
-      "finding": "Uses old logger.channel, cached welcome.channel and a separate language-name list. Does not reuse current log/welcome/prefix/language services, so view may diverge from published state.",
+      "finding": "Reads cached current default log channel (logger.channel) without category routing detail. Prefix falls back to ! instead of client configuration; language labels use a separate list that omits the supported in locale. Read projection does not use the versioned prefix/language or published welcome services and does not distinguish pending persistence/storage failure.",
       "nextTask": "T12; next P0 correction"
     },
     {
