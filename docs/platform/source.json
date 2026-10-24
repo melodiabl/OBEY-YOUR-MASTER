@@ -43,7 +43,14 @@
     "statusEvidence": "evidence/p0-setup-config-20261024.json",
     "deploymentKind": "application_only_p0_setup_config_security_release",
     "node": "22.23.4",
-    "bundledUndici": "6.29.1"
+    "bundledUndici": "6.29.1",
+    "musicAudit": {
+      "at": "2026-10-24T01:27:21.176070+00:00",
+      "evidence": "evidence/music-architecture-audit-20261024.json",
+      "report": "MUSIC-AUDIT-2026-10-24.md",
+      "verdict": "degraded_music_despite_basic_health",
+      "runtimeChanged": false
+    }
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

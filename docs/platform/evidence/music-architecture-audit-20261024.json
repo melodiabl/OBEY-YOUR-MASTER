@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "kind": "music_runtime_and_architecture_audit",
+  "at": "2026-10-24T01:29:35.492121+00:00",
+  "sourceHead": "91d60f2",
+  "runtimeCode": "8e7b9ea366dd7c70f3892b8fa80a265a478951a5",
+  "runtime": {
+    "at": "2026-10-24T01:27:21.176070+00:00",
+    "image": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
+    "containerStatus": "running",
+    "containerHealth": "healthy",
+    "restarts": 0,
+    "httpHealth": {
+      "httpStatus": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 2300
+      }
+    }
+  },
+  "verdict": "degraded_music_despite_basic_health",
+  "runtimeMutated": false,
+  "planException": "Explicit music audit during P0; no global gate or migration accepted.",
+  "observations": {
+    "at": "2026-10-24T01:26:43.010779+00:00",
+    "recoveryFailures": 12,
+    "exhaustedRecoveryBudgets": 1,
+    "restoredLogEvents": 3,
+    "failuresByNodeAndStage": {
+      "trinium-02/voice": 6,
+      "millohost/voice": 5,
+      "millohost/settings": 1
+    },
+    "slowOperations": [
+      {
+        "entryPoint": "node_update",
+        "durationMs": 2686,
+        "succeeded": true
+      },
+      {
+        "entryPoint": "node_update",
+        "durationMs": 4100,
+        "succeeded": true
+      },
+      {
+        "entryPoint": "panel_edit",
+        "durationMs": 1060,
+        "succeeded": true
+      },
+      {
+        "entryPoint": "panel_edit",
+        "durationMs": 1132,
+        "succeeded": true
+      },
+      {
+        "entryPoint": "panel_edit",
+        "durationMs": 1076,
+        "succeeded": true
+      },
+      {
+        "entryPoint": "node_update",
+        "durationMs": 5497,
+        "succeeded": true
+      }
+    ],
+    "voicePingByNode": {
+      "millohost": {
+        "samples": 4,
+        "minMs": 321,
+        "maxMs": 348
+      },
+      "trinium-02": {
+        "samples": 4,
+        "minMs": 56,
+        "maxMs": 72
+      }
+    },
+    "recoveryWindow": {
+      "first": "2026-10-24T02:56:21.145087845+02:00",
+      "last": "2026-10-24T03:13:17.595324806+02:00"
+    }
+  },
+  "nodeProbes": {
+    "at": "2026-10-24T01:23:45.767Z",
+    "diagnosticSessionsOnly": true,
+    "nodes": [
+      {
+        "id": "serenetia",
+        "ws": {
+          "ready": false,
+          "httpStatus": 502,
+          "ms": 2935
+        },
+        "http": [
+          {
+            "route": "stats",
+            "status": 502,
+            "ms": 3069,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 154
+          },
+          {
+            "route": "sessions/synthetic/players",
+            "status": 502,
+            "ms": 3069,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 154
+          },
+          {
+            "route": "loadtracks",
+            "status": 502,
+            "ms": 3071,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 154
+          }
+        ]
+      },
+      {
+        "id": "gdjkhp",
+        "ws": {
+          "ready": false,
+          "httpStatus": 401,
+          "ms": 539
+        },
+        "http": [
+          {
+            "route": "stats",
+            "status": 401,
+            "ms": 611,
+            "contentType": "text/plain",
+            "json": false,
+            "bodyBytes": 12
+          },
+          {
+            "route": "sessions/synthetic/players",
+            "status": 401,
+            "ms": 592,
+            "contentType": "text/plain",
+            "json": false,
+            "bodyBytes": 12
+          },
+          {
+            "route": "loadtracks",
+            "status": 401,
+            "ms": 198,
+            "contentType": "text/plain",
+            "json": false,
+            "bodyBytes": 12
+          }
+        ]
+      },
+      {
+        "id": "millohost",
+        "ws": {
+          "ready": false,
+          "httpStatus": 500,
+          "ms": 575
+        },
+        "http": [
+          {
+            "route": "stats",
+            "status": 500,
+            "ms": 502,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 186
+          },
+          {
+            "route": "sessions/synthetic/players",
+            "status": 500,
+            "ms": 570,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 186
+          },
+          {
+            "route": "loadtracks",
+            "status": 500,
+            "ms": 541,
+            "contentType": "text/html",
+            "json": false,
+            "bodyBytes": 186
+          }
+        ]
+      },
+      {
+        "id": "trinium-02",
+        "ws": {
+          "httpStatus": 101,
+          "apiVersion": null,
+          "ready": true,
+          "resumed": false,
+          "sessionPresent": true,
+          "ms": 455
+        },
+        "http": [
+          {
+            "route": "stats",
+            "status": 200,
+            "ms": 410,
+            "contentType": "application/json",
+            "json": true,
+            "bodyBytes": 507,
+            "errorType": null,
+            "missingSession": false
+          },
+          {
+            "route": "sessions/synthetic/players",
+            "status": 404,
+            "ms": 147,
+            "contentType": "application/json",
+            "json": true,
+            "bodyBytes": 162,
+            "errorType": "Not Found",
+            "missingSession": false
+          },
+          {
+            "route": "loadtracks",
+            "status": 200,
+            "ms": 937,
+            "contentType": "application/json; charset=utf-8",
+            "json": true,
+            "bodyBytes": 6776,
+            "errorType": null,
+            "missingSession": false,
+            "loadType": "search",
+            "tracks": 10
+          }
+        ]
+      }
+    ]
+  },
+  "infoCompatibility": [
+    {
+      "id": "serenetia",
+      "infoStatus": null,
+      "reportedVersion": null,
+      "reportedMajor": null,
+      "infoLatencyMs": 3512
+    },
+    {
+      "id": "gdjkhp",
+      "infoStatus": null,
+      "reportedVersion": null,
+      "reportedMajor": null,
+      "infoLatencyMs": 538
+    },
+    {
+      "id": "millohost",
+      "infoStatus": 200,
+      "reportedVersion": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+      "reportedMajor": 0,
+      "infoLatencyMs": 576
+    },
+    {
+      "id": "trinium-02",
+      "infoStatus": 200,
+      "reportedVersion": "3.8.0",
+      "reportedMajor": 3,
+      "infoLatencyMs": 1996
+    }
+  ],
+  "independentSessionReads": {
+    "at": "2026-10-24T01:24:39.478Z",
+    "id": "trinium-02",
+    "diagnosticSessionOnly": true,
+    "closedDuringProbe": false,
+    "reads": [
+      {
+        "status": 200,
+        "ms": 507,
+        "players": 0,
+        "wsOpen": true,
+        "sessionError": false
+      },
+      {
+        "status": 200,
+        "ms": 181,
+        "players": 0,
+        "wsOpen": true,
+        "sessionError": false
+      },
+      {
+        "status": 200,
+        "ms": 156,
+        "players": 0,
+        "wsOpen": true,
+        "sessionError": false
+      },
+      {
+        "status": 200,
+        "ms": 150,
+        "players": 0,
+        "wsOpen": true,
+        "sessionError": false
+      },
+      {
+        "status": 200,
+        "ms": 162,
+        "players": 0,
+        "wsOpen": true,
+        "sessionError": false
+      }
+    ]
+  },
+  "persistedSessionSummary": {
+    "readAt": "2026-10-24T01:22:47.537Z",
+    "persistedOnly": true,
+    "count": 1,
+    "lastUpdatedAt": [
+      "2026-10-24T01:13:17.596Z"
+    ],
+    "queuedCounts": [
+      0
+    ]
+  },
+  "reproductions": {
+    "at": "2026-10-24T01:25:53.011Z",
+    "isolated": true,
+    "productionNetworkUsed": false,
+    "cases": [
+      {
+        "id": "control_blocked_by_autoplay",
+        "observed": true,
+        "heldMs": 120,
+        "nodeControlCalledWhileLookupPending": false
+      },
+      {
+        "id": "manual_play_can_follow_new_autoplay",
+        "observed": true,
+        "pendingManualMarker": 0,
+        "started": "recommendation",
+        "waiting": "manual"
+      },
+      {
+        "id": "node_preference_outweighs_penalties",
+        "observed": true,
+        "selected": "preferred",
+        "preferredPenalties": 1000,
+        "backupPenalties": 0
+      }
+    ]
+  },
+  "originalTests": {
+    "exitCode": 0,
+    "image": "41c57b937c1c5895de255a04a7d9cb475ea1077500cb61a7197bea8cac9f1651",
+    "network": "none",
+    "files": [
+      "test/discordmusiccatalog.test.js",
+      "test/musiccatalog.test.js",
+      "test/musichandler-state.test.js"
+    ],
+    "results": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "duration_ms": 1640.51455
+    },
+    "initialInvocation": "Image omits tests; first invocation lacked read-only file mounts and was corrected."
+  },
+  "sourceHashes": {
+    "handlers/music/index.js": "89d1d4cd26b62cc89831a2c6d70d0540b2538505c9c0152a81f275d48876569b",
+    "handlers/music/action-queue.js": "557b7a29673646c8859e4125acdf06d4394cc2d9da4a6a6edd04112dcfbf874e",
+    "handlers/music/autoplay.js": "041eb89e1fff9125c156bdc578c61d5f9d2519431e18fc735da09c1ef1fd846f",
+    "handlers/music/nodes.js": "e2bd8a4c60b9035dcfa1e7dfc887f230b1e81d06393b93a4460f32eb2590e4fc",
+    "handlers/music/nodes-runtime.js": "8edd66b5256da862932f6708f37769f176d8d153206b51cd4b1bf61d168e40d8",
+    "handlers/music/node-session.js": "724a15220a81bbcc2d4a79c2d9bfdb06cc97499755bda913015975131a136c27",
+    "handlers/music/recovery-policy.js": "ff64afbe88bc821ecc684d1b92189e374140d10e5f7da788e378e0b27da1cdd7",
+    "handlers/music/player-events.js": "68bf27d70c18751fc6e6954fc7d5a5540d3feb30779e9fa4783c9ec7e890a0c7",
+    "handlers/music/playback-health.js": "b9789429d9395ea4bbde36d9dca31bda37c59aa997b957732997069c4c62018b",
+    "dashboard/index.js": "30facbf86c5c05611bb71572aa43527ecaf65d27ccf06ba46e25559df0a52db4",
+    "commands/Music/join.js": "c9125c027b6d0c66bd61a552b36e6fb3c0fe981460574de6dc0278f27185f307",
+    "commands/Music/moveme.js": "62a63217676293640535f789c03c4203bc1e08f4e20ca67115689b30e39b5892",
+    "commands/Music/reconnect.js": "243ab3c697ba2f6b167cb86218a25435cf6696564d415796e1e8b4bcb48ebb00",
+    "slashCommands/Music/playmusicmix.js": "3b4c1cab5a7d78a82a04c4502b053fe45df9a364c3482fe447a4403414033d8c"
+  },
+  "findings": [
+    {
+      "id": "MA01",
+      "severity": "high",
+      "summary": "Three backups fail WS and essential HTTP probes."
+    },
+    {
+      "id": "MA02",
+      "severity": "high",
+      "summary": "Recorded restore budget exhausted; persisted snapshot no longer advances."
+    },
+    {
+      "id": "MA03",
+      "severity": "high",
+      "summary": "Autoplay holds action queue and manual play lacks early pending intent."
+    },
+    {
+      "id": "MA04",
+      "severity": "medium",
+      "summary": "Static preference outranks penalties; capability detection confuses server major with API version."
+    },
+    {
+      "id": "MA05",
+      "severity": "medium",
+      "summary": "Basic health and threshold-only timing do not diagnose individual playback."
+    },
+    {
+      "id": "MA06",
+      "severity": "medium",
+      "summary": "Music coordinator and legacy SDK consumers remain coupled; planned migration incomplete."
+    }
+  ],
+  "limits": [
+    "No actual playback/audio listening or authenticated web session inspected.",
+    "No voice joins, Discord messages, bot restart, dependency install, data mutation, or push.",
+    "Node diagnostic WS sessions used synthetic user IDs with no players and were terminated.",
+    "Provider probes are bounded point-in-time observations, not an SLA or a proof of root cause for original session loss.",
+    "Original tests pass but do not cover the reproduced concurrency defects.",
+    "No new permanent scripts or test files; diagnostic code supplied over stdin."
+  ],
+  "report": "../MUSIC-AUDIT-2026-10-24.md"
+}

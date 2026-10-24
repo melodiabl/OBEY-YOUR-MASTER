@@ -2,6 +2,8 @@
 
 ## Orden de ejecución vigente · corrección del usuario
 
+**Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
+
 Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La próxima unidad concilia resumen Config y categoría MUSIC.** Navegación setup y guardado de roles se corrigieron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza diecinueve grupos/41 entradas/21 rutas; quedan 634 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
 

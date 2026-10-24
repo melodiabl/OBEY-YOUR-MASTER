@@ -1863,3 +1863,13 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [x] Quitar corazones con estado explícito y reproducción por las API existentes; CSRF, confirmación y bloqueo de duplicados, sin reintentos automáticos.
 - [x] Verificar búsqueda/páginas, datos de dos usuarios/servidores, errores, móvil/teclado y artefacto Docker; retirar pruebas temporales y conservar tres archivos originales.
 - [x] Desplegar con respaldo/reversión y actualizar el plan; reproductor completo y demás ámbitos siguen pendientes.
+
+## Incidencia musical y arquitectura · 24/10/2026
+
+- [x] Auditar runtime, respaldos, recuperación, salud y consumidores; reproducir bloqueo de controles y prioridad manual sin tocar voz real.
+- [x] Conservar evidencia redactada, 25 tests originales y diagnóstico sin scripts/tests permanentes nuevos.
+- [ ] Conciliar errores HTTP/sesión/voz y respaldos utilizables antes de reintentar la sesión agotada.
+- [ ] Corregir autoplay fuera de la sección de mutación e intención manual uniforme en todas las entradas; comprobar cancelación y resultados tardíos.
+- [ ] Completar fachada musical, capacidades NodeLink y migración de cola única en P1 con los casos de aceptación del maestro.
+
+[Auditoría y límites](../docs/platform/MUSIC-AUDIT-2026-10-24.md). Sin cambios de runtime en esta auditoría; P0 y Config siguen pendientes.

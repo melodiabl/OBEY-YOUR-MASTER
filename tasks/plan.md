@@ -14,6 +14,10 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 | 5 | P5 · escalado y recuperación | Drain/takeover, caída de proceso y restauración de datos comprobados antes de ampliar infraestructura. |
 | 6 | P6 · ampliaciones | Comunidad, colecciones y automatización con contratos, cuotas, privacidad y aceptación por capacidad. |
 
+### Incidencia musical auditada · 24/10/2026
+
+El usuario solicitó una auditoría y cuestionó la arquitectura durante la unidad Config. [Informe](../docs/platform/MUSIC-AUDIT-2026-10-24.md) y [evidencia](../docs/platform/evidence/music-architecture-audit-20261024.json): respaldos actualmente fallidos, recuperación agotada, pausa retenida por autoplay y prioridad manual incompleta reproducidas. Diagnóstico terminado; correcciones y migración continúan pendientes. No hubo cambios operativos ni se cerró P0/P1. Config conserva su unidad pendiente; los hallazgos se vinculan a P0/P1 sin sustituir la secuencia global.
+
 ### Unidad inmediata: completar la conciliación de P0
 
 1. Partir del [inventario conciliado](../docs/platform/operation-ownership.json) y la [evidencia P0](../docs/platform/evidence/p0-reconciliation-20261023.json): 675 entradas con adaptador actual, 95 rutas y 779 aliases preservados; runtime `8e7b9ea`.
