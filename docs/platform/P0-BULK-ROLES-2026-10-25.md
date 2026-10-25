@@ -18,4 +18,8 @@ El bloqueo nuevo tiene alcance de proceso. No es una cola duradera, no conserva 
 
 El mapa registra 22 grupos/103 entradas/21 rutas; restan 572 entradas y 74 rutas, incluidas 62 entradas de Administración. No hay mutación masiva equivalente en slash/web actuales; autorole es configuración y roleinfo una lectura. G01/G02 y la aceptación autenticada permanecen abiertos. Siguiente P0: sanciones ban/kick/timeout y sus variantes, con los pares slash existentes.
 
-Estado: candidato comprobado en aislamiento; construcción y despliegue pendientes. Los verificadores se retirarán al conservar resultados y hashes.
+Entrega desplegada: código `1402971d`, imagen `d25394f5be87`, Node 22.23.4 y Undici integrado 6.29.1. Pasan los mismos 84 casos sobre la imagen final, sin montar código candidato. Los 1.000 hashes de fuentes/catálogos, compilado web y tests originales coinciden en imagen y contenedor; gate del inventario, siete comprobaciones HTTP y doce assets públicos correctos.
+
+Diez observaciones: tres durante arranque y siete saludables, todas con HTTP 200, cero reinicios automáticos. La última confirma base de datos y música disponibles. Gateway listo, veinte entradas slash confirmadas y Serenetia/MilloHost conectados; sin errores de recuperación detectados en esa ventana. Esto no certifica reproducción ni un lote real en Discord.
+
+Respaldo de 59.291.563 bytes con CRC gzip válido; reversión a `a8482c0c` preparada. El contenedor conserva entorno, montajes y límites; se actualizan las dos recetas de recuperación y el alias local. Sin restauración de datos, push ni acciones de prueba en Discord. Verificador, candidato sin arrancar y checkout propios retirados; se conservan los tres archivos originales de tests y la evidencia JSON/TAP.

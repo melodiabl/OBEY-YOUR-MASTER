@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-25",
   "phase": "P0",
-  "status": "verified_in_isolation_release_pending",
+  "status": "deployed_healthy",
   "scope": "Eight existing bulk-role adapters; await execution, serialize per guild/client process, fail closed on roster fetch failure and preserve optional log configuration",
   "baseline": {
     "exitCode": 1,
@@ -80,6 +80,43 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "finalImageTests": {
+      "exitCode": 0,
+      "tests": 84,
+      "pass": 84,
+      "fail": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95
+    },
+    "imageHashes": {
+      "checked": 1000,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "liveHashes": {
+      "checked": 1000,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": {
+      "checks": 7,
+      "failures": 0
+    },
+    "publicAssets": {
+      "checks": 12,
+      "failures": 0
+    },
+    "tapEvidence": {
+      "before-expanded.tap": "4590539c4dd5315cae4eafd7f8586d2f59c8d0a2b377bf0be4a38ea90b032574",
+      "after-expanded.tap": "1a84105d53a3c09fa972667cffae75114b96b78100f88c7eaee6f9f077dd2bcd",
+      "final.tap": "1bb3daac089c9a178f002cdab41fa81ffc4a0d033a1f7b465bfa9be996cc0cb6"
     }
   },
   "changes": {
@@ -127,5 +164,72 @@
     "Legacy adminlog migration and complete command language cleanup",
     "No automatic restart replay; verify actual member roles before retry"
   ],
-  "next": "P0 Administration sanctions: ban/kick/timeout variants and current slash peers"
+  "next": "P0 Administration sanctions: ban/kick/timeout variants and current slash peers",
+  "release": {
+    "code": "1402971d498ff0349ab47bc68aad16d49dd4a883",
+    "image": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96",
+    "tag": "localhost/obey-your-master_bot:release-p0-bulk-roles-20261025-1402971d",
+    "at": "2026-10-25T04:48:14.276057+00:00",
+    "rollbackImage": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b"
+  },
+  "operations": {
+    "backup": {
+      "bytes": 59291563,
+      "gzipCrcValid": true,
+      "uncompressedBytes": 120758212
+    },
+    "preflight": {
+      "candidateStarted": false,
+      "differences": [],
+      "environmentPreserved": true,
+      "mountsPreserved": true,
+      "rollbackImage": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b"
+    },
+    "observations": {
+      "samples": 10,
+      "healthy": 7,
+      "starting": 3,
+      "httpOk": 10,
+      "restarts": 0,
+      "last": {
+        "at": "2026-10-25T04:49:20.892365+00:00",
+        "image": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96",
+        "health": "healthy",
+        "restarts": 0,
+        "httpStatus": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 66
+        }
+      }
+    },
+    "startup": {
+      "at": "2026-10-25T04:48:49.819528+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "serenetia",
+        "millohost"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0,
+      "uncaughtLogEvents": 0,
+      "unhandledLogEvents": 0
+    },
+    "cleanup": {
+      "at": "2026-10-25T04:49:26.053832+00:00",
+      "verifierSha256": "9e5891c6408fe42853ad4bc0753d5e3fdf3a165919f4008aa9abac4330f56414",
+      "temporaryVerifierRemoved": true,
+      "ownedReleaseWorktreeRemoved": true,
+      "neverStartedCandidateRemoved": true,
+      "originalTestFilesRetained": true
+    },
+    "recoveryRecipesUpdated": 2,
+    "migrationOrDataRestore": false,
+    "realDiscordTestActions": false,
+    "pushed": false
+  }
 }

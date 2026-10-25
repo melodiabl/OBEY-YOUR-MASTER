@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "41f5ccbaeaabe154e3ed83cd924ae6309b1835f2",
-    "image": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b",
+    "code": "1402971d498ff0349ab47bc68aad16d49dd4a883",
+    "image": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-administration-roles-20261025.json",
-    "change": "Await single-member role mutations and preserve configured command grants on cache misses",
-    "tag": "localhost/obey-your-master_bot:release-p0-administration-20261025-41f5ccb",
+    "evidence": "evidence/p0-bulk-roles-20261025.json",
+    "change": "Awaited bulk-role loops, shared guild admission, complete roster requirement and optional logs preserved",
+    "tag": "localhost/obey-your-master_bot:release-p0-bulk-roles-20261025-1402971d",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-administration-roles-20261025.json",
-    "deploymentKind": "application_only_p0_administration_roles",
+    "statusEvidence": "evidence/p0-bulk-roles-20261025.json",
+    "deploymentKind": "application_only_p0_bulk_roles",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
