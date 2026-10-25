@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 25/10/2026 · familia ban corregida y desplegada
+
+Código `5697919d`, imagen `82932087`: ban/idban/useridban y slash comparten el efecto Discord con roles/miembros frescos, permisos delegados conservados y jerarquía también por ID. Lookup fallido no habilita ban de no miembro; se envían segundos de borrado y se confirma antes de notificar/registrar. Efectos auxiliares acotados y fallos separados; historiales prefix/slash siguen diferenciados. Pasan 96 casos en imagen, 1.001 hashes y HTTP/assets; ocho muestras saludables tras dos de arranque, cero reinicios. Respaldo CRC/reversión `3c092b08` y recetas conservados; temporales retirados, sin sanciones de prueba ni push. [Entrega y límites](P0-BAN-2026-10-25.md).
+
+Veinticuatro grupos/109 entradas/21 rutas revisadas; quedan 566 entradas/74 rutas, incluidas 58 de Administración. **Siguiente P0: kick y timeout/removetimeout prefix, con sus pares slash.** G01/G02, recibos/coordinar sanciones, historial común, logs canónicos y aceptación autenticada siguen abiertos.
+
 ## 25/10/2026 · desbaneo compartido corregido y desplegado
 
 Código `6f0ea66e`, imagen `3c092b08`: texto/slash usan el mismo servicio de desbaneo confirmado y proyección, con permisos frescos y políticas Administrator/BanMembers conservadas. El historial se actualiza tras Discord y falla por separado; espera acotada y corte temporal para registros nuevos. Slash privado, motivos acotados/Unicode válido y sin menciones. Pasan 61 casos en imagen, 1.000 hashes y HTTP/assets; diez muestras saludables sin reinicios. Respaldo CRC y reversión `d25394f5` conservados; temporales retirados, sin desbaneos reales de prueba ni push. [Entrega y límites](P0-UNBAN-2026-10-25.md).
@@ -30,7 +36,7 @@ Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de control
 
 **Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa ban/idban/useridban, kick, timeout/removetimeout de `commands/Administration`, sus pares slash y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza 23 grupos/105 entradas/21 rutas; quedan 570 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa kick y timeout/removetimeout de `commands/Administration`, sus pares slash y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza 24 grupos/109 entradas/21 rutas; quedan 566 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
 ## 24/10/2026 · resumen Config y categoría MUSIC conciliados en aislamiento
 

@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "6f0ea66eddcf044f823c66bfa7dd63df231bf4ee",
-    "image": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505",
+    "code": "5697919d7e591245ebc027ff5f139f596dfc5632",
+    "image": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-unban-20261025.json",
-    "change": "Shared confirmed unban operation with fresh access and separately confirmed history updates",
-    "tag": "localhost/obey-your-master_bot:release-p0-unban-20261025-6f0ea66e",
+    "evidence": "evidence/p0-ban-20261025.json",
+    "change": "Shared ban execution with fresh delegated access, hierarchy and confirmed outcomes",
+    "tag": "localhost/obey-your-master_bot:release-p0-ban-20261025-5697919d",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-unban-20261025.json",
-    "deploymentKind": "application_only_p0_unban",
+    "statusEvidence": "evidence/p0-ban-20261025.json",
+    "deploymentKind": "application_only_p0_ban",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

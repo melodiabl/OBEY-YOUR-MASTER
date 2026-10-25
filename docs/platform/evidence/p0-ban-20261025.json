@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-25",
   "phase": "P0",
-  "status": "verified_in_isolation_release_pending",
+  "status": "deployed_healthy",
   "scope": "Shared Discord ban effect for three prefix adapters and existing slash ban; other sanctions remain pending",
   "baseline": {
     "exitCode": 1,
@@ -57,6 +57,43 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "finalImageTests": {
+      "exitCode": 0,
+      "tests": 96,
+      "pass": 96,
+      "fail": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95
+    },
+    "imageHashes": {
+      "checked": 1001,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "liveHashes": {
+      "checked": 1001,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": {
+      "checks": 7,
+      "failures": 0
+    },
+    "publicAssets": {
+      "checks": 12,
+      "failures": 0
+    },
+    "tapEvidence": {
+      "before.tap": "6e6799e44bd1384d5d6fbe74975a284efda6553cb706eddf0cf597fb3da59396",
+      "after-expanded.tap": "413397bc5fe9d6c421b6290315745eab0069ad973b36e74e9c4bc8f316827df8",
+      "final.tap": "2350fc9f3a9019c1217dd609a3395c858cb6c02bf7a2bec09ef957675c24b7f0"
     }
   },
   "changes": {
@@ -92,5 +129,80 @@
     "No durable receipt or strict cross-action coordination; timed-out case/notification/log operations may finish later",
     "Prefix remains stricter than slash for native-only BanMembers and owner hierarchy; ID forms now enforce hierarchy for current members",
     "The legacy tempban alias still invokes a permanent ban; no temporary-ban scheduler was added"
-  ]
+  ],
+  "release": {
+    "code": "5697919d7e591245ebc027ff5f139f596dfc5632",
+    "image": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd",
+    "tag": "localhost/obey-your-master_bot:release-p0-ban-20261025-5697919d",
+    "at": "2026-10-25T06:02:20.879378+00:00",
+    "rollbackImage": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505"
+  },
+  "review": {
+    "correctness": "40-case failing baseline, 71 expanded isolated cases and 25 original cases; current effect awaited once",
+    "readability": "Three thin prefix adapters replace repeated inline orchestration; actual native effect has a single owner",
+    "architecture": "Existing moderation orchestrator reused with explicit transport policy and source-specific stores; no history merge",
+    "security": "Fresh role/member reads, protected targets, finite SDK hierarchy comparison and explicit unknown-member handling; delegated prefix ACL retained",
+    "performance": "Fresh reads add REST cost; members queried individually with parallel reads after role refresh; post-effect work bounded to five seconds",
+    "limits": "No real REST/Mongo mutation test; durable receipts, source history reconciliation and canonical logging remain open"
+  },
+  "operations": {
+    "backup": {
+      "bytes": 59291931,
+      "gzipCrcValid": true,
+      "uncompressedBytes": 120758157
+    },
+    "preflight": {
+      "candidateStarted": false,
+      "differences": [],
+      "environmentPreserved": true,
+      "mountsPreserved": true,
+      "rollbackImage": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505"
+    },
+    "observations": {
+      "samples": 10,
+      "healthy": 8,
+      "starting": 2,
+      "httpOk": 10,
+      "restarts": 0,
+      "last": {
+        "at": "2026-10-25T06:03:30.694652+00:00",
+        "image": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd",
+        "health": "healthy",
+        "restarts": 0,
+        "httpStatus": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 69
+        }
+      }
+    },
+    "startup": {
+      "at": "2026-10-25T06:03:42.899106+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "serenetia",
+        "millohost"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0,
+      "uncaughtLogEvents": 0,
+      "unhandledLogEvents": 0
+    },
+    "cleanup": {
+      "at": "2026-10-25T06:04:18.309673+00:00",
+      "verifierSha256": "eb3a90e039c3f7d6d790938f58dd36cd8e537013c1a912a0a6d977b792336257",
+      "temporaryVerifierRemoved": true,
+      "ownedReleaseWorktreeRemoved": true,
+      "neverStartedCandidateRemoved": true,
+      "originalTestFilesRetained": true
+    },
+    "recoveryRecipesUpdated": 2,
+    "migrationOrDataRestore": false,
+    "realDiscordTestActions": false,
+    "pushed": false
+  }
 }
