@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "92759e38e4255f0cd8094c85f043e11ffc5a521d",
-    "image": "ccadb236cf866b42b7b9a61a833429a6799a4d01fdc1723f0f71760e9158b25f",
+    "code": "fb4d878e34dfbd3c759dc51c364d824f20be3edf",
+    "image": "4be48604d19bdab9fe56296012913578deb0259bd98b0788c4edac2481ea661b",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-member-actions-20261025.json",
-    "change": "Shared fresh member action execution for kick and timeout with confirmed effects and timeout history closure",
-    "tag": "localhost/obey-your-master_bot:release-p0-member-actions-20261025-92759e38",
+    "evidence": "evidence/p0-warning-module-20261025.json",
+    "change": "Moderation warnings moved by capability to src/modules/moderation with shared persisted cases, private history and confirmed removal",
+    "tag": "localhost/obey-your-master_bot:release-p0-warning-module-20261025-fb4d878e",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-member-actions-20261025.json",
-    "deploymentKind": "application_only_p0_member_actions",
+    "statusEvidence": "evidence/p0-warning-module-20261025.json",
+    "deploymentKind": "application_only_p0_warning_module",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -445,5 +445,14 @@
     "remainingHttpRoutes": 74,
     "globalG01G02Accepted": false,
     "pushed": false
+  },
+  "p0WarningModule": {
+    "date": "2026-10-26",
+    "report": "P0-WARNING-MODULE-2026-10-25.md",
+    "evidence": "evidence/p0-warning-module-20261025.json",
+    "reviewedGroups": 29,
+    "reviewedEntries": 121,
+    "reviewedRoutes": 21,
+    "fullModerationAccepted": false
   }
 }

@@ -1,10 +1,10 @@
 # Checkpoint activo — implementación en el proyecto principal
 
-## 25/10/2026 · advertencias migradas en aislamiento, pendientes de despliegue
+## 26/10/2026 · advertencias migradas y desplegadas
 
 Primer corte real de `src/modules/moderation`: creación persistente compartida por texto/slash y ocho protecciones, historial privado con acceso fresco y retirada condicional del caso o de referencias antiguas. Los adaptadores mantienen nombres/aliases; el texto conserva sus consecuencias configuradas dentro del área como código de compatibilidad. Pasan 81 casos aislados (25 originales), tipos, fronteras, assets y gate de 987 hashes/675 comandos/779 aliases. El mapa llega a 29 grupos/121 entradas/21 rutas; faltan 554 entradas/74 rutas. [Alcance y límites](P0-WARNING-MODULE-2026-10-25.md).
 
-**Pendiente de desplegar:** la captura privada del proceso vivo confirmó cero acciones antiguas y cero perfiles con referencias de avisos cargadas; el inspector ya está cerrado. La entrega continúa en P0 con esa preservación, logs canónicos, recibos, otras intenciones de Administración y G01/G02. La arquitectura definitiva de todo moderation no está terminada.
+Código `fb4d878e`, imagen `4be48604d19b`: los 81 casos pasan en la imagen, 987 hashes y HTTP/assets correctos; diez muestras saludables, cero reinicios. Captura privada previa: cero acciones antiguas y cero perfiles con referencias de avisos cargadas; inspector cerrado. Respaldo CRC de 59.300.850 bytes y reversión `ccadb236` conservados. P0 continúa con logs canónicos, recibos, otras intenciones de Administración y G01/G02; MOD-MODERATION aún es parcial.
 
 ## 25/10/2026 · kick y timeout corregidos y desplegados
 

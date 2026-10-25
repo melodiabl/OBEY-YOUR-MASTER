@@ -1,10 +1,10 @@
 # Estado entregado · 17/10/2026
 
-## 25/10/2026 · candidato de advertencias en la arquitectura objetivo
+## 26/10/2026 · advertencias desplegadas en la arquitectura objetivo
 
 `src/modules/moderation` posee ahora la capacidad de advertencias: casos persistidos para texto/slash/protecciones, lectura privada con permisos frescos y retirada condicionada al servidor y sujeto. Los comandos delegan; el código de consecuencias de `!warn` queda como adaptador de compatibilidad dentro del área. Se comprobaron 81 casos aislados y el inventario efectivo de 987 hashes, 675 entradas y 779 aliases. Son 29 grupos/121 entradas/21 rutas revisadas; faltan 554 entradas/74 rutas. [Informe](P0-WARNING-MODULE-2026-10-25.md).
 
-**Pendiente operativo:** aún no se desplegó ni reinició el bot. La captura privada confirmó que no hay registros antiguos de `modActions` ni perfiles con referencias de avisos cargadas en el proceso vivo; el inspector se cerró. No dar por cerrados P0, G01/G02, logs ni MOD-MODERATION. La imagen vigente continúa en `92759e38`/`ccadb236`.
+Despliegue `fb4d878e`/`4be48604d19b`: 81 casos en imagen, 987 hashes, HTTP 7/7 y assets 12/12; diez muestras saludables y cero reinicios. Antes de reiniciar se confirmó que `modActions` y los perfiles con referencias de avisos estaban vacíos; inspector cerrado. Respaldo CRC de 59.300.850 bytes y reversión `ccadb236` listos. No dar por cerrados P0, G01/G02, logs ni MOD-MODERATION.
 
 ## 25/10/2026 · kick y timeout corregidos y desplegados
 

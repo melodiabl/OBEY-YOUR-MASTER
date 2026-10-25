@@ -1,7 +1,7 @@
 {
   "date": "2026-10-25",
   "phase": "P0",
-  "status": "verified_in_isolation_not_deployed",
+  "status": "deployed_healthy",
   "scope": "First moderation warning capability in src/modules/moderation: create, read, remove and seven automatic producers plus ghost ping",
   "verification": {
     "isolatedCases": 81,
@@ -21,11 +21,37 @@
     ".runtime/p0-warning-history-20261025/before.tap",
     ".runtime/p0-warning-history-20261025/after.tap"
   ],
-  "operationalLimit": "Live process snapshot found zero legacy modActions and zero loaded profiles with warning references; inspector closed. Earlier lost legacy details cannot be reconstructed. Candidate awaits build and verified rollout.",
+  "operationalLimit": "The live process had no legacy warning details before replacement; previously lost historical details remain unrecoverable. No real warning, DM, sanction or voice test was sent.",
   "remaining": [
-    "Build, back up and deploy the candidate; verify source hashes, health and rollback",
     "Canonical moderation logs and durable receipts",
     "Authenticated two-guild acceptance and the rest of moderation",
     "Complete P0 and G01/G02 before P1"
-  ]
+  ],
+  "deployment": {
+    "code": "fb4d878e34dfbd3c759dc51c364d824f20be3edf",
+    "image": "4be48604d19bdab9fe56296012913578deb0259bd98b0788c4edac2481ea661b",
+    "tag": "localhost/obey-your-master_bot:release-p0-warning-module-20261025-fb4d878e",
+    "rollbackImage": "ccadb236cf866b42b7b9a61a833429a6799a4d01fdc1723f0f71760e9158b25f",
+    "backupBytes": 59300850,
+    "backupGzipCrcValid": true,
+    "preflightDifferences": [],
+    "liveLegacyActionsBeforeRestart": 0,
+    "liveProfilesWithWarningsBeforeRestart": 0,
+    "inspectorClosed": true,
+    "imageTests": 81,
+    "runtimeSourceHashes": 987,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "gatewayReady": true,
+    "readyPublicNodes": [
+      "serenetia",
+      "millohost"
+    ],
+    "unhandledLogEvents": 0,
+    "uncaughtLogEvents": 0,
+    "recoveryFailureLogEvents": 0
+  }
 }

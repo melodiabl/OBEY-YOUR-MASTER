@@ -12,6 +12,13 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 
 La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproductor completo continúa pendiente dentro de P1, sin desplazar la conciliación actual de P0. No se marcan etapas completas por reordenar esta lista.
 
+## P0 · advertencias y primer módulo de moderación · 26/10/2026
+
+- [x] Migrar la capacidad de advertencias a `src/modules/moderation`: nueve entradas Discord y ocho protecciones automáticas comparten casos persistidos, lectura privada y retirada confirmada.
+- [x] Verificar 81 casos en imagen, 987 hashes, 675 comandos, 779 aliases, 95 rutas, HTTP 7/7, assets 12/12 y diez observaciones saludables tras desplegar `fb4d878e`/`4be48604d19b`.
+- [x] Comprobar cero referencias antiguas vivas antes del reinicio, cerrar el inspector y conservar respaldo CRC/reversión. [Informe](../docs/platform/P0-WARNING-MODULE-2026-10-25.md).
+- [ ] Continuar las intenciones de Administración restantes, logs y recibos canónicos, G01/G02 y aceptación autenticada en dos servidores. Quedan 554 entradas y 74 rutas; MOD-MODERATION sigue parcial.
+
 ## P0 · unidad conciliada el 24/10/2026
 
 [Informe](../docs/platform/P0-CONCILIACION.md) y [evidencia](../docs/platform/evidence/p0-reconciliation-20261023.json).
