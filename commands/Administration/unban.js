@@ -1,101 +1,28 @@
-const obeyMeta = require("../../handlers/presentation/metadata")
-const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
-const config = require(`${process.cwd()}/botconfig/config.json`);
-var ee = require(`${process.cwd()}/botconfig/embed.json`);
-const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
-const { databasing } = require(`${process.cwd()}/handlers/functions`);
+const { PermissionFlagsBits } = require('discord.js')
+const obeyMeta = require('../../handlers/presentation/metadata')
+const { unbanUser, unbanReply } = require('../../handlers/moderation/action')
+const { t, localeFor } = require('../../handlers/i18n')
+
 module.exports = {
-    name: `unban`,
-    category: "Administration",
-    aliases: [`unbanhammer`],
-    description: `Unbans a Miembro from this Guild`,
-    usage: `unban <ID>`,
+    name: 'unban',
+    category: 'Administration',
+    aliases: ['unbanhammer'],
+    description: 'Unbans a Miembro from this Guild',
+    usage: 'unban <ID>',
     memberpermissions: ['Administrador'],
-    type: "member",
-    run: async (client, message, args, cmduser, text, prefix) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-
-        try {
-            if (!message.guild.members.me.permissions.has([PermissionFlagsBits.BanMembers]))
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable1"])),
-                    ],
-                });
-            //databasing(client, message.guild.id, message.author.id);
-            //message.guild.members.unban("564036254111629332");
-            if (!args[0])
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                            .setTitle(`${emoji?.msg.ERROR} Por favor add a valid USERID`)
-                            .setDescription(
-                                `Usage: \`${prefix}unban <ID>\`\nExample: \`${prefix}unban ${message.author.id}\``
-                            ),
-                    ],
-                });
-
-            let bans = await message.guild.bans.fetch().catch(() => {});
-            if (!bans.map(b => b?.user.id).includes(args[0]))
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                            .setTitle(`${emoji?.msg.ERROR} The Usuario with that Id is not banned in this Servidor!`)
-                            .setDescription(`Type: \`${prefix}listbans\` to see all Bans!`),
-                    ],
-                });
-            try {
-                let banuser = bans.map(b => b?.user).find(u => u.id == args[0]);
-                message.guild.members.unban(banuser ? banuser.id : args[0]);
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.color)
-                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                            .setTitle(`${emoji?.msg.SUCCESS} Successfully Unbanned ${banuser ? banuser.tag : args[0]}`)
-                            .setDescription(`Type: \`${prefix}listbans\` to see all ${bans.size - 1} Bans!`),
-                    ],
-                });
-            } catch (e) {
-                console.log(e.stack ? String(e.stack).grey : String(e).grey);
-                return message.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setColor(es.wrongcolor)
-                            .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                            .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable10"]))
-                            .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable11"])),
-                    ],
-                });
-            }
-        } catch (e) {
-            console.log(String(e.stack).grey.bgRed);
-            return message.reply({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                        .setTitle(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable18"]))
-                        .setDescription(eval(client.la[ls]["cmds"]["administration"]["ban"]["variable19"])),
-                ],
-            });
-        }
+    type: 'member',
+    run: async (client, message, args) => {
+        const locale = localeFor(client, message.guild.id)
+        const es = client.settings.get(message.guild.id, 'embed')
+        const result = await unbanUser(client, {
+            guild: message.guild,
+            actorId: message.author.id,
+            userId: args[0],
+            actorPermission: PermissionFlagsBits.Administrator,
+            reason: t(locale, 'moderation.noReason'),
+        })
+        const payload = unbanReply(result, locale, { successColor: es.color, errorColor: es.wrongcolor })
+        payload.embeds[0].setFooter(obeyMeta.asFooter(client.getFooter(es)))
+        return message.reply(payload)
     },
-};
-/**
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- */
+}

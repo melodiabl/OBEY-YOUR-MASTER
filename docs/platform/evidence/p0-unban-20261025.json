@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "verified_in_isolation_release_pending",
+  "scope": "Shared confirmed unban operation across existing prefix and slash adapters; other sanctions remain pending",
+  "baseline": {
+    "exitCode": 1,
+    "summary": [
+      "# tests 20",
+      "# pass 7",
+      "# fail 13",
+      "# cancelled 0",
+      "# skipped 0"
+    ],
+    "failedCases": [
+      "not ok 1 - prefix waits for Discord before confirming unban",
+      "not ok 2 - prefix rejected unban never confirms success or updates records",
+      "not ok 3 - prefix confirmed unban updates only active bans for guild and target",
+      "not ok 4 - prefix record failure preserves confirmed outcome with warning",
+      "not ok 5 - prefix lookup outage is not reported as no ban",
+      "not ok 7 - prefix verifies fresh actor access before unban",
+      "not ok 12 - slash record failure preserves confirmed outcome with warning",
+      "not ok 13 - slash lookup outage is not reported as no ban",
+      "not ok 14 - slash unknown ban causes no mutation",
+      "not ok 15 - slash verifies fresh actor access before unban",
+      "not ok 17 - slash bounds reason before Discord and embed construction",
+      "not ok 18 - slash acknowledges privately before external work",
+      "not ok 19 - prefix keeps Administrator policy despite slash BanMembers access"
+    ]
+  },
+  "verification": {
+    "baseImage": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96",
+    "tests": 61,
+    "originalTests": 25,
+    "temporaryCases": 36,
+    "pass": 61,
+    "fail": 0,
+    "skipped": 0,
+    "network": "none",
+    "realDiscordOrMongoActions": false,
+    "typesPassed": true,
+    "dependencyBoundariesPassed": true,
+    "audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "changes": {
+    "files": [
+      "commands/Administration/unban.js",
+      "slashCommands/Moderation/unban.js",
+      "handlers/moderation/action.js",
+      "locales/es.json",
+      "locales/en.json"
+    ]
+  },
+  "coverage": {
+    "reviewedGroups": 23,
+    "commandEntriesReviewed": 105,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 570,
+    "remainingHttpRoutes": 74
+  },
+  "acceptance": {
+    "globalG01G02": false,
+    "allSanctions": false,
+    "authenticatedDiscordWalkthrough": false
+  },
+  "next": "P0 remaining ban/kick/timeout variants and slash peers",
+  "limits": [
+    "Database timeout does not cancel a potentially queued write; response marks it unconfirmed",
+    "History cutoff excludes newer timestamped records, without replacing a durable receipt or strict ban/unban coordination",
+    "Other prefix sanctions still differ from slash; no global service migration claimed",
+    "No real unban, DM, moderation case write or voice test performed"
+  ]
+}

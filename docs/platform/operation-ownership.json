@@ -74,7 +74,7 @@
     "commands/Administration/tempmute.js": "d6eafa25c1e38b72719314ba8eb2b8c52b7317befffa0d505404e062637aa909",
     "commands/Administration/timeout.js": "a423374b424e99ebd8210b575c02a309617a32eb9aa2cda1125ec8a4006126b7",
     "commands/Administration/unarchivethread.js": "0423f2ba50909b96f2b46b6f472dba142f1da273a0f8c90c50fe5f5b89327d92",
-    "commands/Administration/unban.js": "483d2d80ec09f8bbf4bcb688c82b2d92368d29ca364088fa9871707e887afafb",
+    "commands/Administration/unban.js": "c878f47104d6719d9393eb8abd1bdd7a8588614337f742dbbd2d9344bf35cf7c",
     "commands/Administration/unlockchannel.js": "c803beeb78448fb5e5cbc3df5af007d2ae49ea0337912071c69508affe230aff",
     "commands/Administration/unlockthread.js": "8e39f11a3c622d4711499ac9a44d34fcebdf2f21e1719af76701803814a91fa3",
     "commands/Administration/unmute.js": "45337352406b1876e8be995661af72f796722afe5d28b67664b87f681901fc18",
@@ -687,7 +687,7 @@
     "handlers/membership-settings.js": "4596c5cbfc660d5195d611147ecbbfaa9c28c1c1184350a05e28a44cee912de6",
     "handlers/membership-title.js": "e2412c75b687a031493431f6f29c9b9e004879729c096a4db9ab896d942b8387",
     "handlers/meme-service.js": "c910cb659d62ea0aabf097666afecf42070920c9bb2439e328d50fea213a715c",
-    "handlers/moderation/action.js": "f9572f0c804ac3e8e3d1c7b8fe2a18b1df4746aeb12e3319701407b4491b5a70",
+    "handlers/moderation/action.js": "85748e2593246cd226ad60cfe2979fc814484b0975b76a6659382212cfe41786",
     "handlers/moderation/cases.js": "55f3593431f534a6cec2b04e93b8bda451a4f4aafec1f0431b3f98210dffa367",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
@@ -925,7 +925,7 @@
     "slashCommands/Moderation/purge.js": "ea4ff3c0532ac9a6833ec496e78ebaf27b09a57719cc36f5eb958f2bb0b23046",
     "slashCommands/Moderation/slowmode.js": "669e453971ff2da04d140bd721140ebe23d8922988318375ce962d45ddacb12d",
     "slashCommands/Moderation/timeout.js": "6a98395fd4d9dfc05a7b8d7a2057357714020f75eface264c1c39d8e9d5e5609",
-    "slashCommands/Moderation/unban.js": "736be2fe036dc6c0cf7105c2461f39b27088a4abcea4543aec47fa4ffa964e25",
+    "slashCommands/Moderation/unban.js": "1b243ca9498deb2b2ffa0f994b27dc6239e6600d21075f1959806745cba8be61",
     "slashCommands/Moderation/unwarn.js": "61810496c2f962617d1fd71e8c83b51026e0132bc36a8ae664d1d1f64932501f",
     "slashCommands/Moderation/vdeafen.js": "f057443f95b46c1a9ca4c8ea72b72e3dbdfe9f0fdd20a9f543730f3350ac10a3",
     "slashCommands/Moderation/vkick.js": "5bb39418729b0b7bb082f0218bb1965f1dcf78b85a359807e2e66ebfeab2efff",
@@ -979,8 +979,8 @@
     "slashCommands/chat.js": "67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931",
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
     "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
-    "locales/es.json": "59bee915096044766345b086444f6199e881dbfae6779737fd6388f523313bef",
-    "locales/en.json": "53b15d11391f382f92e047461eb33c19c814c6003f605f61940a18179f5b6dff",
+    "locales/es.json": "67d7a6accc4b929e22a782f389a44e02af9095bd8ec1de70b95ef368ccef4728",
+    "locales/en.json": "feb441c6032bcd5cf44936541ce27f9c57d143726b417e3c938e5b05a37c9e3d",
     "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b"
   },
@@ -19820,32 +19820,8 @@
           "line": 16
         },
         {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
           "call": "client.getFooter",
           "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 36
-        },
-        {
-          "call": "client.getFooter",
-          "line": 50
-        },
-        {
-          "call": "client.getFooter",
-          "line": 62
-        },
-        {
-          "call": "client.getFooter",
-          "line": 73
-        },
-        {
-          "call": "client.getFooter",
-          "line": 85
         }
       ],
       "storeReferences": [

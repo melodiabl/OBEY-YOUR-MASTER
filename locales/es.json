@@ -153,7 +153,14 @@
     "timeoutDm": "Se aplicó una suspensión temporal en {server}.",
     "reason": "Motivo",
     "user": "Usuario",
-    "case": "Caso"
+    "case": "Caso",
+    "invalidUserId": "Indica un ID de usuario numérico válido.",
+    "notBanned": "Ese usuario no está baneado en este servidor.",
+    "unbanLookupFailed": "No pude comprobar el bloqueo en Discord. No se ha enviado el desbaneo.",
+    "accessUnconfirmed": "No pude confirmar los permisos actuales. No se ha enviado el desbaneo.",
+    "stopping": "El bot se está reiniciando. Vuelve a intentarlo cuando esté disponible.",
+    "unbanDone": "Usuario desbaneado",
+    "unbanRecordFailed": "Discord confirmó el desbaneo, pero la actualización del historial no está confirmada. Revisa el registro; no repitas la acción solo por este aviso."
   },
   "modules": {
     "music": {

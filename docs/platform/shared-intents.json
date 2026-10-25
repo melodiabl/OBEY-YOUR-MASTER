@@ -600,15 +600,59 @@
       "recovery": "no automatic replay after restart; explicit retry filters current cached membership after successful roster fetch, but interrupted batch has no persisted checkpoint",
       "evidence": "evidence/p0-bulk-roles-20261025.json",
       "remaining": "P2 existing durable jobs/Redis integration, fresh grants/hierarchy revalidation during work, cross-process coordination, per-operation receipts and log routing migration; authenticated Discord walkthrough pending"
+    },
+    {
+      "id": "moderation.unban",
+      "commands": [
+        "prefix:unban",
+        "slash:moderation.unban"
+      ],
+      "routes": [],
+      "interactions": [],
+      "service": "handlers/moderation/action.js#unbanUser and #unbanReply",
+      "store": "Discord ban status is effect authority; existing ModerationSchema active ban records are updated only after confirmed removal",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member from Gateway identity; force-fetched after ban lookup before mutation",
+      "permissions": {
+        "prefix": "Administrator, preserving existing dispatcher policy",
+        "slash": "BanMembers, preserving existing metadata policy",
+        "bot": "force-fetched bot must hold BanMembers"
+      },
+      "permissionDifference": "Deliberately retain narrower Administrator prefix policy; no new grants or moderation web endpoint",
+      "parameters": {
+        "userId": "17–20 digit string",
+        "reason": "prefix localized default; optional slash reason bounded to 512 UTF-16 code units and well-formed Unicode"
+      },
+      "confirmation": "explicit authorized invocation; slash private defer before external work; success only after awaited Discord unban",
+      "result": "confirmed Discord effect remains success with separate warning for failed, unacknowledged or timed-out history update",
+      "errors": {
+        "invalidId": "localized invalid ID before external work",
+        "access": "deny if fresh actor/bot lookup fails or permission is absent",
+        "lookup": "only Discord code 10026 maps to not banned; other failures remain unconfirmed",
+        "discord": "existing localized action-failed/unconfirmed outcome; no automatic retry",
+        "storage": "five-second confirmation budget; failure does not replay Discord"
+      },
+      "cooldown": "existing prefix/slash dispatcher defaults; no new throttles",
+      "idempotency": "fresh ban lookup avoids a known absent ban; no durable receipt or cross-action guild lease",
+      "effects": [
+        "one awaited Discord unban request",
+        "conditional updateMany scoped by guild, user, active ban and creation-time cutoff (including legacy records without createdAt)",
+        "reply with mention parsing disabled; no DMs or adminlog changes"
+      ],
+      "i18n": "shared es/en moderation catalog with existing Spanish fallback for other loaded languages",
+      "material": "native Discord embeds; prefix footer preserved, slash acknowledgement private",
+      "recovery": "timed-out database write may still finish later; creation cutoff excludes later timestamped bans; user is told to check history instead of repeating a confirmed action",
+      "evidence": "evidence/p0-unban-20261025.json",
+      "remaining": "P2 durable receipts, strict ban/unban coordination, channel audience revalidation, case history provenance and authenticated Discord walkthrough; remaining sanctions unchanged"
     }
   ],
   "coverage": {
-    "reviewedGroups": 22,
-    "commandEntriesReviewed": 103,
+    "reviewedGroups": 23,
+    "commandEntriesReviewed": 105,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 572,
+    "remainingCommandEntries": 570,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

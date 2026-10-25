@@ -4,10 +4,13 @@ const {nextCaseId}=require('./cases')
 const {registry}=require('../assets/registry')
 const {t,localeFor}=require('../i18n')
 const permissions={ban:PermissionFlagsBits.BanMembers,kick:PermissionFlagsBits.KickMembers,timeout:PermissionFlagsBits.ModerateMembers}
-async function notify(target,payload,timeoutMs=5000) {
+async function settleWithin(work,timeoutMs=5000) {
  let timer
- try {return await Promise.race([Promise.resolve().then(()=>target.send(payload)).then(()=>true,()=>false),new Promise(resolve=>{timer=setTimeout(()=>resolve(null),timeoutMs)})])}
+ try {return await Promise.race([Promise.resolve().then(work).then(()=>true,()=>false),new Promise(resolve=>{timer=setTimeout(()=>resolve(null),timeoutMs)})])}
  finally{clearTimeout(timer)}
+}
+function notify(target,payload,timeoutMs=5000) {
+ return settleWithin(()=>target.send(payload),timeoutMs)
 }
 async function runModeration(client,interaction,action,options={},dependencies={}) {
  const model=dependencies.model||Moderation,allocate=dependencies.allocate||nextCaseId
@@ -52,4 +55,39 @@ async function runModeration(client,interaction,action,options={},dependencies={
  if(notes.length)embed.setDescription(notes.join('\n'))
  return interaction.editReply({embeds:[embed],allowedMentions:{parse:[]}})
 }
-module.exports={runModeration,notify}
+// Prefix retains Administrator; slash retains BanMembers. Refresh both actors before mutation.
+async function unbanUser(client,{guild,actorId,userId,actorPermission,reason},dependencies={}) {
+ const validId=value=>typeof value==='string'&&/^\d{17,20}$/.test(value)
+ if(!validId(userId))return {status:'invalidUserId'}
+ if(!validId(guild?.id)||!validId(actorId)||![PermissionFlagsBits.Administrator,PermissionFlagsBits.BanMembers].includes(actorPermission))return {status:'permission'}
+ if(client._shuttingDown)return {status:'stopping'}
+ let lookupError=null
+ try {await guild.bans.fetch({user:userId,force:true})}catch(error){lookupError=error}
+ let actor,bot
+ try {
+  [actor,bot]=await Promise.all([guild.members.fetch({user:actorId,force:true}),guild.members.fetchMe({force:true})])
+ }catch{return {status:'accessUnconfirmed'}}
+ if(!actor?.permissions?.has(actorPermission))return {status:'permission'}
+ if(!bot?.permissions?.has(PermissionFlagsBits.BanMembers))return {status:'botPermission'}
+ if(lookupError)return {status:lookupError.code===10026?'notBanned':'unbanLookupFailed'}
+ if(client._shuttingDown)return {status:'stopping'}
+ const boundedReason=typeof reason==='string'?reason.slice(0,512).toWellFormed():''
+ const historyCutoff=new Date()
+ try {await guild.members.unban(userId,boundedReason)}catch{return {status:'actionFailed'}}
+ const model=dependencies.model||Moderation
+ const recorded=await settleWithin(async()=>{
+  const result=await model.updateMany({guildId:guild.id,userId,action:'ban',active:true,$or:[{createdAt:{$lte:historyCutoff}},{createdAt:{$exists:false}}]},{$set:{active:false}})
+  if(result?.acknowledged!==true)throw new Error('Unconfirmed moderation write')
+ },dependencies.recordTimeoutMs??5000)
+ return {status:'unbanned',userId,reason:boundedReason,recordFailed:recorded!==true}
+}
+function unbanReply(result,locale,{successColor=0x22C55E,errorColor=0xED4245}={}) {
+ const success=result.status==='unbanned'
+ const embed=new EmbedBuilder().setColor(success?successColor:errorColor)
+ if(success){
+  embed.setTitle(t(locale,'moderation.unbanDone')).addFields({name:t(locale,'moderation.user'),value:result.userId},{name:t(locale,'moderation.reason'),value:result.reason||t(locale,'moderation.noReason')})
+  if(result.recordFailed)embed.setDescription(t(locale,'moderation.unbanRecordFailed'))
+ }else embed.setDescription(t(locale,'moderation.'+result.status))
+ return {embeds:[embed],allowedMentions:{parse:[]}}
+}
+module.exports={runModeration,notify,unbanUser,unbanReply}
