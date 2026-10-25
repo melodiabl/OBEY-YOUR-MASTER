@@ -36,9 +36,6 @@ module.exports = {
                         cmdrole.push(` | <@&${r}>`);
                     } else if (message.guild.members.cache.get(r)) {
                         cmdrole.push(` | <@${r}>`);
-                    } else {
-                        //console.log(r)
-                        client.settings.remove(message.guild.id, r, `cmdadminroles.removerole`);
                     }
                 }
             }
@@ -113,7 +110,7 @@ module.exports = {
                     ],
                 });
             var ge = false;
-            member.roles.remove(role.id).catch(e => {
+            await member.roles.remove(role.id).catch(e => {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 ge = e;
             });

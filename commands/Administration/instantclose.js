@@ -48,14 +48,6 @@ module.exports = {
                         cmdrole.push(` | <@&${r}>`);
                     } else if (message.guild.members.cache.get(r)) {
                         cmdrole.push(` | <@${r}>`);
-                    } else {
-                        //console.log(r)
-                        try {
-                            client.settings.remove(message.guild.id, r, `cmdadminroles.ticket`);
-                        } catch {}
-                        try {
-                            client.settings.remove(message.guild.id, r, `cmdadminroles.close`);
-                        } catch {}
                     }
                 }
             }

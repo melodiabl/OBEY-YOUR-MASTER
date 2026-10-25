@@ -1,0 +1,13 @@
+# P0 · roles de Administración · 25/10/2026
+
+`addrole` y `removerole` esperan ahora el resultado de Discord antes de confirmar o registrar éxito. Una respuesta rechazada produce el mensaje de error existente. Antes, ambos comandos continuaban mientras la petición seguía pendiente y podían anunciar un cambio que había fallado. [Evidencia](evidence/p0-administration-roles-20261025.json).
+
+Se eliminaron además 66 escrituras automáticas de permisos `cmdadminroles.*` en 63 archivos de Administración. No encontrar un rol o miembro en caché no demuestra que el permiso configurado deba borrarse; una invocación incluso denegada podía eliminarlo. La eliminación sigue correspondiendo a la configuración explícita. Se mantienen las condiciones de autorización, jerarquía, nombres, aliases y mensajes. Esto previene nuevas eliminaciones, sin reconstruir concesiones ya perdidas.
+
+La reproducción previa obtuvo seis fallos entre diez casos: confirmación anticipada y falso éxito por rechazo en ambos comandos, eliminación de permisos ante una consulta denegada e invariante estática del directorio. Después pasan los diez y los 25 tests originales, en el runtime actual sin red y con los archivos candidatos montados de solo lectura. Los dobles de Discord usan colecciones, permisos y embeds reales de la biblioteca; ninguna prueba asigna roles ni escribe datos reales. La revisión de alcance confirma 63 archivos con sintaxis válida y solo dos sentencias modificadas para añadir `await`, además de las ramas de eliminación retiradas.
+
+El inventario actualiza hashes y posiciones de llamadas. Se incorpora únicamente la intención revisada de añadir/quitar un rol individual: 21 grupos, 95 entradas y 21 rutas; quedan 580 entradas y 74 rutas. No hay equivalente actual de esta mutación en slash o HTTP; `autorole` configura otra función y `roleinfo` es una consulta. No se considera revisado todo Administración por haber retirado un defecto repetido.
+
+La arquitectura continúa siendo legacy: resolución de miembros/roles desde caché, política inline, comparación numérica de jerarquía, ausencia de recibo duradero y log administrativo antiguo. La futura capa de dominio debe conciliar estos puntos y los desenlaces de red inciertos. El siguiente bloque P0 son los ocho comandos de roles masivos; restan 70 entradas de Administración. Backups, historial de moderación, permisos de canales, tickets e invitaciones conservan sus revisiones pendientes. G01/G02 y el recorrido real de Discord siguen abiertos.
+
+Estado de entrega: comprobado en aislamiento; despliegue pendiente de construcción y validación de la imagen final. Los verificadores temporales se retirarán al conservar la evidencia.

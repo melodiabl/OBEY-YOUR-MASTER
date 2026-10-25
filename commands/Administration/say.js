@@ -24,9 +24,6 @@ module.exports = {
                         cmdrole.push(` | <@&${r}>`);
                     } else if (message.guild.members.cache.get(r)) {
                         cmdrole.push(` | <@${r}>`);
-                    } else {
-                        //console.log(r)
-                        client.settings.remove(message.guild.id, r, `cmdadminroles.say`);
                     }
                 }
             }

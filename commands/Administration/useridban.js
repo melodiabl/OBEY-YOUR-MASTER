@@ -38,8 +38,6 @@ module.exports = {
                         cmdrole.push(` | <@&${r}>`);
                     } else if (message.guild.members.cache.get(r)) {
                         cmdrole.push(` | <@${r}>`);
-                    } else {
-                        client.settings.remove(message.guild.id, r, `cmdadminroles.useridban`);
                     }
                 }
             }

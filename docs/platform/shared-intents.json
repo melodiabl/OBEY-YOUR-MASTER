@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-24",
+  "date": "2026-10-25",
   "phase": "P0",
   "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
   "inventory": "operation-ownership.json",
@@ -511,15 +511,55 @@
       "recovery": "existing form conflict, blocked-state and uncertain-publication handling",
       "evidence": "evidence/p0-setup-block-20261024.json",
       "remaining": "P2 authenticated walkthrough of each form; no resources/messages created in this review; slash/web parity is not claimed"
+    },
+    {
+      "id": "administration.memberRole.change",
+      "commands": [
+        "prefix:addrole",
+        "prefix:removerole"
+      ],
+      "routes": [],
+      "interactions": [],
+      "service": "commands/Administration/addrole.js#run and removerole.js#run (legacy inline orchestration)",
+      "store": "Discord member roles; client.settings supplies existing role/user grants and adminlog destination",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member authenticated by prefix Gateway dispatcher",
+      "permissions": {
+        "discord": "Bot ManageRoles; actor Administrator, guild owner, configured bot owner, adminroles or command-specific role/user grant; strict existing numeric actor/target and actor/role hierarchy"
+      },
+      "permissionDifference": "No equivalent member-role mutation in current slash or HTTP inventory; autorole is separate configuration and roleinfo is a read",
+      "parameters": {
+        "member": "same-guild mention or cached member ID",
+        "role": "same-guild mention or cached role ID"
+      },
+      "confirmation": "authorized command invocation; success only after awaited Discord API resolution",
+      "result": "rejected Discord role mutation returns existing error embed without a success reply",
+      "errors": {
+        "access": "existing localized denial before mutation",
+        "resource": "existing missing member/role response",
+        "discord": "existing failure response after awaited rejection"
+      },
+      "cooldown": "4 seconds in existing prefix dispatcher",
+      "idempotency": "existing cached role presence check; no durable operation receipt and no fresh REST preflight added",
+      "effects": [
+        "one awaited Discord member role add/remove",
+        "existing success reply and optional legacy adminlog only after API resolution",
+        "ordinary authorization no longer deletes configured command grants for cache misses"
+      ],
+      "i18n": "existing loaded command dictionaries; no text changes",
+      "material": "existing native Discord embeds",
+      "recovery": "Discord rejection surfaces as failure; uncertain network outcomes still require checking actual membership",
+      "evidence": "evidence/p0-administration-roles-20261025.json",
+      "remaining": "P2 canonical role service, fresh resource/hierarchy checks, durable idempotency and migrated log routing; real Discord walkthrough not executed"
     }
   ],
   "coverage": {
-    "reviewedGroups": 20,
-    "commandEntriesReviewed": 93,
+    "reviewedGroups": 21,
+    "commandEntriesReviewed": 95,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 582,
+    "remainingCommandEntries": 580,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
