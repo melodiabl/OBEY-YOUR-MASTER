@@ -44,7 +44,7 @@
     "commands/Administration/instantdelete.js": "585b3a1a957361a445cb79d1690747a0015393843cbcfef0da13eefe4690888b",
     "commands/Administration/jointhread.js": "58c12721b587b388bc1be50c339ec2caeab2afb48b95b309e9ae383665e259ae",
     "commands/Administration/jointhreads.js": "7c861f863a5124e7a9c465217340dff3ee6293674b68b963f5612ee7d0ccff0c",
-    "commands/Administration/kick.js": "304fa3318e227a8924e415bf1bae8e2384fe858afeedc129dc5d859c203958de",
+    "commands/Administration/kick.js": "c82a7b0c414610161ef6304a5b72d439a43a8a8cb726772a64b2d283c5d4f146",
     "commands/Administration/leavethread.js": "2abee87ce06fbcea65fa76cb5144ceffcd71402187494e375ad2a5c7d845c559",
     "commands/Administration/listbackups.js": "7206fe3f7bad9c5346e5ca8b7cbb18cb306e85e0b06c289a109ed7ae289f4e8c",
     "commands/Administration/listbans.js": "3d8c9b49cec930c523564b5500dcd7d3f786aa756b7e52fe7f59b21f3f89fd5f",
@@ -63,7 +63,7 @@
     "commands/Administration/removerolefromeveryone.js": "1866fa65934df687fe82a1126d28455ef23775f79819e8e7b133a76f2cad1107",
     "commands/Administration/removerolefromhumans.js": "0e0944b43d9e6971b71726c2e39ed32242f97b3212be10da8f3092957ad7dc6e",
     "commands/Administration/removerolefromrole.js": "abf8c80e4b8133e97f9c41fdafd63897ee9c42ca7c69ec1da26764a08c777de6",
-    "commands/Administration/removetimeout.js": "2a5cd21daccc208cb02a530cacbc7f49dd5a0c250ca642b79cbbe146ad6b9404",
+    "commands/Administration/removetimeout.js": "4addf73901b4a0f96482226c4f1b02502e04a6c48a6e1e9d5b0132d4d2a7312d",
     "commands/Administration/report.js": "8a676320660f9d1632e2d91368a0661fa1e3bb56436a2c7877204dcbc2bddb01",
     "commands/Administration/say.js": "75f1316d3cead613036ab1cf84b6dc0b013a7722a28954de7c062591c1b59495",
     "commands/Administration/setautoarchiveduration.js": "a69758e2e5ad57ff16633a3e69ac0db2e5d3a60001eaac86fa9cfea788240172",
@@ -72,7 +72,7 @@
     "commands/Administration/suggest.js": "44cbd89c9d0008e512da0064ac2f879674ba840b5f3b0e7dbc8bf0a3c409f2cf",
     "commands/Administration/sync-invites.js": "90f8359435137ce7304461a9f4feb645b196f6e20dc556ee1858ed683dff172b",
     "commands/Administration/tempmute.js": "d6eafa25c1e38b72719314ba8eb2b8c52b7317befffa0d505404e062637aa909",
-    "commands/Administration/timeout.js": "a423374b424e99ebd8210b575c02a309617a32eb9aa2cda1125ec8a4006126b7",
+    "commands/Administration/timeout.js": "a7605b553f49891e032ddc6aabbc64c6ad72f4ac6fb00595a863193500dabcbd",
     "commands/Administration/unarchivethread.js": "0423f2ba50909b96f2b46b6f472dba142f1da273a0f8c90c50fe5f5b89327d92",
     "commands/Administration/unban.js": "c878f47104d6719d9393eb8abd1bdd7a8588614337f742dbbd2d9344bf35cf7c",
     "commands/Administration/unlockchannel.js": "c803beeb78448fb5e5cbc3df5af007d2ae49ea0337912071c69508affe230aff",
@@ -687,7 +687,7 @@
     "handlers/membership-settings.js": "4596c5cbfc660d5195d611147ecbbfaa9c28c1c1184350a05e28a44cee912de6",
     "handlers/membership-title.js": "e2412c75b687a031493431f6f29c9b9e004879729c096a4db9ab896d942b8387",
     "handlers/meme-service.js": "c910cb659d62ea0aabf097666afecf42070920c9bb2439e328d50fea213a715c",
-    "handlers/moderation/action.js": "a5a95869ab4932c4b543ee6ad79eb8a71cf8fb4311d473048b096b933ae97c19",
+    "handlers/moderation/action.js": "6a281bae93c1b87a5e14af2f21da633d6d353ecfc7051ab357d12f203c547ad0",
     "handlers/moderation/cases.js": "55f3593431f534a6cec2b04e93b8bda451a4f4aafec1f0431b3f98210dffa367",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
@@ -979,11 +979,13 @@
     "slashCommands/chat.js": "67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931",
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
     "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
-    "locales/es.json": "7200686bca525793b3199cf773441570faebb034cdcba552b85410244ce66683",
-    "locales/en.json": "c0783a3eced9947841b0e656ce61544cb45e831c334b63af262d384e9b5a3f30",
+    "locales/es.json": "293ba91493f1b903367477427f7526469a05aec336afcae934d2143987e8bf26",
+    "locales/en.json": "ca7f4dfeecdb675bbc04a7ade8e8aa5d49b142abe4afbae0b57db9b77611a8c7",
     "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "handlers/moderation/ban.js": "2237b78e4ff51b2065a451058663726fce5141b81101c6c4a29ec3a3755dc227"
+    "handlers/moderation/ban.js": "dc8927b9a012572cb2e25d9040f476d05e27277819b278ff1c6fbac5db574a69",
+    "handlers/moderation/member-access.js": "ef0c019afcf0b68560cca7ad6d7bb8d4f41ec7e0468efb1d11c90e46977233b9",
+    "handlers/moderation/member-actions.js": "2ec2949d1f58e5730335d29bda24d8d91c4efcd3c563b9f319a918edbaa66e7c"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -10571,103 +10573,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/kick.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.getFooter",
-          "line": 23
-        },
-        {
-          "call": "client.settings.get",
-          "line": 27
-        },
-        {
-          "call": "client.settings.get",
-          "line": 28
-        },
-        {
-          "call": "client.getFooter",
-          "line": 51
-        },
-        {
-          "call": "client.getFooter",
-          "line": 66
-        },
-        {
-          "call": "client.getFooter",
-          "line": 84
-        },
-        {
-          "call": "client.getFooter",
-          "line": 94
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 110
-        },
-        {
-          "call": "client.getFooter",
-          "line": 113
-        },
-        {
-          "call": "client.getFooter",
-          "line": 125
-        },
-        {
-          "call": "client.stats.push",
-          "line": 137
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 147
-        },
-        {
-          "call": "client.getFooter",
-          "line": 150
-        },
-        {
-          "call": "client.settings.get",
-          "line": 155
-        },
-        {
-          "call": "client.settings.get",
-          "line": 158
-        },
-        {
-          "call": "client.settings.set",
-          "line": 160
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 171
-        },
-        {
-          "call": "client.getFooter",
-          "line": 174
-        },
-        {
-          "call": "client.getFooter",
-          "line": 182
-        },
-        {
-          "call": "client.getFooter",
-          "line": 200
-        },
-        {
-          "call": "client.getFooter",
-          "line": 212
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/kill.js": {
       "kind": "current-command-adapter",
@@ -15146,99 +15053,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/removetimeout.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.getFooter",
-          "line": 46
-        },
-        {
-          "call": "client.getFooter",
-          "line": 63
-        },
-        {
-          "call": "client.getFooter",
-          "line": 82
-        },
-        {
-          "call": "client.getFooter",
-          "line": 94
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 111
-        },
-        {
-          "call": "client.getFooter",
-          "line": 114
-        },
-        {
-          "call": "client.getFooter",
-          "line": 129
-        },
-        {
-          "call": "client.stats.push",
-          "line": 138
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 149
-        },
-        {
-          "call": "client.getFooter",
-          "line": 152
-        },
-        {
-          "call": "client.settings.get",
-          "line": 161
-        },
-        {
-          "call": "client.settings.get",
-          "line": 164
-        },
-        {
-          "call": "client.settings.set",
-          "line": 166
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 176
-        },
-        {
-          "call": "client.getFooter",
-          "line": 179
-        },
-        {
-          "call": "client.getFooter",
-          "line": 185
-        },
-        {
-          "call": "client.getFooter",
-          "line": 203
-        },
-        {
-          "call": "client.getFooter",
-          "line": 215
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Music/removetrack.js": {
       "kind": "current-command-adapter",
@@ -19008,99 +18824,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/timeout.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.getFooter",
-          "line": 46
-        },
-        {
-          "call": "client.getFooter",
-          "line": 63
-        },
-        {
-          "call": "client.getFooter",
-          "line": 104
-        },
-        {
-          "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 133
-        },
-        {
-          "call": "client.getFooter",
-          "line": 136
-        },
-        {
-          "call": "client.getFooter",
-          "line": 156
-        },
-        {
-          "call": "client.stats.push",
-          "line": 165
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 176
-        },
-        {
-          "call": "client.getFooter",
-          "line": 179
-        },
-        {
-          "call": "client.settings.get",
-          "line": 193
-        },
-        {
-          "call": "client.settings.get",
-          "line": 196
-        },
-        {
-          "call": "client.settings.set",
-          "line": 198
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 208
-        },
-        {
-          "call": "client.getFooter",
-          "line": 211
-        },
-        {
-          "call": "client.getFooter",
-          "line": 217
-        },
-        {
-          "call": "client.getFooter",
-          "line": 235
-        },
-        {
-          "call": "client.getFooter",
-          "line": 247
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/MiniGames/tiny.js": {
       "kind": "current-command-adapter",
@@ -39392,11 +39117,11 @@
           "line": 1
         },
         {
-          "file": "handlers/moderation/action.js",
+          "file": "handlers/moderation/member-access.js",
           "line": 1
         },
         {
-          "file": "handlers/moderation/ban.js",
+          "file": "handlers/moderation/action.js",
           "line": 1
         }
       ]
@@ -39752,14 +39477,6 @@
           "line": 3
         },
         {
-          "file": "commands/Administration/removetimeout.js",
-          "line": 7
-        },
-        {
-          "file": "commands/Administration/timeout.js",
-          "line": 7
-        },
-        {
           "file": "slashCommands/Giveaway/start.js",
           "line": 3
         },
@@ -39810,6 +39527,10 @@
         {
           "file": "handlers/antispam.js",
           "line": 7
+        },
+        {
+          "file": "handlers/moderation/member-actions.js",
+          "line": 1
         }
       ]
     },

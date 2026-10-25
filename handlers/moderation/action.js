@@ -4,7 +4,7 @@ const {nextCaseId}=require('./cases')
 const {registry}=require('../assets/registry')
 const {t,localeFor}=require('../i18n')
 const {performBan}=require('./ban')
-const permissions={ban:PermissionFlagsBits.BanMembers,kick:PermissionFlagsBits.KickMembers,timeout:PermissionFlagsBits.ModerateMembers}
+const {performMemberAction,parseTimeout,formatTimeout}=require('./member-actions')
 async function settleWithin(work,timeoutMs=5000) {
  let timer
  try {return await Promise.race([Promise.resolve().then(work).then(()=>true,()=>false),new Promise(resolve=>{timer=setTimeout(()=>resolve(null),timeoutMs)})])}
@@ -15,7 +15,7 @@ function notify(target,payload,timeoutMs=5000) {
 }
 async function runModeration(client,interaction,action,options={},dependencies={}) {
  const model=dependencies.model||Moderation,allocate=dependencies.allocate||nextCaseId
- const locale=localeFor(client,interaction.guild.id),permission=permissions[action],target=interaction.options.getUser('usuario')
+ const locale=localeFor(client,interaction.guild.id),target=interaction.options.getUser('usuario')
  const reason=(interaction.options.getString('razon')||t(locale,'moderation.noReason')).slice(0,512).toWellFormed()
  const replyError=key=>interaction.editReply({content:`${registry.markup('icon.error')} ${t(locale,'moderation.'+key)}`,allowedMentions:{parse:[]}})
  await interaction.deferReply({ephemeral:true})
@@ -23,25 +23,10 @@ async function runModeration(client,interaction,action,options={},dependencies={
   const result=await performBan(client,{guild:interaction.guild,actorId:interaction.user.id,targetId:target?.id,reason,days:options.days??0,policy:'slash'})
   if(result.status!=='banned')return replyError(result.status)
  } else {
-  if(!permission||!interaction.member?.permissions?.has(permission))return replyError('permission')
-  if(!interaction.guild.members.me?.permissions?.has(permission))return replyError('botPermission')
-  if(!target||[interaction.user.id,client.user.id,interaction.guild.ownerId].includes(target.id))return replyError('protectedTarget')
-  const member=await interaction.guild.members.fetch(target.id).catch(()=>null)
-  if(!member)return replyError('missingMember')
-  const possible=action==='kick'?member.kickable:member.moderatable
-  if(!possible)return replyError('hierarchy')
-  if(interaction.guild.ownerId!==interaction.user.id) {
-   const actorRole=interaction.member.roles?.highest,targetRole=member.roles?.highest
-   if(!actorRole||!targetRole)return replyError('hierarchy')
-   const order=typeof targetRole.comparePositionTo==='function'?targetRole.comparePositionTo(actorRole):targetRole.position-actorRole.position
-   if(order>=0)return replyError('hierarchy')
-  }
-  if(action==='timeout'&&(!Number.isSafeInteger(options.duration)||options.duration<1||options.duration>7*86400000))return replyError('invalidDuration')
-  try {
-   if(action==='kick')await member.kick(reason)
-   else await member.timeout(options.duration,reason)
-  }catch{return replyError('actionFailed')}
+  const result=await performMemberAction(client,{guild:interaction.guild,actorId:interaction.user.id,targetId:target?.id,reason,duration:options.duration,policy:'slash',action})
+  if(result.status!=='applied')return replyError(result.status)
  }
+
  let caseId=null
  const recorded=await settleWithin(async()=>{
   caseId=await allocate(interaction.guild.id)
@@ -96,6 +81,47 @@ async function runPrefixBan(client,message,args,command) {
  embed.setFooter(require('../presentation/metadata').asFooter(client.getFooter(es)))
  return message.reply({embeds:[embed],allowedMentions:{parse:[]}})
 }
+function closeHistory(model,guildId,userId,action,cutoff,timeoutMs=5000) {
+ return settleWithin(async()=>{
+  const result=await model.updateMany({guildId,userId,action,active:true,$or:[{createdAt:{$lte:cutoff}},{createdAt:{$exists:false}}]},{$set:{active:false}})
+  if(result?.acknowledged!==true)throw new Error('Unconfirmed moderation write')
+ },timeoutMs)
+}
+async function runPrefixMemberAction(client,message,args,command) {
+ const locale=localeFor(client,message.guild.id),es=client.settings.get(message.guild.id,'embed')
+ const mention=typeof args[0]==='string'?/^<@!?(\d{17,20})>$/.exec(args[0]):null
+ const targetId=mention?mention[1]:args[0]
+ const reason=(command==='removetimeout'?'':args.slice(command==='timeout'?2:1).join(' '))||t(locale,'moderation.noReason')
+ const result=await performMemberAction(client,{guild:message.guild,actorId:message.author.id,targetId,policy:'prefix',command,action:command,reason,duration:command==='timeout'?parseTimeout(args[1]):undefined})
+ const success=result.status==='applied',key=command==='removetimeout'?'timeoutRemoved':command+'Done'
+ const embed=new EmbedBuilder().setColor(success?(es?.color??0xFFD36F):(es?.wrongcolor??0xED4245))
+ if(!success)embed.setDescription(t(locale,'moderation.'+result.status))
+ else {
+  embed.setTitle(t(locale,'moderation.'+key)).addFields({name:t(locale,'moderation.user'),value:targetId},{name:t(locale,'moderation.reason'),value:result.reason})
+  if(command==='timeout')embed.addFields({name:t(locale,'moderation.duration'),value:formatTimeout(result.duration,locale)})
+  const dmKey=command==='removetimeout'?'timeoutRemovedDm':command+'Dm'
+  const results=await Promise.all([
+   settleWithin(()=>client.stats.push(message.guild.id+message.author.id,Date.now(),command==='kick'?'kick':'mute')),
+   !result.user.bot?notify(result.user,{embeds:[new EmbedBuilder().setColor(0xF0B232).setTitle(t(locale,'moderation.'+dmKey,{server:message.guild.name})).setDescription(result.reason)],allowedMentions:{parse:[]}}):true,
+   settleWithin(async()=>{
+    const destination=client.settings.get(message.guild.id,'adminlog')
+    if(!destination||destination==='no')return
+    const channel=message.guild.channels.cache.get(destination)
+    if(!channel||typeof channel.send!=='function')throw new Error('Log destination unavailable')
+    await channel.send({embeds:[new EmbedBuilder().setColor(0xFFD36F).setTitle(t(locale,'moderation.'+key)).addFields({name:t(locale,'moderation.user'),value:targetId},{name:t(locale,'moderation.reason'),value:result.reason},{name:t(locale,'moderation.moderator'),value:message.author.id})],allowedMentions:{parse:[]}})
+   }),
+   command==='removetimeout'?closeHistory(Moderation,message.guild.id,targetId,'timeout',result.historyCutoff):true,
+  ])
+  const notes=[]
+  if(results[0]!==true)notes.push(t(locale,'moderation.memberStatsUnconfirmed'))
+  if(results[1]!==true)notes.push(t(locale,'moderation.dmUnconfirmed'))
+  if(results[2]!==true)notes.push(t(locale,'moderation.memberLogUnconfirmed'))
+  if(results[3]!==true)notes.push(t(locale,'moderation.timeoutHistoryUnconfirmed'))
+  if(notes.length)embed.setDescription(notes.join('\n'))
+ }
+ embed.setFooter(require('../presentation/metadata').asFooter(client.getFooter(es)))
+ return message.reply({embeds:[embed],allowedMentions:{parse:[]}})
+}
 // Prefix retains Administrator; slash retains BanMembers. Refresh both actors before mutation.
 async function unbanUser(client,{guild,actorId,userId,actorPermission,reason},dependencies={}) {
  const validId=value=>typeof value==='string'&&/^\d{17,20}$/.test(value)
@@ -116,10 +142,7 @@ async function unbanUser(client,{guild,actorId,userId,actorPermission,reason},de
  const historyCutoff=new Date()
  try {await guild.members.unban(userId,boundedReason)}catch{return {status:'actionFailed'}}
  const model=dependencies.model||Moderation
- const recorded=await settleWithin(async()=>{
-  const result=await model.updateMany({guildId:guild.id,userId,action:'ban',active:true,$or:[{createdAt:{$lte:historyCutoff}},{createdAt:{$exists:false}}]},{$set:{active:false}})
-  if(result?.acknowledged!==true)throw new Error('Unconfirmed moderation write')
- },dependencies.recordTimeoutMs??5000)
+ const recorded=await closeHistory(model,guild.id,userId,'ban',historyCutoff,dependencies.recordTimeoutMs??5000)
  return {status:'unbanned',userId,reason:boundedReason,recordFailed:recorded!==true}
 }
 function unbanReply(result,locale,{successColor=0x22C55E,errorColor=0xED4245}={}) {
@@ -131,4 +154,4 @@ function unbanReply(result,locale,{successColor=0x22C55E,errorColor=0xED4245}={}
  }else embed.setDescription(t(locale,'moderation.'+result.status))
  return {embeds:[embed],allowedMentions:{parse:[]}}
 }
-module.exports={runModeration,notify,unbanUser,unbanReply,runPrefixBan}
+module.exports={runModeration,notify,unbanUser,unbanReply,runPrefixBan,runPrefixMemberAction}

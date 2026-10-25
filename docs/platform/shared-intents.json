@@ -691,15 +691,143 @@
       "recovery": "bounded case write added to existing slash ban/kick/timeout flow; no automatic sanction replay on history/notification failure; delayed case persistence remains possible",
       "evidence": "evidence/p0-ban-20261025.json",
       "remaining": "P2 common prefix/slash moderation history, durable receipts/coordination and canonical log pipeline; authenticated Discord walkthrough; kick/timeout prefix adapters still pending"
+    },
+    {
+      "routes": [],
+      "interactions": [],
+      "service": "handlers/moderation/member-actions.js#performMemberAction and member-access.js#checkMemberAccess; existing action.js projection",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "Gateway identity; guild roles and actor/bot/target members refreshed before effect",
+      "permissions": {
+        "prefix": "Existing Administrator, guild/configured owner or adminroles/command-role/user grants; strict actor hierarchy",
+        "slash": "Existing native action permission with guild-owner hierarchy exception; privately deferred",
+        "bot": "KickMembers or ModerateMembers plus SDK kickable/moderatable/manageable capability"
+      },
+      "permissionDifference": "Do not grant prefix access from native action permission alone; retain configured command-specific grants",
+      "confirmation": "explicit invocation; await Discord before stats, DM, log or case work",
+      "errors": {
+        "access": "Fresh read failure, absent permission, protected target or uncertain SDK hierarchy denies mutation",
+        "lookup": "Only 10007 is known missing member; this family always requires a current member",
+        "discord": "Rejected effect never notifies or records success",
+        "ancillary": "Five-second confirmation budgets and separate warnings; no sanction retry"
+      },
+      "cooldown": "Existing dispatcher defaults and aliases",
+      "idempotency": "No durable receipt or strict cross-action lease; no automatic effect replay",
+      "effects": [
+        "one awaited native member mutation",
+        "existing source-specific stats, optional log, notification and case effects after Discord confirmation",
+        "native embeds, bounded well-formed reason and mention parsing disabled"
+      ],
+      "i18n": "es/en shared moderation catalogs with Spanish fallback; compound duration formatted in readable localized units",
+      "material": "existing native Discord embeds and prefix footer",
+      "recovery": "Late history/log/notification completion remains possible; confirmed Discord action is not retried due to an unconfirmed ancillary effect",
+      "evidence": "evidence/p0-member-actions-20261025.json",
+      "remaining": "P2 unified history, canonical log audience/routing, receipts and strict coordination; authenticated walkthrough pending",
+      "id": "moderation.kick",
+      "commands": [
+        "prefix:kick",
+        "slash:moderation.kick"
+      ],
+      "store": "Discord membership authoritative; prefix kick stats/adminlog and slash ModerationSchema case remain distinct",
+      "parameters": {
+        "target": "same-guild member mention/ID; forced REST lookup",
+        "reason": "string, bounded to 512 well-formed UTF-16 units"
+      },
+      "result": "SDK member.kick receives reason string; outcome confirmed before DM/case/log"
+    },
+    {
+      "routes": [],
+      "interactions": [],
+      "service": "handlers/moderation/member-actions.js#performMemberAction and member-access.js#checkMemberAccess; existing action.js projection",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "Gateway identity; guild roles and actor/bot/target members refreshed before effect",
+      "permissions": {
+        "prefix": "Existing Administrator, guild/configured owner or adminroles/command-role/user grants; strict actor hierarchy",
+        "slash": "Existing native action permission with guild-owner hierarchy exception; privately deferred",
+        "bot": "KickMembers or ModerateMembers plus SDK kickable/moderatable/manageable capability"
+      },
+      "permissionDifference": "Do not grant prefix access from native action permission alone; retain configured command-specific grants",
+      "confirmation": "explicit invocation; await Discord before stats, DM, log or case work",
+      "errors": {
+        "access": "Fresh read failure, absent permission, protected target or uncertain SDK hierarchy denies mutation",
+        "lookup": "Only 10007 is known missing member; this family always requires a current member",
+        "discord": "Rejected effect never notifies or records success",
+        "ancillary": "Five-second confirmation budgets and separate warnings; no sanction retry"
+      },
+      "cooldown": "Existing dispatcher defaults and aliases",
+      "idempotency": "No durable receipt or strict cross-action lease; no automatic effect replay",
+      "effects": [
+        "one awaited native member mutation",
+        "existing source-specific stats, optional log, notification and case effects after Discord confirmation",
+        "native embeds, bounded well-formed reason and mention parsing disabled"
+      ],
+      "i18n": "es/en shared moderation catalogs with Spanish fallback; compound duration formatted in readable localized units",
+      "material": "existing native Discord embeds and prefix footer",
+      "recovery": "Late history/log/notification completion remains possible; confirmed Discord action is not retried due to an unconfirmed ancillary effect",
+      "evidence": "evidence/p0-member-actions-20261025.json",
+      "remaining": "P2 unified history, canonical log audience/routing, receipts and strict coordination; authenticated walkthrough pending",
+      "id": "moderation.timeout",
+      "commands": [
+        "prefix:timeout",
+        "slash:moderation.timeout"
+      ],
+      "store": "Discord communication deadline authoritative; prefix mute counter/adminlog and slash ModerationSchema case remain distinct",
+      "parameters": {
+        "duration": "prefix positive compound ms expressions <=28 days with individually positive whole-millisecond parts; slash retains existing predefined choices <=7 days",
+        "state": "prefix rejects active timeout, permits expired stale deadline; slash retains replacement of active timeout"
+      },
+      "result": "SDK member.timeout receives validated milliseconds and bounded reason; no early success notification"
+    },
+    {
+      "routes": [],
+      "interactions": [],
+      "service": "handlers/moderation/member-actions.js#performMemberAction and member-access.js#checkMemberAccess; existing action.js projection",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "Gateway identity; guild roles and actor/bot/target members refreshed before effect",
+      "permissions": {
+        "prefix": "Existing Administrator, guild/configured owner or adminroles/command-role/user grants; strict actor hierarchy",
+        "slash": "Existing native action permission with guild-owner hierarchy exception; privately deferred",
+        "bot": "KickMembers or ModerateMembers plus SDK kickable/moderatable/manageable capability"
+      },
+      "permissionDifference": "Do not grant prefix access from native action permission alone; retain configured command-specific grants",
+      "confirmation": "explicit invocation; await Discord before stats, DM, log or case work",
+      "errors": {
+        "access": "Fresh read failure, absent permission, protected target or uncertain SDK hierarchy denies mutation",
+        "lookup": "Only 10007 is known missing member; this family always requires a current member",
+        "discord": "Rejected effect never notifies or records success",
+        "ancillary": "Five-second confirmation budgets and separate warnings; no sanction retry"
+      },
+      "cooldown": "Existing dispatcher defaults and aliases",
+      "idempotency": "No durable receipt or strict cross-action lease; no automatic effect replay",
+      "effects": [
+        "one awaited native member mutation",
+        "existing source-specific stats, optional log, notification and case effects after Discord confirmation",
+        "native embeds, bounded well-formed reason and mention parsing disabled"
+      ],
+      "i18n": "es/en shared moderation catalogs with Spanish fallback; compound duration formatted in readable localized units",
+      "material": "existing native Discord embeds and prefix footer",
+      "recovery": "Late history/log/notification completion remains possible; confirmed Discord action is not retried due to an unconfirmed ancillary effect",
+      "evidence": "evidence/p0-member-actions-20261025.json",
+      "remaining": "P2 unified history, canonical log audience/routing, receipts and strict coordination; authenticated walkthrough pending",
+      "id": "moderation.timeout.remove",
+      "commands": [
+        "prefix:removetimeout"
+      ],
+      "store": "Discord deadline authoritative; confirmed removal closes existing active timeout ModerationSchema rows for guild/user with creation cutoff plus legacy no-createdAt rows",
+      "parameters": {
+        "target": "same-guild current member; must have an active deadline",
+        "duration": "native null clears deadline; no new slash endpoint"
+      },
+      "result": "SDK null removal confirmed before history update; history failure remains a separate warning"
     }
   ],
   "coverage": {
-    "reviewedGroups": 24,
-    "commandEntriesReviewed": 109,
+    "reviewedGroups": 27,
+    "commandEntriesReviewed": 114,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 566,
+    "remainingCommandEntries": 561,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

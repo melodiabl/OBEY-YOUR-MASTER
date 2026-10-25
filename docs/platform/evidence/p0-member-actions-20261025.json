@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "verified_in_isolation_release_pending",
+  "scope": "Existing kick/timeout prefix+slash and prefix timeout removal, sharing member access with ban",
+  "baseline": {
+    "exitCode": 1,
+    "summary": [
+      "# tests 48",
+      "# pass 21",
+      "# fail 27",
+      "# cancelled 0",
+      "# skipped 0"
+    ],
+    "failed": [
+      "not ok 1 - prefix kick waits for Discord before notification or confirmation",
+      "not ok 2 - prefix kick denies fresh actor revocation",
+      "not ok 3 - prefix kick denies fresh bot revocation",
+      "not ok 5 - prefix kick does not trust cached target after lookup outage",
+      "not ok 6 - prefix kick never notifies or records a rejected sanction",
+      "not ok 7 - prefix timeout waits for Discord before notification or confirmation",
+      "not ok 8 - prefix timeout denies fresh actor revocation",
+      "not ok 9 - prefix timeout denies fresh bot revocation",
+      "not ok 11 - prefix timeout does not trust cached target after lookup outage",
+      "not ok 12 - prefix timeout never notifies or records a rejected sanction",
+      "not ok 13 - prefix removetimeout waits for Discord before notification or confirmation",
+      "not ok 14 - prefix removetimeout denies fresh actor revocation",
+      "not ok 15 - prefix removetimeout denies fresh bot revocation",
+      "not ok 17 - prefix removetimeout does not trust cached target after lookup outage",
+      "not ok 18 - prefix removetimeout never notifies or records a rejected sanction",
+      "not ok 20 - slash kick denies fresh actor revocation",
+      "not ok 21 - slash kick denies fresh bot revocation",
+      "not ok 26 - slash timeout denies fresh actor revocation",
+      "not ok 27 - slash timeout denies fresh bot revocation",
+      "not ok 39 - kick sends a reason string to the SDK",
+      "not ok 40 - remove timeout sends null to clear the deadline",
+      "not ok 41 - timeout rejects invalid duration -1h",
+      "not ok 42 - timeout rejects invalid duration 29d",
+      "not ok 43 - timeout rejects invalid duration 1h+-30min",
+      "not ok 44 - timeout rejects invalid duration 1h++1m",
+      "not ok 46 - timeout rejects invalid duration 1.5ms",
+      "not ok 48 - expired cached deadline does not block a fresh timeout"
+    ]
+  },
+  "verification": {
+    "baseImage": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd",
+    "tests": 122,
+    "originalTests": 25,
+    "temporaryCases": 97,
+    "pass": 122,
+    "fail": 0,
+    "skipped": 0,
+    "network": "none",
+    "realDiscordOrMongoActions": false,
+    "typesPassed": true,
+    "dependencyBoundariesPassed": true,
+    "audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "changes": {
+    "files": [
+      "commands/Administration/kick.js",
+      "commands/Administration/timeout.js",
+      "commands/Administration/removetimeout.js",
+      "handlers/moderation/ban.js",
+      "handlers/moderation/member-access.js",
+      "handlers/moderation/member-actions.js",
+      "handlers/moderation/action.js",
+      "locales/es.json",
+      "locales/en.json"
+    ]
+  },
+  "coverage": {
+    "reviewedGroups": 27,
+    "commandEntriesReviewed": 114,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 561,
+    "remainingHttpRoutes": 74
+  },
+  "acceptance": {
+    "globalG01G02": false,
+    "authenticatedDiscordWalkthrough": false,
+    "unifiedModerationHistory": false
+  },
+  "next": "P0 warning history, permissions and audience",
+  "limits": [
+    "No real sanction, timeout removal, DM, log or moderation case write performed in verification",
+    "Prefix and slash preserve distinct grants, duration/state policies and history sources; no new slash command",
+    "Native removal closes existing timeout records with a cutoff, without a durable receipt or strict concurrent operation lease",
+    "Timed-out ancillary writes may finish after the response; no automatic Discord effect retry"
+  ]
+}
