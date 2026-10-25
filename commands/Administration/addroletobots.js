@@ -4,7 +4,7 @@ const config = require(`${process.cwd()}/botconfig/config.json`);
 const ms = require(`ms`);
 var ee = require(`${process.cwd()}/botconfig/embed.json`);
 const emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
-const map = new Map();
+const { acquireRoleBatch } = require("../../handlers/role-batch-lock");
 const { EmbedBuilder, PermissionFlagsBits } = require(`discord.js`);
 const { databasing, delay } = require(`${process.cwd()}/handlers/functions`);
 module.exports = {
@@ -17,6 +17,7 @@ module.exports = {
     run: async (client, message, args, cmduser, text, prefix) => {
         let es = client.settings.get(message.guild.id, "embed");
         let ls = client.settings.get(message.guild.id, "language");
+        let releaseBatch;
         try {
             if (!message.guild.members.me.permissions.has([PermissionFlagsBits.ManageRoles]))
                 return message.reply({
@@ -56,7 +57,8 @@ module.exports = {
                             .setDescription(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable3"])),
                     ],
                 });
-            if (map.get(message.guild.id))
+            releaseBatch = acquireRoleBatch(client, message.guild.id);
+            if (!releaseBatch)
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()
@@ -87,7 +89,7 @@ module.exports = {
                             .setTitle(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable7"])),
                     ],
                 });
-            await message.guild.members.fetch().catch(() => {});
+            await message.guild.members.fetch();
             var members = message.guild.members.cache
                 .filter(member => !member.roles.cache.has(role.id) && member.user.bot)
                 .map(this_Code_is_by_Tomato_6966 => this_Code_is_by_Tomato_6966);
@@ -102,7 +104,7 @@ module.exports = {
                     ],
                 });
             let seconds = Number(members.length) * 1500;
-            message.reply({
+            await message.reply({
                 embeds: [
                     new EmbedBuilder()
                         .setColor(es.color)
@@ -121,8 +123,7 @@ module.exports = {
             if (client.settings.get(message.guild.id, `adminlog`) != "no") {
                 try {
                     var channel = message.guild.channels.cache.get(client.settings.get(message.guild.id, `adminlog`));
-                    if (!channel) return client.settings.set(message.guild.id, "no", `adminlog`);
-                    channel.send({
+                    if (channel) await channel.send({
                         embeds: [
                             new EmbedBuilder()
                                 .setColor(es.color)
@@ -156,27 +157,22 @@ module.exports = {
             var success = 0;
             var failed = 0;
             var counter = 0;
-            addroletomember(members[counter]);
-            map.set(message.guild.id, true);
-            async function addroletomember(member) {
-                if (counter == members.length) return send_finished();
+            for (const member of members) {
+                if (client._shuttingDown) throw new Error("The bot is restarting. This role operation has stopped; check the existing roles before retrying.");
                 counter++;
-                await member.roles
-                    .add(role.id)
-                    .then(async s => {
-                        success++;
-                        await delay(1500);
-                        addroletomember(members[counter]);
-                    })
-                    .catch(e => {
-                        failed++;
-                        addroletomember(members[counter]);
-                    });
+                try {
+                    await member.roles.add(role.id);
+                    success++;
+                } catch {
+                    failed++;
+                    continue;
+                }
+                await delay(1500);
             }
+            await send_finished();
 
             function send_finished() {
-                map.set(message.guild.id, false);
-                message.reply({
+                return message.reply({
                     content: `<@${message.author.id}>`,
                     embeds: [
                         new EmbedBuilder()
@@ -198,7 +194,6 @@ module.exports = {
                 });
             }
         } catch (e) {
-            map.set(message.guild.id, false);
             console.log(String(e.stack).grey.bgRed);
             return message.reply({
                 embeds: [
@@ -209,6 +204,8 @@ module.exports = {
                         .setDescription(eval(client.la[ls]["cmds"]["administration"]["addroletoeveryone"]["variable16"])),
                 ],
             });
+        } finally {
+            releaseBatch?.();
         }
     },
 };

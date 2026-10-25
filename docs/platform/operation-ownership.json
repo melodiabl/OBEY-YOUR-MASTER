@@ -11,10 +11,10 @@
   },
   "sourceHashes": {
     "commands/Administration/addrole.js": "ae836ae3423fbfc779e4f95569de4e8fb7daa107f4893b0d56d87b25e7c3e42f",
-    "commands/Administration/addroletobots.js": "3f7f43b08079b6c9ab77d4cfb0dee2ca0dab3be47ef528079e8e6d7e890160a2",
-    "commands/Administration/addroletoeveryone.js": "339632570b0526f2ee2fff89a4d3800099f2780f176ce5b978c0c8b8ed97a45e",
-    "commands/Administration/addroletohumans.js": "cc0f44afa62b0936b98c850bf5015e4330df6a0ee42bd0cf02566d12be2693a0",
-    "commands/Administration/addroletorole.js": "9948ee784838551701241a0d739918a8f232a41e7a2fcb2edf001fd47208582f",
+    "commands/Administration/addroletobots.js": "8a5666df4a7d2c9dae6bf195824a0b690188963a215355dcb8ee883b579dff02",
+    "commands/Administration/addroletoeveryone.js": "738ae51fdcb53e95e8c2b94c830c63f8a072fc1e6ca92d826aa5c184b8e8cfbc",
+    "commands/Administration/addroletohumans.js": "44c37eb3a3053768c90d6639da3786e99d7c33ec0248e8bc543f530d8751397d",
+    "commands/Administration/addroletorole.js": "22341f9e3f48a27e9aa18e242dd3c9fa1404274efe3a33a875be214d2ea4a12d",
     "commands/Administration/archivethread.js": "f6a246a82887c5cfa4bfb7864c586bc630f0876db0e42e7bae0a722e02520c9f",
     "commands/Administration/ban.js": "df15952298452660c6daf173fa92ec4877fb1b93ee3b5e76fafa07a35910bdf1",
     "commands/Administration/bans.js": "bbb36d9f4eab7446be3d32aaba607fff4656ac3947b43e6b963d093b98481532",
@@ -59,10 +59,10 @@
     "commands/Administration/react.js": "1c87c2fdd7fb4e3405c2ce43f135624007f8a85cd24921d4e7ed835f8f26cdc5",
     "commands/Administration/removeallwarns.js": "777ba29ed98021334d808096662df22fb55d61959517450c96c088ee086dcd17",
     "commands/Administration/removerole.js": "f1089c39775b8258229f35bcc257b1305856a6d3c0819be69b0fc8a56d7b85d3",
-    "commands/Administration/removerolefrombots.js": "110d1d9e0e2f70031cf69b95cbddd968ec4b8089c8132525eaeabf3c9b1bdc90",
-    "commands/Administration/removerolefromeveryone.js": "2579afee009300f3c776dbe8ec5fbe37e948f9149b8285968e1c710093fea179",
-    "commands/Administration/removerolefromhumans.js": "c4c092e9bb68bdc14d963ec809e13b9b3cbf3332a8432ab5fa4ab90b2faf8eee",
-    "commands/Administration/removerolefromrole.js": "4d036f0fc615c12005d82f459ab83d5dd2029e9da369fddbad6926305e2c7f99",
+    "commands/Administration/removerolefrombots.js": "49ea277325cc492ef4de51c4e6a7f24b16e034519ac752598c3c69141e7966b7",
+    "commands/Administration/removerolefromeveryone.js": "1866fa65934df687fe82a1126d28455ef23775f79819e8e7b133a76f2cad1107",
+    "commands/Administration/removerolefromhumans.js": "0e0944b43d9e6971b71726c2e39ed32242f97b3212be10da8f3092957ad7dc6e",
+    "commands/Administration/removerolefromrole.js": "abf8c80e4b8133e97f9c41fdafd63897ee9c42ca7c69ec1da26764a08c777de6",
     "commands/Administration/removetimeout.js": "2a5cd21daccc208cb02a530cacbc7f49dd5a0c250ca642b79cbbe146ad6b9404",
     "commands/Administration/report.js": "8a676320660f9d1632e2d91368a0661fa1e3bb56436a2c7877204dcbc2bddb01",
     "commands/Administration/say.js": "75f1316d3cead613036ab1cf84b6dc0b013a7722a28954de7c062591c1b59495",
@@ -980,7 +980,9 @@
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
     "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
     "locales/es.json": "59bee915096044766345b086444f6199e881dbfae6779737fd6388f523313bef",
-    "locales/en.json": "53b15d11391f382f92e047461eb33c19c814c6003f605f61940a18179f5b6dff"
+    "locales/en.json": "53b15d11391f382f92e047461eb33c19c814c6003f605f61940a18179f5b6dff",
+    "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
+    "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -2468,79 +2470,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 76
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 86
+          "line": 78
         },
         {
           "call": "client.getFooter",
-          "line": 99
+          "line": 88
+        },
+        {
+          "call": "client.getFooter",
+          "line": 101
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 113
+          "line": 115
         },
         {
           "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.settings.get",
-          "line": 121
+          "line": 118
         },
         {
           "call": "client.settings.get",
           "line": 123
         },
         {
-          "call": "client.settings.set",
-          "line": 124
+          "call": "client.settings.get",
+          "line": 125
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 134
+          "line": 135
         },
         {
           "call": "client.getFooter",
-          "line": 137
+          "line": 138
         },
         {
           "call": "client.getFooter",
-          "line": 145
+          "line": 146
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 189
+          "line": 185
         },
         {
           "call": "client.getFooter",
-          "line": 192
+          "line": 188
         },
         {
           "call": "client.getFooter",
-          "line": 207
+          "line": 202
         }
       ],
       "storeReferences": [
@@ -2562,79 +2560,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 27
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
+          "line": 28
         },
         {
           "call": "client.settings.get",
           "line": 32
         },
         {
-          "call": "client.getFooter",
-          "line": 55
+          "call": "client.settings.get",
+          "line": 33
         },
         {
           "call": "client.getFooter",
-          "line": 65
+          "line": 56
         },
         {
           "call": "client.getFooter",
-          "line": 77
+          "line": 67
         },
         {
           "call": "client.getFooter",
-          "line": 87
+          "line": 79
         },
         {
           "call": "client.getFooter",
-          "line": 100
+          "line": 89
+        },
+        {
+          "call": "client.getFooter",
+          "line": 102
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 114
+          "line": 116
         },
         {
           "call": "client.getFooter",
-          "line": 117
-        },
-        {
-          "call": "client.settings.get",
-          "line": 122
+          "line": 119
         },
         {
           "call": "client.settings.get",
           "line": 124
         },
         {
-          "call": "client.settings.set",
-          "line": 125
+          "call": "client.settings.get",
+          "line": 126
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 135
+          "line": 136
         },
         {
           "call": "client.getFooter",
-          "line": 138
+          "line": 139
         },
         {
           "call": "client.getFooter",
-          "line": 146
+          "line": 147
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 190
+          "line": 186
         },
         {
           "call": "client.getFooter",
-          "line": 193
+          "line": 189
         },
         {
           "call": "client.getFooter",
-          "line": 208
+          "line": 203
         }
       ],
       "storeReferences": [
@@ -2656,79 +2650,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 76
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 86
+          "line": 78
         },
         {
           "call": "client.getFooter",
-          "line": 99
+          "line": 88
+        },
+        {
+          "call": "client.getFooter",
+          "line": 101
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 113
+          "line": 115
         },
         {
           "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.settings.get",
-          "line": 121
+          "line": 118
         },
         {
           "call": "client.settings.get",
           "line": 123
         },
         {
-          "call": "client.settings.set",
-          "line": 124
+          "call": "client.settings.get",
+          "line": 125
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 134
+          "line": 135
         },
         {
           "call": "client.getFooter",
-          "line": 137
+          "line": 138
         },
         {
           "call": "client.getFooter",
-          "line": 145
+          "line": 146
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 189
+          "line": 185
         },
         {
           "call": "client.getFooter",
-          "line": 192
+          "line": 188
         },
         {
           "call": "client.getFooter",
-          "line": 207
+          "line": 202
         }
       ],
       "storeReferences": [
@@ -2750,83 +2740,79 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 78
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 88
+          "line": 80
         },
         {
           "call": "client.getFooter",
-          "line": 98
+          "line": 90
         },
         {
           "call": "client.getFooter",
-          "line": 111
+          "line": 100
+        },
+        {
+          "call": "client.getFooter",
+          "line": 113
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 125
+          "line": 127
         },
         {
           "call": "client.getFooter",
-          "line": 128
-        },
-        {
-          "call": "client.settings.get",
-          "line": 133
+          "line": 130
         },
         {
           "call": "client.settings.get",
           "line": 135
         },
         {
-          "call": "client.settings.set",
-          "line": 136
+          "call": "client.settings.get",
+          "line": 137
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 146
+          "line": 147
         },
         {
           "call": "client.getFooter",
-          "line": 149
+          "line": 150
         },
         {
           "call": "client.getFooter",
-          "line": 157
+          "line": 158
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 201
+          "line": 197
         },
         {
           "call": "client.getFooter",
-          "line": 204
+          "line": 200
         },
         {
           "call": "client.getFooter",
-          "line": 219
+          "line": 214
         }
       ],
       "storeReferences": [
@@ -14948,79 +14934,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 76
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 86
+          "line": 78
         },
         {
           "call": "client.getFooter",
-          "line": 99
+          "line": 88
+        },
+        {
+          "call": "client.getFooter",
+          "line": 101
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 113
+          "line": 115
         },
         {
           "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.settings.get",
-          "line": 121
+          "line": 118
         },
         {
           "call": "client.settings.get",
           "line": 123
         },
         {
-          "call": "client.settings.set",
-          "line": 124
+          "call": "client.settings.get",
+          "line": 125
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 134
+          "line": 135
         },
         {
           "call": "client.getFooter",
-          "line": 137
+          "line": 138
         },
         {
           "call": "client.getFooter",
-          "line": 145
+          "line": 146
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 189
+          "line": 185
         },
         {
           "call": "client.getFooter",
-          "line": 192
+          "line": 188
         },
         {
           "call": "client.getFooter",
-          "line": 207
+          "line": 202
         }
       ],
       "storeReferences": [
@@ -15042,79 +15024,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 76
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 86
+          "line": 78
         },
         {
           "call": "client.getFooter",
-          "line": 99
+          "line": 88
+        },
+        {
+          "call": "client.getFooter",
+          "line": 101
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 113
+          "line": 115
         },
         {
           "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.settings.get",
-          "line": 121
+          "line": 118
         },
         {
           "call": "client.settings.get",
           "line": 123
         },
         {
-          "call": "client.settings.set",
-          "line": 124
+          "call": "client.settings.get",
+          "line": 125
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 134
+          "line": 135
         },
         {
           "call": "client.getFooter",
-          "line": 137
+          "line": 138
         },
         {
           "call": "client.getFooter",
-          "line": 145
+          "line": 146
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 189
+          "line": 185
         },
         {
           "call": "client.getFooter",
-          "line": 192
+          "line": 188
         },
         {
           "call": "client.getFooter",
-          "line": 207
+          "line": 202
         }
       ],
       "storeReferences": [
@@ -15136,79 +15114,75 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 76
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 86
+          "line": 78
         },
         {
           "call": "client.getFooter",
-          "line": 99
+          "line": 88
+        },
+        {
+          "call": "client.getFooter",
+          "line": 101
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 113
+          "line": 115
         },
         {
           "call": "client.getFooter",
-          "line": 116
-        },
-        {
-          "call": "client.settings.get",
-          "line": 121
+          "line": 118
         },
         {
           "call": "client.settings.get",
           "line": 123
         },
         {
-          "call": "client.settings.set",
-          "line": 124
+          "call": "client.settings.get",
+          "line": 125
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 134
+          "line": 135
         },
         {
           "call": "client.getFooter",
-          "line": 137
+          "line": 138
         },
         {
           "call": "client.getFooter",
-          "line": 145
+          "line": 146
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 189
+          "line": 185
         },
         {
           "call": "client.getFooter",
-          "line": 192
+          "line": 188
         },
         {
           "call": "client.getFooter",
-          "line": 207
+          "line": 202
         }
       ],
       "storeReferences": [
@@ -15230,83 +15204,79 @@
         },
         {
           "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
+          "line": 27
         },
         {
           "call": "client.settings.get",
           "line": 31
         },
         {
-          "call": "client.getFooter",
-          "line": 54
+          "call": "client.settings.get",
+          "line": 32
         },
         {
           "call": "client.getFooter",
-          "line": 64
+          "line": 55
         },
         {
           "call": "client.getFooter",
-          "line": 78
+          "line": 66
         },
         {
           "call": "client.getFooter",
-          "line": 88
+          "line": 80
         },
         {
           "call": "client.getFooter",
-          "line": 98
+          "line": 90
         },
         {
           "call": "client.getFooter",
-          "line": 111
+          "line": 100
+        },
+        {
+          "call": "client.getFooter",
+          "line": 113
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 125
+          "line": 127
         },
         {
           "call": "client.getFooter",
-          "line": 128
-        },
-        {
-          "call": "client.settings.get",
-          "line": 133
+          "line": 130
         },
         {
           "call": "client.settings.get",
           "line": 135
         },
         {
-          "call": "client.settings.set",
-          "line": 136
+          "call": "client.settings.get",
+          "line": 137
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 146
+          "line": 147
         },
         {
           "call": "client.getFooter",
-          "line": 149
+          "line": 150
         },
         {
           "call": "client.getFooter",
-          "line": 157
+          "line": 158
         },
         {
           "call": "client.user.displayAvatarURL",
-          "line": 201
+          "line": 197
         },
         {
           "call": "client.getFooter",
-          "line": 204
+          "line": 200
         },
         {
           "call": "client.getFooter",
-          "line": 219
+          "line": 214
         }
       ],
       "storeReferences": [

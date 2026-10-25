@@ -4045,7 +4045,7 @@
         "variable7": "`<:no:833101993668771842> No puedo darle ese rol a todos los miembros, ¡es superior a tu rol más alto!`",
         "variable8": "`<:no:833101993668771842> ¡No se encontraron miembros!`",
         "variable9": "`Normalmente significa que **todos** ya tienen este rol. Puedes intentarlo de nuevo..`",
-        "variable10": "`This will take ${ms(segundos, {long: true})} in ideal conditions. Please be patient.`",
+        "variable10": "`This will take ${ms(seconds, {long: true})} in ideal conditions. Please be patient.`",
         "variable11": "`\\`\\`\\`${String(message.content).substr(0, 2000)}\\`\\`\\``",
         "variable12": "`Ejecutado en: `, `<#${message.channel.id}> \\`${message.channel.name}\\``",
         "variable13": "`Ejecutado por: `, `<@${message.author.id}> (${message.author.tag})\\n\\`${message.author.tag}\\``",

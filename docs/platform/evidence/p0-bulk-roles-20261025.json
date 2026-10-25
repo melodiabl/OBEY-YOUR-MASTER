@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "verified_in_isolation_release_pending",
+  "scope": "Eight existing bulk-role adapters; await execution, serialize per guild/client process, fail closed on roster fetch failure and preserve optional log configuration",
+  "baseline": {
+    "exitCode": 1,
+    "summary": [
+      "# tests 59",
+      "# pass 14",
+      "# fail 45",
+      "# cancelled 0",
+      "# skipped 0"
+    ],
+    "failedCases": [
+      "not ok 1 - addroletobots awaits every member and final response",
+      "not ok 2 - addroletobots refuses an incomplete roster after fetch rejection",
+      "not ok 3 - addroletobots continues without a missing optional log channel",
+      "not ok 4 - addroletobots renders actual Spanish progress and completion",
+      "not ok 5 - addroletoeveryone awaits every member and final response",
+      "not ok 6 - addroletoeveryone refuses an incomplete roster after fetch rejection",
+      "not ok 7 - addroletoeveryone continues without a missing optional log channel",
+      "not ok 8 - addroletoeveryone renders actual Spanish progress and completion",
+      "not ok 9 - addroletohumans awaits every member and final response",
+      "not ok 10 - addroletohumans refuses an incomplete roster after fetch rejection",
+      "not ok 11 - addroletohumans continues without a missing optional log channel",
+      "not ok 12 - addroletohumans renders actual Spanish progress and completion",
+      "not ok 13 - addroletorole awaits every member and final response",
+      "not ok 15 - addroletorole continues without a missing optional log channel",
+      "not ok 16 - addroletorole renders actual Spanish progress and completion",
+      "not ok 17 - removerolefrombots awaits every member and final response",
+      "not ok 18 - removerolefrombots refuses an incomplete roster after fetch rejection",
+      "not ok 19 - removerolefrombots continues without a missing optional log channel",
+      "not ok 20 - removerolefrombots renders actual Spanish progress and completion",
+      "not ok 21 - removerolefromeveryone awaits every member and final response",
+      "not ok 22 - removerolefromeveryone refuses an incomplete roster after fetch rejection",
+      "not ok 23 - removerolefromeveryone continues without a missing optional log channel",
+      "not ok 24 - removerolefromeveryone renders actual Spanish progress and completion",
+      "not ok 25 - removerolefromhumans awaits every member and final response",
+      "not ok 26 - removerolefromhumans refuses an incomplete roster after fetch rejection",
+      "not ok 27 - removerolefromhumans continues without a missing optional log channel",
+      "not ok 28 - removerolefromhumans renders actual Spanish progress and completion",
+      "not ok 29 - removerolefromrole awaits every member and final response",
+      "not ok 31 - removerolefromrole continues without a missing optional log channel",
+      "not ok 32 - removerolefromrole renders actual Spanish progress and completion",
+      "not ok 33 - one guild admission while roster is pending: addroletoeveryone",
+      "not ok 34 - one guild admission while roster is pending: removerolefromeveryone",
+      "not ok 35 - shutdown does not admit a new batch",
+      "not ok 36 - shutdown stops dispatching subsequent member mutations",
+      "not ok 39 - addroletobots preserves configured role grants",
+      "not ok 41 - addroletoeveryone preserves configured role grants",
+      "not ok 43 - addroletohumans preserves configured role grants",
+      "not ok 45 - addroletorole preserves configured role grants",
+      "not ok 47 - removerolefrombots preserves configured role grants",
+      "not ok 49 - removerolefromeveryone preserves configured role grants",
+      "not ok 51 - removerolefromhumans preserves configured role grants",
+      "not ok 53 - removerolefromrole preserves configured role grants",
+      "not ok 54 - addroletorole resolves both mentioned roles in message order",
+      "not ok 56 - removerolefromrole resolves both mentioned roles in message order",
+      "not ok 59 - empty batch releases guild admission"
+    ]
+  },
+  "verification": {
+    "baseImage": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b",
+    "tests": 84,
+    "originalTests": 25,
+    "temporaryCases": 59,
+    "pass": 84,
+    "fail": 0,
+    "skipped": 0,
+    "network": "none",
+    "realDiscordOrMongoActions": false,
+    "typesPassed": true,
+    "dependencyBoundariesPassed": true,
+    "audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "changes": {
+    "commands": [
+      "addroletobots",
+      "addroletoeveryone",
+      "addroletohumans",
+      "addroletorole",
+      "removerolefrombots",
+      "removerolefromeveryone",
+      "removerolefromhumans",
+      "removerolefromrole"
+    ],
+    "files": [
+      "commands/Administration/addroletobots.js",
+      "commands/Administration/addroletoeveryone.js",
+      "commands/Administration/addroletohumans.js",
+      "commands/Administration/addroletorole.js",
+      "commands/Administration/removerolefrombots.js",
+      "commands/Administration/removerolefromeveryone.js",
+      "commands/Administration/removerolefromhumans.js",
+      "commands/Administration/removerolefromrole.js",
+      "handlers/role-batch-lock.js",
+      "languages/es.json"
+    ]
+  },
+  "coverage": {
+    "reviewedGroups": 22,
+    "commandEntriesReviewed": 103,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 572,
+    "remainingHttpRoutes": 74
+  },
+  "acceptance": {
+    "globalG01G02": false,
+    "durableRoleJobs": false,
+    "crossProcessLock": false,
+    "authenticatedDiscordWalkthrough": false
+  },
+  "remaining": [
+    "P2 persistent job checkpoint, leases and receipts in the existing jobs domain",
+    "Fresh grant, membership and role hierarchy revalidation while batches run",
+    "Legacy adminlog migration and complete command language cleanup",
+    "No automatic restart replay; verify actual member roles before retry"
+  ],
+  "next": "P0 Administration sanctions: ban/kick/timeout variants and current slash peers"
+}

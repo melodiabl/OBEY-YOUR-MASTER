@@ -551,15 +551,64 @@
       "recovery": "Discord rejection surfaces as failure; uncertain network outcomes still require checking actual membership",
       "evidence": "evidence/p0-administration-roles-20261025.json",
       "remaining": "P2 canonical role service, fresh resource/hierarchy checks, durable idempotency and migrated log routing; real Discord walkthrough not executed"
+    },
+    {
+      "id": "administration.memberRole.bulkChange",
+      "commands": [
+        "prefix:addroletobots",
+        "prefix:addroletoeveryone",
+        "prefix:addroletohumans",
+        "prefix:addroletorole",
+        "prefix:removerolefrombots",
+        "prefix:removerolefromeveryone",
+        "prefix:removerolefromhumans",
+        "prefix:removerolefromrole"
+      ],
+      "routes": [],
+      "interactions": [],
+      "service": "Eight legacy Administration adapters with handlers/role-batch-lock.js synchronous admission and awaited member loops",
+      "store": "Discord member roles; client.settings grants and optional adminlog destination; in-process per-client guild lock only",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "guild member authenticated by prefix Gateway dispatcher",
+      "permissions": {
+        "discord": "Bot ManageRoles; actor Administrator, guild owner, configured bot owner, adminroles or command-specific role/user grant; existing actor/role numeric hierarchy"
+      },
+      "permissionDifference": "No equivalent current slash or HTTP mutation; individual member role changes and reaction/automatic role grants remain separate intents",
+      "parameters": {
+        "scope": "all members, bots, humans, or members holding a source role",
+        "action": "add or remove target role; two-role variants accept ordered mentions or IDs",
+        "roster": "await successful complete member fetch; fetch rejection aborts without mutating cached subset"
+      },
+      "confirmation": "authorized command invocation; progress reply awaited before role effects; completion reply awaited after the loop",
+      "result": "each attempted member counted once as success or failure after awaited Discord API; optional missing or rejected log destination does not abort work",
+      "errors": {
+        "access": "existing localized denial before roster load or lock admission",
+        "busy": "existing localized active-operation response",
+        "discord": "per-member errors counted in final summary; roster error uses existing command failure",
+        "stopping": "stop before admitting or dispatching another member; existing generic error response"
+      },
+      "cooldown": "60 seconds in existing prefix dispatcher; existing 1500 ms pause after successful member changes retained",
+      "idempotency": "role-presence filtering retained; one of eight commands per guild/client process at a time, acquired before first asynchronous roster fetch; no durable receipt or distributed lease",
+      "effects": [
+        "awaited one-role add/remove per selected member",
+        "progress, optional legacy adminlog and final member counts",
+        "no settings write for missing log channel",
+        "guild admission released in finally on success, validation error, empty batch, roster failure or interruption"
+      ],
+      "i18n": "existing loaded language catalogs; corrected undefined Spanish seconds variable; no complete language rewrite",
+      "material": "existing Discord embeds and loading material",
+      "recovery": "no automatic replay after restart; explicit retry filters current cached membership after successful roster fetch, but interrupted batch has no persisted checkpoint",
+      "evidence": "evidence/p0-bulk-roles-20261025.json",
+      "remaining": "P2 existing durable jobs/Redis integration, fresh grants/hierarchy revalidation during work, cross-process coordination, per-operation receipts and log routing migration; authenticated Discord walkthrough pending"
     }
   ],
   "coverage": {
-    "reviewedGroups": 21,
-    "commandEntriesReviewed": 95,
+    "reviewedGroups": 22,
+    "commandEntriesReviewed": 103,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 580,
+    "remainingCommandEntries": 572,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

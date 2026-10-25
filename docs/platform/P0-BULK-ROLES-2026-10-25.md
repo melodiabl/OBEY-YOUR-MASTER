@@ -1,0 +1,21 @@
+# P0 · roles masivos · 25/10/2026
+
+Se revisaron los ocho comandos existentes de añadir/quitar roles a todos, bots, humanos o miembros de un rol. Cada adaptador espera ahora la carga completa de miembros, la respuesta inicial, cada petición de rol y el resumen final. Si falla la carga, no se actúa sobre una caché parcial. [Evidencia](evidence/p0-bulk-roles-20261025.json).
+
+La recursión sin esperar el siguiente miembro se sustituye por un bucle secuencial con un resultado por intento. Se conserva la espera de 1.500 ms tras cada éxito y el recuento de fallos. Los ocho comandos comparten admisión síncrona por servidor y cliente antes de la primera lectura asíncrona; una segunda invocación no abre otro lote mientras se cargan miembros o se modifica un rol. El bloqueo se libera en `finally`, también con validación fallida, lista vacía, error o interrupción. Se dejan de admitir lotes o despachar otro miembro cuando empieza el apagado; una petición ya enviada puede terminar.
+
+Un destino de adminlog ausente deja de cancelar el lote y de borrar su configuración. El envío de ese log se espera dentro de su manejo de errores existente. Se mantienen las concesiones por Administrator, propietarios y roles/usuarios configurados, la jerarquía actor/rol y los filtros de destinatarios actuales. No se modifican políticas para otros orígenes de roles.
+
+Los dos comandos con rol origen y destino usaban `MessageMentions.ROLES_PATTERN`, inexistente en la biblioteca instalada. Ahora usan `RolesPattern` con búsqueda global para conservar el orden de ambas menciones; también aceptan IDs y rechazan un destino ausente con el uso del comando. La [documentación oficial de MessageMentions](https://discord.js.org/docs/packages/discord.js/14.26.0/MessageMentions%3AClass) confirma la propiedad actual. El progreso español usaba `segundos` cuando el código define `seconds`; se corrige únicamente esa expresión en el catálogo.
+
+## Verificación y límites
+
+La reproducción inicial ampliada contiene 59 casos, con 45 fallos y 14 aprobados. Varias aserciones describen el mismo defecto; no se contabilizan como 45 bugs independientes. En los dos comandos con rol origen, el parser antiguo podía denegar antes de llegar a la carga: un caso de rechazo aprobado allí no demostraba manejo correcto de la carga. El candidato alcanza 59/59, además de los 25 tests originales: **84 aprobados, ninguno omitido**. Discord y las respuestas de red están simulados; se usan los permisos, colecciones y embeds reales de la biblioteca, además de los catálogos es/en existentes.
+
+Se comprueban respuestas retenidas, rechazos del roster, logs ausentes, idioma español real, concurrencia antes de la carga, apagado, fallo parcial, denegación y concesiones configuradas, menciones ordenadas/IDs y liberación tras error/lista vacía. Tipos y fronteras pasan. La auditoría del lockfile mantiene 36 moderate, cero low/high/critical; esta entrega no altera dependencias.
+
+El bloqueo nuevo tiene alcance de proceso. No es una cola duradera, no conserva checkpoint ni recibo y no coordina varias réplicas o las demás funciones que asignan roles. No se reanudan lotes automáticamente tras reinicio; hay que comprobar membresías antes de reintentar. La autorización fresca durante un lote, la jerarquía real y los roles administrados siguen pendientes de la capa de dominio de P2. El runtime de jobs actual tiene handlers y autorización de Architect; esta corrección no añade roles a esa política ni activa nuevos workers.
+
+El mapa registra 22 grupos/103 entradas/21 rutas; restan 572 entradas y 74 rutas, incluidas 62 entradas de Administración. No hay mutación masiva equivalente en slash/web actuales; autorole es configuración y roleinfo una lectura. G01/G02 y la aceptación autenticada permanecen abiertos. Siguiente P0: sanciones ban/kick/timeout y sus variantes, con los pares slash existentes.
+
+Estado: candidato comprobado en aislamiento; construcción y despliegue pendientes. Los verificadores se retirarán al conservar resultados y hashes.
