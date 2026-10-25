@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "64796831efc3f55f97b335b9db970df0457c04b4",
-    "image": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+    "code": "7828e8c065dfc8360d264cb4ca5dd981aee854fe",
+    "image": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/music-concurrency-20261025.json",
-    "change": "Autoplay outside mutations, manual priority, stale transition/restore fences and verified public node selection",
-    "tag": "localhost/obey-your-master_bot:release-music-stability-20261025-6479683",
+    "evidence": "evidence/p0-config-20261025.json",
+    "change": "Persisted Config summary, shared category CAS and fresh setup permissions",
+    "tag": "localhost/obey-your-master_bot:release-p0-config-20261025-7828e8c",
     "status": "healthy",
-    "statusEvidence": "evidence/music-concurrency-20261025.json",
-    "deploymentKind": "application_music_concurrency_and_public_node_selection",
+    "statusEvidence": "evidence/p0-config-20261025.json",
+    "deploymentKind": "application_only_p0_config_and_setup_access",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -58,6 +58,15 @@
         "gdjkhp",
         "trinium-02"
       ]
+    },
+    "configReview": {
+      "date": "2026-10-25",
+      "report": "P0-CONFIG-2026-10-25.md",
+      "evidence": "evidence/p0-config-20261025.json",
+      "reviewedGroups": 20,
+      "reviewedEntries": 93,
+      "reviewedRoutes": 21,
+      "globalG01G02Accepted": false
     }
   },
   "preserve": [

@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 25/10/2026 · Config y Setup pendientes verificados y desplegados
+
+Código `7828e8c`, imagen `2e167799`: resumen persistido y categorías prefix/slash comparten servicio; guardado CAS confirmado y permisos revalidados tras lectura, con canal fresco. Pasan 48 casos en imagen, 998 hashes y HTTP/assets; diez muestras saludables sin reinicios. Respaldo CRC y reversión a `c04c4bee` conservados. Sin cambios de nodos, datos, mensajes/voz de prueba o push; temporales retirados. [Entrega y límites](P0-CONFIG-2026-10-25.md). Veinte grupos/93 entradas/21 rutas revisadas; siguiente P0 `commands/Administration` (72 entradas), con 582 entradas/74 rutas aún pendientes. G01/G02 y aceptación autenticada siguen abiertos.
+
 ## 25/10/2026 · concurrencia musical corregida y desplegada
 
 Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de controles; intención manual uniforme y resultados/eventos/restauraciones antiguos protegidos al ejecutar. Cuarenta y ocho casos en imagen pasan; 991 hashes, HTTP y assets comprobados. Catorce muestras saludables, cero reinicios y cero fallos de recuperación en la ventana observada. Serenetia principal, MilloHost respaldo; GDjkhp y Trinium 02 apartados temporalmente. Respaldo CRC y reversión conservados. [Entrega y límites](MUSIC-CONCURRENCY-2026-10-25.md). Sin voz/mensajes de prueba ni push; verificadores y checkout propios retirados. La migración musical y G01/G02 siguen abiertos. Los cambios locales pendientes de Config/setups se conservan; la siguiente unidad P0 mantiene su lugar.
@@ -8,8 +12,19 @@ Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de control
 
 **Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La próxima unidad concilia resumen Config y categoría MUSIC.** Navegación setup y guardado de roles se corrigieron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza diecinueve grupos/41 entradas/21 rutas; quedan 634 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa `commands/Administration` y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza veinte grupos/93 entradas/21 rutas; quedan 582 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
+## 24/10/2026 · resumen Config y categoría MUSIC conciliados en aislamiento
+
+`/config ver` usa ahora las lecturas versionadas de prefijo, idioma, MUSIC, logs y bienvenida, además de roles persistidos; muestra routing por categoría, distingue defaults de valores guardados e incluye la etiqueta `in`. `/config musica` comparte el servicio de categorías/setup y el CAS, revalida ManageGuild y no escribe en `status`; un flag ausente se muestra como activado predeterminado. `setup-settings` expone `present` y se añadieron claves es/en. El flag MUSIC no certifica salud de sesión; eso sigue en P1/T19.
+
+Diecisiete casos aislados pasan tras corregir un payload de embed inválido detectado en la primera ejecución; el verificador temporal se retira y 25 originales, tipos, fronteras (1.114 módulos), 968 hashes y assets pasan. Sin Gateway/Mongo/voz, push ni despliegue. [Evidencia y límites](evidence/p0-config-summary-music-20261024.json). Quedan 634 entradas y 74 rutas; **siguiente P0: revisar el bloque legacy `commands/Setup` y las intenciones compartidas restantes.** G01/G02 continúan abiertos.
+
+## 24/10/2026 · bloque legacy Setup revisado en aislamiento
+
+Los 52 adaptadores `commands/Setup` pendientes quedan trazados como una intención prefix-only: todos cargan, delegan en un handler `setup-*` existente y no escriben directamente en `client.settings`. Los sinónimos anti-mention, logs/auditlog, membercount/serverstats y music/setupmusic se conservan; la colisión del alias `setup-auditlog` sigue resuelta por precedencia del nombre real. `setup-joinlist` era el único sin metadatos Administrator pese a que su handler ya los exigía; ahora declara `['Administrador']` como los otros 58.
+
+Tres casos estáticos, 25 originales, tipos, fronteras (1.114 módulos), 968 hashes y assets pasan; el verificador temporal se retira. No se ejecutaron formularios ni guardados, así que la aceptación funcional y la creación de recursos siguen en P2. Sin Gateway/Mongo/voz, push ni despliegue. [Evidencia y límites](evidence/p0-setup-block-20261024.json). El mapa suma veinte grupos/93 entradas/21 rutas; faltan 582 entradas y 74 rutas. **Siguiente P0: `commands/Administration` (72 entradas).** G01/G02 siguen abiertos.
 
 ## 24/10/2026 · setup/roles y seguridad conciliados, desplegados
 

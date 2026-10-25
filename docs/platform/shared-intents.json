@@ -310,7 +310,7 @@
       "routes": [],
       "service": "handlers/command-category-settings.js#createCommandCategorySettings over handlers/setup-settings.js; prefix openCategorySetup",
       "store": "Guild.MUSIC command-category flag in client.settings.model, shared SyncMap exclusive queue and cache patch",
-      "status": "corrected_and_verified_in_isolation",
+      "status": "deployed_with_isolated_acceptance",
       "actor": "guild member authenticated by Gateway",
       "permissions": {
         "discord": "ManageGuild at invocation and again at save, plus fresh member/channel/bot access; prefix setup root keeps its existing gate"
@@ -340,7 +340,7 @@
       "i18n": "setup.musicCategory.* in es/en; other loaded legacy languages use the existing Spanish fallback",
       "material": "native Discord embed and existing prefix setup category control",
       "recovery": "read current persisted state after an uncertain result; no blind retry",
-      "evidence": "evidence/p0-config-summary-music-20261024.json",
+      "evidence": "evidence/p0-config-20261025.json",
       "remaining": "Authenticated real Discord walkthrough; the category flag does not certify music session health; P1/T19 acceptance remains"
     },
     {
@@ -364,7 +364,7 @@
       "routes": [],
       "service": "handlers/configuration-summary.js#createConfigurationSummary over prefix-settings, language-settings, setup-settings, logs/policy and welcome-configuration",
       "store": "client.settings.model persisted Guild document; prefix, language, MUSIC, log and welcome revisions",
-      "status": "corrected_and_verified_in_isolation",
+      "status": "deployed_with_isolated_acceptance",
       "actor": "guild member authenticated by Gateway",
       "permissions": {
         "discord": "ManageGuild at invocation plus fresh member/channel/bot access"
@@ -393,7 +393,7 @@
       "i18n": "setup.summary.* in es/en; locale comes from the persisted language and includes the supported in label",
       "material": "native Discord embed",
       "recovery": "retry after storage recovers; no blind write",
-      "evidence": "evidence/p0-config-summary-music-20261024.json",
+      "evidence": "evidence/p0-config-20261025.json",
       "remaining": "Authenticated real Discord walkthrough; global G01/G02 and durable cross-transport receipt remain T12/T13"
     },
     {

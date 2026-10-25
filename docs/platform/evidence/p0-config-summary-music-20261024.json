@@ -51,6 +51,12 @@
   ],
   "deployment": {
     "performed": false,
-    "reason": "Historical isolated verification on 24 October; final image verification and deployment are now proceeding under the standing session authorization."
+    "reason": "Historical isolated verification on 24 October; follow-up deployment and revalidation are recorded in followUpDeployment."
+  },
+  "followUpDeployment": {
+    "date": "2026-10-25",
+    "code": "7828e8c065dfc8360d264cb4ca5dd981aee854fe",
+    "image": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8",
+    "evidence": "p0-config-20261025.json"
   }
 }

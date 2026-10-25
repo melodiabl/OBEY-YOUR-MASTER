@@ -363,7 +363,8 @@
       "skipped": 0,
       "duration_ms": 1640.51455
     },
-    "initialInvocation": "Image omits tests; first invocation lacked read-only file mounts and was corrected."
+    "initialInvocation": "First invocation used node --test test and failed resolving that path; a later check confirmed the original files are present in the image. Repeated with explicit file paths and read-only mounts.",
+    "explanationCorrectedOn": "2026-10-25"
   },
   "sourceHashes": {
     "handlers/music/index.js": "89d1d4cd26b62cc89831a2c6d70d0540b2538505c9c0152a81f275d48876569b",

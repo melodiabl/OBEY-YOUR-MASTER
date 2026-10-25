@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "deployed_increment_global_gates_open",
+  "image": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8",
+  "tag": "localhost/obey-your-master_bot:release-p0-config-20261025-7828e8c",
+  "code": "7828e8c065dfc8360d264cb4ca5dd981aee854fe",
+  "scope": [
+    "Persisted configuration summary",
+    "Shared prefix/slash MUSIC category service and confirmed CAS save",
+    "Post-read access revalidation and forced channel refresh",
+    "52 legacy Setup adapters traced; missing joinlist metadata corrected"
+  ],
+  "coverage": {
+    "reviewedGroups": 20,
+    "commandEntriesReviewed": 93,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 582,
+    "remainingHttpRoutes": 74
+  },
+  "verification": {
+    "finalImage": {
+      "exitCode": 0,
+      "originalTestsBakedIntoImage": true,
+      "results": {
+        "tests": 48,
+        "pass": 48,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "failedCases": []
+    },
+    "originalTests": 25,
+    "temporaryCases": 23,
+    "originalTestFilesRetained": 3,
+    "realPermissionsBaseline": {
+      "exitCode": 1,
+      "sourceHashesVerified": true,
+      "results": {
+        "tests": 3,
+        "pass": 0,
+        "fail": 3,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    },
+    "types": true,
+    "dependencyBoundaries": true,
+    "effectiveInventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95
+    },
+    "sourceHashes": 971,
+    "liveHashes": {
+      "checked": 998,
+      "failed": [],
+      "node": "v22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "httpPassed": 7,
+    "publicAssetHashesMatched": 12,
+    "fixtureSha256": "e06646eeada69aba5f2238087163407e60585b834f00fc824df64d6e232a92ad",
+    "temporaryVerifierRemoved": true,
+    "isolatedCheckoutRemoved": true
+  },
+  "observation": {
+    "first": "2026-10-24T23:58:24.564795+00:00",
+    "last": "2026-10-24T23:59:10.279046+00:00",
+    "healthySamples": 10,
+    "automaticRestarts": 0,
+    "startup": {
+      "at": "2026-10-25T00:01:47.358552+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "millohost",
+        "serenetia"
+      ],
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0,
+      "unavailableNodeLogEvents": 0
+    }
+  },
+  "backup": {
+    "bytes": 59279325,
+    "gzipCrcVerified": true
+  },
+  "deployment": {
+    "onlyBotRecreated": true,
+    "environmentPreserved": true,
+    "nodeConfigurationChanged": false,
+    "defaultPublicNode": "serenetia",
+    "backupNodes": [
+      "millohost"
+    ],
+    "privateEnabled": false,
+    "rollbackImage": "c04c4bee8046ae43309884c5cb9a22ec1821abdea98eaf3855440aa26321b54a",
+    "recipes": ".runtime/p0-config-20261025/",
+    "dataMigration": false,
+    "remotePush": false,
+    "remoteCI": false,
+    "discordTestMessages": 0,
+    "newVoiceTestSessions": 0
+  },
+  "remaining": [
+    "Global G01/G02",
+    "582 command entries and 74 routes",
+    "Authenticated Discord acceptance and P2 form/resource walkthroughs",
+    "Next P0 block: commands/Administration, 72 entries",
+    "Lavalink-client migration and remaining P1 cases"
+  ],
+  "evidenceCorrection": "The earlier music audit incorrectly attributed node --test test failure to absent files. The original files are in the image; final verification uses explicit file paths.",
+  "report": "../P0-CONFIG-2026-10-25.md",
+  "finalCheck": {
+    "at": "2026-10-25T00:10:06.012139+00:00",
+    "image": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8",
+    "containerHealth": "healthy",
+    "automaticRestarts": 0,
+    "httpHealth": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 788
+    },
+    "musicCoreHashesUnchanged": true,
+    "temporaryVerifierRemoved": true
+  }
+}

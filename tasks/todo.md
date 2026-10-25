@@ -16,7 +16,7 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 
 [Informe](../docs/platform/P0-CONCILIACION.md) y [evidencia](../docs/platform/evidence/p0-reconciliation-20261023.json).
 
-- [x] Localizar los adaptadores actuales de 675 entradas y 95 rutas; registrar hashes de 963 fuentes.
+- [x] Localizar los adaptadores actuales de 675 entradas y 95 rutas; registrar hashes de 971 fuentes.
 - [x] Hacer explícitas 26 políticas de colisión conservando los 779 destinos de aliases.
 - [x] Declarar seis dependencias directas sin cambiar versiones o integridades instaladas.
 - [x] Conciliar manifests de música/bienvenida/ayuda/Architect y ejecutar los gates del CI localmente sobre la imagen final.
@@ -29,9 +29,28 @@ La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproduc
 - [x] Trazar nueve grupos y sus servicios/políticas/stores: 25 entradas y 19 rutas; diferencias conservadas con tareas T12/T19/T20/T35/T46.
 - [x] Corregir idioma en slash y web para usar el servicio versionado del setup, guardar solo el idioma desde web y esperar confirmación de almacenamiento.
 - [x] Verificar 14 casos aislados, formulario EJS completo en Chromium y 25 tests originales sobre la imagen final; conservar controles de sesión/CSRF.
-- [ ] Ampliar la revisión: ahora quedan 634 entradas y 74 rutas; seguir con resumen Config y categoría MUSIC. No cerrar P0 ni aceptar todos los negocios por esta muestra.
+- [ ] Ampliar la revisión: ahora quedan 582 entradas y 74 rutas; seguir con `commands/Administration` y las intenciones compartidas restantes. No cerrar P0 ni aceptar todos los negocios por esta muestra.
 
 [Mapa](../docs/platform/shared-intents.json) y [evidencia](../docs/platform/evidence/p0-shared-intents-20261024.json).
+
+## P0 · resumen Config y categoría MUSIC, 24/10/2026
+
+- [x] Leer resumen Config desde servicios persistidos/versionados, con routing de logs, roles persistidos y etiqueta `in`; sin escrituras.
+- [x] Compartir el servicio de categorías y el CAS de setup en `/config musica`, revalidar ManageGuild y no escribir en `status`.
+- [x] Verificar 17 casos aislados más 25 originales, tipos, fronteras (1.114 módulos), 968 hashes y assets; retirar el verificador temporal; sin Gateway/Mongo/voz ni despliegue.
+
+[Evidencia](../docs/platform/evidence/p0-config-summary-music-20261024.json).
+
+## P0 · bloque legacy Setup, 24/10/2026
+
+- [x] Trazar los 52 adaptadores `commands/Setup` restantes como una intención prefix-only que delega en formularios, registros o selectores existentes.
+- [x] Confirmar 59 adaptadores cargables, 52 con delegación y metadatos Administrator, sin lecturas/escrituras directas de `client.settings`.
+- [x] Corregir `setup-joinlist` para declarar `memberpermissions: ['Administrador']`, igual que su comprobación fresca y los otros 58 comandos.
+- [x] Conservar sin cambios los sinónimos deliberados (anti-mention, logs/auditlog, membercount/serverstats, music/setupmusic) y la colisión de alias ya resuelta por precedencia de nombres reales.
+- [x] Verificar 3 casos aislados más 25 originales, tipos, fronteras, 968 hashes y assets; retirar el verificador temporal; sin ejecutar formularios, Gateway/Mongo/voz ni desplegar.
+- [ ] Aceptación autenticada P2 de cada formulario y guardado explícito; G01/G02 y 582 entradas/74 rutas siguen abiertos.
+
+[Evidencia](../docs/platform/evidence/p0-setup-block-20261024.json).
 
 ## P0 · prefijo de guild, 24/10/2026
 
@@ -1873,3 +1892,11 @@ Fuente de aceptación: [recorrido sencillo](../docs/guia-arquitectura/FACILIDAD_
 - [ ] Completar fachada musical, capacidades NodeLink y migración de cola única en P1 con los casos de aceptación del maestro.
 
 [Auditoría y límites](../docs/platform/MUSIC-AUDIT-2026-10-24.md). Sin cambios de runtime en esta auditoría; P0 y Config siguen pendientes.
+
+## P0 · entrega consolidada de Config y Setup · 25/10/2026
+
+- [x] Revalidar resumen/categoría tras lectura y refrescar permisos de canal; reproducir tres fallos y corregirlos.
+- [x] Desplegar con 48 casos aprobados, 998 hashes, HTTP/assets, respaldo y reversión; conservar solo tres tests originales.
+- [ ] Revisar `commands/Administration` (72 entradas); G01/G02 y aceptación autenticada siguen pendientes.
+
+[Entrega y límites](../docs/platform/P0-CONFIG-2026-10-25.md).
