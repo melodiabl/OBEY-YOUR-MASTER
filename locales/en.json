@@ -160,7 +160,12 @@
     "accessUnconfirmed": "I could not confirm current permissions. No unban request was sent.",
     "stopping": "The bot is restarting. Try again when it is available.",
     "unbanDone": "User unbanned",
-    "unbanRecordFailed": "Discord confirmed the unban, but the history update is unconfirmed. Review the record; do not repeat the action just because of this warning."
+    "unbanRecordFailed": "Discord confirmed the unban, but the history update is unconfirmed. Review the record; do not repeat the action just because of this warning.",
+    "invalidDeleteDays": "Message deletion days must be an integer from 0 to 7. They are not the ban duration.",
+    "targetLookupFailed": "I could not confirm the member state in Discord. No ban request was sent.",
+    "statsUnconfirmed": "Discord confirmed the ban, but the counter update is unconfirmed.",
+    "logUnconfirmed": "Discord confirmed the ban, but delivery to the log channel is unconfirmed.",
+    "moderator": "Moderator"
   },
   "modules": {
     "music": {

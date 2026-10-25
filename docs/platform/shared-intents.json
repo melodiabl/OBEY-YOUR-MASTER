@@ -644,15 +644,62 @@
       "recovery": "timed-out database write may still finish later; creation cutoff excludes later timestamped bans; user is told to check history instead of repeating a confirmed action",
       "evidence": "evidence/p0-unban-20261025.json",
       "remaining": "P2 durable receipts, strict ban/unban coordination, channel audience revalidation, case history provenance and authenticated Discord walkthrough; remaining sanctions unchanged"
+    },
+    {
+      "id": "moderation.ban",
+      "commands": [
+        "prefix:ban",
+        "prefix:idban",
+        "prefix:useridban",
+        "slash:moderation.ban"
+      ],
+      "routes": [],
+      "interactions": [],
+      "service": "handlers/moderation/ban.js#performBan; existing action.js orchestrates prefix and slash results",
+      "store": "Discord ban is effect authority; prefix ban retains stats and legacy optional log; useridban retains log, idban has neither; slash retains ModerationSchema and allocated cases",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "Gateway user ID; guild roles, actor, bot and target refreshed before native effect",
+      "permissions": {
+        "prefix": "Administrator, guild/configured owner, global adminroles or command-specific role/user grant; idban retains cmdadminroles.ban and useridban its own key; native-only BanMembers does not grant prefix access",
+        "slash": "BanMembers; guild owner retains hierarchy exception",
+        "bot": "fresh BanMembers and fresh target.bannable"
+      },
+      "permissionDifference": "Prefix retains stricter actor hierarchy, including the owner; ID forms now enforce it for present members instead of bypassing it; no new native privilege or grants",
+      "parameters": {
+        "target": "prefix ban accepts a member mention/ID and requires a current member; ID commands and slash allow confirmed unknown-member code 10007 only",
+        "days": "prefix explicit numeric token must be integer 0–7; slash existing clamp retained; sent as deleteMessageSeconds, never ban duration",
+        "reason": "bounded to 512 well-formed UTF-16 units; explicit zero removed from reason"
+      },
+      "confirmation": "authorized invocation; await Discord before success, stats, DM or log; slash privately deferred by existing handler",
+      "result": "confirmed ban plus independent warning if stats, notification, case or log is unconfirmed",
+      "errors": {
+        "access": "failed fresh reads deny mutation",
+        "lookup": "target outages and malformed successful reads never count as an absent member",
+        "hierarchy": "SDK comparePositionTo must return a finite lower target order; protected actor/bot/guild-owner rejected",
+        "discord": "no case/stats/DM/log on rejected action, no automatic replay",
+        "ancillary": "five-second budgets; late effects may complete after an unconfirmed response"
+      },
+      "cooldown": "existing dispatcher defaults and aliases retained",
+      "idempotency": "no receipt or strict cross-action guild lease; one native ban per invocation",
+      "effects": [
+        "one guild.members.ban with deleteMessageSeconds 0–604800",
+        "existing source-specific stats/log/notification/case behavior; missing cached log destination does not erase settings",
+        "prefix success embed and private slash result suppress mentions"
+      ],
+      "i18n": "shared es/en moderation catalogs and existing Spanish fallback; ban usage clarifies permanent ban versus message-deletion days",
+      "material": "native embeds, existing slash registry assets and prefix footer; obsolete inline GIF and raw command interpolation removed",
+      "recovery": "bounded case write added to existing slash ban/kick/timeout flow; no automatic sanction replay on history/notification failure; delayed case persistence remains possible",
+      "evidence": "evidence/p0-ban-20261025.json",
+      "remaining": "P2 common prefix/slash moderation history, durable receipts/coordination and canonical log pipeline; authenticated Discord walkthrough; kick/timeout prefix adapters still pending"
     }
   ],
   "coverage": {
-    "reviewedGroups": 23,
-    "commandEntriesReviewed": 105,
+    "reviewedGroups": 24,
+    "commandEntriesReviewed": 109,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 570,
+    "remainingCommandEntries": 566,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

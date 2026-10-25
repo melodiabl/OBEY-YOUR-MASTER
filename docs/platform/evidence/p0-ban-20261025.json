@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "verified_in_isolation_release_pending",
+  "scope": "Shared Discord ban effect for three prefix adapters and existing slash ban; other sanctions remain pending",
+  "baseline": {
+    "exitCode": 1,
+    "summary": [
+      "# tests 40",
+      "# pass 18",
+      "# fail 22",
+      "# cancelled 0",
+      "# skipped 0"
+    ],
+    "failedCases": [
+      "not ok 1 - ban awaits Discord and sends no premature notification",
+      "not ok 3 - ban fails closed on target lookup outage",
+      "not ok 4 - ban checks fresh actor permissions",
+      "not ok 5 - ban checks fresh bot permissions",
+      "not ok 6 - ban rejects malformed IDs before issuing ban",
+      "not ok 7 - ban never notifies success after Discord rejection",
+      "not ok 8 - idban awaits Discord and sends no premature notification",
+      "not ok 9 - idban rejects targets above the actor hierarchy",
+      "not ok 10 - idban fails closed on target lookup outage",
+      "not ok 11 - idban checks fresh actor permissions",
+      "not ok 12 - idban checks fresh bot permissions",
+      "not ok 13 - idban rejects malformed IDs before issuing ban",
+      "not ok 16 - useridban rejects targets above the actor hierarchy",
+      "not ok 17 - useridban fails closed on target lookup outage",
+      "not ok 18 - useridban checks fresh actor permissions",
+      "not ok 19 - useridban checks fresh bot permissions",
+      "not ok 20 - useridban rejects malformed IDs before issuing ban",
+      "not ok 24 - slash fails closed on target lookup outage",
+      "not ok 25 - slash checks fresh actor permissions",
+      "not ok 26 - slash checks fresh bot permissions",
+      "not ok 27 - slash rejects malformed IDs before issuing ban",
+      "not ok 36 - ban sends deletion seconds and excludes zero from reason"
+    ]
+  },
+  "verification": {
+    "baseImage": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505",
+    "tests": 96,
+    "originalTests": 25,
+    "temporaryCases": 71,
+    "pass": 96,
+    "fail": 0,
+    "skipped": 0,
+    "network": "none",
+    "realDiscordOrMongoActions": false,
+    "typesPassed": true,
+    "dependencyBoundariesPassed": true,
+    "audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 36,
+      "high": 0,
+      "critical": 0,
+      "total": 36
+    }
+  },
+  "changes": {
+    "files": [
+      "commands/Administration/ban.js",
+      "commands/Administration/idban.js",
+      "commands/Administration/useridban.js",
+      "handlers/moderation/action.js",
+      "handlers/moderation/ban.js",
+      "locales/es.json",
+      "locales/en.json"
+    ]
+  },
+  "coverage": {
+    "reviewedGroups": 24,
+    "commandEntriesReviewed": 109,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 566,
+    "remainingHttpRoutes": 74
+  },
+  "acceptance": {
+    "globalG01G02": false,
+    "allSanctions": false,
+    "authenticatedDiscordWalkthrough": false,
+    "unifiedModerationHistory": false
+  },
+  "next": "P0 prefix kick and timeout/removetimeout, compared with existing slash peers",
+  "limits": [
+    "No real ban, message deletion, notification or moderation case creation was executed",
+    "Prefix retains existing stats/log history while slash retains ModerationSchema cases; histories are not merged",
+    "No durable receipt or strict cross-action coordination; timed-out case/notification/log operations may finish later",
+    "Prefix remains stricter than slash for native-only BanMembers and owner hierarchy; ID forms now enforce hierarchy for current members",
+    "The legacy tempban alias still invokes a permanent ban; no temporary-ban scheduler was added"
+  ]
+}

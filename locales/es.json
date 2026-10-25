@@ -160,7 +160,12 @@
     "accessUnconfirmed": "No pude confirmar los permisos actuales. No se ha enviado el desbaneo.",
     "stopping": "El bot se está reiniciando. Vuelve a intentarlo cuando esté disponible.",
     "unbanDone": "Usuario desbaneado",
-    "unbanRecordFailed": "Discord confirmó el desbaneo, pero la actualización del historial no está confirmada. Revisa el registro; no repitas la acción solo por este aviso."
+    "unbanRecordFailed": "Discord confirmó el desbaneo, pero la actualización del historial no está confirmada. Revisa el registro; no repitas la acción solo por este aviso.",
+    "invalidDeleteDays": "Los días de mensajes que se borran deben ser un entero entre 0 y 7. No indican la duración del ban.",
+    "targetLookupFailed": "No pude confirmar el estado del miembro en Discord. No se ha enviado el ban.",
+    "statsUnconfirmed": "Discord confirmó el ban, pero la actualización del contador no está confirmada.",
+    "logUnconfirmed": "Discord confirmó el ban, pero el envío al canal de registros no está confirmado.",
+    "moderator": "Moderador"
   },
   "modules": {
     "music": {

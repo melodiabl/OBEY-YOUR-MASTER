@@ -16,7 +16,7 @@
     "commands/Administration/addroletohumans.js": "44c37eb3a3053768c90d6639da3786e99d7c33ec0248e8bc543f530d8751397d",
     "commands/Administration/addroletorole.js": "22341f9e3f48a27e9aa18e242dd3c9fa1404274efe3a33a875be214d2ea4a12d",
     "commands/Administration/archivethread.js": "f6a246a82887c5cfa4bfb7864c586bc630f0876db0e42e7bae0a722e02520c9f",
-    "commands/Administration/ban.js": "df15952298452660c6daf173fa92ec4877fb1b93ee3b5e76fafa07a35910bdf1",
+    "commands/Administration/ban.js": "c6e2455ae0ddcb4b1c0fc228c9f3e9e3b0c57bd06b08988fa56dcdea82179870",
     "commands/Administration/bans.js": "bbb36d9f4eab7446be3d32aaba607fff4656ac3947b43e6b963d093b98481532",
     "commands/Administration/channellock.js": "9d4893ebd44fe3689d173d2dbec33a6d76e1970f2ec6f9c67adb8fe5147ef93a",
     "commands/Administration/channelunlock.js": "4c260a5f2867527fe7e466807a36ce084d7019f64fc3dce372806368e9ebb50d",
@@ -37,7 +37,7 @@
     "commands/Administration/esay.js": "b720f18f2f1544a55db06ecb091a0728e8720bfe4ead40fb9f59563f47daafaf",
     "commands/Administration/giveaway.js": "95647dfe88da303a996a80a37214122d889e825f6f0f67daf48bcab61bb1f6bb",
     "commands/Administration/globalwarnings.js": "a4796dfe9d44efff1aad601993a0cb32d352a391d1d51e909f3d2db8017f34cc",
-    "commands/Administration/idban.js": "41de67c8b0ae523a443900b9afa8e04c95018cee485d6b57e5443029f843b76c",
+    "commands/Administration/idban.js": "459d92182f411ce95950533099cf9ac5c6d6ef242c73c070b421651a86f687fb",
     "commands/Administration/image.js": "079feea03896be243fa29c2a96fb8f81234e8fdeac01c7f662d261a0ebf5fc85",
     "commands/Administration/imgembed.js": "f8687ebc0d73b91d7eef5d9df676ecec0c846f8312fd74930b91b58ced54ad89",
     "commands/Administration/instantclose.js": "c022b8334fa3d2cacce06edc1837ea0ea09140883a5c5aeea4a551ae6886aa11",
@@ -80,7 +80,7 @@
     "commands/Administration/unmute.js": "45337352406b1876e8be995661af72f796722afe5d28b67664b87f681901fc18",
     "commands/Administration/unwarn.js": "7a8c43440a692ce50ea74ab8eef32d00b4e8b706ae6a9ac0848909b4fc5a2c22",
     "commands/Administration/updatemessage.js": "25391650061a3a3d35b22b11b9d8ce53ded2c880563b5baf217e9987d8b725bd",
-    "commands/Administration/useridban.js": "f3871b088e9a67a7d611991a2141655f1a98ba6caaec0a2023498cbe2dd4f928",
+    "commands/Administration/useridban.js": "210353d119d6ca6d04977f3c253720c1be1384a0fb42b88bbaa4c28f22f98d56",
     "commands/Administration/warn.js": "4b038879bf3940da35cb4f43334aaea736bfc5332df0e2163fd4b84aeafd3dfc",
     "commands/Administration/warnings.js": "b23da9f7dadc1d782ebd1d95a49711c4a7af75f0fb3ac2f3f3bc509a5e2970aa",
     "commands/Anime-Emotions/a-agree.js": "287eb75d338729395469022281727a60bbb922d8cceb4919b6c78415d77e91de",
@@ -687,7 +687,7 @@
     "handlers/membership-settings.js": "4596c5cbfc660d5195d611147ecbbfaa9c28c1c1184350a05e28a44cee912de6",
     "handlers/membership-title.js": "e2412c75b687a031493431f6f29c9b9e004879729c096a4db9ab896d942b8387",
     "handlers/meme-service.js": "c910cb659d62ea0aabf097666afecf42070920c9bb2439e328d50fea213a715c",
-    "handlers/moderation/action.js": "85748e2593246cd226ad60cfe2979fc814484b0975b76a6659382212cfe41786",
+    "handlers/moderation/action.js": "a5a95869ab4932c4b543ee6ad79eb8a71cf8fb4311d473048b096b933ae97c19",
     "handlers/moderation/cases.js": "55f3593431f534a6cec2b04e93b8bda451a4f4aafec1f0431b3f98210dffa367",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
@@ -979,10 +979,11 @@
     "slashCommands/chat.js": "67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931",
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
     "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
-    "locales/es.json": "67d7a6accc4b929e22a782f389a44e02af9095bd8ec1de70b95ef368ccef4728",
-    "locales/en.json": "feb441c6032bcd5cf44936541ce27f9c57d143726b417e3c938e5b05a37c9e3d",
+    "locales/es.json": "7200686bca525793b3199cf773441570faebb034cdcba552b85410244ce66683",
+    "locales/en.json": "c0783a3eced9947841b0e656ce61544cb45e831c334b63af262d384e9b5a3f30",
     "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
-    "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b"
+    "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
+    "handlers/moderation/ban.js": "2237b78e4ff51b2065a451058663726fce5141b81101c6c4a29ec3a3755dc227"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -3473,107 +3474,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/ban.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.getFooter",
-          "line": 24
-        },
-        {
-          "call": "client.settings.get",
-          "line": 29
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 71
-        },
-        {
-          "call": "client.getFooter",
-          "line": 102
-        },
-        {
-          "call": "client.getFooter",
-          "line": 114
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 131
-        },
-        {
-          "call": "client.getFooter",
-          "line": 134
-        },
-        {
-          "call": "client.getFooter",
-          "line": 146
-        },
-        {
-          "call": "client.getFooter",
-          "line": 163
-        },
-        {
-          "call": "client.stats.push",
-          "line": 177
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 188
-        },
-        {
-          "call": "client.getFooter",
-          "line": 191
-        },
-        {
-          "call": "client.settings.get",
-          "line": 200
-        },
-        {
-          "call": "client.settings.get",
-          "line": 203
-        },
-        {
-          "call": "client.settings.set",
-          "line": 205
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 216
-        },
-        {
-          "call": "client.getFooter",
-          "line": 219
-        },
-        {
-          "call": "client.getFooter",
-          "line": 227
-        },
-        {
-          "call": "client.getFooter",
-          "line": 245
-        },
-        {
-          "call": "client.getFooter",
-          "line": 257
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Economy/bank.js": {
       "kind": "current-command-adapter",
@@ -9448,51 +9350,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/idban.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
-        },
-        {
-          "call": "client.getFooter",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 87
-        },
-        {
-          "call": "client.getFooter",
-          "line": 100
-        },
-        {
-          "call": "client.getFooter",
-          "line": 113
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Soundboard/ilikecutg.js": {
       "kind": "current-command-adapter",
@@ -20402,79 +20261,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/useridban.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
-        },
-        {
-          "call": "client.settings.get",
-          "line": 32
-        },
-        {
-          "call": "client.getFooter",
-          "line": 56
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 87
-        },
-        {
-          "call": "client.getFooter",
-          "line": 90
-        },
-        {
-          "call": "client.getFooter",
-          "line": 101
-        },
-        {
-          "call": "client.settings.get",
-          "line": 107
-        },
-        {
-          "call": "client.settings.get",
-          "line": 109
-        },
-        {
-          "call": "client.settings.set",
-          "line": 110
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 120
-        },
-        {
-          "call": "client.getFooter",
-          "line": 123
-        },
-        {
-          "call": "client.getFooter",
-          "line": 129
-        },
-        {
-          "call": "client.getFooter",
-          "line": 146
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Info/userinfo.js": {
       "kind": "current-command-adapter",
@@ -39576,10 +39364,6 @@
           "line": 4
         },
         {
-          "file": "handlers/moderation/action.js",
-          "line": 1
-        },
-        {
           "file": "handlers/setup-session.js",
           "line": 3
         },
@@ -39605,6 +39389,14 @@
         },
         {
           "file": "handlers/configuration-roles.js",
+          "line": 1
+        },
+        {
+          "file": "handlers/moderation/action.js",
+          "line": 1
+        },
+        {
+          "file": "handlers/moderation/ban.js",
           "line": 1
         }
       ]
