@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "5697919d7e591245ebc027ff5f139f596dfc5632",
-    "image": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd",
+    "code": "92759e38e4255f0cd8094c85f043e11ffc5a521d",
+    "image": "ccadb236cf866b42b7b9a61a833429a6799a4d01fdc1723f0f71760e9158b25f",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-ban-20261025.json",
-    "change": "Shared ban execution with fresh delegated access, hierarchy and confirmed outcomes",
-    "tag": "localhost/obey-your-master_bot:release-p0-ban-20261025-5697919d",
+    "evidence": "evidence/p0-member-actions-20261025.json",
+    "change": "Shared fresh member action execution for kick and timeout with confirmed effects and timeout history closure",
+    "tag": "localhost/obey-your-master_bot:release-p0-member-actions-20261025-92759e38",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-ban-20261025.json",
-    "deploymentKind": "application_only_p0_ban",
+    "statusEvidence": "evidence/p0-member-actions-20261025.json",
+    "deploymentKind": "application_only_p0_member_actions",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

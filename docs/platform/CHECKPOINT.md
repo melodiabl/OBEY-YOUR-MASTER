@@ -1,5 +1,11 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 25/10/2026 · kick y timeout corregidos y desplegados
+
+Código `92759e38`, imagen `ccadb236`: kick/timeout texto-slash y removetimeout prefix comparten ejecución y acceso con lecturas frescas, conservando grants y diferencias de duración/estado. Se espera Discord antes de contar/notificar/registrar; retirada con null y cierre del historial acotado. Duración compuesta validada y legible; regresiones de ban/desbaneo pasan. 122 casos en imagen, 1.003 hashes y HTTP/assets correctos; diez muestras saludables, cero reinicios. Respaldo CRC/reversión `82932087` conservados y recetas actualizadas; temporales retirados, sin sanciones reales de prueba ni push. [Entrega y límites](P0-MEMBER-ACTIONS-2026-10-25.md).
+
+Veintisiete grupos/114 entradas/21 rutas revisadas; quedan 561 entradas/74 rutas, incluidas 55 de Administración. **Siguiente P0: historial de advertencias, permisos y visibilidad.** Mutes por roles, historial común, logs canónicos, coordinación/recibos y aceptación autenticada siguen pendientes; G01/G02 permanecen abiertos.
+
 ## 25/10/2026 · familia ban corregida y desplegada
 
 Código `5697919d`, imagen `82932087`: ban/idban/useridban y slash comparten el efecto Discord con roles/miembros frescos, permisos delegados conservados y jerarquía también por ID. Lookup fallido no habilita ban de no miembro; se envían segundos de borrado y se confirma antes de notificar/registrar. Efectos auxiliares acotados y fallos separados; historiales prefix/slash siguen diferenciados. Pasan 96 casos en imagen, 1.001 hashes y HTTP/assets; ocho muestras saludables tras dos de arranque, cero reinicios. Respaldo CRC/reversión `3c092b08` y recetas conservados; temporales retirados, sin sanciones de prueba ni push. [Entrega y límites](P0-BAN-2026-10-25.md).
@@ -36,7 +42,7 @@ Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de control
 
 **Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa kick y timeout/removetimeout de `commands/Administration`, sus pares slash y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza 24 grupos/109 entradas/21 rutas; quedan 566 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa el historial de advertencias, sus permisos/visibilidad y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza 27 grupos/114 entradas/21 rutas; quedan 561 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
 ## 24/10/2026 · resumen Config y categoría MUSIC conciliados en aislamiento
 

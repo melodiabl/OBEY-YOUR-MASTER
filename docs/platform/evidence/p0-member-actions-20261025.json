@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-25",
   "phase": "P0",
-  "status": "verified_in_isolation_release_pending",
+  "status": "deployed_healthy",
   "scope": "Existing kick/timeout prefix+slash and prefix timeout removal, sharing member access with ban",
   "baseline": {
     "exitCode": 1,
@@ -62,6 +62,43 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "finalImageTests": {
+      "exitCode": 0,
+      "tests": 122,
+      "pass": 122,
+      "fail": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95
+    },
+    "imageHashes": {
+      "checked": 1003,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "liveHashes": {
+      "checked": 1003,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": {
+      "checks": 7,
+      "failures": 0
+    },
+    "publicAssets": {
+      "checks": 12,
+      "failures": 0
+    },
+    "tapEvidence": {
+      "before.tap": "4f183bfd54d73e64c11b51d8b4e6a095f3b98a155dfcbc571c6e2e855be540cc",
+      "after-expanded.tap": "5c4852f2af5775369eb6b7105a6a5fa1d8e88f6214c93d217b31f4d3edcf33c1",
+      "final.tap": "7f3f0fc4bef187b040ae54a54c62e01015e53cdab0f80c13cf866cabe905d775"
     }
   },
   "changes": {
@@ -97,5 +134,80 @@
     "Prefix and slash preserve distinct grants, duration/state policies and history sources; no new slash command",
     "Native removal closes existing timeout records with a cutoff, without a durable receipt or strict concurrent operation lease",
     "Timed-out ancillary writes may finish after the response; no automatic Discord effect retry"
-  ]
+  ],
+  "release": {
+    "code": "92759e38e4255f0cd8094c85f043e11ffc5a521d",
+    "image": "ccadb236cf866b42b7b9a61a833429a6799a4d01fdc1723f0f71760e9158b25f",
+    "tag": "localhost/obey-your-master_bot:release-p0-member-actions-20261025-92759e38",
+    "at": "2026-10-25T17:50:22.222899+00:00",
+    "rollbackImage": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd"
+  },
+  "review": {
+    "correctness": "48-scenario red baseline; 97 expanded isolated scenarios and 25 originals pass; no skipped cases",
+    "readability": "Three prefix adapters replace legacy inline blocks; one member-access gate reused by ban and member actions",
+    "architecture": "Shared effect execution, parsing and explicit transport policies; existing history sources retained and timeout removal closes existing rows",
+    "security": "Fresh roles/member reads, action-specific grants and SDK capabilities, protected targets, safe duration bounds and no raw exception/mention interpolation",
+    "performance": "Single-member REST fetches, parallel member reads after role refresh, bounded post-effect confirmations; no roster fetch",
+    "limits": "No real Discord/Mongo mutation or authenticated walkthrough; durable coordination, common history and canonical logs remain open"
+  },
+  "operations": {
+    "backup": {
+      "bytes": 59293352,
+      "gzipCrcValid": true,
+      "uncompressedBytes": 120759661
+    },
+    "preflight": {
+      "candidateStarted": false,
+      "differences": [],
+      "environmentPreserved": true,
+      "mountsPreserved": true,
+      "rollbackImage": "829320872c7bff6746a2336c0a40a7101801d3c8df7056f805b8df58108875cd"
+    },
+    "observations": {
+      "samples": 10,
+      "healthy": 10,
+      "starting": 0,
+      "httpOk": 10,
+      "restarts": 0,
+      "last": {
+        "at": "2026-10-25T17:52:05.655739+00:00",
+        "image": "ccadb236cf866b42b7b9a61a833429a6799a4d01fdc1723f0f71760e9158b25f",
+        "health": "healthy",
+        "restarts": 0,
+        "httpStatus": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 103
+        }
+      }
+    },
+    "startup": {
+      "at": "2026-10-25T17:52:23.072352+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "serenetia",
+        "millohost"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0,
+      "uncaughtLogEvents": 0,
+      "unhandledLogEvents": 0
+    },
+    "cleanup": {
+      "at": "2026-10-25T17:52:44.429894+00:00",
+      "verifierSha256": "641fc671455f68e4b39f88889187e94cd37bdcb71818c779ea5e8e393a0da994",
+      "temporaryVerifierRemoved": true,
+      "ownedReleaseWorktreeRemoved": true,
+      "neverStartedCandidateRemoved": true,
+      "originalTestFilesRetained": true
+    },
+    "recoveryRecipesUpdated": 2,
+    "migrationOrDataRestore": false,
+    "realDiscordTestActions": false,
+    "pushed": false
+  }
 }

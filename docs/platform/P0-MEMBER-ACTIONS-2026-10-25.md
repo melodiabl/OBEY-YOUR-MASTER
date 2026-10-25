@@ -20,4 +20,8 @@ No se añaden comandos, endpoints ni un timeout-removal slash. No hay recibos du
 
 El mapa llega a **27 grupos, 114 entradas y 21 rutas**. Quedan **561 entradas y 74 rutas**, incluidas 55 de Administración. G01/G02 siguen abiertos. La siguiente unidad P0 es el historial de advertencias, sus permisos y visibilidad; los mutes basados en roles permanecen como intención distinta.
 
-Estado: comprobado en aislamiento; construcción y despliegue pendientes. Se retirarán los verificadores tras conservar la evidencia.
+Entrega desplegada: código `92759e38`, imagen `ccadb236cf86`, Node 22.23.4 y Undici integrado 6.29.1. Pasan los mismos 122 casos sobre la imagen final sin montar código candidato. Coinciden 1.003 hashes de fuentes/catálogos, compilado web y tests originales en imagen y contenedor. Gate local del inventario, siete comprobaciones HTTP y doce assets públicos correctos.
+
+Diez observaciones saludables, HTTP 200 y cero reinicios automáticos; la última confirma base de datos y música disponibles. Gateway listo, veinte entradas slash confirmadas y Serenetia/MilloHost conectados, sin errores de recuperación detectados en esa ventana. Esto no certifica audio ni aceptación autenticada de sanciones.
+
+Respaldo de 59.293.352 bytes con CRC gzip verificado y reversión `82932087` conservados. Entorno, montajes y límites equivalentes; recetas de recuperación y alias local actualizados. Sin restauración de datos, sanciones/DM/logs/casos de prueba, voz de prueba, push ni CI remoto. Verificador, candidato sin arrancar y checkout propios retirados; se conservan los tres archivos originales de tests y la evidencia JSON/TAP.
