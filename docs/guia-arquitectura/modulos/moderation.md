@@ -1,6 +1,8 @@
 # Guía de migración del módulo moderation
 
-Tarea `MOD-MODERATION`. Estado `audit_before_migration`. Destino propuesto `src/modules/moderation`. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
+Tarea `MOD-MODERATION`. Estado `partial_migration_in_isolation`. El primer corte de advertencias ya reside en `src/modules/moderation`; el resto y su aceptación real siguen pendientes. La migración preserva funciones y datos existentes; la ficha no autoriza agregar funciones nuevas.
+
+El [corte de advertencias del 25/10](../../platform/P0-WARNING-MODULE-2026-10-25.md) conecta nueve entradas Discord y ocho protecciones automáticas a casos persistidos y distingue adaptadores, reglas y almacenamiento. Aún no está desplegado. La captura privada del proceso vivo confirmó cero acciones antiguas y cero perfiles con referencias de avisos cargadas; el inspector de diagnóstico se cerró. Estas casillas describen **todo moderation**, por lo que siguen abiertas.
 
 
 Dependencias de arquitectura: `ARCH-03`, `ARCH-05`, `ARCH-07`.

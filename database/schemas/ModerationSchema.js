@@ -8,5 +8,9 @@ const ModerationSchema = new Schema({
   duration: Number,
   active: { type: Boolean, default: true },
   caseId: Number,
+  warningOrigin: { type: String, enum: ['prefix', 'auto', 'slash'] },
+  removedBy: String,
+  removedAt: Date,
+  removalReason: String,
 }, { timestamps: true, strict: false })
 module.exports = model('Moderation', ModerationSchema)

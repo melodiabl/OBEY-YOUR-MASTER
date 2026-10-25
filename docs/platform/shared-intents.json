@@ -195,23 +195,14 @@
         "slash:moderation.warn"
       ],
       "routes": [],
-      "service": null,
-      "store": {
-        "prefix": [
-          "client.modActions",
-          "client.userProfiles",
-          "client.stats"
-        ],
-        "slash": [
-          "ModerationSchema",
-          "ModerationCounterSchema"
-        ]
-      },
-      "status": "divergence_recorded",
-      "finding": "Different case histories, actor policies and automatic warning consequences. Prefix checks configured admin/cmd roles and triggers threshold actions; slash requires KickMembers and creates a separate Mongo case. No common sanction/case authority.",
-      "nextTask": "T35",
+      "service": "src/modules/moderation/application/create-warning.js#createWarning",
+      "store": "ModerationSchema + ModerationCounterSchema; old userProfiles/modActions only read compatibly",
+      "status": "corrected_and_verified_in_isolation",
+      "finding": "Manual prefix/slash and nine automatic warning producers now write a persisted native case; fresh manual access is rechecked before creation. Prefix escalation counts only newly recorded prefix/auto cases, excluding earlier slash cases. The former volatile records are not recoverable after a restart.",
+      "nextTask": "T35: reconcile legacy records, durable receipts, escalation and logs before full domain acceptance",
       "phase": "P2",
-      "migrationRequirement": "Reconcile existing records and policy explicitly before replacing either path; do not silently discard warning history or duplicate sanctions."
+      "migrationRequirement": "Preserve any currently live in-memory legacy records before a production restart; no historical record backfill is claimed.",
+      "evidence": "evidence/p0-warning-module-20261025.json"
     },
     {
       "id": "economy.pay",
@@ -819,15 +810,48 @@
         "duration": "native null clears deadline; no new slash endpoint"
       },
       "result": "SDK null removal confirmed before history update; history failure remains a separate warning"
+    },
+    {
+      "id": "moderation.warning.history",
+      "commands": [
+        "prefix:warnings",
+        "prefix:globalwarnings",
+        "prefix:detailwarn",
+        "slash:moderation.cases"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/history.js; Discord views in discord/history-commands.js and history-view.js",
+      "store": "Verified legacy warning references plus persisted active ModerationSchema warning cases; slash cases reads scoped ModerationSchema",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Fresh staff access before reading and before private delivery; cross-guild prefix history checks each guild independently",
+      "effects": "Prefix history sends one bounded DM and only a generic public notice; slash history is ephemeral. No read-side profile writes.",
+      "limits": "Legacy details are volatile and cannot be reconstructed from old references; native prefix history is capped at 500 active warnings per target across current guilds.",
+      "evidence": "evidence/p0-warning-module-20261025.json"
+    },
+    {
+      "id": "moderation.warning.remove",
+      "commands": [
+        "prefix:unwarn",
+        "prefix:removeallwarns",
+        "slash:moderation.unwarn"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/warning-removal.js; legacy CAS in infrastructure/legacy-warning-store.js",
+      "store": "Native ModerationSchema active flag with actor/time; legacy profile references conditionally updated only for the exact subject and guild",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Fresh actor and hierarchy before mutation; prefix retains configured grants, slash requires native KickMembers",
+      "effects": "No success response before confirmed persistence; mixed bulk removal reports partial completion if the second store fails",
+      "limits": "No durable cross-store transaction or receipt; legacy IDs and source records are not recoverable after restart.",
+      "evidence": "evidence/p0-warning-module-20261025.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 27,
-    "commandEntriesReviewed": 114,
+    "reviewedGroups": 29,
+    "commandEntriesReviewed": 121,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 561,
+    "remainingCommandEntries": 554,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

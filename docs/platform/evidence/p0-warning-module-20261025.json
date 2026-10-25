@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-25",
+  "phase": "P0",
+  "status": "verified_in_isolation_not_deployed",
+  "scope": "First moderation warning capability in src/modules/moderation: create, read, remove and seven automatic producers plus ghost ping",
+  "verification": {
+    "isolatedCases": 81,
+    "originalCasesIncluded": 25,
+    "failed": 0,
+    "sourceHashes": 987,
+    "commandEntries": 675,
+    "aliases": 779,
+    "reviewedGroups": 29,
+    "reviewedCommandEntries": 121,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-warning-history-20261025/before.tap",
+    ".runtime/p0-warning-history-20261025/after.tap"
+  ],
+  "operationalLimit": "Live process snapshot found zero legacy modActions and zero loaded profiles with warning references; inspector closed. Earlier lost legacy details cannot be reconstructed. Candidate awaits build and verified rollout.",
+  "remaining": [
+    "Build, back up and deploy the candidate; verify source hashes, health and rollback",
+    "Canonical moderation logs and durable receipts",
+    "Authenticated two-guild acceptance and the rest of moderation",
+    "Complete P0 and G01/G02 before P1"
+  ]
+}

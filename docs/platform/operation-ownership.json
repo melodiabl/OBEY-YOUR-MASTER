@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedDate": "2026-10-23",
+  "capturedDate": "2026-10-25",
   "meaning": "Owner identifies the current orchestration file, not completion of a canonical business-service migration",
   "capture": {
     "commandLoaders": "executed without login",
@@ -28,7 +28,7 @@
     "commands/Administration/deletechannel.js": "c34d7886887f43f977348421f2d18029f4765e1da7435a29e955b74245f20e4a",
     "commands/Administration/deleterole.js": "cd756fee44f6d3c2fb17b5a132c4668191d35e9c6a67a6d8d3f069523b5429c0",
     "commands/Administration/deletethread.js": "d81e07303aeba976b6f696a5a69da43963f6f210c5233c3fc4d1a019d07eb711",
-    "commands/Administration/detailwarn.js": "410d418776bcbed146a54b15639d3ef49af4b5fe889840e60f494fa1afea8470",
+    "commands/Administration/detailwarn.js": "3fafdbfa3b5964d84259d9f166b5d61ea1b34ccf74077984c26377cca13ada41",
     "commands/Administration/dm.js": "fc8aee048df90a9f9cebd45395de90c856dcf628252aba7149d63f1f37bb393e",
     "commands/Administration/editembed.js": "9771f0519c9e822dbe275138542844c4a0709d6f38c26156c8cd60b95bb17b7b",
     "commands/Administration/editimgembed.js": "39a6a29a9459506aab6acfe8cda3bfd514846bb38599fdf4a2c5a74375dd94e0",
@@ -36,7 +36,7 @@
     "commands/Administration/embedbuilder.js": "f94f06dcf97b49cd767c10725453aa1927f1dba19671e16407037f5357d504c4",
     "commands/Administration/esay.js": "b720f18f2f1544a55db06ecb091a0728e8720bfe4ead40fb9f59563f47daafaf",
     "commands/Administration/giveaway.js": "95647dfe88da303a996a80a37214122d889e825f6f0f67daf48bcab61bb1f6bb",
-    "commands/Administration/globalwarnings.js": "a4796dfe9d44efff1aad601993a0cb32d352a391d1d51e909f3d2db8017f34cc",
+    "commands/Administration/globalwarnings.js": "e9a1c55d11eedf0ac303eb18536e6b4ed8723454b5d18f859a5c0d6da4967c51",
     "commands/Administration/idban.js": "459d92182f411ce95950533099cf9ac5c6d6ef242c73c070b421651a86f687fb",
     "commands/Administration/image.js": "079feea03896be243fa29c2a96fb8f81234e8fdeac01c7f662d261a0ebf5fc85",
     "commands/Administration/imgembed.js": "f8687ebc0d73b91d7eef5d9df676ecec0c846f8312fd74930b91b58ced54ad89",
@@ -57,7 +57,7 @@
     "commands/Administration/permamute.js": "9bb26b63b55b9fe7a84556626b44fed7fd5197c3efa22d0baf9d7de0dd2223b8",
     "commands/Administration/poll.js": "b7e387b27388782cbe90b63e3bbd23d3893f072f6fe42c3bacdd9c7cd79ccb54",
     "commands/Administration/react.js": "1c87c2fdd7fb4e3405c2ce43f135624007f8a85cd24921d4e7ed835f8f26cdc5",
-    "commands/Administration/removeallwarns.js": "777ba29ed98021334d808096662df22fb55d61959517450c96c088ee086dcd17",
+    "commands/Administration/removeallwarns.js": "56def1b046b25b8c2de7c3456abd5bc12d91b1bbf9412b4c34fe97b96871d22e",
     "commands/Administration/removerole.js": "f1089c39775b8258229f35bcc257b1305856a6d3c0819be69b0fc8a56d7b85d3",
     "commands/Administration/removerolefrombots.js": "49ea277325cc492ef4de51c4e6a7f24b16e034519ac752598c3c69141e7966b7",
     "commands/Administration/removerolefromeveryone.js": "1866fa65934df687fe82a1126d28455ef23775f79819e8e7b133a76f2cad1107",
@@ -78,11 +78,11 @@
     "commands/Administration/unlockchannel.js": "c803beeb78448fb5e5cbc3df5af007d2ae49ea0337912071c69508affe230aff",
     "commands/Administration/unlockthread.js": "8e39f11a3c622d4711499ac9a44d34fcebdf2f21e1719af76701803814a91fa3",
     "commands/Administration/unmute.js": "45337352406b1876e8be995661af72f796722afe5d28b67664b87f681901fc18",
-    "commands/Administration/unwarn.js": "7a8c43440a692ce50ea74ab8eef32d00b4e8b706ae6a9ac0848909b4fc5a2c22",
+    "commands/Administration/unwarn.js": "8b136f364ad9d905e381955815adff2df405091f8a4ffed714b98370d0ad0139",
     "commands/Administration/updatemessage.js": "25391650061a3a3d35b22b11b9d8ce53ded2c880563b5baf217e9987d8b725bd",
     "commands/Administration/useridban.js": "210353d119d6ca6d04977f3c253720c1be1384a0fb42b88bbaa4c28f22f98d56",
-    "commands/Administration/warn.js": "4b038879bf3940da35cb4f43334aaea736bfc5332df0e2163fd4b84aeafd3dfc",
-    "commands/Administration/warnings.js": "b23da9f7dadc1d782ebd1d95a49711c4a7af75f0fb3ac2f3f3bc509a5e2970aa",
+    "commands/Administration/warn.js": "8960c41e9c43ab43d1a21909e3bb72e99fc4e9c79e1b1e47f34af528cc5b36ee",
+    "commands/Administration/warnings.js": "be64d6fbc1d526d1c29a821e173997a6ebc2b4278c8442aff69004c8cfd5d0ca",
     "commands/Anime-Emotions/a-agree.js": "287eb75d338729395469022281727a60bbb922d8cceb4919b6c78415d77e91de",
     "commands/Anime-Emotions/a-baka.js": "1a20b73bf315e4c2a75ce2405cd7b1b397455155af402980e2a75b910cbf4123",
     "commands/Anime-Emotions/a-bite.js": "f585783214791e24e04f30618ebeb22af5fcfeb0060a8a7a8ce391dd05aea232",
@@ -574,12 +574,12 @@
     "handlers/NumberCounter.js": "3badd9bdbe8f2d423c4d7cb364d398e8a76d4e4db65aa0aaf8cf8d416a98d8fa",
     "handlers/aichat.js": "632b25bd17f3f449e25fd03d4c616e4ae96c9620595bdb449d4eb77e72cf8515",
     "handlers/anti_nuke.js": "223d83c3411062b2ca2916749bcfaba400a43d3d0dd183c2fba9a1b1d44d0ac5",
-    "handlers/anticaps.js": "cc468c4d24ed2c2d10257953bbb56830064b20cbea7d55f4e8127a45ef41de7b",
-    "handlers/antidiscord.js": "1c25ceff20e89e7bb74115a9977a3364bba1c4467da35e792aae0a89ccecc0a9",
-    "handlers/antilinks.js": "33e63ac97004d3f4d903f31578869e56b9ae8e5be677db6596f3acff0726a3df",
-    "handlers/antimention.js": "588400e4e28fedff656f24d2b26ef61859c19e6aed6112932ee8e91ea7be6103",
-    "handlers/antiselfbot.js": "a93ff11344a9cc104fadedd99bc52a55d05dea49a71dd63d52ed19aed0cd0cff",
-    "handlers/antispam.js": "06c6061a0538d7adb794ea4d7af6215810a3ec6e9961930f9d880b939b9a1597",
+    "handlers/anticaps.js": "3fb951228bef8054e7381d1dd94153378fae548a33e9b6eef75a649d898316aa",
+    "handlers/antidiscord.js": "9017e7abac67cb37244ff7b79a3b822a0e0e3b149ef4a7904ee6533425ab6a63",
+    "handlers/antilinks.js": "840c918e2f3984e66d1d238cbb702d5bfd3d8392606f517fe0fc9c226f6df28f",
+    "handlers/antimention.js": "2894fe09876339150455a96fd37ad5a5316f2ca8e3c42f9158e701ad769fb80b",
+    "handlers/antiselfbot.js": "34af961b268e0b97ee345cf50010a200fd301c3ad46904125468d7b384c1c602",
+    "handlers/antispam.js": "56ee0727b824af12e367bac0d0024289ee322d532ab0a2771f923a7dcd06d1ad",
     "handlers/apply.js": "a43d7b7dde0949555bc9c071892f8b1c9ed098bac6bdc2f737c2c118e6440a29",
     "handlers/architect.js": "c1db4b55c6d8da913d286a67242592960b2b01f94c8bb4e8767de69adac944ff",
     "handlers/architect/application-repository.js": "5a931b0bd10405f4f38343a7213e7b669c20ff929c1d7623fcfe2449210cc445",
@@ -612,7 +612,7 @@
     "handlers/autoembed.js": "40813aecca0a021863229ddebcb350908f115a0c33c7b88d1a6cfaa8f3de48eb",
     "handlers/automeme.js": "2a583524eee34a390a2e962da923710c9d99953c34dcdcf67290c1e01bc74722",
     "handlers/birthdayScheduler.js": "63048d69070d20bf2c7ca69313bf9570062422ef9bf04a56062f2b883b02b60f",
-    "handlers/blacklist.js": "21792823adb4f57ee5b63d8f3a43c4c1f2bfcc972085c95661ebf4610b260ab2",
+    "handlers/blacklist.js": "58a49ae941349bc0db4e577288978b26e35275f002cdc40bbd8a368279e5c058",
     "handlers/boostlog.js": "0ce4aa8fb357f2b6ddaa2d68d5e84877c9fe762314d33adc6ab7ef6e891dce53",
     "handlers/canvasUtils.js": "b0266185a57b7156724e625387b9b6069f8899e1827f44995341453e177334a6",
     "handlers/card-assets.js": "85b89d671315b1c75bc43d74c10483b7604384fc4efadec3acce088aa124fdc4",
@@ -653,7 +653,7 @@
     "handlers/games-choice.js": "9bdd0563beaa0e0c02cfd6099aca1af2995aef384f66507424f04f4f220b227a",
     "handlers/games.js": "466ef73cbf781b42a5b0bbbe362bdf7300e3fa85d05f43c6b39f8a45f32dbbde",
     "handlers/games/board-image.js": "7c79ed7b7d01a9bed656600e738492c10cfe025e87b75a6c59bec74803081e8f",
-    "handlers/ghost_ping_detector.js": "05d75e3cb3c7c9e757b62b4242ca094c7065cca92432bb6f36457f221a415be8",
+    "handlers/ghost_ping_detector.js": "18f61f35975d04558c88dcdf65484dc0e6b139e562800f127a633906260e0f52",
     "handlers/giveaway.js": "66785ce0e6421da69c40362d4cef7adfb6a1759baf5bc46580cce6b7005f507f",
     "handlers/help.js": "b5cc449fe284873e46a4db044d2048e082d1fadf5da7acb3cc1c5de6a06adf25",
     "handlers/helpui.js": "7e3238e17ebd0ccb467edaab8323b8cc7054557784060bccbee08d7390786349",
@@ -688,11 +688,14 @@
     "handlers/membership-title.js": "e2412c75b687a031493431f6f29c9b9e004879729c096a4db9ab896d942b8387",
     "handlers/meme-service.js": "c910cb659d62ea0aabf097666afecf42070920c9bb2439e328d50fea213a715c",
     "handlers/moderation/action.js": "6a281bae93c1b87a5e14af2f21da633d6d353ecfc7051ab357d12f203c547ad0",
+    "handlers/moderation/ban.js": "dc8927b9a012572cb2e25d9040f476d05e27277819b278ff1c6fbac5db574a69",
     "handlers/moderation/cases.js": "55f3593431f534a6cec2b04e93b8bda451a4f4aafec1f0431b3f98210dffa367",
+    "handlers/moderation/member-access.js": "8283b728c2e5881153e4c5cd6317a26ea8221b2880e03e548fb2eca84416ad30",
+    "handlers/moderation/member-actions.js": "2ec2949d1f58e5730335d29bda24d8d91c4efcd3c563b9f319a918edbaa66e7c",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
-    "handlers/music/autoplay.js": "041eb89e1fff9125c156bdc578c61d5f9d2519431e18fc735da09c1ef1fd846f",
     "handlers/music/autoplay-session.js": "a9923da22795ec708d2120a247d459e04832f0a9e1ce8dbd073522d8d9d29687",
+    "handlers/music/autoplay.js": "041eb89e1fff9125c156bdc578c61d5f9d2519431e18fc735da09c1ef1fd846f",
     "handlers/music/catalog-picker.js": "b7e80d6cf95798752c2ce68170d69e4bd43179ebf60dd292fda4c2dc288a243e",
     "handlers/music/catalog-search.js": "f26c91a29234c6a8bcc74eaeb0119b6f350be3a453f1937d8c29ae25e0aa609f",
     "handlers/music/command-settings.js": "6d2ba3f11d2e5bbcf5d30c0ad5e7004b10ea699203744c00c5effe9bd9c1d7d1",
@@ -764,6 +767,7 @@
     "handlers/radio-stations.js": "6b1c441567a29f421043ae6193a27d995e5cd4f5390f57e6bd45c9953d35efb5",
     "handlers/ranking.js": "c00c960cda8832eb3bdf14df6dd995f101354d70aff7272fa48af2f748ccb23c",
     "handlers/reactionrole.js": "2ab61df951ad38db088f99e1d552e91c8b794a6fa849f13941267a1dcb48fc85",
+    "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
     "handlers/roster-publication.js": "a3d2f8fa6b274ae5d54f6adde4aa765251197df41b4437c230e92da03d73d1ef",
     "handlers/roster.js": "ad08a9bf5e9369c3d7dc2b75846c2d53e950585b3e3fc2fb525dd4e078be22cd",
     "handlers/settings-view.js": "1be82b59c5a922b9a30371ece5e071c114f0dac33abbd6af89004b7c1d0f229e",
@@ -835,6 +839,9 @@
     "handlers/welcome/service.js": "df8825574f46ef2460166c694385446b88e2734dc1ff98b46cd3f66e92807407",
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
+    "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
+    "locales/en.json": "66b432040aeb7c6c90889f08d86219a24f1abcdab45b6d67278a2f589483829c",
+    "locales/es.json": "2cc4b9f089262696f447d2c0dfdd15850bed650c853627a36b8dcfe41458e18c",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -920,17 +927,17 @@
     "slashCommands/Invites/reset.js": "64674c2df8e314f426a619ed3f1bae379cf8d2a3a6e40aab4b40ac752562f0bd",
     "slashCommands/Invites/show.js": "a8e7b061340722ec916e9cacaa6d31b7f6d7f314928925991f25801b7b31442e",
     "slashCommands/Moderation/ban.js": "5833fc77f3344cb2f8569111994ce5dc9158e50ef0a2538e2d98999e025498ab",
-    "slashCommands/Moderation/cases.js": "cfb3e11ccbb996e964cc90f277e49d9428ae015dbafdc35bfe04aca46cbf9445",
+    "slashCommands/Moderation/cases.js": "8864351d4d49acf872cba232ac6d58847357cbbc825131e3cbe6f0bf2312d181",
     "slashCommands/Moderation/kick.js": "80e2115c16531583a77d7062e2b8e5ab69df4d08e4eac168815fb1936ee1d86d",
     "slashCommands/Moderation/purge.js": "ea4ff3c0532ac9a6833ec496e78ebaf27b09a57719cc36f5eb958f2bb0b23046",
     "slashCommands/Moderation/slowmode.js": "669e453971ff2da04d140bd721140ebe23d8922988318375ce962d45ddacb12d",
     "slashCommands/Moderation/timeout.js": "6a98395fd4d9dfc05a7b8d7a2057357714020f75eface264c1c39d8e9d5e5609",
     "slashCommands/Moderation/unban.js": "1b243ca9498deb2b2ffa0f994b27dc6239e6600d21075f1959806745cba8be61",
-    "slashCommands/Moderation/unwarn.js": "61810496c2f962617d1fd71e8c83b51026e0132bc36a8ae664d1d1f64932501f",
+    "slashCommands/Moderation/unwarn.js": "525bf68a9bfe7e5e890c79498df4ea0d84aef980173d61f160e8464b2514608f",
     "slashCommands/Moderation/vdeafen.js": "f057443f95b46c1a9ca4c8ea72b72e3dbdfe9f0fdd20a9f543730f3350ac10a3",
     "slashCommands/Moderation/vkick.js": "5bb39418729b0b7bb082f0218bb1965f1dcf78b85a359807e2e66ebfeab2efff",
     "slashCommands/Moderation/vmute.js": "0d9fe976f1cd8bc7013f8f021aba153cdb75d679556cf5538fc1e270f0098695",
-    "slashCommands/Moderation/warn.js": "cf25b8740b1be3f7686b6c1ec33aeca81bcb41259220ff6b779048c257fb74e7",
+    "slashCommands/Moderation/warn.js": "e78cce96ec40fbc2f9fa6898008a7f99fe8a0e46f56f353ba0980c03f80c4ad7",
     "slashCommands/Music/autoplay.js": "5852abb1a2a0226f6667106a210e24a1ab478529c74b7f86beeb9c24a5d3ff31",
     "slashCommands/Music/clearqueue.js": "b141bb18cf7696032a238ff7d515387f2ec47fa4a12d6bfed1180ce83f481eac",
     "slashCommands/Music/filter.js": "8001405e9c0bfec9d1b87c09187869b1c929256920f8426e95ee2cc3891fa45f",
@@ -979,13 +986,17 @@
     "slashCommands/chat.js": "67924371cf43af0f45d1fbade34650ef722596bea554796900c80e5b29d43931",
     "slashCommands/nodes.js": "e483bf3369ae3cf328b3eed9cb687a135dd67361cdc8a4ce28775fa768d663b7",
     "slashCommands/setup.js": "0d6cc8cb0b71bd99265479c5d195e21ed4f53e6eeb9b798ee3c0222eb66fad0a",
-    "locales/es.json": "293ba91493f1b903367477427f7526469a05aec336afcae934d2143987e8bf26",
-    "locales/en.json": "ca7f4dfeecdb675bbc04a7ade8e8aa5d49b142abe4afbae0b57db9b77611a8c7",
-    "handlers/role-batch-lock.js": "514b67b054fcbe73e54a560ca680c7abad798bdb09b8ff43080b63d4f5b70fb2",
-    "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "handlers/moderation/ban.js": "dc8927b9a012572cb2e25d9040f476d05e27277819b278ff1c6fbac5db574a69",
-    "handlers/moderation/member-access.js": "ef0c019afcf0b68560cca7ad6d7bb8d4f41ec7e0468efb1d11c90e46977233b9",
-    "handlers/moderation/member-actions.js": "2ec2949d1f58e5730335d29bda24d8d91c4efcd3c563b9f319a918edbaa66e7c"
+    "src/modules/moderation/application/create-warning.js": "03b7d4b6cfbcdcf84488a8c2b42e52586471df875109e3c716aec93737aa79f5",
+    "src/modules/moderation/application/history.js": "06d22032f8d082173bb828f5be7a748a5c73d69c3c1c6d84ee84db0444c004aa",
+    "src/modules/moderation/application/warning-removal.js": "adc5c863bd1d712a0b7d54a37796ef23424162b57f3c2988a5fb403a371431bd",
+    "src/modules/moderation/discord/history-commands.js": "f5b1edae48c6ec6eb4bb5376d07d1ca6a4be5b44e89ccf6f82763165cf1abbc2",
+    "src/modules/moderation/discord/history-view.js": "86610826ddec420fd25a720ddd9afbc0e2146c3a37b922bb893a38344224c0df",
+    "src/modules/moderation/discord/legacy-prefix-warn.js": "3f45621d8f75918502a4b6669a98af5d640a9efa9a8ae3eb5422062cbf847c7f",
+    "src/modules/moderation/discord/targets.js": "c1f68a7acefcb764243058efce55f3905c6812e81f46d6cb9d95f8a02e9a9bb4",
+    "src/modules/moderation/discord/warning-commands.js": "f53775daa29cdad1d5082d171a1da3a32c0685b7ef77a3bbb1d2543fcb092f89",
+    "src/modules/moderation/domain/warnings.js": "9b67edb62b3ee427fa0e56883f220f4238dd000ed77ebe2c754bfc2c09d25e35",
+    "src/modules/moderation/index.js": "5fa70b8565ab0abbe8013aa17c72fb61b3fc776e4350dd18fcf0e4e64093f85f",
+    "src/modules/moderation/infrastructure/legacy-warning-store.js": "a085a897a1704b0e6f8ee430c0798e2f6c2e78cfd70bb9c69e8dac3ec885d95f"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -6542,71 +6553,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/detailwarn.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.getFooter",
-          "line": 28
-        },
-        {
-          "call": "client.getFooter",
-          "line": 39
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 46
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 54
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 71
-        },
-        {
-          "call": "client.getFooter",
-          "line": 80
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 90
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 91
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 103
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        },
-        {
-          "call": "client.getFooter",
-          "line": 126
-        },
-        {
-          "call": "client.getFooter",
-          "line": 138
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Info/developer.js": {
       "kind": "current-command-adapter",
@@ -8760,119 +8708,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/globalwarnings.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.users.fetch(args[0]).catch",
-          "line": 21
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 21
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 51
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 58
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 59
-        },
-        {
-          "call": "client.getFooter",
-          "line": 65
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 66
-        },
-        {
-          "call": "client.userProfiles.get(warnmember.id, \"warnings\").filter",
-          "line": 66
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 66
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 82
-        },
-        {
-          "call": "client.getFooter",
-          "line": 85
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 86
-        },
-        {
-          "call": "client.userProfiles.get(warnmember.id, \"warnings\").filter",
-          "line": 86
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 86
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 97
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 97
-        },
-        {
-          "call": "client.settings.get",
-          "line": 107
-        },
-        {
-          "call": "client.settings.get",
-          "line": 109
-        },
-        {
-          "call": "client.settings.set",
-          "line": 110
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 120
-        },
-        {
-          "call": "client.getFooter",
-          "line": 123
-        },
-        {
-          "call": "client.getFooter",
-          "line": 131
-        },
-        {
-          "call": "client.getFooter",
-          "line": 148
-        },
-        {
-          "call": "client.getFooter",
-          "line": 160
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/godwhy.js": {
       "kind": "current-command-adapter",
@@ -14238,107 +14075,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/removeallwarns.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 42
-        },
-        {
-          "call": "client.getFooter",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 69
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 75
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 89
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 94
-        },
-        {
-          "call": "client.userProfiles.set",
-          "line": 96
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 107
-        },
-        {
-          "call": "client.getFooter",
-          "line": 110
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 125
-        },
-        {
-          "call": "client.getFooter",
-          "line": 128
-        },
-        {
-          "call": "client.settings.get",
-          "line": 133
-        },
-        {
-          "call": "client.settings.get",
-          "line": 135
-        },
-        {
-          "call": "client.settings.set",
-          "line": 136
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 146
-        },
-        {
-          "call": "client.getFooter",
-          "line": 149
-        },
-        {
-          "call": "client.getFooter",
-          "line": 157
-        },
-        {
-          "call": "client.getFooter",
-          "line": 174
-        },
-        {
-          "call": "client.getFooter",
-          "line": 186
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Settings/removebotchat.js": {
       "kind": "current-command-adapter",
@@ -19696,123 +19434,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/unwarn.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 42
-        },
-        {
-          "call": "client.getFooter",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 66
-        },
-        {
-          "call": "client.getFooter",
-          "line": 80
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 86
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 94
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 95
-        },
-        {
-          "call": "client.getFooter",
-          "line": 102
-        },
-        {
-          "call": "client.getFooter",
-          "line": 111
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 122
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 123
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 136
-        },
-        {
-          "call": "client.getFooter",
-          "line": 139
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 158
-        },
-        {
-          "call": "client.getFooter",
-          "line": 161
-        },
-        {
-          "call": "client.userProfiles.remove",
-          "line": 169
-        },
-        {
-          "call": "client.settings.get",
-          "line": 171
-        },
-        {
-          "call": "client.settings.get",
-          "line": 173
-        },
-        {
-          "call": "client.settings.set",
-          "line": 174
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 184
-        },
-        {
-          "call": "client.getFooter",
-          "line": 187
-        },
-        {
-          "call": "client.getFooter",
-          "line": 193
-        },
-        {
-          "call": "client.getFooter",
-          "line": 210
-        },
-        {
-          "call": "client.getFooter",
-          "line": 222
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/updatemessage.js": {
       "kind": "current-command-adapter",
@@ -21009,293 +20632,15 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/warn.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 42
-        },
-        {
-          "call": "client.getFooter",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 80
-        },
-        {
-          "call": "client.modActions.set",
-          "line": 88
-        },
-        {
-          "call": "client.userProfiles.push",
-          "line": 99
-        },
-        {
-          "call": "client.userProfiles.inc",
-          "line": 100
-        },
-        {
-          "call": "client.stats.push",
-          "line": 102
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 103
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 104
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 116
-        },
-        {
-          "call": "client.getFooter",
-          "line": 119
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 120
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 120
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 140
-        },
-        {
-          "call": "client.getFooter",
-          "line": 143
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 144
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 144
-        },
-        {
-          "call": "client.settings.get",
-          "line": 159
-        },
-        {
-          "call": "client.getFooter",
-          "line": 166
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 180
-        },
-        {
-          "call": "client.getFooter",
-          "line": 183
-        },
-        {
-          "call": "client.getFooter",
-          "line": 193
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 215
-        },
-        {
-          "call": "client.getFooter",
-          "line": 218
-        },
-        {
-          "call": "client.getFooter",
-          "line": 232
-        },
-        {
-          "call": "client.getFooter",
-          "line": 245
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 259
-        },
-        {
-          "call": "client.getFooter",
-          "line": 262
-        },
-        {
-          "call": "client.getFooter",
-          "line": 271
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 293
-        },
-        {
-          "call": "client.getFooter",
-          "line": 296
-        },
-        {
-          "call": "client.getFooter",
-          "line": 310
-        },
-        {
-          "call": "client.settings.get",
-          "line": 324
-        },
-        {
-          "call": "client.settings.get",
-          "line": 326
-        },
-        {
-          "call": "client.settings.set",
-          "line": 327
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 337
-        },
-        {
-          "call": "client.getFooter",
-          "line": 340
-        },
-        {
-          "call": "client.getFooter",
-          "line": 346
-        },
-        {
-          "call": "client.getFooter",
-          "line": 363
-        },
-        {
-          "call": "client.getFooter",
-          "line": 375
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/warnings.js": {
       "kind": "current-command-adapter",
       "file": "commands/Administration/warnings.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.users.fetch(args[0]).catch",
-          "line": 21
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 21
-        },
-        {
-          "call": "client.getFooter",
-          "line": 39
-        },
-        {
-          "call": "client.userProfiles.ensure",
-          "line": 46
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 53
-        },
-        {
-          "call": "client.modActions.get",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 68
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 69
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 69
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 84
-        },
-        {
-          "call": "client.getFooter",
-          "line": 87
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 88
-        },
-        {
-          "call": "client.userProfiles.get",
-          "line": 88
-        },
-        {
-          "call": "client.settings.get",
-          "line": 109
-        },
-        {
-          "call": "client.settings.get",
-          "line": 111
-        },
-        {
-          "call": "client.settings.set",
-          "line": 112
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 122
-        },
-        {
-          "call": "client.getFooter",
-          "line": 125
-        },
-        {
-          "call": "client.getFooter",
-          "line": 131
-        },
-        {
-          "call": "client.getFooter",
-          "line": 148
-        },
-        {
-          "call": "client.getFooter",
-          "line": 160
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/wasted.js": {
       "kind": "current-command-adapter",
@@ -23222,16 +22567,7 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Moderation/unwarn.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.users.fetch(entry.userId).catch",
-          "line": 30
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 30
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "slashCommands/Moderation/vdeafen.js": {
@@ -38449,10 +37785,6 @@
           "line": 2
         },
         {
-          "file": "slashCommands/Moderation/cases.js",
-          "line": 3
-        },
-        {
           "file": "slashCommands/Moderation/kick.js",
           "line": 2
         },
@@ -38473,10 +37805,6 @@
           "line": 2
         },
         {
-          "file": "slashCommands/Moderation/unwarn.js",
-          "line": 2
-        },
-        {
           "file": "slashCommands/Moderation/vdeafen.js",
           "line": 2
         },
@@ -38487,10 +37815,6 @@
         {
           "file": "slashCommands/Moderation/vmute.js",
           "line": 2
-        },
-        {
-          "file": "slashCommands/Moderation/warn.js",
-          "line": 3
         },
         {
           "file": "slashCommands/Music/autoplay.js",
@@ -38795,10 +38119,6 @@
         {
           "file": "handlers/anti_nuke.js",
           "line": 4
-        },
-        {
-          "file": "handlers/ghost_ping_detector.js",
-          "line": 2
         },
         {
           "file": "handlers/dailyfact.js",
@@ -39117,12 +38437,64 @@
           "line": 1
         },
         {
+          "file": "handlers/moderation/action.js",
+          "line": 1
+        },
+        {
+          "file": "handlers/anticaps.js",
+          "line": 8
+        },
+        {
+          "file": "handlers/antidiscord.js",
+          "line": 8
+        },
+        {
+          "file": "handlers/antilinks.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/antimention.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/antiselfbot.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/antispam.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/blacklist.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/ghost_ping_detector.js",
+          "line": 3
+        },
+        {
           "file": "handlers/moderation/member-access.js",
           "line": 1
         },
         {
-          "file": "handlers/moderation/action.js",
+          "file": "slashCommands/Moderation/warn.js",
           "line": 1
+        },
+        {
+          "file": "src/modules/moderation/application/create-warning.js",
+          "line": 4
+        },
+        {
+          "file": "src/modules/moderation/application/history.js",
+          "line": 1
+        },
+        {
+          "file": "src/modules/moderation/discord/history-view.js",
+          "line": 1
+        },
+        {
+          "file": "src/modules/moderation/discord/legacy-prefix-warn.js",
+          "line": 3
         }
       ]
     },
@@ -39481,18 +38853,6 @@
           "line": 3
         },
         {
-          "file": "handlers/antimention.js",
-          "line": 6
-        },
-        {
-          "file": "handlers/antiselfbot.js",
-          "line": 7
-        },
-        {
-          "file": "handlers/antilinks.js",
-          "line": 7
-        },
-        {
           "file": "handlers/functions.js",
           "line": 21
         },
@@ -39513,24 +38873,36 @@
           "line": 5
         },
         {
-          "file": "handlers/anticaps.js",
-          "line": 10
+          "file": "handlers/moderation/member-actions.js",
+          "line": 1
         },
         {
-          "file": "handlers/blacklist.js",
-          "line": 7
+          "file": "handlers/anticaps.js",
+          "line": 11
         },
         {
           "file": "handlers/antidiscord.js",
-          "line": 9
+          "line": 10
         },
         {
-          "file": "handlers/antispam.js",
+          "file": "handlers/antilinks.js",
+          "line": 8
+        },
+        {
+          "file": "handlers/antimention.js",
           "line": 7
         },
         {
-          "file": "handlers/moderation/member-actions.js",
-          "line": 1
+          "file": "handlers/antiselfbot.js",
+          "line": 8
+        },
+        {
+          "file": "handlers/antispam.js",
+          "line": 8
+        },
+        {
+          "file": "handlers/blacklist.js",
+          "line": 8
         }
       ]
     },
@@ -40228,7 +39600,7 @@
     "slashTopLevel": 20,
     "aliases": 779,
     "httpRoutes": 95,
-    "sourceFiles": 968,
+    "sourceFiles": 979,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

@@ -1,3 +1,4 @@
+const { createWarning } = require('../src/modules/moderation')
 const obeyMeta = require("./presentation/metadata")
 const obeyUi = require("./assets/system")
 //import the config.json file
@@ -60,31 +61,11 @@ module.exports = client => {
             let es = client.settings.get(message.guild.id, "embed");
             try {
                 if (autowarn.antiselfbot) {
-                    client.userProfiles.ensure(message.author.id, {
-                        id: message.author.id,
-                        guild: message.guild.id,
-                        totalActions: 0,
-                        warnings: [],
-                        kicks: [],
+                    const { count, escalationCount } = await createWarning(client, {
+                        guildId: message.guild.id, userId: message.author.id, moderatorId: message.author.id, reason: 'AntiSelfBot Autowarn', origin: 'auto',
                     });
-                    const newActionId = client.modActions.autonum;
-                    client.modActions.set(newActionId, {
-                        user: message.author.id,
-                        guild: message.guild.id,
-                        type: "warning",
-                        moderator: message.author.id,
-                        reason: "AntiSelfBot Autowarn",
-                        when: new Date().toLocaleString(`de`),
-                        oldhighesrole: message.member.roles ? message.member.roles.highest : `Had No Roles`,
-                        oldthumburl: message.author.displayAvatarURL(),
-                    });
-                    // Push the action to the user's warnings
-                    client.userProfiles.push(message.author.id, newActionId, "warnings");
-                    client.userProfiles.inc(message.author.id, "totalActions");
-                    client.stats.push(message.guild.id + message.author.id, new Date().getTime(), "warn");
-                    const warnIDs = client.userProfiles.get(message.author.id, "warnings");
-                    const warnData = warnIDs.map(id => client.modActions.get(id));
-                    let warnings = warnData.filter(v => v.guild == message.guild.id);
+                    try { client.stats.push(message.guild.id + message.author.id, new Date().getTime(), 'warn') } catch {}
+                    const warnings = { length: count ?? '?' };
                     message.channel.send({
                         embeds: [
                             new EmbedBuilder()
@@ -102,8 +83,8 @@ module.exports = client => {
                                 ),
                         ],
                     });
-                    let warnsettings = client.settings.get(message.guild.id, "warnsettings");
-                    if (warnsettings.kick && warnsettings.kick == warnings.length) {
+                    let warnsettings = client.settings.get(message.guild.id, "warnsettings") || {};
+                    if (warnsettings.kick && warnsettings.kick == escalationCount) {
                         if (!message.member.kickable)
                             message.channel.send({
                                 embeds: [
@@ -193,7 +174,7 @@ module.exports = client => {
                             }
                         }
                     }
-                    if (warnsettings.ban && warnsettings.ban == warnings.length) {
+                    if (warnsettings.ban && warnsettings.ban == escalationCount) {
                         if (!message.member.bannable)
                             message.channel.send({
                                 embeds: [
@@ -280,8 +261,8 @@ module.exports = client => {
                             }
                         }
                     }
-                    for (const role of warnsettings.roles) {
-                        if (role.warncount == warnings.length) {
+                    for (const role of Array.isArray(warnsettings.roles) ? warnsettings.roles : []) {
+                        if (Number.isSafeInteger(escalationCount) && role.warncount == escalationCount) {
                             if (!message.member.roles.cache.has(role.roleid)) {
                                 message.member.roles.add(role.roleid).catch(O => {});
                             }

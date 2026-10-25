@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 25/10/2026 · candidato de advertencias en la arquitectura objetivo
+
+`src/modules/moderation` posee ahora la capacidad de advertencias: casos persistidos para texto/slash/protecciones, lectura privada con permisos frescos y retirada condicionada al servidor y sujeto. Los comandos delegan; el código de consecuencias de `!warn` queda como adaptador de compatibilidad dentro del área. Se comprobaron 81 casos aislados y el inventario efectivo de 987 hashes, 675 entradas y 779 aliases. Son 29 grupos/121 entradas/21 rutas revisadas; faltan 554 entradas/74 rutas. [Informe](P0-WARNING-MODULE-2026-10-25.md).
+
+**Pendiente operativo:** aún no se desplegó ni reinició el bot. La captura privada confirmó que no hay registros antiguos de `modActions` ni perfiles con referencias de avisos cargadas en el proceso vivo; el inspector se cerró. No dar por cerrados P0, G01/G02, logs ni MOD-MODERATION. La imagen vigente continúa en `92759e38`/`ccadb236`.
+
 ## 25/10/2026 · kick y timeout corregidos y desplegados
 
 Código `92759e38`, imagen `ccadb236`: kick/timeout texto-slash y removetimeout prefix comparten ejecución y acceso con lecturas frescas, conservando grants y diferencias de duración/estado. Se espera Discord antes de contar/notificar/registrar; retirada con null y cierre del historial acotado. Duración compuesta validada y legible; regresiones de ban/desbaneo pasan. 122 casos en imagen, 1.003 hashes y HTTP/assets correctos; diez muestras saludables, cero reinicios. Respaldo CRC/reversión `82932087` conservados y recetas actualizadas; temporales retirados, sin sanciones reales de prueba ni push. [Entrega y límites](P0-MEMBER-ACTIONS-2026-10-25.md).

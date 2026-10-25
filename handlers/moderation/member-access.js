@@ -64,4 +64,4 @@ async function checkMemberAccess(client, { guild, actorId, targetId, policy, com
   return { status: 'allowed', member }
 }
 
-module.exports = { checkMemberAccess }
+module.exports = { checkMemberAccess, prefixAllowed }

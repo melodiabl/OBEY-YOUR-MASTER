@@ -1800,5 +1800,26 @@
       "auditAudience": "Moderation details will be omitted: restrict the channel to roles or members with View Audit Log."
     },
     "auditRestricted": "Moderation details omitted: the destination must be restricted to staff with audit log access."
+  },
+  "moderationHistory": {
+    "title": "Moderation history",
+    "noCaseNumber": "No case number",
+    "empty": "No visible records for this query.",
+    "availability": "Availability",
+    "legacyNotice": "Older entries may be unavailable; this history can be incomplete.",
+    "page": "Page {page}/{pages} · {total} visible records",
+    "sent": "I sent the history in a private message.",
+    "accessDenied": "I could not confirm your current permissions to view this history.",
+    "invalidTarget": "Provide a valid user mention or ID; a name must identify exactly one person.",
+    "invalidPage": "Provide a valid page or index for the visible records.",
+    "unavailable": "I could not confirm the history right now. No details were published.",
+    "deliveryUnconfirmed": "Private delivery is unconfirmed. Enable DMs from the bot and query again; I will not publish history in this channel.",
+    "removed": "Warning(s) removed. The change has been saved.",
+    "changed": "The history changed or differs from the saved data. Read it again before removing warnings.",
+    "inactive": "This warning was already inactive. No change was made.",
+    "recorded": "Warning saved as case",
+    "received": "You received a warning in",
+    "partial": "Part of the history was removed, but I could not confirm the rest. Read it again before retrying.",
+    "writeUnconfirmed": "I could not confirm whether the warning was saved. Check case history before trying again."
   }
 }

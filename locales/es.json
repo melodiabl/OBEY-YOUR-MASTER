@@ -1800,5 +1800,26 @@
       "auditAudience": "Los detalles de moderación se omitirán: restringe el canal a roles o miembros con Ver registro de auditoría."
     },
     "auditRestricted": "Detalles de moderación omitidos: el destino debe estar restringido a personal con acceso al registro de auditoría."
+  },
+  "moderationHistory": {
+    "title": "Historial de moderación",
+    "noCaseNumber": "Sin número de caso",
+    "empty": "No hay registros visibles para esta consulta.",
+    "availability": "Disponibilidad",
+    "legacyNotice": "Las entradas antiguas pueden no estar disponibles; este historial puede estar incompleto.",
+    "page": "Página {page}/{pages} · {total} registros visibles",
+    "sent": "Te envié el historial por mensaje privado.",
+    "accessDenied": "No pude confirmar tus permisos actuales para consultar este historial.",
+    "invalidTarget": "Indica una mención o un ID de usuario válido; un nombre debe identificar a una sola persona.",
+    "invalidPage": "Indica una página o un índice válido para los registros visibles.",
+    "unavailable": "No pude confirmar el historial en este momento. No se han publicado detalles.",
+    "deliveryUnconfirmed": "La entrega privada no está confirmada. Activa los mensajes privados del bot y vuelve a consultar; no publicaré el historial en este canal.",
+    "removed": "Advertencia(s) eliminada(s). El cambio se ha guardado.",
+    "changed": "El historial cambió o no coincide con los datos guardados. Consúltalo de nuevo antes de eliminar.",
+    "inactive": "Esta advertencia ya estaba desactivada. No se ha cambiado.",
+    "recorded": "Advertencia registrada como caso",
+    "received": "Recibiste una advertencia en",
+    "partial": "Se retiró parte del historial, pero no pude confirmar el resto. Vuelve a consultar antes de repetir.",
+    "writeUnconfirmed": "No pude confirmar si se guardó la advertencia. Consulta el historial antes de repetirla."
   }
 }
