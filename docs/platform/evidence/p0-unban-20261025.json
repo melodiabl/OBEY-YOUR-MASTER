@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-25",
   "phase": "P0",
-  "status": "verified_in_isolation_release_pending",
+  "status": "deployed_healthy",
   "scope": "Shared confirmed unban operation across existing prefix and slash adapters; other sanctions remain pending",
   "baseline": {
     "exitCode": 1,
@@ -48,6 +48,43 @@
       "high": 0,
       "critical": 0,
       "total": 36
+    },
+    "finalImageTests": {
+      "exitCode": 0,
+      "tests": 61,
+      "pass": 61,
+      "fail": 0,
+      "skipped": 0
+    },
+    "inventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95
+    },
+    "imageHashes": {
+      "checked": 1000,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "liveHashes": {
+      "checked": 1000,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": {
+      "checks": 7,
+      "failures": 0
+    },
+    "publicAssets": {
+      "checks": 12,
+      "failures": 0
+    },
+    "tapEvidence": {
+      "before.tap": "18bb0f37af195878ebb1deb3fd9b2cde7aade328f1040e877e9ec8cf5c67aba6",
+      "after-expanded.tap": "fffe4ef4f6bba3b4c8dfbe69523c1aa51e9715b165900b1d7620a7e5baec51a9",
+      "final.tap": "2f14f006434c24e553f505d87bc19cced376bda7450f7ed5294590e31f92a7b8"
     }
   },
   "changes": {
@@ -79,5 +116,80 @@
     "History cutoff excludes newer timestamped records, without replacing a durable receipt or strict ban/unban coordination",
     "Other prefix sanctions still differ from slash; no global service migration claimed",
     "No real unban, DM, moderation case write or voice test performed"
-  ]
+  ],
+  "release": {
+    "code": "6f0ea66eddcf044f823c66bfa7dd63df231bf4ee",
+    "image": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505",
+    "tag": "localhost/obey-your-master_bot:release-p0-unban-20261025-6f0ea66e",
+    "at": "2026-10-25T05:15:36.072835+00:00",
+    "rollbackImage": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96"
+  },
+  "review": {
+    "correctness": "Held/rejected effects and independent failed/unacknowledged/timed-out history writes exercised; 36 isolated cases pass",
+    "readability": "Two adapters delegate to actual shared operation and response projection; legacy duplicate unban orchestration removed",
+    "architecture": "Existing moderation service and ModerationSchema reused; no new case store, endpoint or worker",
+    "security": "Validated string IDs; native policy differences preserved and force-refetched; raw errors and unauthorized target data not returned; mentions disabled",
+    "performance": "One forced target-ban lookup instead of fetching all prefix bans; fresh actor/bot reads and bounded five-second history confirmation",
+    "limits": "No real Discord walkthrough or Mongo integration; no durable receipts or strict cross-action coordination"
+  },
+  "operations": {
+    "backup": {
+      "bytes": 59293004,
+      "gzipCrcValid": true,
+      "uncompressedBytes": 120758151
+    },
+    "preflight": {
+      "candidateStarted": false,
+      "differences": [],
+      "environmentPreserved": true,
+      "mountsPreserved": true,
+      "rollbackImage": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96"
+    },
+    "observations": {
+      "samples": 10,
+      "healthy": 10,
+      "starting": 0,
+      "httpOk": 10,
+      "restarts": 0,
+      "last": {
+        "at": "2026-10-25T05:17:03.709937+00:00",
+        "image": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505",
+        "health": "healthy",
+        "restarts": 0,
+        "httpStatus": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 87
+        }
+      }
+    },
+    "startup": {
+      "at": "2026-10-25T05:17:27.282034+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "serenetia",
+        "millohost"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0,
+      "uncaughtLogEvents": 0,
+      "unhandledLogEvents": 0
+    },
+    "cleanup": {
+      "at": "2026-10-25T05:18:52.339067+00:00",
+      "verifierSha256": "a19f89f93057b06280148cdf7ba19953ca793f2e19cac7fc8f947f9286179bdb",
+      "temporaryVerifierRemoved": true,
+      "ownedReleaseWorktreeRemoved": true,
+      "neverStartedCandidateRemoved": true,
+      "originalTestFilesRetained": true
+    },
+    "recoveryRecipesUpdated": 2,
+    "migrationOrDataRestore": false,
+    "realDiscordTestActions": false,
+    "pushed": false
+  }
 }

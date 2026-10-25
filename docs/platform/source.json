@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "1402971d498ff0349ab47bc68aad16d49dd4a883",
-    "image": "d25394f5be87b916602f22c6df155fa5243bb6a30857b879ab95bebe6dd9ad96",
+    "code": "6f0ea66eddcf044f823c66bfa7dd63df231bf4ee",
+    "image": "3c092b08e82883f560cf8c707a08a0604dbfd0460781b6869cf856e01e109505",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-bulk-roles-20261025.json",
-    "change": "Awaited bulk-role loops, shared guild admission, complete roster requirement and optional logs preserved",
-    "tag": "localhost/obey-your-master_bot:release-p0-bulk-roles-20261025-1402971d",
+    "evidence": "evidence/p0-unban-20261025.json",
+    "change": "Shared confirmed unban operation with fresh access and separately confirmed history updates",
+    "tag": "localhost/obey-your-master_bot:release-p0-unban-20261025-6f0ea66e",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-bulk-roles-20261025.json",
-    "deploymentKind": "application_only_p0_bulk_roles",
+    "statusEvidence": "evidence/p0-unban-20261025.json",
+    "deploymentKind": "application_only_p0_unban",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
