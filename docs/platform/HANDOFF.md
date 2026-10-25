@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 25/10/2026 · roles individuales y permisos de Administración corregidos
+
+Código `41f5ccb`, imagen `a8482c0c`: añadir/quitar un rol espera a Discord; los rechazos no anuncian éxito. Se retiran 66 borrados automáticos de permisos ante ausencias de caché en 63 archivos, sin modificar las condiciones de acceso. Pasan 35 casos en imagen, 998 hashes y HTTP/assets; nueve muestras saludables tras una de arranque, cero reinicios. Respaldo CRC y reversión `2e167799` conservados; temporales retirados, sin acciones de prueba en Discord ni push. [Entrega y límites](P0-ADMINISTRATION-ROLES-2026-10-25.md).
+
+El mapa registra 21 grupos/95 entradas/21 rutas; quedan 580 entradas/74 rutas. Solo se aceptó en aislamiento esta intención de roles individuales; Administración conserva 70 entradas pendientes. **Siguiente P0: ocho comandos de roles masivos y sus permisos, coordinación y persistencia.** G01/G02 y la aceptación autenticada siguen abiertos.
+
 ## 25/10/2026 · Config y Setup pendientes verificados y desplegados
 
 Código `7828e8c`, imagen `2e167799`: resumen persistido y categorías prefix/slash comparten servicio; guardado CAS confirmado y permisos revalidados tras lectura, con canal fresco. Pasan 48 casos en imagen, 998 hashes y HTTP/assets; diez muestras saludables sin reinicios. Respaldo CRC y reversión a `c04c4bee` conservados. Sin cambios de nodos, datos, mensajes/voz de prueba o push; temporales retirados. [Entrega y límites](P0-CONFIG-2026-10-25.md). Veinte grupos/93 entradas/21 rutas revisadas; siguiente P0 `commands/Administration` (72 entradas), con 582 entradas/74 rutas aún pendientes. G01/G02 y aceptación autenticada siguen abiertos.
@@ -12,7 +18,7 @@ Código `6479683`, imagen `c04c4bee`: autoplay busca fuera de la cola de control
 
 **Incidencia auditada el 24/10:** [música y arquitectura](MUSIC-AUDIT-2026-10-24.md). Tres respaldos fallan en la muestra, recuperación agotada y dos defectos de coordinación reproducidos. Sin cambios operativos; la migración sigue pendiente. Esta petición interrumpe la unidad Config para diagnóstico, sin cerrar P0 ni cambiar el orden global.
 
-Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa `commands/Administration` y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza veinte grupos/93 entradas/21 rutas; quedan 582 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
+Continuar por el [orden activo del plan](../../tasks/plan.md#orden-activo--23102026): P0 activo, después P1 musical y P2 de gestión; P3 acompaña cada recorrido, luego P4/P5/P6. **La siguiente unidad revisa los ocho comandos de roles masivos de `commands/Administration` y las intenciones compartidas restantes.** Navegación setup, guardado de roles y los 52 adaptadores legacy de `commands/Setup` se revisaron en aislamiento; se actualizaron dependencias de seguridad y runtime/CI a Node 22.23.4. El mapa traza 21 grupos/95 entradas/21 rutas; quedan 580 entradas y 74 rutas por revisar. G01/G02 y recorridos autenticados reales siguen abiertos. El modo 24/7 mantiene sus casos de continuidad en P1. Los «siguientes» fechados debajo son históricos.
 
 ## 24/10/2026 · resumen Config y categoría MUSIC conciliados en aislamiento
 

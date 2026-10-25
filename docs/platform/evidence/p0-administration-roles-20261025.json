@@ -3,7 +3,7 @@
   "date": "2026-10-25",
   "phase": "P0",
   "scope": "Single-member role changes plus removal of cache-miss authorization-grant pruning in Administration",
-  "status": "verified_in_isolation_release_pending",
+  "status": "deployed_healthy",
   "baseline": {
     "exitCode": 1,
     "results": {
@@ -31,7 +31,46 @@
     "passed": 35,
     "failed": 0,
     "skipped": 0,
-    "realDiscordOrMongoActions": false
+    "realDiscordOrMongoActions": false,
+    "finalImageTests": {
+      "exitCode": 0,
+      "tests": 35,
+      "pass": 35,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageHashes": {
+      "checked": 998,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "liveHashes": {
+      "checked": 998,
+      "failed": [],
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "typesPassed": true,
+    "dependencyBoundariesPassed": true,
+    "inventory": {
+      "commands": 675,
+      "aliases": 779,
+      "httpRoutes": 95
+    },
+    "http": {
+      "checks": 7,
+      "failures": 0
+    },
+    "publicAssets": {
+      "checks": 12,
+      "failures": 0
+    },
+    "tapEvidence": {
+      "before.tap": "474d09556988af45bff6aa6bba49b195ac10166610e4e434cce1f810cbef6518",
+      "after.tap": "aa3235104d4bdfd579e4a199956eb3355fe14100725646156e1844e41757c834",
+      "final.tap": "abba8220eb94eecc04b784f15d44a04dd97c2d1ba20b11b72938c0be0b6c4c58"
+    }
   },
   "changes": {
     "removedCalls": 66,
@@ -130,5 +169,70 @@
     "fullAdministration": false,
     "realDiscordWalkthrough": false
   },
-  "next": "P0: eight bulk-role commands, then remaining Administration families (70 entries remain in this category)"
+  "next": "P0: eight bulk-role commands, then remaining Administration families (70 entries remain in this category)",
+  "release": {
+    "code": "41f5ccbaeaabe154e3ed83cd924ae6309b1835f2",
+    "image": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b",
+    "tag": "localhost/obey-your-master_bot:release-p0-administration-20261025-41f5ccb",
+    "at": "2026-10-25T04:31:36.873421+00:00",
+    "rollbackImage": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8"
+  },
+  "operations": {
+    "backup": {
+      "bytes": 59297144,
+      "gzipCrcValid": true,
+      "uncompressedBytes": 120766448
+    },
+    "preflight": {
+      "candidateStarted": false,
+      "differences": [],
+      "environmentPreserved": true,
+      "mountsPreserved": true,
+      "rollbackImage": "2e167799548a0666568dab372ee7981ae481c4170d9b43adcf7c784b69ff3aa8"
+    },
+    "observations": {
+      "samples": 10,
+      "healthy": 9,
+      "starting": 1,
+      "httpOk": 10,
+      "restarts": 0,
+      "last": {
+        "at": "2026-10-25T04:32:50.127462+00:00",
+        "image": "a8482c0c10945b05e534a70113ba0a19c8f0cf1a300f963dcbffefc31789928b",
+        "health": "healthy",
+        "restarts": 0,
+        "httpStatus": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 73
+        }
+      }
+    },
+    "startup": {
+      "at": "2026-10-25T04:33:08.630729+00:00",
+      "gatewayReady": true,
+      "slash20Registered": true,
+      "readyPublicNodes": [
+        "serenetia",
+        "millohost"
+      ],
+      "unavailableNodeLogEvents": 0,
+      "recoveryFailureLogEvents": 0,
+      "setupFailureLogEvents": 0
+    },
+    "cleanup": {
+      "at": "2026-10-25T04:33:34.851483+00:00",
+      "temporaryVerifierRemoved": true,
+      "verifierSha256": "527081899b23b1293317f1327216389d94cd078a5ff8cb76b653cf7f844ab947",
+      "ownedReleaseWorktreeRemoved": true,
+      "neverStartedCandidateRemoved": true,
+      "originalTestFilesRetained": true
+    },
+    "recoveryRecipesUpdated": 2,
+    "pushed": false,
+    "migrationOrDataRestore": false,
+    "realDiscordTestActions": false
+  }
 }

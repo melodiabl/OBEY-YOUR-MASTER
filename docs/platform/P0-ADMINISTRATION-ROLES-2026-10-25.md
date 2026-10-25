@@ -10,4 +10,8 @@ El inventario actualiza hashes y posiciones de llamadas. Se incorpora únicament
 
 La arquitectura continúa siendo legacy: resolución de miembros/roles desde caché, política inline, comparación numérica de jerarquía, ausencia de recibo duradero y log administrativo antiguo. La futura capa de dominio debe conciliar estos puntos y los desenlaces de red inciertos. El siguiente bloque P0 son los ocho comandos de roles masivos; restan 70 entradas de Administración. Backups, historial de moderación, permisos de canales, tickets e invitaciones conservan sus revisiones pendientes. G01/G02 y el recorrido real de Discord siguen abiertos.
 
-Estado de entrega: comprobado en aislamiento; despliegue pendiente de construcción y validación de la imagen final. Los verificadores temporales se retirarán al conservar la evidencia.
+Entrega desplegada: código `41f5ccb`, imagen `a8482c0c1094`, Node 22.23.4 y Undici integrado 6.29.1. Los 35 casos pasan también sobre la imagen final sin montajes de código; 998 hashes coinciden en imagen y contenedor. Tipos, fronteras y gate del inventario pasan. Siete comprobaciones HTTP y doce assets públicos correctos.
+
+Diez muestras: una en arranque y nueve saludables, las diez con HTTP 200 y cero reinicios automáticos; la última confirma base de datos y música disponibles. Gateway listo, veinte entradas slash confirmadas y Serenetia/MilloHost conectados; sin fallos de recuperación detectados en esa ventana. Esto no sustituye la escucha ni la aceptación autenticada.
+
+Respaldo de 59.297.144 bytes con CRC gzip verificado y reversión inmediata a `2e167799` conservados. Preflight confirma entorno, montajes, configuración y límites equivalentes. Se actualizaron las dos recetas de recuperación y el alias local de imagen. No hubo restauración de datos, mensajes/asignaciones de roles/voz de prueba ni push. Verificador, candidato sin arrancar y checkout de construcción propios retirados; los tres archivos originales de tests se conservan.
