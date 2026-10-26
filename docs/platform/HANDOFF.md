@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 26/10/2026 · silencios por rol desplegados
+
+Los cuatro comandos de muteo y su tarea de vencimiento usan ahora `src/modules/moderation`: efecto Discord esperado, escritura confirmada, acceso fresco, retirada por servidor/usuario/registro exacto y protección frente a renovación concurrente. `MuteSchema` conserva el array legado que antes se descartaba. [Informe y límites](P0-ROLE-MUTE-2026-10-26.md).
+
+Despliegue `2a89fb30`/`3c93869f7b67`: 36 pruebas en imagen, 992 hashes, 675 comandos, 779 aliases, HTTP 7/7, assets 12/12, diez muestras saludables y cero reinicios. Memoria y Mongo tenían cero silencios por rol pendientes antes del reinicio; respaldo CRC de 59.303.125 bytes y reversión `4be48604` listos. Mapa: 30 grupos/125 entradas/21 rutas revisadas; restan 550 entradas/74 rutas. P0, G01/G02, logs/recibos, coordinación entre procesos y aceptación autenticada siguen abiertos. Sin sanciones de prueba ni push.
+
 ## 26/10/2026 · advertencias desplegadas en la arquitectura objetivo
 
 `src/modules/moderation` posee ahora la capacidad de advertencias: casos persistidos para texto/slash/protecciones, lectura privada con permisos frescos y retirada condicionada al servidor y sujeto. Los comandos delegan; el código de consecuencias de `!warn` queda como adaptador de compatibilidad dentro del área. Se comprobaron 81 casos aislados y el inventario efectivo de 987 hashes, 675 entradas y 779 aliases. Son 29 grupos/121 entradas/21 rutas revisadas; faltan 554 entradas/74 rutas. [Informe](P0-WARNING-MODULE-2026-10-25.md).

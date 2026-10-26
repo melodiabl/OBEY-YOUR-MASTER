@@ -12,6 +12,13 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 
 La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproductor completo continúa pendiente dentro de P1, sin desplazar la conciliación actual de P0. No se marcan etapas completas por reordenar esta lista.
 
+## P0 · silencios por rol · 26/10/2026
+
+- [x] Corregir el esquema `MUTES` y unir `mute`, `tempmute`, `permamute`, `unmute` y el vencimiento bajo la capacidad de moderación.
+- [x] Confirmar permisos frescos, efectos Discord y guardado antes del éxito; reintentar vencimientos fallidos y proteger renovaciones concurrentes.
+- [x] Verificar 36 pruebas en imagen, 992 hashes, 675 comandos, 779 aliases, HTTP 7/7 y assets 12/12; desplegar `2a89fb30`/`3c93869f7b67` con diez muestras saludables y respaldo CRC. [Informe](../docs/platform/P0-ROLE-MUTE-2026-10-26.md).
+- [ ] Continuar Administración, logs y recibos canónicos, G01/G02 y aceptación autenticada en dos servidores. Quedan 550 entradas y 74 rutas; P0 sigue abierto.
+
 ## P0 · advertencias y primer módulo de moderación · 26/10/2026
 
 - [x] Migrar la capacidad de advertencias a `src/modules/moderation`: nueve entradas Discord y ocho protecciones automáticas comparten casos persistidos, lectura privada y retirada confirmada.

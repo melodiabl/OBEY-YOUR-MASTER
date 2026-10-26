@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "fb4d878e34dfbd3c759dc51c364d824f20be3edf",
-    "image": "4be48604d19bdab9fe56296012913578deb0259bd98b0788c4edac2481ea661b",
+    "code": "2a89fb3065005ca882da6c6e85921a57ba46ca60",
+    "image": "3c93869f7b67320b3a66744d31fa6c5465f38e47474b73dfedbe704e03c27c41",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-warning-module-20261025.json",
-    "change": "Moderation warnings moved by capability to src/modules/moderation with shared persisted cases, private history and confirmed removal",
-    "tag": "localhost/obey-your-master_bot:release-p0-warning-module-20261025-fb4d878e",
+    "evidence": "evidence/p0-role-mute-20261026.json",
+    "change": "Confirmed and durable role mutes with fresh access, expiry retry and per-member coordination",
+    "tag": "localhost/obey-your-master_bot:release-p0-role-mute-20261026-2a89fb30",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-warning-module-20261025.json",
-    "deploymentKind": "application_only_p0_warning_module",
+    "statusEvidence": "evidence/p0-role-mute-20261026.json",
+    "deploymentKind": "application_only_p0_role_mute",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

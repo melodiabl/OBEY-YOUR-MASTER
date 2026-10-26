@@ -1,5 +1,11 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 26/10/2026 · silencios por rol corregidos y desplegados
+
+`mute`, `tempmute`, `permamute`, `unmute` y el vencimiento comparten ahora lógica en `src/modules/moderation`. El esquema conserva `MUTES`, se espera Discord y Mongo antes de responder éxito, la retirada se limita al registro exacto y una renovación concurrente no pierde el rol. Pasaron 36 pruebas en imagen (25 originales), tipos, fronteras y 992 hashes; 675 comandos y 779 aliases conservados. El mapa llega a 30 grupos/125 entradas/21 rutas; faltan 550 entradas/74 rutas. [Informe](P0-ROLE-MUTE-2026-10-26.md).
+
+Código `2a89fb30`, imagen `3c93869f7b67`: Mongo y memoria tenían cero silencios pendientes antes del cambio; inspector cerrado. Respaldo CRC de 59.303.125 bytes y reversión `4be48604` conservados. Diez muestras saludables, cero reinicios, HTTP 7/7, recursos 12/12, base de datos y música disponibles. Sin sanciones reales de prueba ni push. **Siguiente P0:** continuar Administración, logs/recibos canónicos, G01/G02 y aceptación autenticada; P1 musical sigue después.
+
 ## 26/10/2026 · advertencias migradas y desplegadas
 
 Primer corte real de `src/modules/moderation`: creación persistente compartida por texto/slash y ocho protecciones, historial privado con acceso fresco y retirada condicional del caso o de referencias antiguas. Los adaptadores mantienen nombres/aliases; el texto conserva sus consecuencias configuradas dentro del área como código de compatibilidad. Pasan 81 casos aislados (25 originales), tipos, fronteras, assets y gate de 987 hashes/675 comandos/779 aliases. El mapa llega a 29 grupos/121 entradas/21 rutas; faltan 554 entradas/74 rutas. [Alcance y límites](P0-WARNING-MODULE-2026-10-25.md).

@@ -20,6 +20,8 @@ El usuario solicitó una auditoría y cuestionó la arquitectura durante la unid
 
 ### Unidad inmediata: completar la conciliación de P0
 
+**Entrega 26/10 (silencios):** `mute`, `tempmute`, `permamute`, `unmute` y su vencimiento usan una capacidad compartida con permisos frescos, efecto confirmado, guardado duradero y renovación coordinada. El esquema ya persiste `MUTES`; memoria y Mongo tenían cero registros pendientes antes de reiniciar. [Informe](../docs/platform/P0-ROLE-MUTE-2026-10-26.md). Hay 30 grupos/125 entradas/21 rutas revisadas; faltan 550 entradas/74 rutas. Código `2a89fb30`, imagen `3c93869f7b67` saludable con respaldo y reversión preparados. P0, G01/G02 y la aceptación autenticada siguen abiertos.
+
 **Entrega 26/10:** el historial, creación y retirada de advertencias iniciaron la migración por capacidad a `src/modules/moderation`, con 29 grupos y 121 entradas revisadas y desplegadas en este corte; quedan 554 entradas y 74 rutas. [Evidencia](../docs/platform/P0-WARNING-MODULE-2026-10-25.md). La captura privada del proceso vivo confirmó cero acciones antiguas y cero perfiles con referencias de avisos cargadas; la imagen `4be48604d19b` está saludable con respaldo y reversión verificados. Esto no modifica el orden P0 → P1 → P2, con P3 transversal.
 
 1. Partir del [inventario conciliado](../docs/platform/operation-ownership.json) y la [evidencia P0](../docs/platform/evidence/p0-reconciliation-20261023.json): 675 entradas con adaptador actual, 95 rutas y 779 aliases preservados; runtime vigente en [source.json](../docs/platform/source.json).

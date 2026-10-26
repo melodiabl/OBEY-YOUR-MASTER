@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-26",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Prefix mute, tempmute, permamute, unmute and role-mute expiry in src/modules/moderation",
+  "finding": "MuteSchema omitted the legacy MUTES array, so Mongoose strict mode discarded scheduled role mutes",
+  "verification": {
+    "isolatedCases": 36,
+    "originalCasesIncluded": 25,
+    "newCases": 11,
+    "failed": 0,
+    "sourceHashes": 992,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 30,
+    "reviewedCommandEntries": 125,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-role-mute-20261026/all-tests.tap",
+    ".runtime/p0-role-mute-20261026/image-tests.tap",
+    ".runtime/p0-role-mute-20261026/observations.json",
+    ".runtime/p0-role-mute-20261026/http-assets.json"
+  ],
+  "operationalLimit": "No real Discord sanction, DM or voice test; cross-process coordination, canonical receipts/logs and two-guild acceptance remain open",
+  "deployment": {
+    "code": "2a89fb3065005ca882da6c6e85921a57ba46ca60",
+    "image": "3c93869f7b67320b3a66744d31fa6c5465f38e47474b73dfedbe704e03c27c41",
+    "tag": "localhost/obey-your-master_bot:release-p0-role-mute-20261026-2a89fb30",
+    "rollbackImage": "4be48604d19bdab9fe56296012913578deb0259bd98b0788c4edac2481ea661b",
+    "backupBytes": 59303125,
+    "backupGzipCrcValid": true,
+    "preflightDifferences": [],
+    "liveInMemoryMutesBeforeRestart": 0,
+    "mongoMutesBeforeRestart": 0,
+    "inspectorClosed": true,
+    "imageTests": 36,
+    "runtimeSourceHashes": 992,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "gatewayReadyLogEvents": 9,
+    "unhandledLogEvents": 0,
+    "errorLogEvents": 0
+  },
+  "remaining": [
+    "P0: other Administration intents, canonical logs/receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}
