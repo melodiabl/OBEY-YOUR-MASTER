@@ -1646,6 +1646,7 @@
       "logs": "📋 Log channel",
       "logsRouting": "🗂️ Logs by category",
       "logsGeneral": "default",
+      "logsLegacyAdmin": "legacy adminlog",
       "logsDisabled": "disabled",
       "logsNotConfigured": "not configured",
       "log_server": "Server",
@@ -1725,6 +1726,9 @@
       "unbanned": "Member unbanned",
       "timeoutChanged": "Timeout updated",
       "kicked": "Member kicked",
+      "warningIssued": "Warning recorded",
+      "roleMuted": "Role mute applied",
+      "roleUnmuted": "Role mute removed",
       "messageDeleted": "Message deleted",
       "messageEdited": "Message edited",
       "attachmentsChanged": "Message attachments updated",
@@ -1750,6 +1754,7 @@
       "owner": "Owner",
       "count": "Count",
       "reason": "Reason",
+      "case": "Case",
       "accountCreated": "Account created",
       "from": "From",
       "to": "To",
@@ -1797,7 +1802,8 @@
       "contentOff": "Message text disabled.",
       "contentLimited": "Text requested, but Message Content intent is missing. Never-captured text cannot be recovered.",
       "invalid": "The saved destination is invalid; review the selection.",
-      "auditAudience": "Moderation details will be omitted: restrict the channel to roles or members with View Audit Log."
+      "auditAudience": "Moderation details will be omitted: restrict the channel to roles or members with View Audit Log.",
+      "legacyAdminlog": "Destination inherited from adminlog. Details still follow the audience policy."
     },
     "auditRestricted": "Moderation details omitted: the destination must be restricted to staff with audit log access."
   },

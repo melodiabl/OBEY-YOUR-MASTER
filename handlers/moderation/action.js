@@ -5,6 +5,8 @@ const {registry}=require('../assets/registry')
 const {t,localeFor}=require('../i18n')
 const {performBan}=require('./ban')
 const {performMemberAction,parseTimeout,formatTimeout}=require('./member-actions')
+const {canObserveModerationAudit}=require('../logs/policy')
+const {emitModerationLog}=require('../../src/modules/moderation/application/logging')
 async function settleWithin(work,timeoutMs=5000) {
  let timer
  try {return await Promise.race([Promise.resolve().then(work).then(()=>true,()=>false),new Promise(resolve=>{timer=setTimeout(()=>resolve(null),timeoutMs)})])}
@@ -25,6 +27,8 @@ async function runModeration(client,interaction,action,options={},dependencies={
  } else {
   const result=await performMemberAction(client,{guild:interaction.guild,actorId:interaction.user.id,targetId:target?.id,reason,duration:options.duration,policy:'slash',action})
   if(result.status!=='applied')return replyError(result.status)
+  if(action==='kick'&&!canObserveModerationAudit(client,interaction.guild))
+   void emitModerationLog(client,{guildId:interaction.guild.id,kind:'kicked',userId:target.id,user:target,actorId:interaction.user.id,reason})
  }
 
  let caseId=null
@@ -64,18 +68,10 @@ async function runPrefixBan(client,message,args,command) {
   const results=await Promise.all([
    command==='ban'?settleWithin(()=>client.stats.push(message.guild.id+message.author.id,Date.now(),'ban')):true,
    command==='ban'&&result.user&&!result.user.bot?notify(result.user,{embeds:[new EmbedBuilder().setColor(0xF0B232).setTitle(t(locale,'moderation.banDm',{server:message.guild.name})).setDescription(result.reason)],allowedMentions:{parse:[]}}):true,
-   command!=='idban'?settleWithin(async()=>{
-    const destination=client.settings.get(message.guild.id,'adminlog')
-    if(!destination||destination==='no')return
-    const channel=message.guild.channels.cache.get(destination)
-    if(!channel||typeof channel.send!=='function')throw new Error('Log destination unavailable')
-    await channel.send({embeds:[new EmbedBuilder().setColor(0xFFD36F).setTitle(t(locale,'moderation.banDone')).addFields({name:t(locale,'moderation.user'),value:result.targetId},{name:t(locale,'moderation.reason'),value:result.reason},{name:t(locale,'moderation.moderator'),value:message.author.id})],allowedMentions:{parse:[]}})
-   }):true,
   ])
   const notes=[]
   if(results[0]!==true)notes.push(t(locale,'moderation.statsUnconfirmed'))
   if(results[1]!==true)notes.push(t(locale,'moderation.dmUnconfirmed'))
-  if(results[2]!==true)notes.push(t(locale,'moderation.logUnconfirmed'))
   if(notes.length)embed.setDescription(notes.join('\n'))
  }
  embed.setFooter(require('../presentation/metadata').asFooter(client.getFooter(es)))
@@ -103,13 +99,10 @@ async function runPrefixMemberAction(client,message,args,command) {
   const results=await Promise.all([
    settleWithin(()=>client.stats.push(message.guild.id+message.author.id,Date.now(),command==='kick'?'kick':'mute')),
    !result.user.bot?notify(result.user,{embeds:[new EmbedBuilder().setColor(0xF0B232).setTitle(t(locale,'moderation.'+dmKey,{server:message.guild.name})).setDescription(result.reason)],allowedMentions:{parse:[]}}):true,
-   settleWithin(async()=>{
-    const destination=client.settings.get(message.guild.id,'adminlog')
-    if(!destination||destination==='no')return
-    const channel=message.guild.channels.cache.get(destination)
-    if(!channel||typeof channel.send!=='function')throw new Error('Log destination unavailable')
-    await channel.send({embeds:[new EmbedBuilder().setColor(0xFFD36F).setTitle(t(locale,'moderation.'+key)).addFields({name:t(locale,'moderation.user'),value:targetId},{name:t(locale,'moderation.reason'),value:result.reason},{name:t(locale,'moderation.moderator'),value:message.author.id})],allowedMentions:{parse:[]}})
-   }),
+   command==='kick'&&!canObserveModerationAudit(client,message.guild)?settleWithin(async()=>{
+    const delivery=await emitModerationLog(client,{guildId:message.guild.id,kind:'kicked',userId:targetId,user:result.user,actorId:message.author.id,reason:result.reason})
+    if(!['sent','skipped'].includes(delivery.status))throw new Error('Log delivery unconfirmed')
+   }):true,
    command==='removetimeout'?closeHistory(Moderation,message.guild.id,targetId,'timeout',result.historyCutoff):true,
   ])
   const notes=[]

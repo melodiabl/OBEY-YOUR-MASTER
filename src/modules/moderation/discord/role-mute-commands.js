@@ -1,4 +1,5 @@
 const { applyRoleMute, applyTimeoutMute, liftMute, parseDuration, MAX_TIMEOUT } = require('../application/role-mutes')
+const { emitModerationLog } = require('../application/logging')
 
 const messages = {
   es: {
@@ -46,17 +47,8 @@ function targetFromArgs(args) {
   return match && (match[1] || match[2])
 }
 
-async function sendReceipt(client, message, command, targetId, reason, mode) {
+async function sendNotice(client, message, command, targetId, reason) {
   const options = { allowedMentions: { parse: [] } }
-  const id = client.settings.get(message.guild.id, 'adminlog')
-  if (id && id !== 'no') {
-    const channel = await message.guild.channels.fetch(id).catch(() => null)
-    if (channel?.isTextBased()) {
-      const content = [command, 'actor=' + message.author.id, 'target=' + targetId,
-        'mode=' + mode, reason && 'reason=' + reason].filter(Boolean).join(' | ').slice(0, 1900)
-      await channel.send({ content, ...options }).catch(() => {})
-    }
-  }
   if (command !== 'unmute') {
     const user = await client.users.fetch(targetId).catch(() => null)
     if (user) await user.send({ content: 'OBEY: ' + command + ' en ' + message.guild.name +
@@ -96,7 +88,10 @@ async function runPrefixRoleMute(client, message, args, command) {
   if (command !== 'unmute') {
     try { client.stats.push(message.guild.id + message.author.id, Date.now(), 'mute') } catch {}
   }
-  await sendReceipt(client, message, command, targetId, reason, result.mode)
+  if (result.mode === 'role') void emitModerationLog(client, { guildId: message.guild.id,
+    kind: command === 'unmute' ? 'roleUnmuted' : 'roleMuted', userId: targetId,
+    user: result.member?.user, actorId: message.author.id, reason })
+  await sendNotice(client, message, command, targetId, reason)
 }
 
 module.exports = { runPrefixRoleMute }

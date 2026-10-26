@@ -38,7 +38,8 @@ module.exports = {
       const logRouting = CATEGORIES.map(category => {
         const route = summary.logs.routing[category]
         const value = route.state === 'disabled' ? copy('logsDisabled') : route.channelId ? `<#${route.channelId}>` : copy('logsNotConfigured')
-        const inherited = route.state === 'inherited' ? ` (${copy('logsGeneral')})` : ''
+        const inherited = route.state === 'inherited' ? ` (${copy('logsGeneral')})`
+          : route.state === 'legacy_adminlog' ? ` (${copy('logsLegacyAdmin')})` : ''
         return `${copy(`log_${category}`)}: ${value}${inherited}`
       }).join('\n')
 

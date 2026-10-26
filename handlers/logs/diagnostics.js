@@ -7,7 +7,8 @@ const { registry } = require('../assets/registry')
 async function diagnoseLogs(client, context, values) {
   const { guild, member, bot } = await requireSetupAccess(client, { ...context, actorPermission: F.ManageGuild })
   const locale = localeFor(client, guild.id), copy = key => t(locale, 'logs.diagnostics.' + key)
-  const settings = { logger: { channel: values.defaultChannel }, logChannels: Object.fromEntries(CATEGORIES.map(key => [key, values[key]])) }
+  const settings = { logger: { channel: values.defaultChannel }, adminlog: client.settings.get(guild.id, 'adminlog'),
+    logChannels: Object.fromEntries(CATEGORIES.map(key => [key, values[key]])) }
   const targets = new Map()
   const embed = new EmbedBuilder().setColor(0x5865F2).setTitle(`${registry.markup('icon.info')} ${copy('title')}`).setDescription(copy('description'))
   for (const category of CATEGORIES) {
@@ -20,6 +21,7 @@ async function diagnoseLogs(client, context, values) {
         : !channel.permissionsFor(member)?.has(F.ViewChannel) ? copy('denied')
           : !channel.permissionsFor(bot)?.has([F.ViewChannel, F.SendMessages, F.EmbedLinks]) ? copy('botPermissions')
             : `<#${channel.id}> · ${copy('ready')}`
+      if (category === 'moderation' && destination.state === 'legacy_adminlog') status += '\n' + copy('legacyAdminlog')
       if (category === 'moderation' && channel?.guildId === guild.id && channel.permissionsFor(member)?.has(F.ViewChannel) && !mayRevealAudit(channel, guild)) status += '\n' + copy('auditAudience')
     }
     embed.addFields({ name: t(locale, 'logs.categories.' + category), value: status, inline: true })

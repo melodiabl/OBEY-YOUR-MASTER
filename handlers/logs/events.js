@@ -1,6 +1,7 @@
 const { AuditLogEvent, PermissionFlagsBits: F, GatewayIntentBits: I, escapeMarkdown } = require('discord.js')
 const { createHash, randomUUID } = require('node:crypto')
 const { validId, userSnapshot, messageSnapshot, timeoutValue } = require('./snapshots')
+const { canObserveModerationAudit } = require('./policy')
 const field = (key, value) => ({ key, value: String(value ?? '—').slice(0, 1000) })
 const label = value => `${escapeMarkdown(String(value?.globalName || value?.username || value?.name || '—')).slice(0, 180)}${value?.id ? ` · \`${value.id}\`` : ''}`
 const date = value => Number.isFinite(Number(value)) && Number(value) > 0 ? `<t:${Math.floor(Number(value) / 1000)}:f>` : '—'
@@ -8,7 +9,7 @@ const date = value => Number.isFinite(Number(value)) && Number(value) > 0 ? `<t:
 function attachLogEvents(client, service) {
   const listeners = []
   const seenAuditEntries = new Map()
-  const hasAudit = guild => Boolean(guild?.members?.me?.permissions.has(F.ViewAuditLog) && client.options?.intents?.has(I.GuildModeration))
+  const hasAudit = guild => canObserveModerationAudit(client, guild)
   const emit = (guild, category, kind, fields, extra = {}) => {
     if (!guild?.id) return
     void service.emit({ guildId: guild.id, category, kind, fields, ...extra }).catch(() => console.warn(JSON.stringify({ event: 'guild_log_capture_failed', entryPoint: 'gateway', requestId: randomUUID(), code: 'delivery_pipeline_failed' })))

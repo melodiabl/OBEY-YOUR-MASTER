@@ -13,7 +13,7 @@ function createLogService(client, { write = row => console.info(JSON.stringify(r
   const keyFor = record => record.guildId + ':' + record.category
   function result(record, status, code, messageId) {
     if (Object.hasOwn(counts, status)) counts[status]++
-    if (status !== 'skipped' && status !== 'paused') write({ event: 'guild_log_delivery', entryPoint: record.origin === 'audit' ? 'audit_gateway' : 'gateway', requestId: record.requestId,
+    if (status !== 'skipped' && status !== 'paused') write({ event: 'guild_log_delivery', entryPoint: record.origin === 'audit' ? 'audit_gateway' : ['command', 'scheduler', 'automation'].includes(record.origin) ? record.origin : 'gateway', requestId: record.requestId,
       guild: hash(record.guildId), category: record.category, kind: record.kind, status, ...(code ? { code } : {}) })
     return { status, ...(code ? { code } : {}), ...(messageId ? { messageId } : {}) }
   }

@@ -36,6 +36,7 @@ function createConfigurationSummary(client) {
         })
         const logSettings = {
           logger: { channel: logValues.values.defaultChannel },
+          adminlog: persisted.adminlog,
           logChannels: Object.fromEntries(CATEGORIES.map(category => [category, logValues.values[category]])),
         }
         return {

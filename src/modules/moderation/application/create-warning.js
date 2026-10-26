@@ -3,6 +3,7 @@ const { nextCaseId } = require('../../../../handlers/moderation/cases')
 const { validId, HistoryError } = require('../domain/warnings')
 const { PermissionFlagsBits } = require('discord.js')
 const { prefixAllowed } = require('../../../../handlers/moderation/member-access')
+const { emitModerationLog } = require('./logging')
 
 async function requireManualWarningAccess(client, guild, actorId, targetId, transport) {
   if (!validId(guild?.id) || !validId(actorId) || !validId(targetId) || actorId === targetId
@@ -45,6 +46,8 @@ async function createWarning(client, { guildId, userId, moderatorId, reason, ori
     }
     if (!Number.isSafeInteger(escalationCount) || escalationCount < 0 || escalationCount > count) escalationCount = null
   } catch { count = null; globalCount = null; escalationCount = null }
+  void emitModerationLog(client, { guildId, kind: 'warningIssued', userId,
+    actorId: moderatorId, reason, caseId, origin: origin === 'auto' ? 'automation' : 'command' })
   return { caseId, count, globalCount, escalationCount }
 }
 

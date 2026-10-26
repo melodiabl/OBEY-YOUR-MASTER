@@ -860,10 +860,40 @@
       "effects": "Await Discord before reply, stats, DM and admin log; durable role expiry and exact guild/user removal; failed role write attempts to revert",
       "limits": "No real guild sanction test; whole-array legacy store still needs P5 cross-process coordination and P2 canonical receipts/log routing",
       "evidence": "evidence/p0-role-mute-20261026.json"
+    },
+    {
+      "id": "moderation.log-routing",
+      "commands": [
+        "prefix:setup-admincmdlog",
+        "prefix:setup-logger",
+        "slash:config.logs",
+        "slash:config.ver",
+        "prefix:warn",
+        "slash:moderation.warn",
+        "prefix:mute",
+        "prefix:tempmute",
+        "prefix:permamute",
+        "prefix:unmute",
+        "prefix:ban",
+        "prefix:idban",
+        "prefix:useridban",
+        "prefix:kick",
+        "prefix:timeout",
+        "prefix:removetimeout",
+        "slash:moderation.kick"
+      ],
+      "routes": [],
+      "service": "handlers/logs/service.js and policy.js; src/modules/moderation/application/logging.js",
+      "store": "Guild.logChannels.moderation, Guild.logger.channel, legacy Guild.adminlog fallback; no new collection",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Explicit moderation disable wins; modern category and general destination precede legacy adminlog. All moderation details require the existing staff audit audience proof.",
+      "producers": "Discord audit/Gateway handles ban and timeout; confirmed warnings and role mutes use one canonical emitter; kick uses a command fallback only when audit observation is unavailable.",
+      "limits": "No durable LogEvent/Delivery or cross-producer receipt; authenticated Discord delivery and two-guild audience walkthrough remain open.",
+      "evidence": "evidence/p0-moderation-logs-20261026.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 30,
+    "reviewedGroups": 31,
     "commandEntriesReviewed": 125,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,

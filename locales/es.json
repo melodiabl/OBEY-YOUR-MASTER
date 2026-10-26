@@ -1646,6 +1646,7 @@
       "logs": "📋 Canal de logs",
       "logsRouting": "🗂️ Logs por categoría",
       "logsGeneral": "general",
+      "logsLegacyAdmin": "adminlog anterior",
       "logsDisabled": "desactivado",
       "logsNotConfigured": "no configurado",
       "log_server": "Servidor",
@@ -1725,6 +1726,9 @@
       "unbanned": "Veto retirado",
       "timeoutChanged": "Aislamiento actualizado",
       "kicked": "Miembro expulsado",
+      "warningIssued": "Advertencia registrada",
+      "roleMuted": "Silencio por rol aplicado",
+      "roleUnmuted": "Silencio por rol retirado",
       "messageDeleted": "Mensaje eliminado",
       "messageEdited": "Mensaje editado",
       "attachmentsChanged": "Adjuntos de mensaje actualizados",
@@ -1750,6 +1754,7 @@
       "owner": "Propietario",
       "count": "Cantidad",
       "reason": "Motivo",
+      "case": "Caso",
       "accountCreated": "Cuenta creada",
       "from": "Origen",
       "to": "Destino",
@@ -1797,7 +1802,8 @@
       "contentOff": "Texto de mensajes desactivado.",
       "contentLimited": "Texto solicitado, pero falta el intent de contenido. No se puede recuperar texto nunca capturado.",
       "invalid": "El destino guardado no es válido; revisa la selección.",
-      "auditAudience": "Los detalles de moderación se omitirán: restringe el canal a roles o miembros con Ver registro de auditoría."
+      "auditAudience": "Los detalles de moderación se omitirán: restringe el canal a roles o miembros con Ver registro de auditoría.",
+      "legacyAdminlog": "Destino heredado de adminlog. Los detalles siguen sujetos a la política de audiencia."
     },
     "auditRestricted": "Detalles de moderación omitidos: el destino debe estar restringido a personal con acceso al registro de auditoría."
   },

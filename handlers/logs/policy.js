@@ -1,4 +1,4 @@
-const { PermissionFlagsBits: F } = require('discord.js')
+const { PermissionFlagsBits: F, GatewayIntentBits: I } = require('discord.js')
 const { audienceFits } = require('./audience')
 const CATEGORIES = Object.freeze(['server', 'members', 'moderation', 'messages', 'voice'])
 const validId = value => typeof value === 'string' && /^\d{17,20}$/.test(value)
@@ -10,8 +10,19 @@ function resolveLogDestination(settings, category) {
   if (value === false || value === '' || value === 'no' || value === 'nochannel') return { channelId: null, state: 'disabled' }
   if (value != null && value !== 'inherit') return { channelId: validId(value) ? value : null, state: validId(value) ? 'configured' : 'invalid' }
   const legacy = settings?.logger?.channel
-  return { channelId: validId(legacy) ? legacy : null, state: validId(legacy) ? 'inherited' : 'unset' }
+  if (validId(legacy)) return { channelId: legacy, state: 'inherited' }
+  // Older moderation commands used a separate adminlog setting. An explicit
+  // category disable above still wins; other categories never inherit it.
+  if (category === 'moderation' && (legacy == null || legacy === 'no' || legacy === 'nochannel')) {
+    const adminlog = settings?.adminlog
+    if (validId(adminlog)) return { channelId: adminlog, state: 'legacy_adminlog' }
+  }
+  return { channelId: null, state: 'unset' }
 }
+
+const canObserveModerationAudit = (client, guild) => Boolean(
+  guild?.members?.me?.permissions?.has(F.ViewAuditLog) && client.options?.intents?.has(I.GuildModeration)
+)
 
 function restrictedTo(destination, guild, permission) {
   if (destination.guildId !== guild.id) return false
@@ -40,4 +51,4 @@ function includeMessageContent(settings, source, destination, guild) {
   return settings?.logger?.includeMessageContent === true && Boolean(source) && !source.nsfw && !source.parent?.nsfw && mayRevealSource(source, destination, guild)
 }
 
-module.exports = { CATEGORIES, resolveLogDestination, mayRevealSource, includeMessageContent, mayRevealAudit }
+module.exports = { CATEGORIES, resolveLogDestination, mayRevealSource, includeMessageContent, mayRevealAudit, canObserveModerationAudit }

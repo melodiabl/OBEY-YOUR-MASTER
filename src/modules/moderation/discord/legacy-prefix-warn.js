@@ -253,38 +253,6 @@ const runPrefixWarn = async (client, message, args, cmduser, text, prefix) => {
                         }
                     }
                 }
-                if (client.settings.get(message.guild.id, `adminlog`) != "no") {
-                    try {
-                        var channel = message.guild.channels.cache.get(client.settings.get(message.guild.id, `adminlog`));
-                        if (channel) await channel.send({
-                            embeds: [
-                                new EmbedBuilder()
-                                    .setColor(es.color)
-                                    .setThumbnail(
-                                        es.thumb
-                                            ? es.footericon &&
-                                              (es.footericon.includes("http://") || es.footericon.includes("https://"))
-                                                ? es.footericon
-                                                : client.user.displayAvatarURL()
-                                            : null
-                                    )
-                                    .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                                    .setAuthor(obeyMeta.asAuthor({ name: `warn | ${message.author.username}`, iconURL: message.author.displayAvatarURL() }))
-                                    .setDescription(eval(client.la[ls]["cmds"]["administration"]["warn"]["variable24"]))
-                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_15"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable15"]) })
-                                    .addFields({ name: eval(client.la[ls]["cmds"]["administration"]["ban"]["variablex_16"]), value: eval(client.la[ls]["cmds"]["administration"]["ban"]["variable16"]) })
-                                    .setTimestamp()
-                                    .setFooter(obeyMeta.asFooter(client.getFooter(
-                                            "ID: " + message.author.id,
-                                            message.author.displayAvatarURL()
-                                        ))
-                                    ),
-                            ],
-                        });
-                    } catch (e) {
-                        console.log(e.stack ? String(e.stack).grey : String(e).grey);
-                    }
-                }
             } catch (e) {
                 console.log(e.stack ? String(e.stack).grey : String(e).grey);
                 return message.reply({
