@@ -12,6 +12,13 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 
 La biblioteca, bienvenida y base de Next ya entregadas se conservan. El reproductor completo continúa pendiente dentro de P1, sin desplazar la conciliación actual de P0. No se marcan etapas completas por reordenar esta lista.
 
+## P0 · registros de moderación · 26/10/2026
+
+- [x] Unificar `adminlog` heredado con el enrutamiento de moderación y proteger los detalles según la audiencia del canal.
+- [x] Eliminar envíos directos de los comandos; corregir vencimiento sin canal de aviso y sacar la notificación del bloqueo por usuario.
+- [x] Verificar 35 pruebas en imagen, 993 hashes, 675 comandos, 779 aliases, 95 rutas, HTTP 7/7 y recursos 12/12; desplegar `f13b2f1d`/`433a47555310` con diez muestras saludables y respaldo CRC. [Informe](../docs/platform/P0-MODERATION-LOGS-2026-10-26.md).
+- [ ] Continuar otras intenciones de Administración, recibos duraderos entre productores, G01/G02 y aceptación autenticada en dos servidores. Quedan 550 entradas y 74 rutas; P0 sigue abierto.
+
 ## P0 · silencios por rol · 26/10/2026
 
 - [x] Corregir el esquema `MUTES` y unir `mute`, `tempmute`, `permamute`, `unmute` y el vencimiento bajo la capacidad de moderación.

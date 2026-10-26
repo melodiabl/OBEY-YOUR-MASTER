@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "2a89fb3065005ca882da6c6e85921a57ba46ca60",
-    "image": "3c93869f7b67320b3a66744d31fa6c5465f38e47474b73dfedbe704e03c27c41",
+    "code": "f13b2f1d399cca27e185a03bfbcbe01f132c1c5d",
+    "image": "433a475553100be7d19177156c23f274557e13b9060f618ba0593f722f9727b5",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-role-mute-20261026.json",
-    "change": "Confirmed and durable role mutes with fresh access, expiry retry and per-member coordination",
-    "tag": "localhost/obey-your-master_bot:release-p0-role-mute-20261026-2a89fb30",
+    "evidence": "evidence/p0-moderation-logs-20261026.json",
+    "change": "Canonical moderation log routing with legacy adminlog fallback and protected audience",
+    "tag": "localhost/obey-your-master_bot:release-p0-moderation-logs-20261026-f13b2f1d",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-role-mute-20261026.json",
-    "deploymentKind": "application_only_p0_role_mute",
+    "statusEvidence": "evidence/p0-moderation-logs-20261026.json",
+    "deploymentKind": "application_only_p0_moderation_logs",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -374,7 +374,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Continue P0 with Config summary projection and MUSIC category settings; 19 groups / 41 entries / 21 routes traced; 634 entries and 74 routes remain. 24/7 failures remain P1 acceptance.",
+    "nextUnit": "Continue P0 with remaining Administration intents and durable receipts; 31 groups / 125 command entries / 21 routes traced; 550 entries and 74 routes remain. G01/G02 and authenticated acceptance stay open; 24/7 failures remain P1 acceptance.",
     "sequence": [
       "P0",
       "P1",

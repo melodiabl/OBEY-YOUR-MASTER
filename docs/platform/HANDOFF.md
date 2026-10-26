@@ -1,5 +1,11 @@
 # Estado entregado · 17/10/2026
 
+## 26/10/2026 · registros de moderación desplegados
+
+Se eliminó el envío directo a `adminlog` de comandos de moderación. La categoría moderna hereda ese destino si no hay otro y protege usuario, responsable, motivo y caso según la visibilidad. Advertencias y silencios por rol emiten tras efecto confirmado; ban y timeout usan auditoría/Gateway, kick tiene fallback cuando falta auditoría. El vencimiento ya admite la ausencia de canal de aviso y no sostiene el bloqueo por usuario mientras entrega el log. [Informe](P0-MODERATION-LOGS-2026-10-26.md).
+
+Despliegue `f13b2f1d`/`433a47555310`: 35 pruebas en imagen, 993 hashes, 675 comandos, 779 aliases, HTTP 7/7, assets 12/12, diez muestras saludables, cero reinicios. Respaldo CRC 59.303.760 bytes y reversión `3c93869f`; mapa 31 grupos/125 entradas/21 rutas, quedan 550/74. P0, recibos duraderos, G01/G02 y aceptación autenticada siguen abiertos. Sin sanciones de prueba ni push.
+
 ## 26/10/2026 · silencios por rol desplegados
 
 Los cuatro comandos de muteo y su tarea de vencimiento usan ahora `src/modules/moderation`: efecto Discord esperado, escritura confirmada, acceso fresco, retirada por servidor/usuario/registro exacto y protección frente a renovación concurrente. `MuteSchema` conserva el array legado que antes se descartaba. [Informe y límites](P0-ROLE-MUTE-2026-10-26.md).

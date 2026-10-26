@@ -1,5 +1,11 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 26/10/2026 · registros de moderación protegidos y desplegados
+
+Los comandos antiguos dejaron de enviar motivos y responsables directamente a `adminlog`: advertencias, silencios por rol y vencimientos usan el servicio de logs con prueba de audiencia; vetos y timeout conservan los eventos Discord, y kick usa fallback solo sin auditoría disponible. El destino heredado sigue funcionando para moderación con redacción en canales abiertos. También se corrigió el vencimiento sin canal de aviso. [Informe y límites](P0-MODERATION-LOGS-2026-10-26.md).
+
+Código `f13b2f1d`, imagen `433a47555310`: 35 pruebas en imagen, 993 hashes, 675 comandos, 779 aliases, 95 rutas, HTTP 7/7 y recursos 12/12. Respaldo CRC de 59.303.760 bytes, reversión `3c93869f` preparada; diez muestras saludables, Mongo y música disponibles, cero reinicios. El mapa llega a 31 grupos/125 entradas/21 rutas; quedan 550 entradas/74 rutas. **Siguiente P0:** otras intenciones de Administración, recibos duraderos y conciliación G01/G02. La aceptación autenticada en dos servidores sigue pendiente, sin sanciones reales de prueba ni push.
+
 ## 26/10/2026 · silencios por rol corregidos y desplegados
 
 `mute`, `tempmute`, `permamute`, `unmute` y el vencimiento comparten ahora lógica en `src/modules/moderation`. El esquema conserva `MUTES`, se espera Discord y Mongo antes de responder éxito, la retirada se limita al registro exacto y una renovación concurrente no pierde el rol. Pasaron 36 pruebas en imagen (25 originales), tipos, fronteras y 992 hashes; 675 comandos y 779 aliases conservados. El mapa llega a 30 grupos/125 entradas/21 rutas; faltan 550 entradas/74 rutas. [Informe](P0-ROLE-MUTE-2026-10-26.md).

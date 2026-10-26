@@ -1,0 +1,11 @@
+# P0 · enrutamiento de registros de moderación
+
+La revisión detectó envíos directos a `Guild.adminlog` en comandos antiguos de sanciones. Ese camino omitía la comprobación de visibilidad que usan los logs nuevos. En las 81 configuraciones consultadas antes del cambio no había ningún `adminlog` activo; sí había un destino de moderación moderno y dos generales.
+
+Los avisos persistidos, silencios por rol y sus vencimientos pasan ahora por `client.logs.emit`. Los vetos y cambios de timeout conservan el productor de auditoría/Gateway; las expulsiones usan un emisor del comando solo cuando el bot no puede observar la auditoría. La categoría `moderation` admite `adminlog` como destino heredado cuando no hay un destino moderno, pero una desactivación explícita prevalece. El servicio redacta responsable, usuario, motivo y caso cuando no puede demostrar que el canal es exclusivo del personal de auditoría. `/config ver` y el diagnóstico de logs indican el fallback heredado.
+
+Una prueba de vencimiento reveló que un silencio sin canal de aviso intentaba llamar `isTextBased` sobre una cadena vacía. La comprobación se hizo opcional y las notificaciones se sacaron del bloqueo por miembro: un envío lento ya no detiene la renovación de ese usuario.
+
+Se verificaron 35 casos en la imagen, incluidos los 25 tests originales; tipos, dependencias, assets, hashes de 993 fuentes, 675 comandos, 779 aliases y 95 rutas. El mapa cubre 31 grupos, 125 entradas y 21 rutas; quedan 550 entradas y 74 rutas. El despliegue `f13b2f1d` usa la imagen `433a47555310`, con respaldo completo de 59.303.760 bytes y CRC gzip válido. La configuración candidata coincidió con la activa en variables, red, volúmenes, memoria, usuario, arranque y healthcheck; la imagen anterior quedó como reversión. HTTP 7/7 y recursos públicos 12/12 coinciden con la imagen.
+
+**Límites:** no se ejecutaron sanciones, DMs ni pruebas de visibilidad reales en Discord. Tampoco hay recibos duraderos entre productores, retención de `LogEvent`/`Delivery`, coordinación entre procesos ni aceptación autenticada en dos servidores. P0 y G01/G02 permanecen abiertos; P1 de música sigue después de P0 según el orden del plan. [Datos de verificación](evidence/p0-moderation-logs-20261026.json).

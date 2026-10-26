@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-26",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Canonical moderation log routing with legacy adminlog fallback and audience protection",
+  "verification": {
+    "isolatedCases": 35,
+    "originalCasesIncluded": 25,
+    "newCases": 10,
+    "failed": 0,
+    "sourceHashes": 993,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 31,
+    "reviewedCommandEntries": 125,
+    "reviewedHttpRoutes": 21,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-moderation-logs-20261026/tests.tap",
+    ".runtime/p0-moderation-logs-20261026/image-tests.tap",
+    ".runtime/p0-moderation-logs-20261026/observations.json",
+    ".runtime/p0-moderation-logs-20261026/http-assets.json"
+  ],
+  "deployment": {
+    "code": "f13b2f1d399cca27e185a03bfbcbe01f132c1c5d",
+    "image": "433a475553100be7d19177156c23f274557e13b9060f618ba0593f722f9727b5",
+    "tag": "localhost/obey-your-master_bot:release-p0-moderation-logs-20261026-f13b2f1d",
+    "rollbackImage": "3c93869f7b67320b3a66744d31fa6c5465f38e47474b73dfedbe704e03c27c41",
+    "backupBytes": 59303760,
+    "backupGzipCrcValid": true,
+    "preflightDifferences": [],
+    "inspectorClosed": true,
+    "imageTests": 35,
+    "runtimeSourceHashes": 993,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "unhandledLogEvents": 0,
+    "errorLogEvents": 0
+  },
+  "configurationBeforeDeployment": {
+    "guildDocumentsChecked": 81,
+    "legacyAdminlogConfigured": 0,
+    "modernModerationConfigured": 1,
+    "generalLoggerConfigured": 2,
+    "explicitModerationDisabled": 0
+  },
+  "operationalLimit": "No real Discord sanction, DM or two-guild visibility test; durable cross-producer receipts, retention and authenticated acceptance remain open",
+  "remaining": [
+    "P0: other Administration intents, durable moderation receipts, G01/G02, authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}
