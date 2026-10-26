@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-25",
+  "date": "2026-10-26",
   "phase": "P0",
   "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
   "inventory": "operation-ownership.json",
@@ -843,15 +843,32 @@
       "effects": "No success response before confirmed persistence; mixed bulk removal reports partial completion if the second store fails",
       "limits": "No durable cross-store transaction or receipt; legacy IDs and source records are not recoverable after restart.",
       "evidence": "evidence/p0-warning-module-20261025.json"
+    },
+    {
+      "id": "moderation.role-mute",
+      "commands": [
+        "prefix:mute",
+        "prefix:tempmute",
+        "prefix:permamute",
+        "prefix:unmute"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/role-mutes.js and role-mute-worker.js",
+      "store": "MuteSchema legacy MUTES document via confirmed SyncMap exclusive writes; Discord role or communication deadline authoritative for active effect",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Fresh actor, bot, target and role hierarchy; command-specific prefix grants preserved; bot ManageRoles or ModerateMembers checked for the actual effect",
+      "effects": "Await Discord before reply, stats, DM and admin log; durable role expiry and exact guild/user removal; failed role write attempts to revert",
+      "limits": "No real guild sanction test; whole-array legacy store still needs P5 cross-process coordination and P2 canonical receipts/log routing",
+      "evidence": "evidence/p0-role-mute-20261026.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 29,
-    "commandEntriesReviewed": 121,
+    "reviewedGroups": 30,
+    "commandEntriesReviewed": 125,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 554,
+    "remainingCommandEntries": 550,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedDate": "2026-10-25",
+  "capturedDate": "2026-10-26",
   "meaning": "Owner identifies the current orchestration file, not completion of a canonical business-service migration",
   "capture": {
     "commandLoaders": "executed without login",
@@ -52,9 +52,9 @@
     "commands/Administration/lockchannel.js": "f10e30287249b689b9d4263073b99018c18bbc9d081c9804510848095f10c0b2",
     "commands/Administration/lockthread.js": "bfad075883ae83e68328a4d188c84516a8c330daad95cbd2d3320557ef179364",
     "commands/Administration/manageinvites.js": "916ce91b29ebe1455d3842a54e89c93defe1de7213ddb979f04ae9ddab0e6989",
-    "commands/Administration/mute.js": "5393f35e1ea19501ef1a353ffcb28add9ba0cb69307b608f0cda3c7ad466b263",
+    "commands/Administration/mute.js": "574f8510de240eefa0ebe8bffa56eed24e16ed42f5dcde173e3474d899c118ab",
     "commands/Administration/nickname.js": "cce51c6f188abf061c9dfe192611cd0d459fbd2327aeacb3328ae406184b4b01",
-    "commands/Administration/permamute.js": "9bb26b63b55b9fe7a84556626b44fed7fd5197c3efa22d0baf9d7de0dd2223b8",
+    "commands/Administration/permamute.js": "35507fad29315788b21cd91a9ec5812df3313cc46914e56ae9a4786d3ca56795",
     "commands/Administration/poll.js": "b7e387b27388782cbe90b63e3bbd23d3893f072f6fe42c3bacdd9c7cd79ccb54",
     "commands/Administration/react.js": "1c87c2fdd7fb4e3405c2ce43f135624007f8a85cd24921d4e7ed835f8f26cdc5",
     "commands/Administration/removeallwarns.js": "56def1b046b25b8c2de7c3456abd5bc12d91b1bbf9412b4c34fe97b96871d22e",
@@ -71,13 +71,13 @@
     "commands/Administration/snipe.js": "0d2e5c02c2917bc712eacda031bc5d1b25a9ca3e10648595a5af478d8da8de2e",
     "commands/Administration/suggest.js": "44cbd89c9d0008e512da0064ac2f879674ba840b5f3b0e7dbc8bf0a3c409f2cf",
     "commands/Administration/sync-invites.js": "90f8359435137ce7304461a9f4feb645b196f6e20dc556ee1858ed683dff172b",
-    "commands/Administration/tempmute.js": "d6eafa25c1e38b72719314ba8eb2b8c52b7317befffa0d505404e062637aa909",
+    "commands/Administration/tempmute.js": "bc94825364dc56c2159fa964e3abdc0a2c3f694a93875017016daa7b5f6c4cb5",
     "commands/Administration/timeout.js": "a7605b553f49891e032ddc6aabbc64c6ad72f4ac6fb00595a863193500dabcbd",
     "commands/Administration/unarchivethread.js": "0423f2ba50909b96f2b46b6f472dba142f1da273a0f8c90c50fe5f5b89327d92",
     "commands/Administration/unban.js": "c878f47104d6719d9393eb8abd1bdd7a8588614337f742dbbd2d9344bf35cf7c",
     "commands/Administration/unlockchannel.js": "c803beeb78448fb5e5cbc3df5af007d2ae49ea0337912071c69508affe230aff",
     "commands/Administration/unlockthread.js": "8e39f11a3c622d4711499ac9a44d34fcebdf2f21e1719af76701803814a91fa3",
-    "commands/Administration/unmute.js": "45337352406b1876e8be995661af72f796722afe5d28b67664b87f681901fc18",
+    "commands/Administration/unmute.js": "97639427e7158d4733e79751f4b5837fa8b107ee6ee903fb2a1d0d71532ed340",
     "commands/Administration/unwarn.js": "8b136f364ad9d905e381955815adff2df405091f8a4ffed714b98370d0ad0139",
     "commands/Administration/updatemessage.js": "25391650061a3a3d35b22b11b9d8ce53ded2c880563b5baf217e9987d8b725bd",
     "commands/Administration/useridban.js": "210353d119d6ca6d04977f3c253720c1be1384a0fb42b88bbaa4c28f22f98d56",
@@ -750,7 +750,7 @@
     "handlers/music/web-lyrics.js": "91d026f1e02f7326b69043397a1f03963dcc6979691534a5a0fe19888f7780bd",
     "handlers/musiccatalog.js": "779ad1a2b057e38966634b3cdecf53c9659c155d1db7ce42f43ba230aadb539e",
     "handlers/musichandler.js": "57d0cb346d90a4e1c5b362e21bc31431beb7c69a5a77d4c48baf53be0942b5e9",
-    "handlers/mute.js": "73cd0245e40de683855129616c0deb89ff917284dc19f12fac0c69984438d4d9",
+    "handlers/mute.js": "5f06323e669eb06c1cf61210e8611e89c9ed920d51b5b549be819ef233ce4397",
     "handlers/neko-provider.js": "c726175276f4722893d1b047e090909a100f8a8770aea4087be89dfd8c55e9e4",
     "handlers/owner-notifications.js": "790ef5e1ca135f1596b9d2320a214dcdf619efa0b4582e345606ac67ff543e77",
     "handlers/permissions.js": "dfd543e3fb6e1420e0663210a308ec03d1e0eb85d7db04dfd583f522232fc078",
@@ -995,8 +995,13 @@
     "src/modules/moderation/discord/targets.js": "c1f68a7acefcb764243058efce55f3905c6812e81f46d6cb9d95f8a02e9a9bb4",
     "src/modules/moderation/discord/warning-commands.js": "f53775daa29cdad1d5082d171a1da3a32c0685b7ef77a3bbb1d2543fcb092f89",
     "src/modules/moderation/domain/warnings.js": "9b67edb62b3ee427fa0e56883f220f4238dd000ed77ebe2c754bfc2c09d25e35",
-    "src/modules/moderation/index.js": "5fa70b8565ab0abbe8013aa17c72fb61b3fc776e4350dd18fcf0e4e64093f85f",
-    "src/modules/moderation/infrastructure/legacy-warning-store.js": "a085a897a1704b0e6f8ee430c0798e2f6c2e78cfd70bb9c69e8dac3ec885d95f"
+    "src/modules/moderation/index.js": "39b97fbe46f26829a149e80da7977e3aca9d612e26997a9607f581b84b6342db",
+    "src/modules/moderation/infrastructure/legacy-warning-store.js": "a085a897a1704b0e6f8ee430c0798e2f6c2e78cfd70bb9c69e8dac3ec885d95f",
+    "database/schemas/MuteSchema.js": "e7d5f4bafe46a70fd4bd4d1f3ac5813e3e0f4046092441dc25ecb8d14a9ac85f",
+    "src/modules/moderation/application/role-mutes.js": "545d4703a0fa28fb1e1bb96d19407c6344b1ce93931953e74677ea01d5344a03",
+    "src/modules/moderation/application/role-mute-worker.js": "0ddddf84089760675323a7a6da13fdb3e4a206a574c041813e7c02a9aad3f8c4",
+    "src/modules/moderation/discord/role-mute-commands.js": "b9f310a2666a94e02fab7b32fa9dd059a5e9a8a55dc7f801de0a4e941c866c58",
+    "src/modules/moderation/infrastructure/role-mute-store.js": "9ee42632912792dcaffd67d110fadb03845c2e0cc30c85bcf96809eea683e046"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -11648,171 +11653,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/mute.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 81
-        },
-        {
-          "call": "client.settings.get",
-          "line": 86
-        },
-        {
-          "call": "client.getFooter",
-          "line": 108
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 146
-        },
-        {
-          "call": "client.getFooter",
-          "line": 149
-        },
-        {
-          "call": "client.stats.push",
-          "line": 160
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 172
-        },
-        {
-          "call": "client.getFooter",
-          "line": 175
-        },
-        {
-          "call": "client.getFooter",
-          "line": 197
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 218
-        },
-        {
-          "call": "client.getFooter",
-          "line": 221
-        },
-        {
-          "call": "client.stats.push",
-          "line": 227
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 239
-        },
-        {
-          "call": "client.getFooter",
-          "line": 242
-        },
-        {
-          "call": "client.mutes.push",
-          "line": 249
-        },
-        {
-          "call": "client.stats.push",
-          "line": 263
-        },
-        {
-          "call": "client.getFooter",
-          "line": 303
-        },
-        {
-          "call": "client.getFooter",
-          "line": 320
-        },
-        {
-          "call": "client.getFooter",
-          "line": 335
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 351
-        },
-        {
-          "call": "client.getFooter",
-          "line": 354
-        },
-        {
-          "call": "client.mutes.push",
-          "line": 360
-        },
-        {
-          "call": "client.stats.push",
-          "line": 374
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 385
-        },
-        {
-          "call": "client.getFooter",
-          "line": 388
-        },
-        {
-          "call": "client.getFooter",
-          "line": 432
-        },
-        {
-          "call": "client.settings.get",
-          "line": 441
-        },
-        {
-          "call": "client.settings.get",
-          "line": 443
-        },
-        {
-          "call": "client.settings.set",
-          "line": 444
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 454
-        },
-        {
-          "call": "client.getFooter",
-          "line": 457
-        },
-        {
-          "call": "client.getFooter",
-          "line": 463
-        },
-        {
-          "call": "client.getFooter",
-          "line": 480
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Soundboard/nani.js": {
       "kind": "current-command-adapter",
@@ -12683,103 +12525,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/permamute.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.settings.get",
-          "line": 29
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.getFooter",
-          "line": 53
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 75
-        },
-        {
-          "call": "client.getFooter",
-          "line": 107
-        },
-        {
-          "call": "client.getFooter",
-          "line": 119
-        },
-        {
-          "call": "client.getFooter",
-          "line": 151
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 167
-        },
-        {
-          "call": "client.getFooter",
-          "line": 170
-        },
-        {
-          "call": "client.stats.push",
-          "line": 176
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 188
-        },
-        {
-          "call": "client.getFooter",
-          "line": 191
-        },
-        {
-          "call": "client.settings.get",
-          "line": 198
-        },
-        {
-          "call": "client.settings.get",
-          "line": 200
-        },
-        {
-          "call": "client.settings.set",
-          "line": 201
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 211
-        },
-        {
-          "call": "client.getFooter",
-          "line": 214
-        },
-        {
-          "call": "client.getFooter",
-          "line": 220
-        },
-        {
-          "call": "client.getFooter",
-          "line": 237
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Info/permissions.js": {
       "kind": "current-command-adapter",
@@ -17683,123 +17430,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/tempmute.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 78
-        },
-        {
-          "call": "client.getFooter",
-          "line": 89
-        },
-        {
-          "call": "client.getFooter",
-          "line": 121
-        },
-        {
-          "call": "client.getFooter",
-          "line": 132
-        },
-        {
-          "call": "client.getFooter",
-          "line": 147
-        },
-        {
-          "call": "client.getFooter",
-          "line": 162
-        },
-        {
-          "call": "client.getFooter",
-          "line": 177
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 193
-        },
-        {
-          "call": "client.getFooter",
-          "line": 196
-        },
-        {
-          "call": "client.mutes.push",
-          "line": 202
-        },
-        {
-          "call": "client.stats.push",
-          "line": 216
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 227
-        },
-        {
-          "call": "client.getFooter",
-          "line": 230
-        },
-        {
-          "call": "client.getFooter",
-          "line": 271
-        },
-        {
-          "call": "client.settings.get",
-          "line": 278
-        },
-        {
-          "call": "client.settings.get",
-          "line": 280
-        },
-        {
-          "call": "client.settings.set",
-          "line": 281
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 291
-        },
-        {
-          "call": "client.getFooter",
-          "line": 294
-        },
-        {
-          "call": "client.getFooter",
-          "line": 300
-        },
-        {
-          "call": "client.getFooter",
-          "line": 317
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/test.js": {
       "kind": "current-command-adapter",
@@ -19294,95 +18926,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/unmute.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.settings.get",
-          "line": 30
-        },
-        {
-          "call": "client.settings.get",
-          "line": 31
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 78
-        },
-        {
-          "call": "client.getFooter",
-          "line": 96
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        },
-        {
-          "call": "client.getFooter",
-          "line": 118
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 132
-        },
-        {
-          "call": "client.getFooter",
-          "line": 135
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 147
-        },
-        {
-          "call": "client.getFooter",
-          "line": 150
-        },
-        {
-          "call": "client.settings.get",
-          "line": 155
-        },
-        {
-          "call": "client.settings.get",
-          "line": 157
-        },
-        {
-          "call": "client.settings.set",
-          "line": 158
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 168
-        },
-        {
-          "call": "client.getFooter",
-          "line": 171
-        },
-        {
-          "call": "client.getFooter",
-          "line": 188
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/MiniGames/uno.js": {
       "kind": "current-command-adapter",
