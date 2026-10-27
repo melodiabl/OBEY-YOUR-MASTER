@@ -17,11 +17,19 @@ for (const name of ['.env', 'docker-compose.yml', 'docker-compose.override.yml',
 const archive = path.join(directory, 'mongo.archive.gz')
 const out = fs.openSync(archive, 'wx', 0o600)
 const errorLog = fs.openSync(path.join(directory, 'backup-error.log'), 'wx', 0o600)
-const child = spawn('podman', ['run', '--rm', '--network', 'host', '-e', 'MONGO_URL', 'docker.io/library/mongo:7', 'sh', '-c', 'exec mongodump --uri="$MONGO_URL" --archive --gzip --quiet'], {
-  env: { ...process.env, MONGO_URL: uri }, stdio: ['ignore', out, errorLog],
+const dumpConfig = path.join(directory, 'mongodump.yml')
+fs.writeFileSync(dumpConfig, `uri: ${JSON.stringify(uri)}\n`, { flag: 'wx', mode: 0o600 })
+const childEnv = { ...process.env }
+delete childEnv.MONGO_URL
+delete childEnv.mongourl
+const child = spawn('podman', ['run', '--rm', '--network', 'host', '--volume', `${dumpConfig}:/run/mongodump.yml:ro`,
+  '--entrypoint', 'mongodump', 'docker.io/library/mongo:7', '--config=/run/mongodump.yml', '--archive', '--gzip', '--quiet'], {
+  env: childEnv, stdio: ['ignore', out, errorLog],
 })
+child.on('error', () => { /* The close handler reports a failed backup without exposing process details. */ })
 child.on('close', code => {
   fs.closeSync(out); fs.closeSync(errorLog)
+  fs.rmSync(dumpConfig, { force: true })
   if (code || !fs.statSync(archive).size) { console.error('Backup failed; private error log retained at', directory); process.exitCode = 1; return }
   console.log(JSON.stringify({ backup: directory, bytes: fs.statSync(archive).size }))
 })
