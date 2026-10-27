@@ -1807,6 +1807,19 @@
     },
     "auditRestricted": "Detalles de moderación omitidos: el destino debe estar restringido a personal con acceso al registro de auditoría."
   },
+  "moderationBanList": {
+    "title": "Vetos de {server}",
+    "empty": "No hay vetos en este servidor.",
+    "reason": "Motivo",
+    "noReason": "Sin motivo registrado",
+    "page": "Página {page}/{pages} · {total} vetos",
+    "sent": "Te envié la lista de vetos por mensaje privado.",
+    "accessDenied": "No pude confirmar tus permisos actuales para consultar los vetos.",
+    "botPermission": "Necesito el permiso Vetar miembros para consultar los vetos.",
+    "invalidPage": "Indica un número de página válido.",
+    "unavailable": "No pude confirmar la lista de vetos. No se han publicado detalles.",
+    "deliveryUnconfirmed": "No pude confirmar la entrega privada. Activa los mensajes privados del bot; no publicaré los motivos en este canal."
+  },
   "moderationHistory": {
     "title": "Historial de moderación",
     "noCaseNumber": "Sin número de caso",

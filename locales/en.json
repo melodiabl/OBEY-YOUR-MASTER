@@ -1807,6 +1807,19 @@
     },
     "auditRestricted": "Moderation details omitted: the destination must be restricted to staff with audit log access."
   },
+  "moderationBanList": {
+    "title": "Bans in {server}",
+    "empty": "There are no bans in this server.",
+    "reason": "Reason",
+    "noReason": "No reason recorded",
+    "page": "Page {page}/{pages} · {total} bans",
+    "sent": "I sent the ban list in a private message.",
+    "accessDenied": "I could not confirm your current permission to view bans.",
+    "botPermission": "I need Ban Members permission to read the ban list.",
+    "invalidPage": "Provide a valid page number.",
+    "unavailable": "I could not confirm the ban list. No details were published.",
+    "deliveryUnconfirmed": "Private delivery is unconfirmed. Enable DMs from the bot; I will not post reasons in this channel."
+  },
   "moderationHistory": {
     "title": "Moderation history",
     "noCaseNumber": "No case number",

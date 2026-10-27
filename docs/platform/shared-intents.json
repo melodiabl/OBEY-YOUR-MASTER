@@ -890,15 +890,33 @@
       "producers": "Discord audit/Gateway handles ban and timeout; confirmed warnings and role mutes use one canonical emitter; kick uses a command fallback only when audit observation is unavailable.",
       "limits": "No durable LogEvent/Delivery or cross-producer receipt; authenticated Discord delivery and two-guild audience walkthrough remain open.",
       "evidence": "evidence/p0-moderation-logs-20261026.json"
+    },
+    {
+      "id": "moderation.bans.list",
+      "commands": [
+        "prefix:bans",
+        "prefix:listbans"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/ban-list.js",
+      "store": "Discord GuildBanManager; read only, no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Both command names use the existing prefix ban grants and fresh actor/bot permission checks; ban reasons are delivered only to the actor by DM.",
+      "parameters": {
+        "page": "positive integer; eight bans per private page; out-of-range requests clamp to the last page"
+      },
+      "result": "Channel reply confirms only private delivery or reports an unavailable/denied state; no reason appears in channel.",
+      "limits": "No real Discord DM acceptance or two-guild walkthrough; reading all bans uses Discord cursor pagination with a 15-second request timeout and a 100-batch safety limit.",
+      "evidence": "evidence/p0-ban-list-20261027.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 31,
-    "commandEntriesReviewed": 125,
+    "reviewedGroups": 32,
+    "commandEntriesReviewed": 127,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 550,
+    "remainingCommandEntries": 548,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
