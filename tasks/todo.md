@@ -1,5 +1,13 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · modo lento · 28/10/2026
+
+- [x] Unificar `slowmode` y `/slowmode` con segundos enteros 0–21.600, permisos frescos y canal confirmado.
+- [x] Esperar y comprobar el valor devuelto por Discord antes del éxito; diferir slash en privado y emitir al servicio de logs después del efecto.
+- [x] Verificar 37 pruebas en imagen, 999 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12; desplegar `a6a84bcc`/`029e9d190545` con diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-SLOWMODE-2026-10-28.md).
+- [ ] Continuar Administración, recibos, G01/G02 y aceptación autenticada. Quedan 542 entradas y 74 rutas; P0 sigue abierto.
+
+
 ## P0 · bloqueo de canales · 28/10/2026
 
 - [x] Unificar `lockchannel`, `channellock`, `unlockchannel` y `channelunlock` con acceso fresco, `ManageRoles` y cambios solo en las dos capacidades del destino.

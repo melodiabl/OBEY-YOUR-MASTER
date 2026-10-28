@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Shared confirmed slowmode changes for prefix and slash",
+  "verification": {
+    "isolatedCases": 37,
+    "originalCasesIncluded": 25,
+    "newCases": 12,
+    "failed": 0,
+    "sourceHashes": 999,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 34,
+    "reviewedCommandEntries": 133,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 542,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-slowmode-20261028/focused.tap",
+    ".runtime/p0-slowmode-20261028/tests.tap",
+    ".runtime/p0-slowmode-20261028/image-tests.tap",
+    ".runtime/p0-slowmode-20261028/runtime-observations.json",
+    ".runtime/p0-slowmode-20261028/http-assets.json",
+    ".runtime/p0-slowmode-20261028/preflight.json",
+    ".runtime/p0-slowmode-20261028/deployment.json"
+  ],
+  "deployment": {
+    "code": "a6a84bcc22724c1ea773ce5c66f9de4ca74b687f",
+    "image": "029e9d1905454bde2bdb8cb5a57c4bf74cf5756f045a404e2d9f0437f399e03e",
+    "tag": "localhost/obey-your-master_bot:release-p0-slowmode-20261028-a6a84bcc",
+    "rollbackImage": "08bc1522a3b87abd3f0de8d2278b108a30e17446196a26761afae9d8f225fc18",
+    "priorBackupBytes": 59325699,
+    "postBackupBytes": 59323927,
+    "bothBackupGzipCrcValid": true,
+    "backupTempConfigRemoved": true,
+    "preflightDifferences": [],
+    "inspectorClosed": true,
+    "imageTests": 37,
+    "runtimeSourceHashes": 999,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "unhandledLogEvents": 0,
+    "errorLogEvents": 0
+  },
+  "operationalLimit": "No real Discord slowmode change or two-guild authenticated acceptance test",
+  "remaining": [
+    "P0: other Administration intents, durable receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}

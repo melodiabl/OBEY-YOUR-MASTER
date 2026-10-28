@@ -1,5 +1,12 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · modo lento compartido y desplegado
+
+`slowmode` de texto y `/slowmode` comparten validación 0–21.600, permisos actuales, canal fresco y respuesta tras confirmar el valor devuelto por Discord. Slash difiere en privado; los cambios confirmados usan el servicio de logs. [Informe y límites](P0-SLOWMODE-2026-10-28.md).
+
+Código `a6a84bcc`, imagen `029e9d190545`: 37 pruebas en imagen, 999 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; dos respaldos CRC y reversión `08bc1522a3b8`. Mapa P0: 34 grupos/133 entradas/21 rutas, faltan 542/74. No se cambiaron canales reales para probar. P0, recibos, G01/G02 y aceptación autenticada siguen abiertos.
+
+
 ## 28/10/2026 · bloqueo de canales unificado y desplegado
 
 `lockchannel`, `channellock`, `unlockchannel` y `channelunlock` comparten acceso fresco y edición puntual de sobrescrituras. Se eliminaron la clave inválida `SEND_MESSAGE`, el reemplazo completo de permisos y los éxitos tras fallos de la API. [Informe y límite de restauración](P0-CHANNEL-LOCK-2026-10-28.md).

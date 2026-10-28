@@ -1,5 +1,12 @@
 # Estado entregado · 17/10/2026
 
+## 28/10/2026 · modo lento de texto y slash corregido
+
+`slowmode` y `/slowmode` usan el mismo servicio: segundos enteros 0–21.600, permisos frescos, canal confirmado y éxito solo tras la respuesta de Discord. La interacción slash se difiere en privado; los logs se emiten después del efecto. [Informe](P0-SLOWMODE-2026-10-28.md).
+
+Despliegue `a6a84bcc`/`029e9d190545`: 37 pruebas en imagen, 999 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Dos respaldos CRC y reversión `08bc1522a3b8`. Mapa P0: 34 grupos/133 entradas/21 rutas revisadas; quedan 542/74. Sin cambios reales de modo lento para prueba ni push. Continuar P0 con Administración, recibos duraderos y G01/G02.
+
+
 ## 28/10/2026 · permisos de canales corregidos
 
 Cuatro comandos de bloquear/desbloquear canal comparten servicio con permisos frescos, `ManageRoles`, edición puntual y respuestas tras confirmar Discord. Los fallos parciales se distinguen del éxito; los cambios confirmados emiten al servicio de logs. [Informe](P0-CHANNEL-LOCK-2026-10-28.md).

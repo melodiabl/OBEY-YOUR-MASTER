@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## Avance P0 · modo lento · 28/10/2026
+
+El texto `slowmode` y `/slowmode` comparten validación, permisos frescos y confirmación del valor aplicado por Discord. Código `a6a84bcc`, imagen `029e9d190545`, 37 pruebas, 999 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-SLOWMODE-2026-10-28.md). El mapa cubre 34 grupos/133 comandos/21 rutas; restan 542 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada antes de P1.
+
+
 ## Avance P0 · bloqueo de canales · 28/10/2026
 
 Cuatro comandos de bloquear/desbloquear canal comparten servicio, permisos frescos y edición puntual, sin reemplazar las otras sobrescrituras. Código `80bc8eed`, imagen `08bc1522a3b8`, 36 pruebas, 997 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia y límite](../docs/platform/P0-CHANNEL-LOCK-2026-10-28.md). El mapa cubre 33 grupos/131 comandos/21 rutas; restan 544 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada antes de P1.
