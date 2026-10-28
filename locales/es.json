@@ -1929,5 +1929,14 @@
     "conflict": "La lista cambió mientras guardabas. Consulta el estado actual y vuelve a intentarlo.",
     "unavailable": "No pude confirmar el guardado. Comprueba la lista antes de reintentar.",
     "more": "Y {count} canales más."
+  },
+  "djRoles": {
+    "added": "Rol DJ añadido. Roles configurados: {count}.",
+    "removed": "Rol DJ retirado. Roles configurados: {count}.",
+    "unchanged": "La lista ya tenía ese estado. Roles configurados: {count}.",
+    "empty": "No se exige rol DJ; siguen vigentes los demás permisos de cada control.",
+    "invalid": "Menciona un rol válido de este servidor o indica su ID.",
+    "conflict": "Los roles DJ cambiaron mientras guardabas. Consulta el estado actual antes de reintentar.",
+    "unavailable": "No pude confirmar el guardado de los roles DJ. Consulta la configuración antes de reintentar."
   }
 }

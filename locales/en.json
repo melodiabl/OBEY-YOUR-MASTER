@@ -1929,5 +1929,14 @@
     "conflict": "The list changed while saving. Check the current state and try again.",
     "unavailable": "I could not confirm the save. Check the list before retrying.",
     "more": "And {count} more channels."
+  },
+  "djRoles": {
+    "added": "DJ role added. Configured roles: {count}.",
+    "removed": "DJ role removed. Configured roles: {count}.",
+    "unchanged": "The list was already in that state. Configured roles: {count}.",
+    "empty": "No DJ role is required; other control permissions still apply.",
+    "invalid": "Mention a valid role in this server or enter its ID.",
+    "conflict": "DJ roles changed while saving. Check the current state before retrying.",
+    "unavailable": "I could not confirm the DJ role save. Check the settings before retrying."
   }
 }

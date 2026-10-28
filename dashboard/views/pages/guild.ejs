@@ -5,6 +5,7 @@
   breadcrumb: [{ label: 'Mis Servidores', url: '/dashboard' }, { label: guild.name }]
 }) %>
 <link rel="stylesheet" href="/css/log-settings.css">
+<link rel="stylesheet" href="/css/dj-role-settings.css">
 
 <!-- Saved/error alert -->
 <% if (typeof prefixSaved !== 'undefined' && prefixSaved) { %>
@@ -308,22 +309,7 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-head">
-          <div class="card-ico ico-pink"><i class="fas fa-user-shield"></i></div>
-          <div><div class="card-title">Rol de DJ</div><div class="card-desc">Solo este rol puede controlar la música</div></div>
-        </div>
-        <div class="card-body">
-          <div class="form-group">
-            <label class="form-label">Rol de DJ</label>
-            <span class="form-help">Sin rol configurado = cualquier usuario puede usar la música</span>
-            <select name="djRole" class="form-select">
-              <option value="">— Sin restricción —</option>
-              <% roles.forEach(r => { %><option value="<%= r.id %>" <%= (settings.djroles?.[0]||settings.djRole)===r.id?'selected':'' %>><%= r.name %></option><% }) %>
-            </select>
-          </div>
-        </div>
-      </div>
+      <%- include('../includes/dj-role-settings', { settings, djRoleOptions, djRolesSaved }) %>
 
       <div class="alert alert-info">
         <i class="fas fa-circle-info"></i>
@@ -497,6 +483,10 @@
 <form id="prefix-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
   <input type="hidden" name="_intent" value="prefix">
   <input type="hidden" name="prefixRevision" value="<%= settings.prefixRevision %>">
+</form>
+<form id="dj-roles-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
+  <input type="hidden" name="_intent" value="djRoles">
+  <input type="hidden" name="djRolesRevision" value="<%= settings.djRolesRevision %>">
 </form>
 <script src="/js/log-settings.js" defer></script>
 

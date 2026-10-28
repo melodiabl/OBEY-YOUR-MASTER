@@ -70,10 +70,6 @@ function check_if_dj(client, member, song) {
     if (String(roleid) == "") return false;
     var isdj = false;
     for (const djRole of roleid) {
-        if (!member.guild.roles.cache.get(djRole)) {
-            client.settings.remove(member.guild.id, djRole, `djroles`);
-            continue;
-        }
         if (member.roles.cache.has(djRole)) isdj = true;
     }
     if (!isdj && !member.permissions.has(Discord.PermissionFlagsBits.Administrator) && (song?.requesterId || song?.requester?.id) != member.id)

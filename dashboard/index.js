@@ -14,6 +14,8 @@ const { sessionAuth, establishSession, dashboardReturnTo } = require('./auth')
 const { createLanguageSettings } = require('../handlers/language-settings')
 const { availableLanguages } = require('../handlers/setup-language')
 const { createPrefixSettings } = require('../handlers/prefix-settings')
+const { readDjRoles } = require('../handlers/dj-role-settings')
+const { saveDjRoleForm } = require('./dj-role-form')
 
 module.exports = async client => {
   const app    = express()
@@ -359,7 +361,11 @@ module.exports = async client => {
     let prefix
     try { prefix = await createPrefixSettings(client).read(guild.id) }
     catch { return res.status(503).json({ error: 'setup_storage' }) }
+    let djRoles
+    try { djRoles = await readDjRoles(client, { guildId: guild.id, actorId: req.session.user.id, transport: 'web' }) }
+    catch (error) { return res.status(error.code === 'setup_denied' ? 403 : 503).json({ error: error.code === 'setup_denied' ? 'setup_denied' : 'setup_storage' }) }
     const settings = { ...(client.settings.get(guild.id) || {}), prefix: prefix.values.prefix || client.config?.prefix || '!', prefixRevision: prefix.revision,
+      djroles: djRoles.values.roles, djRolesRevision: djRoles.revision,
       language: language.language, languageRevision: language.revision,
       welcomeMessage: welcome.message, welcomeChannel:welcome.channelId, welcomeRevision:welcome.revision }
     const allCh    = [...guild.channels.cache.values()]
@@ -373,6 +379,9 @@ module.exports = async client => {
       languages: availableLanguages(client),
       languageSaved: req.query.languageSaved === '1',
       prefixSaved: req.query.prefixSaved === '1',
+      djRolesSaved: req.query.djRolesSaved === '1',
+      djRoleOptions: [...guild.roles.cache.values()].map(role => ({ id: role.id, name: role.name }))
+        .concat(djRoles.values.roles.filter(id => !guild.roles.cache.has(id)).map(id => ({ id, name: `Rol no disponible (${id})` }))),
       logsConfiguration,
       logDestinationChannels: visibleLogChannels.filter(channel => [0, 5].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
       logSourceChannels: visibleLogChannels.filter(channel => [0, 2, 4, 5, 13, 15, 16].includes(channel.type)).map(channel => ({ id: channel.id, name: channel.name })),
@@ -396,6 +405,9 @@ module.exports = async client => {
       return res.status(403).json({ error: 'No permission' })
 
     const b     = req.body
+    if (b._intent === 'djRoles') return saveDjRoleForm(client, req, res, guild)
+    if (['djRole', 'djroles', 'djRoles', 'djRolesRevision'].some(key => Object.hasOwn(b, key)))
+      return res.status(409).json({ error: 'dj_configuration_moved', message: 'Abre la sección Roles DJ y usa su botón Guardar roles DJ.' })
     if (b._intent === 'prefix') {
       if (Object.keys(b).some(key => !['_intent', 'prefix', 'prefixRevision', '_csrf'].includes(key)))
         return res.status(400).json({ error: 'invalid_setup' })
@@ -477,7 +489,6 @@ module.exports = async client => {
     patch.autoplay = b.autoplay === 'on'
 
     // DJ role + birthday
-    if (b.djRole          !== undefined) patch.djRole          = b.djRole          || null
     if (b.birthdayChannel !== undefined) patch.birthdayChannel = b.birthdayChannel || null
 
     // Build bot-format paths
@@ -493,7 +504,6 @@ module.exports = async client => {
     if (patch.antiMention !== undefined) { botPatch['antimention.enabled'] = patch.antiMention; botPatch['autowarn.antimention'] = patch.antiMention }
     if (patch.antiMentionLimit !== undefined) botPatch['antimention.limit'] = patch.antiMentionLimit
     if (patch.antiSelfbot !== undefined) { botPatch['antiselfbot.enabled'] = patch.antiSelfbot; botPatch['autowarn.antiselfbot'] = patch.antiSelfbot }
-    if (patch.djRole          !== undefined) botPatch.djroles         = patch.djRole ? [patch.djRole] : []
     if (patch.birthdayChannel !== undefined) botPatch.birthdayChannel = patch.birthdayChannel
 
     // Keep every saved field coherent with commands, including nested module settings.
@@ -527,7 +537,6 @@ module.exports = async client => {
     s.set(gid, patch.autoplay, 'autoplay')
     client.music?.setAutoplay?.(gid, patch.autoplay)
 
-    if (patch.djRole !== undefined) s.set(gid, patch.djRole ? [patch.djRole] : [], 'djroles')
     if (patch.autoEmbed !== undefined) s.set(gid, patch.autoEmbed ? (s.get(gid, 'autoembed') || []) : [], 'autoembed')
     if (patch.autoMeme  !== undefined) s.set(gid, patch.autoMeme  ? 'enabled' : 'disabled', 'automeme')
     if (patch.birthdayChannel !== undefined) s.set(gid, patch.birthdayChannel, 'birthdayChannel')

@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-head">
+    <div class="card-ico ico-pink"><i class="fas fa-user-shield" aria-hidden="true"></i></div>
+    <div><div class="card-title">Roles DJ</div><div class="card-desc">Elige quién puede usar los controles reservados a DJ</div></div>
+  </div>
+  <div class="card-body">
+    <% if (typeof djRolesSaved !== 'undefined' && djRolesSaved) { %><p class="alert alert-success" role="status">Roles DJ guardados correctamente.</p><% } %>
+    <fieldset class="dj-role-fieldset" aria-describedby="dj-role-help">
+      <legend class="form-label">Roles con acceso DJ</legend>
+      <p class="form-help" id="dj-role-help">Marca uno o varios roles. Sin selección no se exige un rol DJ; siguen vigentes los demás permisos y reglas de los controles.</p>
+      <div class="dj-role-options">
+        <% djRoleOptions.forEach(role => { %>
+          <label class="dj-role-choice"><input type="checkbox" form="dj-roles-settings-form" name="djRoles" value="<%= role.id %>" <%= settings.djroles.includes(role.id) ? 'checked' : '' %>><span><%= role.name %></span></label>
+        <% }) %>
+        <% if (!djRoleOptions.length) { %><p class="form-help">No hay roles disponibles.</p><% } %>
+      </div>
+    </fieldset>
+    <button type="submit" form="dj-roles-settings-form" class="btn btn-p btn-sm">Guardar roles DJ</button>
+  </div>
+</div>

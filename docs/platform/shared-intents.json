@@ -1058,15 +1058,33 @@
       "result": "Success after awaited CAS persistence; conflicts and storage failures never announce success; router no longer prunes settings based on missing cache.",
       "limits": "Reset remains a separate legacy operation; authenticated two-guild walkthrough and durable operation receipts remain pending.",
       "evidence": "evidence/p0-bot-channels-20261028.json"
+    },
+    {
+      "id": "configuration.dj_roles",
+      "commands": [
+        "prefix:adddj",
+        "prefix:removedj"
+      ],
+      "routes": [
+        "GET /dashboard/:guildId",
+        "POST /dashboard/:guildId"
+      ],
+      "service": "handlers/dj-role-settings.js",
+      "store": "Guild.djroles through shared setup-settings CAS; single field authority",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Prefix retains fresh Administrator and channel access checks; web retains fresh ManageGuild with OAuth/CSRF middleware. Role existence fetched for additions and replacements; stale references may be removed.",
+      "result": "Persisted multi-role list with revision conflict detection, separate web intent and no cache-miss pruning. Generic dashboard no longer writes djroles or singular djRole.",
+      "limits": "Legacy reset remains separate; no production role configuration changes used for testing. Authenticated two-guild acceptance pending.",
+      "evidence": "evidence/p0-dj-roles-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 40,
-    "commandEntriesReviewed": 149,
+    "reviewedGroups": 41,
+    "commandEntriesReviewed": 151,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 526,
+    "remainingCommandEntries": 524,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
