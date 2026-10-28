@@ -1081,28 +1081,30 @@
       "id": "configuration.music_defaults",
       "commands": [
         "prefix:defaultvolume",
-        "prefix:defaultautoplay"
+        "prefix:defaultautoplay",
+        "prefix:defaultequalizer"
       ],
       "routes": [
         "GET /dashboard/:guildId",
         "POST /dashboard/:guildId"
       ],
       "service": "handlers/music-default-settings.js",
-      "store": "Guild.defaultVolume and Guild.autoplay through existing setup-settings CAS; committed cache supplies new music connections",
+      "store": "Guild.defaultVolume, Guild.autoplay and Guild.defaultEqualizer through existing setup-settings CAS; committed cache supplies fresh music connections",
       "status": "corrected_and_verified_in_isolation",
       "policy": "Fresh Administrator/channel/bot checks for prefix; fresh ManageGuild with OAuth and CSRF for web. Prefix volume 1–150; web 0–200; integer only.",
-      "result": "Commands and dedicated web form await conditional persistence. Generic saves do not mutate these defaults or the active session. Old defaultvolume/defaultap values remain preserved and unused, matching current engine behavior.",
-      "limits": "No automatic legacy-key migration; defaultequalizer and reset remain separate pending work. No real server settings or voice joins for testing; authenticated two-guild acceptance and durable receipts pending.",
-      "evidence": "evidence/p0-music-defaults-20261029.json"
+      "result": "Commands and dedicated form share conditional persistence. Equalizer accepts existing native presets, defaults off, and applies only on a fresh connection. Session recovery and node switching keep saved effects. Unconfirmed default effect is visible in now-playing; active-session controls remain independent.",
+      "limits": "No automatic legacy-key migration; legacy reset remains pending. No real server configuration changes or voice joins for testing. Authenticated two-guild acceptance, actual audio and durable receipts pending.",
+      "evidence": "evidence/p0-default-equalizer-20261029.json",
+      "previousEvidence": "evidence/p0-music-defaults-20261029.json"
     }
   ],
   "coverage": {
     "reviewedGroups": 42,
-    "commandEntriesReviewed": 153,
+    "commandEntriesReviewed": 154,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 522,
+    "remainingCommandEntries": 521,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

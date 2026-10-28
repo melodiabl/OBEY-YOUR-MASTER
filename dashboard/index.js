@@ -16,7 +16,7 @@ const { availableLanguages } = require('../handlers/setup-language')
 const { createPrefixSettings } = require('../handlers/prefix-settings')
 const { readDjRoles } = require('../handlers/dj-role-settings')
 const { saveDjRoleForm } = require('./dj-role-form')
-const { readMusicDefaults } = require('../handlers/music-default-settings')
+const { readMusicDefaults, equalizerProfiles } = require('../handlers/music-default-settings')
 const { saveMusicDefaultForm } = require('./music-default-form')
 
 module.exports = async client => {
@@ -369,7 +369,7 @@ module.exports = async client => {
     let musicDefaults
     try { musicDefaults = await readMusicDefaults(client, { guildId: guild.id, actorId: req.session.user.id, transport: 'web' }) }
     catch (error) { return res.status(error.code === 'setup_denied' ? 403 : 503).json({ error: error.code === 'setup_denied' ? 'setup_denied' : 'setup_storage' }) }
-    const settings = { ...(client.settings.get(guild.id) || {}), defaultVolume: musicDefaults.values.volume, autoplay: musicDefaults.values.autoplay,
+    const settings = { ...(client.settings.get(guild.id) || {}), defaultVolume: musicDefaults.values.volume, autoplay: musicDefaults.values.autoplay, defaultEqualizer: musicDefaults.values.equalizer,
       musicDefaultsRevision: musicDefaults.revision, prefix: prefix.values.prefix || client.config?.prefix || '!', prefixRevision: prefix.revision,
       djroles: djRoles.values.roles, djRolesRevision: djRoles.revision,
       language: language.language, languageRevision: language.revision,
@@ -387,6 +387,7 @@ module.exports = async client => {
       prefixSaved: req.query.prefixSaved === '1',
       djRolesSaved: req.query.djRolesSaved === '1',
       musicDefaultsSaved: req.query.musicDefaultsSaved === '1',
+      equalizerProfiles,
       djRoleOptions: [...guild.roles.cache.values()].map(role => ({ id: role.id, name: role.name }))
         .concat(djRoles.values.roles.filter(id => !guild.roles.cache.has(id)).map(id => ({ id, name: `Rol no disponible (${id})` }))),
       logsConfiguration,
@@ -413,7 +414,7 @@ module.exports = async client => {
 
     const b     = req.body
     if (b._intent === 'musicDefaults') return saveMusicDefaultForm(client, req, res, guild)
-    if (['defaultVolume', 'autoplay', 'musicDefaultsRevision', 'defaultvolume', 'defaultap'].some(key => Object.hasOwn(b, key)))
+    if (['defaultVolume', 'autoplay', 'defaultEqualizer', 'defaulteq', 'musicDefaultsRevision', 'defaultvolume', 'defaultap'].some(key => Object.hasOwn(b, key)))
       return res.status(409).json({ error: 'music_defaults_moved', message: 'Abre Música y usa Guardar ajustes de inicio.' })
     if (b._intent === 'djRoles') return saveDjRoleForm(client, req, res, guild)
     if (['djRole', 'djroles', 'djRoles', 'djRolesRevision'].some(key => Object.hasOwn(b, key)))

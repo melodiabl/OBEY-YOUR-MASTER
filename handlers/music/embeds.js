@@ -39,6 +39,7 @@ function buildNPEmbed(client, guildId, state, positionMs = null) {
   const isStream = !!info.isStream
 
   const indicators = []
+  if (state.defaultEqualizerStatus === 'unconfirmed') indicators.push(t(locale, 'music.defaultEqualizerUnconfirmed'))
   if (active)          indicators.push(`${obeyUi.markup("icon.settings")} ${active}`)
   if (state.autoplay)  indicators.push(`${registry.markup('autoplay')} ${t(locale, 'music.autoplay')}`)
   if (state.shuffle)   indicators.push(`${E.shuffle} Mezclar`)

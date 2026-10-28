@@ -280,6 +280,7 @@ module.exports = client => {
       const response = await player.setFilters(filters)
       const position = elapsedForState(guildId, state)
       state.filter = 'custom'
+      state.defaultEqualizerStatus = 'overridden'
       state.customFilters = filters
       anchorFromNode(state, response, position)
       emitState(guildId)
@@ -317,7 +318,7 @@ module.exports = client => {
         if (!s.nodeTransition) { s.currentTrack = null; s.startedAt = null; s.paused = false }
         stopLiveUpdate(guildId)
       }
-      const defaults = musicDefaultsForConnection(client, guildId)
+      const defaults = current.nodeTransition ? null : musicDefaultsForConnection(client, guildId)
       getState(guildId).status = 'connecting'
       const guild = client.guilds?.cache?.get(guildId)
       const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: guild?.shardId ?? guild?.shard?.id ?? 0 })
@@ -326,13 +327,28 @@ module.exports = client => {
       state.locale = require('../i18n').localeFor(client, guildId)
       state.voiceChannelId = voiceChannelId
       state.textChannelId  = textChannelId
-      state.autoplay = defaults.autoplay
-      if (typeof player.setGlobalVolume === 'function') {
+      if (defaults) state.autoplay = defaults.autoplay
+      if (defaults && typeof player.setGlobalVolume === 'function') {
         try {
           await player.setGlobalVolume(defaults.volume)
           state.volume = defaults.volume
         } catch {
           console.warn('[Music] No se pudo aplicar el volumen predeterminado.')
+        }
+      }
+      state.defaultEqualizerStatus = 'off'
+      if (defaults) {
+        state.filter = 'none'
+        state.customFilters = undefined
+        if (defaults.equalizer !== 'off') {
+          try {
+            await player.setFilters({ ...FILTER_RESET, ...FILTER_PRESETS[defaults.equalizer] })
+            state.filter = defaults.equalizer
+            state.defaultEqualizerStatus = 'applied'
+          } catch {
+            state.defaultEqualizerStatus = 'unconfirmed'
+            console.warn('[Music] No se pudo confirmar el ecualizador predeterminado; la conexión sigue disponible.')
+          }
         }
       }
       this._bindPlayerEvents(player, guildId)
@@ -679,6 +695,7 @@ module.exports = client => {
       const response = await player.setFilters({ ...FILTER_RESET, ...(FILTER_PRESETS[preset] || {}) })
       const position = elapsedForState(guildId, state)
       state.filter = preset
+      state.defaultEqualizerStatus = 'overridden'
       anchorFromNode(state, response, position)
       emitState(guildId)
       return state.filter

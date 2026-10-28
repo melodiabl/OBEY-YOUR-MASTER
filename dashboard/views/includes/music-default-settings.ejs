@@ -15,6 +15,15 @@
       <span class="form-help" id="music-default-autoplay-help">Busca música relacionada cuando termine la cola. Para cambiar la sesión actual, usa /autoplay en Discord.</span>
       <span class="toggle"><input id="music-default-autoplay" type="checkbox" name="autoplay" form="music-defaults-settings-form" value="on" <%= settings.autoplay ? 'checked' : '' %> aria-describedby="music-default-autoplay-help"><span class="tslider" aria-hidden="true"></span></span>
     </div>
+    <div class="form-group">
+      <label class="form-label" for="music-default-equalizer">Ecualizador predeterminado</label>
+      <span class="form-help" id="music-default-equalizer-help">Se aplica al abrir una nueva conexión de voz. Sin ecualización conserva el audio sin este efecto; los controles de la sesión pueden cambiarlo después.</span>
+      <select id="music-default-equalizer" name="defaultEqualizer" form="music-defaults-settings-form" class="form-select" aria-describedby="music-default-equalizer-help">
+        <% Object.entries(equalizerProfiles).forEach(([value, label]) => { %>
+          <option value="<%= value %>" <%= settings.defaultEqualizer === value ? 'selected' : '' %>><%= label %></option>
+        <% }) %>
+      </select>
+    </div>
     <button type="submit" form="music-defaults-settings-form" class="btn btn-p btn-sm">Guardar ajustes de inicio</button>
   </div>
 </div>

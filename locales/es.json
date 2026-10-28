@@ -72,7 +72,8 @@
     "paused": "Pausado",
     "off": "Desactivado",
     "silenced": "Silenciado",
-    "voiceRequired": "Debes estar en un canal de voz."
+    "voiceRequired": "Debes estar en un canal de voz.",
+    "defaultEqualizerUnconfirmed": "Ecualizador predeterminado sin confirmar"
   },
   "economy": {
     "disabled": "El sistema de economía no está activado.",
@@ -1946,6 +1947,8 @@
     "volumeInvalid": "Usa defaultvolume con un número entero entre 1 y 150.",
     "autoplayInvalid": "Usa defaultautoplay sin argumentos para alternar el ajuste predeterminado.",
     "conflict": "Los ajustes de música cambiaron. Consulta la configuración actual antes de intentarlo de nuevo.",
-    "unavailable": "No pude confirmar el guardado. Vuelve a abrir la configuración para consultar el estado actual."
+    "unavailable": "No pude confirmar el guardado. Vuelve a abrir la configuración para consultar el estado actual.",
+    "equalizerSaved": "Ecualizador predeterminado guardado: {preset}. Se aplicará al iniciar una nueva conexión de música.",
+    "equalizerInvalid": "Usa defaultequalizer [off|pop|bassboost|metal|treblebass]. Sin argumentos alterna Pop/desactivado."
   }
 }

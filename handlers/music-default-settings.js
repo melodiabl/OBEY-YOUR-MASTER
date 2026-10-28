@@ -3,12 +3,14 @@ const { PermissionFlagsBits: F } = require('discord.js')
 const { createSetupSettings } = require('./setup-settings')
 const { requireSetupAccess } = require('./setup-access')
 
-const schema = z.strictObject({ volume: z.number().int().min(0).max(200), autoplay: z.boolean() })
+const equalizerProfiles = Object.freeze({ off: 'Sin ecualización', pop: 'Pop', bassboost: 'Bass Boost', metal: 'Metal', treblebass: 'Treble + Bass' })
+const schema = z.strictObject({ volume: z.number().int().min(0).max(200), autoplay: z.boolean(), equalizer: z.enum(Object.keys(equalizerProfiles)) })
 function fail(code) { throw Object.assign(new Error(code), { code }) }
 function createMusicDefaultSettings(client) {
   return createSetupSettings(client.settings, {
     volume: { path: 'defaultVolume', default: 100, schema: schema.shape.volume },
     autoplay: { path: 'autoplay', default: false, schema: schema.shape.autoplay },
+    equalizer: { path: 'defaultEqualizer', default: 'off', schema: schema.shape.equalizer },
   }, () => Boolean(client._shuttingDown || client._dbReady === false))
 }
 async function loadMusicDefaults(client, guildId) {
@@ -20,6 +22,7 @@ function musicDefaultsForConnection(client, guildId) {
   const values = {
     volume: client.settings?.get?.(guildId, 'defaultVolume') ?? 100,
     autoplay: client.settings?.get?.(guildId, 'autoplay') ?? false,
+    equalizer: client.settings?.get?.(guildId, 'defaultEqualizer') ?? 'off',
   }
   if (!schema.safeParse(values).success) fail('setup_storage')
   return values
@@ -48,9 +51,10 @@ async function saveMusicDefaults(client, context, patch, revision) {
   return createMusicDefaultSettings(client).save(context.guildId, parsed.data, revision)
 }
 async function changeMusicDefault(client, context, field, value) {
-  if (!['volume', 'autoplay'].includes(field)) fail('invalid_setup')
+  if (!['volume', 'autoplay', 'equalizer'].includes(field)) fail('invalid_setup')
   const before = await readMusicDefaults(client, context)
-  const next = field === 'autoplay' ? !before.values.autoplay : value
+  const next = field === 'autoplay' ? !before.values.autoplay
+    : field === 'equalizer' && value === undefined ? (before.values.equalizer === 'off' ? 'pop' : 'off') : value
   return saveMusicDefaults(client, context, { [field]: next }, before.revision)
 }
-module.exports = { musicDefaultsForConnection, createMusicDefaultSettings, loadMusicDefaults, readMusicDefaults, saveMusicDefaults, changeMusicDefault }
+module.exports = { equalizerProfiles, musicDefaultsForConnection, createMusicDefaultSettings, loadMusicDefaults, readMusicDefaults, saveMusicDefaults, changeMusicDefault }
