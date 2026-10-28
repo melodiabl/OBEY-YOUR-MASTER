@@ -1902,5 +1902,22 @@
     "botPermission": "I need View Channel, Read Message History and Manage Messages here.",
     "busy": "A cleanup is already running in this channel. Wait for it to finish.",
     "unavailable": "I could not confirm the cleanup. Check the channel before retrying."
+  },
+  "moderationDeletion": {
+    "invalidTarget": "Choose a valid channel or role in this server.",
+    "unavailable": "I could not confirm deletion. Check the resource before retrying.",
+    "unconfirmed": "Discord did not confirm deletion. Check the resource before retrying.",
+    "accessDenied": "I could not confirm your current permission to delete this resource.",
+    "botPermission": "The bot lacks the permission required to delete this resource.",
+    "threadTarget": "Use deletethread to delete a thread.",
+    "protectedRole": "The everyone role and integration-managed roles cannot be deleted.",
+    "hierarchy": "The role must be below both the bot and your highest role; the server owner may bypass their own hierarchy.",
+    "deleted": "Discord confirmed deletion of resource ID {id}.",
+    "preview": "Delete role ID {id}? This action cannot be undone.",
+    "confirm": "Delete role",
+    "cancel": "Cancel",
+    "cancelled": "Deletion cancelled.",
+    "expired": "Confirmation expired. Open the command again.",
+    "ownerOnly": "Only the person who opened this confirmation can use it."
   }
 }

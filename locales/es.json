@@ -1902,5 +1902,22 @@
     "botPermission": "Necesito Ver canal, Leer historial y Gestionar mensajes aquí.",
     "busy": "Ya hay una limpieza en curso en este canal. Espera a que termine.",
     "unavailable": "No pude confirmar la limpieza. Comprueba el canal antes de reintentar."
+  },
+  "moderationDeletion": {
+    "invalidTarget": "Indica un canal o rol válido de este servidor.",
+    "unavailable": "No pude confirmar el borrado. Comprueba el recurso antes de reintentar.",
+    "unconfirmed": "Discord no confirmó el borrado. Comprueba el recurso antes de reintentar.",
+    "accessDenied": "No pude confirmar tus permisos actuales para borrar este recurso.",
+    "botPermission": "El bot no tiene el permiso necesario para borrar este recurso.",
+    "threadTarget": "Para borrar un hilo usa deletethread.",
+    "protectedRole": "No se puede borrar @everyone ni un rol administrado por una integración.",
+    "hierarchy": "El rol debe estar por debajo del rol más alto del bot y del tuyo; el dueño del servidor puede omitir su propia jerarquía.",
+    "deleted": "Discord confirmó el borrado del recurso con ID {id}.",
+    "preview": "¿Eliminar el rol con ID {id}? Esta acción no se puede deshacer.",
+    "confirm": "Eliminar rol",
+    "cancel": "Cancelar",
+    "cancelled": "Borrado cancelado.",
+    "expired": "La confirmación caducó. Abre el comando de nuevo.",
+    "ownerOnly": "Solo quien abrió esta confirmación puede usarla."
   }
 }

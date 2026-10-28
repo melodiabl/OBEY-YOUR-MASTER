@@ -25,8 +25,8 @@
     "commands/Administration/close.js": "ec5fa176a2648d900efe1102d70a015648e5d7f257823bf8c4b09be9bcd1e5d9",
     "commands/Administration/copymessage.js": "25877a4083760363822e6f2f707cf6c5667746cf5845eed140484921dcd63b49",
     "commands/Administration/createbackup.js": "02c98697adad71c00045964aaaaaa00ab5038f1d730ff1e845c4594947339c50",
-    "commands/Administration/deletechannel.js": "c34d7886887f43f977348421f2d18029f4765e1da7435a29e955b74245f20e4a",
-    "commands/Administration/deleterole.js": "cd756fee44f6d3c2fb17b5a132c4668191d35e9c6a67a6d8d3f069523b5429c0",
+    "commands/Administration/deletechannel.js": "cd5f1ab9c7d111997b6c0b4b3355ae0316d8b69321f0f3490f0f74b81eedd498",
+    "commands/Administration/deleterole.js": "4c986c6d6d37aa8fd79d427a318071f3188e3f3b8b300598398aa1c96b9fa375",
     "commands/Administration/deletethread.js": "5f190d89b6fb28b6694282726f1cfc62d3cd7d64930e0f1858b7864d56426777",
     "commands/Administration/detailwarn.js": "3fafdbfa3b5964d84259d9f166b5d61ea1b34ccf74077984c26377cca13ada41",
     "commands/Administration/dm.js": "fc8aee048df90a9f9cebd45395de90c856dcf628252aba7149d63f1f37bb393e",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "6c0f67f3c58cc8f8a1fa4928579fc22b937de31a686fe4896cefedb9dec2c412",
-    "locales/es.json": "0eb40daa6ad9e0c52a05728fcf76062d56482716eff371068ead8f486f05ad0d",
+    "locales/en.json": "710099c5fce8ca97f971f5ed1496b159f48a4eecedc84249b29fb99185f5627a",
+    "locales/es.json": "9f7671407ae448590697d1d3f318601de9e61ea8214addbf6a05625e81d6fc40",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1014,7 +1014,9 @@
     "src/modules/moderation/application/thread-actions.js": "8efe6d16454cfbad1a08f15639ab7a7ffa4592c0c87709aa77fee54ca3ba956f",
     "src/modules/moderation/discord/thread-action-commands.js": "dcd22dd25e9cd6209feff0d4cc4cc89bb5676ffb308d31fc01ab6d7c412db516",
     "src/modules/moderation/application/purge-messages.js": "0ce2e4fead8e929f3418072ed36df5d3ab50c7c059de841534b3eef9ab7ed98b",
-    "src/modules/moderation/discord/purge-commands.js": "9ec84d7e551f830733cbb036a50962f30294a212a2eacf7311b5d445078f3997"
+    "src/modules/moderation/discord/purge-commands.js": "9ec84d7e551f830733cbb036a50962f30294a212a2eacf7311b5d445078f3997",
+    "src/modules/moderation/application/resource-deletion.js": "d6ec45b799d1c3824a40671a96bb338035a13dfcc9610c4054dfb40964aeeff2",
+    "src/modules/moderation/discord/resource-deletion-commands.js": "4260a677dde42ada71c81fd8f383bd18a285ac00475dfce0f595c2ffddde25b9"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

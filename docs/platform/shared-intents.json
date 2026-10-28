@@ -1028,15 +1028,30 @@
       "result": "Only confirmed Discord deletions count; interrupted runs report partial count; no success is reported after REST failure.",
       "limits": "No real Discord purge or two-guild authenticated acceptance test; cross-process purge lease and durable log receipts remain open.",
       "evidence": "evidence/p0-purge-20261028.json"
+    },
+    {
+      "id": "administration.resource_delete",
+      "commands": [
+        "prefix:deletechannel",
+        "prefix:deleterole"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/resource-deletion.js",
+      "store": "Discord channels and roles; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Fresh actor, bot, roles and target; channel requires Administrator/owner and bot ManageChannels. Role keeps delegated grants and requires actor/bot hierarchy; managed/everyone roles are protected. Role confirmation revalidates access.",
+      "result": "Confirmed Discord deletion before success or log; invalid explicit target never falls back to current channel.",
+      "limits": "No real resource deletion or authenticated two-guild test; durable receipts remain pending.",
+      "evidence": "evidence/p0-deletion-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 38,
-    "commandEntriesReviewed": 145,
+    "reviewedGroups": 39,
+    "commandEntriesReviewed": 147,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 530,
+    "remainingCommandEntries": 528,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
