@@ -1,5 +1,12 @@
 # Estado entregado · 17/10/2026
 
+## 28/10/2026 · permisos de canales corregidos
+
+Cuatro comandos de bloquear/desbloquear canal comparten servicio con permisos frescos, `ManageRoles`, edición puntual y respuestas tras confirmar Discord. Los fallos parciales se distinguen del éxito; los cambios confirmados emiten al servicio de logs. [Informe](P0-CHANNEL-LOCK-2026-10-28.md).
+
+Despliegue `80bc8eed`/`08bc1522a3b8`: 36 pruebas en imagen, 997 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Dos respaldos CRC y reversión `b12685348616`. Mapa P0: 33 grupos/131 entradas/21 rutas revisadas; quedan 544/74. Sin pruebas que cambien permisos en servidores reales ni push. El desbloqueo global hereda permisos y no reconstruye denegaciones anteriores; continuar P0 con Administración, recibos duraderos y G01/G02.
+
+
 ## 28/10/2026 · consulta de vetos y respaldo protegidos
 
 `bans`/`listbans` ya no publican motivos de veto: validan permisos actuales, recorren el cursor de Discord y entregan la página por DM. El respaldo Mongo dejó de pasar la URI en la línea de comandos y elimina su archivo temporal. [Informe](P0-BAN-LIST-2026-10-28.md).

@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Shared channel permission lock/unlock with fresh access and isolated overwrite edits",
+  "verification": {
+    "isolatedCases": 36,
+    "originalCasesIncluded": 25,
+    "newCases": 11,
+    "failed": 0,
+    "sourceHashes": 997,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 33,
+    "reviewedCommandEntries": 131,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 544,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-channel-lock-20261028/focused.tap",
+    ".runtime/p0-channel-lock-20261028/tests.tap",
+    ".runtime/p0-channel-lock-20261028/image-tests.tap",
+    ".runtime/p0-channel-lock-20261028/runtime-observations.json",
+    ".runtime/p0-channel-lock-20261028/http-assets.json",
+    ".runtime/p0-channel-lock-20261028/preflight.json",
+    ".runtime/p0-channel-lock-20261028/deployment.json"
+  ],
+  "deployment": {
+    "code": "80bc8eed3d77240ba2e1103ae7fcf60c6e426798",
+    "image": "08bc1522a3b87abd3f0de8d2278b108a30e17446196a26761afae9d8f225fc18",
+    "tag": "localhost/obey-your-master_bot:release-p0-channel-lock-20261028-80bc8eed",
+    "rollbackImage": "b126853486164d168ed4a2d088c6875a6e8b2ebc716e74272d1cb5c2c828433e",
+    "priorBackupBytes": 59322265,
+    "postBackupBytes": 59324701,
+    "bothBackupGzipCrcValid": true,
+    "backupTempConfigRemoved": true,
+    "preflightDifferences": [],
+    "inspectorClosed": true,
+    "imageTests": 36,
+    "runtimeSourceHashes": 997,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "unhandledLogEvents": 0,
+    "errorLogEvents": 0
+  },
+  "operationalLimit": "No real Discord channel permissions changed for testing; global unlock inherits prior category/channel permissions and cannot reconstruct preexisting explicit deny",
+  "remaining": [
+    "P0: other Administration intents, durable receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}

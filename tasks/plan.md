@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## Avance P0 · bloqueo de canales · 28/10/2026
+
+Cuatro comandos de bloquear/desbloquear canal comparten servicio, permisos frescos y edición puntual, sin reemplazar las otras sobrescrituras. Código `80bc8eed`, imagen `08bc1522a3b8`, 36 pruebas, 997 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia y límite](../docs/platform/P0-CHANNEL-LOCK-2026-10-28.md). El mapa cubre 33 grupos/131 comandos/21 rutas; restan 544 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada antes de P1.
+
+
 ## Avance P0 · 28/10/2026
 
 La consulta de vetos `bans`/`listbans` entrega solo por DM, con permisos frescos y paginación completa; el respaldo Mongo usa configuración temporal privada. Código `b921791c`, imagen `b12685348616`, 34 pruebas, 995 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-BAN-LIST-2026-10-28.md). Se revisaron 32 grupos/127 comandos/21 rutas; restan 548 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada, antes de P1.

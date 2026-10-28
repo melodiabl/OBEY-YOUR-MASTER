@@ -1,5 +1,13 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · bloqueo de canales · 28/10/2026
+
+- [x] Unificar `lockchannel`, `channellock`, `unlockchannel` y `channelunlock` con acceso fresco, `ManageRoles` y cambios solo en las dos capacidades del destino.
+- [x] Eliminar reemplazo de todas las sobrescrituras, `SEND_MESSAGE` inválido y éxito tras fallos; informar aplicación parcial y usar DM si el canal ya no permite responder.
+- [x] Verificar 36 pruebas en imagen, 997 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12; desplegar `80bc8eed`/`08bc1522a3b8` con diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-CHANNEL-LOCK-2026-10-28.md).
+- [ ] Diseñar restauración exacta del estado anterior de `@everyone` con coordinación duradera; continuar Administración, recibos, G01/G02 y aceptación autenticada. Quedan 544 entradas y 74 rutas; P0 sigue abierto.
+
+
 ## P0 · consulta privada de vetos · 28/10/2026
 
 - [x] Unificar `bans`/`listbans` con acceso fresco, cursor de hasta 1.000 vetos por lote y entrega por DM sin motivos en el canal.

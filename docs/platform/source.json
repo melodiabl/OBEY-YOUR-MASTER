@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b921791cba0bce988f2799b4f80e99402fe3469a",
-    "image": "b126853486164d168ed4a2d088c6875a6e8b2ebc716e74272d1cb5c2c828433e",
+    "code": "80bc8eed3d77240ba2e1103ae7fcf60c6e426798",
+    "image": "08bc1522a3b87abd3f0de8d2278b108a30e17446196a26761afae9d8f225fc18",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-ban-list-20261027.json",
-    "change": "Private ban-list history and backup URI protection",
-    "tag": "localhost/obey-your-master_bot:release-p0-ban-list-20261027-b921791c",
+    "evidence": "evidence/p0-channel-lock-20261028.json",
+    "change": "Shared channel lock commands with isolated overwrite edits and fresh access",
+    "tag": "localhost/obey-your-master_bot:release-p0-channel-lock-20261028-80bc8eed",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-ban-list-20261027.json",
-    "deploymentKind": "application_only_p0_ban_list",
+    "statusEvidence": "evidence/p0-channel-lock-20261028.json",
+    "deploymentKind": "application_only_p0_channel_lock",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -374,7 +374,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Continue P0 with remaining Administration intents and durable receipts; 32 groups / 127 command entries / 21 routes traced; 548 entries and 74 routes remain. G01/G02 and authenticated acceptance stay open; 24/7 failures remain P1 acceptance.",
+    "nextUnit": "Continue P0 with remaining Administration intents and durable receipts; 33 groups / 131 command entries / 21 routes traced; 544 entries and 74 routes remain. G01/G02 and authenticated acceptance stay open; 24/7 failures remain P1 acceptance.",
     "sequence": [
       "P0",
       "P1",

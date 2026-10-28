@@ -1,5 +1,12 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · bloqueo de canales unificado y desplegado
+
+`lockchannel`, `channellock`, `unlockchannel` y `channelunlock` comparten acceso fresco y edición puntual de sobrescrituras. Se eliminaron la clave inválida `SEND_MESSAGE`, el reemplazo completo de permisos y los éxitos tras fallos de la API. [Informe y límite de restauración](P0-CHANNEL-LOCK-2026-10-28.md).
+
+Código `80bc8eed`, imagen `08bc1522a3b8`: 36 pruebas en imagen, 997 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; dos respaldos CRC y reversión `b12685348616`. Mapa P0: 33 grupos/131 entradas/21 rutas, faltan 544/74. No se cambiaron canales reales para probar. P0, recibos, G01/G02 y aceptación autenticada siguen abiertos.
+
+
 ## 28/10/2026 · historial privado de vetos desplegado
 
 `bans` y `listbans` comparten consulta paginada con permisos frescos, entrega por DM y respuesta pública sin motivos. El respaldo Mongo usa configuración temporal privada y ya no expone la URI en argumentos. [Informe y límites](P0-BAN-LIST-2026-10-28.md).
