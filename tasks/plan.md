@@ -4,6 +4,8 @@
 
 `clear`, `clearbotmessages` y `/purge` comparten permisos actuales, límites de Discord, filtros y conteo confirmado; los fallos parciales se informan. Código `21365849`, imagen `d609d9b0ac00`, 19 casos aislados y 25 originales en imagen, 1.005 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-PURGE-2026-10-28.md). El mapa cubre 38 grupos/145 comandos/21 rutas; restan 530 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.
 
+[Clasificación de lo pendiente](../docs/platform/P0-TRIAGE-2026-10-28.md): el contador incluye comandos de contenido y consultas, además de operaciones de estado. Revisar primero Administración y Settings, mapear los pares prefix/slash y asignar Music al recorrido P1 sin confundir inventario con aceptación.
+
 ## Avance P0 · ajustes de hilos · 28/10/2026
 
 Entrar, salir, unirse a todos los hilos activos y borrarlos comparten acceso fresco y confirmación de Discord. La unión masiva informa resultados parciales. Código `8f6e9dee`, imagen `b02393a3a86e`, 14 casos aislados y 25 originales en imagen, 1.003 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-THREAD-ACTIONS-2026-10-28.md). El mapa cubre 37 grupos/142 comandos/21 rutas; restan 533 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.

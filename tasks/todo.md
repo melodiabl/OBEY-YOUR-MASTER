@@ -5,6 +5,7 @@
 - [x] Unificar `clear`, `clearbotmessages` y `/purge` con permisos frescos, límites 2–100 y antigüedad de dos semanas; informar conteos confirmados y fallos parciales.
 - [x] Verificar 19 casos aislados y 25 originales en imagen, 1.005 hashes, inventario 675/779/95, HTTP 7/7, recursos 12/12, diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-PURGE-2026-10-28.md).
 - [ ] Continuar Administración, recibos, G01/G02 y aceptación autenticada. Quedan 530 entradas y 74 rutas; P0 sigue abierto. Después P1 musical, panel y `/help` con materiales aprobados.
+- [ ] Usar la [clasificación P0](../docs/platform/P0-TRIAGE-2026-10-28.md) para revisar primero 28 entradas de Administración y 22 de Settings; resolver pares prefix/slash y asignar las demás intenciones a su fase sin afirmar funcionamiento por inventario.
 
 ## P0 · pertenencia y borrado de hilos · 28/10/2026
 
