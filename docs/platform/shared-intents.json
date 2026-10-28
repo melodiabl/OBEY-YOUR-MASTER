@@ -948,15 +948,37 @@
       "result": "Success only after Discord returns the requested value; invalid, unavailable and unconfirmed states are explicit.",
       "limits": "No authenticated two-guild or real Discord channel edit test; log delivery is separate from the confirmed channel change.",
       "evidence": "evidence/p0-slowmode-20261028.json"
+    },
+    {
+      "id": "administration.thread_settings",
+      "commands": [
+        "prefix:archivethread",
+        "prefix:unarchivethread",
+        "prefix:lockthread",
+        "prefix:unlockthread",
+        "prefix:setautoarchiveduration"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/thread-settings.js",
+      "store": "Discord ThreadChannel metadata; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Each command keeps its configured prefix grant, checks fresh actor and bot membership, and requires effective ManageThreads for the bot before mutation.",
+      "parameters": {
+        "thread": "mentioned thread, exact ID or current thread; refreshed through Discord",
+        "autoArchiveDuration": "60, 1440, 4320 or 10080 minutes"
+      },
+      "result": "Success only after Discord returns the requested archived, locked or auto archive duration value; no-op and failures are distinct.",
+      "limits": "No real Discord thread mutation or two-guild acceptance test; delete/join/leave commands and durable log receipts remain separate work.",
+      "evidence": "evidence/p0-thread-settings-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 34,
-    "commandEntriesReviewed": 133,
+    "reviewedGroups": 35,
+    "commandEntriesReviewed": 138,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 542,
+    "remainingCommandEntries": 537,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

@@ -1863,5 +1863,20 @@
     "unchanged": "Slowmode in {channel} was already {seconds} seconds.",
     "enabled": "Slowmode set to {seconds} seconds in {channel}.",
     "disabled": "Slowmode disabled in {channel}."
+  },
+  "moderationThreadSettings": {
+    "archivethread": "Thread {thread} archived.",
+    "unarchivethread": "Thread {thread} reopened.",
+    "lockthread": "Thread {thread} locked: only members who manage threads can reopen it.",
+    "unlockthread": "Thread {thread} unlocked: reopening is allowed.",
+    "setautoarchiveduration": "Auto archive duration for {thread} set to {minutes} minutes.",
+    "unchanged": "Thread {thread} was already in that state.",
+    "invalidDuration": "Enter 60, 1440, 4320 or 10080 minutes.",
+    "invalidThread": "Choose a valid thread in this server.",
+    "archivedThread": "Reopen the thread before changing its lock or auto archive duration.",
+    "accessDenied": "I could not confirm your current permission to change this thread.",
+    "botPermission": "I need Manage Threads in this thread.",
+    "unavailable": "I could not confirm the change. Check the thread state before retrying.",
+    "unconfirmed": "Discord did not confirm the new state. Check the thread before retrying."
   }
 }

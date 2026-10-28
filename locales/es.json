@@ -1863,5 +1863,20 @@
     "unchanged": "El modo lento de {channel} ya estaba en {seconds} segundos.",
     "enabled": "Modo lento de {seconds} segundos activado en {channel}.",
     "disabled": "Modo lento desactivado en {channel}."
+  },
+  "moderationThreadSettings": {
+    "archivethread": "Hilo {thread} archivado.",
+    "unarchivethread": "Hilo {thread} reabierto.",
+    "lockthread": "Hilo {thread} bloqueado: solo quienes gestionan hilos podrán reabrirlo.",
+    "unlockthread": "Hilo {thread} desbloqueado: se permite su reapertura.",
+    "setautoarchiveduration": "Autoarchivo de {thread} establecido en {minutes} minutos.",
+    "unchanged": "El hilo {thread} ya tenía ese estado.",
+    "invalidDuration": "Indica 60, 1440, 4320 o 10080 minutos.",
+    "invalidThread": "Indica un hilo válido de este servidor.",
+    "archivedThread": "Reabre el hilo antes de cambiar su bloqueo o duración de autoarchivo.",
+    "accessDenied": "No pude confirmar tus permisos actuales para cambiar el hilo.",
+    "botPermission": "Necesito Gestionar hilos en ese hilo.",
+    "unavailable": "No pude confirmar el cambio. Revisa el estado del hilo antes de reintentar.",
+    "unconfirmed": "Discord no confirmó el nuevo estado. Revisa el hilo antes de reintentar."
   }
 }
