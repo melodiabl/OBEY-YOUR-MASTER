@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 28/10/2026 · borrado de canales y roles
+
+Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso fresco, destino exacto y confirmación de roles revalidada. Doce casos aislados y 25 originales en imagen, 1.007 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; sin borrados reales de prueba. P0: 39 grupos/147 entradas/21 rutas, faltan 528/74. G01/G02, recibos y aceptación autenticada siguen abiertos. [Informe](../docs/platform/P0-DELETION-2026-10-28.md).
+
 ## Avance P0 · limpieza de mensajes · 28/10/2026
 
 `clear`, `clearbotmessages` y `/purge` comparten permisos actuales, límites de Discord, filtros y conteo confirmado; los fallos parciales se informan. Código `21365849`, imagen `d609d9b0ac00`, 19 casos aislados y 25 originales en imagen, 1.005 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-PURGE-2026-10-28.md). El mapa cubre 38 grupos/145 comandos/21 rutas; restan 530 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.

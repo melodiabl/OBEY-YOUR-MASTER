@@ -1,5 +1,9 @@
 # Estado entregado · 17/10/2026
 
+## 28/10/2026 · borrado de canales y roles
+
+Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso fresco, destino exacto y confirmación de roles revalidada. Doce casos aislados y 25 originales en imagen, 1.007 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; sin borrados reales de prueba. P0: 39 grupos/147 entradas/21 rutas, faltan 528/74. G01/G02, recibos y aceptación autenticada siguen abiertos. [Informe](P0-DELETION-2026-10-28.md).
+
 ## 28/10/2026 · ajustes de hilos corregidos
 
 Cinco comandos de hilos comparten servicio con miembros, roles y hilo frescos, `ManageThreads` del bot, duración permitida y éxito solo tras la respuesta de Discord. Si archivar impide responder, la confirmación se envía por DM; los logs usan el servicio canónico. [Informe](P0-THREAD-SETTINGS-2026-10-28.md).

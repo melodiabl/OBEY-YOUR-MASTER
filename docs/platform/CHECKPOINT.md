@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · borrado de canales y roles
+
+Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso fresco, destino exacto y confirmación de roles revalidada. Doce casos aislados y 25 originales en imagen, 1.007 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; sin borrados reales de prueba. P0: 39 grupos/147 entradas/21 rutas, faltan 528/74. G01/G02, recibos y aceptación autenticada siguen abiertos. [Informe](P0-DELETION-2026-10-28.md).
+
 ## 28/10/2026 · limpieza de mensajes compartida y desplegada
 
 `clear`, `clearbotmessages` y `/purge` comparten acceso fresco, límites de Discord, filtros y conteo confirmado. Fallos parciales ya no anuncian éxito total. [Informe y límites](P0-PURGE-2026-10-28.md).

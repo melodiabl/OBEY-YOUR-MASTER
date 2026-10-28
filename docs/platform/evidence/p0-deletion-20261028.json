@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Fresh channel/role deletion with role confirmation revalidation",
+  "verification": {
+    "isolatedCases": 12,
+    "originalCasesInImage": 25,
+    "failed": 0,
+    "sourceHashes": 1007,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 39,
+    "reviewedCommandEntries": 147,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 528,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "imageInventoryGate": "pass"
+  },
+  "deployment": {
+    "code": "3d62a7b49fcde86303c7f594d3b9e5940435f54d",
+    "image": "ee586c109e73d5cdd572e282676c31a598d0771b352dddc8b7bea911952b2b7a",
+    "tag": "localhost/obey-your-master_bot:release-p0-deletion-20261028-3d62a7b4",
+    "rollbackImage": "d609d9b0ac000434dfade22858d75e6434af92e5013556ea22f65ac0402366f7",
+    "backupBytes": 59225200,
+    "backupGzipCrcValid": true,
+    "tempConfigRemoved": true,
+    "httpRoutesChecked": 7,
+    "assetsChecked": 12,
+    "healthyObservations": 10,
+    "restarts": 0
+  },
+  "evidenceFiles": [
+    ".runtime/p0-deletion-20261028/focused.tap",
+    ".runtime/p0-deletion-20261028/tests.tap",
+    ".runtime/p0-deletion-20261028/image-tests.tap",
+    ".runtime/p0-deletion-20261028/image-inventory.log",
+    ".runtime/p0-deletion-20261028/preflight.json",
+    ".runtime/p0-deletion-20261028/deployment.json",
+    ".runtime/p0-deletion-20261028/runtime-observations.json",
+    ".runtime/p0-deletion-20261028/http-assets.json",
+    ".runtime/p0-deletion-20261028/backup-output.json"
+  ],
+  "limits": [
+    "No real channel/role deletion used for testing",
+    "Authenticated two-guild acceptance and durable receipts remain pending",
+    "Role deletion now also enforces actor hierarchy except for the guild owner"
+  ]
+}

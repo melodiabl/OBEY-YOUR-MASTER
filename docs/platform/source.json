@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "21365849523add13132d93bb1e270877d69e9f3d",
-    "image": "d609d9b0ac000434dfade22858d75e6434af92e5013556ea22f65ac0402366f7",
+    "code": "3d62a7b49fcde86303c7f594d3b9e5940435f54d",
+    "image": "ee586c109e73d5cdd572e282676c31a598d0771b352dddc8b7bea911952b2b7a",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-purge-20261028.json",
-    "change": "Confirmed message purge across prefix and slash",
-    "tag": "localhost/obey-your-master_bot:release-p0-purge-20261028-21365849",
+    "evidence": "evidence/p0-deletion-20261028.json",
+    "change": "Fresh channel and role deletion with confirmation revalidation",
+    "tag": "localhost/obey-your-master_bot:release-p0-deletion-20261028-3d62a7b4",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-purge-20261028.json",
-    "deploymentKind": "application_only_p0_purge",
+    "statusEvidence": "evidence/p0-deletion-20261028.json",
+    "deploymentKind": "application_only_p0_resource_deletion",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
