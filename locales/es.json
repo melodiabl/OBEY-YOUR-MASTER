@@ -1919,5 +1919,15 @@
     "cancelled": "Borrado cancelado.",
     "expired": "La confirmación caducó. Abre el comando de nuevo.",
     "ownerOnly": "Solo quien abrió esta confirmación puede usarla."
+  },
+  "botChannels": {
+    "added": "Canal añadido. Canales configurados: {count}.",
+    "removed": "Canal retirado. Canales configurados: {count}.",
+    "unchanged": "La lista ya tenía ese estado. Canales configurados: {count}.",
+    "allChannels": "La lista está vacía: los comandos se permiten en todos los canales según sus permisos.",
+    "invalid": "Menciona un canal de texto válido de este servidor o indica su ID.",
+    "conflict": "La lista cambió mientras guardabas. Consulta el estado actual y vuelve a intentarlo.",
+    "unavailable": "No pude confirmar el guardado. Comprueba la lista antes de reintentar.",
+    "more": "Y {count} canales más."
   }
 }

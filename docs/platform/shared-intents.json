@@ -1043,15 +1043,30 @@
       "result": "Confirmed Discord deletion before success or log; invalid explicit target never falls back to current channel.",
       "limits": "No real resource deletion or authenticated two-guild test; durable receipts remain pending.",
       "evidence": "evidence/p0-deletion-20261028.json"
+    },
+    {
+      "id": "configuration.bot_channels",
+      "commands": [
+        "prefix:addbotchat",
+        "prefix:removebotchat"
+      ],
+      "routes": [],
+      "service": "handlers/bot-channel-settings.js",
+      "store": "Guild.botchannel through shared setup-settings conditional persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Fresh Administrator membership, invocation channel access and add-target bot permissions; removing a stale configured channel ID remains possible.",
+      "result": "Success after awaited CAS persistence; conflicts and storage failures never announce success; router no longer prunes settings based on missing cache.",
+      "limits": "Reset remains a separate legacy operation; authenticated two-guild walkthrough and durable operation receipts remain pending.",
+      "evidence": "evidence/p0-bot-channels-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 39,
-    "commandEntriesReviewed": 147,
+    "reviewedGroups": 40,
+    "commandEntriesReviewed": 149,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 528,
+    "remainingCommandEntries": 526,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

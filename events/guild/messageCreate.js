@@ -59,12 +59,6 @@ module.exports = async (client, message) => {
         if (botchannel.toString() !== "") {
             //if its not in a BotChannel, and user not an ADMINISTRATOR
             if (!botchannel.includes(message.channel.id) && !message.member.permissions.has(Discord.PermissionFlagsBits.Administrator)) {
-                for (const channelId of botchannel) {
-                    let channel = message.guild.channels.cache.get(channelId);
-                    if (!channel) {
-                        client.settings.remove(message.guild.id, channelId, `botchannel`);
-                    }
-                }
                 try {
                     message.react(obeyUi.reaction("833101993668771842")).catch(() => {});
                 } catch {}

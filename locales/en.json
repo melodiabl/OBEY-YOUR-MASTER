@@ -1919,5 +1919,15 @@
     "cancelled": "Deletion cancelled.",
     "expired": "Confirmation expired. Open the command again.",
     "ownerOnly": "Only the person who opened this confirmation can use it."
+  },
+  "botChannels": {
+    "added": "Channel added. Configured channels: {count}.",
+    "removed": "Channel removed. Configured channels: {count}.",
+    "unchanged": "The list was already in that state. Configured channels: {count}.",
+    "allChannels": "The list is empty: commands are allowed in all channels subject to their permissions.",
+    "invalid": "Mention a valid text channel in this server or enter its ID.",
+    "conflict": "The list changed while saving. Check the current state and try again.",
+    "unavailable": "I could not confirm the save. Check the list before retrying.",
+    "more": "And {count} more channels."
   }
 }

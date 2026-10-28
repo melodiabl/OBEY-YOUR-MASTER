@@ -409,7 +409,7 @@
     "commands/School-Commands/e.js": "67a35e62c585f103e26761ba174ddfc3260294976ec2a4fafc55633a5b7bf72f",
     "commands/School-Commands/pi.js": "3db99632a109e2620a3787ada35c3f03b32263c7c339836ec38f5abd95575492",
     "commands/School-Commands/remind.js": "914043c677198b45feeaf719fa43f6a5137090610f6daf26389363a32ecd8f56",
-    "commands/Settings/addbotchat.js": "9744d382ad44824d6c65b807c6243a6618d86b66a1f85e90afe828ae4e039f7c",
+    "commands/Settings/addbotchat.js": "6b971f85710ed068d8a479e88c9d7887301068234ce75ae5f0d35e61faa730cf",
     "commands/Settings/adddj.js": "85858194cd40b1227a50384879ae049a0201921fff2773bce34f84222adca6a9",
     "commands/Settings/addmoney.js": "11bdfb13c42fed29583a3d685ea4be3546a0eda64a9f132dd18230dfd0527a43",
     "commands/Settings/afk.js": "6060f43ec1e13b6f94c734e16152ce2fca910a315c56fc873ac9a1a697d322ef",
@@ -419,7 +419,7 @@
     "commands/Settings/defaultvolume.js": "b5b7a1775b0d2ccd4a41c6c65977584e227269f57257e799e5c5d30d2a535cd3",
     "commands/Settings/playmsg.js": "fe8861ffc33b3e6ac28e0f0b74259afa3d1560dd3d692803da92b347696e17eb",
     "commands/Settings/prefix.js": "25d2f65f249f31c459583dcffde428b1c158c507b57379cadc8a2d747dbb0061",
-    "commands/Settings/removebotchat.js": "ad87a4bfd037f031198d5a6735063342f02f4bdccdb9f894227118caff35316e",
+    "commands/Settings/removebotchat.js": "c4361feadf2b4a4f8ecb80e9d71e67adac116a0f29c1e9892b8e3fabb7c57150",
     "commands/Settings/removedj.js": "c48058ecfa9c80fb5b263f6d2420d4e24c7ec6e1dced641ea7d6d1605a4995ca",
     "commands/Settings/removemoney.js": "1b6e684421a0c93bb83fc3e8c82ac4d0c586ba0129cf790967ed0fdc97770e86",
     "commands/Settings/reset.js": "4f85f8279f8b3bc9a487ac79d8a5761ed33e329346bbbf936b2f746bdeee56aa",
@@ -569,7 +569,7 @@
     "events/client/warn.js": "bb6935e65d25a42aab050ad94235e11cffc97db7757e27e3f8875906b83f4990",
     "events/guild/interactionCreate.js": "77c50df61a71ff3d38ec04a57456dd8129744c6c4c5622139b671129874ece4b",
     "events/guild/message.js": "7cc47f5601468bc9f42383618eb0a18ed3492e9b29583658031b663bf158fac1",
-    "events/guild/messageCreate.js": "36f4ac08ba7978197aeb03d3cca929f7539abb30788bad44788ef7d64bf5ea7b",
+    "events/guild/messageCreate.js": "885056b56adbd28731e17df3ede172c95407d1bfb44de086c8034ceffcd583e8",
     "events/guild/threadCreate.js": "a30a07046ef1c6e3d5546b2a7c86f6e3ba5a16bba71e61cfbe971415f6364b42",
     "handlers/NumberCounter.js": "3badd9bdbe8f2d423c4d7cb364d398e8a76d4e4db65aa0aaf8cf8d416a98d8fa",
     "handlers/aichat.js": "632b25bd17f3f449e25fd03d4c616e4ae96c9620595bdb449d4eb77e72cf8515",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "710099c5fce8ca97f971f5ed1496b159f48a4eecedc84249b29fb99185f5627a",
-    "locales/es.json": "9f7671407ae448590697d1d3f318601de9e61ea8214addbf6a05625e81d6fc40",
+    "locales/en.json": "8e68a88dbb94a534c26e1cfd9102843eeab860994365c351cbe3a2d7689de08e",
+    "locales/es.json": "36b5ddcde8c523f5f085e36f0458f1307b96df4095c4aafc289afa1132c01892",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1016,7 +1016,9 @@
     "src/modules/moderation/application/purge-messages.js": "0ce2e4fead8e929f3418072ed36df5d3ab50c7c059de841534b3eef9ab7ed98b",
     "src/modules/moderation/discord/purge-commands.js": "9ec84d7e551f830733cbb036a50962f30294a212a2eacf7311b5d445078f3997",
     "src/modules/moderation/application/resource-deletion.js": "d6ec45b799d1c3824a40671a96bb338035a13dfcc9610c4054dfb40964aeeff2",
-    "src/modules/moderation/discord/resource-deletion-commands.js": "4260a677dde42ada71c81fd8f383bd18a285ac00475dfce0f595c2ffddde25b9"
+    "src/modules/moderation/discord/resource-deletion-commands.js": "4260a677dde42ada71c81fd8f383bd18a285ac00475dfce0f595c2ffddde25b9",
+    "handlers/bot-channel-settings.js": "175ecf503fa0f3e557dbbc258109d79d5f550bef105de00b44718bb23fd4ab83",
+    "handlers/bot-channel-command.js": "a6cf6e9e3531671fbc02ede3720d581e4745447411d4db0be6f0372aa2a67c07"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
