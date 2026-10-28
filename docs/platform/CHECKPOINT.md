@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 29/10/2026 · ecualizador predeterminado conectado al reproductor
+
+Código `c48414be`, imagen `46c47b3a90a3`: defaultequalizer y panel comparten perfiles nativos con CAS, desactivados por defecto; una conexión nueva aplica el elegido. Recuperación/cambio de nodo evitan los valores predeterminados; el efecto no confirmado se indica en reproducción. Dieciséis casos aislados, doce escenarios de navegador, 25 originales en imagen, tipos y dependencias; 1.019 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 42 grupos/154 entradas/21 rutas; restan 521/74. Reset, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-DEFAULT-EQUALIZER-2026-10-29.md).
+
 ## 29/10/2026 · volumen y autoplay predeterminados compartidos
 
 Código `b889c06a`, imagen `96d593a66433`: comandos y formulario web independiente usan defaultVolume/autoplay con CAS y confirmación tras persistir. Guardar ajustes generales ya no cambia autoplay de la sesión activa. Quince casos aislados, doce escenarios de navegador, 25 pruebas originales en imagen, tipos y dependencias; 1.019 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 42 grupos/153 entradas/21 rutas; faltan 522/74. Ecualizador antiguo, reset, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-MUSIC-DEFAULTS-2026-10-29.md).

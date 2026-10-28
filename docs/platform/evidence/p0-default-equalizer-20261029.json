@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "c48414bef24a4e22cb668830f31dede581ccd1a9",
+  "image": "46c47b3a90a3f51fa31212f38a637cf86c9695e82976a2f58354e91448873235",
+  "tag": "localhost/obey-your-master_bot:release-p0-default-equalizer-20261029-c48414be",
+  "previousImage": "96d593a66433fc8bde6d7c4541f8452b0ed4b72d68998093d8ba1a3ebcf81095",
+  "scope": [
+    "prefix:defaultequalizer",
+    "shared default music configuration form",
+    "fresh music connection equalizer",
+    "recovery bypass for defaults"
+  ],
+  "configuration": {
+    "path": "Guild.defaultEqualizer",
+    "default": "off",
+    "profiles": [
+      "off",
+      "pop",
+      "bassboost",
+      "metal",
+      "treblebass"
+    ],
+    "legacyFlagPreservedUnused": "defaulteq",
+    "conditionalPersistence": true,
+    "oldPayloadWithoutEqualizer": "preserve current profile",
+    "newConnectionOnly": true,
+    "applyDuringRecovery": false
+  },
+  "verification": {
+    "regressionBefore": "new connection ignored selected Pop equalizer",
+    "isolatedCases": 16,
+    "actualMusicModuleWithFakeDiscordAndPlayer": true,
+    "browserScenarios": [
+      "off default and five supported choices",
+      "equalizer belongs only to independent music form",
+      "keyboard selection and save confirmed",
+      "off selection persisted",
+      "layout 320",
+      "layout 768",
+      "layout 1024",
+      "layout 1440",
+      "clean successful-load and save console",
+      "stale revision preserves Discord choice",
+      "revoked fresh permission denied",
+      "missing CSRF denied"
+    ],
+    "successfulConsoleErrors": [],
+    "browserPageErrors": [],
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1157,
+      "dependencies": 3407
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1019,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": [
+      {
+        "url": "http://127.0.0.1:3002/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/",
+        "status": 302,
+        "expected": 302
+      },
+      {
+        "url": "http://127.0.0.1:3002/api/panel/context",
+        "status": 401,
+        "expected": 401
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/package.json",
+        "status": 404,
+        "expected": 404
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/",
+        "status": 302,
+        "expected": 302
+      }
+    ],
+    "assets": [
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/2qprrfrwmtel1.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/turbopack-1gj34814o3k0t.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3wbm-994r45kr.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3cfn99dbrcvvp.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/37dgj-y9ab1m8.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/379otflgu1tbv.css",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3f87ogitp1f5z.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0umf92h1sb77c.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_ssgManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_buildManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_clientMiddlewareManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/css/dj-role-settings.css",
+        "status": 200,
+        "hashMatches": true
+      }
+    ],
+    "runtimeSamples": [
+      {
+        "sample": 1,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 2,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 3,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 4,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 5,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 6,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 7,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 8,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 9,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 10,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      }
+    ],
+    "backup": {
+      "bytes": 59228172,
+      "gzipCrc": true,
+      "temporaryCredentialConfigRemoved": true
+    }
+  },
+  "deployment": {
+    "healthy": true,
+    "restarts": 0,
+    "recoveryRecipesUpdated": true,
+    "latestTagPromoted": true,
+    "previousImageRetained": true,
+    "push": false
+  },
+  "cleanup": {
+    "temporaryScriptsRemoved": true,
+    "temporaryBrowserDependenciesRemoved": true,
+    "originalTestsUnchanged": true,
+    "evidenceRetained": true
+  },
+  "coverage": {
+    "reviewedGroups": 42,
+    "commandEntriesReviewed": 154,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 521,
+    "remainingHttpRoutes": 74
+  },
+  "source": "https://lavalink.dev/api/rest#equalizer",
+  "limits": [
+    "Synthetic connections only; no test voice joins, real Discord messages or user configuration mutations.",
+    "No live listening test or authenticated two-guild acceptance.",
+    "Recovery verification here proves bypass of defaults; full recovery acceptance remains in P1.",
+    "Legacy reset and durable receipts remain pending; P0 and global G01/G02 are open."
+  ]
+}

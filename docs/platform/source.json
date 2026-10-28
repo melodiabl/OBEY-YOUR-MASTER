@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b889c06aecffd4ed218e88bdfd7adf90f4236579",
-    "image": "96d593a66433fc8bde6d7c4541f8452b0ed4b72d68998093d8ba1a3ebcf81095",
+    "code": "c48414bef24a4e22cb668830f31dede581ccd1a9",
+    "image": "46c47b3a90a3f51fa31212f38a637cf86c9695e82976a2f58354e91448873235",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-music-defaults-20261029.json",
-    "change": "Shared revisioned default volume and autoplay for commands and independent dashboard form; general save preserves active music session",
-    "tag": "localhost/obey-your-master_bot:release-p0-music-defaults-20261029-b889c06a",
+    "evidence": "evidence/p0-default-equalizer-20261029.json",
+    "change": "Shared revisioned native equalizer preset for fresh connections; defaults bypass session recovery; unconfirmed effects visible in now-playing",
+    "tag": "localhost/obey-your-master_bot:release-p0-default-equalizer-20261029-c48414be",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-music-defaults-20261029.json",
-    "deploymentKind": "application_only_p0_music_defaults",
+    "statusEvidence": "evidence/p0-default-equalizer-20261029.json",
+    "deploymentKind": "application_only_p0_default_equalizer",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
