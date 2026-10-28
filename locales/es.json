@@ -1840,5 +1840,17 @@
     "received": "Recibiste una advertencia en",
     "partial": "Se retiró parte del historial, pero no pude confirmar el resto. Vuelve a consultar antes de repetir.",
     "writeUnconfirmed": "No pude confirmar si se guardó la advertencia. Consulta el historial antes de repetirla."
+  },
+  "moderationChannelLock": {
+    "locked": "Bloqueé el envío en {channel} para {count} destino(s).",
+    "unlocked": "Desbloqueé el envío en {channel} para {count} destino(s).",
+    "unchanged": "Los permisos de {channel} ya estaban en ese estado.",
+    "accessDenied": "No pude confirmar tus permisos actuales para cambiar los permisos del canal.",
+    "botPermission": "Necesito Gestionar roles y los permisos de mensajes y reacciones para editar este canal.",
+    "invalidChannel": "Elige un canal de texto válido de este servidor.",
+    "invalidTarget": "No pude confirmar el rol o miembro indicado; no cambié sus permisos.",
+    "tooManyTargets": "Indica como máximo diez roles o miembros.",
+    "partial": "Se cambiaron {count} destino(s), pero no pude completar los demás. Revisa los permisos actuales.",
+    "unavailable": "No pude confirmar el cambio de permisos. Revisa el estado del canal antes de reintentar."
   }
 }

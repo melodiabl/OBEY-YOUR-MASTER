@@ -18,8 +18,8 @@
     "commands/Administration/archivethread.js": "f6a246a82887c5cfa4bfb7864c586bc630f0876db0e42e7bae0a722e02520c9f",
     "commands/Administration/ban.js": "c6e2455ae0ddcb4b1c0fc228c9f3e9e3b0c57bd06b08988fa56dcdea82179870",
     "commands/Administration/bans.js": "14c408a870c5af88fa57f22d2dba895b72a76d869f9401541643f5d7a5e5f402",
-    "commands/Administration/channellock.js": "9d4893ebd44fe3689d173d2dbec33a6d76e1970f2ec6f9c67adb8fe5147ef93a",
-    "commands/Administration/channelunlock.js": "4c260a5f2867527fe7e466807a36ce084d7019f64fc3dce372806368e9ebb50d",
+    "commands/Administration/channellock.js": "fd2d87915fefb59b29c343a4b1490dacf329964483b6d8caf466dba1a867e5ef",
+    "commands/Administration/channelunlock.js": "ec322be43235be5a3633eb08237e29114b3991a726daf950cbcddbc69e56a7e7",
     "commands/Administration/clear.js": "552197ae6e2c3bde1c4c8207fe46b4bfe15d365519efa66db3897b2b07bc3d8d",
     "commands/Administration/clearbotmessages.js": "d01276db858f105915c7979fd23c200aaf23878e7cd22f6b45f37869ddc323b5",
     "commands/Administration/close.js": "ec5fa176a2648d900efe1102d70a015648e5d7f257823bf8c4b09be9bcd1e5d9",
@@ -49,7 +49,7 @@
     "commands/Administration/listbackups.js": "7206fe3f7bad9c5346e5ca8b7cbb18cb306e85e0b06c289a109ed7ae289f4e8c",
     "commands/Administration/listbans.js": "fe10174bd30cc02f902888bfdc96630fb24c7ff1151b0357238114e15c149a78",
     "commands/Administration/loadbackup.js": "db4e6d00a77d5904a5ffa90e81bc374b3687fbf88ee0d02e6b213ed367e58f25",
-    "commands/Administration/lockchannel.js": "f10e30287249b689b9d4263073b99018c18bbc9d081c9804510848095f10c0b2",
+    "commands/Administration/lockchannel.js": "9c3fa6cafbefb5dc13837d970bbfb71b869375ab4f25858a49543a2ab9c137aa",
     "commands/Administration/lockthread.js": "bfad075883ae83e68328a4d188c84516a8c330daad95cbd2d3320557ef179364",
     "commands/Administration/manageinvites.js": "916ce91b29ebe1455d3842a54e89c93defe1de7213ddb979f04ae9ddab0e6989",
     "commands/Administration/mute.js": "574f8510de240eefa0ebe8bffa56eed24e16ed42f5dcde173e3474d899c118ab",
@@ -75,7 +75,7 @@
     "commands/Administration/timeout.js": "a7605b553f49891e032ddc6aabbc64c6ad72f4ac6fb00595a863193500dabcbd",
     "commands/Administration/unarchivethread.js": "0423f2ba50909b96f2b46b6f472dba142f1da273a0f8c90c50fe5f5b89327d92",
     "commands/Administration/unban.js": "c878f47104d6719d9393eb8abd1bdd7a8588614337f742dbbd2d9344bf35cf7c",
-    "commands/Administration/unlockchannel.js": "c803beeb78448fb5e5cbc3df5af007d2ae49ea0337912071c69508affe230aff",
+    "commands/Administration/unlockchannel.js": "dd1c7923a49d487ad90e174effb96eae8ae11cfcfea5559cf8048e3adfc6d607",
     "commands/Administration/unlockthread.js": "8e39f11a3c622d4711499ac9a44d34fcebdf2f21e1719af76701803814a91fa3",
     "commands/Administration/unmute.js": "97639427e7158d4733e79751f4b5837fa8b107ee6ee903fb2a1d0d71532ed340",
     "commands/Administration/unwarn.js": "8b136f364ad9d905e381955815adff2df405091f8a4ffed714b98370d0ad0139",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "fbd672109bd652e68fdcad6ec3c42a73a0defc821946718b1aca63659b9790d8",
-    "locales/es.json": "f33828d5f24c85e67bc442d4915b87aec8bf11d16d1222bf9df7a867cb90dd83",
+    "locales/en.json": "2132e11c1cffa77d621369395024c6c94118719dd5c0f269fce4d2e235cf04c5",
+    "locales/es.json": "b4b0eb4423ce82b977ea7c5ede5872fea83e6cff1e786bcf6c476f14ff111fb4",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1004,7 +1004,9 @@
     "src/modules/moderation/infrastructure/role-mute-store.js": "9ee42632912792dcaffd67d110fadb03845c2e0cc30c85bcf96809eea683e046",
     "src/modules/moderation/application/logging.js": "df85f0273e44dbe6befa0d3e7f82cbaea9f596c4788976668eaf9423428be486",
     "src/modules/moderation/application/ban-list.js": "d7668e35a97275ef18eda45f4cb072bbe2c80b7267a8c25c49e5ce681297f8ea",
-    "src/modules/moderation/discord/ban-list-commands.js": "d463aee953957005f29b6b7b47a7e5c33e2bd6275b29efaa7a3a15719a185f24"
+    "src/modules/moderation/discord/ban-list-commands.js": "d463aee953957005f29b6b7b47a7e5c33e2bd6275b29efaa7a3a15719a185f24",
+    "src/modules/moderation/application/channel-lock.js": "89675d4309d05e3c02c1affead215b5372862dd3583a960c4a64b0a71d1924f6",
+    "src/modules/moderation/discord/channel-lock-commands.js": "22875410c9d83fd2b8d8f964b4b90186c3e1a4b884d4f4c898c0bdba26517d32"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -4651,141 +4653,15 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/channellock.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 56
-        },
-        {
-          "call": "client.getFooter",
-          "line": 77
-        },
-        {
-          "call": "client.getFooter",
-          "line": 113
-        },
-        {
-          "call": "client.settings.get",
-          "line": 117
-        },
-        {
-          "call": "client.settings.get",
-          "line": 119
-        },
-        {
-          "call": "client.settings.set",
-          "line": 120
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 130
-        },
-        {
-          "call": "client.getFooter",
-          "line": 133
-        },
-        {
-          "call": "client.getFooter",
-          "line": 139
-        },
-        {
-          "call": "client.getFooter",
-          "line": 156
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/channelunlock.js": {
       "kind": "current-command-adapter",
       "file": "commands/Administration/channelunlock.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 55
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 102
-        },
-        {
-          "call": "client.settings.get",
-          "line": 106
-        },
-        {
-          "call": "client.settings.get",
-          "line": 108
-        },
-        {
-          "call": "client.settings.set",
-          "line": 109
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 119
-        },
-        {
-          "call": "client.getFooter",
-          "line": 122
-        },
-        {
-          "call": "client.getFooter",
-          "line": 128
-        },
-        {
-          "call": "client.getFooter",
-          "line": 145
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/MiniGames/chaoswords.js": {
       "kind": "current-command-adapter",
@@ -10924,83 +10800,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/lockchannel.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.settings.get",
-          "line": 23
-        },
-        {
-          "call": "client.getFooter",
-          "line": 46
-        },
-        {
-          "call": "client.getFooter",
-          "line": 69
-        },
-        {
-          "call": "client.getFooter",
-          "line": 100
-        },
-        {
-          "call": "client.getFooter",
-          "line": 117
-        },
-        {
-          "call": "client.getFooter",
-          "line": 148
-        },
-        {
-          "call": "client.getFooter",
-          "line": 164
-        },
-        {
-          "call": "client.getFooter",
-          "line": 199
-        },
-        {
-          "call": "client.settings.get",
-          "line": 206
-        },
-        {
-          "call": "client.settings.get",
-          "line": 208
-        },
-        {
-          "call": "client.settings.set",
-          "line": 209
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 219
-        },
-        {
-          "call": "client.getFooter",
-          "line": 222
-        },
-        {
-          "call": "client.getFooter",
-          "line": 228
-        },
-        {
-          "call": "client.getFooter",
-          "line": 245
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/lockthread.js": {
       "kind": "current-command-adapter",
@@ -18723,75 +18524,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/unlockchannel.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.settings.get",
-          "line": 23
-        },
-        {
-          "call": "client.getFooter",
-          "line": 46
-        },
-        {
-          "call": "client.getFooter",
-          "line": 69
-        },
-        {
-          "call": "client.getFooter",
-          "line": 99
-        },
-        {
-          "call": "client.getFooter",
-          "line": 115
-        },
-        {
-          "call": "client.getFooter",
-          "line": 150
-        },
-        {
-          "call": "client.settings.get",
-          "line": 156
-        },
-        {
-          "call": "client.settings.get",
-          "line": 158
-        },
-        {
-          "call": "client.settings.set",
-          "line": 159
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 169
-        },
-        {
-          "call": "client.getFooter",
-          "line": 172
-        },
-        {
-          "call": "client.getFooter",
-          "line": 178
-        },
-        {
-          "call": "client.getFooter",
-          "line": 195
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/unlockthread.js": {
       "kind": "current-command-adapter",

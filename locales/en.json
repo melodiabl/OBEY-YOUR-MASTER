@@ -1840,5 +1840,17 @@
     "received": "You received a warning in",
     "partial": "Part of the history was removed, but I could not confirm the rest. Read it again before retrying.",
     "writeUnconfirmed": "I could not confirm whether the warning was saved. Check case history before trying again."
+  },
+  "moderationChannelLock": {
+    "locked": "Locked sending in {channel} for {count} target(s).",
+    "unlocked": "Unlocked sending in {channel} for {count} target(s).",
+    "unchanged": "The permissions in {channel} were already in that state.",
+    "accessDenied": "I could not confirm your current permission to edit this channel.",
+    "botPermission": "I need Manage Roles and message/reaction permissions to edit this channel.",
+    "invalidChannel": "Choose a valid text channel in this server.",
+    "invalidTarget": "I could not confirm that role or member; their permissions were not changed.",
+    "tooManyTargets": "Provide at most ten roles or members.",
+    "partial": "Updated {count} target(s), but could not finish the rest. Check the current permissions.",
+    "unavailable": "I could not confirm the permission change. Check the channel state before retrying."
   }
 }
