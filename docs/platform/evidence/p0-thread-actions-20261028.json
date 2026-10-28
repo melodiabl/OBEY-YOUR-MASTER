@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Confirmed thread membership, bulk joining and deletion with fresh access",
+  "verification": {
+    "isolatedCases": 14,
+    "originalCasesInImage": 25,
+    "failed": 0,
+    "sourceHashes": 1003,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 37,
+    "reviewedCommandEntries": 142,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 533,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "imageSourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-thread-actions-20261028/build.log",
+    ".runtime/p0-thread-actions-20261028/image-tests.tap",
+    ".runtime/p0-thread-actions-20261028/image-inventory.log",
+    ".runtime/p0-thread-actions-20261028/runtime-observations.json",
+    ".runtime/p0-thread-actions-20261028/http-assets.json",
+    ".runtime/p0-thread-actions-20261028/preflight.json",
+    ".runtime/p0-thread-actions-20261028/deployment.json",
+    ".runtime/p0-thread-actions-20261028/backup-output.json",
+    ".runtime/p0-thread-actions-20261028/postdeploy-backup-output.json"
+  ],
+  "deployment": {
+    "code": "8f6e9deeffbad9253d5213d9b94f83c0404d0a16",
+    "image": "b02393a3a86e3ad8f6658d3de6448befca4652d9b70481da58bfe094b84f1f8c",
+    "tag": "localhost/obey-your-master_bot:release-p0-thread-actions-20261028-8f6e9dee",
+    "rollbackImage": "e40fe933bbb14ef06148d9541d870de6f54b909f1f2879a65531f48a5d5a47dc",
+    "priorBackupBytes": 59356967,
+    "postBackupBytes": 59356328,
+    "bothBackupGzipCrcValid": true,
+    "backupTempConfigRemoved": true,
+    "preflightDifferences": [],
+    "imageTests": 25,
+    "isolatedHostCases": 14,
+    "runtimeSourceHashes": 1003,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0
+  },
+  "operationalLimit": "No real Discord thread mutation, authenticated two-guild acceptance or durable log receipt",
+  "remaining": [
+    "P0: other Administration intents, durable receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}

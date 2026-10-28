@@ -4,7 +4,7 @@
 
 Cinco comandos de hilos comparten servicio con miembros, roles y hilo frescos, `ManageThreads` del bot, duración permitida y éxito solo tras la respuesta de Discord. Si archivar impide responder, la confirmación se envía por DM; los logs usan el servicio canónico. [Informe](P0-THREAD-SETTINGS-2026-10-28.md).
 
-Despliegue `99e399b7`/`e40fe933bbb1`: 41 pruebas en imagen, 1.001 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Dos respaldos CRC y reversión `029e9d190545`. Mapa P0: 35 grupos/138 entradas/21 rutas revisadas; quedan 537/74. Sin cambios reales de hilos para prueba ni push. Borrar, entrar y salir de hilos siguen separados; continuar Administración, recibos y G01/G02.
+Despliegue `8f6e9dee`/`b02393a3a86e`: 14 casos aislados y 25 originales en imagen, 1.003 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Dos respaldos CRC y reversión `e40fe933bbb1`. Mapa P0: 37 grupos/142 entradas/21 rutas revisadas; quedan 533/74. Sin cambios reales de hilos para prueba ni push. [Informe](P0-THREAD-ACTIONS-2026-10-28.md). Continuar Administración, recibos y G01/G02.
 
 
 ## 28/10/2026 · modo lento de texto y slash corregido

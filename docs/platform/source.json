@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "99e399b7d0dac39ce55a76b6fbbc875e08f98725",
-    "image": "e40fe933bbb14ef06148d9541d870de6f54b909f1f2879a65531f48a5d5a47dc",
+    "code": "8f6e9deeffbad9253d5213d9b94f83c0404d0a16",
+    "image": "b02393a3a86e3ad8f6658d3de6448befca4652d9b70481da58bfe094b84f1f8c",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-thread-settings-20261028.json",
-    "change": "Shared confirmed thread archive, lock and auto archive duration operations",
-    "tag": "localhost/obey-your-master_bot:release-p0-thread-settings-20261028-99e399b7",
+    "evidence": "evidence/p0-thread-actions-20261028.json",
+    "change": "Confirmed thread membership, bulk joining and deletion",
+    "tag": "localhost/obey-your-master_bot:release-p0-thread-actions-20261028-8f6e9dee",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-thread-settings-20261028.json",
-    "deploymentKind": "application_only_p0_thread_settings",
+    "statusEvidence": "evidence/p0-thread-actions-20261028.json",
+    "deploymentKind": "application_only_p0_thread_actions",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

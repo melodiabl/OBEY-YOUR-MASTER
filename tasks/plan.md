@@ -2,7 +2,7 @@
 
 ## Avance P0 · ajustes de hilos · 28/10/2026
 
-Cinco comandos de hilos comparten acceso fresco, permiso `ManageThreads` del bot y confirmación de archivar, reabrir, bloquear, desbloquear o cambiar autoarchivo. Código `99e399b7`, imagen `e40fe933bbb1`, 41 pruebas, 1.001 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-THREAD-SETTINGS-2026-10-28.md). El mapa cubre 35 grupos/138 comandos/21 rutas; restan 537 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.
+Entrar, salir, unirse a todos los hilos activos y borrarlos comparten acceso fresco y confirmación de Discord. La unión masiva informa resultados parciales. Código `8f6e9dee`, imagen `b02393a3a86e`, 14 casos aislados y 25 originales en imagen, 1.003 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-THREAD-ACTIONS-2026-10-28.md). El mapa cubre 37 grupos/142 comandos/21 rutas; restan 533 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.
 
 
 ## Avance P0 · modo lento · 28/10/2026

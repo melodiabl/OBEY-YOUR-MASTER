@@ -1,5 +1,12 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · pertenencia y borrado de hilos · 28/10/2026
+
+- [x] Unificar `jointhread`, `jointhreads`, `leavethread` y `deletethread` con permisos frescos y resultado confirmado.
+- [x] Limitar la unión masiva a veinte intentos por ejecución y comunicar unidos, fallidos y pendientes; conservar los alias.
+- [x] Verificar 14 casos aislados y 25 originales en imagen, 1.003 hashes, inventario 675/779/95, HTTP 7/7, recursos 12/12, diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-THREAD-ACTIONS-2026-10-28.md).
+- [ ] Continuar otras órdenes de Administración, recibos, G01/G02 y aceptación autenticada. Quedan 533 entradas y 74 rutas; P0 sigue abierto.
+
 ## P0 · ajustes de hilos · 28/10/2026
 
 - [x] Unificar archivar, reabrir, bloquear, desbloquear y autoarchivo de hilos con acceso fresco y `ManageThreads` del bot.

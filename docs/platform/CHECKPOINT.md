@@ -1,5 +1,11 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · pertenencia y borrado de hilos desplegados
+
+`jointhread`, `jointhreads`, `leavethread` y `deletethread` comparten permisos actuales, hilo fresco y resultado confirmado por Discord. La unión masiva usa la lista activa y comunica fallos parciales. [Informe y límites](P0-THREAD-ACTIONS-2026-10-28.md).
+
+Código `8f6e9dee`, imagen `b02393a3a86e`: 14 casos aislados y 25 originales en imagen, 1.003 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; dos respaldos CRC y reversión `e40fe933bbb1`. Mapa P0: 37 grupos/142 entradas/21 rutas, faltan 533/74. Sin mutaciones reales de hilos para probar; P0, recibos, G01/G02 y aceptación autenticada siguen abiertos.
+
 ## 28/10/2026 · ajustes de hilos compartidos y desplegados
 
 Archivar, reabrir, bloquear, desbloquear y cambiar el autoarchivo de hilos comparten acceso fresco, `ManageThreads` del bot y confirmación del valor devuelto por Discord. El bloqueo restringe la reapertura; un hilo archivado se reabre antes de editar otras propiedades. [Informe y límites](P0-THREAD-SETTINGS-2026-10-28.md).

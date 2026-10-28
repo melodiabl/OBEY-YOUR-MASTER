@@ -1,0 +1,11 @@
+# P0 · pertenencia y borrado de hilos
+
+`jointhread`, `jointhreads`, `leavethread` y `deletethread` dependían de caché y enviaban registros directamente a `adminlog`. `jointhread` y `leavethread` podían registrar éxito después de un fallo; `deletethread` eliminaba sin confirmar el acceso actual ni responder al usuario. Ahora los cuatro adaptadores usan `src/modules/moderation/application/thread-actions.js` y mensajes en español e inglés.
+
+Las operaciones individuales obtienen roles, actor, bot e hilo de nuevo. Conservan los permisos delegados de los comandos de pertenencia; borrar exige Administrator o propiedad del servidor y `ManageThreads` del bot. Un argumento inválido nunca se convierte silenciosamente en el hilo actual. Entrar y salir requieren un hilo activo; Discord debe confirmar la acción antes del mensaje y el evento de log. Si salir o borrar el hilo impide responder en el canal, se intenta un DM.
+
+`jointhreads` consulta la lista de hilos activos y la pertenencia del bot por la API de Discord, excluye los hilos ya unidos y procesa como máximo veinte por ejecución. Informa unidos, fallidos y pendientes por separado. La [documentación de hilos](https://github.com/discord/discord-api-docs/blob/main/developers/topics/threads.mdx) y el [recurso de canales](https://github.com/discord/discord-api-docs/blob/main/developers/resources/channel.mdx) respaldan la exigencia de hilo activo, el permiso de borrado y la confirmación REST de entrada/salida.
+
+El código `8f6e9dee` se verificó con catorce casos aislados, 25 pruebas originales en la imagen, tipos, dependencias, recursos y el inventario de 1.003 hashes, 675 comandos, 779 alias y 95 rutas. La imagen `b02393a3a86e` coincide con la configuración activa, quedó saludable en diez muestras sin reinicios y pasó HTTP 7/7 y recursos públicos 12/12. Dos respaldos Mongo de 59.356.967 y 59.356.328 bytes pasaron CRC; no dejaron el archivo de configuración temporal. La imagen anterior `e40fe933bbb1` permanece para reversión.
+
+**Límites:** no se ejecutaron acciones sobre hilos reales ni aceptación autenticada en dos servidores. La salud de música indica disponibilidad básica y no certifica audio. P0 continúa con otras órdenes de Administración, recibos duraderos y G01/G02; P1 musical sigue después. [Evidencia](evidence/p0-thread-actions-20261028.json).
