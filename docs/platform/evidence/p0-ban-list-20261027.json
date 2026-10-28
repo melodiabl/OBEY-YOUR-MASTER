@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Private ban-list history and backup URI protection",
+  "verification": {
+    "isolatedCases": 34,
+    "originalCasesIncluded": 25,
+    "newCases": 9,
+    "failed": 0,
+    "sourceHashes": 995,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 32,
+    "reviewedCommandEntries": 127,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 548,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "sourceInventoryGate": "pass",
+    "npmAudit": {
+      "moderate": 36,
+      "high": 0,
+      "critical": 0
+    }
+  },
+  "evidenceFiles": [
+    ".runtime/p0-ban-list-20261027/tests.tap",
+    ".runtime/p0-ban-list-20261027/image-tests.tap",
+    ".runtime/p0-ban-list-20261027/runtime-observations.json",
+    ".runtime/p0-ban-list-20261027/http-assets.json",
+    ".runtime/p0-ban-list-20261027/preflight.json",
+    ".runtime/p0-ban-list-20261027/deployment.json"
+  ],
+  "deployment": {
+    "code": "b921791cba0bce988f2799b4f80e99402fe3469a",
+    "image": "b126853486164d168ed4a2d088c6875a6e8b2ebc716e74272d1cb5c2c828433e",
+    "tag": "localhost/obey-your-master_bot:release-p0-ban-list-20261027-b921791c",
+    "rollbackImage": "433a475553100be7d19177156c23f274557e13b9060f618ba0593f722f9727b5",
+    "priorBackupBytes": 59300824,
+    "postBackupBytes": 59323278,
+    "bothBackupGzipCrcValid": true,
+    "backupTempConfigRemoved": true,
+    "backupUriAbsentFromProcessArguments": true,
+    "preflightDifferences": [],
+    "inspectorClosed": true,
+    "imageTests": 34,
+    "runtimeSourceHashes": 995,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0,
+    "unhandledLogEvents": 0,
+    "errorLogEvents": 0,
+    "initialSwitchRolledBack": true,
+    "retryDeployed": true
+  },
+  "operationalLimit": "No real Discord DM, ban-list read or two-guild acceptance test; Mongo credential previously passed in argv must be rotated",
+  "remaining": [
+    "P0: other Administration intents, durable receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "P2: setup and moderation walkthroughs"
+  ]
+}

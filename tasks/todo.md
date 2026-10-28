@@ -1,5 +1,13 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · consulta privada de vetos · 28/10/2026
+
+- [x] Unificar `bans`/`listbans` con acceso fresco, cursor de hasta 1.000 vetos por lote y entrega por DM sin motivos en el canal.
+- [x] Retirar la URI de Mongo de los argumentos del respaldo, verificar archivo temporal eliminado y conservar respaldos CRC anterior y posterior.
+- [x] Verificar 34 pruebas en imagen, 995 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12; desplegar `b921791c`/`b12685348616` con diez muestras saludables. [Informe](../docs/platform/P0-BAN-LIST-2026-10-28.md).
+- [ ] Rotar la credencial Mongo que antes aparecía en argumentos; continuar Administración, recibos duraderos, G01/G02 y aceptación autenticada. Quedan 548 entradas y 74 rutas; P0 sigue abierto.
+
+
 ## Prioridad activa única
 
 Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 → P2 → P4 → P5 → P6**, con **P3 transversal** a cada recorrido. Los checkpoints y tareas posteriores conservan su evidencia; no definen por sí solos qué se hace a continuación.

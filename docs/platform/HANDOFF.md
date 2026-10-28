@@ -1,5 +1,12 @@
 # Estado entregado · 17/10/2026
 
+## 28/10/2026 · consulta de vetos y respaldo protegidos
+
+`bans`/`listbans` ya no publican motivos de veto: validan permisos actuales, recorren el cursor de Discord y entregan la página por DM. El respaldo Mongo dejó de pasar la URI en la línea de comandos y elimina su archivo temporal. [Informe](P0-BAN-LIST-2026-10-28.md).
+
+Despliegue `b921791c`/`b12685348616`: 34 pruebas en imagen, 995 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Respaldo anterior y posterior con CRC; imagen `433a47555310` retenida para reversión. Mapa P0: 32 grupos/127 entradas/21 rutas revisadas, quedan 548/74. Sin DMs ni consultas reales de prueba, aceptación autenticada ni push; la credencial Mongo anterior debe rotarse. Continuar P0 con Administración, recibos duraderos y G01/G02.
+
+
 ## 26/10/2026 · registros de moderación desplegados
 
 Se eliminó el envío directo a `adminlog` de comandos de moderación. La categoría moderna hereda ese destino si no hay otro y protege usuario, responsable, motivo y caso según la visibilidad. Advertencias y silencios por rol emiten tras efecto confirmado; ban y timeout usan auditoría/Gateway, kick tiene fallback cuando falta auditoría. El vencimiento ya admite la ausencia de canal de aviso y no sostiene el bloqueo por usuario mientras entrega el log. [Informe](P0-MODERATION-LOGS-2026-10-26.md).

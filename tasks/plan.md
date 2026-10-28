@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## Avance P0 · 28/10/2026
+
+La consulta de vetos `bans`/`listbans` entrega solo por DM, con permisos frescos y paginación completa; el respaldo Mongo usa configuración temporal privada. Código `b921791c`, imagen `b12685348616`, 34 pruebas, 995 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-BAN-LIST-2026-10-28.md). Se revisaron 32 grupos/127 comandos/21 rutas; restan 548 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada, antes de P1.
+
+
 ## Orden activo · 23/10/2026
 
 La corrección del usuario «sigue un orden en el plan» fija una única secuencia de ejecución. Gobierna el [maestro 0.15](../docs/guia-arquitectura/investigacion-20261022/08_PLAN_DE_EJECUCION.md); los IDs T/ARCH/MOD existentes conservan alcance, dependencias y evidencias. Las entregas siguientes son historial y no cambian la prioridad activa.

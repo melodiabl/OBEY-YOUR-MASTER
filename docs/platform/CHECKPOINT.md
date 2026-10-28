@@ -1,5 +1,12 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · historial privado de vetos desplegado
+
+`bans` y `listbans` comparten consulta paginada con permisos frescos, entrega por DM y respuesta pública sin motivos. El respaldo Mongo usa configuración temporal privada y ya no expone la URI en argumentos. [Informe y límites](P0-BAN-LIST-2026-10-28.md).
+
+Código `b921791c`, imagen `b12685348616`: 34 pruebas en imagen, 995 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; respaldo previo y posterior con CRC, reversión `433a47555310`. El primer cambio revirtió automáticamente por una invocación duplicada del script de despliegue; el siguiente quedó saludable. El mapa cubre 32 grupos/127 entradas/21 rutas; quedan 548 entradas/74 rutas. P0, G01/G02 y aceptación real siguen abiertos. La credencial de Mongo usada antes del cambio necesita rotación.
+
+
 ## 26/10/2026 · registros de moderación protegidos y desplegados
 
 Los comandos antiguos dejaron de enviar motivos y responsables directamente a `adminlog`: advertencias, silencios por rol y vencimientos usan el servicio de logs con prueba de audiencia; vetos y timeout conservan los eventos Discord, y kick usa fallback solo sin auditoría disponible. El destino heredado sigue funcionando para moderación con redacción en canales abiertos. También se corrigió el vencimiento sin canal de aviso. [Informe y límites](P0-MODERATION-LOGS-2026-10-26.md).
