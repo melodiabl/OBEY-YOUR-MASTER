@@ -1938,5 +1938,14 @@
     "invalid": "Mention a valid role in this server or enter its ID.",
     "conflict": "DJ roles changed while saving. Check the current state before retrying.",
     "unavailable": "I could not confirm the DJ role save. Check the settings before retrying."
+  },
+  "musicDefaults": {
+    "volumeSaved": "Default volume saved: {volume}. It will apply on a new music connection.",
+    "autoplayOn": "Default autoplay enabled. It will apply on a new music connection.",
+    "autoplayOff": "Default autoplay disabled. It will apply on a new music connection.",
+    "volumeInvalid": "Use defaultvolume with a whole number from 1 to 150.",
+    "autoplayInvalid": "Use defaultautoplay without arguments to toggle the default setting.",
+    "conflict": "Music settings changed. Review the current configuration before trying again.",
+    "unavailable": "Saving could not be confirmed. Reopen settings to check the current state."
   }
 }

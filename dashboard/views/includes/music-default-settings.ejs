@@ -1,0 +1,20 @@
+<div class="card" id="music-default-settings">
+  <div class="card-head">
+    <div class="card-ico ico-p"><i class="fas fa-sliders" aria-hidden="true"></i></div>
+    <div><div class="card-title">Al iniciar la música</div><div class="card-desc">Valores para una nueva conexión de voz</div></div>
+  </div>
+  <div class="card-body">
+    <% if (musicDefaultsSaved) { %><p class="alert alert-success" role="status">Ajustes guardados. Se aplicarán al iniciar una nueva conexión de música.</p><% } %>
+    <div class="form-group">
+      <label class="form-label" for="music-default-volume">Volumen predeterminado</label>
+      <span class="form-help" id="music-default-volume-help">De 0 a 200. 100 es el volumen normal; 0 silencia el audio.</span>
+      <input id="music-default-volume" type="number" name="defaultVolume" form="music-defaults-settings-form" value="<%= settings.defaultVolume %>" min="0" max="200" step="1" required class="form-input sm" aria-describedby="music-default-volume-help">
+    </div>
+    <div class="form-group">
+      <label for="music-default-autoplay" class="form-label">Autoplay predeterminado</label>
+      <span class="form-help" id="music-default-autoplay-help">Busca música relacionada cuando termine la cola. Para cambiar la sesión actual, usa /autoplay en Discord.</span>
+      <span class="toggle"><input id="music-default-autoplay" type="checkbox" name="autoplay" form="music-defaults-settings-form" value="on" <%= settings.autoplay ? 'checked' : '' %> aria-describedby="music-default-autoplay-help"><span class="tslider" aria-hidden="true"></span></span>
+    </div>
+    <button type="submit" form="music-defaults-settings-form" class="btn btn-p btn-sm">Guardar ajustes de inicio</button>
+  </div>
+</div>

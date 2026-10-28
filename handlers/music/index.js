@@ -4,6 +4,7 @@ const { searchNodes, trackOnNode } = require('./node-search')
 const { allowedMusicTrack, assertMusicQuery } = require('./nodes-config')
 const { sameRecording } = require('./recordings')
 const MusicHistory = require('../../database/schemas/MusicHistorySchema')
+const { musicDefaultsForConnection } = require('../music-default-settings')
 
 const { playerStates, liveMessages, liveTimers, getState, resetState } = require('./state')
 const { normalizePublicTrack, tracksFromResolve, clampMs } = require('./utils')
@@ -316,6 +317,7 @@ module.exports = client => {
         if (!s.nodeTransition) { s.currentTrack = null; s.startedAt = null; s.paused = false }
         stopLiveUpdate(guildId)
       }
+      const defaults = musicDefaultsForConnection(client, guildId)
       getState(guildId).status = 'connecting'
       const guild = client.guilds?.cache?.get(guildId)
       const player = await client.shoukaku.joinVoiceChannel({ guildId, channelId: voiceChannelId, shardId: guild?.shardId ?? guild?.shard?.id ?? 0 })
@@ -324,15 +326,13 @@ module.exports = client => {
       state.locale = require('../i18n').localeFor(client, guildId)
       state.voiceChannelId = voiceChannelId
       state.textChannelId  = textChannelId
-      const autoplay = client.settings?.get?.(guildId, 'autoplay')
-      if (typeof autoplay === 'boolean') state.autoplay = autoplay
-      const defaultVolume = Number(client.settings?.get?.(guildId, 'defaultVolume'))
-      if (client.settings?.get?.(guildId, 'defaultVolume') != null && defaultVolume >= 0 && defaultVolume <= 200 && typeof player.setGlobalVolume === 'function') {
+      state.autoplay = defaults.autoplay
+      if (typeof player.setGlobalVolume === 'function') {
         try {
-          await player.setGlobalVolume(defaultVolume)
-          state.volume = defaultVolume
-        } catch (error) {
-          console.warn('[Music] No se pudo aplicar el volumen por defecto:', error?.message || error)
+          await player.setGlobalVolume(defaults.volume)
+          state.volume = defaults.volume
+        } catch {
+          console.warn('[Music] No se pudo aplicar el volumen predeterminado.')
         }
       }
       this._bindPlayerEvents(player, guildId)

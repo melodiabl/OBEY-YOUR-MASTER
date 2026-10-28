@@ -292,22 +292,11 @@
               <% }) %>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Volumen por defecto</label>
-            <span class="form-help">Valor entre 1 y 200 (100 = normal)</span>
-            <input type="number" name="defaultVolume" value="<%= settings.defaultVolume ?? 100 %>" min="0" max="200" class="form-input sm">
-          </div>
-          <div class="toggle-group">
-            <label class="toggle-item">
-              <div class="ti-info">
-                <span class="ti-label">Autoplay por defecto</span>
-                <span class="ti-desc">Reproducir pistas similares cuando la cola termina</span>
-              </div>
-              <label class="toggle"><input type="checkbox" name="autoplay" value="on" <%= settings.autoplay?'checked':'' %>><span class="tslider"></span></label>
-            </label>
-          </div>
+
         </div>
       </div>
+
+      <%- include('../includes/music-default-settings', { settings, musicDefaultsSaved }) %>
 
       <%- include('../includes/dj-role-settings', { settings, djRoleOptions, djRolesSaved }) %>
 
@@ -487,6 +476,10 @@
 <form id="dj-roles-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
   <input type="hidden" name="_intent" value="djRoles">
   <input type="hidden" name="djRolesRevision" value="<%= settings.djRolesRevision %>">
+</form>
+<form id="music-defaults-settings-form" method="POST" action="/dashboard/<%= guild.id %>" hidden>
+  <input type="hidden" name="_intent" value="musicDefaults">
+  <input type="hidden" name="musicDefaultsRevision" value="<%= settings.musicDefaultsRevision %>">
 </form>
 <script src="/js/log-settings.js" defer></script>
 

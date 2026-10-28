@@ -1938,5 +1938,14 @@
     "invalid": "Menciona un rol válido de este servidor o indica su ID.",
     "conflict": "Los roles DJ cambiaron mientras guardabas. Consulta el estado actual antes de reintentar.",
     "unavailable": "No pude confirmar el guardado de los roles DJ. Consulta la configuración antes de reintentar."
+  },
+  "musicDefaults": {
+    "volumeSaved": "Volumen predeterminado guardado: {volume}. Se aplicará al iniciar una nueva conexión de música.",
+    "autoplayOn": "Autoplay predeterminado activado. Se aplicará al iniciar una nueva conexión de música.",
+    "autoplayOff": "Autoplay predeterminado desactivado. Se aplicará al iniciar una nueva conexión de música.",
+    "volumeInvalid": "Usa defaultvolume con un número entero entre 1 y 150.",
+    "autoplayInvalid": "Usa defaultautoplay sin argumentos para alternar el ajuste predeterminado.",
+    "conflict": "Los ajustes de música cambiaron. Consulta la configuración actual antes de intentarlo de nuevo.",
+    "unavailable": "No pude confirmar el guardado. Vuelve a abrir la configuración para consultar el estado actual."
   }
 }

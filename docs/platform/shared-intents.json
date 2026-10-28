@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-26",
+  "date": "2026-10-29",
   "phase": "P0",
   "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
   "inventory": "operation-ownership.json",
@@ -1076,15 +1076,33 @@
       "result": "Persisted multi-role list with revision conflict detection, separate web intent and no cache-miss pruning. Generic dashboard no longer writes djroles or singular djRole.",
       "limits": "Legacy reset remains separate; no production role configuration changes used for testing. Authenticated two-guild acceptance pending.",
       "evidence": "evidence/p0-dj-roles-20261028.json"
+    },
+    {
+      "id": "configuration.music_defaults",
+      "commands": [
+        "prefix:defaultvolume",
+        "prefix:defaultautoplay"
+      ],
+      "routes": [
+        "GET /dashboard/:guildId",
+        "POST /dashboard/:guildId"
+      ],
+      "service": "handlers/music-default-settings.js",
+      "store": "Guild.defaultVolume and Guild.autoplay through existing setup-settings CAS; committed cache supplies new music connections",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Fresh Administrator/channel/bot checks for prefix; fresh ManageGuild with OAuth and CSRF for web. Prefix volume 1–150; web 0–200; integer only.",
+      "result": "Commands and dedicated web form await conditional persistence. Generic saves do not mutate these defaults or the active session. Old defaultvolume/defaultap values remain preserved and unused, matching current engine behavior.",
+      "limits": "No automatic legacy-key migration; defaultequalizer and reset remain separate pending work. No real server settings or voice joins for testing; authenticated two-guild acceptance and durable receipts pending.",
+      "evidence": "evidence/p0-music-defaults-20261029.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 41,
-    "commandEntriesReviewed": 151,
+    "reviewedGroups": 42,
+    "commandEntriesReviewed": 153,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 524,
+    "remainingCommandEntries": 522,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
