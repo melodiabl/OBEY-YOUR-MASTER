@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "b889c06aecffd4ed218e88bdfd7adf90f4236579",
+  "image": "96d593a66433fc8bde6d7c4541f8452b0ed4b72d68998093d8ba1a3ebcf81095",
+  "tag": "localhost/obey-your-master_bot:release-p0-music-defaults-20261029-b889c06a",
+  "previousImage": "1289a1190d71e32fe556e0084889b7a40ab560a235da7b58c16d150aa3acada6",
+  "scope": [
+    "prefix:defaultvolume",
+    "prefix:defaultautoplay",
+    "GET /dashboard/:guildId",
+    "POST /dashboard/:guildId",
+    "new music connections read validated committed defaults from cache"
+  ],
+  "persistence": {
+    "fields": [
+      "Guild.defaultVolume",
+      "Guild.autoplay"
+    ],
+    "conditional": true,
+    "sharedExistingQueue": true,
+    "legacyKeysPreservedUnused": [
+      "defaultvolume",
+      "defaultap"
+    ],
+    "automaticMigration": false,
+    "defaults": {
+      "volume": 100,
+      "autoplay": false
+    }
+  },
+  "verification": {
+    "regressionBefore": "volume command wrote a key unused by current engine; assertion defaultVolume=50 failed",
+    "isolatedCases": 15,
+    "browserScenarios": [
+      "canonical volume displayed",
+      "general and music forms isolated",
+      "independent save persists and confirms both values",
+      "unchecked autoplay persists false",
+      "layout 320",
+      "layout 768",
+      "layout 1024",
+      "layout 1440",
+      "clean successful-load console",
+      "stale browser rejected without overwriting Discord",
+      "fresh permission revocation denied",
+      "CSRF rejected"
+    ],
+    "browserPageErrors": [],
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1157,
+      "dependencies": 3408
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1019,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "http": [
+      {
+        "url": "http://127.0.0.1:3002/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/",
+        "status": 302,
+        "expected": 302
+      },
+      {
+        "url": "http://127.0.0.1:3002/api/panel/context",
+        "status": 401,
+        "expected": 401
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/package.json",
+        "status": 404,
+        "expected": 404
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/",
+        "status": 302,
+        "expected": 302
+      }
+    ],
+    "assets": [
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/2qprrfrwmtel1.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/turbopack-1gj34814o3k0t.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3wbm-994r45kr.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3cfn99dbrcvvp.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/37dgj-y9ab1m8.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/379otflgu1tbv.css",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3f87ogitp1f5z.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0umf92h1sb77c.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_ssgManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_buildManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_clientMiddlewareManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/css/dj-role-settings.css",
+        "status": 200,
+        "hashMatches": true
+      }
+    ],
+    "runtimeSamples": [
+      {
+        "sample": 1,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 2,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 3,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 4,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 5,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 6,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 7,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 8,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 9,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 10,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      }
+    ],
+    "backup": {
+      "bytes": 59230930,
+      "gzipCrc": true,
+      "temporaryCredentialConfigRemoved": true
+    },
+    "cleanup": {
+      "ownTemporaryScriptsRemoved": true,
+      "temporaryBrowserDependenciesRemoved": true,
+      "originalTestFilesUnchanged": true,
+      "evidenceRetained": true
+    }
+  },
+  "deployment": {
+    "healthy": true,
+    "restarts": 0,
+    "recoveryRecipesUpdated": true,
+    "latestTagPromoted": true,
+    "previousImageRetained": true,
+    "push": false
+  },
+  "coverage": {
+    "reviewedGroups": 42,
+    "commandEntriesReviewed": 153,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 522,
+    "remainingHttpRoutes": 74
+  },
+  "limits": [
+    "Fixtures only; no real user settings changes or test voice joins.",
+    "Basic music health does not accept audio quality or latency.",
+    "Legacy default equalizer and reset remain pending.",
+    "Authenticated two-guild walkthrough and durable receipts remain pending; global G01/G02 and P0 are open."
+  ]
+}

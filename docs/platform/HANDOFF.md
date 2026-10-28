@@ -1,5 +1,9 @@
 # Estado entregado · 17/10/2026
 
+## 29/10/2026 · volumen y autoplay predeterminados compartidos
+
+Código `b889c06a`, imagen `96d593a66433`: comandos y formulario web independiente usan defaultVolume/autoplay con CAS y confirmación tras persistir. Guardar ajustes generales ya no cambia autoplay de la sesión activa. Quince casos aislados, doce escenarios de navegador, 25 pruebas originales en imagen, tipos y dependencias; 1.019 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 42 grupos/153 entradas/21 rutas; faltan 522/74. Ecualizador antiguo, reset, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-MUSIC-DEFAULTS-2026-10-29.md).
+
 ## 28/10/2026 · roles DJ compartidos
 
 Código `f0602f4c`, imagen `1289a1190d71`: roles DJ compartidos por comandos/panel con CAS y formulario múltiple independiente; sin borrado por caché. Trece casos aislados, trece escenarios de navegador y 25 originales en imagen; 1.015 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 41 grupos/151 entradas/21 rutas; faltan 524/74. G01/G02, recibos y aceptación autenticada siguen pendientes. [Informe](P0-DJ-ROLES-2026-10-28.md).
