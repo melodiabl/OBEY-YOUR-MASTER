@@ -1,5 +1,9 @@
 # Tareas y checkpoints de OBEY
 
+## 28/10/2026 · roles DJ compartidos
+
+Código `f0602f4c`, imagen `1289a1190d71`: roles DJ compartidos por comandos/panel con CAS y formulario múltiple independiente; sin borrado por caché. Trece casos aislados, trece escenarios de navegador y 25 originales en imagen; 1.015 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 41 grupos/151 entradas/21 rutas; faltan 524/74. G01/G02, recibos y aceptación autenticada siguen pendientes. [Informe](../docs/platform/P0-DJ-ROLES-2026-10-28.md).
+
 ## 28/10/2026 · canales de comandos persistidos
 
 Código `6adb96dd`, imagen `78b4cd73c294`: addbotchat/removebotchat esperan guardado CAS; el router conserva canales ausentes en caché. Diez casos aislados, una regresión de fuente y 25 originales en imagen; 1.009 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 40 grupos/149 entradas/21 rutas; faltan 526/74. Recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](../docs/platform/P0-BOT-CHANNELS-2026-10-28.md).

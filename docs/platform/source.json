@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "6adb96ddaecb3e27d34209b5d79c8e55c56f5f43",
-    "image": "78b4cd73c2947ebac6c15ed0c828f723386377237ee44094a1c9be764bc35488",
+    "code": "f0602f4c34be5892a3fbf4ed101a08f35e891391",
+    "image": "1289a1190d71e32fe556e0084889b7a40ab560a235da7b58c16d150aa3acada6",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-bot-channels-20261028.json",
-    "change": "Awaited conditional command-channel persistence and preserved configuration on cache misses",
-    "tag": "localhost/obey-your-master_bot:release-p0-bot-channels-20261028-6adb96dd",
+    "evidence": "evidence/p0-dj-roles-20261028.json",
+    "change": "Shared revisioned DJ roles for Discord and multi-role dashboard form",
+    "tag": "localhost/obey-your-master_bot:release-p0-dj-roles-20261028-f0602f4c",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-bot-channels-20261028.json",
-    "deploymentKind": "application_only_p0_bot_channels",
+    "statusEvidence": "evidence/p0-dj-roles-20261028.json",
+    "deploymentKind": "application_only_p0_dj_roles",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

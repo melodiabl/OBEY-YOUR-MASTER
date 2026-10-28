@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Shared revisioned DJ role settings for prefix and dashboard with a dedicated multi-role form",
+  "verification": {
+    "isolatedCases": 13,
+    "browserScenarios": 13,
+    "browserPageErrors": 0,
+    "originalCasesInImage": 25,
+    "failed": 0,
+    "sourceHashes": 1015,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 41,
+    "reviewedCommandEntries": 151,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 524,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "imageInventoryGate": "pass"
+  },
+  "deployment": {
+    "code": "f0602f4c34be5892a3fbf4ed101a08f35e891391",
+    "image": "1289a1190d71e32fe556e0084889b7a40ab560a235da7b58c16d150aa3acada6",
+    "tag": "localhost/obey-your-master_bot:release-p0-dj-roles-20261028-f0602f4c",
+    "rollbackImage": "78b4cd73c2947ebac6c15ed0c828f723386377237ee44094a1c9be764bc35488",
+    "backupBytes": 59227369,
+    "backupGzipCrcValid": true,
+    "tempConfigRemoved": true,
+    "httpRoutesChecked": 7,
+    "assetsChecked": 13,
+    "healthyObservations": 10,
+    "restarts": 0
+  },
+  "evidenceFiles": [
+    ".runtime/p0-dj-roles-20261028/focused.tap",
+    ".runtime/p0-dj-roles-20261028/tests.tap",
+    ".runtime/p0-dj-roles-20261028/image-tests.tap",
+    ".runtime/p0-dj-roles-20261028/image-inventory.log",
+    ".runtime/p0-dj-roles-20261028/preflight.json",
+    ".runtime/p0-dj-roles-20261028/deployment.json",
+    ".runtime/p0-dj-roles-20261028/runtime-observations.json",
+    ".runtime/p0-dj-roles-20261028/http-assets.json",
+    ".runtime/p0-dj-roles-20261028/backup-output.json",
+    ".runtime/p0-dj-roles-20261028/browser.json",
+    ".runtime/p0-dj-roles-20261028/dj-320.png",
+    ".runtime/p0-dj-roles-20261028/dj-1440.png"
+  ],
+  "limits": [
+    "Browser used the full real EJS page, real service and isolated repository/actor fixtures; no production role configuration changes used for testing",
+    "Legacy reset remains separate",
+    "Authenticated two-guild acceptance and durable operation receipts remain pending"
+  ]
+}
