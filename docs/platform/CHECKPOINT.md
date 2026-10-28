@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · canales de comandos persistidos
+
+Código `6adb96dd`, imagen `78b4cd73c294`: addbotchat/removebotchat esperan guardado CAS; el router conserva canales ausentes en caché. Diez casos aislados, una regresión de fuente y 25 originales en imagen; 1.009 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 40 grupos/149 entradas/21 rutas; faltan 526/74. Recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-BOT-CHANNELS-2026-10-28.md).
+
 ## 28/10/2026 · borrado de canales y roles
 
 Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso fresco, destino exacto y confirmación de roles revalidada. Doce casos aislados y 25 originales en imagen, 1.007 hashes, HTTP 7/7, recursos 12/12 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; sin borrados reales de prueba. P0: 39 grupos/147 entradas/21 rutas, faltan 528/74. G01/G02, recibos y aceptación autenticada siguen abiertos. [Informe](P0-DELETION-2026-10-28.md).

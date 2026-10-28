@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Persisted command channel list with conditional save and no cache-based pruning",
+  "verification": {
+    "isolatedBehaviorCases": 10,
+    "sourceRegressionChecks": 1,
+    "originalCasesInImage": 25,
+    "failed": 0,
+    "sourceHashes": 1009,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 40,
+    "reviewedCommandEntries": 149,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 526,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "imageInventoryGate": "pass"
+  },
+  "deployment": {
+    "code": "6adb96ddaecb3e27d34209b5d79c8e55c56f5f43",
+    "image": "78b4cd73c2947ebac6c15ed0c828f723386377237ee44094a1c9be764bc35488",
+    "tag": "localhost/obey-your-master_bot:release-p0-bot-channels-20261028-6adb96dd",
+    "rollbackImage": "ee586c109e73d5cdd572e282676c31a598d0771b352dddc8b7bea911952b2b7a",
+    "backupBytes": 59227376,
+    "backupGzipCrcValid": true,
+    "tempConfigRemoved": true,
+    "httpRoutesChecked": 7,
+    "assetsChecked": 12,
+    "healthyObservations": 10,
+    "restarts": 0
+  },
+  "evidenceFiles": [
+    ".runtime/p0-bot-channels-20261028/focused.tap",
+    ".runtime/p0-bot-channels-20261028/tests.tap",
+    ".runtime/p0-bot-channels-20261028/image-tests.tap",
+    ".runtime/p0-bot-channels-20261028/image-inventory.log",
+    ".runtime/p0-bot-channels-20261028/preflight.json",
+    ".runtime/p0-bot-channels-20261028/deployment.json",
+    ".runtime/p0-bot-channels-20261028/runtime-observations.json",
+    ".runtime/p0-bot-channels-20261028/http-assets.json",
+    ".runtime/p0-bot-channels-20261028/backup-output.json"
+  ],
+  "limits": [
+    "Persistence verified using isolated repository fixtures; no production configuration writes used for testing",
+    "Reset remains a separate legacy writer",
+    "Authenticated two-guild acceptance and durable operation receipts remain pending"
+  ]
+}

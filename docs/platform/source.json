@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "3d62a7b49fcde86303c7f594d3b9e5940435f54d",
-    "image": "ee586c109e73d5cdd572e282676c31a598d0771b352dddc8b7bea911952b2b7a",
+    "code": "6adb96ddaecb3e27d34209b5d79c8e55c56f5f43",
+    "image": "78b4cd73c2947ebac6c15ed0c828f723386377237ee44094a1c9be764bc35488",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-deletion-20261028.json",
-    "change": "Fresh channel and role deletion with confirmation revalidation",
-    "tag": "localhost/obey-your-master_bot:release-p0-deletion-20261028-3d62a7b4",
+    "evidence": "evidence/p0-bot-channels-20261028.json",
+    "change": "Awaited conditional command-channel persistence and preserved configuration on cache misses",
+    "tag": "localhost/obey-your-master_bot:release-p0-bot-channels-20261028-6adb96dd",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-deletion-20261028.json",
-    "deploymentKind": "application_only_p0_resource_deletion",
+    "statusEvidence": "evidence/p0-bot-channels-20261028.json",
+    "deploymentKind": "application_only_p0_bot_channels",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
