@@ -1,5 +1,12 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · ajustes de hilos compartidos y desplegados
+
+Archivar, reabrir, bloquear, desbloquear y cambiar el autoarchivo de hilos comparten acceso fresco, `ManageThreads` del bot y confirmación del valor devuelto por Discord. El bloqueo restringe la reapertura; un hilo archivado se reabre antes de editar otras propiedades. [Informe y límites](P0-THREAD-SETTINGS-2026-10-28.md).
+
+Código `99e399b7`, imagen `e40fe933bbb1`: 41 pruebas en imagen, 1.001 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; dos respaldos CRC y reversión `029e9d190545`. Mapa P0: 35 grupos/138 entradas/21 rutas, faltan 537/74. No se cambiaron hilos reales para probar. P0, recibos, G01/G02 y aceptación autenticada siguen abiertos.
+
+
 ## 28/10/2026 · modo lento compartido y desplegado
 
 `slowmode` de texto y `/slowmode` comparten validación 0–21.600, permisos actuales, canal fresco y respuesta tras confirmar el valor devuelto por Discord. Slash difiere en privado; los cambios confirmados usan el servicio de logs. [Informe y límites](P0-SLOWMODE-2026-10-28.md).

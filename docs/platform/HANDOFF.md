@@ -1,5 +1,12 @@
 # Estado entregado · 17/10/2026
 
+## 28/10/2026 · ajustes de hilos corregidos
+
+Cinco comandos de hilos comparten servicio con miembros, roles y hilo frescos, `ManageThreads` del bot, duración permitida y éxito solo tras la respuesta de Discord. Si archivar impide responder, la confirmación se envía por DM; los logs usan el servicio canónico. [Informe](P0-THREAD-SETTINGS-2026-10-28.md).
+
+Despliegue `99e399b7`/`e40fe933bbb1`: 41 pruebas en imagen, 1.001 hashes, inventario 675/779/95, HTTP 7/7, assets 12/12 y diez muestras saludables sin reinicios. Dos respaldos CRC y reversión `029e9d190545`. Mapa P0: 35 grupos/138 entradas/21 rutas revisadas; quedan 537/74. Sin cambios reales de hilos para prueba ni push. Borrar, entrar y salir de hilos siguen separados; continuar Administración, recibos y G01/G02.
+
+
 ## 28/10/2026 · modo lento de texto y slash corregido
 
 `slowmode` y `/slowmode` usan el mismo servicio: segundos enteros 0–21.600, permisos frescos, canal confirmado y éxito solo tras la respuesta de Discord. La interacción slash se difiere en privado; los logs se emiten después del efecto. [Informe](P0-SLOWMODE-2026-10-28.md).

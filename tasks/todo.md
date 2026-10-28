@@ -1,5 +1,13 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · ajustes de hilos · 28/10/2026
+
+- [x] Unificar archivar, reabrir, bloquear, desbloquear y autoarchivo de hilos con acceso fresco y `ManageThreads` del bot.
+- [x] Aceptar solo 60/1.440/4.320/10.080 minutos; confirmar el valor devuelto por Discord y usar DM si archivar impide responder.
+- [x] Verificar 41 pruebas en imagen, 1.001 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12; desplegar `99e399b7`/`e40fe933bbb1` con diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-THREAD-SETTINGS-2026-10-28.md).
+- [ ] Continuar borrar/entrar/salir de hilos, otras órdenes de Administración, recibos, G01/G02 y aceptación autenticada. Quedan 537 entradas y 74 rutas; P0 sigue abierto.
+
+
 ## P0 · modo lento · 28/10/2026
 
 - [x] Unificar `slowmode` y `/slowmode` con segundos enteros 0–21.600, permisos frescos y canal confirmado.

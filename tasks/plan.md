@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## Avance P0 · ajustes de hilos · 28/10/2026
+
+Cinco comandos de hilos comparten acceso fresco, permiso `ManageThreads` del bot y confirmación de archivar, reabrir, bloquear, desbloquear o cambiar autoarchivo. Código `99e399b7`, imagen `e40fe933bbb1`, 41 pruebas, 1.001 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-THREAD-SETTINGS-2026-10-28.md). El mapa cubre 35 grupos/138 comandos/21 rutas; restan 537 comandos/74 rutas. P0 continúa con Administración, recibos, G01/G02 y aceptación autenticada antes de P1.
+
+
 ## Avance P0 · modo lento · 28/10/2026
 
 El texto `slowmode` y `/slowmode` comparten validación, permisos frescos y confirmación del valor aplicado por Discord. Código `a6a84bcc`, imagen `029e9d190545`, 37 pruebas, 999 hashes, HTTP 7/7, assets 12/12 y diez muestras saludables. [Evidencia](../docs/platform/P0-SLOWMODE-2026-10-28.md). El mapa cubre 34 grupos/133 comandos/21 rutas; restan 542 comandos/74 rutas. P0 sigue activo con Administración, recibos duraderos, G01/G02 y aceptación autenticada antes de P1.
