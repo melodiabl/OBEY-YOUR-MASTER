@@ -1852,5 +1852,16 @@
     "tooManyTargets": "Indica como máximo diez roles o miembros.",
     "partial": "Se cambiaron {count} destino(s), pero no pude completar los demás. Revisa los permisos actuales.",
     "unavailable": "No pude confirmar el cambio de permisos. Revisa el estado del canal antes de reintentar."
+  },
+  "moderationSlowmode": {
+    "invalidSeconds": "Indica un número entero de segundos entre 0 y 21600. Usa 0 para desactivar el modo lento.",
+    "invalidChannel": "Este canal no admite modo lento.",
+    "accessDenied": "No pude confirmar tus permisos actuales para cambiar el modo lento.",
+    "botPermission": "Necesito Gestionar canales en el canal elegido.",
+    "unavailable": "No pude confirmar el cambio. Consulta el modo lento actual antes de reintentar.",
+    "unconfirmed": "Discord no confirmó el nuevo valor. Consulta el modo lento actual antes de reintentar.",
+    "unchanged": "El modo lento de {channel} ya estaba en {seconds} segundos.",
+    "enabled": "Modo lento de {seconds} segundos activado en {channel}.",
+    "disabled": "Modo lento desactivado en {channel}."
   }
 }

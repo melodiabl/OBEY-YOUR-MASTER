@@ -929,15 +929,34 @@
       "result": "Replies after a confirmed Discord edit; partial and failed edits are reported without claiming complete success.",
       "limits": "No authenticated Discord test; default unlock clears @everyone SendMessages/AddReactions to inherit permissions, while targeted unlock explicitly allows them.",
       "evidence": "evidence/p0-channel-lock-20261028.json"
+    },
+    {
+      "id": "moderation.slowmode",
+      "commands": [
+        "prefix:slowmode",
+        "slash:moderation.slowmode"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/slowmode.js",
+      "store": "Discord channel rateLimitPerUser; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Prefix keeps configured slowmode grants; slash requires fresh ManageChannels on actor and target channel; both confirm fresh bot ManageChannels and await Discord.",
+      "parameters": {
+        "seconds": "integer 0..21600 inclusive; 0 disables slowmode",
+        "channel": "prefix current channel; slash selected channel or current channel"
+      },
+      "result": "Success only after Discord returns the requested value; invalid, unavailable and unconfirmed states are explicit.",
+      "limits": "No authenticated two-guild or real Discord channel edit test; log delivery is separate from the confirmed channel change.",
+      "evidence": "evidence/p0-slowmode-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 33,
-    "commandEntriesReviewed": 131,
+    "reviewedGroups": 34,
+    "commandEntriesReviewed": 133,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 544,
+    "remainingCommandEntries": 542,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

@@ -67,7 +67,7 @@
     "commands/Administration/report.js": "8a676320660f9d1632e2d91368a0661fa1e3bb56436a2c7877204dcbc2bddb01",
     "commands/Administration/say.js": "75f1316d3cead613036ab1cf84b6dc0b013a7722a28954de7c062591c1b59495",
     "commands/Administration/setautoarchiveduration.js": "a69758e2e5ad57ff16633a3e69ac0db2e5d3a60001eaac86fa9cfea788240172",
-    "commands/Administration/slowmode.js": "bc8ec76961eed9c0d9e8912cac320348d9653fd2cde2802c839bcb9ea9015615",
+    "commands/Administration/slowmode.js": "3f7215c77913acd7489127cec8bd5df37e09d77db680103e760eb8be334d394b",
     "commands/Administration/snipe.js": "0d2e5c02c2917bc712eacda031bc5d1b25a9ca3e10648595a5af478d8da8de2e",
     "commands/Administration/suggest.js": "44cbd89c9d0008e512da0064ac2f879674ba840b5f3b0e7dbc8bf0a3c409f2cf",
     "commands/Administration/sync-invites.js": "90f8359435137ce7304461a9f4feb645b196f6e20dc556ee1858ed683dff172b",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "2132e11c1cffa77d621369395024c6c94118719dd5c0f269fce4d2e235cf04c5",
-    "locales/es.json": "b4b0eb4423ce82b977ea7c5ede5872fea83e6cff1e786bcf6c476f14ff111fb4",
+    "locales/en.json": "8ba3039ab0e079fbf526305dae57e4129a962dd80e1829526298ca787d452b3f",
+    "locales/es.json": "ee26bc43e69da5ec514a89d726d3aad5313394cf7b5f35d83c1318c949f7f455",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -930,7 +930,7 @@
     "slashCommands/Moderation/cases.js": "8864351d4d49acf872cba232ac6d58847357cbbc825131e3cbe6f0bf2312d181",
     "slashCommands/Moderation/kick.js": "80e2115c16531583a77d7062e2b8e5ab69df4d08e4eac168815fb1936ee1d86d",
     "slashCommands/Moderation/purge.js": "ea4ff3c0532ac9a6833ec496e78ebaf27b09a57719cc36f5eb958f2bb0b23046",
-    "slashCommands/Moderation/slowmode.js": "669e453971ff2da04d140bd721140ebe23d8922988318375ce962d45ddacb12d",
+    "slashCommands/Moderation/slowmode.js": "2da1895e545ba85461ba7b4dc1779a94aa5361ba05f08b507907b9e34d9a3dc3",
     "slashCommands/Moderation/timeout.js": "6a98395fd4d9dfc05a7b8d7a2057357714020f75eface264c1c39d8e9d5e5609",
     "slashCommands/Moderation/unban.js": "1b243ca9498deb2b2ffa0f994b27dc6239e6600d21075f1959806745cba8be61",
     "slashCommands/Moderation/unwarn.js": "525bf68a9bfe7e5e890c79498df4ea0d84aef980173d61f160e8464b2514608f",
@@ -1006,7 +1006,9 @@
     "src/modules/moderation/application/ban-list.js": "d7668e35a97275ef18eda45f4cb072bbe2c80b7267a8c25c49e5ce681297f8ea",
     "src/modules/moderation/discord/ban-list-commands.js": "d463aee953957005f29b6b7b47a7e5c33e2bd6275b29efaa7a3a15719a185f24",
     "src/modules/moderation/application/channel-lock.js": "89675d4309d05e3c02c1affead215b5372862dd3583a960c4a64b0a71d1924f6",
-    "src/modules/moderation/discord/channel-lock-commands.js": "22875410c9d83fd2b8d8f964b4b90186c3e1a4b884d4f4c898c0bdba26517d32"
+    "src/modules/moderation/discord/channel-lock-commands.js": "22875410c9d83fd2b8d8f964b4b90186c3e1a4b884d4f4c898c0bdba26517d32",
+    "src/modules/moderation/application/slowmode.js": "6f3c464b6122cbd49ac393d08b967f800985561f48dd386c1870a08cdd3479cb",
+    "src/modules/moderation/discord/slowmode-commands.js": "9e217ba3d8567b0a560a63616e01da403b1d2a2960acd2cdfcb2b8757f7e9cf4"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -16349,71 +16351,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/slowmode.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 15
-        },
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.getFooter",
-          "line": 23
-        },
-        {
-          "call": "client.settings.get",
-          "line": 27
-        },
-        {
-          "call": "client.settings.get",
-          "line": 28
-        },
-        {
-          "call": "client.getFooter",
-          "line": 51
-        },
-        {
-          "call": "client.getFooter",
-          "line": 62
-        },
-        {
-          "call": "client.settings.get",
-          "line": 67
-        },
-        {
-          "call": "client.settings.get",
-          "line": 69
-        },
-        {
-          "call": "client.settings.set",
-          "line": 70
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 80
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 89
-        },
-        {
-          "call": "client.getFooter",
-          "line": 105
-        },
-        {
-          "call": "client.getFooter",
-          "line": 117
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/MiniGames/snake.js": {
       "kind": "current-command-adapter",

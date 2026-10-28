@@ -1852,5 +1852,16 @@
     "tooManyTargets": "Provide at most ten roles or members.",
     "partial": "Updated {count} target(s), but could not finish the rest. Check the current permissions.",
     "unavailable": "I could not confirm the permission change. Check the channel state before retrying."
+  },
+  "moderationSlowmode": {
+    "invalidSeconds": "Enter a whole number of seconds from 0 to 21600. Use 0 to turn slowmode off.",
+    "invalidChannel": "This channel does not support slowmode.",
+    "accessDenied": "I could not confirm your current permission to change slowmode.",
+    "botPermission": "I need Manage Channels in the selected channel.",
+    "unavailable": "I could not confirm the change. Check the current slowmode before retrying.",
+    "unconfirmed": "Discord did not confirm the new value. Check the current slowmode before retrying.",
+    "unchanged": "Slowmode in {channel} was already {seconds} seconds.",
+    "enabled": "Slowmode set to {seconds} seconds in {channel}.",
+    "disabled": "Slowmode disabled in {channel}."
   }
 }
