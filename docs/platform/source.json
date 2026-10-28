@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "8f6e9deeffbad9253d5213d9b94f83c0404d0a16",
-    "image": "b02393a3a86e3ad8f6658d3de6448befca4652d9b70481da58bfe094b84f1f8c",
+    "code": "21365849523add13132d93bb1e270877d69e9f3d",
+    "image": "d609d9b0ac000434dfade22858d75e6434af92e5013556ea22f65ac0402366f7",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-thread-actions-20261028.json",
-    "change": "Confirmed thread membership, bulk joining and deletion",
-    "tag": "localhost/obey-your-master_bot:release-p0-thread-actions-20261028-8f6e9dee",
+    "evidence": "evidence/p0-purge-20261028.json",
+    "change": "Confirmed message purge across prefix and slash",
+    "tag": "localhost/obey-your-master_bot:release-p0-purge-20261028-21365849",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-thread-actions-20261028.json",
-    "deploymentKind": "application_only_p0_thread_actions",
+    "statusEvidence": "evidence/p0-purge-20261028.json",
+    "deploymentKind": "application_only_p0_purge",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

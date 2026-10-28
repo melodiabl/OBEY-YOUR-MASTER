@@ -1,5 +1,11 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 28/10/2026 · limpieza de mensajes compartida y desplegada
+
+`clear`, `clearbotmessages` y `/purge` comparten acceso fresco, límites de Discord, filtros y conteo confirmado. Fallos parciales ya no anuncian éxito total. [Informe y límites](P0-PURGE-2026-10-28.md).
+
+Código `21365849`, imagen `d609d9b0ac00`: 19 casos aislados y 25 originales en imagen, 1.005 hashes, 675 comandos, 779 alias, 95 rutas, HTTP 7/7 y recursos 12/12. Diez muestras saludables, cero reinicios; dos respaldos CRC y reversión `b02393a3a86e`. Mapa P0: 38 grupos/145 entradas/21 rutas, faltan 530/74. Sin borrados reales de prueba; G01/G02, recibos y aceptación autenticada siguen abiertos.
+
 ## 28/10/2026 · pertenencia y borrado de hilos desplegados
 
 `jointhread`, `jointhreads`, `leavethread` y `deletethread` comparten permisos actuales, hilo fresco y resultado confirmado por Discord. La unión masiva usa la lista activa y comunica fallos parciales. [Informe y límites](P0-THREAD-ACTIONS-2026-10-28.md).

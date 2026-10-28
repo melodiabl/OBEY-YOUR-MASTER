@@ -1,5 +1,11 @@
 # Tareas y checkpoints de OBEY
 
+## P0 · limpieza de mensajes · 28/10/2026
+
+- [x] Unificar `clear`, `clearbotmessages` y `/purge` con permisos frescos, límites 2–100 y antigüedad de dos semanas; informar conteos confirmados y fallos parciales.
+- [x] Verificar 19 casos aislados y 25 originales en imagen, 1.005 hashes, inventario 675/779/95, HTTP 7/7, recursos 12/12, diez muestras saludables y dos respaldos CRC. [Informe](../docs/platform/P0-PURGE-2026-10-28.md).
+- [ ] Continuar Administración, recibos, G01/G02 y aceptación autenticada. Quedan 530 entradas y 74 rutas; P0 sigue abierto. Después P1 musical, panel y `/help` con materiales aprobados.
+
 ## P0 · pertenencia y borrado de hilos · 28/10/2026
 
 - [x] Unificar `jointhread`, `jointhreads`, `leavethread` y `deletethread` con permisos frescos y resultado confirmado.

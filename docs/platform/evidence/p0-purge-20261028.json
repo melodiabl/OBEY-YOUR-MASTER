@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-28",
+  "phase": "P0",
+  "status": "deployed_healthy",
+  "scope": "Confirmed message purge across prefix and slash with fresh access and partial result reporting",
+  "verification": {
+    "isolatedCases": 19,
+    "originalCasesInImage": 25,
+    "failed": 0,
+    "sourceHashes": 1005,
+    "commandEntries": 675,
+    "aliases": 779,
+    "routes": 95,
+    "reviewedGroups": 38,
+    "reviewedCommandEntries": 145,
+    "reviewedHttpRoutes": 21,
+    "remainingCommandEntries": 530,
+    "remainingHttpRoutes": 74,
+    "typecheck": "pass",
+    "dependencyBoundaries": "pass",
+    "assetValidation": "pass",
+    "imageSourceInventoryGate": "pass"
+  },
+  "evidenceFiles": [
+    ".runtime/p0-purge-20261028/focused.tap",
+    ".runtime/p0-purge-20261028/tests.tap",
+    ".runtime/p0-purge-20261028/build.log",
+    ".runtime/p0-purge-20261028/image-tests.tap",
+    ".runtime/p0-purge-20261028/image-inventory.log",
+    ".runtime/p0-purge-20261028/runtime-observations.json",
+    ".runtime/p0-purge-20261028/http-assets.json",
+    ".runtime/p0-purge-20261028/preflight.json",
+    ".runtime/p0-purge-20261028/deployment.json",
+    ".runtime/p0-purge-20261028/backup-output.json",
+    ".runtime/p0-purge-20261028/postdeploy-backup-output.json"
+  ],
+  "deployment": {
+    "code": "21365849523add13132d93bb1e270877d69e9f3d",
+    "image": "d609d9b0ac000434dfade22858d75e6434af92e5013556ea22f65ac0402366f7",
+    "tag": "localhost/obey-your-master_bot:release-p0-purge-20261028-21365849",
+    "rollbackImage": "b02393a3a86e3ad8f6658d3de6448befca4652d9b70481da58bfe094b84f1f8c",
+    "priorBackupBytes": 59357252,
+    "postBackupBytes": 59358553,
+    "bothBackupGzipCrcValid": true,
+    "backupTempConfigRemoved": true,
+    "preflightDifferences": [],
+    "imageTests": 25,
+    "isolatedHostCases": 19,
+    "runtimeSourceHashes": 1005,
+    "httpRoutesChecked": 7,
+    "publicAssetsChecked": 12,
+    "observations": 10,
+    "healthyObservations": 10,
+    "automaticRestarts": 0
+  },
+  "operationalLimit": "No real Discord message deletion, authenticated two-guild acceptance, cross-process lease or durable log receipt",
+  "remaining": [
+    "P0: other Administration intents, durable receipts, G01/G02 and authenticated acceptance",
+    "P1: music architecture and single-queue migration",
+    "Panel and /help with approved materials after P1"
+  ]
+}
