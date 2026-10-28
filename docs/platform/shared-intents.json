@@ -1007,15 +1007,36 @@
       "result": "Reports deletion only after Discord confirms; log delivery is separate.",
       "limits": "No real thread deletion or two-guild acceptance test; durable log receipt remains open.",
       "evidence": "evidence/p0-thread-actions-20261028.json"
+    },
+    {
+      "id": "moderation.message_purge",
+      "commands": [
+        "prefix:clear",
+        "prefix:clearbotmessages",
+        "slash:moderation.purge"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/purge-messages.js",
+      "store": "Discord recent messages; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Prefix keeps command-specific delegated admin grants and fresh channel visibility; slash requires fresh actor ManageMessages. Bot needs ViewChannel, ReadMessageHistory and ManageMessages. One in-process purge per channel.",
+      "parameters": {
+        "prefix": "1-5000 messages scanned; optional bots or user ID/mention; clearbotmessages defaults to scanning 250",
+        "slash": "1-99 matches from latest 100; all, bots, links, attachments or user override",
+        "age": "newer than fourteen days with a one-minute safety margin"
+      },
+      "result": "Only confirmed Discord deletions count; interrupted runs report partial count; no success is reported after REST failure.",
+      "limits": "No real Discord purge or two-guild authenticated acceptance test; cross-process purge lease and durable log receipts remain open.",
+      "evidence": "evidence/p0-purge-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 37,
-    "commandEntriesReviewed": 142,
+    "reviewedGroups": 38,
+    "commandEntriesReviewed": 145,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 533,
+    "remainingCommandEntries": 530,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

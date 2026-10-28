@@ -1891,5 +1891,16 @@
     "botPermission": "El bot no tiene los permisos necesarios en este hilo.",
     "unavailable": "No pude confirmar la acción. Comprueba el estado del hilo antes de reintentar.",
     "unconfirmed": "Discord no confirmó la acción. Comprueba el estado del hilo antes de reintentar."
+  },
+  "moderationPurge": {
+    "deleted": "Discord confirmó la eliminación de {count} mensajes recientes. Se revisaron {scanned}.",
+    "partial": "Discord confirmó {count} eliminaciones de {scanned} mensajes revisados, pero la operación se interrumpió. Comprueba el canal antes de reintentar.",
+    "none": "No encontré mensajes recientes que coincidan entre los {scanned} revisados.",
+    "invalidAmount": "Indica una cantidad entera válida: de 1 a 5.000 en texto o de 1 a 99 en /purge.",
+    "invalidFilter": "Indica bots o menciona a un usuario válido de este servidor.",
+    "accessDenied": "No pude confirmar tus permisos actuales para borrar mensajes en este canal.",
+    "botPermission": "Necesito Ver canal, Leer historial y Gestionar mensajes aquí.",
+    "busy": "Ya hay una limpieza en curso en este canal. Espera a que termine.",
+    "unavailable": "No pude confirmar la limpieza. Comprueba el canal antes de reintentar."
   }
 }

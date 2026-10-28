@@ -1891,5 +1891,16 @@
     "botPermission": "The bot lacks the required permissions in this thread.",
     "unavailable": "I could not confirm the action. Check the thread state before retrying.",
     "unconfirmed": "Discord did not confirm the action. Check the thread state before retrying."
+  },
+  "moderationPurge": {
+    "deleted": "Discord confirmed deletion of {count} recent messages. Scanned {scanned}.",
+    "partial": "Discord confirmed {count} deletions from {scanned} scanned messages, but the operation stopped. Check the channel before retrying.",
+    "none": "No matching recent messages found among {scanned} scanned.",
+    "invalidAmount": "Enter a valid whole number: 1 to 5,000 for text or 1 to 99 for /purge.",
+    "invalidFilter": "Choose bots or mention a valid user in this server.",
+    "accessDenied": "I could not confirm your current permission to delete messages in this channel.",
+    "botPermission": "I need View Channel, Read Message History and Manage Messages here.",
+    "busy": "A cleanup is already running in this channel. Wait for it to finish.",
+    "unavailable": "I could not confirm the cleanup. Check the channel before retrying."
   }
 }

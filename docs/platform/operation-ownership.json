@@ -20,8 +20,8 @@
     "commands/Administration/bans.js": "14c408a870c5af88fa57f22d2dba895b72a76d869f9401541643f5d7a5e5f402",
     "commands/Administration/channellock.js": "fd2d87915fefb59b29c343a4b1490dacf329964483b6d8caf466dba1a867e5ef",
     "commands/Administration/channelunlock.js": "ec322be43235be5a3633eb08237e29114b3991a726daf950cbcddbc69e56a7e7",
-    "commands/Administration/clear.js": "552197ae6e2c3bde1c4c8207fe46b4bfe15d365519efa66db3897b2b07bc3d8d",
-    "commands/Administration/clearbotmessages.js": "d01276db858f105915c7979fd23c200aaf23878e7cd22f6b45f37869ddc323b5",
+    "commands/Administration/clear.js": "b478ffa54a3c8f4251d9402b5bf0837526d71b7e61103f3e25e2035da4c6c5bf",
+    "commands/Administration/clearbotmessages.js": "c24b5790722149c3e9d7a8f084d30b41afa4daeda3d9d082131c51b0485a5a95",
     "commands/Administration/close.js": "ec5fa176a2648d900efe1102d70a015648e5d7f257823bf8c4b09be9bcd1e5d9",
     "commands/Administration/copymessage.js": "25877a4083760363822e6f2f707cf6c5667746cf5845eed140484921dcd63b49",
     "commands/Administration/createbackup.js": "02c98697adad71c00045964aaaaaa00ab5038f1d730ff1e845c4594947339c50",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "2e0d549abd08d12251b1fb9439ea72f314f0562e1e7c8db6a23784e62eeed1db",
-    "locales/es.json": "545faf8a45cf8cdd61822cee8db6707b0d3c3bd7416a7dfa60d0e25b001f04a7",
+    "locales/en.json": "6c0f67f3c58cc8f8a1fa4928579fc22b937de31a686fe4896cefedb9dec2c412",
+    "locales/es.json": "0eb40daa6ad9e0c52a05728fcf76062d56482716eff371068ead8f486f05ad0d",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -929,7 +929,7 @@
     "slashCommands/Moderation/ban.js": "5833fc77f3344cb2f8569111994ce5dc9158e50ef0a2538e2d98999e025498ab",
     "slashCommands/Moderation/cases.js": "8864351d4d49acf872cba232ac6d58847357cbbc825131e3cbe6f0bf2312d181",
     "slashCommands/Moderation/kick.js": "80e2115c16531583a77d7062e2b8e5ab69df4d08e4eac168815fb1936ee1d86d",
-    "slashCommands/Moderation/purge.js": "ea4ff3c0532ac9a6833ec496e78ebaf27b09a57719cc36f5eb958f2bb0b23046",
+    "slashCommands/Moderation/purge.js": "819827304631580f4678e6938eacb50793cf8ea6ea45c8d50acc2fcf05e8c5ec",
     "slashCommands/Moderation/slowmode.js": "2da1895e545ba85461ba7b4dc1779a94aa5361ba05f08b507907b9e34d9a3dc3",
     "slashCommands/Moderation/timeout.js": "6a98395fd4d9dfc05a7b8d7a2057357714020f75eface264c1c39d8e9d5e5609",
     "slashCommands/Moderation/unban.js": "1b243ca9498deb2b2ffa0f994b27dc6239e6600d21075f1959806745cba8be61",
@@ -1012,7 +1012,9 @@
     "src/modules/moderation/application/thread-settings.js": "7c42c9c7886d0e922f42eb641e2dd52eadf7145c43324d5c7ca86bfb51a49422",
     "src/modules/moderation/discord/thread-settings-commands.js": "1d450c9ba3cf06a111e6398bfcaa2b57fd068b29efc8e418d698b544750eba82",
     "src/modules/moderation/application/thread-actions.js": "8efe6d16454cfbad1a08f15639ab7a7ffa4592c0c87709aa77fee54ca3ba956f",
-    "src/modules/moderation/discord/thread-action-commands.js": "dcd22dd25e9cd6209feff0d4cc4cc89bb5676ffb308d31fc01ab6d7c412db516"
+    "src/modules/moderation/discord/thread-action-commands.js": "dcd22dd25e9cd6209feff0d4cc4cc89bb5676ffb308d31fc01ab6d7c412db516",
+    "src/modules/moderation/application/purge-messages.js": "0ce2e4fead8e929f3418072ed36df5d3ab50c7c059de841534b3eef9ab7ed98b",
+    "src/modules/moderation/discord/purge-commands.js": "9ec84d7e551f830733cbb036a50962f30294a212a2eacf7311b5d445078f3997"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
