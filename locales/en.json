@@ -1878,5 +1878,18 @@
     "botPermission": "I need Manage Threads in this thread.",
     "unavailable": "I could not confirm the change. Check the thread state before retrying.",
     "unconfirmed": "Discord did not confirm the new state. Check the thread before retrying."
+  },
+  "moderationThreadActions": {
+    "joined": "The bot joined {thread}.",
+    "left": "The bot left {thread}.",
+    "deleted": "Thread {thread} deleted.",
+    "bulk": "Threads joined: {joined}. Failed: {failed}. Remaining: {remaining}. Run the command again if any remain.",
+    "none": "The bot is already in every available active thread.",
+    "invalidThread": "Choose a valid thread in this server.",
+    "archivedThread": "The thread is archived. Reopen it before joining or leaving.",
+    "accessDenied": "I could not confirm your current access to this thread.",
+    "botPermission": "The bot lacks the required permissions in this thread.",
+    "unavailable": "I could not confirm the action. Check the thread state before retrying.",
+    "unconfirmed": "Discord did not confirm the action. Check the thread state before retrying."
   }
 }

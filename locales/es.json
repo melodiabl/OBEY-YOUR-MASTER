@@ -1878,5 +1878,18 @@
     "botPermission": "Necesito Gestionar hilos en ese hilo.",
     "unavailable": "No pude confirmar el cambio. Revisa el estado del hilo antes de reintentar.",
     "unconfirmed": "Discord no confirmó el nuevo estado. Revisa el hilo antes de reintentar."
+  },
+  "moderationThreadActions": {
+    "joined": "El bot se unió a {thread}.",
+    "left": "El bot salió de {thread}.",
+    "deleted": "Hilo {thread} eliminado.",
+    "bulk": "Hilos unidos: {joined}. Fallidos: {failed}. Pendientes: {remaining}. Ejecuta el comando de nuevo si quedan pendientes.",
+    "none": "El bot ya está en todos los hilos activos disponibles.",
+    "invalidThread": "Indica un hilo válido de este servidor.",
+    "archivedThread": "El hilo está archivado. Reábrelo antes de unir o sacar al bot.",
+    "accessDenied": "No pude confirmar tus permisos actuales para este hilo.",
+    "botPermission": "El bot no tiene los permisos necesarios en este hilo.",
+    "unavailable": "No pude confirmar la acción. Comprueba el estado del hilo antes de reintentar.",
+    "unconfirmed": "Discord no confirmó la acción. Comprueba el estado del hilo antes de reintentar."
   }
 }

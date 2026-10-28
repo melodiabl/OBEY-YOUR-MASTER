@@ -968,17 +968,54 @@
         "autoArchiveDuration": "60, 1440, 4320 or 10080 minutes"
       },
       "result": "Success only after Discord returns the requested archived, locked or auto archive duration value; no-op and failures are distinct.",
-      "limits": "No real Discord thread mutation or two-guild acceptance test; delete/join/leave commands and durable log receipts remain separate work.",
+      "limits": "No real Discord thread mutation or two-guild acceptance test; durable log receipts remain separate work.",
       "evidence": "evidence/p0-thread-settings-20261028.json"
+    },
+    {
+      "id": "administration.thread_membership",
+      "commands": [
+        "prefix:jointhread",
+        "prefix:jointhreads",
+        "prefix:leavethread"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/thread-actions.js",
+      "store": "Discord thread membership; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Fresh actor/bot member and role fetch; prefix grants preserved; channel visibility checked on the selected thread. Bulk reads the live active-thread list and bot membership.",
+      "parameters": {
+        "thread": "mention, exact ID or current thread for single actions; active threads for bulk",
+        "bulkLimit": 20
+      },
+      "result": "Only confirmed Discord responses count as joined or left; bulk reports joined, failed and remaining separately; successful effects use the log service.",
+      "limits": "No authenticated Discord membership change or two-guild acceptance test; no cross-process durable receipt.",
+      "evidence": "evidence/p0-thread-actions-20261028.json"
+    },
+    {
+      "id": "administration.thread_delete",
+      "commands": [
+        "prefix:deletethread"
+      ],
+      "routes": [],
+      "service": "src/modules/moderation/application/thread-actions.js",
+      "store": "Discord thread deletion; no local persistence",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Fresh Administrator/owner check and bot ManageThreads on the selected thread; exact target parsing avoids accidental current-thread fallback.",
+      "parameters": {
+        "thread": "mention, exact ID or current thread"
+      },
+      "result": "Reports deletion only after Discord confirms; log delivery is separate.",
+      "limits": "No real thread deletion or two-guild acceptance test; durable log receipt remains open.",
+      "evidence": "evidence/p0-thread-actions-20261028.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 35,
-    "commandEntriesReviewed": 138,
+    "reviewedGroups": 37,
+    "commandEntriesReviewed": 142,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 537,
+    "remainingCommandEntries": 533,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
