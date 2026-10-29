@@ -224,13 +224,19 @@
         "prefix:changeprefix"
       ],
       "routes": [],
-      "service": null,
-      "store": "botconfig/config.json in memory and fs.writeFile",
-      "status": "distinct_legacy_intent_recorded",
+      "service": "handlers/global-prefix-settings.js#createGlobalPrefixSettings",
+      "store": "botconfig/config.json through shared createFileSettings file queue, fsync and atomic rename",
+      "status": "corrected_and_verified_in_isolation",
       "scope": "Global default, used when a guild has no prefix override",
-      "permissions": "Legacy bot-owner-list guard plus Administrator metadata",
-      "finding": "Separate from guild override; asynchronous file write and legacy owner-list substring check require explicit owner-configuration review. Not migrated or executed by this increment.",
-      "nextTask": "T12 / T55"
+      "permissions": "Exact IDs from current on-disk bot-owner list plus fresh guild Administrator, membership, channel and bot access; rechecked inside shared file queue and before rename",
+      "finding": "Awaited conditional file replacement precedes publication to all live config readers and success. Guild overrides preserved. Container-local config is not an external durable configuration store; that migration remains open.",
+      "nextTask": "T12 / T55",
+      "confirmation": "Explicit changeprefix invocation; no-argument query is read-only",
+      "limits": [
+        "One process/file queue; no durable operation receipts or cross-process locking",
+        "Container file survives process restart but not container recreation from an unchanged image"
+      ],
+      "evidence": "evidence/p0-global-prefix-20261029.json"
     },
     {
       "id": "configuration.guild.reset",

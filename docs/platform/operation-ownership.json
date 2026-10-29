@@ -368,7 +368,7 @@
     "commands/Owner/botfilename.js": "b58b0960ad395f975f4c2f3e5093522bac17ce33eb21a15ea435fc07a8a4fa81",
     "commands/Owner/changeavatar.js": "b36dc5c57308e1220fad05b1825890fdd8ffa8e5b2b1491df300d89cbf9ef503",
     "commands/Owner/changename.js": "f3d664d36fd9d5b44dd26c97929a64272c6701aaab51fbf3643659ebec6c7388",
-    "commands/Owner/changeprefix.js": "d42e88dfd2553d5ceb7d8ce810df1b295473c2bec0a078934fd58f07d41b0a46",
+    "commands/Owner/changeprefix.js": "ee97955bb54a8c794509cfe08842707ba56f19857d4b5ca76d50e28a7f710f2c",
     "commands/Owner/changestatus.js": "4dfb6384c16ba291ec4d8e5b9f85783df51f9fbc482476f07b04985c18baa4a8",
     "commands/Owner/cmdreload.js": "a3b29bb2dc9e4236f38d594a02617010992789efdf9c981f7c704dadaa6c9b94",
     "commands/Owner/deployslash.js": "2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "7cd8fcd4c5d9e06f9fc1a8a9ffc8fff72a13d4a793354b206990748393c71865",
-    "locales/es.json": "09378d8524bc106ea9b50a1349f98e67873b1027b1fc4dd5c5b441a95c23e7f3",
+    "locales/en.json": "515abca5b0e21b7ff95579a23bd2e966aa3909646e9176fba67a720b4aed0e4a",
+    "locales/es.json": "c7fdab547eaea35427ce18ee943363a330f80f50205ef503b6d3fe9e87bd67a1",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1033,7 +1033,9 @@
     "handlers/legacy-reset-command.js": "e024f025c654deef587975306ba3d34f3babaaca3622cdbfb422948a7dfb4d54",
     "handlers/global-reset-settings.js": "b3efc9595166418545051a580350a71911752a3d4d4d3a7be29305274d437c25",
     "handlers/global-reset-command.js": "4a6dcffe80287bc41ef23ffe41652830cee51391e53f6b10dde26ffd827369f5",
-    "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c"
+    "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c",
+    "handlers/global-prefix-command.js": "42d53803fa048a18f01dc77b77855c8f2e0fc18deb9a1677b9c495c6b68cbdef",
+    "handlers/global-prefix-settings.js": "85dca798b65bd56697ef86d2bbf3596a82fabcfff43bd269b000ac16348b92aa"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -4417,47 +4419,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/changeprefix.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.getFooter",
-          "line": 24
-        },
-        {
-          "call": "client.getFooter",
-          "line": 39
-        },
-        {
-          "call": "client.getFooter",
-          "line": 50
-        },
-        {
-          "call": "client.getFooter",
-          "line": 60
-        },
-        {
-          "call": "client.getFooter",
-          "line": 72
-        },
-        {
-          "call": "client.getFooter",
-          "line": 82
-        },
-        {
-          "call": "client.getFooter",
-          "line": 97
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Owner/changestatus.js": {
       "kind": "current-command-adapter",

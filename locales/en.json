@@ -1987,5 +1987,13 @@
     "unavailable": "The reset or access could not be confirmed. Check the current state before trying again.",
     "usage": "Use resetsettings without arguments and choose one of its two options.",
     "stale": "This confirmation belongs to an earlier choice. Review the current preview."
+  },
+  "globalPrefix": {
+    "current": "Current global prefix: {prefix}. Each server keeps its own prefix.",
+    "invalid": "Use one prefix of 1 to 5 characters, without whitespace or control characters.",
+    "saved": "Global prefix saved: {prefix}. Each server keeps its own prefix.",
+    "ownerOnly": "Only bot owners can view or change the global prefix.",
+    "conflict": "The global prefix changed while saving. Check its current value before trying again.",
+    "unavailable": "The global prefix save could not be confirmed. Check its current value before trying again."
   }
 }

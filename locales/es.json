@@ -1987,5 +1987,13 @@
     "unavailable": "No pude confirmar el restablecimiento o el acceso. Consulta el estado actual antes de volver a intentarlo.",
     "usage": "Usa resetsettings sin argumentos y elige una de sus dos opciones.",
     "stale": "Esta confirmación corresponde a una selección anterior. Revisa la vista actual."
+  },
+  "globalPrefix": {
+    "current": "Prefijo global actual: {prefix}. Cada servidor conserva su prefijo propio.",
+    "invalid": "Usa un único prefijo de 1 a 5 caracteres, sin espacios ni caracteres de control.",
+    "saved": "Prefijo global guardado: {prefix}. Los prefijos propios de cada servidor se conservan.",
+    "ownerOnly": "Solo los propietarios del bot pueden consultar o cambiar el prefijo global.",
+    "conflict": "El prefijo global cambió durante el guardado. Consulta su valor actual antes de volver a intentarlo.",
+    "unavailable": "No pude confirmar el guardado del prefijo global. Consulta su valor actual antes de volver a intentarlo."
   }
 }
