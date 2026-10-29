@@ -81,9 +81,9 @@ function cardMediaURL(source) {
   return url
 }
 
-function createCardMediaLoader({ request = https.get, timeoutMs = 5000 } = {}) {
+function createCardMediaLoader({ request = https.get, timeoutMs = 5000, inspect = inspectCardImage } = {}) {
   async function load(source) {
-    if (Buffer.isBuffer(source)) { inspectCardImage(source); return Buffer.from(source) }
+    if (Buffer.isBuffer(source)) { inspect(source); return Buffer.from(source) }
     if (typeof source !== 'string' || source.length > 2048) throw failure('invalid_card_media')
     const url = cardMediaURL(source)
     return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ function createCardMediaLoader({ request = https.get, timeoutMs = 5000 } = {}) {
           res.once('end', () => {
             if (settled) return
             const buffer = Buffer.concat(chunks)
-            try { inspectCardImage(buffer); finish(null, buffer) } catch (error) { finish(error) }
+            try { inspect(buffer); finish(null, buffer) } catch (error) { finish(error) }
           })
         })
         req.once('error', () => finish(failure('invalid_card_media')))
@@ -129,4 +129,4 @@ function createCardMediaLoader({ request = https.get, timeoutMs = 5000 } = {}) {
 }
 
 const cardMedia = createCardMediaLoader()
-module.exports = { inspectCardImage, createCardMediaLoader, cardMedia, MAX_IMAGE_BYTES, MAX_IMAGE_SIDE, MAX_IMAGE_PIXELS }
+module.exports = { inspectCardImage, createCardMediaLoader, cardMediaURL, cardMedia, MAX_IMAGE_BYTES, MAX_IMAGE_SIDE, MAX_IMAGE_PIXELS }

@@ -366,8 +366,8 @@
     "commands/Music/voteskip.js": "61ac9b11d9173e0a72f3418c17287b21cd0a4005230e4ed41612f1b57c48cbfb",
     "commands/Owner/addmoney.js": "edc53365e72e61b100d627c044a34215601cf139fab5f03592987a25cb2f9253",
     "commands/Owner/botfilename.js": "b58b0960ad395f975f4c2f3e5093522bac17ce33eb21a15ea435fc07a8a4fa81",
-    "commands/Owner/changeavatar.js": "b36dc5c57308e1220fad05b1825890fdd8ffa8e5b2b1491df300d89cbf9ef503",
-    "commands/Owner/changename.js": "f3d664d36fd9d5b44dd26c97929a64272c6701aaab51fbf3643659ebec6c7388",
+    "commands/Owner/changeavatar.js": "9813f7e12a47d5619aab744fddb2d9486596173f1c96da39bd8c41dfb5a8b337",
+    "commands/Owner/changename.js": "5ad905915b3bf336a78db7385235f998e213095a8fd3251f1eefe388d3d0c45a",
     "commands/Owner/changeprefix.js": "ee97955bb54a8c794509cfe08842707ba56f19857d4b5ca76d50e28a7f710f2c",
     "commands/Owner/changestatus.js": "4034ed7639efaa34404d069901a2cdb899de8c6b1f4229224a7274aef7538067",
     "commands/Owner/cmdreload.js": "a3b29bb2dc9e4236f38d594a02617010992789efdf9c981f7c704dadaa6c9b94",
@@ -619,7 +619,7 @@
     "handlers/card-background.js": "2290979320ac9eb92ec6d088a3c6b495f301ab93b7bf96fc1db658eff3359a7b",
     "handlers/card-delivery.js": "ef4ca6a5a210bee7c0a39275d0f0ce84cc462889ad6a74926727e28dbf46a068",
     "handlers/card-job.js": "6acb4045905aa181baaa1badb9cc45e83d6cb114c69461c6bf28622ff6de7a8e",
-    "handlers/card-media.js": "2e836c079ed4d060d8b71c2dc12ed2bc50b012910fae22803b4547ef4e6db24a",
+    "handlers/card-media.js": "2545c21c44d748a1964c780ecaa370669ea6dd0e4efbf1c8b1a9258e62d3c4d3",
     "handlers/card-pool.js": "fa24dd37863f81a751f9d1996420a74473955e88b58c91a41e0627fb894f2dd6",
     "handlers/card-renderer.js": "6d034dd71d7a584e96e4841c0938dab5cf79142a9b03d8e0276718c15381c554",
     "handlers/card-worker.js": "c5d74b835f3aeeb87dc6795eb980afbf552418233f44a32f24ffb9dc918f102a",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "8e45faba4f064277f6bba57f8c4da011ab07ff5c6d9a7b2dfcce8914c40febca",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "515abca5b0e21b7ff95579a23bd2e966aa3909646e9176fba67a720b4aed0e4a",
-    "locales/es.json": "c7fdab547eaea35427ce18ee943363a330f80f50205ef503b6d3fe9e87bd67a1",
+    "locales/en.json": "0607be10d01618aa003cc6dc5d67df755512acffaf38688c9c47eaed50526853",
+    "locales/es.json": "41aa26b8264651c5184d780e6247bc9048cc23ead7a0f2e69197314baaadb2f5",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1043,7 +1043,11 @@
     "handlers/bot-status-command.js": "8042a0179f35861a668d1d206659806ff50d4cd66f9a17575b22a60e65da0cfc",
     "handlers/bot-status-contract.js": "ca04872467856be6836d9fc2ec8079ecd27509c34a1e3a52c21ab2db540de9c8",
     "handlers/bot-status-runtime.js": "c54e4ca4de6c3747fe83b4c4f14501aee35c9e670bc1865a0498e8c3e393e583",
-    "handlers/bot-status-settings.js": "0bfe699d7d22f040fb78138bed55e87c287e29738c27b1b3d8f5c07ddf2b5bb1"
+    "handlers/bot-status-settings.js": "0bfe699d7d22f040fb78138bed55e87c287e29738c27b1b3d8f5c07ddf2b5bb1",
+    "handlers/avatar-media.js": "16e1a6986e26ae96cfb603496a06eec9e4b6da95496c53ba38cd429883f50433",
+    "handlers/avatar-image-worker.js": "5a6b4c26f5b5c829c75d75ea8004ea7a2b618aa42995e758ae26fba12a1e3eed",
+    "handlers/bot-profile-command.js": "8a8a26a84f6275f52882bb75f3c45f2d37db4ed5052da78d10878ff78d9db72e",
+    "handlers/bot-profile-service.js": "bb7a150e6946f149c73f5dc23dfd48a3fd729054a0db99857973322ba94e1719"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -4265,75 +4269,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/changeavatar.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.getFooter",
-          "line": 27
-        },
-        {
-          "call": "client.user .setAvatar(`./image.jpg`) .then(user => { return message.channel.send({ embeds: [ new EmbedBuilder() .setTitle(eval(client.la[ls][\"cmds\"][\"owner\"][\"changeavatar\"][\"variable3\"])) .setColor(es.color) .setFooter(obeyMeta.asFooter(client.getFooter(es))), ], }); }) .catch",
-          "line": 39
-        },
-        {
-          "call": "client.user .setAvatar(`./image.jpg`) .then",
-          "line": 39
-        },
-        {
-          "call": "client.user .setAvatar",
-          "line": 39
-        },
-        {
-          "call": "client.getFooter",
-          "line": 47
-        },
-        {
-          "call": "client.getFooter",
-          "line": 56
-        },
-        {
-          "call": "client.getFooter",
-          "line": 68
-        },
-        {
-          "call": "client.user .setAvatar(`./image.jpg`) .then(user => { try { fs.unlinkSync(); } catch {} return message.channel.send({ embeds: [ new EmbedBuilder() .setTitle(eval(client.la[ls][\"cmds\"][\"owner\"][\"changeavatar\"][\"variable6\"])) .setColor(es.color) .setFooter(obeyMeta.asFooter(client.getFooter(es))), ], }); }) .catch",
-          "line": 77
-        },
-        {
-          "call": "client.user .setAvatar(`./image.jpg`) .then",
-          "line": 77
-        },
-        {
-          "call": "client.user .setAvatar",
-          "line": 77
-        },
-        {
-          "call": "client.getFooter",
-          "line": 88
-        },
-        {
-          "call": "client.getFooter",
-          "line": 97
-        },
-        {
-          "call": "client.getFooter",
-          "line": 110
-        },
-        {
-          "call": "client.getFooter",
-          "line": 134
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/changemymind.js": {
       "kind": "current-command-adapter",
@@ -4373,55 +4310,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/changename.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.getFooter",
-          "line": 24
-        },
-        {
-          "call": "client.getFooter",
-          "line": 35
-        },
-        {
-          "call": "client.getFooter",
-          "line": 46
-        },
-        {
-          "call": "client.user .setUsername(args.join(\" \")) .then(user => { return message.channel.send({ embeds: [ new EmbedBuilder() .setColor(es.wrongcolor) .setFooter(obeyMeta.asFooter(client.getFooter(es))) .setTitle(eval(client.la[ls][\"cmds\"][\"owner\"][\"changename\"][\"variable6\"])), ], }); }) .catch",
-          "line": 50
-        },
-        {
-          "call": "client.user .setUsername(args.join(\" \")) .then",
-          "line": 50
-        },
-        {
-          "call": "client.user .setUsername",
-          "line": 50
-        },
-        {
-          "call": "client.getFooter",
-          "line": 57
-        },
-        {
-          "call": "client.getFooter",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 79
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Owner/changeprefix.js": {
       "kind": "current-command-adapter",

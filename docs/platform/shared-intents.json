@@ -1138,15 +1138,36 @@
       ],
       "nextTask": "T12 / T55",
       "evidence": "evidence/p0-bot-status-20261029.json"
+    },
+    {
+      "id": "operations.bot.profile.update",
+      "commands": [
+        "prefix:changename",
+        "prefix:changeavatar"
+      ],
+      "routes": [],
+      "service": "handlers/bot-profile-service.js#performBotProfileChange",
+      "store": "Discord Modify Current User raw REST response; no new local profile store",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current on-disk bot owners and fresh guild/channel/bot access; no new Administrator requirement; reauthorization after image work and before effect",
+      "confirmation": "Explicit command; initial reply must succeed before admission, success only after explicit raw response fields and bot ID match",
+      "finding": "Bounded one-operation lock,20s caller deadline with lock retained until API settles, no command-layer retry. MIME-correct in-memory avatar uses bounded trusted-CDN transport, per-frame GIF validation and isolated native codec. Message failures never leak through legacy raw-error handler.",
+      "limits": [
+        "Single client process; no durable receipt or distributed lock",
+        "Timeout after API admission leaves an uncertain outcome; actual visual profile acceptance pending",
+        "Avatar sources are one PNG/JPEG/GIF attachment or HTTPS Discord CDN URL"
+      ],
+      "nextTask": "T12 / T55",
+      "evidence": "evidence/p0-bot-profile-20261029.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 44,
-    "commandEntriesReviewed": 156,
+    "reviewedGroups": 45,
+    "commandEntriesReviewed": 158,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 519,
+    "remainingCommandEntries": 517,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

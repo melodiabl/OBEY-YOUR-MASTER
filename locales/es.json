@@ -1995,5 +1995,18 @@
     "ownerOnly": "Solo los propietarios del bot pueden consultar o cambiar el prefijo global.",
     "conflict": "El prefijo global cambió durante el guardado. Consulta su valor actual antes de volver a intentarlo.",
     "unavailable": "No pude confirmar el guardado del prefijo global. Consulta su valor actual antes de volver a intentarlo."
+  },
+  "botProfile": {
+    "checking": "Comprobando el cambio de perfil…",
+    "savedName": "Nombre del bot actualizado: {name}.",
+    "savedAvatar": "Avatar del bot actualizado.",
+    "invalidName": "Usa un nombre de 2 a 32 caracteres, sin controles, caracteres invisibles, menciones ni nombres reservados por Discord.",
+    "invalidAvatar": "Adjunta un solo PNG, JPEG o GIF de hasta 4 MiB, o usa un enlace HTTPS de cdn.discordapp.com o media.discordapp.net. No combines adjuntos y enlaces.",
+    "busy": "Ya hay un cambio de perfil en curso. Comprueba su resultado antes de volver a intentarlo.",
+    "timeout": "Se agotó la espera antes de enviar el cambio a Discord.",
+    "rateLimited": "Discord ha limitado los cambios de perfil. Espera y comprueba el perfil antes de volver a intentarlo.",
+    "denied": "Solo los propietarios actuales del bot con acceso a este canal pueden cambiar su perfil.",
+    "unavailable": "No pude verificar el acceso o el bot se está cerrando. El cambio no se pudo iniciar.",
+    "unconfirmed": "No pude confirmar el cambio. Comprueba el perfil actual antes de volver a intentarlo."
   }
 }

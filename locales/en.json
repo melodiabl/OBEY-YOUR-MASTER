@@ -1995,5 +1995,18 @@
     "ownerOnly": "Only bot owners can view or change the global prefix.",
     "conflict": "The global prefix changed while saving. Check its current value before trying again.",
     "unavailable": "The global prefix save could not be confirmed. Check its current value before trying again."
+  },
+  "botProfile": {
+    "checking": "Checking the profile change…",
+    "savedName": "Bot username updated: {name}.",
+    "savedAvatar": "Bot avatar updated.",
+    "invalidName": "Use a name of 2 to 32 characters without control or invisible characters, mentions, or names reserved by Discord.",
+    "invalidAvatar": "Attach one PNG, JPEG or GIF up to 4 MiB, or use an HTTPS link from cdn.discordapp.com or media.discordapp.net. Use either an attachment or a link.",
+    "busy": "A profile change is already in progress. Check its result before trying again.",
+    "timeout": "The wait expired before the change was sent to Discord.",
+    "rateLimited": "Discord has limited profile changes. Wait and check the profile before trying again.",
+    "denied": "Only current bot owners with access to this channel can change its profile.",
+    "unavailable": "Access could not be verified or the bot is shutting down. The change could not be started.",
+    "unconfirmed": "The change could not be confirmed. Check the current profile before trying again."
   }
 }
