@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b53bd187563252817d182a1fe2aee575f7767df0",
-    "image": "62dbf8ca3a0149e3a6fe0cb8cfbd7fd58a29d6db03dd6efb5fd3bfc4aec6044b",
+    "code": "ca7f1e7a4fd6671523a95e87f98a98f5bf23fbfd",
+    "image": "90b117a6dcc5f679f3d6bd6258df2cd02209d929e607d0af21c6b137589a4e6f",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-global-prefix-20261029.json",
-    "change": "Global prefix with exact on-disk owner authorization, fresh Administrator access, shared atomic file settings and live publication after replacement",
-    "tag": "localhost/obey-your-master_bot:release-p0-global-prefix-20261029-b53bd187",
+    "evidence": "evidence/p0-global-config-20261029.json",
+    "change": "Persistent migrated global configuration with strict bootstrap, exact file readers, advertising restoration and stopped-container projection migration",
+    "tag": "localhost/obey-your-master_bot:release-p0-global-config-20261029-ca7f1e7a",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-global-prefix-20261029.json",
-    "deploymentKind": "application_only_p0_global_prefix",
+    "statusEvidence": "evidence/p0-global-config-20261029.json",
+    "deploymentKind": "application_only_p0_global_configuration_persistence",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

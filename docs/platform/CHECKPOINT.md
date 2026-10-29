@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 29/10/2026 · ajustes globales persistentes
+
+Código `ca7f1e7a`, imagen `90b117a6dcc5`: prefijo, propietarios, avisos y publicidad usan una proyección privada fuera del contenedor. Inicio estricto antes de consumidores; identidad compartida y materiales actuales conservados. Publicidad restaurada con ActivityType numérico. Copia del origen detenido, directorio 0700/archivos 0600; respaldo posterior con proyección y hashes. Veintiocho casos nuevos y 25 originales en host/imagen, recreación de dos contenedores aislados, recuperación en imagen anterior, tipos/dependencias y 1.030 hashes. HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios; respaldo/reversión conservados y temporales retirados. P0 sigue en 43 grupos/155 entradas/21 rutas; quedan 520/74. Restan estado/otros Owner-Settings, recibos, G01/G02 y aceptación real. [Informe](P0-GLOBAL-CONFIG-2026-10-29.md).
+
 ## 29/10/2026 · prefijo global con guardado confirmado
 
 Código `b53bd187`, imagen `62dbf8ca3a01`: changeprefix usa IDs exactos del archivo actual y Administrator/canal/bot frescos; cola compartida, revisión y reemplazo atómico antes de actualizar la memoria. Conserva prefijos por servidor y otras claves. Dieciocho casos nuevos y 25 originales pasan en host/imagen; tipos, dependencias, 1.026 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC, reversión y evidencia conservados; temporales retirados. P0 sigue en 43 grupos/155 entradas/21 rutas; restan 520/74. Persistencia externa de la configuración global, demás Owner/Settings, recibos, G01/G02 y aceptación real pendientes. [Informe](P0-GLOBAL-PREFIX-2026-10-29.md).

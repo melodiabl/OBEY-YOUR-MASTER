@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "ca7f1e7a4fd6671523a95e87f98a98f5bf23fbfd",
+  "image": "90b117a6dcc5f679f3d6bd6258df2cd02209d929e607d0af21c6b137589a4e6f",
+  "tag": "localhost/obey-your-master_bot:release-p0-global-config-20261029-ca7f1e7a",
+  "previousImage": "62dbf8ca3a0149e3a6fe0cb8cfbd7fd58a29d6db03dd6efb5fd3bfc4aec6044b",
+  "scope": {
+    "config": [
+      "prefix",
+      "ownerIDS",
+      "ownerGuildNotifications",
+      "ownerNotificationsLanguage"
+    ],
+    "advertisement": [
+      "adenabled"
+    ],
+    "notMigrated": [
+      "legacy status fields",
+      "other legacy global config writers"
+    ],
+    "tokensIncluded": false,
+    "materialsFromImage": true
+  },
+  "persistence": {
+    "directory": ".runtime/global-configuration",
+    "containerDirectory": "/app/runtime-configuration",
+    "mode": "0700",
+    "fileMode": "0600",
+    "uid": 1000,
+    "gid": 1000,
+    "rwMount": true,
+    "bootstrapBeforeConsumers": true,
+    "sharedRequireObjectIdentity": true,
+    "strictProjection": true,
+    "noSilentConfiguredFallback": true,
+    "readLimitBytes": 65536,
+    "singleProcessQueue": true,
+    "crossProcessLock": false,
+    "durableReceipts": false,
+    "advertisingRuntimeRestored": true,
+    "numericActivityType": true
+  },
+  "migration": {
+    "initialized": true,
+    "files": 2,
+    "sourceStopped": true,
+    "fields": 5,
+    "uid": 1000,
+    "mode": 448,
+    "finalStoppedSourceMatched": true,
+    "existingStoresNeverOverwritten": true
+  },
+  "verification": {
+    "newCasesHost": 28,
+    "newCasesImage": 28,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "containerLifecycle": {
+      "pass": true,
+      "containers": 2,
+      "distinctContainers": true,
+      "network": "none",
+      "syntheticDataOnly": true,
+      "prefixAndOwnerPreferencesRestored": true,
+      "advertisingRuntimeRestored": true,
+      "materialsFromNewImage": true
+    },
+    "legacyRestore": {
+      "pass": true,
+      "legacyImageRestoration": true,
+      "projectionMerged": true,
+      "unmigratedFieldsPreserved": true,
+      "network": "none"
+    },
+    "noRealTestDiscordOrVoiceActions": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1166,
+      "dependencies": 3442
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1030,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "composeVariantsValidated": 3,
+    "independentReviews": {
+      "cycles": 3,
+      "actionableFindings": 4,
+      "allFixed": true,
+      "substantiveRemaining": 0,
+      "externalModelUsed": false
+    }
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-29T18:38:16.299Z",
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "backupBefore": {
+      "bytes": 59370785,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 2
+    },
+    "backupAfter": {
+      "bytes": 59367544,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 2,
+      "manifestMatches": true,
+      "source": "persistent",
+      "activeProjectionMatches": true
+    },
+    "previousImageRetained": true,
+    "recipesUpdated": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "syntheticDataRemoved": true,
+    "migrationScratchRemoved": true,
+    "evidenceRetained": true,
+    "operationalInitializerRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25
+  },
+  "coverage": {
+    "reviewedGroups": 43,
+    "commandEntriesReviewed": 155,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 520,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "Remaining Owner and Settings operations and status migration",
+    "Cross-process exclusion and durable receipts",
+    "Canonical audit and G01/G02",
+    "Authenticated two-guild acceptance",
+    "P1 music migration and real audio acceptance"
+  ],
+  "pushed": false
+}
