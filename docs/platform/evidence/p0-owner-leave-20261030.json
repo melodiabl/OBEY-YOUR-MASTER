@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "phase": "P0",
+  "code": "684848e23df29121ea38341bb7fc2288cec0fbd3",
+  "image": "59cf89d06f238485e7bdb092eed44f6a74ab857182dd471cf12f8c8748678c56",
+  "tag": "localhost/obey-your-master_bot:release-p0-owner-leave-20261030-684848e2",
+  "previousImage": "05e2cf4985fce9cfd10bd263f4b3f619801baecb0fdc6b3676a72d92e8ed689b",
+  "scope": [
+    "prefix:leaveserver"
+  ],
+  "aliases": [
+    "serverleave",
+    "kickbot"
+  ],
+  "authorization": {
+    "exactCurrentOwnerIds": true,
+    "freshOriginMemberChannelAndBot": true,
+    "freshTargetGuildAndBotMembership": true,
+    "reauthorizationAfterPriorNotice": true,
+    "noNewAdministratorRequirement": true
+  },
+  "confirmation": {
+    "opaquePreparation": true,
+    "contextAndClientBound": true,
+    "oneUse": true,
+    "expiryMs": 30000,
+    "actorGuildMessageNonceBound": true,
+    "cancelAndFailedAckNoLeave": true,
+    "failedAckInvalidatesReplay": true,
+    "noFallbackTarget": true,
+    "nameChangedRequiresNewPreview": true,
+    "cardAssetCleanupDisclosed": true
+  },
+  "execution": {
+    "oneActivePerClientAndTarget": true,
+    "callerTimeoutMs": 20000,
+    "pendingLockHeldUntilUnderlyingSettlement": true,
+    "shutdownTracksUnderlyingOperation": true,
+    "noLateAdmissionAfterExpiryOrTimeout": true,
+    "priorNoticeRequired": true,
+    "sdkLeaveAwaited": true,
+    "uncertainRequestNotReportedAsConfirmed": true,
+    "noCommandLayerRetry": true,
+    "noDmOrAlternateResultChannel": true,
+    "noNewDataReset": true
+  },
+  "verification": {
+    "newCasesHost": 30,
+    "newCasesImage": 30,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "allDiscordEffectsFaked": true,
+    "realSdkLeaveWithFakeRest": true,
+    "legacyImmediateLeaveReproduced": true,
+    "noRealDeparturesOrTestMessages": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1177,
+      "dependencies": 3453
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1044,
+      "commandsLoaded": 675,
+      "aliasesLoaded": 779,
+      "routesInUnchangedInventory": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "independentReview": {
+      "contract": "docs/platform/OWNER-LEAVE-CONTRACT.md",
+      "passes": 2,
+      "actionableFindings": 0,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false,
+      "userPreference": "Continue current independent review",
+      "ownFollowup": "Invalidate collector after failed ACK and verify replay has no effect"
+    },
+    "composeVariantsValidated": 3,
+    "translatedMessagesPerLocale": 16
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-29T23:42:40.474Z",
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "backupBefore": {
+      "bytes": 59370950,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "source": "persistent"
+    },
+    "backupAfter": {
+      "bytes": 59371819,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "previousImageRetained": true,
+    "recipesUpdated": true,
+    "priorRuntime": {
+      "historicalRestartCount": 1,
+      "previousExitCode": 0,
+      "oomKilled": false,
+      "causeConfirmed": false,
+      "initialPreflightStoppedBeforeMutation": true,
+      "stableSamplesBeforeReplacement": 5,
+      "rawDiagnosticLogRemoved": true
+    }
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "fixtureSourcesRemoved": true,
+    "evidenceRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25,
+    "productionLeaveHandlersRetained": true
+  },
+  "coverage": {
+    "reviewedGroups": 48,
+    "commandEntriesReviewed": 163,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 512,
+    "remainingHttpRoutes": 74,
+    "countsMeasureReviewNotBrokenFunctions": true
+  },
+  "pending": [
+    "Other Owner and Settings operations",
+    "Durable receipts and canonical audit including lifecycle request provenance",
+    "Cross-process coordination",
+    "G01/G02 and authenticated two-guild acceptance",
+    "Real owner-invoked departure and restart acceptance",
+    "P1 lavalink-client migration and real audio recovery acceptance"
+  ],
+  "pushed": false
+}

@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b9ecc88246f293b4a8d1aa438fff7f2b57309d74",
-    "image": "05e2cf4985fce9cfd10bd263f4b3f619801baecb0fdc6b3676a72d92e8ed689b",
+    "code": "684848e23df29121ea38341bb7fc2288cec0fbd3",
+    "image": "59cf89d06f238485e7bdb092eed44f6a74ab857182dd471cf12f8c8748678c56",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-owner-operations-20261030.json",
-    "change": "Minimal owner diagnostics and confirmed controlled restart with fresh owner authorization and bounded service shutdown",
-    "tag": "localhost/obey-your-master_bot:release-p0-owner-ops-20261030-b9ecc882",
+    "evidence": "evidence/p0-owner-leave-20261030.json",
+    "change": "Confirmed owner server departures with fresh origin and target access, one-use preview and bounded pending operation",
+    "tag": "localhost/obey-your-master_bot:release-p0-owner-leave-20261030-684848e2",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-owner-operations-20261030.json",
-    "deploymentKind": "application_only_p0_owner_operations",
+    "statusEvidence": "evidence/p0-owner-leave-20261030.json",
+    "deploymentKind": "application_only_p0_owner_leave",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
