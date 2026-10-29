@@ -2030,5 +2030,23 @@
     "cancelled": "Restart cancelled. Shutdown was not requested.",
     "expired": "Confirmation expired. Shutdown was not requested.",
     "requesting": "Confirmation received. Requesting controlled shutdown; check that the bot reconnects afterwards."
+  },
+  "ownerLeave": {
+    "usage": "Usage: leaveserver <server ID>. Supply exactly one complete ID.",
+    "denied": "Only a current bot owner can request this departure. Also check your channel access.",
+    "targetUnavailable": "I could not verify that the bot belongs to that server. No departure was requested.",
+    "conflict": "The server changed after the preview. Open the command again to review the target.",
+    "expired": "The confirmation expired. No departure was requested.",
+    "busy": "A departure is already pending for that server. Check its status before trying again.",
+    "timeout": "Verification timed out. No departure request was admitted.",
+    "unconfirmed": "I could not confirm the departure. The request may have reached Discord; check whether the bot is still in the server before trying again.",
+    "unavailable": "I could not complete verification or deliver the prior notice. No departure was requested.",
+    "preview": "Leave **{name}** (`{id}`)?\nThe bot will stop responding there and music will be interrupted. You will need to invite it again to bring it back. The usual automatic card asset cleanup still runs when leaving.\nConfirm within the next 30 seconds.",
+    "confirm": "Leave server",
+    "cancel": "Cancel",
+    "notYours": "This confirmation belongs to the person who opened the command.",
+    "cancelled": "Departure cancelled.",
+    "requesting": "Confirmation received. I will request departure from the selected server. If this is that server, I may be unable to send the result here.",
+    "confirmed": "Discord confirmed the departure request for the selected server."
   }
 }

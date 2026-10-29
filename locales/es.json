@@ -2030,5 +2030,23 @@
     "cancelled": "Reinicio cancelado. No se ha solicitado el cierre.",
     "expired": "La confirmación venció. No se ha solicitado el cierre.",
     "requesting": "Confirmación recibida. Solicito el cierre controlado; comprueba después que el bot vuelva a conectarse."
+  },
+  "ownerLeave": {
+    "usage": "Uso: leaveserver <ID del servidor>. Indica un único ID completo.",
+    "denied": "Solo el dueño actual del bot puede solicitar esta salida. Comprueba también tu acceso al canal.",
+    "targetUnavailable": "No pude confirmar que el bot pertenezca al servidor indicado. No solicité la salida.",
+    "conflict": "El servidor cambió desde la vista previa. Abre el comando de nuevo para revisar el destino.",
+    "expired": "La confirmación venció. No solicité la salida.",
+    "busy": "Ya hay una salida en curso para ese servidor. Comprueba su estado antes de volver a intentarlo.",
+    "timeout": "La comprobación agotó su espera. No se admitió la solicitud de salida.",
+    "unconfirmed": "No pude confirmar la salida. La petición pudo llegar a Discord; comprueba si el bot sigue en el servidor antes de volver a intentarlo.",
+    "unavailable": "No pude completar la comprobación o entregar el aviso previo. No solicité la salida.",
+    "preview": "¿Salir de **{name}** (`{id}`)?\nEl bot dejará de responder allí y la música se interrumpirá. Para recuperarlo tendrás que invitarlo de nuevo. Se conserva la limpieza automática de materiales de tarjetas al salir.\nConfirma en los próximos 30 segundos.",
+    "confirm": "Salir del servidor",
+    "cancel": "Cancelar",
+    "notYours": "Esta confirmación pertenece a quien abrió el comando.",
+    "cancelled": "Salida cancelada.",
+    "requesting": "Confirmación recibida. Voy a solicitar la salida del servidor indicado. Si es este servidor, puede que no pueda enviar el resultado aquí.",
+    "confirmed": "Discord confirmó la petición de salida del servidor indicado."
   }
 }

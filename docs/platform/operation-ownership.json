@@ -374,7 +374,7 @@
     "commands/Owner/deployslash.js": "2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d",
     "commands/Owner/detailedeval.js": "4e58361580bb01c615437cae2a0db359fdea189d532d34056b954037b2e16acd",
     "commands/Owner/eval.js": "6a0fcf0faaa2993ad118554c42ff66d89afe7b659f019bb94144fe2c5cd765f4",
-    "commands/Owner/leaveserver.js": "f940ad044b60c32c51cc68cdb8d3014d06b17a220c75854ec7d9e2055fe7bfc8",
+    "commands/Owner/leaveserver.js": "9f600900905f5d5f3b2a79919cf2b9bdd9f374a3a89af1e63f0dcbd18f62a0cc",
     "commands/Owner/reloadallcmds.js": "0018f919abfe43afd059994160f3e87774d7e5ef869fe32b878a725e7afc4f00",
     "commands/Owner/reloadbot.js": "5e113873c79ae154776ca25bfa2f0222cb6e255213ab9433d8e2ee2d2c6e52a6",
     "commands/Owner/removemoney.js": "809b37a032e647763c56ba6ce3d6d2f41a6080237ba225bbf0df78723503c983",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "05d6a0b06eeb55584d283629e4f3ed0d794c6704fdfa9724b825abff8b7bef60",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "63b564cdbde9c1899bce6f76ad94c2a5a516410b73991c554489be6881b541a6",
-    "locales/es.json": "315a792cbc99da75303563a36c31eaee9c4b832571efaa9278a969c9431ece63",
+    "locales/en.json": "a91c20259aca79a1c07b98c3a43e3786a3582ee3a4b428feb053d47fa961eb6c",
+    "locales/es.json": "cc2c120f8299e4018b709805b53b9eaa31f5333d3d30024a6625b47497dbe154",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1051,7 +1051,9 @@
     "handlers/bot-owner-access.js": "31091a9aaabd26321713e2970835750533ad4c5455c172dc2db116cf3072414c",
     "handlers/bot-restart.js": "1b022a21c2cf8111b85cfc756077ad3b3f62a687e8ad9220df9dc2f8852d3e5a",
     "handlers/owner-operations.js": "2b4b9f56610ed6af46df2d1bff04ed0bdfb55559e28d43547f71739a6268bf09",
-    "handlers/owner-operations-command.js": "894508d0fb9fc5a92a9de58ae294911d26f873f91293ba690753e8e287ed6742"
+    "handlers/owner-operations-command.js": "894508d0fb9fc5a92a9de58ae294911d26f873f91293ba690753e8e287ed6742",
+    "handlers/owner-guild-leave.js": "fbb86a9e40c25a240efe82b4d68203f92a5f2002fbaf073d34fecb05e7d0e0e1",
+    "handlers/owner-guild-leave-command.js": "c41e7a243aa471b6efa07e293583c1e48d9d534068e56889d3ab54e506fa203a"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

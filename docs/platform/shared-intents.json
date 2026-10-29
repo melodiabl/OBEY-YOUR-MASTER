@@ -1195,15 +1195,34 @@
       ],
       "nextTask": "T12 / T55",
       "evidence": "evidence/p0-owner-operations-20261030.json"
+    },
+    {
+      "id": "operations.bot.guild.leave",
+      "commands": [
+        "prefix:leaveserver"
+      ],
+      "routes": [],
+      "service": "handlers/owner-guild-leave.js / handlers/owner-guild-leave-command.js",
+      "store": "Opaque in-process single-use preparation and per-client/per-guild active operation tracked by setup drain",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current bot owner with fresh origin member/channel/bot, fresh target guild and bot membership, final authorization after prior notice delivery",
+      "scope": "Leave exact joined target after 30-second actor/guild/message/nonce confirmation; no fallback target or new Administrator grant",
+      "finding": "Legacy immediate leave reproduced with VM fake. Await SDK REST completion, distinguish unconfirmed admitted requests from pre-admission failure, no command-level retry, hold lock through underlying settlement after timeout. Existing guildDelete cleanup retained and disclosed.",
+      "limits": [
+        "No durable receipt or cross-process lock",
+        "SDK success does not certify Gateway event or real voice continuity",
+        "Real owner-invoked departure acceptance not run"
+      ],
+      "evidence": "evidence/p0-owner-leave-20261030.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 47,
-    "commandEntriesReviewed": 162,
+    "reviewedGroups": 48,
+    "commandEntriesReviewed": 163,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 513,
+    "remainingCommandEntries": 512,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,
