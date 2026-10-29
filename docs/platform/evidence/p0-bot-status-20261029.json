@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "169a491bdcd2176ca72f009ad48322eac29e33d4",
+  "image": "aa27bed982864e429eccb907646477204a6c6e31f905e325bb6166e0e81ddecf",
+  "tag": "localhost/obey-your-master_bot:release-p0-bot-status-20261029-169a491b",
+  "previousImage": "90b117a6dcc5f679f3d6bd6258df2cd02209d929e607d0af21c6b137589a4e6f",
+  "scope": [
+    "prefix:changestatus",
+    "alias:botstatus",
+    "existing alias resolution:status"
+  ],
+  "fields": [
+    "text",
+    "text2",
+    "type",
+    "url",
+    "presence"
+  ],
+  "authorization": {
+    "exactCurrentOwnerIds": true,
+    "freshMemberChannelAndBot": true,
+    "noNewAdministratorRequirement": true,
+    "insideFileOperations": true
+  },
+  "persistence": {
+    "file": "status.json",
+    "directory": ".runtime/global-configuration",
+    "mode": "0600",
+    "uid": 1000,
+    "gid": 1000,
+    "revision": true,
+    "atomicReplacement": true,
+    "publishCacheAndRequestOnlyAfterCommit": true,
+    "oldTwoFilesPreserved": true,
+    "strictThreeFileStartup": true,
+    "developmentWritesOriginalConfigStatus": true,
+    "crossProcessLock": false,
+    "durableReceipts": false
+  },
+  "interface": {
+    "sharedForm": true,
+    "localDraft": true,
+    "explicitSave": true,
+    "discardCloseAndExpiryNoWrites": true,
+    "realSdkModalAndStaleChecks": true,
+    "discordPresenceAckClaimed": false,
+    "deliveryFailureDistinct": true
+  },
+  "runtime": {
+    "singleController": true,
+    "numericActivityTypes": true,
+    "rotationMs": 90000,
+    "advertisementMs": 75000,
+    "saveRestartsRotation": true,
+    "cancelOldAdvertisement": true,
+    "shutdownClearsTimers": true,
+    "repeatedPlaceholders": true,
+    "historicalTypoCompatible": true,
+    "unicodeBounds": true,
+    "noCounterInflation": true
+  },
+  "migration": {
+    "initialized": false,
+    "statusAdded": true,
+    "existingPreserved": true,
+    "sourceStopped": true,
+    "oldFilesByteIdentical": true,
+    "statusSourceMatched": true,
+    "documents": 3
+  },
+  "verification": {
+    "newCasesHost": 30,
+    "newCasesImage": 30,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "containerLifecycle": {
+      "pass": true,
+      "containers": 2,
+      "distinctContainers": true,
+      "network": "none",
+      "syntheticDataOnly": true,
+      "statusAndPresenceRestored": true
+    },
+    "oldImageCompatibility": {
+      "pass": true,
+      "oldTwoFileReaderCompatible": true,
+      "statusFileRetained": true,
+      "network": "none"
+    },
+    "noRealTestDiscordMessagesDmsVoiceOrStatusCommands": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1170,
+      "dependencies": 3458
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1034,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "composeVariantsValidated": 3,
+    "independentReview": {
+      "passes": 2,
+      "actionableFindings": 1,
+      "fixed": true,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false
+    }
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-29T21:14:58.375Z",
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "backupBefore": {
+      "bytes": 59369606,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 2,
+      "preMigrationFormat": true,
+      "supplementedAfterStoppedUpgrade": {
+        "bytes": 59369606,
+        "crc": true,
+        "temporaryConfigRemoved": true,
+        "globalConfigurationFiles": 3,
+        "manifestMatches": true,
+        "activeProjectionMatches": true,
+        "source": "persistent-after-stopped-status-upgrade"
+      }
+    },
+    "backupAfter": {
+      "bytes": 59373190,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "previousImageRetained": true,
+    "recipesUpdated": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "syntheticDataRemoved": true,
+    "migrationScratchRemoved": true,
+    "evidenceRetained": true,
+    "operationalInitializerRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25
+  },
+  "coverage": {
+    "reviewedGroups": 44,
+    "commandEntriesReviewed": 156,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 519,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "Other Owner and Settings operations",
+    "Durable receipts and canonical audit",
+    "Cross-process coordination",
+    "G01/G02 and authenticated two-guild acceptance",
+    "Real Discord editor acceptance",
+    "P1 music migration and real audio acceptance"
+  ],
+  "pushed": false
+}

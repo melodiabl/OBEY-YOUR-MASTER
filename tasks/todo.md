@@ -1,5 +1,9 @@
 # Tareas y checkpoints de OBEY
 
+## 29/10/2026 · estado del bot persistente y menú con borrador
+
+Código `169a491b`, imagen `aa27bed98286`: changestatus conserva aliases y grant de owner; cinco ajustes con Guardar/Descartar. Revisión y archivo confirmado antes de publicar memoria o solicitar presencia, sin prometer ACK de Discord. Tercer documento separado, añadido desde el proceso detenido sin cambiar los dos anteriores. Controlador único de rotación/publicidad y cierre. Treinta casos nuevos y 25 originales en host/imagen, recreación aislada y compatibilidad con imagen anterior; tipos, dependencias y 1.034 hashes. HTTP 7/7, recursos 13/13, diez muestras saludables sin reinicios, respaldos CRC con tres documentos y reversión conservados; temporales retirados. P0: 44 grupos/156 entradas/21 rutas; quedan 519/74. Restan otros Owner/Settings, recibos, G01/G02, aceptación real y P1. [Informe](../docs/platform/P0-BOT-STATUS-2026-10-29.md).
+
 ## 29/10/2026 · ajustes globales persistentes
 
 Código `ca7f1e7a`, imagen `90b117a6dcc5`: prefijo, propietarios, avisos y publicidad usan una proyección privada fuera del contenedor. Inicio estricto antes de consumidores; identidad compartida y materiales actuales conservados. Publicidad restaurada con ActivityType numérico. Copia del origen detenido, directorio 0700/archivos 0600; respaldo posterior con proyección y hashes. Veintiocho casos nuevos y 25 originales en host/imagen, recreación de dos contenedores aislados, recuperación en imagen anterior, tipos/dependencias y 1.030 hashes. HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios; respaldo/reversión conservados y temporales retirados. P0 sigue en 43 grupos/155 entradas/21 rutas; quedan 520/74. Restan estado/otros Owner-Settings, recibos, G01/G02 y aceptación real. [Informe](../docs/platform/P0-GLOBAL-CONFIG-2026-10-29.md).

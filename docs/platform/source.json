@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "ca7f1e7a4fd6671523a95e87f98a98f5bf23fbfd",
-    "image": "90b117a6dcc5f679f3d6bd6258df2cd02209d929e607d0af21c6b137589a4e6f",
+    "code": "169a491bdcd2176ca72f009ad48322eac29e33d4",
+    "image": "aa27bed982864e429eccb907646477204a6c6e31f905e325bb6166e0e81ddecf",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-global-config-20261029.json",
-    "change": "Persistent migrated global configuration with strict bootstrap, exact file readers, advertising restoration and stopped-container projection migration",
-    "tag": "localhost/obey-your-master_bot:release-p0-global-config-20261029-ca7f1e7a",
+    "evidence": "evidence/p0-bot-status-20261029.json",
+    "change": "Bot status draft editor with exact owner authorization, separate persistent status document and one runtime presence scheduler",
+    "tag": "localhost/obey-your-master_bot:release-p0-bot-status-20261029-169a491b",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-global-config-20261029.json",
-    "deploymentKind": "application_only_p0_global_configuration_persistence",
+    "statusEvidence": "evidence/p0-bot-status-20261029.json",
+    "deploymentKind": "application_only_p0_bot_status",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
