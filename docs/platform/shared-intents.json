@@ -1096,15 +1096,30 @@
       "limits": "No automatic legacy-key migration; legacy reset remains pending. No real server configuration changes or voice joins for testing. Authenticated two-guild acceptance, actual audio and durable receipts pending.",
       "evidence": "evidence/p0-default-equalizer-20261029.json",
       "previousEvidence": "evidence/p0-music-defaults-20261029.json"
+    },
+    {
+      "id": "configuration.legacy_reset",
+      "commands": [
+        "prefix:reset"
+      ],
+      "routes": [],
+      "service": "handlers/legacy-reset-settings.js",
+      "store": "Guild prefix, djroles, botchannel and six legacy panel reference fields; existing setup-settings CAS over the single aliased SyncMap",
+      "status": "corrected_and_verified_in_isolation",
+      "policy": "Current guild owner fetched from Discord, existing Administrator and invocation channel/bot checks; reauthorized inside the shared persistence queue after confirmation.",
+      "confirmation": "30-second button confirmation scoped to guild/message/actor and unique token; one claim before ACK and persistence; cancel, expiry and failed ACK submit no changes.",
+      "result": "One atomic conditional update and committed cache patch before success. Scoped conflicts preserve newer settings; unrelated settings are preserved. No Discord channels, messages or roles are deleted.",
+      "limits": "Retains actual nine-field legacy scope and corrects the former all-setups description. No production reset or real test interactions. Authenticated two-guild acceptance and durable receipts remain pending.",
+      "evidence": "evidence/p0-legacy-reset-20261029.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 42,
-    "commandEntriesReviewed": 154,
+    "reviewedGroups": 43,
+    "commandEntriesReviewed": 155,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 521,
+    "remainingCommandEntries": 520,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

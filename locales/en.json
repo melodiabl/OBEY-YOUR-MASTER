@@ -1950,5 +1950,18 @@
     "unavailable": "Saving could not be confirmed. Reopen settings to check the current state.",
     "equalizerSaved": "Default equalizer saved: {preset}. It will apply on a new music connection.",
     "equalizerInvalid": "Use defaultequalizer [off|pop|bassboost|metal|treblebass]. Without arguments it toggles Pop/off."
+  },
+  "legacyReset": {
+    "preview": "Reset basic configuration\n\nThe prefix will be {prefix}. DJ roles and command-channel lists will be cleared, along with the six legacy music-panel references. Welcome, tickets, logs and current-player settings are preserved.\n\nConfirm within 30 seconds.",
+    "saved": "Reset saved: prefix {prefix}, empty DJ and command-channel lists, and cleared legacy-panel references. Use /setup to configure systems.",
+    "confirm": "Reset",
+    "cancel": "Cancel",
+    "cancelled": "Reset cancelled. No changes were submitted.",
+    "expired": "Confirmation expired. No changes were submitted.",
+    "conflict": "Configuration changed while you were confirming. Open reset again to review the current state.",
+    "ownerOnly": "Only the current server owner can reset this configuration.",
+    "notYours": "Only the person who opened this confirmation can use its buttons.",
+    "unavailable": "The reset could not be confirmed. Reopen settings to check the current state.",
+    "usage": "Use reset without arguments and review the confirmation."
   }
 }

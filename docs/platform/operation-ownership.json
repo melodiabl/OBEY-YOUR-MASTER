@@ -422,7 +422,7 @@
     "commands/Settings/removebotchat.js": "c4361feadf2b4a4f8ecb80e9d71e67adac116a0f29c1e9892b8e3fabb7c57150",
     "commands/Settings/removedj.js": "0483962df62ec0796677a5b1a15aea1d305a6ebad58cc3a968ed96c3b2e2c32c",
     "commands/Settings/removemoney.js": "1b6e684421a0c93bb83fc3e8c82ac4d0c586ba0129cf790967ed0fdc97770e86",
-    "commands/Settings/reset.js": "4f85f8279f8b3bc9a487ac79d8a5761ed33e329346bbbf936b2f746bdeee56aa",
+    "commands/Settings/reset.js": "f7fa93389489afe02507e9b37f1cdced0123f5978bcd2594b7770a5b400b3531",
     "commands/Settings/toggledisabled.js": "479c35d0f2ef34f3237991609487890200a0f59de5121df2659c45efca55f785",
     "commands/Settings/toggledjonly.js": "751510fdd049869cd29d7fbf94c15e4d19421edcb6867464ef85e1b9097471fe",
     "commands/Settings/toggledm.js": "0235fee2ab59545b866589e722bc9a29dceeeba62b0f3fd191fe92672d79c4ea",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "6be553d140f0f9069fddd33860203dbe473711006360c81e241bbc7daed8f7df",
-    "locales/es.json": "e310cec544382939a6693ce8c8e14420393945c16b93741e292b4258ebd9c4bf",
+    "locales/en.json": "854996db6c553375590f62315964c462bf12ffcf490d1c95e45c659f8d8a48f2",
+    "locales/es.json": "4ca02e8284fe49318fbb551e31eec533a9e57c9181dec49d23c086e5f91cb755",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1028,7 +1028,9 @@
     "handlers/music-default-command.js": "e423eb1b5301b5656bc9df8169b0ce5bccb5bd8b1f48511b04a7473d675dd13a",
     "handlers/music-default-settings.js": "967a136de8af3b7f6b8f140dff330718b4ee678500622a00c48718e330a8d7f4",
     "dashboard/music-default-form.js": "8651ebedd92d6f9bfc28ffec9978abb1893c460d4bc9c212f62c9e6177820c88",
-    "dashboard/views/includes/music-default-settings.ejs": "b06b32feff71a6dce84f59d770e2d115f57ddb6287339b2ec8498f76b64dc0ab"
+    "dashboard/views/includes/music-default-settings.ejs": "b06b32feff71a6dce84f59d770e2d115f57ddb6287339b2ec8498f76b64dc0ab",
+    "handlers/legacy-reset-settings.js": "26dc867e9ebf244f488546956110421e4968c317e3a65fc1f924f5825078942a",
+    "handlers/legacy-reset-command.js": "e024f025c654deef587975306ba3d34f3babaaca3622cdbfb422948a7dfb4d54"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

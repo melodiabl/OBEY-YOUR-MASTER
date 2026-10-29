@@ -1950,5 +1950,18 @@
     "unavailable": "No pude confirmar el guardado. Vuelve a abrir la configuración para consultar el estado actual.",
     "equalizerSaved": "Ecualizador predeterminado guardado: {preset}. Se aplicará al iniciar una nueva conexión de música.",
     "equalizerInvalid": "Usa defaultequalizer [off|pop|bassboost|metal|treblebass]. Sin argumentos alterna Pop/desactivado."
+  },
+  "legacyReset": {
+    "preview": "Restablecer configuración básica\n\nEl prefijo será {prefix}. Se vaciarán las listas de roles DJ y canales de comandos, y se limpiarán las seis referencias del panel musical antiguo. Bienvenida, tickets, registros y ajustes del reproductor actual se conservan.\n\nConfirma en los próximos 30 segundos.",
+    "saved": "Restablecimiento guardado: prefijo {prefix}, listas DJ y de canales de comandos vacías y referencias del panel antiguo limpiadas. Usa /setup para configurar los sistemas.",
+    "confirm": "Restablecer",
+    "cancel": "Cancelar",
+    "cancelled": "Restablecimiento cancelado. No se enviaron cambios.",
+    "expired": "La confirmación venció. No se enviaron cambios.",
+    "conflict": "La configuración cambió mientras confirmabas. Abre reset de nuevo para revisar el estado actual.",
+    "ownerOnly": "Solo el propietario actual del servidor puede restablecer esta configuración.",
+    "notYours": "Solo quien abrió esta confirmación puede usar sus botones.",
+    "unavailable": "No pude confirmar el restablecimiento. Vuelve a abrir la configuración para consultar el estado actual.",
+    "usage": "Usa reset sin argumentos y revisa la confirmación."
   }
 }
