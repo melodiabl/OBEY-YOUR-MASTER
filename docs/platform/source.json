@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "169a491bdcd2176ca72f009ad48322eac29e33d4",
-    "image": "aa27bed982864e429eccb907646477204a6c6e31f905e325bb6166e0e81ddecf",
+    "code": "b2c038b9359b7ca1618aba57d6cd6d995c18170a",
+    "image": "c80fa5e0cf0f24ce9ce4abfbb2ec8eaed4b970f9962ed0742971373643797c5c",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-bot-status-20261029.json",
-    "change": "Bot status draft editor with exact owner authorization, separate persistent status document and one runtime presence scheduler",
-    "tag": "localhost/obey-your-master_bot:release-p0-bot-status-20261029-169a491b",
+    "evidence": "evidence/p0-bot-profile-20261029.json",
+    "change": "Confirmed global bot username/avatar changes with exact owner access, bounded single-flight execution and isolated avatar decoding",
+    "tag": "localhost/obey-your-master_bot:release-p0-bot-profile-20261029-b2c038b9",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-bot-status-20261029.json",
-    "deploymentKind": "application_only_p0_bot_status",
+    "statusEvidence": "evidence/p0-bot-profile-20261029.json",
+    "deploymentKind": "application_only_p0_bot_profile",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {

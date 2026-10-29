@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 29/10/2026 · nombre y avatar del bot confirmados
+
+Código `b2c038b9`, imagen `c80fa5e0cf0f`: changename/changeavatar conservan aliases y grant del dueño, con ID exacto y acceso fresco. Respuesta REST explícita, espera de 20 s y bloqueo hasta terminar; fallos de mensajes contenidos. Avatar PNG/JPEG/GIF en memoria, CDN acotado y validación aislada sin credenciales; cuadros GIF completos y bytes de animación conservados. Treinta casos nuevos y 25 originales en host/imagen, tipos/dependencias y 1.038 hashes. HTTP 7/7, recursos 13/13, diez muestras saludables sin reinicios, respaldos CRC y reversión conservados. Temporales e imagen intermedia retirados; no se modificó el perfil real para probar. P0: 45 grupos/158 entradas/21 rutas; quedan 517/74. Otros Owner/Settings, recibos, G01/G02, aceptación real y P1 siguen pendientes. [Informe](../docs/platform/P0-BOT-PROFILE-2026-10-29.md).
+
 ## 29/10/2026 · estado del bot persistente y menú con borrador
 
 Código `169a491b`, imagen `aa27bed98286`: changestatus conserva aliases y grant de owner; cinco ajustes con Guardar/Descartar. Revisión y archivo confirmado antes de publicar memoria o solicitar presencia, sin prometer ACK de Discord. Tercer documento separado, añadido desde el proceso detenido sin cambiar los dos anteriores. Controlador único de rotación/publicidad y cierre. Treinta casos nuevos y 25 originales en host/imagen, recreación aislada y compatibilidad con imagen anterior; tipos, dependencias y 1.034 hashes. HTTP 7/7, recursos 13/13, diez muestras saludables sin reinicios, respaldos CRC con tres documentos y reversión conservados; temporales retirados. P0: 44 grupos/156 entradas/21 rutas; quedan 519/74. Restan otros Owner/Settings, recibos, G01/G02, aceptación real y P1. [Informe](../docs/platform/P0-BOT-STATUS-2026-10-29.md).
