@@ -2008,5 +2008,27 @@
     "denied": "Solo los propietarios actuales del bot con acceso a este canal pueden cambiar su perfil.",
     "unavailable": "No pude verificar el acceso o el bot se está cerrando. El cambio no se pudo iniciar.",
     "unconfirmed": "No pude confirmar el cambio. Comprueba el perfil actual antes de volver a intentarlo."
+  },
+  "ownerOps": {
+    "usage": "Usa el comando sin argumentos.",
+    "checking": "Comprobando la operación…",
+    "denied": "Solo los propietarios actuales del bot con acceso a este canal pueden usar esta operación.",
+    "unavailable": "No pude verificar el acceso o completar la operación. Vuelve a comprobar el estado del bot.",
+    "identityTitle": "Identidad del bot",
+    "identity": "Datos de identidad disponibles.",
+    "bot": "Bot",
+    "application": "Aplicación",
+    "applicationUnavailable": "No se pudieron obtener los datos actuales de la aplicación.",
+    "versions": "Versiones del paquete y librerías",
+    "stopDisabled": "La parada permanente se administra desde el despliegue del bot. Este comando permanece desactivado.",
+    "reloadDisabled": "La recarga en caliente está desactivada. Usa restartbot para solicitar un reinicio controlado cuando esté disponible.",
+    "restartUnavailable": "El reinicio por Discord no está disponible o ya hay una solicitud en curso. Comprueba el estado desde el despliegue.",
+    "restartPreview": "¿Solicitar un reinicio del bot?\n\nEl bot se desconectará y la reproducción se interrumpirá. El sistema de despliegue intentará iniciarlo otra vez. Confirma en los próximos 30 segundos.",
+    "confirm": "Confirmar reinicio",
+    "cancel": "Cancelar",
+    "notYours": "Esta confirmación pertenece a otra persona.",
+    "cancelled": "Reinicio cancelado. No se ha solicitado el cierre.",
+    "expired": "La confirmación venció. No se ha solicitado el cierre.",
+    "requesting": "Confirmación recibida. Solicito el cierre controlado; comprueba después que el bot vuelva a conectarse."
   }
 }

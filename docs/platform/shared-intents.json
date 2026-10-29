@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "phase": "P0",
   "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
   "inventory": "operation-ownership.json",
@@ -1159,15 +1159,51 @@
       ],
       "nextTask": "T12 / T55",
       "evidence": "evidence/p0-bot-profile-20261029.json"
+    },
+    {
+      "id": "operations.bot.identity.read",
+      "commands": [
+        "prefix:botfilename"
+      ],
+      "routes": [],
+      "service": "handlers/owner-operations.js#readBotIdentity",
+      "store": "Fresh application metadata projected to public identity fields and installed versions",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current on-disk bot owner and fresh guild/channel/bot access before and after query; no new Administrator grant",
+      "finding": "No paths, host interfaces/IP, shell hints, application owner/team/description or raw errors. Ten-second read deadline and explicit unavailable application state.",
+      "nextTask": "T12 / T55",
+      "evidence": "evidence/p0-owner-operations-20261030.json"
+    },
+    {
+      "id": "operations.bot.lifecycle.request",
+      "commands": [
+        "prefix:stopbot",
+        "prefix:reloadbot",
+        "prefix:restartbot"
+      ],
+      "routes": [],
+      "service": "handlers/owner-operations-command.js / handlers/bot-restart.js",
+      "store": "In-process reservation and existing graceful shutdown; deployment supervisor owns startup",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current on-disk bot owner, fresh member/channel/bot access, scoped single-use confirmation, final reauthorization after message delivery",
+      "scope": "stopbot/reloadbot stay disabled; restartbot uses controlled shutdown when explicitly enabled by deployment",
+      "finding": "No shell or hot cache/listener mutation. Cancel, expiry and failed ACK/delivery do not admit restart. One reservation per client; named shutdown steps continue after failures, Gateway destroy awaited,20s global deadline retained. A request is not evidence of a completed restart.",
+      "limits": [
+        "No durable restart receipt or cross-process reservation",
+        "Real owner-invoked restart/recovery acceptance pending",
+        "Runtime flag requires a supervising deployment"
+      ],
+      "nextTask": "T12 / T55",
+      "evidence": "evidence/p0-owner-operations-20261030.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 45,
-    "commandEntriesReviewed": 158,
+    "reviewedGroups": 47,
+    "commandEntriesReviewed": 162,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 517,
+    "remainingCommandEntries": 513,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

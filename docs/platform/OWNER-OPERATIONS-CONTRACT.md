@@ -1,0 +1,13 @@
+# Operaciones del dueño · identidad y reinicio
+
+Se conservan nombres, aliases, categoría, tipo y cooldown de botfilename, stopbot, reloadbot y restartbot. El grant es dueño actual del bot, con ID exacto del archivo y miembro/canal/bot frescos. No se añade Administrator. La política compartida se extrae del servicio de perfil para reutilizarla sin acoplar diagnósticos con imágenes.
+
+botfilename muestra solo identidad pública del bot/aplicación y versiones del paquete, Node y Discord.js. No publica rutas, interfaces/IP, comandos de shell, credenciales, propietarios de la aplicación ni miembros de su equipo. La aplicación se obtiene de nuevo; si falla, se distingue información no disponible de un resultado vacío. La consulta se acota a diez segundos y reautoriza antes de devolver la proyección. No envía DMs.
+
+stopbot y reloadbot permanecen desactivados, como antes. Se retiran las respuestas de soporte del creador anterior y el código de recarga que ya era inalcanzable. La parada permanente se administra desde el despliegue. La recarga en caliente no borra módulos, listeners o comandos; puede usarse el reinicio controlado cuando esté disponible.
+
+restartbot deja de ejecutar PM2 y exige dueño, vista previa y Confirmar/Cancelar de un solo uso en treinta segundos, ligados al actor, guild y mensaje. La vista previa advierte de desconexión y pérdida temporal de reproducción. Se reautoriza al confirmar. Una reserva global por cliente precede a la respuesta; solo tras confirmar su entrega se agenda el cierre habitual mediante setImmediate. ACK, entrega o autorización fallidos, cancelación, vencimiento y doble clic no generan otro reinicio. La reserva se libera si no se pudo admitir el efecto.
+
+El scheduler se habilita únicamente con OBEY_OWNER_RESTART_ENABLED=true, que el despliegue activa después de comprobar restart=always. Reutiliza el shutdown existente para servicios, configuración, sesiones, base de datos y Gateway, incluido su límite global de veinte segundos. Intenta los pasos restantes si uno lanza o rechaza, espera el cierre de Discord y conserva salida de fallo; un paso bloqueado sigue sujeto al límite global. No invoca shell, Podman ni PM2 desde Discord. Confirmar la solicitud no certifica el arranque posterior, que pertenece al supervisor y su aceptación real sigue pendiente.
+
+No se ejecutan parada o reinicio reales por comandos durante las pruebas. Se usan archivos, Discord/SDK y scheduler simulados; el cambio de imagen autorizado utiliza el procedimiento normal de despliegue. Sin nuevos datos persistentes, recibos duraderos ni coordinación entre procesos. La prueba real de botones y reinicio por el dueño, recuperación de voz y demás tareas del plan permanecen abiertas.

@@ -365,7 +365,7 @@
     "commands/Music/volume.js": "8d6da144fadb548311b81a53f76eeb925e3754fa96b10bd97148d639b797de88",
     "commands/Music/voteskip.js": "61ac9b11d9173e0a72f3418c17287b21cd0a4005230e4ed41612f1b57c48cbfb",
     "commands/Owner/addmoney.js": "edc53365e72e61b100d627c044a34215601cf139fab5f03592987a25cb2f9253",
-    "commands/Owner/botfilename.js": "b58b0960ad395f975f4c2f3e5093522bac17ce33eb21a15ea435fc07a8a4fa81",
+    "commands/Owner/botfilename.js": "53e7eb5a3182e08b097fa33eae1ba2e8254ad1145f8930b08fd8f33e83262197",
     "commands/Owner/changeavatar.js": "9813f7e12a47d5619aab744fddb2d9486596173f1c96da39bd8c41dfb5a8b337",
     "commands/Owner/changename.js": "5ad905915b3bf336a78db7385235f998e213095a8fd3251f1eefe388d3d0c45a",
     "commands/Owner/changeprefix.js": "ee97955bb54a8c794509cfe08842707ba56f19857d4b5ca76d50e28a7f710f2c",
@@ -376,13 +376,13 @@
     "commands/Owner/eval.js": "6a0fcf0faaa2993ad118554c42ff66d89afe7b659f019bb94144fe2c5cd765f4",
     "commands/Owner/leaveserver.js": "f940ad044b60c32c51cc68cdb8d3014d06b17a220c75854ec7d9e2055fe7bfc8",
     "commands/Owner/reloadallcmds.js": "0018f919abfe43afd059994160f3e87774d7e5ef869fe32b878a725e7afc4f00",
-    "commands/Owner/reloadbot.js": "6da5e77efdfaf0f1fc2a4f98863cef406ae6dd90ede5e6bd8e7995c235da5e19",
+    "commands/Owner/reloadbot.js": "5e113873c79ae154776ca25bfa2f0222cb6e255213ab9433d8e2ee2d2c6e52a6",
     "commands/Owner/removemoney.js": "809b37a032e647763c56ba6ce3d6d2f41a6080237ba225bbf0df78723503c983",
     "commands/Owner/resetsettings.js": "227670be2715c8b9a9d3772f32d38ab234978f30703a14f0468a55bad141a71a",
-    "commands/Owner/restartbot.js": "23e0e806f2a627f0532aa7fa7f22b7a273ec04ca540ddfc73226235f6f2571fd",
+    "commands/Owner/restartbot.js": "363ed59ff1a4aa4515b35cb5f9e35dffb8d0366584a4ce5068feba6d57bbe848",
     "commands/Owner/setup-advertise.js": "2abebb6ca127033398102e836d3d6c7b968e51c70bbf69884bf82d0f56f7837f",
     "commands/Owner/setup-owner.js": "e0915fbc5fe8dc83135c5f1a79af7e275cfdb26c501f7fcf99345b684c8ffa08",
-    "commands/Owner/stopbot.js": "23066d5c79d80c6738e4bc43748ba8991f6d2553ccbc210e3df85bb6066f214a",
+    "commands/Owner/stopbot.js": "15e6cc076453344d2e53920e5c2a3e16375683d3f48ae4cbbf9fa89d25526550",
     "commands/Programming/coliru.js": "f3ffbc55f105bff74003082cf7c9e08bba3794f6e1c5886de60c104e1e14f8e5",
     "commands/Programming/compile.js": "d02fb64d15994e82acf916d3eb626d0bf5f26b84b5a90b0bbd5fd8eed0d71816",
     "commands/Programming/github.js": "16ff384bb52235027c91c97607f6fc4c30e18b6cff68e47bf5c87c60332820e3",
@@ -838,10 +838,10 @@
     "handlers/welcome/index.js": "9f5ac7a731de6e488f0b012bd78895a2ac9fe397e3c3a75d9a679b4670fb42d2",
     "handlers/welcome/service.js": "df8825574f46ef2460166c694385446b88e2734dc1ff98b46cd3f66e92807407",
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
-    "index.js": "8e45faba4f064277f6bba57f8c4da011ab07ff5c6d9a7b2dfcce8914c40febca",
+    "index.js": "05d6a0b06eeb55584d283629e4f3ed0d794c6704fdfa9724b825abff8b7bef60",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "0607be10d01618aa003cc6dc5d67df755512acffaf38688c9c47eaed50526853",
-    "locales/es.json": "41aa26b8264651c5184d780e6247bc9048cc23ead7a0f2e69197314baaadb2f5",
+    "locales/en.json": "63b564cdbde9c1899bce6f76ad94c2a5a516410b73991c554489be6881b541a6",
+    "locales/es.json": "315a792cbc99da75303563a36c31eaee9c4b832571efaa9278a969c9431ece63",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1036,7 +1036,7 @@
     "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c",
     "handlers/global-prefix-command.js": "42d53803fa048a18f01dc77b77855c8f2e0fc18deb9a1677b9c495c6b68cbdef",
     "handlers/global-prefix-settings.js": "29b985662ea0d798e38e3d317b91d77901e3ae8d0a1c712015d86582ac435d9a",
-    "docker-compose.yml": "3aaad9ea9e7315cbc9071d407e15e684fbef8a75f5ec91f95fc041d0b8801a09",
+    "docker-compose.yml": "4d17883d7f4b362e38dffc53011998b3619c3ba8e071e2590f08c8e31de03781",
     "scripts/backup-before-release.js": "dfe9d6b85fc97fcc990a93cbd08d57439d9e9f84db81e420577ccaf2445903ab",
     "scripts/initialize-global-configuration.js": "dab030bcc4f224513859251db0f66e043ac3f9f07bb276c40620e7c5e5f7f796",
     "handlers/global-configuration.js": "4bfa800a1277f819fab94a2225619e4dd3a9e49fb44defccdd138eff068b4473",
@@ -1047,7 +1047,11 @@
     "handlers/avatar-media.js": "0d101e6699e0fc6ae3f61cd3b6fe4f37537bb414e5026a787606308ea0afe820",
     "handlers/avatar-image-worker.js": "5a6b4c26f5b5c829c75d75ea8004ea7a2b618aa42995e758ae26fba12a1e3eed",
     "handlers/bot-profile-command.js": "8a8a26a84f6275f52882bb75f3c45f2d37db4ed5052da78d10878ff78d9db72e",
-    "handlers/bot-profile-service.js": "bb7a150e6946f149c73f5dc23dfd48a3fd729054a0db99857973322ba94e1719"
+    "handlers/bot-profile-service.js": "a72aea2b9996f10f841eed63e040d76679562fe531a5f3ff6c93636f6a428935",
+    "handlers/bot-owner-access.js": "31091a9aaabd26321713e2970835750533ad4c5455c172dc2db116cf3072414c",
+    "handlers/bot-restart.js": "1b022a21c2cf8111b85cfc756077ad3b3f62a687e8ad9220df9dc2f8852d3e5a",
+    "handlers/owner-operations.js": "2b4b9f56610ed6af46df2d1bff04ed0bdfb55559e28d43547f71739a6268bf09",
+    "handlers/owner-operations-command.js": "894508d0fb9fc5a92a9de58ae294911d26f873f91293ba690753e8e287ed6742"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -3964,39 +3968,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/botfilename.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.application.fetch().catch",
-          "line": 32
-        },
-        {
-          "call": "client.application.fetch",
-          "line": 32
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 33
-        },
-        {
-          "call": "client.getFooter",
-          "line": 72
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Info/botinfo.js": {
       "kind": "current-command-adapter",
@@ -13003,123 +12976,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/reloadbot.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 26
-        },
-        {
-          "call": "client.application.fetch().catch",
-          "line": 32
-        },
-        {
-          "call": "client.application.fetch",
-          "line": 32
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 33
-        },
-        {
-          "call": "client.destroy",
-          "line": 67
-        },
-        {
-          "call": "client.getFooter",
-          "line": 72
-        },
-        {
-          "call": "client.commands.clear",
-          "line": 78
-        },
-        {
-          "call": "client.removeAllListeners",
-          "line": 92
-        },
-        {
-          "call": "client.basicshandlers.forEach",
-          "line": 96
-        },
-        {
-          "call": "client.socialhandlers.forEach",
-          "line": 105
-        },
-        {
-          "call": "client.allhandlers.forEach",
-          "line": 114
-        },
-        {
-          "call": "client.Joblivelog.stop",
-          "line": 122
-        },
-        {
-          "call": "client.Joblivelog2.stop",
-          "line": 123
-        },
-        {
-          "call": "client.Jobyoutube.stop",
-          "line": 124
-        },
-        {
-          "call": "client.Jobtwitterfeed.stop",
-          "line": 125
-        },
-        {
-          "call": "client.Jobtiktok.stop",
-          "line": 126
-        },
-        {
-          "call": "client.Jobroster.stop",
-          "line": 127
-        },
-        {
-          "call": "client.Jobroster2.stop",
-          "line": 128
-        },
-        {
-          "call": "client.Jobroster3.stop",
-          "line": 129
-        },
-        {
-          "call": "client.Jobmembercount.stop",
-          "line": 130
-        },
-        {
-          "call": "client.JobJointocreate.stop",
-          "line": 131
-        },
-        {
-          "call": "client.JobJointocreate2.stop",
-          "line": 132
-        },
-        {
-          "call": "client.Jobdailyfact.stop",
-          "line": 133
-        },
-        {
-          "call": "client.Jobmute.stop",
-          "line": 134
-        },
-        {
-          "call": "client.getFooter",
-          "line": 149
-        },
-        {
-          "call": "client.getFooter",
-          "line": 160
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/School-Commands/remind.js": {
       "kind": "current-command-adapter",
@@ -14255,23 +14113,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/restartbot.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.getFooter",
-          "line": 36
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Music/resume.js": {
       "kind": "current-command-adapter",
@@ -16114,39 +15957,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/stopbot.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.application.fetch().catch",
-          "line": 31
-        },
-        {
-          "call": "client.application.fetch",
-          "line": 31
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 32
-        },
-        {
-          "call": "client.getFooter",
-          "line": 82
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Music/stoploop.js": {
       "kind": "current-command-adapter",

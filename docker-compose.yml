@@ -56,6 +56,7 @@ services:
       LAVALINK_NODES_FILE: /app/runtime-nodes/nodes.json
       OBEY_EMOJI_MAP_FILE: /app/runtime-emojis/application-emojis.json
       OBEY_GLOBAL_CONFIG_DIR: /app/runtime-configuration
+      OBEY_OWNER_RESTART_ENABLED: "true"
     volumes:
       - ./.runtime/nodes:/app/runtime-nodes:ro
       - ./.runtime/emojis:/app/runtime-emojis:ro

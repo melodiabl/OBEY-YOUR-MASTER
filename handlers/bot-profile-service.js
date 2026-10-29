@@ -1,8 +1,7 @@
 const { z } = require('zod')
 const { Routes } = require('discord.js')
 const { globalConfigurationFile } = require('./global-configuration')
-const { readOwnerIds } = require('./setup-owner-settings')
-const { requireSetupAccess } = require('./setup-access')
+const { requireBotOwnerAccess } = require('./bot-owner-access')
 const { runSetupOperation } = require('./setup-operations')
 const { cardMediaURL } = require('./card-media')
 const { validateAvatarImage, avatarMedia } = require('./avatar-media')
@@ -11,18 +10,11 @@ const fail = code => { throw Object.assign(new Error(code), { code }) }
 const usernameSchema = z.string().refine(value => !/[\p{Cc}\p{Cf}]/u.test(value) && value.isWellFormed())
   .transform(value => value.trim().replace(/\s+/gu, ' ')).pipe(z.string().min(2).max(32))
   .refine(value => !/[@#:`]/u.test(value) && !/discord/i.test(value) && !['everyone', 'here'].includes(value.toLowerCase()))
-async function requireProfileAccess(client, context, ownerFile = ownerFileDefault) {
-  try {
-    await requireSetupAccess(client, { ...context, authorizeActor: async () => {
-      if (!/^\d{17,20}$/.test(context.actorId || '') || !(await readOwnerIds(ownerFile)).includes(context.actorId)) fail('setup_denied')
-    } })
-  } catch (error) { fail(['setup_denied', 'setup_actor_permissions', 'setup_channel_access', 'setup_bot_permissions'].includes(error.message) ? 'setup_denied' : 'setup_unavailable') }
-}
 function performBotProfileChange(client, context, change, { ownerFile = ownerFileDefault, loadAvatar = source => avatarMedia.load(source), timeoutMs = 20000 } = {}) {
   let expired = false, admitted = false, timer
   const available = () => { if (expired || client._shuttingDown) fail('setup_unavailable') }
   const operation = runSetupOperation(client, async () => {
-    await requireProfileAccess(client, context, ownerFile)
+    await requireBotOwnerAccess(client, context, ownerFile)
     available()
     if (active.has(client)) fail('profile_busy')
     active.add(client)
@@ -43,7 +35,7 @@ function performBotProfileChange(client, context, change, { ownerFile = ownerFil
         } catch { fail('profile_avatar') }
       } else fail('profile_invalid')
       available()
-      await requireProfileAccess(client, context, ownerFile)
+      await requireBotOwnerAccess(client, context, ownerFile)
       available()
       let user
       const botId = client.user.id
@@ -59,4 +51,4 @@ function performBotProfileChange(client, context, change, { ownerFile = ownerFil
   const deadline = new Promise((_, reject) => { timer = setTimeout(() => { expired = true; reject(Object.assign(new Error('profile_timeout'), { code: admitted ? 'profile_unconfirmed' : 'profile_timeout' })) }, timeoutMs) })
   return Promise.race([operation, deadline]).finally(() => clearTimeout(timer))
 }
-module.exports = { usernameSchema, requireProfileAccess, performBotProfileChange }
+module.exports = { usernameSchema, performBotProfileChange }

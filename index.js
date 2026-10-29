@@ -143,29 +143,38 @@ async function shutdown() {
   if (shuttingDown) return
   shuttingDown = true
   client._shuttingDown = true
-  client.stopNodes?.()
-  client.stopAssets?.()
-  client.stopDatabaseInitialization?.()
-  client.stopBotStatus?.()
   const timeout = setTimeout(() => process.exit(1), 20000)
   timeout.unref()
-  try {
-    await client.stopCards?.()
-    await client.stopJobs?.()
-    await client.stopOwnerNotifications?.()
-    await client.stopLogs?.()
-    // Include configuration requests still waiting for Discord authorization.
-    await client.stopWelcomeConfiguration?.()
-    await require('./handlers/setup-operations').stopSetupOperations(client)
-    await client.music?.flushSessions?.()
-    await client.flushDatabase?.()
-    await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))
-    client.destroy()
-    await mongoose.disconnect()
-    clearTimeout(timeout)
-    process.exit(0)
-  } catch (error) { console.error('[Bot] Shutdown failed:', error.message); process.exit(1) }
+  let failed = false
+  const steps = [
+    ['nodes', () => client.stopNodes?.()],
+    ['assets', () => client.stopAssets?.()],
+    ['db-init', () => client.stopDatabaseInitialization?.()],
+    ['presence', () => client.stopBotStatus?.()],
+    ['cards', () => client.stopCards?.()],
+    ['jobs', () => client.stopJobs?.()],
+    ['owner-notices', () => client.stopOwnerNotifications?.()],
+    ['logs', () => client.stopLogs?.()],
+    ['configuration', () => client.stopWelcomeConfiguration?.()],
+    ['setup-operations', () => require('./handlers/setup-operations').stopSetupOperations(client)],
+    ['sessions', () => client.music?.flushSessions?.()],
+    ['database', () => client.flushDatabase?.()],
+    ['voice', async () => {
+      const results = await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))
+      if (results.some(result => result.status === 'rejected')) throw Error('voice_shutdown_failed')
+    }],
+    ['gateway', () => client.destroy()],
+    ['mongo', () => mongoose.disconnect()],
+  ]
+  for (const [name, execute] of steps) {
+    try { await execute() }
+    catch { failed = true; console.error('[Bot] Shutdown step failed: ' + name) }
+  }
+  clearTimeout(timeout)
+  if (failed) console.error('[Bot] Shutdown failed')
+  process.exit(failed ? 1 : 0)
 }
+client.botRestart = require('./handlers/bot-restart').createBotRestart(client, shutdown)
 process.once('SIGTERM', shutdown)
 process.once('SIGINT', shutdown)
 

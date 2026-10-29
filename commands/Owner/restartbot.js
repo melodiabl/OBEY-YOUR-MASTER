@@ -1,52 +1,6 @@
-const obeyMeta = require("../../handlers/presentation/metadata")
-var { EmbedBuilder } = require(`discord.js`);
-var Discord = require(`discord.js`);
-var config = require(`${process.cwd()}/botconfig/config.json`);
-var ee = require(`${process.cwd()}/botconfig/embed.json`);
-var emoji = require(`${process.cwd()}/handlers/assets/legacy-config`);
-var { databasing, isValidURL } = require(`${process.cwd()}/handlers/functions`);
+const { runOwnerOperation } = require('../../handlers/owner-operations-command')
 module.exports = {
-    name: "restartbot",
-    category: "Owner",
-    aliases: ["botrestart"],
-    cooldown: 5,
-    usage: "restartbot",
-    type: "bot",
-    description: "Restarts the Bot, if it`s not working as intended or so..",
-    run: async (client, message, args, cmduser, text, prefix) => {
-        let es = client.settings.get(message.guild.id, "embed");
-        let ls = client.settings.get(message.guild.id, "language");
-        try {
-            await message.reply("NOW RESTARTING!");
-            require("child_process").exec(`pm2 restart ID_OF_THE_BOT_PROCESS_IN_PM2_LIST`, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`exec error: ${error}`);
-                    message.reply({ content: eval(client.la[ls]["cmds"]["owner"]["restartbot"]["variable4"]) });
-                    return;
-                }
-                message.reply({ content: eval(client.la[ls]["cmds"]["owner"]["restartbot"]["variable5"]) });
-            });
-            message.reply({ content: eval(client.la[ls]["cmds"]["owner"]["restartbot"]["variable6"]) });
-        } catch (e) {
-            console.log(String(e.stack).dim.bgRed);
-            return message.channel.send({
-                embeds: [
-                    new EmbedBuilder()
-                        .setColor(es.wrongcolor)
-                        .setFooter(obeyMeta.asFooter(client.getFooter(es)))
-                        .setTitle(client.la[ls].common.erroroccur)
-                        .setDescription(eval(client.la[ls]["cmds"]["owner"]["restartbot"]["variable7"])),
-                ],
-            });
-        }
-    },
-};
-/**
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- */
+  name: 'restartbot', category: 'Owner', aliases: ['botrestart'], cooldown: 5, usage: 'restartbot', type: 'bot',
+  description: 'El dueño solicita un reinicio controlado tras confirmar la desconexión del bot.',
+  run: (client, message, args) => runOwnerOperation(client, message, args, 'restart'),
+}

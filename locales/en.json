@@ -2008,5 +2008,27 @@
     "denied": "Only current bot owners with access to this channel can change its profile.",
     "unavailable": "Access could not be verified or the bot is shutting down. The change could not be started.",
     "unconfirmed": "The change could not be confirmed. Check the current profile before trying again."
+  },
+  "ownerOps": {
+    "usage": "Use the command without arguments.",
+    "checking": "Checking the operation…",
+    "denied": "Only current bot owners with access to this channel can use this operation.",
+    "unavailable": "Access could not be verified or the operation could not be completed. Check the bot status again.",
+    "identityTitle": "Bot identity",
+    "identity": "Available identity information.",
+    "bot": "Bot",
+    "application": "Application",
+    "applicationUnavailable": "Current application information could not be retrieved.",
+    "versions": "Package and library versions",
+    "stopDisabled": "Permanent shutdown is managed from the bot deployment. This command remains disabled.",
+    "reloadDisabled": "Hot reloading is disabled. Use restartbot to request a controlled restart when available.",
+    "restartUnavailable": "Restart through Discord is unavailable or another request is in progress. Check the deployment status.",
+    "restartPreview": "Request a bot restart?\n\nThe bot will disconnect and playback will be interrupted. The deployment system will attempt to start it again. Confirm within 30 seconds.",
+    "confirm": "Confirm restart",
+    "cancel": "Cancel",
+    "notYours": "This confirmation belongs to someone else.",
+    "cancelled": "Restart cancelled. Shutdown was not requested.",
+    "expired": "Confirmation expired. Shutdown was not requested.",
+    "requesting": "Confirmation received. Requesting controlled shutdown; check that the bot reconnects afterwards."
   }
 }
