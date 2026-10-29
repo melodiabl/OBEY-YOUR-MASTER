@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "fffe3b0e1ffa3d9ca39a6893652f0a38713450a4",
+  "image": "f626acbef79ca39e61eb2b2bad4a15e23ded8b8ef7384cc1774c9452b921dac2",
+  "tag": "localhost/obey-your-master_bot:release-p0-global-reset-20261029-fffe3b0e",
+  "previousImage": "27483e1bb6f59870af71533c46add777eecfa1085cfa06175cb6f35ad8603b7c",
+  "scope": [
+    "prefix:resetsettings",
+    "alias:resetallsettings"
+  ],
+  "modeSelection": {
+    "configuration": "Guild (legacy warns retained), JTC1/2/3, Roster, CustomCommand, Keyword, exact-guild Ranking settings",
+    "data": "Configuration plus exact-guild Stats/UserProfile and valid guildId-userId Ranking records, legacy embedded warns cleared",
+    "preserved": [
+      "Premium",
+      "shared personal libraries and queues",
+      "economy",
+      "canonical moderation",
+      "MusicGuild/MusicSession",
+      "ambiguous legacy personal/statistics records",
+      "Discord channels/roles/messages"
+    ]
+  },
+  "confirmation": {
+    "chooseThenPreviewThenConfirm": true,
+    "uniqueNoncePerPreview": true,
+    "timeoutMs": 60000,
+    "scope": [
+      "actor",
+      "guild",
+      "message"
+    ],
+    "ackBeforeMutation": true,
+    "busyAndSingleClaim": true,
+    "cancelAndExpiryNoWrites": true,
+    "ownerIdsExactMatch": true,
+    "freshAccess": true
+  },
+  "persistence": {
+    "atomicTransaction": true,
+    "readConcern": "snapshot",
+    "writeConcern": "majority",
+    "databaseTimeoutMs": 15000,
+    "maxCommitTimeMs": 5000,
+    "typedBsonRevision": true,
+    "numericPromotionDisabledForSnapshot": true,
+    "queryRecordLimit": 5000,
+    "totalBsonLimitBytes": 8388608,
+    "perStoreCaptureBeforeQueueReservation": true,
+    "cachePublicationAfterCommit": true,
+    "pendingMutationJournal": true,
+    "frozenPayloadsPreserveJsAndBsonTypes": true,
+    "mathUsesLegacyAbsoluteComputedValue": true,
+    "noPartialDeleteFallback": true
+  },
+  "verification": {
+    "isolatedReplicaMongoMajor": 7,
+    "mongoIntegrationAndInteractionCasesHost": 24,
+    "pureMutationCasesHost": 4,
+    "newCasesImage": 28,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "realSyncMapAndDiscordBuilders": true,
+    "noRealDiscordInteractions": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1162,
+      "dependencies": 3426
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1024,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "topology": {
+      "logicalSessions": true,
+      "replicaSet": true,
+      "sharded": false,
+      "transactionCapable": true
+    },
+    "productionDependencyAudit": {
+      "unchangedLock": true,
+      "moderate": 37,
+      "high": 0,
+      "critical": 0
+    },
+    "http": [
+      {
+        "url": "http://127.0.0.1:3002/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/",
+        "status": 302,
+        "expected": 302
+      },
+      {
+        "url": "http://127.0.0.1:3002/api/panel/context",
+        "status": 401,
+        "expected": 401
+      },
+      {
+        "url": "http://127.0.0.1:3002/app/package.json",
+        "status": 404,
+        "expected": 404
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/health",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/",
+        "status": 302,
+        "expected": 302
+      }
+    ],
+    "assets": [
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/2qprrfrwmtel1.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/turbopack-1gj34814o3k0t.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3wbm-994r45kr.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3cfn99dbrcvvp.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/37dgj-y9ab1m8.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/379otflgu1tbv.css",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0cz1d0mv5g_q7.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/3f87ogitp1f5z.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/chunks/0umf92h1sb77c.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_ssgManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_buildManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/app/_next/static/k5u7-JuFeeLaEU788aFqA/_clientMiddlewareManifest.js",
+        "status": 200,
+        "hashMatches": true
+      },
+      {
+        "url": "https://obey.melodiaauris.qzz.io/css/dj-role-settings.css",
+        "status": 200,
+        "hashMatches": true
+      }
+    ],
+    "runtimeSamples": [
+      {
+        "sample": 1,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 2,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 3,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 4,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 5,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 6,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 7,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 8,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 9,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      },
+      {
+        "sample": 10,
+        "health": "healthy",
+        "restarts": 0,
+        "status": "ok",
+        "database": true,
+        "music": true
+      }
+    ],
+    "backup": {
+      "bytes": 59233457,
+      "gzipCrc": true,
+      "temporaryCredentialConfigRemoved": true
+    }
+  },
+  "reviews": {
+    "independentCycles": 3,
+    "crossModel": "user chose to continue with current review",
+    "findingsResolved": [
+      "reservation/acquisition capture windows",
+      "same-value sets and push replay semantics",
+      "non-upsert updates after record deletion",
+      "JSON BSON-type collisions",
+      "numeric BSON promotion",
+      "queued payload mutation and cache consistency"
+    ],
+    "regressionCoverage": true,
+    "noFourthReview": true
+  },
+  "deployment": {
+    "healthy": true,
+    "restarts": 0,
+    "latestPromoted": true,
+    "recoveryRecipesUpdated": true,
+    "previousImageRetained": true,
+    "push": false
+  },
+  "cleanup": {
+    "fixtureDatabaseContainerRemoved": true,
+    "temporaryScriptsRemoved": true,
+    "originalTestsUnchanged": true,
+    "evidenceRetained": true
+  },
+  "coverage": {
+    "reviewedGroups": 43,
+    "commandEntriesReviewed": 155,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 520,
+    "remainingHttpRoutes": 74
+  },
+  "limits": [
+    "No production reset or real Discord test interaction.",
+    "Only records unambiguously linked to the selected guild enter the data mode; legacy migration remains separate.",
+    "Durable receipts, global audit and authenticated two-guild acceptance pending.",
+    "Basic music availability does not certify audio quality.",
+    "P0 and global G01/G02 remain open."
+  ]
+}

@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 29/10/2026 · resetsettings con dos opciones y transacciones
+
+Código `fffe3b0e`, imagen `f626acbef79c`: botones Solo configuración / Configuración y datos, vista previa y confirmación ligada a esa selección. IDs de owner exactos, transacción snapshot/majority y revisión BSON tipada; diario de mutaciones para conservar escrituras en espera y publicar caché después del commit. Se conservan premium, bibliotecas compartidas, moderación y música avanzada. Veintiocho pruebas nuevas contra Mongo aislado en imagen, 25 originales, tipos, dependencias y 1.024 hashes; HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; fixture/temporales retirados. P0: 43 grupos/155 entradas/21 rutas, restan 520/74. Recibos, auditoría global, migración de claves antiguas, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-GLOBAL-RESET-2026-10-29.md).
+
 ## 29/10/2026 · reset básico con confirmación y guardado condicional
 
 Código `9acbe35c`, imagen `27483e1bb6f5`: reset/hardreset conserva su alcance de nueve campos, confirma con botones de un solo uso y revalida al propietario dentro de la cola. Una escritura atómica precede al éxito; conflictos, cancelación, vencimiento y ACK fallido no anuncian guardado. Dieciocho casos aislados y 25 originales en imagen; tipos, dependencias, 1.021 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 43 grupos/155 entradas/21 rutas; restan 520/74. Resetsettings global, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-LEGACY-RESET-2026-10-29.md).
