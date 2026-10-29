@@ -1,0 +1,13 @@
+# Estado del bot · contrato de migración
+
+`changestatus`, `botstatus` y la resolución efectiva existente de `status` conservan identidad, categoría Owner y cooldown. Solo un propietario actual del bot puede abrir y guardar el editor; debe seguir siendo miembro con acceso al canal y el bot debe poder responder. No se introduce un requisito Administrator que antes no existía.
+
+El formulario compartido contiene primer texto, segundo texto, actividad, URL de Twitch y presencia (online, idle, dnd). Hay borrador, Guardar, Descartar y cierre; seleccionar o editar no solicita una presencia ni escribe. Los textos tienen entre 1 y 128 unidades UTF-16, sin controles. Las actividades admitidas son PLAYING, LISTENING, WATCHING, STREAMING y COMPETING. URL vacía fuera de Streaming; para Streaming se exige HTTPS y un canal de twitch.tv sin credenciales, puerto, query o fragmento. No se hace una consulta a esa URL.
+
+La escritura usa revisión y reemplazo atómico, con dueño/canal/bot frescos después de esperar la cola y antes del efecto. La memoria compartida y el envío de presencia solo cambian después de confirmar el archivo. Un fallo de entrega a Discord no revierte el guardado ni lo repite; se indica que los ajustes están guardados y el envío no se pudo completar. Una presencia encolada no se presenta como confirmada por Discord.
+
+Producción usa un tercer documento `status.json`, con el objeto status completo. El archivo separado permite a la imagen anterior seguir leyendo config.json/advertisement.json con sus esquemas estrictos. La primera ampliación copia el estado final de un contenedor detenido y nunca reemplaza los documentos existentes. El nuevo arranque exige los tres documentos; el respaldo previo a la migración puede reconocer el formato anterior de dos. El desarrollo sin directorio persiste status en el config.json original. La copia de respaldo y el procedimiento de recuperación incluyen el tercer archivo.
+
+Un único controlador envía tipos numéricos, aplica presencia al iniciar/guardar, alterna textos cada 90 segundos y conserva la ventana publicitaria de 75 segundos. Al guardar se cancela el temporizador publicitario anterior; al cerrar se cancelan todos. Las plantillas admiten los marcadores actuales, repeticiones y createdtime junto a la errata histórica createdime. Los contadores reflejan los datos disponibles, sin multiplicarlos por el número de servidores. Los valores expandidos se acotan sin cortar pares Unicode.
+
+No se cambian presencia, mensajes o voz reales para probar. Se usan SDK, archivos, permisos y temporizadores aislados. Permanecen pendientes las demás operaciones Owner, recibos duraderos, coordinación entre procesos y la aceptación visual/interactiva del usuario en Discord.

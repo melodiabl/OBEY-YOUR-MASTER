@@ -9,7 +9,9 @@ const root = path.resolve(__dirname, '..'), destination = path.join(root, '.runt
 function initialize() {
   const args = process.argv.slice(2)
   if (args.length && (args.length !== 2 || args[0] !== '--from-container' || !/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,79}$/.test(args[1]))) throw Error('invalid_arguments')
-  if (fs.existsSync(destination)) { readGlobalConfiguration(destination); return { initialized: false, existingValidated: true } }
+  const existing = fs.existsSync(destination) ? readGlobalConfiguration(destination, { allowMissingStatus: true }) : null
+  if (existing?.['status.json']) return { initialized: false, existingValidated: true }
+  if (existing && !args.length) throw Error('source_container_required')
   if (!args.length && process.env.OBEY_GLOBAL_CONFIG_DIR !== undefined) throw Error('source_container_required')
   if (args.length && execFileSync('podman', ['inspect', '--format', '{{.State.Running}}', args[1]], { encoding: 'utf8', stdio: 'pipe' }).trim() !== 'false') throw Error('source_container_running')
   fs.mkdirSync(path.dirname(destination), { recursive: true, mode: 0o700 })
@@ -25,16 +27,23 @@ function initialize() {
       }
       documents[name] = JSON.parse(fs.readFileSync(file, 'utf8'))
     }
-    for (const [name, document] of Object.entries(projectGlobalConfiguration(documents))) {
+    const projected = projectGlobalConfiguration(documents)
+    for (const [name, document] of Object.entries(existing ? { 'status.json': projected['status.json'] } : projected)) {
       const file = path.join(staging, name), fd = fs.openSync(file, 'wx', 0o600)
       try { fs.writeFileSync(fd, JSON.stringify(document, null, 2) + '\n'); fs.fsyncSync(fd) }
       finally { fs.closeSync(fd) }
       if (process.getuid?.() === 0) fs.chownSync(file, 1000, 1000)
     }
+    if (existing) {
+      // Atomic create, never replace a status file that appeared concurrently.
+      fs.linkSync(path.join(staging, 'status.json'), path.join(destination, 'status.json'))
+      readGlobalConfiguration(destination)
+      return { initialized: false, statusAdded: true, existingPreserved: true }
+    }
     readGlobalConfiguration(staging)
     if (process.getuid?.() === 0) fs.chownSync(staging, 1000, 1000)
     fs.renameSync(staging, destination)
-    return { initialized: true, files: 2 }
+    return { initialized: true, files: 3 }
   } finally {
     fs.rmSync(source, { recursive: true, force: true })
     fs.rmSync(staging, { recursive: true, force: true })

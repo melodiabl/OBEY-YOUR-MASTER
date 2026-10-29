@@ -146,6 +146,7 @@ async function shutdown() {
   client.stopNodes?.()
   client.stopAssets?.()
   client.stopDatabaseInitialization?.()
+  client.stopBotStatus?.()
   const timeout = setTimeout(() => process.exit(1), 20000)
   timeout.unref()
   try {

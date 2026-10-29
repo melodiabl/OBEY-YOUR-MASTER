@@ -17,7 +17,7 @@ for (const name of ['.env', 'docker-compose.yml', 'docker-compose.override.yml',
   fs.chmodSync(destination, 0o600)
 }
 const persisted = path.join(root, '.runtime/global-configuration')
-const documents = fs.existsSync(persisted) ? readGlobalConfiguration(persisted) : projectGlobalConfiguration({
+const documents = fs.existsSync(persisted) ? readGlobalConfiguration(persisted, { allowMissingStatus: true }) : projectGlobalConfiguration({
   'config.json': require('../botconfig/config.json'), 'advertisement.json': require('../botconfig/advertisement.json'),
 })
 const configurationBackup = path.join(directory, 'global-configuration')

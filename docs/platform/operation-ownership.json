@@ -369,7 +369,7 @@
     "commands/Owner/changeavatar.js": "b36dc5c57308e1220fad05b1825890fdd8ffa8e5b2b1491df300d89cbf9ef503",
     "commands/Owner/changename.js": "f3d664d36fd9d5b44dd26c97929a64272c6701aaab51fbf3643659ebec6c7388",
     "commands/Owner/changeprefix.js": "ee97955bb54a8c794509cfe08842707ba56f19857d4b5ca76d50e28a7f710f2c",
-    "commands/Owner/changestatus.js": "4dfb6384c16ba291ec4d8e5b9f85783df51f9fbc482476f07b04985c18baa4a8",
+    "commands/Owner/changestatus.js": "4034ed7639efaa34404d069901a2cdb899de8c6b1f4229224a7274aef7538067",
     "commands/Owner/cmdreload.js": "a3b29bb2dc9e4236f38d594a02617010992789efdf9c981f7c704dadaa6c9b94",
     "commands/Owner/deployslash.js": "2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d",
     "commands/Owner/detailedeval.js": "4e58361580bb01c615437cae2a0db359fdea189d532d34056b954037b2e16acd",
@@ -559,7 +559,7 @@
     "events/client/disconnect.js": "c8e9116887a9915e7a73385a842ad176657b142464f161e92da566d212a7015b",
     "events/client/error.js": "67297ac00f86a39adf7bb112958d0bcc59ec132b12e6080afad7db40c4ee27c5",
     "events/client/rateLimit.js": "767c8e16fe8a9edad6660b1de97121e3517e9f08fa4a89de31fda76f28536762",
-    "events/client/ready.js": "f4cafc343dd1c1c1f2a146f004669deb94a1eaece020392f6908be9df6a25ed6",
+    "events/client/ready.js": "529aa951171d7098f8b496d562cc7b1875b859aa654810fbfb44c7db59e8fe99",
     "events/client/reconnecting.js": "f67c1711648af117ddecfa1bbd0efd1bd11ce9792653b2d2becb3f6d9b00dee9",
     "events/client/shardDisconnect.js": "5ec2e4fc681968ce9930f4f67a19ed28b407aaa973e078f5203cb51ddcf17a0b",
     "events/client/shardError.js": "ff1871a733c7e574adf95138cba3d42d440787f9bf4d5f681b88595acdef141b",
@@ -838,7 +838,7 @@
     "handlers/welcome/index.js": "9f5ac7a731de6e488f0b012bd78895a2ac9fe397e3c3a75d9a679b4670fb42d2",
     "handlers/welcome/service.js": "df8825574f46ef2460166c694385446b88e2734dc1ff98b46cd3f66e92807407",
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
-    "index.js": "2216c2632508110f66e8bad7daaba9544121bd395516e3495a820f520c05b1c6",
+    "index.js": "8e45faba4f064277f6bba57f8c4da011ab07ff5c6d9a7b2dfcce8914c40febca",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
     "locales/en.json": "515abca5b0e21b7ff95579a23bd2e966aa3909646e9176fba67a720b4aed0e4a",
     "locales/es.json": "c7fdab547eaea35427ce18ee943363a330f80f50205ef503b6d3fe9e87bd67a1",
@@ -1037,9 +1037,13 @@
     "handlers/global-prefix-command.js": "42d53803fa048a18f01dc77b77855c8f2e0fc18deb9a1677b9c495c6b68cbdef",
     "handlers/global-prefix-settings.js": "29b985662ea0d798e38e3d317b91d77901e3ae8d0a1c712015d86582ac435d9a",
     "docker-compose.yml": "3aaad9ea9e7315cbc9071d407e15e684fbef8a75f5ec91f95fc041d0b8801a09",
-    "scripts/backup-before-release.js": "cea9f33afe211ab4d842dbf55d79cf4ba1b4cc242e88a62d9ae4762dbac4bdda",
-    "scripts/initialize-global-configuration.js": "224b63cde3b76dda308eed3669b6cb4b8eb5cd79af03b05097f46a0306902950",
-    "handlers/global-configuration.js": "e4f693dd5326d393f999b2a504b999332159bdd4ec7f7bb883eaeb9bf633dd66"
+    "scripts/backup-before-release.js": "dfe9d6b85fc97fcc990a93cbd08d57439d9e9f84db81e420577ccaf2445903ab",
+    "scripts/initialize-global-configuration.js": "dab030bcc4f224513859251db0f66e043ac3f9f07bb276c40620e7c5e5f7f796",
+    "handlers/global-configuration.js": "4bfa800a1277f819fab94a2225619e4dd3a9e49fb44defccdd138eff068b4473",
+    "handlers/bot-status-command.js": "8042a0179f35861a668d1d206659806ff50d4cd66f9a17575b22a60e65da0cfc",
+    "handlers/bot-status-contract.js": "ca04872467856be6836d9fc2ec8079ecd27509c34a1e3a52c21ab2db540de9c8",
+    "handlers/bot-status-runtime.js": "c54e4ca4de6c3747fe83b4c4f14501aee35c9e670bc1865a0498e8c3e393e583",
+    "handlers/bot-status-settings.js": "0bfe699d7d22f040fb78138bed55e87c287e29738c27b1b3d8f5c07ddf2b5bb1"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -4430,163 +4434,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/changestatus.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.getFooter",
-          "line": 28
-        },
-        {
-          "call": "client.user.username.split",
-          "line": 135
-        },
-        {
-          "call": "client.getFooter",
-          "line": 139
-        },
-        {
-          "call": "client.guilds.cache.reduce",
-          "line": 169
-        },
-        {
-          "call": "client.stats.get",
-          "line": 182
-        },
-        {
-          "call": "client.guilds.cache.values",
-          "line": 183
-        },
-        {
-          "call": "client.stats.get",
-          "line": 193
-        },
-        {
-          "call": "client.guilds.cache.values",
-          "line": 194
-        },
-        {
-          "call": "client.user.setActivity",
-          "line": 202
-        },
-        {
-          "call": "client.getFooter",
-          "line": 212
-        },
-        {
-          "call": "client.getFooter",
-          "line": 226
-        },
-        {
-          "call": "client.getFooter",
-          "line": 248
-        },
-        {
-          "call": "client.user.username.split",
-          "line": 262
-        },
-        {
-          "call": "client.getFooter",
-          "line": 266
-        },
-        {
-          "call": "client.guilds.cache.reduce",
-          "line": 296
-        },
-        {
-          "call": "client.stats.get",
-          "line": 309
-        },
-        {
-          "call": "client.guilds.cache.values",
-          "line": 310
-        },
-        {
-          "call": "client.stats.get",
-          "line": 320
-        },
-        {
-          "call": "client.guilds.cache.values",
-          "line": 321
-        },
-        {
-          "call": "client.user.setActivity",
-          "line": 329
-        },
-        {
-          "call": "client.getFooter",
-          "line": 339
-        },
-        {
-          "call": "client.getFooter",
-          "line": 353
-        },
-        {
-          "call": "client.getFooter",
-          "line": 375
-        },
-        {
-          "call": "client.user.setActivity",
-          "line": 459
-        },
-        {
-          "call": "client.getFooter",
-          "line": 469
-        },
-        {
-          "call": "client.getFooter",
-          "line": 491
-        },
-        {
-          "call": "client.getFooter",
-          "line": 531
-        },
-        {
-          "call": "client.getFooter",
-          "line": 547
-        },
-        {
-          "call": "client.getFooter",
-          "line": 558
-        },
-        {
-          "call": "client.user.setActivity",
-          "line": 567
-        },
-        {
-          "call": "client.getFooter",
-          "line": 577
-        },
-        {
-          "call": "client.getFooter",
-          "line": 595
-        },
-        {
-          "call": "client.getFooter",
-          "line": 617
-        },
-        {
-          "call": "client.user.setStatus",
-          "line": 694
-        },
-        {
-          "call": "client.getFooter",
-          "line": 698
-        },
-        {
-          "call": "client.getFooter",
-          "line": 730
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/channellock.js": {
       "kind": "current-command-adapter",

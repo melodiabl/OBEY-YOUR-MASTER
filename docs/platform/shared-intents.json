@@ -1118,15 +1118,35 @@
       "result": "One atomic conditional update and committed cache patch before success. Scoped conflicts preserve newer settings; unrelated settings are preserved. No Discord channels, messages or roles are deleted.",
       "limits": "Retains actual nine-field legacy scope and corrects the former all-setups description. No production reset or real test interactions. Authenticated two-guild acceptance and durable receipts remain pending.",
       "evidence": "evidence/p0-legacy-reset-20261029.json"
+    },
+    {
+      "id": "operations.bot.status.configure",
+      "commands": [
+        "prefix:changestatus"
+      ],
+      "routes": [],
+      "service": "handlers/bot-status-settings.js#createBotStatusSettings",
+      "store": "Persistent status.json in shared configuration volume, atomic file queue and revision; original config.status in local development",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current on-disk bot owners, fresh guild/channel/bot access, no new Administrator requirement; rechecked inside file operation",
+      "confirmation": "Shared form draft and explicit Save; Discard/close/expiry never publish presence",
+      "finding": "Persist before updating shared config or requesting numeric presence. Availability survives recreation, one controller owns rotation/advertisement timers and shutdown. Gateway delivery is not acknowledged by Discord.",
+      "scope": "Five status fields: text, text2, type, url, presence",
+      "limits": [
+        "Single process queue, no cross-process lock or durable receipt",
+        "Runtime presence delivery is queued/unconfirmed, distinct from persisted settings"
+      ],
+      "nextTask": "T12 / T55",
+      "evidence": "evidence/p0-bot-status-20261029.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 43,
-    "commandEntriesReviewed": 155,
+    "reviewedGroups": 44,
+    "commandEntriesReviewed": 156,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 520,
+    "remainingCommandEntries": 519,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

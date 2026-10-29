@@ -1,17 +1,7 @@
 //here the event starts
 let config = require(`${process.cwd()}/botconfig/config.json`);
 const Discord = require("discord.js");
-const { ActivityType } = require("discord.js");
-const moment = require("moment");
-
-const ACTIVITY_TYPE_MAP = {
-    PLAYING: ActivityType.Playing,
-    LISTENING: ActivityType.Listening,
-    WATCHING: ActivityType.Watching,
-    STREAMING: ActivityType.Streaming,
-    COMPETING: ActivityType.Competing,
-};
-const { nFormatter } = require(`${process.cwd()}/handlers/functions`);
+const { botStatusRuntime } = require('../../handlers/bot-status-runtime');
 module.exports = client => {
     //SETTING ALL GUILD DATA FOR THE DJ ONLY COMMANDS for the DEFAULT
     //client.guilds.cache.forEach(guild=>client.settings.set(guild.id, ["autoplay", "clearqueue", "forward", "loop", "jump", "loopqueue", "loopsong", "move", "pause", "resume", "removetrack", "removedupe", "restart", "rewind", "seek", "shuffle", "skip", "stop", "volume"], "djonlycmds"))
@@ -51,8 +41,7 @@ module.exports = client => {
             "Memory:": `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB / ${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB`,
         });
 
-        change_status(client);
-        setInterval(() => { change_status(client); }, 90 * 1000);
+        botStatusRuntime(client).start();
 
         // Auto-deploy slash commands globales al iniciar
         if (client.allCommands && client.allCommands.length > 0) {
@@ -64,92 +53,3 @@ module.exports = client => {
         console.log(String(e.stack).grey.bgRed);
     }
 };
-var state = false;
-function change_status(client) {
-    config = require(`${process.cwd()}/botconfig/config.json`);
-    if (!state) {
-        client.user.setActivity(
-            `${config.status.text}`
-                .replace("{prefix}", config.prefix)
-                .replace("{guildcount}", nFormatter(client.guilds.cache.size, 2))
-                .replace(
-                    "{membercount}",
-                    nFormatter(
-                        client.guilds.cache.reduce((a, b) => a + b?.memberCount, 0),
-                        2
-                    )
-                )
-                .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
-                .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
-                .replace("{name}", client.user.username)
-                .replace("{tag}", client.user.username)
-                .replace("{commands}", client.commands.size)
-                .replace(
-                    "{usedcommands}",
-                    nFormatter(
-                        Math.ceil((client.stats.get("global", "commands") * [...client.guilds.cache.values()].length) / 10),
-                        2
-                    )
-                )
-                .replace(
-                    "{songsplayed}",
-                    nFormatter(
-                        Math.ceil((client.stats.get("global", "songs") * [...client.guilds.cache.values()].length) / 10),
-                        2
-                    )
-                ),
-            { type: ACTIVITY_TYPE_MAP[config.status.type] ?? ActivityType.Listening, url: config.status.url }
-        );
-    } else {
-        client.user.setActivity(
-            `${config.status.text2}`
-                .replace("{prefix}", config.prefix)
-                .replace("{guildcount}", nFormatter(client.guilds.cache.size, 2))
-                .replace(
-                    "{membercount}",
-                    nFormatter(
-                        client.guilds.cache.reduce((a, b) => a + b?.memberCount, 0),
-                        2
-                    )
-                )
-                .replace("{created}", moment(client.user.createdTimestamp).format("DD/MM/YYYY"))
-                .replace("{createdime}", moment(client.user.createdTimestamp).format("HH:mm:ss"))
-                .replace("{name}", client.user.username)
-                .replace("{tag}", client.user.username)
-                .replace("{commands}", client.commands.size)
-                .replace(
-                    "{usedcommands}",
-                    nFormatter(
-                        Math.ceil((client.stats.get("global", "commands") * [...client.guilds.cache.values()].length) / 10),
-                        2
-                    )
-                )
-                .replace(
-                    "{songsplayed}",
-                    nFormatter(
-                        Math.ceil((client.stats.get("global", "songs") * [...client.guilds.cache.values()].length) / 10),
-                        2
-                    )
-                ),
-            { type: ACTIVITY_TYPE_MAP[config.status.type] ?? ActivityType.Listening, url: config.status.url }
-        );
-    }
-    state = !state;
-    if (client.ad.enabled) {
-        setTimeout(
-            () => {
-                client.user.setActivity(client.ad.statusad);
-            },
-            (90 - 15) * 1000
-        );
-    }
-}
-/**
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- * Desarrollado por Melodia | https://github.com/melodiabl
- * @INFO
- */
