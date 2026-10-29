@@ -1963,5 +1963,29 @@
     "notYours": "Only the person who opened this confirmation can use its buttons.",
     "unavailable": "The reset could not be confirmed. Reopen settings to check the current state.",
     "usage": "Use reset without arguments and review the confirmation."
+  },
+  "globalReset": {
+    "choose": "What should be reset in this server?\n\nConfiguration only: general preferences, welcome, tickets, logs, JTC setups, roster, commands and XP settings.\nConfiguration and data: also includes statistics, profiles and XP explicitly linked to this server.\n\nPremium, personal libraries, economy, sanctions and advanced music configuration are preserved. Choosing an option does not save changes.",
+    "configuration": "Configuration only",
+    "data": "Configuration and data",
+    "cancel": "Cancel",
+    "confirm": "Confirm reset",
+    "back": "Change option",
+    "reading": "Reading the current state to prepare confirmation…",
+    "saving": "Reset in progress. Waiting for database confirmation…",
+    "previewConfiguration": "Reset configuration only\n\nThe listed general preferences and setups will be reset. Statistics, profiles, member XP and legacy warnings are preserved.\n\nPremium, personal libraries, economy, sanctions and advanced music configuration remain. Discord channels and messages remain in place. Select Confirm reset to save.",
+    "previewData": "Reset configuration and data linked to this server\n\nThe listed settings, statistics, local profiles, member XP and legacy warnings will be reset. Only records unambiguously linked to this server are included; shared personal records and legacy records without a reliable link are preserved.\n\nPremium, libraries, economy, canonical moderation history and advanced music configuration remain. Discord channels and messages remain in place.",
+    "savedConfiguration": "Configuration reset confirmed. Local server data was preserved. Use /setup to configure systems.",
+    "savedData": "Configuration and linked server data reset confirmed. Shared data and the systems listed in the preview were preserved.",
+    "cancelled": "Reset cancelled. No changes were submitted.",
+    "expired": "Selection or confirmation expired. No changes were submitted.",
+    "ownerOnly": "Only an authorized bot owner can open and confirm this reset.",
+    "notYours": "Only the person who opened this panel can choose and confirm.",
+    "conflict": "Data changed after the preview. Open resetsettings again and review the current state.",
+    "tooLarge": "This reset exceeds its data limit and requires a separate review. Deletion was not started.",
+    "unconfirmed": "The commit result could not be confirmed. Check the current state before repeating the reset.",
+    "unavailable": "The reset or access could not be confirmed. Check the current state before trying again.",
+    "usage": "Use resetsettings without arguments and choose one of its two options.",
+    "stale": "This confirmation belongs to an earlier choice. Review the current preview."
   }
 }

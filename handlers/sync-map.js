@@ -1,3 +1,4 @@
+const { cloneMutation } = require('./sync-map-mutations')
 function getPath(obj, path) {
   if (!path || typeof path !== 'string') return obj
   return path.split('.').reduce((o, k) => (o != null && typeof o === 'object' ? o[k] : undefined), obj)
@@ -25,6 +26,7 @@ class SyncMap {
     this._cache   = new Map()
     this._writes = Promise.resolve()
     this._errors = []
+    this._mutationCaptures = new Set()
   }
 
   persist(operation) {
@@ -33,6 +35,21 @@ class SyncMap {
       console.error(`[DB] ${this.model.modelName} write failed:`, error.message)
     })
   }
+  // Freeze the submitted update so later cache edits cannot change queued persistence.
+  persistUpdate(key, update, options = {}) {
+    const frozen = cloneMutation(update)
+    this.recordMutation({ key: String(key), update: frozen, upsert: Boolean(options.upsert) })
+    this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: String(key) }, frozen, options))
+  }
+  recordMutation(mutation) {
+    for (const capture of this._mutationCaptures) if (capture.matches(mutation.key)) capture.mutations.push(mutation)
+  }
+  captureMutations(matches) {
+    const capture = { matches, mutations: [] }
+    this._mutationCaptures.add(capture)
+    return { mutations: capture.mutations, close: () => this._mutationCaptures.delete(capture) }
+  }
+
   // Explicit writes join the same persistence queue, but expose their own result/error.
   exclusive(operation) {
     const result = this._writes.then(() => {
@@ -47,6 +64,13 @@ class SyncMap {
     const doc = this._cache.get(key) || { [this.guildKey]: key }
     for (const [path, value] of Object.entries(patch)) setPath(doc, path, structuredClone(value))
     this._cache.set(key, doc)
+  }
+
+  // Publish a transaction's committed snapshot without scheduling another database write.
+  replaceCached(key, value) {
+    key = String(key)
+    if (value == null) this._cache.delete(key)
+    else this._cache.set(key, { [this.guildKey]: key, ...value })
   }
 
   async flush() {
@@ -77,7 +101,7 @@ class SyncMap {
         ? { [this.guildKey]: key, ...JSON.parse(JSON.stringify(defaultValue)) }
         : { [this.guildKey]: key }
       this._cache.set(key, obj)
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $setOnInsert: defaultValue || {} }, { upsert: true }))
+      this.persistUpdate(key, { $setOnInsert: defaultValue || {} }, { upsert: true })
     } else if (!path && typeof defaultValue === 'object' && defaultValue !== null) {
       // Guild existente: merge de campos faltantes (ej. "embed", "suggest", etc.)
       const doc = this._cache.get(key)
@@ -89,7 +113,7 @@ class SyncMap {
         }
       }
       if (Object.keys(toSet).length > 0) {
-        this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: toSet }))
+        this.persistUpdate(key, { $set: toSet }, { upsert: true })
       }
     }
     if (path) {
@@ -97,7 +121,7 @@ class SyncMap {
       if (doc && !hasPath(doc, path)) {
         const val = typeof defaultValue === 'object' ? JSON.parse(JSON.stringify(defaultValue)) : defaultValue
         setPath(doc, path, val)
-        this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: val } }))
+        this.persistUpdate(key, { $set: { [path]: val } }, { upsert: true })
       }
     }
     return this._cache.get(key)
@@ -120,13 +144,13 @@ class SyncMap {
     const doc = this._cache.get(key)
     if (path) {
       setPath(doc, path, value)
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: value } }, { upsert: true }))
+      this.persistUpdate(key, { $set: { [path]: value } }, { upsert: true })
     } else if (typeof value === 'object' && value !== null) {
       Object.assign(doc, value)
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: value }, { upsert: true }))
+      this.persistUpdate(key, { $set: value }, { upsert: true })
     } else {
       this._cache.set(key, { [this.guildKey]: key, value })
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { value } }, { upsert: true }))
+      this.persistUpdate(key, { $set: { value } }, { upsert: true })
     }
   }
 
@@ -147,10 +171,11 @@ class SyncMap {
       if (keys.some(part => ['__proto__', 'prototype', 'constructor'].includes(part))) throw new Error('Invalid data path')
       const last = keys.pop(), parent = keys.length ? getPath(this._cache.get(key), keys.join('.')) : this._cache.get(key)
       if (parent) delete parent[last]
-      this.persist(() => this.model.updateOne({ [this.guildKey]: key }, { $unset: { [path]: 1 } }))
+      this.persistUpdate(key, { $unset: { [path]: 1 } })
       return
     }
     this._cache.delete(key)
+    this.recordMutation({ key, deleted: true })
     this.persist(() => this.model.deleteOne({ [this.guildKey]: key }))
   }
 
@@ -165,7 +190,7 @@ class SyncMap {
     const filtered = arr.filter(v => !fn(v))
     if (path) {
       setPath(doc, path, filtered)
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: filtered } }))
+      this.persistUpdate(key, { $set: { [path]: filtered } }, { upsert: true })
     }
   }
 
@@ -186,7 +211,7 @@ class SyncMap {
       : n
     if (!Number.isFinite(result)) throw new Error('El resultado no es un número válido')
     setPath(doc, path, result)
-    this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $set: { [path]: result } }))
+    this.persistUpdate(key, { $set: { [path]: result } }, { upsert: true })
   }
 
   // Enmap API: inc(key, path)
@@ -201,7 +226,7 @@ class SyncMap {
       const arr = getPath(doc, path) || []
       arr.push(value)
       setPath(doc, path, arr)
-      this.persist(() => this.model.findOneAndUpdate({ [this.guildKey]: key }, { $push: { [path]: value } }, { upsert: true }))
+      this.persistUpdate(key, { $push: { [path]: { $each: [value] } } }, { upsert: true })
     }
   }
 

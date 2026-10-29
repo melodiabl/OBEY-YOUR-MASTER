@@ -378,7 +378,7 @@
     "commands/Owner/reloadallcmds.js": "0018f919abfe43afd059994160f3e87774d7e5ef869fe32b878a725e7afc4f00",
     "commands/Owner/reloadbot.js": "6da5e77efdfaf0f1fc2a4f98863cef406ae6dd90ede5e6bd8e7995c235da5e19",
     "commands/Owner/removemoney.js": "809b37a032e647763c56ba6ce3d6d2f41a6080237ba225bbf0df78723503c983",
-    "commands/Owner/resetsettings.js": "82333c53b626fa95e6e478714f7e1bcd347c81b4267e30dfe054c4b8328c5200",
+    "commands/Owner/resetsettings.js": "227670be2715c8b9a9d3772f32d38ab234978f30703a14f0468a55bad141a71a",
     "commands/Owner/restartbot.js": "23e0e806f2a627f0532aa7fa7f22b7a273ec04ca540ddfc73226235f6f2571fd",
     "commands/Owner/setup-advertise.js": "2abebb6ca127033398102e836d3d6c7b968e51c70bbf69884bf82d0f56f7837f",
     "commands/Owner/setup-owner.js": "e0915fbc5fe8dc83135c5f1a79af7e275cfdb26c501f7fcf99345b684c8ffa08",
@@ -815,7 +815,7 @@
     "handlers/sticky/service.js": "ab82007774be2330e4403a7ebfbbc3728da8e20d9dc4b3e7a8c89d32330a847a",
     "handlers/suggest.js": "d6d2250870797589f729fed1816a4bec31e96c320a826dbe2c74b45caec8d362",
     "handlers/suggestions/presentation.js": "023d9ad03dd074cc1abdd66b8e77058d2f5e0908c2fd766727499e0d4a77b7e2",
-    "handlers/sync-map.js": "4fc16ecfab7e207bffaa0df086c0c16567f475c3e309bdb7d8de3d564e24fd04",
+    "handlers/sync-map.js": "3f96eca1b924434917c4688d2cda0346106807833124259c27fa369091b821f8",
     "handlers/templates/format.js": "9bd2cf6c34fd7eb505809843938a1305075f496957ed18cf3a33982f96d2e561",
     "handlers/templates/merge.js": "d5387833ad70274e3e01c85af5add390b84594ec9258f54e3f06c8df1a0962f5",
     "handlers/templates/repository.js": "a6803b977c623fd120335894666b1ae2a18d564d7cd756932eb630260bf23db4",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "854996db6c553375590f62315964c462bf12ffcf490d1c95e45c659f8d8a48f2",
-    "locales/es.json": "4ca02e8284fe49318fbb551e31eec533a9e57c9181dec49d23c086e5f91cb755",
+    "locales/en.json": "7cd8fcd4c5d9e06f9fc1a8a9ffc8fff72a13d4a793354b206990748393c71865",
+    "locales/es.json": "09378d8524bc106ea9b50a1349f98e67873b1027b1fc4dd5c5b441a95c23e7f3",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1030,7 +1030,10 @@
     "dashboard/music-default-form.js": "8651ebedd92d6f9bfc28ffec9978abb1893c460d4bc9c212f62c9e6177820c88",
     "dashboard/views/includes/music-default-settings.ejs": "b06b32feff71a6dce84f59d770e2d115f57ddb6287339b2ec8498f76b64dc0ab",
     "handlers/legacy-reset-settings.js": "26dc867e9ebf244f488546956110421e4968c317e3a65fc1f924f5825078942a",
-    "handlers/legacy-reset-command.js": "e024f025c654deef587975306ba3d34f3babaaca3622cdbfb422948a7dfb4d54"
+    "handlers/legacy-reset-command.js": "e024f025c654deef587975306ba3d34f3babaaca3622cdbfb422948a7dfb4d54",
+    "handlers/global-reset-settings.js": "b3efc9595166418545051a580350a71911752a3d4d4d3a7be29305274d437c25",
+    "handlers/global-reset-command.js": "4a6dcffe80287bc41ef23ffe41652830cee51391e53f6b10dde26ffd827369f5",
+    "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

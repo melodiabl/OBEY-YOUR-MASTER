@@ -238,13 +238,14 @@
         "prefix:resetsettings"
       ],
       "routes": [],
-      "service": null,
-      "store": "Multiple guild stores deleted through legacy SyncMaps",
-      "status": "distinct_legacy_intent_recorded",
-      "scope": "Full guild configuration/data reset, not a prefix change",
-      "permissions": "Legacy bot-owner-list guard and explicit yes confirmation",
-      "finding": "Deletes whole settings including prefix and other stores. Kept separate from individual field saves; no reset invoked and no recovery acceptance claimed.",
-      "nextTask": "T12 / T29"
+      "service": "handlers/global-reset-settings.js",
+      "store": "Guild, JTC1/2/3, Roster, CustomCommand, Keyword and exact-guild Ranking settings; data mode also exact-guild Stats/UserProfile and guildId-userId Ranking records",
+      "status": "corrected_and_verified_with_isolated_mongodb",
+      "scope": "Two user-selected scopes, explicit preview and confirmation; shared personal collections, premium, canonical moderation and advanced music stores preserved",
+      "permissions": "Exact bot-owner IDs, fresh membership/channel/bot access and reauthorization after queue admission and before effects",
+      "finding": "Atomic snapshot/majority transaction, BSON-typed revision, per-store reservation journals and post-commit cache publication; no best-effort delete fallback",
+      "nextTask": "Authenticated Discord acceptance and durable receipts remain in T12/T29",
+      "evidence": "evidence/p0-global-reset-20261029.json"
     },
     {
       "id": "configuration.setup.navigate",
@@ -1093,7 +1094,7 @@
       "status": "corrected_and_verified_in_isolation",
       "policy": "Fresh Administrator/channel/bot checks for prefix; fresh ManageGuild with OAuth and CSRF for web. Prefix volume 1–150; web 0–200; integer only.",
       "result": "Commands and dedicated form share conditional persistence. Equalizer accepts existing native presets, defaults off, and applies only on a fresh connection. Session recovery and node switching keep saved effects. Unconfirmed default effect is visible in now-playing; active-session controls remain independent.",
-      "limits": "No automatic legacy-key migration; scoped reset is reviewed separately under configuration.legacy_reset. Global resetsettings remains pending. No real server configuration changes or voice joins for testing. Authenticated two-guild acceptance, actual audio and durable receipts pending.",
+      "limits": "No automatic legacy-key migration. Scoped reset and two-mode global configuration reset are reviewed separately; advanced music data stays outside global reset scope. No real server mutations or voice joins for testing. Authenticated two-guild acceptance, audio and durable receipts pending.",
       "evidence": "evidence/p0-default-equalizer-20261029.json",
       "previousEvidence": "evidence/p0-music-defaults-20261029.json"
     },

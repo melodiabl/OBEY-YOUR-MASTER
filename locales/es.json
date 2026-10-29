@@ -1963,5 +1963,29 @@
     "notYours": "Solo quien abrió esta confirmación puede usar sus botones.",
     "unavailable": "No pude confirmar el restablecimiento. Vuelve a abrir la configuración para consultar el estado actual.",
     "usage": "Usa reset sin argumentos y revisa la confirmación."
+  },
+  "globalReset": {
+    "choose": "¿Qué quieres restablecer en este servidor?\n\nSolo configuración: preferencias generales, bienvenida, tickets, registros, canales de voz temporales, listas de miembros, comandos y ajustes de XP.\nConfiguración y datos: añade estadísticas, perfiles y XP con vínculo confirmado al servidor.\n\nSe conservan premium, bibliotecas personales, economía, sanciones y configuración musical avanzada. Elegir una opción todavía no guarda cambios.",
+    "configuration": "Solo configuración",
+    "data": "Configuración y datos",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar restablecimiento",
+    "back": "Cambiar opción",
+    "reading": "Leyendo el estado actual para preparar la confirmación…",
+    "saving": "Restablecimiento en curso. Esperando la confirmación de la base de datos…",
+    "previewConfiguration": "Restablecer solo configuración\n\nSe restablecerán las preferencias generales y los asistentes indicados. Se conservarán estadísticas, perfiles, XP de miembros y avisos antiguos.\n\nPremium, bibliotecas personales, economía, sanciones y configuración musical avanzada se conservan. Los canales y mensajes de Discord siguen existiendo. Pulsa Confirmar restablecimiento para guardar.",
+    "previewData": "Restablecer configuración y datos vinculados al servidor\n\nAdemás de los ajustes, se borrarán estadísticas, perfiles locales, XP de miembros y avisos antiguos de este servidor. Solo se incluyen registros con una asociación inequívoca: los datos personales compartidos o antiguos sin vínculo fiable se conservan.\n\nSe conservan premium, bibliotecas, economía, historial canónico de moderación y configuración musical avanzada. Los canales y mensajes de Discord siguen existiendo.",
+    "savedConfiguration": "Restablecimiento de configuración confirmado. Los datos locales del servidor se conservaron. Usa /setup para configurar los sistemas.",
+    "savedData": "Restablecimiento de configuración y datos vinculados confirmado. Se conservaron los datos compartidos y los sistemas indicados en la vista previa.",
+    "cancelled": "Restablecimiento cancelado. No se enviaron cambios.",
+    "expired": "La selección o confirmación venció. No se enviaron cambios.",
+    "ownerOnly": "Solo un propietario autorizado del bot puede abrir y confirmar este restablecimiento.",
+    "notYours": "Solo quien abrió este panel puede elegir y confirmar.",
+    "conflict": "Los datos cambiaron desde la vista previa. Abre resetsettings otra vez y revisa el estado actual.",
+    "tooLarge": "El conjunto supera el límite de este restablecimiento. Requiere una revisión específica; no se inició el borrado.",
+    "unconfirmed": "El resultado del commit no pudo confirmarse. Consulta el estado actual antes de repetir el restablecimiento.",
+    "unavailable": "No pude confirmar el restablecimiento o el acceso. Consulta el estado actual antes de volver a intentarlo.",
+    "usage": "Usa resetsettings sin argumentos y elige una de sus dos opciones.",
+    "stale": "Esta confirmación corresponde a una selección anterior. Revisa la vista actual."
   }
 }
