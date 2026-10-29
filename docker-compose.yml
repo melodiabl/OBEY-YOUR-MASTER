@@ -55,9 +55,11 @@ services:
       LAVALINK_DEFAULT_NODE: ${LAVALINK_DEFAULT_NODE:-trinium-02}
       LAVALINK_NODES_FILE: /app/runtime-nodes/nodes.json
       OBEY_EMOJI_MAP_FILE: /app/runtime-emojis/application-emojis.json
+      OBEY_GLOBAL_CONFIG_DIR: /app/runtime-configuration
     volumes:
       - ./.runtime/nodes:/app/runtime-nodes:ro
       - ./.runtime/emojis:/app/runtime-emojis:ro
+      - ./.runtime/global-configuration:/app/runtime-configuration:rw
     mem_limit: 1200m
     memswap_limit: 1400m
     healthcheck:

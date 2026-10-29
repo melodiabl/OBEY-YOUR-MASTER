@@ -1,8 +1,8 @@
-const path = require('node:path')
+const { globalConfigurationFile } = require('./global-configuration')
 const { createFileSettings } = require('./setup-file-settings')
 const { prefixSchema } = require('./prefix-settings')
 const { requireSetupAccess } = require('./setup-access')
-const configFile = path.join(__dirname, '../botconfig/config.json')
+const configFile = globalConfigurationFile('config.json')
 
 function createGlobalPrefixSettings(client, context, { file = configFile } = {}) {
   return createFileSettings(client, {
@@ -21,7 +21,7 @@ function createGlobalPrefixSettings(client, context, { file = configFile } = {})
     },
     publish(next) {
       // Every require(config.json) reader shares this object. Publish only after rename.
-      if (file === configFile) require(configFile).prefix = next.prefix
+      if (file === configFile) require('../botconfig/config.json').prefix = next.prefix
       if (client.config) client.config.prefix = next.prefix
     },
   })

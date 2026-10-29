@@ -225,18 +225,18 @@
       ],
       "routes": [],
       "service": "handlers/global-prefix-settings.js#createGlobalPrefixSettings",
-      "store": "botconfig/config.json through shared createFileSettings file queue, fsync and atomic rename",
+      "store": "Persistent config.json projection under OBEY_GLOBAL_CONFIG_DIR, shared createFileSettings queue, fsync and atomic rename; original path only when env is absent",
       "status": "corrected_and_verified_in_isolation",
       "scope": "Global default, used when a guild has no prefix override",
       "permissions": "Exact IDs from current on-disk bot-owner list plus fresh guild Administrator, membership, channel and bot access; rechecked inside shared file queue and before rename",
-      "finding": "Awaited conditional file replacement precedes publication to all live config readers and success. Guild overrides preserved. Container-local config is not an external durable configuration store; that migration remains open.",
+      "finding": "Exact on-disk owners, fresh Administrator access, conditional replacement and live publication preserved. Startup hydrates migrated fields before consumers load; RW directory survives container recreation. Unmigrated status/materials remain image configuration.",
       "nextTask": "T12 / T55",
       "confirmation": "Explicit changeprefix invocation; no-argument query is read-only",
       "limits": [
-        "One process/file queue; no durable operation receipts or cross-process locking",
-        "Container file survives process restart but not container recreation from an unchanged image"
+        "Single process/file queue; no durable operation receipts or cross-process locking",
+        "Remaining legacy Owner commands and their fields need separate review"
       ],
-      "evidence": "evidence/p0-global-prefix-20261029.json"
+      "evidence": "evidence/p0-global-config-20261029.json"
     },
     {
       "id": "configuration.guild.reset",

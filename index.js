@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./handlers/global-configuration').initializeGlobalConfiguration()
 require('colors')
 const { Client, GatewayIntentBits, Partials, Collection } = require('discord.js')
 const { discordRestOptions, observeRateLimits } = require('./handlers/project/discord-rest')

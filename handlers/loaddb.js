@@ -92,7 +92,8 @@ module.exports = async client => {
   client.modActions      = new EnmapLike()
 
   // Advertisement feature (inicialización por defecto)
-  client.ad = { enabled: false, statusad: null, spacedot: ' • ', textad: '' }
+  client.ad = process.env.OBEY_GLOBAL_CONFIG_DIR === undefined ? { enabled: false, statusad: null, spacedot: ' • ', textad: '' }
+    : require('./global-configuration').advertisementRuntimeSettings()
 
   // Helpers de alto nivel
   client.getGuild    = (guildId) => GuildSchema.findOne({ guildId }).lean()

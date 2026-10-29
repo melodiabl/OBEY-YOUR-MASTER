@@ -1,9 +1,9 @@
 const { EmbedBuilder, Events, escapeMarkdown } = require('discord.js')
 const { randomUUID, createHash } = require('node:crypto')
 const fs = require('node:fs/promises')
-const path = require('node:path')
+const { globalConfigurationFile } = require('./global-configuration')
 const { asFooter } = require('./presentation/metadata')
-const configFile = path.join(__dirname, '../botconfig/config.json')
+const configFile = globalConfigurationFile('config.json')
 const initialized = new WeakMap()
 
 async function readOwnerNoticePreferences(file = configFile) {

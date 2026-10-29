@@ -672,7 +672,7 @@
     "handlers/keyword.js": "1f18f10154f4ada3d98d412eff9eb14418a2b0740f7006d8749d8dba6610ecc4",
     "handlers/language-settings.js": "23d60859e0a9a892bc75a505b3012f2b8d95f5aece68ab6be0f311ef5aca39bf",
     "handlers/leave.js": "766b16d7259147ddfff65e51209aabf3587fbedd06a98d4f3bc779b7a8f04de4",
-    "handlers/loaddb.js": "7d6f2c942d1277d63ec12ea693f23a1cf0eb4e7109e1b9a50cf3decab788bd76",
+    "handlers/loaddb.js": "ce6ac8f3521e0a04a51f48d36483715f64fc6bd156009c21f61d6830f3290a4f",
     "handlers/logger.js": "23b2e4ad4909fbcbb872431d4de308a7acc26cb65c10b5f5ad249af79a6019e2",
     "handlers/logs/audience.js": "88e7cc8df7afbd9dc13d419b34f38dc449d2d8a2b2efc22135bc5233b04b4e6c",
     "handlers/logs/configuration.js": "5ae9fc11f9427c51a4a97fa30277b54ac1aeea6380c14b2dfb79bb4c6618ee9d",
@@ -752,7 +752,7 @@
     "handlers/musichandler.js": "57d0cb346d90a4e1c5b362e21bc31431beb7c69a5a77d4c48baf53be0942b5e9",
     "handlers/mute.js": "5f06323e669eb06c1cf61210e8611e89c9ed920d51b5b549be819ef233ce4397",
     "handlers/neko-provider.js": "c726175276f4722893d1b047e090909a100f8a8770aea4087be89dfd8c55e9e4",
-    "handlers/owner-notifications.js": "790ef5e1ca135f1596b9d2320a214dcdf619efa0b4582e345606ac67ff543e77",
+    "handlers/owner-notifications.js": "818e60d4df7a11ff994d517cecf26fe2cd2277014bfadc38caaa0e6d85f8e119",
     "handlers/permissions.js": "dfd543e3fb6e1420e0663210a308ec03d1e0eb85d7db04dfd583f522232fc078",
     "handlers/pokemon-game.js": "f96367b81f1e7f92cc0699ff150b34c352e6defcc2de26c53d93fe248f58429e",
     "handlers/position.js": "28a486d88685edf74ac52fb9bcfc83b36cbf669d0b8c90c8fa706b12630f17dc",
@@ -793,7 +793,7 @@
     "handlers/setup-music-resources.js": "8e916f197ca97682e7548f61f6bf6f88aa6ed61497e10d94083e33c9944b6a1d",
     "handlers/setup-navigation.js": "af7eaafedbca35ba567e50297bf0079b0ef738f48165d16e82a4fd431e0ee0a6",
     "handlers/setup-operations.js": "3e29529644ccd8ccb409f7a6bda76c30919700fdbbcbfb1093be1b5bd97873ba",
-    "handlers/setup-owner-settings.js": "77669ba375940e02c5514d8f71a017b41506511cc044f92d704c93610742a700",
+    "handlers/setup-owner-settings.js": "ddc4ed506ea8c97ba9fde4b98817aacc6c381753640f932c5b47603e4a4384fd",
     "handlers/setup-panels.js": "f49e70d42732d178cb9e0377596cd5d085df30ffc503e3569f14f9884d2b1f16",
     "handlers/setup-publications.js": "07cf90234b7adcc578d89bb777b2ced810b9aa467fda7332206e8ae838e88207",
     "handlers/setup-radio-resources.js": "7154329d3ae2b8a75394289cd8ccb56a445f10bf43c6ea083fcebdd4a259569f",
@@ -838,7 +838,7 @@
     "handlers/welcome/index.js": "9f5ac7a731de6e488f0b012bd78895a2ac9fe397e3c3a75d9a679b4670fb42d2",
     "handlers/welcome/service.js": "df8825574f46ef2460166c694385446b88e2734dc1ff98b46cd3f66e92807407",
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
-    "index.js": "ee7074a4f115d326337f1135cab329aa49f44af853dc67e6507b2b9467e144dc",
+    "index.js": "2216c2632508110f66e8bad7daaba9544121bd395516e3495a820f520c05b1c6",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
     "locales/en.json": "515abca5b0e21b7ff95579a23bd2e966aa3909646e9176fba67a720b4aed0e4a",
     "locales/es.json": "c7fdab547eaea35427ce18ee943363a330f80f50205ef503b6d3fe9e87bd67a1",
@@ -1035,7 +1035,11 @@
     "handlers/global-reset-command.js": "4a6dcffe80287bc41ef23ffe41652830cee51391e53f6b10dde26ffd827369f5",
     "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c",
     "handlers/global-prefix-command.js": "42d53803fa048a18f01dc77b77855c8f2e0fc18deb9a1677b9c495c6b68cbdef",
-    "handlers/global-prefix-settings.js": "85dca798b65bd56697ef86d2bbf3596a82fabcfff43bd269b000ac16348b92aa"
+    "handlers/global-prefix-settings.js": "29b985662ea0d798e38e3d317b91d77901e3ae8d0a1c712015d86582ac435d9a",
+    "docker-compose.yml": "3aaad9ea9e7315cbc9071d407e15e684fbef8a75f5ec91f95fc041d0b8801a09",
+    "scripts/backup-before-release.js": "cea9f33afe211ab4d842dbf55d79cf4ba1b4cc242e88a62d9ae4762dbac4bdda",
+    "scripts/initialize-global-configuration.js": "224b63cde3b76dda308eed3669b6cb4b8eb5cd79af03b05097f46a0306902950",
+    "handlers/global-configuration.js": "e4f693dd5326d393f999b2a504b999332159bdd4ec7f7bb883eaeb9bf633dd66"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
