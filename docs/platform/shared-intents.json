@@ -1056,7 +1056,7 @@
       "status": "corrected_and_verified_in_isolation",
       "policy": "Fresh Administrator membership, invocation channel access and add-target bot permissions; removing a stale configured channel ID remains possible.",
       "result": "Success after awaited CAS persistence; conflicts and storage failures never announce success; router no longer prunes settings based on missing cache.",
-      "limits": "Reset remains a separate legacy operation; authenticated two-guild walkthrough and durable operation receipts remain pending.",
+      "limits": "Scoped reset is reviewed separately under configuration.legacy_reset; authenticated two-guild walkthrough and durable operation receipts remain pending.",
       "evidence": "evidence/p0-bot-channels-20261028.json"
     },
     {
@@ -1074,7 +1074,7 @@
       "status": "corrected_and_verified_in_isolation",
       "policy": "Prefix retains fresh Administrator and channel access checks; web retains fresh ManageGuild with OAuth/CSRF middleware. Role existence fetched for additions and replacements; stale references may be removed.",
       "result": "Persisted multi-role list with revision conflict detection, separate web intent and no cache-miss pruning. Generic dashboard no longer writes djroles or singular djRole.",
-      "limits": "Legacy reset remains separate; no production role configuration changes used for testing. Authenticated two-guild acceptance pending.",
+      "limits": "Scoped reset is reviewed separately under configuration.legacy_reset; no production role configuration changes used for testing. Authenticated two-guild acceptance pending.",
       "evidence": "evidence/p0-dj-roles-20261028.json"
     },
     {
@@ -1093,7 +1093,7 @@
       "status": "corrected_and_verified_in_isolation",
       "policy": "Fresh Administrator/channel/bot checks for prefix; fresh ManageGuild with OAuth and CSRF for web. Prefix volume 1–150; web 0–200; integer only.",
       "result": "Commands and dedicated form share conditional persistence. Equalizer accepts existing native presets, defaults off, and applies only on a fresh connection. Session recovery and node switching keep saved effects. Unconfirmed default effect is visible in now-playing; active-session controls remain independent.",
-      "limits": "No automatic legacy-key migration; legacy reset remains pending. No real server configuration changes or voice joins for testing. Authenticated two-guild acceptance, actual audio and durable receipts pending.",
+      "limits": "No automatic legacy-key migration; scoped reset is reviewed separately under configuration.legacy_reset. Global resetsettings remains pending. No real server configuration changes or voice joins for testing. Authenticated two-guild acceptance, actual audio and durable receipts pending.",
       "evidence": "evidence/p0-default-equalizer-20261029.json",
       "previousEvidence": "evidence/p0-music-defaults-20261029.json"
     },

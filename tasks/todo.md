@@ -1,5 +1,9 @@
 # Tareas y checkpoints de OBEY
 
+## 29/10/2026 · reset básico con confirmación y guardado condicional
+
+Código `9acbe35c`, imagen `27483e1bb6f5`: reset/hardreset conserva su alcance de nueve campos, confirma con botones de un solo uso y revalida al propietario dentro de la cola. Una escritura atómica precede al éxito; conflictos, cancelación, vencimiento y ACK fallido no anuncian guardado. Dieciocho casos aislados y 25 originales en imagen; tipos, dependencias, 1.021 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 43 grupos/155 entradas/21 rutas; restan 520/74. Resetsettings global, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](../docs/platform/P0-LEGACY-RESET-2026-10-29.md).
+
 ## 29/10/2026 · ecualizador predeterminado conectado al reproductor
 
 Código `c48414be`, imagen `46c47b3a90a3`: defaultequalizer y panel comparten perfiles nativos con CAS, desactivados por defecto; una conexión nueva aplica el elegido. Recuperación/cambio de nodo evitan los valores predeterminados; el efecto no confirmado se indica en reproducción. Dieciséis casos aislados, doce escenarios de navegador, 25 originales en imagen, tipos y dependencias; 1.019 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados. P0: 42 grupos/154 entradas/21 rutas; restan 521/74. Reset, recibos, G01/G02 y aceptación autenticada siguen pendientes. [Informe](../docs/platform/P0-DEFAULT-EQUALIZER-2026-10-29.md).
