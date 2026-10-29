@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 30/10/2026 · diagnóstico y reinicio controlado del dueño
+
+Código `b9ecc882`, imagen `05e2cf4985fc`: botfilename muestra identidad pública y versiones; restartbot exige dueño actual, confirmación y reserva única antes del cierre sin shell. Stop/reload conservan su desactivación; shutdown continúa tras fallos y espera el Gateway. Bandera de reinicio habilitada tras verificar supervisor always. Veintisiete casos nuevos y 25 originales pasan en host/imagen; tipos, dependencias y 1.042 hashes. HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC, reversión y evidencia conservados; verificadores temporales retirados. No se ejecutó un reinicio por comando ni mensajes de prueba en Discord. P0: 47 grupos/162 entradas/21 rutas; restan 513/74 por revisar, sin equivaler a funciones rotas. Otros Owner/Settings, recibos, G01/G02, aceptación real y P1 siguen pendientes. [Informe](P0-OWNER-OPERATIONS-2026-10-30.md).
+
 ## 29/10/2026 · nombre y avatar del bot confirmados
 
 Código `b2c038b9`, imagen `c80fa5e0cf0f`: changename/changeavatar conservan aliases y grant del dueño, con ID exacto y acceso fresco. Respuesta REST explícita, espera de 20 s y bloqueo hasta terminar; fallos de mensajes contenidos. Avatar PNG/JPEG/GIF en memoria, CDN acotado y validación aislada sin credenciales; cuadros GIF completos y bytes de animación conservados. Treinta casos nuevos y 25 originales en host/imagen, tipos/dependencias y 1.038 hashes. HTTP 7/7, recursos 13/13, diez muestras saludables sin reinicios, respaldos CRC y reversión conservados. Temporales e imagen intermedia retirados; no se modificó el perfil real para probar. P0: 45 grupos/158 entradas/21 rutas; quedan 517/74. Otros Owner/Settings, recibos, G01/G02, aceptación real y P1 siguen pendientes. [Informe](P0-BOT-PROFILE-2026-10-29.md).

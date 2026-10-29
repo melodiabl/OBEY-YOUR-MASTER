@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "b2c038b9359b7ca1618aba57d6cd6d995c18170a",
-    "image": "c80fa5e0cf0f24ce9ce4abfbb2ec8eaed4b970f9962ed0742971373643797c5c",
+    "code": "b9ecc88246f293b4a8d1aa438fff7f2b57309d74",
+    "image": "05e2cf4985fce9cfd10bd263f4b3f619801baecb0fdc6b3676a72d92e8ed689b",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-bot-profile-20261029.json",
-    "change": "Confirmed global bot username/avatar changes with exact owner access, bounded single-flight execution and isolated avatar decoding",
-    "tag": "localhost/obey-your-master_bot:release-p0-bot-profile-20261029-b2c038b9",
+    "evidence": "evidence/p0-owner-operations-20261030.json",
+    "change": "Minimal owner diagnostics and confirmed controlled restart with fresh owner authorization and bounded service shutdown",
+    "tag": "localhost/obey-your-master_bot:release-p0-owner-ops-20261030-b9ecc882",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-bot-profile-20261029.json",
-    "deploymentKind": "application_only_p0_bot_profile",
+    "statusEvidence": "evidence/p0-owner-operations-20261030.json",
+    "deploymentKind": "application_only_p0_owner_operations",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -67,7 +67,9 @@
       "reviewedEntries": 93,
       "reviewedRoutes": 21,
       "globalG01G02Accepted": false
-    }
+    },
+    "ownerRestartEnabled": true,
+    "supervisorAlways": true
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

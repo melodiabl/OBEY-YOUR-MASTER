@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "phase": "P0",
+  "code": "b9ecc88246f293b4a8d1aa438fff7f2b57309d74",
+  "image": "05e2cf4985fce9cfd10bd263f4b3f619801baecb0fdc6b3676a72d92e8ed689b",
+  "tag": "localhost/obey-your-master_bot:release-p0-owner-ops-20261030-b9ecc882",
+  "previousImage": "c80fa5e0cf0f24ce9ce4abfbb2ec8eaed4b970f9962ed0742971373643797c5c",
+  "scope": [
+    "prefix:botfilename",
+    "prefix:stopbot",
+    "prefix:reloadbot",
+    "prefix:restartbot"
+  ],
+  "authorization": {
+    "exactCurrentOwnerIds": true,
+    "freshMemberChannelAndBot": true,
+    "noNewAdministratorRequirement": true,
+    "recheckBeforeEffect": true,
+    "sharedProfilePolicyPreserved": true
+  },
+  "diagnostics": {
+    "publicIdentityAndVersionsOnly": true,
+    "freshApplicationMatchingBotId": true,
+    "explicitUnavailableState": true,
+    "timeoutMs": 10000,
+    "hostPathsNetworkAndTeamDataRemoved": true
+  },
+  "restart": {
+    "confirmationSeconds": 30,
+    "actorGuildMessageBound": true,
+    "oneReservationPerClient": true,
+    "ackAndDeliveryBeforeEffect": true,
+    "finalAuthorizationAfterDelivery": true,
+    "cancelExpiryDoubleClickAndFailureCovered": true,
+    "noShell": true,
+    "enabledFlagRequired": true,
+    "supervisorAlwaysVerified": true,
+    "requestDoesNotCertifyRecovery": true,
+    "stopAndHotReloadRemainDisabled": true,
+    "noLiveCommandRestartUsed": true
+  },
+  "shutdown": {
+    "remainingStepsAttemptedAfterRejection": true,
+    "gatewayDestroyAwaited": true,
+    "failedStatusPreserved": true,
+    "sanitizedStepLogs": true,
+    "globalTimeoutMs": 20000,
+    "hungStepCanReachGlobalTimeout": true
+  },
+  "verification": {
+    "newCasesHost": 27,
+    "newCasesImage": 27,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "processExitAndServicesFaked": true,
+    "realShutdownBodyVerifiedInVm": true,
+    "legacyUnownedShellAttemptReproducedWithFakeExecutor": true,
+    "legacyHostAndTeamDisclosureReproducedWithFakes": true,
+    "noRealDiscordChangesOrTestMessages": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1175,
+      "dependencies": 3450
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1042,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "composeVariantsValidated": 3,
+    "independentReview": {
+      "passes": 2,
+      "actionableFindings": 1,
+      "allFixed": true,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false
+    }
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-29T23:22:08.961Z",
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "ownerRestartFlag": true,
+    "supervisorAlways": true,
+    "backupBefore": {
+      "bytes": 59368902,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true
+    },
+    "backupAfter": {
+      "bytes": 59370438,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "previousImageRetained": true,
+    "recipesUpdated": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "fixtureSourcesRemoved": true,
+    "evidenceRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25,
+    "productionLifecycleHandlersRetained": true
+  },
+  "coverage": {
+    "reviewedGroups": 47,
+    "commandEntriesReviewed": 162,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 513,
+    "remainingHttpRoutes": 74,
+    "countsMeasureIntentReviewNotBrokenFunctions": true
+  },
+  "pending": [
+    "Other Owner and Settings operations",
+    "Durable receipts and canonical audit",
+    "Cross-process coordination",
+    "G01/G02 and authenticated two-guild acceptance",
+    "Real owner-invoked restart acceptance",
+    "P1 music migration and real audio recovery acceptance"
+  ],
+  "pushed": false
+}
