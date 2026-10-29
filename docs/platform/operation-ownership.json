@@ -1044,7 +1044,7 @@
     "handlers/bot-status-contract.js": "ca04872467856be6836d9fc2ec8079ecd27509c34a1e3a52c21ab2db540de9c8",
     "handlers/bot-status-runtime.js": "c54e4ca4de6c3747fe83b4c4f14501aee35c9e670bc1865a0498e8c3e393e583",
     "handlers/bot-status-settings.js": "0bfe699d7d22f040fb78138bed55e87c287e29738c27b1b3d8f5c07ddf2b5bb1",
-    "handlers/avatar-media.js": "16e1a6986e26ae96cfb603496a06eec9e4b6da95496c53ba38cd429883f50433",
+    "handlers/avatar-media.js": "0d101e6699e0fc6ae3f61cd3b6fe4f37537bb414e5026a787606308ea0afe820",
     "handlers/avatar-image-worker.js": "5a6b4c26f5b5c829c75d75ea8004ea7a2b618aa42995e758ae26fba12a1e3eed",
     "handlers/bot-profile-command.js": "8a8a26a84f6275f52882bb75f3c45f2d37db4ed5052da78d10878ff78d9db72e",
     "handlers/bot-profile-service.js": "bb7a150e6946f149c73f5dc23dfd48a3fd729054a0db99857973322ba94e1719"

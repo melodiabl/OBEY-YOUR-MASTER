@@ -22,7 +22,7 @@ function inspectGifPixels(data, minimum, expected, colors) {
   }
   invalid()
 }
-function inspectAvatarImage(buffer) {
+function inspectAvatarImage(buffer, { pixels = true } = {}) {
   if (!Buffer.isBuffer(buffer) || buffer.length < 13 || buffer.length > MAX_IMAGE_BYTES) invalid()
   if (!['GIF87a', 'GIF89a'].includes(buffer.toString('ascii', 0, 6))) {
     let image
@@ -60,15 +60,17 @@ function inspectAvatarImage(buffer) {
     offset += 9 + 3 * localColors
     if (offset >= buffer.length || buffer[offset] < 2 || buffer[offset] > 8) invalid()
     const minimum = buffer[offset++]
-    inspectGifPixels(blocks(true), minimum, w * h, colors)
+    const compressed = blocks(pixels)
+    if (pixels) inspectGifPixels(compressed, minimum, w * h, colors)
     frames++
     if (frames > 1000 || width * height * frames > 32 * 1024 * 1024) invalid()
   }
   invalid()
 }
-const avatarMedia = createCardMediaLoader({ inspect: inspectAvatarImage })
+const inspectAvatarBounds = buffer => inspectAvatarImage(buffer, { pixels: false })
+const avatarMedia = createCardMediaLoader({ inspect: inspectAvatarBounds })
 async function validateAvatarImage(buffer) {
-  const metadata = inspectAvatarImage(buffer)
+  const metadata = inspectAvatarBounds(buffer)
   await new Promise((resolve, reject) => {
     const nodeArgs = ['--max-old-space-size=96', path.join(__dirname, 'avatar-image-worker.js')]
     const options = { stdio: ['pipe', 'pipe', 'ignore'], env: { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', TZ: 'UTC' } }
