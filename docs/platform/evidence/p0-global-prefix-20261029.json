@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "phase": "P0",
+  "code": "b53bd187563252817d182a1fe2aee575f7767df0",
+  "image": "62dbf8ca3a0149e3a6fe0cb8cfbd7fd58a29d6db03dd6efb5fd3bfc4aec6044b",
+  "tag": "localhost/obey-your-master_bot:release-p0-global-prefix-20261029-b53bd187",
+  "previousImage": "f626acbef79ca39e61eb2b2bad4a15e23ded8b8ef7384cc1774c9452b921dac2",
+  "scope": [
+    "prefix:changeprefix"
+  ],
+  "authorization": {
+    "exactOnDiskOwnerIds": true,
+    "freshAdministrator": true,
+    "freshMemberChannelAndBot": true,
+    "insideSharedFileQueue": true,
+    "recheckBeforeRename": true
+  },
+  "persistence": {
+    "sharedFileQueue": "handlers/setup-file-settings.js",
+    "revisionAndRawFileCheck": true,
+    "fsyncThenAtomicRename": true,
+    "publishAfterRename": true,
+    "guildOverridesPreserved": true,
+    "unrelatedKeysPreserved": true,
+    "externalDurableStore": false,
+    "crossProcessLock": false,
+    "durableReceipts": false
+  },
+  "verification": {
+    "redReproductions": 2,
+    "newCasesHost": 18,
+    "newCasesImage": 18,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "noRealPrefixChangesOrDiscordMessages": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1164,
+      "dependencies": 3431
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1026,
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "configurationMatchedBeforeDeploy": true
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-29T17:28:17.269Z",
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "healthySamples": 10,
+    "backup": {
+      "bytes": 59233819,
+      "crc": true,
+      "temporaryConfigRemoved": true
+    },
+    "previousImageRetained": true,
+    "recipesUpdated": true
+  },
+  "cleanup": {
+    "ownTemporaryVerifiersRemoved": true,
+    "fixtureSourcesRemoved": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25,
+    "evidenceRetained": true
+  },
+  "coverage": {
+    "reviewedGroups": 43,
+    "commandEntriesReviewed": 155,
+    "httpRoutesReviewed": 21,
+    "remainingCommandEntries": 520,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "External durable global configuration",
+    "Remaining Owner and Settings operations",
+    "Durable receipts and canonical audit",
+    "G01/G02 global acceptance",
+    "Authenticated two-guild acceptance",
+    "P1 music migration and real audio acceptance"
+  ],
+  "pushed": false
+}

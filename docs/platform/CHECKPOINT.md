@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 29/10/2026 · prefijo global con guardado confirmado
+
+Código `b53bd187`, imagen `62dbf8ca3a01`: changeprefix usa IDs exactos del archivo actual y Administrator/canal/bot frescos; cola compartida, revisión y reemplazo atómico antes de actualizar la memoria. Conserva prefijos por servidor y otras claves. Dieciocho casos nuevos y 25 originales pasan en host/imagen; tipos, dependencias, 1.026 hashes, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC, reversión y evidencia conservados; temporales retirados. P0 sigue en 43 grupos/155 entradas/21 rutas; restan 520/74. Persistencia externa de la configuración global, demás Owner/Settings, recibos, G01/G02 y aceptación real pendientes. [Informe](P0-GLOBAL-PREFIX-2026-10-29.md).
+
 ## 29/10/2026 · resetsettings con dos opciones y transacciones
 
 Código `fffe3b0e`, imagen `f626acbef79c`: botones Solo configuración / Configuración y datos, vista previa y confirmación ligada a esa selección. IDs de owner exactos, transacción snapshot/majority y revisión BSON tipada; diario de mutaciones para conservar escrituras en espera y publicar caché después del commit. Se conservan premium, bibliotecas compartidas, moderación y música avanzada. Veintiocho pruebas nuevas contra Mongo aislado en imagen, 25 originales, tipos, dependencias y 1.024 hashes; HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldo CRC y reversión conservados; fixture/temporales retirados. P0: 43 grupos/155 entradas/21 rutas, restan 520/74. Recibos, auditoría global, migración de claves antiguas, G01/G02 y aceptación autenticada siguen pendientes. [Informe](P0-GLOBAL-RESET-2026-10-29.md).
