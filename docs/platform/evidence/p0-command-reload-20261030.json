@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "phase": "P0",
+  "code": "5b9188537766e249e17bce2ec0bddad45a3fa539",
+  "image": "f29da2c49a64830a10ac7d4fb4ba39c2cc4d5794cc2d12da98a5e632452b5393",
+  "tag": "localhost/obey-your-master_bot:release-p0-command-reload-20261030-5b918853",
+  "previousImage": "59cf89d06f238485e7bdb092eed44f6a74ab857182dd471cf12f8c8748678c56",
+  "scope": [
+    "prefix:cmdreload",
+    "prefix:reloadallcmds"
+  ],
+  "aliases": [
+    "commandreload",
+    "reloadallcommands"
+  ],
+  "retirement": {
+    "hotReloadEffectRemoved": true,
+    "namesAliasesCategoryTypeUsageAndCooldownMetadataPreserved": true,
+    "descriptionsAndMessagesExplainRetirement": true,
+    "noAutomaticAlternativeExecution": true,
+    "codeChangesRequireImageDeployment": true,
+    "processRestartUsesExistingSeparateConfirmation": true,
+    "startupRemainsCommandAndAliasPolicyAuthority": true,
+    "noDateSetForRemovingCommandNames": true
+  },
+  "authorization": {
+    "exactCurrentOwnerIds": true,
+    "freshMemberChannelAndBot": true,
+    "accessBeforeUsageReply": true,
+    "noNewAdministratorRequirement": true,
+    "timeoutMs": 10000
+  },
+  "containment": {
+    "noRegistryAccessOrMutation": true,
+    "noExplicitRequireCacheChanges": true,
+    "noUserInputImportsEvalOrPathInterpolation": true,
+    "noSlashDeploymentOrRestart": true,
+    "localeReadFailureUsesSafeSpanish": true,
+    "invalidLocaleContained": true,
+    "replyFailureContained": true,
+    "noDmFallbackOrAlternateChannel": true
+  },
+  "legacyReproduction": {
+    "singleFailedLoadRemovesActiveCommand": true,
+    "singleLeavesDanglingAlias": true,
+    "allBypassesRestrictedFilter": true,
+    "allRebuildsAliasesOutsidePolicy": true,
+    "allEffectsFaked": true
+  },
+  "verification": {
+    "newCasesHost": 29,
+    "newCasesImage": 29,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "registriesProtectedByThrowingProxy": true,
+    "noRealCommandInvocationsOrTestMessages": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1178,
+      "dependencies": 3447
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1045,
+      "commandsLoaded": 675,
+      "aliasesLoaded": 779,
+      "routesInUnchangedInventory": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1"
+    },
+    "nativeDependencyAudit": {
+      "moderate": 37,
+      "high": 0,
+      "critical": 0,
+      "lockChanged": false
+    },
+    "composeVariantsValidated": 3,
+    "translatedMessagesPerLocale": 5,
+    "independentReview": {
+      "passes": 2,
+      "actionableFindings": 1,
+      "allFixed": true,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false,
+      "regression": "Throwing settings locale lookup contained with safe Spanish unavailable reply"
+    }
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-30T00:16:34.095Z",
+    "priorStableSamples": 5,
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "backupBefore": {
+      "bytes": 59370162,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "source": "persistent"
+    },
+    "backupAfter": {
+      "bytes": 59368643,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "recipesUpdated": true,
+    "previousImageRetained": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "fixtureSourcesRemoved": true,
+    "evidenceRetained": true,
+    "productionMigrationNoticeHandlerRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25
+  },
+  "coverage": {
+    "reviewedGroups": 49,
+    "commandEntriesReviewed": 165,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 510,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "Other Owner and Settings operations",
+    "Durable receipts and canonical audit",
+    "Cross-process coordination",
+    "G01/G02 and authenticated two-guild acceptance",
+    "Real owner migration notice and confirmed restart acceptance",
+    "P1 lavalink-client migration and real audio recovery acceptance"
+  ],
+  "pushed": false
+}

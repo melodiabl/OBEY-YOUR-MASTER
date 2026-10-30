@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "684848e23df29121ea38341bb7fc2288cec0fbd3",
-    "image": "59cf89d06f238485e7bdb092eed44f6a74ab857182dd471cf12f8c8748678c56",
+    "code": "5b9188537766e249e17bce2ec0bddad45a3fa539",
+    "image": "f29da2c49a64830a10ac7d4fb4ba39c2cc4d5794cc2d12da98a5e632452b5393",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-owner-leave-20261030.json",
-    "change": "Confirmed owner server departures with fresh origin and target access, one-use preview and bounded pending operation",
-    "tag": "localhost/obey-your-master_bot:release-p0-owner-leave-20261030-684848e2",
+    "evidence": "evidence/p0-command-reload-20261030.json",
+    "change": "Unsafe command hot reload retired with preserved names and fresh-owner migration guidance; startup remains the registry authority",
+    "tag": "localhost/obey-your-master_bot:release-p0-command-reload-20261030-5b918853",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-owner-leave-20261030.json",
-    "deploymentKind": "application_only_p0_owner_leave",
+    "statusEvidence": "evidence/p0-command-reload-20261030.json",
+    "deploymentKind": "application_only_p0_command_reload_retirement",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -69,7 +69,8 @@
       "globalG01G02Accepted": false
     },
     "ownerRestartEnabled": true,
-    "supervisorAlways": true
+    "supervisorAlways": true,
+    "commandHotReloadRetired": true
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
