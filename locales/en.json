@@ -2048,5 +2048,12 @@
     "cancelled": "Departure cancelled.",
     "requesting": "Confirmation received. I will request departure from the selected server. If this is that server, I may be unable to send the result here.",
     "confirmed": "Discord confirmed the departure request for the selected server."
+  },
+  "commandReload": {
+    "singleUsage": "Usage: cmdreload <command name>. Hot reload is retired; this command explains how to update or restart.",
+    "allUsage": "Usage: reloadallcmds, without arguments. Hot reload is retired.",
+    "retired": "Command hot reload is retired. No commands or aliases were changed.\nTo apply code changes, build and deploy the new image. To restart the current image, use restartbot and confirm the restart there. This command does not do so automatically.",
+    "denied": "Only a current bot owner can consult this operation. Also check your channel access.",
+    "unavailable": "I could not verify current access. No commands or aliases were changed. Try again when the bot is available."
   }
 }

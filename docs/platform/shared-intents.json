@@ -1214,15 +1214,34 @@
         "Real owner-invoked departure acceptance not run"
       ],
       "evidence": "evidence/p0-owner-leave-20261030.json"
+    },
+    {
+      "id": "operations.bot.commandReload.retired",
+      "commands": [
+        "prefix:cmdreload",
+        "prefix:reloadallcmds"
+      ],
+      "routes": [],
+      "service": "handlers/retired-command-reload.js",
+      "store": "None; current owner file read and fresh origin access only",
+      "status": "retired_unsafe_effect_with_preserved_command_names",
+      "permissions": "Exact current bot owner plus fresh member/channel/bot access; no new Administrator grant",
+      "scope": "Preserved aliases and metadata, localized migration notice, no command/alias/cache/listener mutations and no automatic restart",
+      "finding": "VM reproduced removed active command and dangling alias on single load failure, restricted-command registration and alias policy bypass on full reload. Code updates use image deployment; process restart uses existing separately confirmed restartbot.",
+      "limits": [
+        "Owner-command migration notice acceptance in real Discord pending",
+        "Other Owner operations, durable receipts and global gates remain open"
+      ],
+      "evidence": "evidence/p0-command-reload-20261030.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 48,
-    "commandEntriesReviewed": 163,
+    "reviewedGroups": 49,
+    "commandEntriesReviewed": 165,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 512,
+    "remainingCommandEntries": 510,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

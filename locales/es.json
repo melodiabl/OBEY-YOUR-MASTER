@@ -2048,5 +2048,12 @@
     "cancelled": "Salida cancelada.",
     "requesting": "Confirmación recibida. Voy a solicitar la salida del servidor indicado. Si es este servidor, puede que no pueda enviar el resultado aquí.",
     "confirmed": "Discord confirmó la petición de salida del servidor indicado."
+  },
+  "commandReload": {
+    "singleUsage": "Uso: cmdreload <nombre del comando>. La recarga en caliente está retirada; consulta aquí cómo actualizar o reiniciar.",
+    "allUsage": "Uso: reloadallcmds, sin argumentos. La recarga en caliente está retirada.",
+    "retired": "La recarga de comandos en caliente está retirada. No se modificó ningún comando ni alias.\nPara aplicar cambios de código, construye y despliega la imagen nueva. Para reiniciar la imagen actual, usa restartbot y confirma allí el reinicio. Este comando no lo ejecuta automáticamente.",
+    "denied": "Solo el dueño actual del bot puede consultar esta operación. Comprueba también tu acceso al canal.",
+    "unavailable": "No pude confirmar el acceso actual. No se modificó ningún comando ni alias. Vuelve a intentarlo cuando el bot esté disponible."
   }
 }
