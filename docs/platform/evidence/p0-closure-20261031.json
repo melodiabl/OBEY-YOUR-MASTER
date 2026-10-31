@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "scope": "P0 workload classification and operational CI gate; no behavioral acceptance or runtime deployment",
+  "baseCommit": "d8f244311f7a381d1c3f4996086989c8f760a8e8",
+  "classification": {
+    "file": "p0-classification.json",
+    "sha256": "bb0805098629491d146b60a66549b898baaf56a7464f02518fc8b3d016bb300a",
+    "commandEntries": 675,
+    "httpRoutes": 95,
+    "capabilities": 27,
+    "functionalReviewUnchanged": {
+      "reviewedGroups": 51,
+      "commandEntriesReviewed": 168,
+      "httpRoutesReviewed": 21,
+      "totalCommandEntries": 675,
+      "totalHttpRoutes": 95,
+      "remainingCommandEntries": 507,
+      "remainingHttpRoutes": 74
+    },
+    "baselineDifference": {
+      "originalCandidateFiles": 674,
+      "currentAdapterFiles": 675,
+      "added": [
+        "slashCommands/setup.js"
+      ],
+      "retired": []
+    }
+  },
+  "originalGates": {
+    "ids": [
+      "G01",
+      "G02",
+      "G25"
+    ],
+    "contractsUnchanged": true,
+    "accepted": false
+  },
+  "checks": {
+    "hostNode": "v22.23.2",
+    "hostClassificationCases": {
+      "tests": 29,
+      "pass": 29,
+      "fail": 0,
+      "skipped": 0
+    },
+    "hostOriginalTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageNode": "v22.23.4",
+    "imageBundledUndici": "6.29.1",
+    "imageClassificationCases": {
+      "tests": 29,
+      "pass": 29,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageOriginalTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageInventory": {
+      "commands": 675,
+      "aliases": 779,
+      "routes": 95,
+      "node": "v22.23.4"
+    },
+    "sourceHashesVerified": 1052,
+    "validationMethod": "Existing release image, network disabled, read-only mounts of classification/validator/inventory and temporary cases. CI inventory step executed via stdin; no service started. Not a fresh image build or npm ci.",
+    "originalTestFiles": [
+      "test/discordmusiccatalog.test.js",
+      "test/musiccatalog.test.js",
+      "test/musichandler-state.test.js"
+    ],
+    "ciChanged": "Added local classification gate; other steps preserved",
+    "remoteCiExecuted": false,
+    "freshInstallationExecuted": false
+  },
+  "independentReview": {
+    "rounds": 3,
+    "resolvedFindings": [
+      "phase policy independent of classified data",
+      "mandatory P0 findings retained",
+      "library entries reconciled across transports",
+      "P0 membership constrained to bounded base entries"
+    ],
+    "lastPass": "No new concrete findings in the scoped correction/documentation review. Not acceptance of business behavior."
+  },
+  "pendingBlocks": [
+    {
+      "id": "P0-C2",
+      "scope": "Sensitive boundaries: giveaway, servers, loadbackup, content triage and outstanding provider Mongo credential rotation"
+    },
+    {
+      "id": "P0-C3",
+      "scope": "13 base routes: session/tenant/CSRF and minimum outputs"
+    },
+    {
+      "id": "P0-C4",
+      "scope": "Original G25 public documentation, history, notices and actual support"
+    },
+    {
+      "id": "P0-C5",
+      "scope": "Final exact installation/runtime/CI/registry/aliases evidence and original G01/G02/G25 acceptance"
+    }
+  ],
+  "runtime": {
+    "changed": false,
+    "code": "3295f5c5e6a4a8ef0748c4df910efbbb853bff1e",
+    "image": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
+    "restarted": false,
+    "discordOperationsExecuted": false,
+    "voiceOperationsExecuted": false,
+    "databaseMutationsExecuted": false
+  },
+  "temporaryVerification": {
+    "directory": ".runtime/p0-closure-20261031",
+    "logHashes": {
+      "classification.tap": "37dc0c4206f126f057b121eff2e96abea2f31b7d757ddd91465ba02541eab887",
+      "classification.json": "4f0c07a6434a634a44139a1f07c714fec7cc73bd9c081fa914c44c8e49a7497e",
+      "original-tests.log": "2089cd5ac63663511a463dc243089646d1fc5aa695e5c91c2d4ac8aa05038abc",
+      "image-classification.tap": "2b30e127ff67be3a0de474ec8b96dca2adfcd75be0f69d1f5add75382ab7c903",
+      "image-original-tests.log": "132b57f806d44ece7720a7264618227c2a337a4281f60f6a79d5768e0d618d7e",
+      "image-inventory.log": "ecaf0554cb5ef127bffe0423548ede9b2477f3015529f66e06812d53f79a237d"
+    },
+    "fixtureSourcesRemoved": true,
+    "keptOperationalGate": "scripts/verify-p0-classification.js"
+  },
+  "limits": [
+    "Classification coverage is not functional acceptance; reviewed groups retain their own limits.",
+    "Host Node22.23.2 differs from the exact Node22.23.4 image; no new G01 installation claim is made.",
+    "Known base security findings and Mongo credential rotation remain unresolved in this classification-only delivery.",
+    "G01/G02/G25, P1 music migration and later capability acceptance remain open."
+  ]
+}

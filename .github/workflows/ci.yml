@@ -31,6 +31,8 @@ jobs:
       - run: npm run typecheck:welcome
       - run: npm run dependencies:welcome
       - run: npm test
+      - name: Verify capability classification without promoting functional acceptance
+        run: node scripts/verify-p0-classification.js
       - run: node scripts/obey-assets.js
       - name: Build Next.js panel and runtime image without starting services
         run: docker build -t obey-platform-check .

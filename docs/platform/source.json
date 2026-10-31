@@ -380,7 +380,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Continue P0 with remaining Administration intents and durable receipts; 35 groups / 138 command entries / 21 routes traced; 537 entries and 74 routes remain. G01/G02 and authenticated acceptance stay open; 24/7 failures remain P1 acceptance.",
+    "nextUnit": "P0-C2: sensitive boundaries (giveaway input/code generation, exact servers owner access, loadbackup destructive boundary, flagged content triage, outstanding Mongo credential rotation). Then P0-C3 base HTTP/session review, P0-C4 original G25 docs, P0-C5 exact G01/G02/G25 closure. Classification: 675 commands / 95 routes / 27 capabilities; functional review remains 51 groups / 168 commands / 21 routes, with 507 / 74 still pending in their capability phases. P0 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -390,7 +390,9 @@
       "P6"
     ],
     "transversal": "P3 resources and localization accompany each capability",
-    "completedStagesNotImplied": true
+    "completedStagesNotImplied": true,
+    "closureReport": "P0-CLOSURE-2026-10-31.md",
+    "classification": "p0-classification.json"
   },
   "p0Reconciliation": {
     "implementationCode": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
@@ -460,5 +462,16 @@
     "reviewedEntries": 121,
     "reviewedRoutes": 21,
     "fullModerationAccepted": false
+  },
+  "p0Classification": {
+    "date": "2026-10-31",
+    "report": "P0-CLOSURE-2026-10-31.md",
+    "evidence": "evidence/p0-closure-20261031.json",
+    "commands": 675,
+    "routes": 95,
+    "capabilities": 27,
+    "functionalReviewUnchanged": true,
+    "originalGatesAccepted": false,
+    "runtimeChanged": false
   }
 }

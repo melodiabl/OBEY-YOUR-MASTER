@@ -1,5 +1,10 @@
 # Tareas y checkpoints de OBEY
 
+## 31/10/2026 · clasificación completa y cierre acotado de P0
+
+675 comandos/95 rutas asignados a 27 capacidades; diferencia 674→675 por `slashCommands/setup.js`, sin retiros. Revisión funcional intacta: 51 grupos/168 comandos/21 rutas; los restantes 507/74 conservan fase y tarea. Gate de integridad integrado en CI, 29 casos aislados y 25 tests originales aprobados en host e imagen Node22.23.4; 1.052 hashes y catálogo 675/779/95. Tres pasadas de revisión corrigieron escapes de fase, flags, pertenencia P0 y agrupación de biblioteca. **P0 permanece abierto:** C2 fronteras sensibles/rotación Mongo, C3 sesión y 13 rutas base, C4 documentación G25, C5 aceptación original G01/G02/G25. Los recorridos en dos guilds siguen en P2 y audio/migración en P1. Sin despliegue, reinicio ni operaciones reales de prueba; verificadores temporales retirados. [Informe](../docs/platform/P0-CLOSURE-2026-10-31.md).
+
+
 ## 31/10/2026 · publicación slash confirmada y arranque sin PUT redundante
 
 Código `3295f5c5`, imagen `8b8a55bf89d9`: deployslash exige dueño actual, destino exacto y confirmación; un servidor desconocido nunca pasa a global. Catálogo/registro y autoridad revalidados, transporte de escritura sin reintentos y reserva hasta terminar. Arranque compartido omite PUT si ya coincide: dry-run real e inicio unchanged con 20 raíces/144 invocaciones, sin publicación real de prueba. Cuarenta y cinco casos nuevos y 25 originales pasan en host/imagen; tipos, fronteras y 1.051 hashes. Catálogo 675/779, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC/reversión conservados y temporales retirados. Revisión acotada: último hallazgo de límites corregido con red/green local tras la tercera pasada del catálogo. P0: 51 grupos/168 entradas/21 rutas; quedan 507/74 por revisar. Recibos, G01/G02, aceptación real y P1 siguen abiertos. [Informe](../docs/platform/P0-SLASH-PUBLICATION-2026-10-31.md).
@@ -114,7 +119,11 @@ Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso f
 
 Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 → P2 → P4 → P5 → P6**, con **P3 transversal** a cada recorrido. Los checkpoints y tareas posteriores conservan su evidencia; no definen por sí solos qué se hace a continuación.
 
-- [ ] **Ahora · P0:** completar propietarios y discrepancias del inventario efectivo de comandos/rutas/aliases y las verificaciones pendientes de base/versiones/lock/CI, conforme a las puertas del maestro.
+- [x] **P0-C1:** clasificar 675 comandos/95 rutas en 27 capacidades, conservar revisión funcional 168/21 y conciliar 674→675. [Contrato y aceptación](../docs/platform/P0-CLOSURE-2026-10-31.md).
+- [ ] **P0-C2 · siguiente:** resolver giveaway/servers, revisar frontera destructiva de loadbackup y contenido señalado, acreditar rotación Mongo previa. Ver aceptación concreta en el contrato de cierre.
+- [ ] **P0-C3:** revisar las 13 rutas base y autoridad sesión/tenant/CSRF, sin aceptar por arrastre las rutas de negocio.
+- [ ] **P0-C4 · G25:** conciliar README/guías/avisos/soporte, conservar historia y exclusiones.
+- [ ] **P0-C5 · G01/G02/G25:** instalación exacta, comprobaciones de base y registro/aliases del corte, aceptación explícita de cada gate; CI remoto separado de evidencia local.
 - [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
 - [ ] **Luego · P2:** completar configuración/setups, bienvenida, tickets, moderación y logs por recorrido, con aceptación entre dos guilds.
 - [ ] **En cada recorrido · P3:** recursos, IDs/fallbacks, idiomas y evidencia visual de esa capacidad.

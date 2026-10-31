@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## 31/10/2026 · clasificación completa y cierre acotado de P0
+
+675 comandos/95 rutas asignados a 27 capacidades; diferencia 674→675 por `slashCommands/setup.js`, sin retiros. Revisión funcional intacta: 51 grupos/168 comandos/21 rutas; los restantes 507/74 conservan fase y tarea. Gate de integridad integrado en CI, 29 casos aislados y 25 tests originales aprobados en host e imagen Node22.23.4; 1.052 hashes y catálogo 675/779/95. Tres pasadas de revisión corrigieron escapes de fase, flags, pertenencia P0 y agrupación de biblioteca. **P0 permanece abierto:** C2 fronteras sensibles/rotación Mongo, C3 sesión y 13 rutas base, C4 documentación G25, C5 aceptación original G01/G02/G25. Los recorridos en dos guilds siguen en P2 y audio/migración en P1. Sin despliegue, reinicio ni operaciones reales de prueba; verificadores temporales retirados. [Informe](../docs/platform/P0-CLOSURE-2026-10-31.md).
+
+
 ## 31/10/2026 · publicación slash confirmada y arranque sin PUT redundante
 
 Código `3295f5c5`, imagen `8b8a55bf89d9`: deployslash exige dueño actual, destino exacto y confirmación; un servidor desconocido nunca pasa a global. Catálogo/registro y autoridad revalidados, transporte de escritura sin reintentos y reserva hasta terminar. Arranque compartido omite PUT si ya coincide: dry-run real e inicio unchanged con 20 raíces/144 invocaciones, sin publicación real de prueba. Cuarenta y cinco casos nuevos y 25 originales pasan en host/imagen; tipos, fronteras y 1.051 hashes. Catálogo 675/779, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC/reversión conservados y temporales retirados. Revisión acotada: último hallazgo de límites corregido con red/green local tras la tercera pasada del catálogo. P0: 51 grupos/168 entradas/21 rutas; quedan 507/74 por revisar. Recibos, G01/G02, aceptación real y P1 siguen abiertos. [Informe](../docs/platform/P0-SLASH-PUBLICATION-2026-10-31.md).
@@ -108,7 +113,32 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 El usuario solicitó una auditoría y cuestionó la arquitectura durante la unidad Config. [Informe](../docs/platform/MUSIC-AUDIT-2026-10-24.md) y [evidencia](../docs/platform/evidence/music-architecture-audit-20261024.json): respaldos actualmente fallidos, recuperación agotada, pausa retenida por autoplay y prioridad manual incompleta reproducidas. Diagnóstico terminado; [concurrencia y restauración corregidas](../docs/platform/MUSIC-CONCURRENCY-2026-10-25.md) y desplegadas en `6479683`. La migración y los demás hallazgos siguen pendientes. La auditoría inicial fue de lectura y P0/P1 siguen abiertos. Resumen Config y categoría MUSIC se verificaron y desplegaron después en `7828e8c`; los hallazgos se vinculan a P0/P1 sin sustituir la secuencia global.
 
-### Unidad inmediata: completar la conciliación de P0
+### Unidad inmediata: cierre acotado de P0 · 31/10/2026
+
+La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **675 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **51 grupos/168 comandos/21 rutas**. Los otros 507/74 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
+
+1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674→675 por `slashCommands/setup.js`, tareas y CI de integridad.
+2. **P0-C2 siguiente:** fronteras sensibles de giveaway/servers/loadbackup, triage de contenido y evidencia de rotación de la credencial Mongo anterior. Resolver los riesgos de base; el negocio completo conserva su fase.
+3. **P0-C3 pendiente:** sesión/tenant/CSRF y salida mínima de las 13 rutas base, conciliando la evidencia anterior sin promover las operaciones de negocio.
+4. **P0-C4 pendiente:** documentación pública conforme a **G25**, con historia, avisos, exclusiones y soporte reales.
+5. **P0-C5 pendiente:** corte de instalación/versiones/lock/CI y loader/registro/aliases conforme a **G01/G02**, más aceptación de G25. Evidencia del corte; separar comprobación local de CI remoto.
+
+**Aceptación de P0:** criterios originales G01/G02/G25 y discrepancias de base resueltas. No exige remodelar primero todos los comandos de P1/P2/P6. Recorridos completos en dos guilds pertenecen a P2; audio y migración a lavalink-client a P1; recibos duraderos conservan sus requisitos por capacidad y recuperación. No se eliminan los pendientes históricos por esta corrección de seguimiento.
+
+### Reglas para las próximas entregas
+
+- Una unidad activa a la vez; verificar, registrar resultado y pendientes, y después avanzar según dependencias.
+- Las pantallas Next.js/React se completan junto a su capacidad. El reproductor completo pertenece a P1 y se conectará al contrato y cola canónicos; no inicia ahora una cadena independiente de rediseños.
+- El usuario confirmó el 28/10 que, tras cerrar P0 y avanzar P1, quiere un panel web claro y una interfaz `/help` cuidada. Usar los PNG/GIF y referencias actualizados por función, conservando identidad y tipografía; registrar IDs reales y fallbacks antes de publicar materiales.
+- Conservar el frontend ya desplegado, datos, identidad y tipografía. La elección de Next.js + React + TypeScript sigue vigente.
+- Mantener los tres archivos originales de tests y retirar los verificadores temporales al cerrar cada entrega. Conservar respaldos/reversión y las autorizaciones del usuario; no provocar mensajes, eventos o entradas de voz de prueba fuera del alcance autorizado.
+- Una incidencia real se corrige y se registra como excepción concreta; después se retoma la unidad activa. No sustituir el orden por la última pantalla modificada.
+
+## Entregas e instrucciones históricas
+
+### Seguimiento P0 sustituido el 31/10/2026
+
+Texto anterior conservado como historia; sus recuentos y «siguientes» no gobiernan la prioridad actual.
 
 **Entrega 26/10 (logs de moderación):** se unificó el destino heredado `adminlog` con el servicio de logs, se protegieron los detalles según la audiencia y se eliminaron envíos directos de los comandos antiguos. La imagen `433a47555310` está saludable; [informe](../docs/platform/P0-MODERATION-LOGS-2026-10-26.md). El mapa llega a 31 grupos/125 entradas/21 rutas; quedan 550 entradas/74 rutas. Continúan pendientes los recibos duraderos, otras intenciones de Administración, G01/G02 y la aceptación real.
 
@@ -123,16 +153,7 @@ El usuario solicitó una auditoría y cuestionó la arquitectura durante la unid
 
 **Aceptación de esta unidad:** propietarios/discrepancias trazables y evidencia vinculada a los IDs existentes; instalación y comprobaciones apropiadas de la base; ninguna capacidad marcada funcional solo por aparecer en el inventario. Después se ejecuta el primer recorrido de migración de P1.
 
-### Reglas para las próximas entregas
 
-- Una unidad activa a la vez; verificar, registrar resultado y pendientes, y después avanzar según dependencias.
-- Las pantallas Next.js/React se completan junto a su capacidad. El reproductor completo pertenece a P1 y se conectará al contrato y cola canónicos; no inicia ahora una cadena independiente de rediseños.
-- El usuario confirmó el 28/10 que, tras cerrar P0 y avanzar P1, quiere un panel web claro y una interfaz `/help` cuidada. Usar los PNG/GIF y referencias actualizados por función, conservando identidad y tipografía; registrar IDs reales y fallbacks antes de publicar materiales.
-- Conservar el frontend ya desplegado, datos, identidad y tipografía. La elección de Next.js + React + TypeScript sigue vigente.
-- Mantener los tres archivos originales de tests y retirar los verificadores temporales al cerrar cada entrega. Conservar respaldos/reversión y las autorizaciones del usuario; no provocar mensajes, eventos o entradas de voz de prueba fuera del alcance autorizado.
-- Una incidencia real se corrige y se registra como excepción concreta; después se retoma la unidad activa. No sustituir el orden por la última pantalla modificada.
-
-## Entregas e instrucciones históricas
 
 Los «siguientes» de este historial describen su momento. La prioridad actual se consulta únicamente en **Orden activo** y en la cabecera de `tasks/todo.md`.
 

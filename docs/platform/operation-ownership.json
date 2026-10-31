@@ -1060,7 +1060,8 @@
     "handlers/slash-publication-catalog.js": "a9b1bbc571e5e23f6d668efa5639414102d08b021e7900452e4827895867b7a1",
     "handlers/slash-publication-transport.js": "e6304d1339bfd1c1d358a03479e97848e817ed9cbd6a408347d4eb44b76ffead",
     "handlers/slash-publication.js": "262488a66ea64d295b788dad6d21e919b1058886728f34cba8e557157dcb822a",
-    "handlers/slash-publication-command.js": "42ab1989a561d56dd6c8fa821bcfc55aeb5961f7c4a8b7a77036299a9d3a522e"
+    "handlers/slash-publication-command.js": "42ab1989a561d56dd6c8fa821bcfc55aeb5961f7c4a8b7a77036299a9d3a522e",
+    "scripts/verify-p0-classification.js": "0db993be1e1d39e78243962af55c0f941a9c6e0efa257a156c5e886bb6dabd5e"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

@@ -1,5 +1,10 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 31/10/2026 · clasificación completa y cierre acotado de P0
+
+675 comandos/95 rutas asignados a 27 capacidades; diferencia 674→675 por `slashCommands/setup.js`, sin retiros. Revisión funcional intacta: 51 grupos/168 comandos/21 rutas; los restantes 507/74 conservan fase y tarea. Gate de integridad integrado en CI, 29 casos aislados y 25 tests originales aprobados en host e imagen Node22.23.4; 1.052 hashes y catálogo 675/779/95. Tres pasadas de revisión corrigieron escapes de fase, flags, pertenencia P0 y agrupación de biblioteca. **P0 permanece abierto:** C2 fronteras sensibles/rotación Mongo, C3 sesión y 13 rutas base, C4 documentación G25, C5 aceptación original G01/G02/G25. Los recorridos en dos guilds siguen en P2 y audio/migración en P1. Sin despliegue, reinicio ni operaciones reales de prueba; verificadores temporales retirados. [Informe](P0-CLOSURE-2026-10-31.md).
+
+
 ## 31/10/2026 · publicación slash confirmada y arranque sin PUT redundante
 
 Código `3295f5c5`, imagen `8b8a55bf89d9`: deployslash exige dueño actual, destino exacto y confirmación; un servidor desconocido nunca pasa a global. Catálogo/registro y autoridad revalidados, transporte de escritura sin reintentos y reserva hasta terminar. Arranque compartido omite PUT si ya coincide: dry-run real e inicio unchanged con 20 raíces/144 invocaciones, sin publicación real de prueba. Cuarenta y cinco casos nuevos y 25 originales pasan en host/imagen; tipos, fronteras y 1.051 hashes. Catálogo 675/779, HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC/reversión conservados y temporales retirados. Revisión acotada: último hallazgo de límites corregido con red/green local tras la tercera pasada del catálogo. P0: 51 grupos/168 entradas/21 rutas; quedan 507/74 por revisar. Recibos, G01/G02, aceptación real y P1 siguen abiertos. [Informe](P0-SLASH-PUBLICATION-2026-10-31.md).
