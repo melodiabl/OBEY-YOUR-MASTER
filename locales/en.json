@@ -2060,5 +2060,27 @@
     "retired": "The JavaScript console over Discord is retired. No received code was executed or displayed.\nUse the bot’s concrete commands for each operation. For identity and versions, use botfilename. Code changes go through the project maintenance and deployment workflow.",
     "denied": "Only a current bot owner can consult this operation. Also check your channel access.",
     "unavailable": "I could not verify access or read the current language. No received content was executed. Try again when the bot is available."
+  },
+  "slashPublication": {
+    "usage": "Usage: deployslash [server ID | global]. No argument prepares the global scope; confirmation is always required.",
+    "denied": "Only a current bot owner can publish commands. Also check your channel access.",
+    "target": "I could not verify the selected server and bot membership. The scope was not changed to global.",
+    "conflict": "The catalog, target or remote registry changed after the preview. Open the command again to review.",
+    "expired": "Confirmation expired. No publication was admitted.",
+    "busy": "A synchronization or publication is already pending. Check its result before trying again.",
+    "timeout": "Verification timed out before a publication was admitted.",
+    "unconfirmed": "I could not confirm the publication result. The request may have reached Discord; inspect the current registry before trying again.",
+    "catalog": "The loaded catalog is empty, restricted or invalid. Nothing was published.",
+    "remote": "I could not validate the Discord registry for this scope. It was not treated as empty.",
+    "unavailable": "I could not complete verification or deliver the notice. No publication was admitted.",
+    "global": "GLOBAL · all servers of the application",
+    "preview": "Publish to **{target}**\n{roots} root records · {invocations} invocations\nAdded: {added} · Changed: {changed} · Removed: {removed}\nThis replaces the entire registry in this scope. Global scope affects all servers. An already matching registry is not published again. Confirm within 30 seconds.",
+    "confirm": "Confirm publication",
+    "cancel": "Cancel",
+    "notYours": "This confirmation belongs to the person who opened the command.",
+    "cancelled": "Publication cancelled.",
+    "requesting": "Confirmation received. I am revalidating the scope and registry before requesting publication.",
+    "unchanged": "The Discord registry already matches the loaded catalog. It was not published again.",
+    "confirmed": "Discord confirmed a registry matching the submitted catalog. Client propagation may take time."
   }
 }

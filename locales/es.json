@@ -2060,5 +2060,27 @@
     "retired": "La consola de JavaScript por Discord está retirada. No se ejecutó ni mostró código recibido.\nUsa los comandos concretos del bot para cada operación. Para consultar identidad y versiones, usa botfilename. Los cambios de código se realizan mediante el flujo de mantenimiento y despliegue del proyecto.",
     "denied": "Solo el dueño actual del bot puede consultar esta operación. Comprueba también tu acceso al canal.",
     "unavailable": "No pude confirmar el acceso o leer el idioma actual. No se ejecutó contenido recibido. Vuelve a intentarlo cuando el bot esté disponible."
+  },
+  "slashPublication": {
+    "usage": "Uso: deployslash [ID del servidor | global]. Sin argumento se prepara el alcance global; siempre requiere confirmación.",
+    "denied": "Solo el dueño actual del bot puede publicar comandos. Comprueba también tu acceso al canal.",
+    "target": "No pude confirmar el servidor indicado y la pertenencia del bot. No se cambió al alcance global.",
+    "conflict": "El catálogo, el destino o el registro remoto cambió desde la vista previa. Abre el comando de nuevo para revisar.",
+    "expired": "La confirmación venció. No se admitió una publicación.",
+    "busy": "Ya hay una sincronización o publicación en curso. Comprueba su resultado antes de volver a intentarlo.",
+    "timeout": "La comprobación agotó su espera antes de admitir una publicación.",
+    "unconfirmed": "No pude confirmar el resultado de publicación. La petición pudo llegar a Discord; consulta el registro actual antes de volver a intentarlo.",
+    "catalog": "El catálogo cargado está vacío, restringido o no es válido. No se publicó.",
+    "remote": "No pude validar el registro de Discord para este alcance. No se interpretó como un registro vacío.",
+    "unavailable": "No pude completar la comprobación o entregar el aviso. No se admitió una publicación.",
+    "global": "GLOBAL · todos los servidores de la aplicación",
+    "preview": "Publicar en **{target}**\n{roots} registros raíz · {invocations} invocaciones\nAltas: {added} · Cambios: {changed} · Bajas: {removed}\nSe reemplaza el registro completo de este alcance. El alcance global afecta a todos los servidores. Si ya coincide, no se vuelve a publicar. Confirma en 30 segundos.",
+    "confirm": "Confirmar publicación",
+    "cancel": "Cancelar",
+    "notYours": "Esta confirmación pertenece a quien abrió el comando.",
+    "cancelled": "Publicación cancelada.",
+    "requesting": "Confirmación recibida. Estoy revalidando el alcance y el registro antes de solicitar la publicación.",
+    "unchanged": "El registro de Discord ya coincide con el catálogo cargado. No se volvió a publicar.",
+    "confirmed": "Discord confirmó un registro que coincide con el catálogo enviado. Su propagación a los clientes puede tardar."
   }
 }

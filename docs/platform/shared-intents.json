@@ -1252,15 +1252,34 @@
         "Real Discord notice acceptance, other Owner/Settings, durable receipts and global gates remain pending"
       ],
       "evidence": "evidence/p0-owner-console-20261031.json"
+    },
+    {
+      "id": "operations.bot.slash.publish",
+      "commands": [
+        "prefix:deployslash"
+      ],
+      "routes": [],
+      "service": "handlers/slash-publication.js / slash-publication-catalog.js / slash-publication-transport.js / slash-publication-command.js",
+      "store": "Loaded SDK catalog and Discord registry; one in-process publication lock and setup drain",
+      "status": "corrected_and_verified_in_isolation",
+      "permissions": "Exact current bot owner, fresh origin and target bot membership; scoped expiring single-use confirmation with final authorization",
+      "scope": "Exact guild or explicitly previewed global target; no unknown-guild fallback. Shared startup synchronization omits unchanged writes.",
+      "finding": "VM reproduces unknown guild becoming global write under historical ID. Canonical response checks, stale preview rejection, empty/restricted/invalid catalogs rejected, installation contexts preserved when not managed, independent no-retry writer. Read-only actual registry equals20 roots/144 invocations under startup asset fallback.",
+      "limits": [
+        "No durable receipt, cross-process lock or Discord CAS",
+        "Last catalog bounds finding fixed with local red/green after three independent passes; no fourth pass",
+        "No real PUT publication tests or global acceptance claimed"
+      ],
+      "evidence": "evidence/p0-slash-publication-20261031.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 50,
-    "commandEntriesReviewed": 167,
+    "reviewedGroups": 51,
+    "commandEntriesReviewed": 168,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 508,
+    "remainingCommandEntries": 507,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

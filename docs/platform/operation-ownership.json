@@ -371,7 +371,7 @@
     "commands/Owner/changeprefix.js": "ee97955bb54a8c794509cfe08842707ba56f19857d4b5ca76d50e28a7f710f2c",
     "commands/Owner/changestatus.js": "4034ed7639efaa34404d069901a2cdb899de8c6b1f4229224a7274aef7538067",
     "commands/Owner/cmdreload.js": "fb37003b05c19b98432e23b514dd68f2e0509ed3df2df43e3545dd788f140cd4",
-    "commands/Owner/deployslash.js": "2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d",
+    "commands/Owner/deployslash.js": "5a2c13e178fc8e11d8579acb89ef4370014fe1e29351c869e9bbe032e6ad05a9",
     "commands/Owner/detailedeval.js": "90a13e4d293dba62884a533fd215e8ca232fc991a181c6e13a5fbe8c017eb9ed",
     "commands/Owner/eval.js": "7696cff11af0d7be396fd116a2e258a751b66b4464a59a869d9aa9a8ab7a7ec9",
     "commands/Owner/leaveserver.js": "9f600900905f5d5f3b2a79919cf2b9bdd9f374a3a89af1e63f0dcbd18f62a0cc",
@@ -559,7 +559,7 @@
     "events/client/disconnect.js": "c8e9116887a9915e7a73385a842ad176657b142464f161e92da566d212a7015b",
     "events/client/error.js": "67297ac00f86a39adf7bb112958d0bcc59ec132b12e6080afad7db40c4ee27c5",
     "events/client/rateLimit.js": "767c8e16fe8a9edad6660b1de97121e3517e9f08fa4a89de31fda76f28536762",
-    "events/client/ready.js": "529aa951171d7098f8b496d562cc7b1875b859aa654810fbfb44c7db59e8fe99",
+    "events/client/ready.js": "2f494b2968abd9bbbeed995f2aa0e97d1d5b26519f11e4a95350661beb38d743",
     "events/client/reconnecting.js": "f67c1711648af117ddecfa1bbd0efd1bd11ce9792653b2d2becb3f6d9b00dee9",
     "events/client/shardDisconnect.js": "5ec2e4fc681968ce9930f4f67a19ed28b407aaa973e078f5203cb51ddcf17a0b",
     "events/client/shardError.js": "ff1871a733c7e574adf95138cba3d42d440787f9bf4d5f681b88595acdef141b",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "05d6a0b06eeb55584d283629e4f3ed0d794c6704fdfa9724b825abff8b7bef60",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "c4ec37b049e0fb4c03daa374d5fbe1e571b5309c54de1a51139e8f5551a85d00",
-    "locales/es.json": "d3c6e28491646b8aa2d0ca9f2042ed49e2ca3ee953cb52f3d8fa0bec6922dabf",
+    "locales/en.json": "9685e299f1b1bf4473f4266b43932a854706d2f0c8615ecbae9760d4358f2b87",
+    "locales/es.json": "dca97b067b233f615de90f349eab0b561315f1b8630959021ea72fd0e0ba4192",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1056,7 +1056,11 @@
     "handlers/owner-guild-leave-command.js": "c41e7a243aa471b6efa07e293583c1e48d9d534068e56889d3ab54e506fa203a",
     "handlers/retired-command-reload.js": "2392ae0a6494d75a13ee048ace5f9638621c237e872e8379905d9466e42d7347",
     "handlers/owner-console-command.js": "2497b95830eda147e6404315d6ca22cf6e82880d46b8c059aba947d2a6c1e39c",
-    "package-lock.json": "ba0fe8cc57e06e50f99626501ed2e886e9cab152f86d0a205416e23114fbaf08"
+    "package-lock.json": "ba0fe8cc57e06e50f99626501ed2e886e9cab152f86d0a205416e23114fbaf08",
+    "handlers/slash-publication-catalog.js": "a9b1bbc571e5e23f6d668efa5639414102d08b021e7900452e4827895867b7a1",
+    "handlers/slash-publication-transport.js": "e6304d1339bfd1c1d358a03479e97848e817ed9cbd6a408347d4eb44b76ffead",
+    "handlers/slash-publication.js": "262488a66ea64d295b788dad6d21e919b1058886728f34cba8e557157dcb822a",
+    "handlers/slash-publication-command.js": "42ab1989a561d56dd6c8fa821bcfc55aeb5961f7c4a8b7a77036299a9d3a522e"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -5919,47 +5923,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/deployslash.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 28
-        },
-        {
-          "call": "client.settings.get",
-          "line": 29
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 38
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 50
-        },
-        {
-          "call": "client.application.commands .set(client.allCommands) .then(slashCommandsData => { themsg.edit( `**\\`${slashCommandsData.size} Slash-Commands\\`** (\\`${slashCommandsData.map(d => d.options).flat().length} Subcommands\\`) loaded for all **possible Guilds**\\n> Those Guilds are those, who invited me with the **SLASH COMMAND INVITE LINK** from \\`${prefix}invite\\`\\n> *Because u are using Global Settings, it can take up to 1 hour until the Commands are changed!*` ); }) .catch",
-          "line": 60
-        },
-        {
-          "call": "client.application.commands .set(client.allCommands) .then",
-          "line": 60
-        },
-        {
-          "call": "client.application.commands .set",
-          "line": 60
-        },
-        {
-          "call": "client.guilds.cache.get",
-          "line": 69
-        },
-        {
-          "call": "client.getFooter",
-          "line": 93
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Economy/deposit.js": {
       "kind": "current-command-adapter",

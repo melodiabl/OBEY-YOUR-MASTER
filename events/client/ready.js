@@ -43,12 +43,11 @@ module.exports = client => {
 
         botStatusRuntime(client).start();
 
-        // Auto-deploy slash commands globales al iniciar
-        if (client.allCommands && client.allCommands.length > 0) {
-            client.application.commands.set(client.allCommands)
-                .then(d => console.log(`[Slash] ${d.size} slash commands desplegados globalmente.`.cyan))
-                .catch(e => console.warn('[Slash] No se pudo desplegar:', e.message))
-        }
+        // Preserve startup synchronization; unchanged registries do not need a PUT.
+        require('../../handlers/slash-publication').syncGlobalCommands(client)
+            .then(result => console.log(`[Slash] Startup catalog ${result.status}; roots=${result.roots}`))
+            .catch(() => console.warn('[Slash] Startup synchronization unconfirmed; no automatic retry'))
+
     } catch (e) {
         console.log(String(e.stack).grey.bgRed);
     }
