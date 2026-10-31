@@ -528,18 +528,18 @@
     "commands/Soundboard/wow.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Voice/voice.js": "ebebc1df85565fd8f0d69d137dba5facc7c91b603083abf9346ed645c796c2c4",
     "dashboard/architect-routes.js": "b67231d1141cc48510e588d3cebaa5696fe744012f8d05a6242cb4e5ceebaf5e",
-    "dashboard/auth.js": "eefd7730bdc83821210da2ca9e288bb56031ea5f519d36f8009bbb55e4853922",
+    "dashboard/auth.js": "6e687264cda3f08abc64e96628a668cff76a457e8a28f48e8b77ed33dca385d9",
     "dashboard/cards-routes.js": "16fd1a55ab746c241ee9c0e11112be5dbc9fc2f7ad0d79b3d15874b1b50d8e5a",
     "dashboard/configuration-routes.js": "6637add63b556cf4a08431a3dd2f8e6e458391a7f00542fa1c137e60d9bb5fb2",
-    "dashboard/frontend-routes.js": "4e68b61fff7adceff7729f981cc5908454bcddce1b3b01517a1e8f0f50c7f434",
+    "dashboard/frontend-routes.js": "b35c58423cb3d31b9005eed00990883c348761019e5dea86c1c0065cbf82d2d7",
     "dashboard/help-routes.js": "bb0056da7c903c2a060ae37a70e00f2e64e25b311600f6f0c55a65f641501d55",
-    "dashboard/index.js": "c83b3e1112d5e5eee855d344f19f61b9656cf801afa323869db749520140ec1a",
+    "dashboard/index.js": "5b6187e6ccd364c052163cd8dd5038a07d1db032c4bf0950babeaf8393476274",
     "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
     "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
     "dashboard/music-visibility.js": "69ccb986fef629933848cf9baac403e7e672b3a29f28182bf8d5e2214bd5c927",
     "dashboard/nodes-routes.js": "2c6792f817625bfa09438fb7c1a0670e85e50aca1bf61b44e725f8979685fa04",
-    "dashboard/permissions.js": "036a76ad921253375963ec846a5b4f1972efcb16bafe28358ec692bd27eb90dd",
-    "dashboard/security.js": "10ce21e3eb6162f965f01fbde3a9ff6581baca860c3032dc6bbb35cbe6dc2dba",
+    "dashboard/permissions.js": "f01e45d75da9ac6a0bcbae877db65ec5370e429b98914be08e9b642ecacbc879",
+    "dashboard/security.js": "57d985091163894915a6c6929137a3ac69db2f4722d9e7ee1be60491401e8bdf",
     "dashboard/welcome-routes.js": "18f3c6c159f2e08d01b1cbfd1cabad2a44f9dcc3cd4ef4ef4b3c7494464c48e6",
     "events/client/debug.js": "a36326f7326f3a79d2c6880409a1f7357d8a0ee0b2117fd2af1065d6edb70722",
     "events/client/disconnect.js": "c8e9116887a9915e7a73385a842ad176657b142464f161e92da566d212a7015b",
@@ -1052,7 +1052,10 @@
     "handlers/owner-server-list.js": "2e53f396e27f3feeca47aa664211ae7a96ed6e8a7bd27bb3068cd636cc02877f",
     "handlers/backup-restore.js": "7f000265b88f1426e0ab9a167bac9806526e0cad1d828af06a1b45b09b07b5c2",
     "handlers/backup-restore-command.js": "078ff4139eec5170239298d806e2c11748bbaeebc22a86ae9b69fa2dd0813e0c",
-    "handlers/retired-content.json": "95ee5d9501890cb1b3627b264a6a0cb7bec0fe38fe9b53cc844e37e2f3ef6a86"
+    "handlers/retired-content.json": "95ee5d9501890cb1b3627b264a6a0cb7bec0fe38fe9b53cc844e37e2f3ef6a86",
+    "dashboard/session-store.js": "13dca445f12fb6912c718a8a6a789d261d9413645164bc6c129c56f78caf8609",
+    "dashboard/oauth.js": "266ce8b91a50fee6c59399a239ea3a8b96de3f1f50fcb5ef2c32f72233dd7e11",
+    "dashboard/statistics.js": "89702fa0dfe723d027fc3c0f17095704e2ccce4fbae2a3ff0e6deaae5327df67"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -27364,7 +27367,7 @@
       "method": "GET",
       "path": "/api/panel/context",
       "owner": "dashboard/frontend-routes.js",
-      "line": 10,
+      "line": 11,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -27373,7 +27376,7 @@
       "method": "GET",
       "path": "/app",
       "owner": "dashboard/frontend-routes.js",
-      "line": 42,
+      "line": 34,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -27382,7 +27385,7 @@
       "method": "GET",
       "path": "/app/",
       "owner": "dashboard/frontend-routes.js",
-      "line": 42,
+      "line": 34,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28003,7 +28006,7 @@
       "method": "GET",
       "path": "/health",
       "owner": "dashboard/index.js",
-      "line": 122,
+      "line": 115,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28012,7 +28015,7 @@
       "method": "GET",
       "path": "/",
       "owner": "dashboard/index.js",
-      "line": 130,
+      "line": 123,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28021,7 +28024,7 @@
       "method": "GET",
       "path": "/login",
       "owner": "dashboard/index.js",
-      "line": 132,
+      "line": 125,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28030,7 +28033,7 @@
       "method": "GET",
       "path": "/auth/callback",
       "owner": "dashboard/index.js",
-      "line": 152,
+      "line": 140,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28039,7 +28042,7 @@
       "method": "POST",
       "path": "/logout",
       "owner": "dashboard/index.js",
-      "line": 187,
+      "line": 157,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28048,7 +28051,7 @@
       "method": "GET",
       "path": "/panel",
       "owner": "dashboard/index.js",
-      "line": 203,
+      "line": 170,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28057,7 +28060,7 @@
       "method": "POST",
       "path": "/api/refresh-guilds",
       "owner": "dashboard/index.js",
-      "line": 214,
+      "line": 181,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28066,8 +28069,8 @@
       "method": "GET",
       "path": "/api/sse",
       "owner": "dashboard/index.js",
-      "line": 250,
-      "handlerCount": 1,
+      "line": 210,
+      "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
     {
@@ -28075,7 +28078,7 @@
       "method": "GET",
       "path": "/api/stats",
       "owner": "dashboard/index.js",
-      "line": 267,
+      "line": 214,
       "handlerCount": 1,
       "behaviorAcceptance": "not-executed"
     },
@@ -28084,7 +28087,7 @@
       "method": "GET",
       "path": "/api/invites/:guildId",
       "owner": "dashboard/index.js",
-      "line": 274,
+      "line": 222,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28093,8 +28096,8 @@
       "method": "GET",
       "path": "/dashboard",
       "owner": "dashboard/index.js",
-      "line": 304,
-      "handlerCount": 2,
+      "line": 252,
+      "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
     {
@@ -28102,7 +28105,7 @@
       "method": "GET",
       "path": "/dashboard/:guildId",
       "owner": "dashboard/index.js",
-      "line": 340,
+      "line": 261,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28111,7 +28114,7 @@
       "method": "POST",
       "path": "/dashboard/:guildId",
       "owner": "dashboard/index.js",
-      "line": 391,
+      "line": 325,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -28120,7 +28123,7 @@
       "method": "GET",
       "path": "/stats/:guildId",
       "owner": "dashboard/index.js",
-      "line": 542,
+      "line": 470,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28129,7 +28132,7 @@
       "method": "GET",
       "path": "/player/:guildId",
       "owner": "dashboard/index.js",
-      "line": 615,
+      "line": 543,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28138,7 +28141,7 @@
       "method": "GET",
       "path": "/music/:guildId",
       "owner": "dashboard/index.js",
-      "line": 618,
+      "line": 546,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28147,7 +28150,7 @@
       "method": "GET",
       "path": "/library/:guildId",
       "owner": "dashboard/index.js",
-      "line": 638,
+      "line": 566,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28156,7 +28159,7 @@
       "method": "GET",
       "path": "/api/player/:guildId",
       "owner": "dashboard/index.js",
-      "line": 656,
+      "line": 584,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28165,7 +28168,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/action",
       "owner": "dashboard/index.js",
-      "line": 665,
+      "line": 593,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -28174,7 +28177,7 @@
       "method": "GET",
       "path": "/api/player/:guildId/top-tracks",
       "owner": "dashboard/index.js",
-      "line": 700,
+      "line": 628,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28183,7 +28186,7 @@
       "method": "GET",
       "path": "/api/player/:guildId/voice-channels",
       "owner": "dashboard/index.js",
-      "line": 728,
+      "line": 656,
       "handlerCount": 2,
       "behaviorAcceptance": "not-executed"
     },
@@ -28192,7 +28195,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/preview",
       "owner": "dashboard/index.js",
-      "line": 741,
+      "line": 669,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -28201,7 +28204,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/search",
       "owner": "dashboard/index.js",
-      "line": 788,
+      "line": 716,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -28210,7 +28213,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/add",
       "owner": "dashboard/index.js",
-      "line": 808,
+      "line": 736,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     }
@@ -36880,7 +36883,7 @@
     "slashTopLevel": 20,
     "aliases": 776,
     "httpRoutes": 95,
-    "sourceFiles": 1043,
+    "sourceFiles": 1046,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

@@ -388,7 +388,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "P0-C3: review session/tenant/CSRF and minimal outputs of the 13 base routes. P0-C2 boundaries and scoped content retirements deployed and healthy; provider Mongo credential rotation remains externally open. Then original G25 documentation and exact G01/G02/G25 cut. Active classification: 661 commands / 95 routes; 14 retired entries traced. Functional review remains 51 groups / 168 commands / 21 routes; 493 commands / 74 routes remain pending in their capability phases. P0 not accepted.",
+    "nextUnit": "Finish P0-C3 image/browser/deployment verification, then P0-C4 original G25 public documentation. Provider Mongo credential rotation remains externally open under C2. Review: 52 groups / 168 commands / 34 routes; 493 commands / 61 routes remain in their capability phases. G01/G02/G25 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -501,5 +501,14 @@
     "globalP0Accepted": false,
     "implementationCode": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
     "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a"
+  },
+  "p0Session": {
+    "date": "2026-10-31",
+    "report": "P0-SESSION-2026-10-31.md",
+    "evidence": "evidence/p0-session-20261031.json",
+    "status": "verified-in-isolation-image-pending",
+    "baseRoutesReviewed": 13,
+    "realUserOAuthAccepted": false,
+    "distributedAccepted": false
   }
 }

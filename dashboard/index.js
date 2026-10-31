@@ -7,10 +7,13 @@ const http       = require('http')
 const crypto     = require('crypto')
 const { Server } = require('socket.io')
 const { PermissionFlagsBits } = require('discord.js')
-const { freshGuildPermissions } = require('./permissions')
+const { freshGuildPermissions, readFreshGuilds } = require('./permissions')
+const { fenceSessionStore } = require('./session-store')
+const { createDiscordOAuth } = require('./oauth')
+const { publicStats, streamStatistics } = require('./statistics')
 const { createMusicRealtime, createSocketAuthorizer } = require('./music-realtime')
 const { canManageGuild } = require('../handlers/permissions')
-const { sessionAuth, establishSession, dashboardReturnTo } = require('./auth')
+const { sessionAuth, establishSession, dashboardReturnTo, consumeOAuthState, saveSession, invalidateSession, publicUser, createSessionId, trackSessionIssuance } = require('./auth')
 const { createLanguageSettings } = require('../handlers/language-settings')
 const { availableLanguages } = require('../handlers/setup-language')
 const { createPrefixSettings } = require('../handlers/prefix-settings')
@@ -51,6 +54,14 @@ module.exports = async client => {
   app.use('/api/config', express.json({ limit: '16kb' }))
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
+  app.disable('x-powered-by')
+  app.use((_req, res, next) => {
+    res.set('X-Content-Type-Options', 'nosniff')
+    res.set('X-Frame-Options', 'DENY')
+    res.set('Content-Security-Policy', "frame-ancestors 'none'")
+    res.set('Referrer-Policy', 'same-origin')
+    next()
+  })
   app.use(express.static(path.join(__dirname, 'public')))
   app.set('view engine', 'ejs')
   app.set('views', path.join(__dirname, 'views'))
@@ -59,6 +70,7 @@ module.exports = async client => {
   const secureCookies = /^https:\/\//i.test(BASE_URL)
   const sessionMiddleware = session({
     secret: SESSION_SECRET,
+    genid: createSessionId,
     resave: false,
     saveUninitialized: false,
     proxy: secureCookies,
@@ -68,46 +80,23 @@ module.exports = async client => {
       sameSite: 'lax',
       secure: secureCookies,
     },
-    store: MongoStore.create({ mongoUrl: MONGO_URL, collectionName: 'dashboard_sessions' }),
+    store: fenceSessionStore(MongoStore.create({ mongoUrl: MONGO_URL, collectionName: 'dashboard_sessions' })),
   })
-  app.use(sessionMiddleware)
+  app.use((req, res, next) => sessionMiddleware(req, res, error => {
+    if (!error) return next()
+    if (res.headersSent) return next(error)
+    res.set('Cache-Control', 'private, no-store').vary('Cookie')
+    return req.path.startsWith('/api/') ? res.status(503).json({ error: 'session_unavailable' })
+      : res.status(503).send('No se pudo verificar la sesión. Inténtalo de nuevo.')
+  }))
+  app.use(trackSessionIssuance)
   app.use(require('./security').csrfProtection(BASE_URL))
 
   // ─── OAuth2 helpers ───────────────────────────────────────────────────────
 
-  async function refreshDiscordToken(session) {
-    const { refresh_token } = session.user
-    if (!refresh_token) throw new Error('no_refresh_token')
-    const tokenRes = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
-      client_id:     DISCORD_CLIENT_ID,
-      client_secret: DISCORD_CLIENT_SECRET,
-      grant_type:    'refresh_token',
-      refresh_token,
-    }), { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-    const { access_token, refresh_token: newRefresh, expires_in } = tokenRes.data
-    const [userRes, guildsRes] = await Promise.all([
-      axios.get('https://discord.com/api/users/@me',        { headers: { Authorization: `Bearer ${access_token}` } }),
-      axios.get('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${access_token}` } }),
-    ])
-    session.user = {
-      ...userRes.data,
-      guilds:        guildsRes.data,
-      access_token,
-      refresh_token: newRefresh,
-      expires_at:    Date.now() + expires_in * 1000,
-    }
-  }
-
-  // Auth middleware — validates session + refreshes Discord token if near expiry
-  const requireAuth = sessionAuth(refreshDiscordToken)
-
-  const fetchDiscordGuilds = async accessToken => {
-    const response = await axios.get('https://discord.com/api/users/@me/guilds', {
-      headers: { Authorization: `Bearer ${accessToken}` },
-      timeout: 5000,
-    })
-    return response.data
-  }
+  const oauth = createDiscordOAuth(axios, { clientId: DISCORD_CLIENT_ID, clientSecret: DISCORD_CLIENT_SECRET, redirectUri: REDIRECT_URI })
+  const requireAuth = sessionAuth(oauth.refresh)
+  const fetchDiscordGuilds = oauth.fetchGuilds
   const requireFreshGuildPermissions = freshGuildPermissions(fetchDiscordGuilds)
   require('./frontend-routes')(app, client, { requireAuth, fetchGuilds: fetchDiscordGuilds })
 
@@ -128,87 +117,61 @@ module.exports = async client => {
     const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
     const music = Boolean(node && node.state === 1)
     const healthy = database && music && !client._shuttingDown
-    res.status(healthy ? 200 : 503).json({ status: healthy ? 'ok' : 'degraded', database: Boolean(database), music, uptime: Math.floor(process.uptime()) })
+    res.set('Cache-Control', 'no-store').status(healthy ? 200 : 503).json({ status: healthy ? 'ok' : 'degraded', database: Boolean(database), music, uptime: Math.floor(process.uptime()) })
   })
 
   app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')))
 
-  app.get('/login', (req, res) => {
+  app.get('/login', async (req, res) => {
+    res.set('Cache-Control', 'private, no-store').vary('Cookie')
+    const before = { ...req.session }
     req.session.oauthReturnTo = dashboardReturnTo(req.query.returnTo)
     const state = crypto.randomBytes(24).toString('hex')
     req.session.oauthState = state
-    const params = new URLSearchParams({
-      client_id:     DISCORD_CLIENT_ID,
-      redirect_uri:  REDIRECT_URI,
-      response_type: 'code',
-      scope:         'identify guilds',
-      state,
-    })
-    req.session.save(err => {
-      if (err) {
-        console.error('[Dashboard] No se pudo iniciar la sesión OAuth:', err.message)
-        return res.redirect('/?error=session_failed')
-      }
-      res.redirect(`https://discord.com/oauth2/authorize?${params}`)
-    })
+    delete req.session.oauthPending
+    const params = new URLSearchParams({ client_id: DISCORD_CLIENT_ID, redirect_uri: REDIRECT_URI,
+      response_type: 'code', scope: 'identify guilds', state })
+    try {
+      await saveSession(req, before, 'state')
+      return res.redirect(`https://discord.com/oauth2/authorize?${params}`)
+    } catch { return res.redirect('/?error=session_failed') }
   })
 
   app.get('/auth/callback', async (req, res) => {
+    res.set('Cache-Control', 'private, no-store').vary('Cookie')
     const { code, state, error } = req.query
-    if (error) return res.redirect(`/?error=${encodeURIComponent(error)}`)
-    if (!code) return res.redirect('/?error=no_code')
-    if (!state || state !== req.session?.oauthState) return res.redirect('/?error=invalid_state')
-    const returnTo = dashboardReturnTo(req.session.oauthReturnTo)
-    delete req.session.oauthState
+    let consumed
+    try { consumed = await consumeOAuthState(req, state) }
+    catch { return res.redirect('/?error=invalid_state') }
+    if (error) return res.redirect('/?error=access_denied')
+    if (typeof code !== 'string' || !code || code.length > 2048) return res.redirect('/?error=no_code')
     try {
-      const tokenRes = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
-        client_id:     DISCORD_CLIENT_ID,
-        client_secret: DISCORD_CLIENT_SECRET,
-        grant_type:    'authorization_code',
-        code,
-        redirect_uri:  REDIRECT_URI,
-      }), { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-
-      const { access_token, refresh_token, expires_in } = tokenRes.data
-      const [userRes, guildsRes] = await Promise.all([
-        axios.get('https://discord.com/api/users/@me',        { headers: { Authorization: `Bearer ${access_token}` } }),
-        axios.get('https://discord.com/api/users/@me/guilds', { headers: { Authorization: `Bearer ${access_token}` } }),
-      ])
-      await establishSession(req, {
-        ...userRes.data,
-        guilds:        guildsRes.data,
-        access_token,
-        refresh_token,
-        expires_at:    Date.now() + expires_in * 1000,
-        logged_in_at:  Date.now(),
-      })
-      res.redirect(returnTo)
-    } catch (e) {
-      res.redirect('/?error=auth_failed')
-    }
+      const user = await oauth.exchange(code)
+      const previousId = req.sessionID
+      await establishSession(req, user, { pendingId: consumed.pendingId })
+      realtime.disconnectSession(previousId)
+      return res.redirect(consumed.returnTo)
+    } catch { return res.redirect('/?error=auth_failed') }
   })
 
-  app.post('/logout', (req, res) => {
-    // Revoke Discord token before destroying session
-    const token = req.session?.user?.access_token
-    if (token) {
-      axios.post('https://discord.com/api/oauth2/token/revoke', new URLSearchParams({
-        client_id:     DISCORD_CLIENT_ID,
-        client_secret: DISCORD_CLIENT_SECRET,
-        token,
-      }), { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).catch(() => {})
-    }
-    realtime.disconnectSession(req.sessionID)
-    req.session.destroy(() => res.redirect('/'))
+  app.post('/logout', async (req, res) => {
+    res.set('Cache-Control', 'private, no-store').vary('Cookie')
+    const token = req.session?.user?.access_token, sid = req.sessionID
+    try { await invalidateSession(req) }
+    catch { return res.status(503).send('No se pudo confirmar el cierre de sesión. Inténtalo de nuevo.') }
+    realtime.disconnectSession(sid)
+    res.clearCookie('connect.sid', { path: '/', httpOnly: true, sameSite: 'lax', secure: secureCookies })
+    if (token) oauth.revoke(token).catch(() => {})
+    return res.redirect('/')
   })
 
   // ─── Panel home ───────────────────────────────────────────────────────────
 
   app.get('/panel', requireAuth, (req, res) => {
     res.render('pages/home', {
-      user:       req.session.user,
+      user:       publicUser(req.session.user),
       activePage: 'home',
-      bot:        { guilds: client.guilds.cache.size, commands: 625 },
+      bot:        { guilds: client.guilds.cache.size, commands: (client.commands?.size || 0) + (client.slashCommands?.size || 0) },
       breadcrumb: [{ label: 'Panel de control' }],
     })
   })
@@ -217,16 +180,9 @@ module.exports = async client => {
 
   app.post('/api/refresh-guilds', requireAuth, async (req, res) => {
     try {
-      const { access_token } = req.session.user
-      const guildsRes = await axios.get('https://discord.com/api/users/@me/guilds', {
-        headers: { Authorization: `Bearer ${access_token}` },
-      })
-      req.session.user.guilds           = guildsRes.data
-      req.session.user.guilds_fetched_at = Date.now()
-      res.json({ ok: true, count: guildsRes.data.length })
-    } catch {
-      res.json({ ok: false })
-    }
+      const user = await readFreshGuilds(req, fetchDiscordGuilds)
+      return res.json({ ok: true, count: user.guilds.length })
+    } catch (error) { return res.status(error.code === 'not_authenticated' ? 401 : 503).json({ ok: false, error: error.code === 'not_authenticated' ? 'not_authenticated' : 'permissions_unavailable' }) }
   })
 
   // ─── SSE — stats en tiempo real ───────────────────────────────────────────
@@ -251,26 +207,14 @@ module.exports = async client => {
     return sseCache.data
   }
 
-  app.get('/api/sse', (req, res) => {
-    res.setHeader('Content-Type', 'text/event-stream')
-    res.setHeader('Cache-Control', 'no-cache')
-    res.setHeader('X-Accel-Buffering', 'no')
-    res.flushHeaders()
+  app.get('/api/sse', requireAuth, async (req, res) => streamStatistics(req, res, computeStats))
 
-    const send = () => {
-      try { res.write(`data: ${JSON.stringify(computeStats())}\n\n`) } catch {}
-    }
-
-    send()
-    const iv = setInterval(send, 5000)
-    req.on('close', () => clearInterval(iv))
-  })
-
-  // ─── Stats JSON (legacy polling) ─────────────────────────────────────────
-
-  app.get('/api/stats', (req, res) => {
-    const stats = computeStats()
-    res.json({ ...stats, uptime: process.uptime() })
+  // Anonymous landing pages receive only aggregate counters. Internal metrics
+  // keep the existing authenticated panel access and are never shared-cacheable.
+  app.get('/api/stats', async (req, res) => {
+    res.set('Cache-Control', 'private, no-store').vary('Cookie')
+    if (!req.session?.user) return res.json(publicStats(computeStats()))
+    return requireAuth(req, res, () => res.json(computeStats()))
   })
 
   // ─── Invite leaderboard ───────────────────────────────────────────────────
@@ -305,38 +249,11 @@ module.exports = async client => {
 
   // ─── Dashboard — server list ──────────────────────────────────────────────
 
-  app.get('/dashboard', requireAuth, async (req, res) => {
-    // Auto-refresh guild list if older than 60 seconds
-    const lastFetch = req.session.user.guilds_fetched_at || 0
-    if (Date.now() - lastFetch > 60_000) {
-      try {
-        const guildsRes = await axios.get('https://discord.com/api/users/@me/guilds', {
-          headers: { Authorization: `Bearer ${req.session.user.access_token}` },
-        })
-        // Reassign whole user object so MongoStore detects the change
-        req.session.user = { ...req.session.user, guilds: guildsRes.data, guilds_fetched_at: Date.now() }
-        await new Promise((ok, fail) => req.session.save(e => e ? fail(e) : ok()))
-      } catch { /* use cached guilds if Discord API fails */ }
-    }
-
-    const userGuilds = req.session.user.guilds || []
-    // Show servers where user is owner OR has Manage Server OR Administrator
-    const manageable = userGuilds.filter(g => {
-      if (g.owner) return true
-      const perms = BigInt(g.permissions || 0)
-      return (perms & BigInt(0x8)) === BigInt(0x8)   // ADMINISTRATOR
-          || (perms & BigInt(0x20)) === BigInt(0x20)  // MANAGE_GUILD
-    })
-    const botGuilds  = manageable.map(g => ({
-      ...g,
-      inBot: client.guilds.cache.has(g.id),
-      icon:  g.icon ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png` : null,
-    }))
-    res.render('pages/dashboard', {
-      user:     req.session.user,
-      guilds:   botGuilds,
-      clientId: DISCORD_CLIENT_ID,
-    })
+  app.get('/dashboard', requireAuth, requireFreshGuildPermissions, (req, res) => {
+    const manageable = req.session.user.guilds.filter(guild => canManageGuild(req.session.user, guild.id))
+    const botGuilds = manageable.map(guild => ({ ...guild, inBot: client.guilds.cache.has(guild.id),
+      icon: guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : null }))
+    res.render('pages/dashboard', { user: publicUser(req.session.user), guilds: botGuilds, clientId: DISCORD_CLIENT_ID })
   })
 
   // ─── Guild settings GET ───────────────────────────────────────────────────

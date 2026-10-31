@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "scope": "P0-C3 thirteen base routes; single-process session boundary, not full business or distributed acceptance",
+  "baseCommit": "e3a3de52db0e1ae8178c4f99107d090af1cc1d4d",
+  "status": "verified-in-isolation-image-pending",
+  "checks": {
+    "hostNode": "v22.23.2",
+    "hostFocused": {
+      "tests": 39,
+      "pass": 39,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "hostMongoAdapter": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "driver": "isolated Chromium CDP fallback",
+      "browser": "HeadlessChrome/151.0.7922.34",
+      "user": "nobody",
+      "realUserProfile": false,
+      "passed": 12,
+      "exceptions": 0,
+      "cases": [
+        "anonymous-public-counters-only",
+        "anonymous-context-denied",
+        "authorized-guild-only-rendered",
+        "context-allowlist-no-oauth-tokens",
+        "httponly-lax-cookie",
+        "refresh-control-sends-csrf",
+        "revocation-removes-old-guild",
+        "isolated-context-has-no-other-session",
+        "authenticated-statistics-stream-delivered",
+        "logout-form-sends-csrf-and-clears-session",
+        "existing-tab-denied-after-logout",
+        "stream-reconnect-denied-after-logout"
+      ]
+    },
+    "original": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "remoteCIExecuted": false,
+    "nativeAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 0,
+      "critical": 0,
+      "total": 50
+    },
+    "nativeAuditExit": 1,
+    "typecheck": true,
+    "dependencyBoundaries": true
+  },
+  "implementation": {
+    "expressSession": "1.19.0",
+    "connectMongo": "5.1.0",
+    "publicSessionAPIOnly": true,
+    "ordering": "one process, public Store and Session APIs",
+    "predecessorRecord": "cookie TTL and successor only; no old profile/tokens/state",
+    "distributedAccepted": false
+  },
+  "review": {
+    "rounds": 3,
+    "findingsResolvedWithRegressions": [
+      "anonymous stale OAuth state restore",
+      "backend read errors incorrectly invalidating login",
+      "rotation pending read versus logout",
+      "legacy concurrent CSRF initialization",
+      "late OAuth cookie after logout",
+      "public API regeneration"
+    ],
+    "browserImplementationFindingResolved": "Headers-sent session error during stream closure follows Express error handling; no second header write"
+  },
+  "coverage": {
+    "reviewedGroups": 52,
+    "commandEntriesReviewed": 168,
+    "httpRoutesReviewed": 34,
+    "totalCommandEntries": 661,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 493,
+    "remainingHttpRoutes": 61
+  },
+  "deployment": {
+    "status": "pending",
+    "runtimeChanged": false
+  },
+  "limits": [
+    "No real user OAuth, Discord messages, voice or business mutations used as tests.",
+    "Full business acceptance in two guilds remains P2.",
+    "Distributed atomicity/takeover remains P5.",
+    "Provider Mongo credential rotation, original G25 and final G01/G02/G25 gates remain open."
+  ],
+  "cleanup": {
+    "temporarySourcesRemoved": false,
+    "originalTestsPreserved": true
+  },
+  "logHashes": {
+    "all-host.tap": "74a474bad2c30a1739ccd81401dbb9b52afb1b26680669a7e552808a79315a28",
+    "mongo-green.tap": "62a67a58bf3c410e51c8ee903f175f49397b341a100182b0ba3a1b78a04c69f5",
+    "browser-results.json": "a25568d00148b0ea0bcd8376028da38a3ec04bb7d940d1a353cf115e89e27636",
+    "original-tests.log": "c8a24b52c7615d4164b3c182cf3d048647e2de29b2c8739ef112080534778a29"
+  }
+}

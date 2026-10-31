@@ -3,8 +3,8 @@
   "date": "2026-10-31",
   "scope": "Complete active workload classification, with fourteen retired entries separately traced. Not behavioral acceptance. Current owners and hashes resolve through operation-ownership.json.",
   "inputs": {
-    "inventoryCoreSha256": "a628afab963a17c8a645fd339d4a3692ddb7a25ab476315033666337d423b53a",
-    "sharedIntentsSha256": "5ba6dc6bb4ff1bf98ccae526c1c8789b9d14bdb6095cb52f12b1540cae145a57",
+    "inventoryCoreSha256": "d0916bcaea315b022dcb65596530898c0fcfdd88a7c5dd4c9f372c9709fa0a0c",
+    "sharedIntentsSha256": "181cdecd5981891ad753bcdc8a6a9085c5d27eb76dc480efdda86b14d44e33e8",
     "retiredContentSha256": "3fd37040c10b97e812c7d101ac70c9558669cd4ae036e643927350843a9dda30"
   },
   "originalP0Gates": [
@@ -1084,9 +1084,9 @@
     {"id": "slash:welcome.ver","capability": "welcome","reviewedIntents": [],"flags": []}
   ],
   "routes": [
-    {"id": "GET /api/panel/context","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /app","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /app/","capability": "platform","reviewedIntents": [],"flags": []},
+    {"id": "GET /api/panel/context","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /app","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /app/","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
     {"id": "GET /api/music/health","capability": "music","reviewedIntents": [],"flags": []},
     {"id": "GET /api/music/status/:guildId","capability": "music","reviewedIntents": [],"flags": []},
     {"id": "GET /api/music/lyrics/:guildId","capability": "music","reviewedIntents": [],"flags": []},
@@ -1155,17 +1155,17 @@
     {"id": "GET /api/guilds/:guildId/logs/config","capability": "logs","reviewedIntents": ["logs.configuration"],"flags": []},
     {"id": "PUT /api/guilds/:guildId/logs/config","capability": "logs","reviewedIntents": ["logs.configuration"],"flags": []},
     {"id": "POST /dashboard/:guildId/logs","capability": "logs","reviewedIntents": ["logs.configuration"],"flags": []},
-    {"id": "GET /health","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /login","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /auth/callback","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "POST /logout","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /panel","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "POST /api/refresh-guilds","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /api/sse","capability": "platform","reviewedIntents": [],"flags": []},
-    {"id": "GET /api/stats","capability": "platform","reviewedIntents": [],"flags": []},
+    {"id": "GET /health","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /login","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /auth/callback","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "POST /logout","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /panel","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "POST /api/refresh-guilds","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /api/sse","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
+    {"id": "GET /api/stats","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
     {"id": "GET /api/invites/:guildId","capability": "invites","reviewedIntents": [],"flags": []},
-    {"id": "GET /dashboard","capability": "platform","reviewedIntents": [],"flags": []},
+    {"id": "GET /dashboard","capability": "platform","reviewedIntents": ["platform.session.base"],"flags": []},
     {"id": "GET /dashboard/:guildId","capability": "configuration","reviewedIntents": ["configuration.dj_roles","configuration.language.set","configuration.music_defaults"],"flags": []},
     {"id": "POST /dashboard/:guildId","capability": "configuration","reviewedIntents": ["configuration.dj_roles","configuration.language.set","configuration.music_defaults","configuration.prefix.set"],"flags": []},
     {"id": "GET /stats/:guildId","capability": "invites","reviewedIntents": [],"flags": []},
@@ -1184,13 +1184,13 @@
     "classifiedCommands": 661,
     "classifiedRoutes": 95,
     "functionalReview": {
-      "reviewedGroups": 51,
+      "reviewedGroups": 52,
       "commandEntriesReviewed": 168,
-      "httpRoutesReviewed": 21,
+      "httpRoutesReviewed": 34,
       "totalCommandEntries": 661,
       "totalHttpRoutes": 95,
       "remainingCommandEntries": 493,
-      "remainingHttpRoutes": 74
+      "remainingHttpRoutes": 61
     },
     "byCapability": {
       "platform": {

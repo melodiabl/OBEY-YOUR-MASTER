@@ -1271,16 +1271,63 @@
         "No real PUT publication tests or global acceptance claimed"
       ],
       "evidence": "evidence/p0-slash-publication-20261031.json"
+    },
+    {
+      "id": "platform.session.base",
+      "commands": [],
+      "routes": [
+        "GET /api/panel/context",
+        "GET /app",
+        "GET /app/",
+        "GET /health",
+        "GET /",
+        "GET /login",
+        "GET /auth/callback",
+        "POST /logout",
+        "GET /panel",
+        "POST /api/refresh-guilds",
+        "GET /api/sse",
+        "GET /api/stats",
+        "GET /dashboard"
+      ],
+      "service": "dashboard/auth.js + session-store.js + oauth.js + permissions.js + statistics.js",
+      "store": "Existing connect-mongo dashboard_sessions. Per-SID ordering in one process; minimal predecessor routing rows preserve late-response revocation without retaining old tokens/profile.",
+      "status": "corrected_and_verified_in_isolation",
+      "actor": "OAuth identify/guilds user for private routes; anonymous public aggregates and health only",
+      "permissions": {
+        "private": "Live store session, unchanged actor/login generation and unexpired token; fresh Discord guild permissions where a guild list is returned",
+        "public": "Explicit health/aggregate allowlist without tenant IDs or internal memory metrics"
+      },
+      "permissionDifference": "No new guild grants; removed stale-list fallback and anonymous internal/SSE access. Existing authenticated panel metrics retained.",
+      "confirmation": "OAuth state consumed once before exchange; SID regeneration; Origin/CSRF on session mutations; logout revokes successor sessions too",
+      "result": "No authenticated response recreates a destroyed session; temporary backend errors fail without deleting a valid login",
+      "errors": {
+        "unauthenticated": 401,
+        "csrf": 403,
+        "upstreamOrStoreUnavailable": 503
+      },
+      "cooldown": "No new throttle; provider timeouts and bounded stream backpressure",
+      "idempotency": "Single refresh flight per session; protected OAuth state and successor links; logout removes descendants",
+      "effects": [
+        "session rotation and authenticated metadata persistence",
+        "token revocation requested after confirmed local logout",
+        "no Discord messages, voice or business operations in tests"
+      ],
+      "i18n": "Existing dashboard Spanish and stable API error codes; localization remains P3",
+      "material": "Existing EJS/Next pages, fonts and assets preserved",
+      "recovery": "Transient failures preserve login; distributed atomicity and full business walkthroughs remain P5/P2",
+      "evidence": "evidence/p0-session-20261031.json",
+      "remaining": "Real user OAuth grant and full two-guild business acceptance are not asserted; C2 provider Mongo credential rotation, G25 and final original G01/G02/G25 gates remain open."
     }
   ],
   "coverage": {
-    "reviewedGroups": 51,
+    "reviewedGroups": 52,
     "commandEntriesReviewed": 168,
-    "httpRoutesReviewed": 21,
+    "httpRoutesReviewed": 34,
     "totalCommandEntries": 661,
     "totalHttpRoutes": 95,
     "remainingCommandEntries": 493,
-    "remainingHttpRoutes": 74
+    "remainingHttpRoutes": 61
   },
   "globalG01G02Accepted": false,
   "limits": [
