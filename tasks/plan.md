@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## 31/10/2026 · fronteras sensibles de P0 desplegadas
+
+Código `debad1e8`, imagen `8582432834dc`: reglas de sorteos sin código generado y conservadas al reiniciar; `servers` privado con dueño vigente por ID exacto; restauración ligada a copia/destino, acceso fresco, confirmación y reserva ante resultado incierto. Catorce comandos/ocho audios señalados retirados, Fun conservado. Inventario 661 comandos/776 alias/95 rutas; 1.043 hashes. Cuarenta y ocho casos nuevos y 25 originales pasan en host/imagen, tipos y fronteras; HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC, reversión y proyección global conservados; temporales retirados. **C2 sigue abierto por rotación Mongo en el proveedor**; revisión funcional 51/168/21 sin aumento. Siguiente bloque independiente C3 (sesión/tenant), luego G25 y corte G01/G02/G25. Sin restauraciones, sorteos, voz o mensajes reales de prueba. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md).
+
+
 ## 31/10/2026 · clasificación completa y cierre acotado de P0
 
 675 comandos/95 rutas asignados a 27 capacidades; diferencia 674→675 por `slashCommands/setup.js`, sin retiros. Revisión funcional intacta: 51 grupos/168 comandos/21 rutas; los restantes 507/74 conservan fase y tarea. Gate de integridad integrado en CI, 29 casos aislados y 25 tests originales aprobados en host e imagen Node22.23.4; 1.052 hashes y catálogo 675/779/95. Tres pasadas de revisión corrigieron escapes de fase, flags, pertenencia P0 y agrupación de biblioteca. **P0 permanece abierto:** C2 fronteras sensibles/rotación Mongo, C3 sesión y 13 rutas base, C4 documentación G25, C5 aceptación original G01/G02/G25. Los recorridos en dos guilds siguen en P2 y audio/migración en P1. Sin despliegue, reinicio ni operaciones reales de prueba; verificadores temporales retirados. [Informe](../docs/platform/P0-CLOSURE-2026-10-31.md).
@@ -118,7 +123,7 @@ El usuario solicitó una auditoría y cuestionó la arquitectura durante la unid
 La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **661 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **51 grupos/168 comandos/21 rutas**. Los otros 493/74 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
 
 1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674−14 retirados+`slashCommands/setup.js`=661, con procedencia de las retiradas, tareas y CI de integridad.
-2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados en aislamiento. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
+2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados y desplegados. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
 3. **P0-C3 siguiente:** sesión/tenant/CSRF y salida mínima de las 13 rutas base, conciliando la evidencia anterior sin promover las operaciones de negocio.
 4. **P0-C4 pendiente:** documentación pública conforme a **G25**, con historia, avisos, exclusiones y soporte reales.
 5. **P0-C5 pendiente:** corte de instalación/versiones/lock/CI y loader/registro/aliases conforme a **G01/G02**, más aceptación de G25. Evidencia del corte; separar comprobación local de CI remoto.

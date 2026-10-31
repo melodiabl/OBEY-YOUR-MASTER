@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-10-31",
   "scope": "P0-C2 security boundaries and scoped content retirement; no full capability acceptance",
-  "status": "verified-in-isolation-deployment-pending",
+  "status": "deployed-healthy-provider-rotation-open",
   "checks": {
     "hostNode": "v22.23.2",
     "hostClassification": {
@@ -40,7 +40,46 @@
       "fail": 0,
       "skipped": 0
     },
-    "hostClassificationIncludedInFocused": true
+    "hostClassificationIncludedInFocused": true,
+    "imageFocusedTests": {
+      "tests": 48,
+      "pass": 48,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageOriginalTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "imageNode": "v22.23.4",
+    "bundledUndici": "6.29.1",
+    "imageInventory": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "node": "v22.23.4"
+    },
+    "httpPassed": 7,
+    "assetHashesPassed": 13,
+    "remoteCIExecuted": false,
+    "imageBuilt": true,
+    "slashReadOnlyComparison": {
+      "dryRun": true,
+      "mutatingRestDisabled": true,
+      "equal": true,
+      "roots": 20,
+      "invocations": 144,
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "startup": {
+      "startupUnchanged": true,
+      "startupUnconfirmed": false,
+      "privateLogRetained": true
+    }
   },
   "readOnlyDatabaseAudit": {
     "connected": true,
@@ -85,27 +124,188 @@
     "P0-C2, G01/G02/G25 remain open.",
     "Full giveaway lifecycle remains P6; complete restore and cross-process recovery remain P5.",
     "No real Discord messages, voice playback, giveaways, restore or data mutations were executed as tests.",
-    "Temporary verifier source removal is pending completion of image verification."
+    "Local checks and actual image deployment do not certify remote CI.",
+    "Health confirms Mongo and a connected Lavalink node, not a real audio-listening acceptance case."
   ],
   "deployment": {
-    "status": "pending",
-    "runtimeChanged": false
+    "deployed": true,
+    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
+    "tag": "localhost/obey-your-master_bot:release-p0-security-20261031-debad1e8",
+    "rollbackContainer": "obey_bot_p0_security_rollback",
+    "previousImage": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
+    "samples": [
+      {
+        "sample": 1,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 2,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 3,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 4,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 5,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 6,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 7,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 8,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 9,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 10,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      }
+    ],
+    "environmentEqual": true,
+    "mountsEqual": true,
+    "supervisorEqual": true,
+    "rollbackContainerRemovedAfterValidation": true,
+    "rollbackImageRetained": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
+    "rollbackArguments": "rollback-arguments.private.json",
+    "rollbackAutomaticRestartRiskRemoved": true,
+    "runtimeChanged": true,
+    "code": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
+    "preBackup": {
+      "backup": "/home/backups/obey-releases/2026-10-31T20-44-03-205Z",
+      "bytes": 59283591,
+      "crcValid": true,
+      "globalDocuments": 3,
+      "globalHashesMatch": true,
+      "uriMatchesRuntime": true
+    },
+    "postBackup": {
+      "backup": "/home/backups/obey-releases/2026-10-31T20-47-19-451Z",
+      "bytes": 59283881,
+      "crcValid": true,
+      "globalDocuments": 3,
+      "globalHashesMatch": true,
+      "globalProjectionUnchanged": true
+    },
+    "latestUpdated": true,
+    "privateRecipesUpdated": 2,
+    "preflightCorrection": "Null log options handled before stopping the previous service; no outage in that failed preparation.",
+    "rollbackRetention": "Previous image plus private inspection, environment and recreation arguments retained; stopped previous container removed after validation to avoid restarting both bots."
   },
   "logs": {
-    "security-green.tap": {
-      "sha256": "35045065518b33bd1c1cc5f1524e6f919130d000738b97a528945b81337bc1fa"
+    "all-host.tap": {
+      "sha256": "07689bb1894cbee37c9070cf7eb59e8a0a3e4cd140757faf0a69f81a415c76a1"
     },
-    "classification-green.tap": {
-      "sha256": "0ef216e43ce403487a24954238e05b2a828d5afded60f8f53b3961789afda96b"
+    "all-image.tap": {
+      "sha256": "295ed97d92c15832c9d944562a5183ee9386efced4d447333a17285ec0ce72dc"
     },
     "original-tests.log": {
-      "sha256": "fc653c0f72a14021a068b83b56805d41e0de669c639d6c4d822b58f66c067e61"
+      "sha256": "7466aa8a0168e7f413a4d684457e20fd692753de3f8f8262f3b8798e77387098"
+    },
+    "image-original-tests.log": {
+      "sha256": "f8e2ce6e886e67359329b4497ce32814fc46140cce1dc9aa1e279cb5abcb8d90"
     },
     "legacy-red.json": {
       "sha256": "4036e0cb36676cb6805a4911c3e6e488d4ee58424eae675be7cd34580b440e03"
     },
     "database-audit.json": {
       "sha256": "8952812b11080dc337b385d52ed14e114c6c78f81af34bb8a738c068dada313a"
+    },
+    "image-inventory.log": {
+      "sha256": "1e242171216b658f80e74067d4a55c1a97f1481350c730130ac022b13dc36678"
+    },
+    "classification.json": {
+      "sha256": "8650f52e9346ba09dcb39ff425559248246a7018ea3d72fbda1730bbdebba2fd"
+    },
+    "http-assets.json": {
+      "sha256": "8d14e466529fdcf14dd2815687950b10d7e4e03b6b52f18d0a09b8781834fdea"
+    },
+    "backup-verified.json": {
+      "sha256": "311ed1070e75d27464a36277345f4de7aaf6a0cfc8f1c73278160993ba1860a0"
+    },
+    "post-backup-verified.json": {
+      "sha256": "d9247afa54a4b40f01ccd04de939bad03958e850d574d628844e0f735816e841"
+    },
+    "startup-summary.json": {
+      "sha256": "57ee3113cf8a1de8880f0d4122fbbe406ccbc86797025bd37f6011c3ba6aab10"
+    },
+    "dependency-audit.json": {
+      "sha256": "94dd8db08c4dcdb0caab989b65ea3b84b34966b3bcb57295b9e9616c1129a1f7"
     }
+  },
+  "implementationCode": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
+  "baseCommit": "2cabf913041abf2a029ecff44cf7797055fc040b",
+  "cleanup": {
+    "temporaryVerifierSourcesRemoved": true,
+    "originalTestFilesPreserved": true,
+    "keptOperationalArtifacts": [
+      "runtime.env (0600)",
+      "private container inspection and recreation arguments",
+      "TAP/JSON evidence",
+      "two verified backups and previous image"
+    ]
   }
 }

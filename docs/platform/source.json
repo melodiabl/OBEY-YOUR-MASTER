@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "3295f5c5e6a4a8ef0748c4df910efbbb853bff1e",
-    "image": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
+    "code": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
+    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-slash-publication-20261031.json",
-    "change": "Scoped confirmed slash publication with current-owner checks and shared no-op startup synchronization; dedicated non-retrying writer",
-    "tag": "localhost/obey-your-master_bot:release-p0-slash-publication-20261031-3295f5c5",
+    "evidence": "evidence/p0-security-20261031.json",
+    "change": "P0-C2: safe persisted giveaway rules, private current-owner server listing, confirmed backup restore admission, scoped content retirement",
+    "tag": "localhost/obey-your-master_bot:release-p0-security-20261031-debad1e8",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-slash-publication-20261031.json",
-    "deploymentKind": "application_only_p0_slash_publication",
+    "statusEvidence": "evidence/p0-security-20261031.json",
+    "deploymentKind": "Verified image; same environment/mounts/resources/supervisor; exact registry unchanged; no business effects used as tests",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -73,7 +73,15 @@
     "commandHotReloadRetired": true,
     "ownerConsoleRetired": true,
     "followRedirects": "1.16.2",
-    "slashStartup": "unchanged"
+    "slashStartup": "unchanged",
+    "securityBoundaries": {
+      "giveawayRules": "static callbacks with persisted data; restored eligibility verified",
+      "serverList": "current exact owner authority; private DM paging",
+      "backupRestore": "bound snapshot, fresh authority, one-use confirmation and uncertain-outcome reservation",
+      "retiredCommands": 14,
+      "retiredAudioAssets": 8,
+      "providerCredentialRotated": false
+    }
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",
@@ -380,7 +388,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "P0-C3: review session/tenant/CSRF and minimal outputs of the 13 base routes. P0-C2 code boundaries and 14 content retirements verified in isolation; provider Mongo credential rotation remains an external open item. Then original G25 documentation and exact G01/G02/G25 cut. Active classification 661 commands / 95 routes, 14 retired entries traced; functional review remains51groups/168commands/21routes, remaining493/74. P0 not accepted.",
+    "nextUnit": "P0-C3: review session/tenant/CSRF and minimal outputs of the 13 base routes. P0-C2 boundaries and scoped content retirements deployed and healthy; provider Mongo credential rotation remains externally open. Then original G25 documentation and exact G01/G02/G25 cut. Active classification: 661 commands / 95 routes; 14 retired entries traced. Functional review remains 51 groups / 168 commands / 21 routes; 493 commands / 74 routes remain pending in their capability phases. P0 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -472,16 +480,26 @@
     "capabilities": 27,
     "functionalReviewUnchanged": true,
     "originalGatesAccepted": false,
-    "runtimeChanged": false
+    "runtimeChanged": false,
+    "meaning": "Initial 675-entry classification capture; current active inventory is recorded separately after reviewed retirements.",
+    "activeInventory": {
+      "commands": 661,
+      "routes": 95,
+      "aliases": 776,
+      "retiredEntries": 14,
+      "evidence": "evidence/p0-security-20261031.json"
+    }
   },
   "p0Security": {
     "date": "2026-10-31",
     "report": "P0-SECURITY-2026-10-31.md",
     "evidence": "evidence/p0-security-20261031.json",
-    "status": "verified-in-isolation-deployment-pending",
+    "status": "deployed-healthy-provider-rotation-open",
     "retiredCommands": 14,
     "retiredAudioAssets": 8,
     "providerCredentialRotated": false,
-    "globalP0Accepted": false
+    "globalP0Accepted": false,
+    "implementationCode": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
+    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a"
   }
 }
