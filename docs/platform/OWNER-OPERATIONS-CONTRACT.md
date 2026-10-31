@@ -13,3 +13,5 @@ El scheduler se habilita únicamente con OBEY_OWNER_RESTART_ENABLED=true, que el
 No se ejecutan parada o reinicio reales por comandos durante las pruebas. Se usan archivos, Discord/SDK y scheduler simulados; el cambio de imagen autorizado utiliza el procedimiento normal de despliegue. Sin nuevos datos persistentes, recibos duraderos ni coordinación entre procesos. La prueba real de botones y reinicio por el dueño, recuperación de voz y demás tareas del plan permanecen abiertas.
 
 Las otras dos entradas antiguas de recarga, cmdreload/commandreload y reloadallcmds/reloadallcommands, también conservan únicamente un aviso de migración para el dueño. No modifican registros, alias ni caché ni activan restartbot automáticamente. El código se actualiza por despliegue y el proceso se reinicia por la confirmación separada. [Contrato de retirada y guía](COMMAND-RELOAD-RETIREMENT.md).
+
+Las consolas eval/evaluate y detailedeval con sus alias conservan únicamente un aviso para el dueño actual; se retiraron JavaScript recibido y el grant por ID histórico. No sustituyen esa ejecución por otro endpoint o consola. [Contrato de retirada](OWNER-CONSOLE-RETIREMENT.md).

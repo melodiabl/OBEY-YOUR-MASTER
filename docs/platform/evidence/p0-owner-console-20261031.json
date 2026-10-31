@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0",
+  "code": "cb68e4e9c15b9624360f3429789e471e8a439e35",
+  "dependencyCode": "cbe8917c7eb626fb5c48c715330a969db8e2a55b",
+  "image": "b7b0480c938913e7edcb641bd697f5c899f67a5f5e9c9d8a8cedfda44510e2ad",
+  "tag": "localhost/obey-your-master_bot:release-p0-owner-console-20261031-cb68e4e9",
+  "previousImage": "f29da2c49a64830a10ac7d4fb4ba39c2cc4d5794cc2d12da98a5e632452b5393",
+  "scope": [
+    "prefix:eval",
+    "prefix:detailedeval"
+  ],
+  "aliases": [
+    "evaluate",
+    "detailedevaluate",
+    "detailevaluate",
+    "detaileval"
+  ],
+  "retirement": {
+    "arbitraryCodeExecutionRemoved": true,
+    "historicalFixedIdGrantRemoved": true,
+    "namesAliasesCategoryTypeUsageAndCooldownMetadataPreserved": true,
+    "argumentsNotReadCoercedOrForwardedByAdapters": true,
+    "noCodeOrResultsEchoed": true,
+    "noAlternativeArbitraryExecutionPath": true,
+    "noAutomaticRestartOrDeployment": true,
+    "generalDispatcherInstrumentationPreserved": true,
+    "otherLegacyEvalSitesNotClaimedRemoved": true
+  },
+  "authorization": {
+    "exactCurrentOwnerIds": true,
+    "freshMemberChannelAndBot": true,
+    "noNewAdministratorRequirement": true,
+    "timeoutMs": 10000
+  },
+  "containment": {
+    "noPrivateClientPropertyReads": true,
+    "invalidLocaleUsesSafeSpanishUnavailable": true,
+    "loadedLanguages": [
+      "es",
+      "en",
+      "de",
+      "in"
+    ],
+    "legacyDeInCatalogFallbackPreserved": true,
+    "regionalSuffixesAccepted": true,
+    "lateAuthorizedResponsePrevented": true,
+    "replyFailureContained": true,
+    "noDmOrOtherChannelFallback": true
+  },
+  "legacyReproduction": {
+    "eval": {
+      "historicalIdExecutesDespiteNotInConfiguredOwners": true,
+      "currentConfiguredOwnerDeniedByHardcodedId": true,
+      "markerOnly": true
+    },
+    "detailedeval": {
+      "historicalIdExecutesDespiteNotInConfiguredOwners": true,
+      "currentConfiguredOwnerDeniedByHardcodedId": true,
+      "markerOnly": true
+    },
+    "allEffectsFaked": true,
+    "noRealSecretsInspected": true
+  },
+  "dependencyPatch": {
+    "package": "follow-redirects",
+    "before": "1.16.1",
+    "after": "1.16.2",
+    "onlyPackageVersionChanged": true,
+    "advisory": "GHSA-mrwp-f3q8-3g9p",
+    "advisorySource": "https://github.com/advisories/GHSA-mrwp-f3q8-3g9p",
+    "packageJsonUnchanged": true,
+    "runtimeVersionConfirmed": "1.16.2",
+    "applicationExploitationClaimed": false,
+    "loopbackSyntheticHeadersOnly": true,
+    "firstOriginCredentialPresent": true,
+    "redirectTargetCredentialAbsent": true,
+    "ordinaryHeaderPreserved": true,
+    "sameAndCrossRealm": true,
+    "review": {
+      "passes": 1,
+      "actionableFindings": 0,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false,
+      "reviewerRestoredOriginalGuardInMemoryAndObservedFailure": true,
+      "noFilesChangedByReviewer": true
+    }
+  },
+  "verification": {
+    "consoleCasesHost": 29,
+    "consoleCasesImage": 29,
+    "redirectCasesHost": 2,
+    "redirectCasesImage": 2,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "noRealConsoleInvocationsOrTestMessages": true,
+    "argumentsAndPrivatePropertiesProtectedByThrowingProxiesOrGetters": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1179,
+      "dependencies": 3441
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1047,
+      "lockIncluded": true,
+      "commandsLoaded": 675,
+      "aliasesLoaded": 779,
+      "routesInUnchangedInventory": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1",
+      "followRedirects": "1.16.2"
+    },
+    "nativeDependencyAuditBefore": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 1,
+      "critical": 0,
+      "total": 51
+    },
+    "nativeDependencyAuditAfter": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 0,
+      "critical": 0,
+      "total": 50
+    },
+    "composeVariantsValidated": 3,
+    "consoleReview": {
+      "passes": 2,
+      "actionableFindings": 1,
+      "allFixed": true,
+      "remainingSubstantive": 0,
+      "externalModelUsed": false,
+      "regression": "Invalid language strings now get safe Spanish unavailable; valid es/en/de/in and regional suffixes retain catalog fallback"
+    }
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-31T00:50:58.688Z",
+    "priorStableSamples": 5,
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "assetPreflightCorrection": {
+      "failedStage": "candidate-assets",
+      "previousGeneratedAssetPathsNotReusable": true,
+      "containerCutoverAttempted": false,
+      "healthyPriorContainerUnchanged": true,
+      "correction": "Discover static resource paths and hashes in the candidate image",
+      "assetChecksMaintained": 13
+    },
+    "backupBefore": {
+      "bytes": 59230675,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "source": "persistent"
+    },
+    "backupAfter": {
+      "bytes": 59232096,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "recipesUpdated": true,
+    "previousImageRetained": true,
+    "rollbackDoesNotRetainTheseSecurityCorrections": true,
+    "musicHealthIsBasicOnly": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "fixtureSourcesRemoved": true,
+    "temporaryPlanningNoteRemoved": true,
+    "evidenceRetained": true,
+    "productionNoticeHandlerRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25
+  },
+  "coverage": {
+    "reviewedGroups": 50,
+    "commandEntriesReviewed": 167,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 508,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "Other legacy template eval sites",
+    "Other Owner and Settings operations",
+    "Remaining moderate dependency findings",
+    "Durable receipts and canonical audit",
+    "Cross-process coordination",
+    "G01/G02 and authenticated two-guild acceptance",
+    "Real owner notice acceptance",
+    "P1 lavalink-client migration and real audio recovery acceptance"
+  ],
+  "pushed": false
+}

@@ -1,5 +1,9 @@
 # Estado entregado · 17/10/2026
 
+## 31/10/2026 · consolas JavaScript retiradas y dependencia parcheada
+
+Código `cb68e4e9`, imagen `b7b0480c9389`: eval/detailedeval conservan nombres y alias con un aviso para el dueño actual. Se retiraron ejecución de texto y grant por ID histórico; los argumentos no se leen ni pasan al servicio. Veintinueve casos nuevos, dos de redirección y 25 originales pasan en host/imagen, tipos/fronteras y 1.047 hashes; catálogo 675/779. Commit separado actualiza solo follow-redirects 1.16.1→1.16.2; auditoría con 50 moderadas y ninguna alta/crítica. HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios; respaldo CRC y reversión conservados, verificadores retirados. Sin comandos ni mensajes reales de prueba. P0: 50 grupos/167 entradas/21 rutas; quedan 508/74 por revisar. Otros eval heredados, Owner/Settings, recibos, G01/G02 y aceptación real siguen pendientes; P1 mantiene su migración y audio real. [Informe](P0-OWNER-CONSOLE-2026-10-31.md).
+
 ## 30/10/2026 · retirada de la recarga en caliente de comandos
 
 Código `5b918853`, imagen `f29da2c49a64`: cmdreload/commandreload y reloadallcmds/reloadallcommands conservan nombres y metadatos con un aviso de migración para el dueño. Se retiró su efecto, que podía quitar un comando al fallar la carga o saltarse las reglas de alias/contenido del arranque. El código se aplica por despliegue; restartbot reinicia la imagen actual con confirmación separada. Veintinueve casos nuevos y 25 originales pasan en host/imagen, tipos/fronteras y 1.045 hashes; catálogo 675/779, HTTP 7/7 y recursos 13/13. Diez muestras saludables con cero reinicios, respaldos CRC y reversión conservados, verificadores temporales retirados. Sin comandos ni mensajes reales de prueba. P0: 49 grupos/165 entradas/21 rutas; quedan 510/74 por revisar. Otros Owner/Settings, recibos, G01/G02, aceptación real y P1 siguen abiertos. [Informe](P0-COMMAND-RELOAD-2026-10-30.md).
