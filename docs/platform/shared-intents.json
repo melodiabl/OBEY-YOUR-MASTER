@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-30",
+  "date": "2026-10-31",
   "phase": "P0",
   "scope": "Manually traced shared-intent groups; not a claim of complete canonical operation migration",
   "inventory": "operation-ownership.json",
@@ -1233,15 +1233,34 @@
         "Other Owner operations, durable receipts and global gates remain open"
       ],
       "evidence": "evidence/p0-command-reload-20261030.json"
+    },
+    {
+      "id": "operations.bot.console.retired",
+      "commands": [
+        "prefix:eval",
+        "prefix:detailedeval"
+      ],
+      "routes": [],
+      "service": "handlers/owner-console-command.js",
+      "store": "None; current owner file and fresh origin access read only",
+      "status": "retired_arbitrary_execution_with_preserved_command_names",
+      "permissions": "Exact current bot owner plus fresh origin member/channel/bot, no historical fixed-ID grant and no new Administrator requirement",
+      "scope": "Two Discord console names and aliases retained as localized static maintenance guidance; arguments not read, coerced, echoed or forwarded by adapters",
+      "finding": "VM marker demonstrated both old handlers execute for a hardcoded ID absent from configured owners and deny a configured current owner. No eval/Function/vm/shell/import or alternative arbitrary-code path in the replacement; no live command test.",
+      "limits": [
+        "Other legacy template eval sites are outside this slice",
+        "Real Discord notice acceptance, other Owner/Settings, durable receipts and global gates remain pending"
+      ],
+      "evidence": "evidence/p0-owner-console-20261031.json"
     }
   ],
   "coverage": {
-    "reviewedGroups": 49,
-    "commandEntriesReviewed": 165,
+    "reviewedGroups": 50,
+    "commandEntriesReviewed": 167,
     "httpRoutesReviewed": 21,
     "totalCommandEntries": 675,
     "totalHttpRoutes": 95,
-    "remainingCommandEntries": 510,
+    "remainingCommandEntries": 508,
     "remainingHttpRoutes": 74
   },
   "globalG01G02Accepted": false,

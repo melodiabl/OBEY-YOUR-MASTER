@@ -372,8 +372,8 @@
     "commands/Owner/changestatus.js": "4034ed7639efaa34404d069901a2cdb899de8c6b1f4229224a7274aef7538067",
     "commands/Owner/cmdreload.js": "fb37003b05c19b98432e23b514dd68f2e0509ed3df2df43e3545dd788f140cd4",
     "commands/Owner/deployslash.js": "2ad85785c27f984521521d4ec040ca52f4a6be4ed8e2ad85b0089c3e12b08f1d",
-    "commands/Owner/detailedeval.js": "4e58361580bb01c615437cae2a0db359fdea189d532d34056b954037b2e16acd",
-    "commands/Owner/eval.js": "6a0fcf0faaa2993ad118554c42ff66d89afe7b659f019bb94144fe2c5cd765f4",
+    "commands/Owner/detailedeval.js": "90a13e4d293dba62884a533fd215e8ca232fc991a181c6e13a5fbe8c017eb9ed",
+    "commands/Owner/eval.js": "7696cff11af0d7be396fd116a2e258a751b66b4464a59a869d9aa9a8ab7a7ec9",
     "commands/Owner/leaveserver.js": "9f600900905f5d5f3b2a79919cf2b9bdd9f374a3a89af1e63f0dcbd18f62a0cc",
     "commands/Owner/reloadallcmds.js": "e99b98e854c2f33a923ea94160b9b88c266c4aafc0f2691eaabf3eb1163a60d8",
     "commands/Owner/reloadbot.js": "5e113873c79ae154776ca25bfa2f0222cb6e255213ab9433d8e2ee2d2c6e52a6",
@@ -840,8 +840,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "05d6a0b06eeb55584d283629e4f3ed0d794c6704fdfa9724b825abff8b7bef60",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "d9c3a3e07df5e20c36cf1f6ad45fa32e21005fcc8a2c935fab2074ba15e5169b",
-    "locales/es.json": "8c497f05cc94cf59821f080673ade6bdd8db08bb5b4ca0822777a897c44f13d6",
+    "locales/en.json": "c4ec37b049e0fb4c03daa374d5fbe1e571b5309c54de1a51139e8f5551a85d00",
+    "locales/es.json": "d3c6e28491646b8aa2d0ca9f2042ed49e2ca3ee953cb52f3d8fa0bec6922dabf",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
@@ -1054,7 +1054,9 @@
     "handlers/owner-operations-command.js": "894508d0fb9fc5a92a9de58ae294911d26f873f91293ba690753e8e287ed6742",
     "handlers/owner-guild-leave.js": "fbb86a9e40c25a240efe82b4d68203f92a5f2002fbaf073d34fecb05e7d0e0e1",
     "handlers/owner-guild-leave-command.js": "c41e7a243aa471b6efa07e293583c1e48d9d534068e56889d3ab54e506fa203a",
-    "handlers/retired-command-reload.js": "2392ae0a6494d75a13ee048ace5f9638621c237e872e8379905d9466e42d7347"
+    "handlers/retired-command-reload.js": "2392ae0a6494d75a13ee048ace5f9638621c237e872e8379905d9466e42d7347",
+    "handlers/owner-console-command.js": "2497b95830eda147e6404315d6ca22cf6e82880d46b8c059aba947d2a6c1e39c",
+    "package-lock.json": "ba0fe8cc57e06e50f99626501ed2e886e9cab152f86d0a205416e23114fbaf08"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -6030,31 +6032,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/detailedeval.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 31
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 82
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/detailwarn.js": {
       "kind": "current-command-adapter",
@@ -7141,31 +7120,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Owner/eval.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 21
-        },
-        {
-          "call": "client.settings.get",
-          "line": 22
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 31
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 79
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Fun/excuseme.js": {
       "kind": "current-command-adapter",

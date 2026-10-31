@@ -2055,5 +2055,10 @@
     "retired": "La recarga de comandos en caliente está retirada. No se modificó ningún comando ni alias.\nPara aplicar cambios de código, construye y despliega la imagen nueva. Para reiniciar la imagen actual, usa restartbot y confirma allí el reinicio. Este comando no lo ejecuta automáticamente.",
     "denied": "Solo el dueño actual del bot puede consultar esta operación. Comprueba también tu acceso al canal.",
     "unavailable": "No pude confirmar el acceso actual. No se modificó ningún comando ni alias. Vuelve a intentarlo cuando el bot esté disponible."
+  },
+  "ownerConsole": {
+    "retired": "La consola de JavaScript por Discord está retirada. No se ejecutó ni mostró código recibido.\nUsa los comandos concretos del bot para cada operación. Para consultar identidad y versiones, usa botfilename. Los cambios de código se realizan mediante el flujo de mantenimiento y despliegue del proyecto.",
+    "denied": "Solo el dueño actual del bot puede consultar esta operación. Comprueba también tu acceso al canal.",
+    "unavailable": "No pude confirmar el acceso o leer el idioma actual. No se ejecutó contenido recibido. Vuelve a intentarlo cuando el bot esté disponible."
   }
 }
