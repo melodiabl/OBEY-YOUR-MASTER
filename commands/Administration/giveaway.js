@@ -1,3 +1,4 @@
+const { parseBonusEntries, eligibilityOptions } = require('../../handlers/giveaway-eligibility')
 const obeyMeta = require("../../handlers/presentation/metadata")
 const obeyUi = require("../../handlers/assets/system")
 const Discord = require("discord.js");
@@ -271,41 +272,11 @@ module.exports = {
                     errors: ["time"],
                 });
                 bonusentriesdata = collected.first();
-                if (bonusentriesdata.mentions.roles.size > 0) {
-                    let args = bonusentriesdata.content.split(",").map(i => i?.trim());
-                    if (bonusentriesdata.mentions.roles.size > 1) {
-                        if (!args[0]) return message.reply(obeyUi.owned("❌ ¡Entrada de Múltiples Roles Extra no válida, revisa el EJEMPLO!"));
-                        options.messages.giveaway += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
-                        options.messages.giveawayEnded += "\n\n**ROLES DE ENTRADA EXTRA:**\n";
-                        [...bonusentriesdata.mentions.roles.values()].forEach((role, index) => {
-                            let curData = args[index].split(" ");
-                            let Amount = Math.floor(Number(curData[1]) || null) || null;
-                            var roleid = role.id;
-                            options.bonusEntries.push({
-                                // Members who have the "Nitro Boost" role get 2 bonus entries
-                                bonus: new Function(
-                                    "member",
-                                    `return member && member.roles && member.roles.cache.size > 1 && member.roles.cache.some((r) => r.id === '${roleid}') ? '${Amount}' ? '${Amount}' : 1 : null`
-                                ),
-                                cumulative: true,
-                            });
-                            options.messages.giveaway += `> <@&${role.id}> | \`${Amount ? Amount : 1} Puntos\`\n`;
-                            options.messages.giveawayEnded += `> <@&${role.id}> | \`${Amount ? Amount : 1} Puntos\`\n`;
-                        });
-                    }
-                    //One Bonus entrie
-                    else {
-                        options.bonusEntries.push({
-                            // Members who have the "Nitro Boost" role get 2 bonus entries
-                            bonus: new Function(
-                                "member",
-                                `return member && member.roles && member.roles.cache.size > 1 && member.roles.cache.some((r) => r.id === '${bonusentriesdata.mentions.roles.first().id}') ? Math.floor(Number('${bonusentriesdata.content.split(" ")[1]}')) ? Math.floor(Number('${bonusentriesdata.content.split(" ")[1]}')) : 1 : null`
-                            ),
-                            cumulative: true,
-                        });
-                        options.messages.giveaway += `\n\n**ROL DE ENTRADA EXTRA:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Puntos\`\n`;
-                        options.messages.giveawayEnded += `\n\n**ROL DE ENTRADA EXTRA:**\n> <@&${bonusentriesdata.mentions.roles.first().id}> | \`${Math.floor(Number(bonusentriesdata.content.split(" ")[1])) ? Math.floor(Number(bonusentriesdata.content.split(" ")[1])) : 1} Puntos\`\n`;
-                    }
+                const bonus = parseBonusEntries(bonusentriesdata.content, [...bonusentriesdata.mentions.roles.keys()]);
+                if (bonus.length) {
+                    const summary = "\n\n**ROLES DE ENTRADA EXTRA:**\n" + bonus.map(rule => `> <@&${rule.roleId}> | \`${rule.amount} Puntos\`\n`).join("");
+                    options.messages.giveaway += summary;
+                    options.messages.giveawayEnded += summary;
                 }
 
                 let requiredroles;
@@ -335,24 +306,23 @@ module.exports = {
                     errors: ["time"],
                 });
                 requiredroles = collected.first();
-                if (requiredroles.mentions.roles.size >= 1) {
-                    let theRoles = [...requiredroles.mentions.roles.values()];
-                    options.messages.giveaway += `\n\n**ROLES REQUERIDOS:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
-                    options.messages.giveawayEnded += `\n\n**ROLES REQUERIDOS:**\n${[...theRoles].map(r => `> <@&${r.id}>`).join("\n")}`;
-                    theRoles = theRoles.map(r => r.id);
-                    options.exemptMembers = new Function(
-                        "member",
-                        `return !member || !member.roles ||!member.roles.cache.some((r) => '${theRoles}'.includes(r.id))`
-                    );
+                const required = [...requiredroles.mentions.roles.keys()];
+                Object.assign(options, eligibilityOptions(bonus, required));
+                if (required.length) {
+                    const summary = `\n\n**ROLES REQUERIDOS:**\n${required.map(id => `> <@&${id}>`).join("\n")}`;
+                    options.messages.giveaway += summary;
+                    options.messages.giveawayEnded += summary;
                 }
                 options.messages.giveaway = options.messages.giveaway.substring(0, 2000);
                 options.messages.giveawayEnded = options.messages.giveawayEnded.substring(0, 2000);
                 //role requirements
-                client.giveawaysManager.start(giveawayChannel, options);
+                await client.giveawaysManager.start(giveawayChannel, options);
 
                 message.reply({ content: eval(client.la[ls]["cmds"]["administration"]["giveaway"]["variable27"]) });
             } catch (error) {
-                console.log(error);
+                if (error?.code === "giveaway_invalid_bonus" || error?.code === "giveaway_invalid_role") {
+                    return message.reply({ content: "Roles o entradas no válidos. Usa menciones de rol y cantidades enteras entre 1 y 1000000, sin repetir roles.", allowedMentions: { parse: [] } });
+                }
                 return message.reply({
                     embeds: [
                         new EmbedBuilder()

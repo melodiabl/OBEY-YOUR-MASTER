@@ -1,16 +1,17 @@
+const { isRestrictedCommand } = require('../../handlers/command-policy')
 const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice')
 const path = require('path')
 const fs   = require('fs')
 
-const AUDIO_DIR = path.join(process.cwd(), 'commands', obeyUi.owned('🔊 Soundboard'), 'audio')
+const AUDIO_DIR = path.join(process.cwd(), 'commands', 'Soundboard', 'audio')
 
 // Lista de sonidos disponibles (nombre → archivo)
 const SOUNDS = (() => {
   try {
     return fs.readdirSync(AUDIO_DIR)
-      .filter(f => /\.(mp3|m4a|wav|ogg)$/.test(f))
+      .filter(f => /\.(mp3|m4a|wav|ogg)$/.test(f) && !isRestrictedCommand({ name: path.parse(f).name }))
       .map(f => ({ name: path.parse(f).name, file: path.join(AUDIO_DIR, f) }))
       .sort((a, b) => a.name.localeCompare(b.name))
   } catch { return [] }

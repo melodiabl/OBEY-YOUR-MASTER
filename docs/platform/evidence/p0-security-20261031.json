@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "scope": "P0-C2 security boundaries and scoped content retirement; no full capability acceptance",
+  "status": "verified-in-isolation-deployment-pending",
+  "checks": {
+    "hostNode": "v22.23.2",
+    "hostClassification": {
+      "tests": 9,
+      "pass": 9,
+      "fail": 0,
+      "skipped": 0
+    },
+    "hostOriginal": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "typecheck": true,
+    "dependencies": true,
+    "audit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 0,
+      "critical": 0,
+      "total": 50
+    },
+    "nativeAuditExit": 1,
+    "inventory": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "sourceHashes": 1043
+    },
+    "hostFocusedTests": {
+      "tests": 48,
+      "pass": 48,
+      "fail": 0,
+      "skipped": 0
+    },
+    "hostClassificationIncludedInFocused": true
+  },
+  "readOnlyDatabaseAudit": {
+    "connected": true,
+    "giveawayDocuments": 1,
+    "storedBonusCallbacks": 0,
+    "storedExemptCallbacks": 0,
+    "structuredEligibility": 0,
+    "providerManaged": true,
+    "userManagementPrivilegeObserved": false,
+    "rotationPerformed": false
+  },
+  "legacyReproduction": {
+    "legacySubstringOwnerGrantReproduced": true,
+    "legacyPublicServerListReproduced": true,
+    "realDiscordMessages": 0
+  },
+  "review": {
+    "rounds": 3,
+    "fixed": [
+      "restart role requirement after actual dependency deserialization",
+      "reservation preserved after late restore result following timeout"
+    ],
+    "finalScope": "source changes, scoped retirement and traceability; final evidence generated after report review"
+  },
+  "retirement": {
+    "commands": 14,
+    "audioAssets": 8,
+    "manifest": "../../../handlers/retired-content.json",
+    "unverifiedAudioNotAssertedExplicit": true,
+    "vendorProviderNotClaimedAudited": true
+  },
+  "functionalReview": {
+    "groups": 51,
+    "commands": 168,
+    "routes": 21,
+    "remainingCommands": 493,
+    "remainingRoutes": 74,
+    "increasedByThisPatch": false
+  },
+  "limits": [
+    "Provider credential rotation remains unperformed: no user-management privilege observed and no provider connector.",
+    "P0-C2, G01/G02/G25 remain open.",
+    "Full giveaway lifecycle remains P6; complete restore and cross-process recovery remain P5.",
+    "No real Discord messages, voice playback, giveaways, restore or data mutations were executed as tests.",
+    "Temporary verifier source removal is pending completion of image verification."
+  ],
+  "deployment": {
+    "status": "pending",
+    "runtimeChanged": false
+  },
+  "logs": {
+    "security-green.tap": {
+      "sha256": "35045065518b33bd1c1cc5f1524e6f919130d000738b97a528945b81337bc1fa"
+    },
+    "classification-green.tap": {
+      "sha256": "0ef216e43ce403487a24954238e05b2a828d5afded60f8f53b3961789afda96b"
+    },
+    "original-tests.log": {
+      "sha256": "fc653c0f72a14021a068b83b56805d41e0de669c639d6c4d822b58f66c067e61"
+    },
+    "legacy-red.json": {
+      "sha256": "4036e0cb36676cb6805a4911c3e6e488d4ee58424eae675be7cd34580b440e03"
+    },
+    "database-audit.json": {
+      "sha256": "8952812b11080dc337b385d52ed14e114c6c78f81af34bb8a738c068dada313a"
+    }
+  }
+}

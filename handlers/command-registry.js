@@ -34,7 +34,7 @@ function buildAliases(commands) {
   for (const command of [...commands.values()].sort((a, b) => a.name.localeCompare(b.name))) {
     for (const value of command.aliases || []) {
       const alias = String(value).trim().toLowerCase()
-      if (!alias || alias === command.name || commands.has(alias)) continue
+      if (!alias || alias === command.name || commands.has(alias) || isRestrictedCommand({ name: alias })) continue
       const previous = aliases.get(alias)
       if (previous && previous !== command.name) {
         conflicts.push({ alias, candidates: [previous, command.name] })

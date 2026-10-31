@@ -2082,5 +2082,35 @@
     "requesting": "Confirmation received. I am revalidating the scope and registry before requesting publication.",
     "unchanged": "The Discord registry already matches the loaded catalog. It was not published again.",
     "confirmed": "Discord confirmed a registry matching the submitted catalog. Client propagation may take time."
+  },
+  "ownerServers": {
+    "usage": "Use this command without arguments.",
+    "denied": "This command requires a current bot owner with access to this channel.",
+    "unavailable": "I could not verify access or deliver the private query. No details were posted in this channel.",
+    "sent": "I sent the query in a direct message.",
+    "title": "Bot servers · private query",
+    "empty": "No servers are available.",
+    "page": "Page {page}/{pages} · {total} servers",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "backupRestore": {
+    "usage": "Usage: loadbackup <source server ID> <position from1 to5>. This server is the destination.",
+    "denied": "You must still own both servers and the bot needs Administrator in both. I could not confirm those permissions or channel access.",
+    "conflict": "The selected backup changed. Restoration did not start. Open a new preview.",
+    "expired": "Confirmation expired. Restoration did not start.",
+    "busy": "This server has a pending or uncertain restoration. Review its status before continuing.",
+    "unconfirmed": "I could not confirm the result. The server may have been partly restored. Do not repeat the operation; review its state and recovery.",
+    "unavailable": "I could not prepare or verify the restoration. No change is confirmed.",
+    "invalidBackup": "The backup is unavailable or its format does not match its source server.",
+    "delivery": "I could not deliver the advance notice. Restoration did not start.",
+    "confirm": "Restore this server",
+    "cancel": "Cancel",
+    "notYours": "Only the person who requested this restoration may confirm it.",
+    "cancelled": "Restoration cancelled. No change started.",
+    "preparing": "Checking the backup and permissions before restoration…",
+    "requesting": "Preparing to restore backup `{backup}` into `{target}`. The result will be sent here.",
+    "returned": "The library returned a result for `{target}`. Check channels, roles and data; this response does not verify complete restoration.",
+    "preview": "⚠️ The current structure of **{name}** (`{target}`) will be cleared before restoration. This may delete channels, roles and messages.\nSource: `{source}` · position {slot}\nBackup: `{backup}` · created <t:{created}:f>\nThere is no automatic rollback. Confirm only if this is the destination and backup you intend to use."
   }
 }

@@ -1,5 +1,6 @@
 // Retired adult/profane commands must not return under an ordinary category.
-const RETIRED_NAMES = new Set(['brazzers', 'shit'])
+const retired = require('./retired-content.json')
+const RETIRED_NAMES = new Set(['brazzers', 'shit', ...retired.commands.flatMap(entry => [entry.name, ...entry.aliases])])
 const COMMAND_CATEGORY_KEYS = Object.freeze(['ECONOMY', 'SCHOOL', 'MUSIC', 'FILTER', 'CUSTOMQUEUE', 'PROGRAMMING', 'RANKING', 'SOUNDBOARD', 'VOICE', 'FUN', 'MINIGAMES', 'ANIME'])
 function commandCategoryKey(category) {
   if (typeof category !== 'string') return null

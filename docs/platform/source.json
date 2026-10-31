@@ -380,7 +380,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "P0-C2: sensitive boundaries (giveaway input/code generation, exact servers owner access, loadbackup destructive boundary, flagged content triage, outstanding Mongo credential rotation). Then P0-C3 base HTTP/session review, P0-C4 original G25 docs, P0-C5 exact G01/G02/G25 closure. Classification: 675 commands / 95 routes / 27 capabilities; functional review remains 51 groups / 168 commands / 21 routes, with 507 / 74 still pending in their capability phases. P0 not accepted.",
+    "nextUnit": "P0-C3: review session/tenant/CSRF and minimal outputs of the 13 base routes. P0-C2 code boundaries and 14 content retirements verified in isolation; provider Mongo credential rotation remains an external open item. Then original G25 documentation and exact G01/G02/G25 cut. Active classification 661 commands / 95 routes, 14 retired entries traced; functional review remains51groups/168commands/21routes, remaining493/74. P0 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -473,5 +473,15 @@
     "functionalReviewUnchanged": true,
     "originalGatesAccepted": false,
     "runtimeChanged": false
+  },
+  "p0Security": {
+    "date": "2026-10-31",
+    "report": "P0-SECURITY-2026-10-31.md",
+    "evidence": "evidence/p0-security-20261031.json",
+    "status": "verified-in-isolation-deployment-pending",
+    "retiredCommands": 14,
+    "retiredAudioAssets": 8,
+    "providerCredentialRotated": false,
+    "globalP0Accepted": false
   }
 }

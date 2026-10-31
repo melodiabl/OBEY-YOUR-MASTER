@@ -1,3 +1,4 @@
+const { eligibilityOptions } = require('../../handlers/giveaway-eligibility')
 const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder, PermissionFlagsBits, ChannelType } = require('discord.js')
 const ms = require('ms')
@@ -47,7 +48,7 @@ module.exports = {
     }
 
     if (role) {
-      options.exemptMembers = m => !m.roles.cache.has(role.id)
+      Object.assign(options, eligibilityOptions([], [role.id]))
     }
 
     try {

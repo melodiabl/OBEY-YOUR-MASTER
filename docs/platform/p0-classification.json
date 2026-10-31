@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
   "date": "2026-10-31",
-  "scope": "Complete workload classification, not behavioral acceptance. Current owners and hashes resolve through operation-ownership.json.",
+  "scope": "Complete active workload classification, with fourteen retired entries separately traced. Not behavioral acceptance. Current owners and hashes resolve through operation-ownership.json.",
   "inputs": {
-    "inventoryCoreSha256": "b1c69014e2bc14d665ebfdaaea452c5d78d812281423d04e8274710c9ff43d2d",
-    "sharedIntentsSha256": "965f4b3b6aebf833b18e850b0bccd551598ff276f202370fc9ab458fd33b36e3"
+    "inventoryCoreSha256": "a628afab963a17c8a645fd339d4a3692ddb7a25ab476315033666337d423b53a",
+    "sharedIntentsSha256": "5ba6dc6bb4ff1bf98ccae526c1c8789b9d14bdb6095cb52f12b1540cae145a57",
+    "retiredContentSha256": "3fd37040c10b97e812c7d101ac70c9558669cd4ae036e643927350843a9dda30"
   },
   "originalP0Gates": [
     {
@@ -440,7 +441,6 @@
     {"id": "prefix:a-highfive","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:a-hug","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:a-kick","capability": "fun","reviewedIntents": [],"flags": []},
-    {"id": "prefix:a-kill","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:a-kiss","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:a-nervous","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:a-pat","capability": "fun","reviewedIntents": [],"flags": []},
@@ -479,7 +479,6 @@
     {"id": "prefix:affect","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:afk","capability": "profiles","reviewedIntents": [],"flags": []},
     {"id": "prefix:afkmusic","capability": "music","reviewedIntents": [],"flags": []},
-    {"id": "prefix:ahshit","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:airhorn","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:airpods","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:amazeme","capability": "fun","reviewedIntents": [],"flags": []},
@@ -511,7 +510,6 @@
     {"id": "prefix:byemom","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:calc","capability": "utilities","reviewedIntents": [],"flags": []},
     {"id": "prefix:calculator","capability": "utilities","reviewedIntents": [],"flags": []},
-    {"id": "prefix:cancer","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:changeavatar","capability": "owner","reviewedIntents": ["operations.bot.profile.update"],"flags": []},
     {"id": "prefix:changemymind","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:changename","capability": "owner","reviewedIntents": ["operations.bot.profile.update"],"flags": []},
@@ -563,7 +561,6 @@
     {"id": "prefix:detailwarn","capability": "moderation","reviewedIntents": ["moderation.warning.history"],"flags": []},
     {"id": "prefix:developer","capability": "utilities","reviewedIntents": [],"flags": []},
     {"id": "prefix:dice","capability": "economy","reviewedIntents": [],"flags": []},
-    {"id": "prefix:disability","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:disconnected","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:dm","capability": "messages","reviewedIntents": [],"flags": []},
     {"id": "prefix:door","capability": "fun","reviewedIntents": [],"flags": []},
@@ -612,11 +609,8 @@
     {"id": "prefix:greyscale","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:guessthenumber","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:guessthepokemon","capability": "fun","reviewedIntents": [],"flags": []},
-    {"id": "prefix:ha-gay","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:hangman","capability": "fun","reviewedIntents": [],"flags": []},
-    {"id": "prefix:hellomf","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:help","capability": "utilities","reviewedIntents": ["utilities.help.read"],"flags": []},
-    {"id": "prefix:hitler","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:honk","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:hourly","capability": "economy","reviewedIntents": [],"flags": []},
     {"id": "prefix:httpstatus","capability": "developer-tools","reviewedIntents": [],"flags": []},
@@ -645,9 +639,7 @@
     {"id": "prefix:jump","capability": "music","reviewedIntents": [],"flags": []},
     {"id": "prefix:keepdistance","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:kick","capability": "moderation","reviewedIntents": ["moderation.kick","moderation.log-routing"],"flags": []},
-    {"id": "prefix:kill","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:kiss","capability": "fun","reviewedIntents": [],"flags": []},
-    {"id": "prefix:kuss-digga","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:latestquotes","capability": "messages","reviewedIntents": [],"flags": []},
     {"id": "prefix:laugh","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:leaderboard","capability": "levels","reviewedIntents": [],"flags": []},
@@ -704,7 +696,6 @@
     {"id": "prefix:permamute","capability": "moderation","reviewedIntents": ["moderation.log-routing","moderation.role-mute"],"flags": []},
     {"id": "prefix:permissions","capability": "utilities","reviewedIntents": [],"flags": []},
     {"id": "prefix:pew-pew","capability": "voice","reviewedIntents": [],"flags": []},
-    {"id": "prefix:ph-intro","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:pi","capability": "utilities","reviewedIntents": [],"flags": []},
     {"id": "prefix:piccolo","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:ping","capability": "utilities","reviewedIntents": [],"flags": []},
@@ -882,7 +873,6 @@
     {"id": "prefix:suiii","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:superidol","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:support","capability": "utilities","reviewedIntents": [],"flags": []},
-    {"id": "prefix:surprisemf","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:sus","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:sync-invites","capability": "invites","reviewedIntents": [],"flags": []},
     {"id": "prefix:tempmute","capability": "moderation","reviewedIntents": ["moderation.log-routing","moderation.role-mute"],"flags": []},
@@ -924,10 +914,8 @@
     {"id": "prefix:usertag","capability": "utilities","reviewedIntents": [],"flags": []},
     {"id": "prefix:uwu","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:vaporwave","capability": "fun","reviewedIntents": [],"flags": []},
-    {"id": "prefix:verpissdich","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:vibrate","capability": "music","reviewedIntents": [],"flags": []},
     {"id": "prefix:vibrato","capability": "music","reviewedIntents": [],"flags": []},
-    {"id": "prefix:violence","capability": "fun","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:voice","capability": "voice","reviewedIntents": [],"flags": []},
     {"id": "prefix:voiceleaderboard","capability": "levels","reviewedIntents": [],"flags": []},
     {"id": "prefix:voicerank","capability": "levels","reviewedIntents": [],"flags": []},
@@ -947,7 +935,6 @@
     {"id": "prefix:work","capability": "economy","reviewedIntents": [],"flags": []},
     {"id": "prefix:wouldyourather","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:wow","capability": "voice","reviewedIntents": [],"flags": []},
-    {"id": "prefix:wryd-stepbro","capability": "voice","reviewedIntents": [],"flags": ["P0-C2:content-triage-required"]},
     {"id": "prefix:youtubeinfo","capability": "feeds","reviewedIntents": [],"flags": []},
     {"id": "prefix:youtubememe","capability": "fun","reviewedIntents": [],"flags": []},
     {"id": "prefix:youtubetogether","capability": "fun","reviewedIntents": [],"flags": []},
@@ -1194,15 +1181,15 @@
     {"id": "POST /api/player/:guildId/add","capability": "music","reviewedIntents": [],"flags": []}
   ],
   "coverage": {
-    "classifiedCommands": 675,
+    "classifiedCommands": 661,
     "classifiedRoutes": 95,
     "functionalReview": {
       "reviewedGroups": 51,
       "commandEntriesReviewed": 168,
       "httpRoutesReviewed": 21,
-      "totalCommandEntries": 675,
+      "totalCommandEntries": 661,
       "totalHttpRoutes": 95,
-      "remainingCommandEntries": 507,
+      "remainingCommandEntries": 493,
       "remainingHttpRoutes": 74
     },
     "byCapability": {
@@ -1267,7 +1254,7 @@
         "routes": 3
       },
       "voice": {
-        "commands": 55,
+        "commands": 47,
         "routes": 0
       },
       "levels": {
@@ -1295,7 +1282,7 @@
         "routes": 0
       },
       "fun": {
-        "commands": 156,
+        "commands": 150,
         "routes": 0
       },
       "developer-tools": {
@@ -1318,16 +1305,187 @@
   },
   "baselineDifference": {
     "originalCandidateFiles": 674,
-    "currentAdapterFiles": 675,
+    "currentAdapterFiles": 661,
     "added": [
       "slashCommands/setup.js"
     ],
-    "retired": []
+    "retired": [
+      "commands/Anime-Emotions/a-kill.js",
+      "commands/Fun/cancer.js",
+      "commands/Fun/disability.js",
+      "commands/Fun/hitler.js",
+      "commands/Fun/kill.js",
+      "commands/Fun/violence.js",
+      "commands/Soundboard/ahshit.js",
+      "commands/Soundboard/ha-gay.js",
+      "commands/Soundboard/hellomf.js",
+      "commands/Soundboard/kuss-digga.js",
+      "commands/Soundboard/ph-intro.js",
+      "commands/Soundboard/surprisemf.js",
+      "commands/Soundboard/verpissdich.js",
+      "commands/Soundboard/wryd-stepbro.js"
+    ]
   },
   "limits": [
     "Classification does not execute commands, HTTP requests, music or Discord effects.",
     "Existing reviewedIntents retain their individual statuses and remaining work; linkage is not functional acceptance.",
     "Observed store/call metadata in the older inventory capture may be stale; source hashes validate identity only.",
     "Unclassified behavior and content findings remain open in the linked work items; no P0 gate is accepted by assignment."
-  ]
+  ],
+  "retiredEntries": [
+    {
+      "id": "prefix:a-kill",
+      "owner": "commands/Anime-Emotions/a-kill.js",
+      "sha256": "8ba9095bbecba1b76ee9182f1dc297d2a09da8414996f69ae3e8d2da2a396897",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ahshit",
+      "owner": "commands/Soundboard/ahshit.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:cancer",
+      "owner": "commands/Fun/cancer.js",
+      "sha256": "0b0ee998f88c5474422706ec6cf1bd336515d10a799d20bca6d831e52616da25",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:disability",
+      "owner": "commands/Fun/disability.js",
+      "sha256": "e4eba3d7e64087456367db7379bc5e4e0847ba1f2b6fe90415053da758fe9501",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ha-gay",
+      "owner": "commands/Soundboard/ha-gay.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:hellomf",
+      "owner": "commands/Soundboard/hellomf.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:hitler",
+      "owner": "commands/Fun/hitler.js",
+      "sha256": "83811a1ccea9f0a73fca2049273873b73fbc4541b2cc33c8bfa576b16f811a78",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:kill",
+      "owner": "commands/Fun/kill.js",
+      "sha256": "cc2fc299d54f18e161f4d378d2dd3d126fcdbca96f5f366b5da5a21621a90096",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:kuss-digga",
+      "owner": "commands/Soundboard/kuss-digga.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ph-intro",
+      "owner": "commands/Soundboard/ph-intro.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:surprisemf",
+      "owner": "commands/Soundboard/surprisemf.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:verpissdich",
+      "owner": "commands/Soundboard/verpissdich.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:violence",
+      "owner": "commands/Fun/violence.js",
+      "sha256": "b9c4044638bba7ddc193f0990579f8e91040ecf799ce339757c1e03031aec280",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:wryd-stepbro",
+      "owner": "commands/Soundboard/wryd-stepbro.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "status": "retired",
+      "flags": [
+        "P0-C2:content-triage-required"
+      ],
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    }
+  ],
+  "findingResolutions": {
+    "prefix:giveaway": {
+      "status": "corrected-and-verified-in-isolation",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    "prefix:loadbackup": {
+      "status": "corrected-and-verified-in-isolation",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    "prefix:servers": {
+      "status": "corrected-and-verified-in-isolation",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    }
+  }
 }

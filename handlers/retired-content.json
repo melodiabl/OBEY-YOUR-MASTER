@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "scope": "Application commands and their local audio retired under the existing no-adult/profane-content requirement. Unverified audio is not asserted to be explicit.",
+  "commands": [
+    {
+      "id": "prefix:a-kill",
+      "name": "a-kill",
+      "owner": "commands/Anime-Emotions/a-kill.js",
+      "sha256": "8ba9095bbecba1b76ee9182f1dc297d2a09da8414996f69ae3e8d2da2a396897",
+      "aliases": [
+        "akill",
+        "anime-kill",
+        "animekill"
+      ],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ahshit",
+      "name": "ahshit",
+      "owner": "commands/Soundboard/ahshit.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:cancer",
+      "name": "cancer",
+      "owner": "commands/Fun/cancer.js",
+      "sha256": "0b0ee998f88c5474422706ec6cf1bd336515d10a799d20bca6d831e52616da25",
+      "aliases": [],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:disability",
+      "name": "disability",
+      "owner": "commands/Fun/disability.js",
+      "sha256": "e4eba3d7e64087456367db7379bc5e4e0847ba1f2b6fe90415053da758fe9501",
+      "aliases": [],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ha-gay",
+      "name": "ha-gay",
+      "owner": "commands/Soundboard/ha-gay.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:hellomf",
+      "name": "hellomf",
+      "owner": "commands/Soundboard/hellomf.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:hitler",
+      "name": "hitler",
+      "owner": "commands/Fun/hitler.js",
+      "sha256": "83811a1ccea9f0a73fca2049273873b73fbc4541b2cc33c8bfa576b16f811a78",
+      "aliases": [],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:kill",
+      "name": "kill",
+      "owner": "commands/Fun/kill.js",
+      "sha256": "cc2fc299d54f18e161f4d378d2dd3d126fcdbca96f5f366b5da5a21621a90096",
+      "aliases": [],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:kuss-digga",
+      "name": "kuss-digga",
+      "owner": "commands/Soundboard/kuss-digga.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:ph-intro",
+      "name": "ph-intro",
+      "owner": "commands/Soundboard/ph-intro.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:surprisemf",
+      "name": "surprisemf",
+      "owner": "commands/Soundboard/surprisemf.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:verpissdich",
+      "name": "verpissdich",
+      "owner": "commands/Soundboard/verpissdich.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:violence",
+      "name": "violence",
+      "owner": "commands/Fun/violence.js",
+      "sha256": "b9c4044638bba7ddc193f0990579f8e91040ecf799ce339757c1e03031aec280",
+      "aliases": [],
+      "reason": "legacy_targeted_mockery_or_lethal_caption",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    },
+    {
+      "id": "prefix:wryd-stepbro",
+      "name": "wryd-stepbro",
+      "owner": "commands/Soundboard/wryd-stepbro.js",
+      "sha256": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
+      "aliases": [],
+      "reason": "unverified_audio_with_adult_or_profane_label",
+      "status": "retired",
+      "evidence": "docs/platform/P0-SECURITY-2026-10-31.md"
+    }
+  ],
+  "assets": [
+    {
+      "path": "commands/Soundboard/audio/ha-gay.mp3",
+      "sha256": "05015e5c92cad46e0f4ec07caa04267c2003a07169e9eeefc0ec1c34762eafd3"
+    },
+    {
+      "path": "commands/Soundboard/audio/ahshit.mp3",
+      "sha256": "b162e885906704ec53a74c75d73ad71cb0882708fa967aff353edbb2630931d6"
+    },
+    {
+      "path": "commands/Soundboard/audio/ph-intro.mp3",
+      "sha256": "069008daa94c57b4062383ab5e058d8ec58950c3613ce9b674ad7fd835b58862"
+    },
+    {
+      "path": "commands/Soundboard/audio/wryd-stepbro.m4a",
+      "sha256": "5509ed264b018e2cf38709b4113b863c16e351e761fc1b6554b3e6b5d4878b0c"
+    },
+    {
+      "path": "commands/Soundboard/audio/verpissdich.mp3",
+      "sha256": "b5ea9cb47818109c06d1fee80b337d14d6efead5ed3cf9f1d544c0c9f5f00a64"
+    },
+    {
+      "path": "commands/Soundboard/audio/surprisemf.mp3",
+      "sha256": "13481764ae82f39702fa96c58e4bee8bda7d02998d25c1dfa680bfbcb2f2aea2"
+    },
+    {
+      "path": "commands/Soundboard/audio/kuss-digga.mp3",
+      "sha256": "0d170d8305ecde5ce1f67d89ee97b33052e5dea1f947bfc12c17df2432d697d7"
+    },
+    {
+      "path": "commands/Soundboard/audio/hellomf.mp3",
+      "sha256": "d3c9a75e89e1df8683dc71b22958db758e7e0380258b7d63849c7836ad1eccfa"
+    }
+  ]
+}

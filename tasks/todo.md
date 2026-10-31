@@ -119,9 +119,9 @@ Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso f
 
 Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 → P2 → P4 → P5 → P6**, con **P3 transversal** a cada recorrido. Los checkpoints y tareas posteriores conservan su evidencia; no definen por sí solos qué se hace a continuación.
 
-- [x] **P0-C1:** clasificar 675 comandos/95 rutas en 27 capacidades, conservar revisión funcional 168/21 y conciliar 674→675. [Contrato y aceptación](../docs/platform/P0-CLOSURE-2026-10-31.md).
-- [ ] **P0-C2 · siguiente:** resolver giveaway/servers, revisar frontera destructiva de loadbackup y contenido señalado, acreditar rotación Mongo previa. Ver aceptación concreta en el contrato de cierre.
-- [ ] **P0-C3:** revisar las 13 rutas base y autoridad sesión/tenant/CSRF, sin aceptar por arrastre las rutas de negocio.
+- [x] **P0-C1:** clasificar 661 comandos/95 rutas en 27 capacidades, conservar revisión funcional 168/21 y conciliar 674−14+1=661 y trazar las retiradas. [Contrato y aceptación](../docs/platform/P0-CLOSURE-2026-10-31.md).
+- [ ] **P0-C2 · pendiente externo:** código de giveaway/servers/loadbackup y contenido señalado corregidos y verificados en aislamiento; falta acreditar rotación Mongo en el proveedor. [Evidencia](../docs/platform/P0-SECURITY-2026-10-31.md).
+- [ ] **P0-C3 · siguiente:** revisar las 13 rutas base y autoridad sesión/tenant/CSRF, sin aceptar por arrastre las rutas de negocio.
 - [ ] **P0-C4 · G25:** conciliar README/guías/avisos/soporte, conservar historia y exclusiones.
 - [ ] **P0-C5 · G01/G02/G25:** instalación exacta, comprobaciones de base y registro/aliases del corte, aceptación explícita de cada gate; CI remoto separado de evidencia local.
 - [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.

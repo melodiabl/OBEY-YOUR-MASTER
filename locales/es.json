@@ -2082,5 +2082,35 @@
     "requesting": "Confirmación recibida. Estoy revalidando el alcance y el registro antes de solicitar la publicación.",
     "unchanged": "El registro de Discord ya coincide con el catálogo cargado. No se volvió a publicar.",
     "confirmed": "Discord confirmó un registro que coincide con el catálogo enviado. Su propagación a los clientes puede tardar."
+  },
+  "ownerServers": {
+    "usage": "Usa este comando sin argumentos.",
+    "denied": "Este comando requiere ser propietario actual del bot y conservar acceso al canal.",
+    "unavailable": "No pude verificar el acceso o entregar la consulta por mensaje privado. No se publicaron detalles en este canal.",
+    "sent": "Te envié la consulta por mensaje privado.",
+    "title": "Servidores del bot · consulta privada",
+    "empty": "No hay servidores disponibles.",
+    "page": "Página {page}/{pages} · {total} servidores",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "backupRestore": {
+    "usage": "Uso: loadbackup <ID del servidor de origen> <posición del 1 al 5>. El destino es este servidor.",
+    "denied": "Debes seguir siendo propietario de ambos servidores y el bot necesita Administrator en ambos. No pude confirmar esos permisos o el acceso al canal.",
+    "conflict": "La copia seleccionada cambió. No se inició la restauración. Abre una nueva vista previa.",
+    "expired": "La confirmación venció. No se inició la restauración.",
+    "busy": "Ya hay una restauración pendiente o con resultado incierto en este servidor. Revisa su estado antes de continuar.",
+    "unconfirmed": "No pude confirmar el resultado. El servidor puede haber quedado restaurado parcialmente. No repitas la operación: revisa su estado y la recuperación.",
+    "unavailable": "No pude preparar o verificar la restauración. No se confirma ningún cambio.",
+    "invalidBackup": "La copia no está disponible o no tiene un formato compatible con su servidor de origen.",
+    "delivery": "No pude entregar el aviso previo. No se inició la restauración.",
+    "confirm": "Restaurar este servidor",
+    "cancel": "Cancelar",
+    "notYours": "Solo quien solicitó esta restauración puede confirmarla.",
+    "cancelled": "Restauración cancelada. No se inició ningún cambio.",
+    "preparing": "Comprobando la copia y los permisos antes de restaurar…",
+    "requesting": "Preparando la restauración de la copia `{backup}` en `{target}`. Recibirás el resultado aquí.",
+    "returned": "La biblioteca devolvió un resultado para `{target}`. Comprueba canales, roles y datos; esta respuesta no verifica la restauración completa.",
+    "preview": "⚠️ Se borrará la estructura actual de **{name}** (`{target}`) antes de restaurar. Puede eliminar canales, roles y mensajes.\nOrigen: `{source}` · posición {slot}\nCopia: `{backup}` · creada <t:{created}:f>\nNo hay reversión automática. Confirma solo si este es el destino y la copia que quieres usar."
   }
 }

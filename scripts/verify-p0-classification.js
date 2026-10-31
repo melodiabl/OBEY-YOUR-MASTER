@@ -25,11 +25,13 @@ function verifyClassification(options = {}) {
   const inventory = options.inventory || read('docs/platform/operation-ownership.json')
   const review = options.review || read('docs/platform/shared-intents.json')
   const backlog = options.backlog || read('docs/guia-arquitectura/investigacion-20261022/backlog.json')
+  const retirement = read('handlers/retired-content.json')
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.gateAcceptance, 'not-assessed-by-classification')
   const core = Object.fromEntries(['commands', 'routes', 'aliases', 'aliasResolutions'].map(key => [key, inventory[key]]))
   assert.equal(data.inputs.inventoryCoreSha256, digest(core), 'Inventory changed: reconcile classification')
   assert.equal(data.inputs.sharedIntentsSha256, digest(review), 'Review changed: reconcile classification')
+  assert.equal(data.inputs.retiredContentSha256, digest(retirement), 'Retirement changed: reconcile classification')
   const gates = backlog.tasks.filter(task => task.priority === 'P0').map(task =>
     Object.fromEntries(['id', 'priority', 'owner', 'title', 'acceptance'].map(key => [key, task[key]])))
   assert.deepEqual(data.originalP0Gates, gates, 'Preserve original P0 criteria, including G25')
@@ -141,8 +143,32 @@ function verifyClassification(options = {}) {
     requiredFindings[name] = 'content-triage-required'
   }
   const classified = new Map([...data.commands, ...data.routes].map(entry => [entry.id, entry]))
+  const retiredNames = Object.entries(requiredFindings).filter(([, finding]) => finding === 'content-triage-required').map(([name]) => name).sort()
+  assert.deepEqual(retirement.commands.map(entry => entry.name).sort(), retiredNames, 'Preserve the reviewed retirement scope')
+  assert.deepEqual(data.retiredEntries, retirement.commands.map(entry => ({
+    id: entry.id, owner: entry.owner, sha256: entry.sha256, status: entry.status,
+    flags: ['P0-C2:content-triage-required'], evidence: entry.evidence
+  })), 'Retired entries must retain provenance and resolution')
+  for (const entry of retirement.commands) {
+    assert.equal(entry.status, 'retired')
+    assert(!classified.has(entry.id), `Retired entry is active: ${entry.id}`)
+    assert(!fs.existsSync(path.join(root, entry.owner)), `Retired adapter still exists: ${entry.id}`)
+    assert.match(entry.sha256, /^[a-f0-9]{64}$/)
+    assert(!inventory.aliases.some(alias => alias.target === entry.name || entry.aliases.includes(alias.alias)), `Retired alias is active: ${entry.id}`)
+  }
+  for (const entry of retirement.assets) {
+    assert(!fs.existsSync(path.join(root, entry.path)), `Retired audio still exists: ${entry.path}`)
+    assert.match(entry.sha256, /^[a-f0-9]{64}$/)
+  }
   for (const [name, finding] of Object.entries(requiredFindings)) {
-    assert(classified.get('prefix:' + name)?.flags.includes('P0-C2:' + finding), `Missing base finding: ${name}`)
+    const entry = classified.get('prefix:' + name) || data.retiredEntries.find(entry => entry.id === 'prefix:' + name)
+    assert(entry?.flags.includes('P0-C2:' + finding), `Missing base finding: ${name}`)
+  }
+  assert.deepEqual(Object.keys(data.findingResolutions).sort(), ['prefix:giveaway', 'prefix:loadbackup', 'prefix:servers'])
+  for (const resolution of Object.values(data.findingResolutions)) {
+    assert.equal(resolution.status, 'corrected-and-verified-in-isolation')
+    assert.equal(resolution.evidence, 'docs/platform/P0-SECURITY-2026-10-31.md')
+    assert(fs.existsSync(path.join(root, resolution.evidence)))
   }
   for (const entry of [...inventory.commands.filter(entry => entry.category === 'Playlist' || entry.category === 'Favoritos' || ['playlist', 'like', 'likedsongs', 'savedqueue'].includes(entry.name)),
     ...inventory.routes.filter(entry => /\/(?:library|like(?:d)?|playlist)(?:\/|$)/.test(entry.path))]) {

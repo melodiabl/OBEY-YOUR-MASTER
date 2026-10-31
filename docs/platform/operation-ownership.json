@@ -35,7 +35,7 @@
     "commands/Administration/embed.js": "f0ec619d356fb1d46fab6a133da7533a5eda1657b9e7a10d4cd10a105fa81e84",
     "commands/Administration/embedbuilder.js": "f94f06dcf97b49cd767c10725453aa1927f1dba19671e16407037f5357d504c4",
     "commands/Administration/esay.js": "b720f18f2f1544a55db06ecb091a0728e8720bfe4ead40fb9f59563f47daafaf",
-    "commands/Administration/giveaway.js": "95647dfe88da303a996a80a37214122d889e825f6f0f67daf48bcab61bb1f6bb",
+    "commands/Administration/giveaway.js": "5039e77111c97dc213d03d842054006882d649443e4e2a2fc66f64b537d02af8",
     "commands/Administration/globalwarnings.js": "e9a1c55d11eedf0ac303eb18536e6b4ed8723454b5d18f859a5c0d6da4967c51",
     "commands/Administration/idban.js": "459d92182f411ce95950533099cf9ac5c6d6ef242c73c070b421651a86f687fb",
     "commands/Administration/image.js": "079feea03896be243fa29c2a96fb8f81234e8fdeac01c7f662d261a0ebf5fc85",
@@ -48,7 +48,7 @@
     "commands/Administration/leavethread.js": "a47964b90956e6d3f9ecbcc8c9bc94d9b37c80d6e24ba28d9c4f35e8838da8fb",
     "commands/Administration/listbackups.js": "7206fe3f7bad9c5346e5ca8b7cbb18cb306e85e0b06c289a109ed7ae289f4e8c",
     "commands/Administration/listbans.js": "fe10174bd30cc02f902888bfdc96630fb24c7ff1151b0357238114e15c149a78",
-    "commands/Administration/loadbackup.js": "db4e6d00a77d5904a5ffa90e81bc374b3687fbf88ee0d02e6b213ed367e58f25",
+    "commands/Administration/loadbackup.js": "3dbbe8e8a3a636b063ac5f8febc20fd5c6823975ba8774b5d2fed279f4fb5ec3",
     "commands/Administration/lockchannel.js": "9c3fa6cafbefb5dc13837d970bbfb71b869375ab4f25858a49543a2ab9c137aa",
     "commands/Administration/lockthread.js": "a26201fe4673dbbdb1a0ce8f9dce474d3355ec5cf11ee8c3419baabdaf850fe9",
     "commands/Administration/manageinvites.js": "916ce91b29ebe1455d3842a54e89c93defe1de7213ddb979f04ae9ddab0e6989",
@@ -99,7 +99,6 @@
     "commands/Anime-Emotions/a-highfive.js": "4292b59170ff37b25cc2776936a86a620cec04f7cbc566d998ffff080c8b27e0",
     "commands/Anime-Emotions/a-hug.js": "76589c213f9eaa0ee6fc62d94989fd3d782c6ed7cc950f41dd442a6d8922fd5c",
     "commands/Anime-Emotions/a-kick.js": "237543f00e87b5f8460bed1ec8b180588847460351b7d01269d40d0a54fee5b2",
-    "commands/Anime-Emotions/a-kill.js": "8ba9095bbecba1b76ee9182f1dc297d2a09da8414996f69ae3e8d2da2a396897",
     "commands/Anime-Emotions/a-kiss.js": "5aee5184b322777f429b9ab442a9767ef184f6146cae4eb5a844ee0403c4fac6",
     "commands/Anime-Emotions/a-nervous.js": "dd57b60c0e7a6ef2482e68627309da2297fffd4d6e9149005e5d58eceba87eb8",
     "commands/Anime-Emotions/a-pat.js": "0e9da54714d82a6f313c95a1cc47ac39d824a32fd3cccbb7e791a82ead360168",
@@ -172,7 +171,6 @@
     "commands/Fun/bed.js": "7fa756313d6f575d53a3adedb3b46f8aa4e6fd02ae29ccb823417a319a3da9ce",
     "commands/Fun/blur.js": "bc4ee1bf933d9ecf70f591ff3e93e1bbb4c512e93a3bbd980dcffe32473e2efe",
     "commands/Fun/byemom.js": "5dafae099bffb11af678b2cbd4a725cdbad423d3875220b3116784c7e616cddf",
-    "commands/Fun/cancer.js": "0b0ee998f88c5474422706ec6cf1bd336515d10a799d20bca6d831e52616da25",
     "commands/Fun/changemymind.js": "3546e3cdf19510916f4deb7efc6b09c906b3fd6dc97e28c8f9a5c5989a4125a3",
     "commands/Fun/chat.js": "3c48a61e914f70bf47d4e2eb0f0fefd49d0b64cd9faf7c8159f5f9a94267b9ee",
     "commands/Fun/circle.js": "c7e1166f20ebd7fb788fbedc12682f22f301cdf7be8ae303f8f589c664f59c1f",
@@ -181,7 +179,6 @@
     "commands/Fun/cry.js": "ba813cb5550825f891d52022a419a7b01c963a1bb33c2c7125b1d5b1a5178afc",
     "commands/Fun/dab.js": "d68f27d4258e625f192783d8bcce4d23cb347a908e6dc305e02cf66ab5ad7afc",
     "commands/Fun/delete.js": "8e8049a829a50a8188b804e42595d25855435a39837bb269067324fe8c07c916",
-    "commands/Fun/disability.js": "e4eba3d7e64087456367db7379bc5e4e0847ba1f2b6fe90415053da758fe9501",
     "commands/Fun/door.js": "7335763c9b721bafe60d9f6dc6c378bc6ff70af6e092ed6bee1f9c7be7af6d7d",
     "commands/Fun/drake.js": "2017265b6df82c18919e43fdcd84168139ee183da88e4baa830d58819d8d600f",
     "commands/Fun/egg.js": "e68f4ab086e3b26933aa949aec0a897b0d2e2b53c1a8c422b9dc207d9cac053c",
@@ -195,14 +192,12 @@
     "commands/Fun/floor.js": "a9a7fd1ae0126a5015e609814f1d2ef1746df7f70dc9e57ca307ca61e1ef3873",
     "commands/Fun/godwhy.js": "888f387aa5d9ebd6fd1b6b00ce48d72abcd0e1b0a46b889962c6be60ea8fc056",
     "commands/Fun/greyscale.js": "00561cbbc179136cabc63d55db3738f2699c8ccf93483c21b928779a95771f2a",
-    "commands/Fun/hitler.js": "83811a1ccea9f0a73fca2049273873b73fbc4541b2cc33c8bfa576b16f811a78",
     "commands/Fun/invert.js": "d1c18035f1495c1126257bd479b7c9b386fb00d8be4b68b685f3ad45dc0e4910",
     "commands/Fun/ipad.js": "8d8dd2bfa6373f8f86e23b2238162bee9b789768058a7db12a00cea19a0e7bb8",
     "commands/Fun/jail.js": "7b3c6aeb04d6ff40aac6cb3da51ffd94e3edfe782d9e16e87847d78ec8da70b8",
     "commands/Fun/joke.js": "3055783f78fc347329645fe279e904111a4cc070b65f64c6d3ba46da98e9eec1",
     "commands/Fun/jokeOverHead.js": "cf7bf98e7d4fc574c7da1c24212782fdeaec35828624c983add5a24c8b87021b",
     "commands/Fun/keepdistance.js": "9515f1f13be3c5f649e2cfe81b11a5f1df1d8a0149042db0c62617b81976ac7c",
-    "commands/Fun/kill.js": "cc2fc299d54f18e161f4d378d2dd3d126fcdbca96f5f366b5da5a21621a90096",
     "commands/Fun/kiss.js": "d6797a49fb7a8bd545f86354dca61b5546f0ed0533086fbade218f77cf89eef0",
     "commands/Fun/meme.js": "ab8c1c94673b727fa1ab0c5bc8647ae4bd9d06bb3a6b72c8475b6521d686050c",
     "commands/Fun/note.js": "a508567ca63723288cff8c2eeaa9828837b6ff7a8fbbf4ccde43b5e6393b4ed4",
@@ -223,7 +218,6 @@
     "commands/Fun/trash.js": "378a9e10f63692c4950647b892359c65a3531dabddeb9451061c1d918948828e",
     "commands/Fun/trigger.js": "9280ce435f0008d5e8b19ea99fe3e347cf2889ad1d2eb1ac7d13f504356beb45",
     "commands/Fun/tweet.js": "19f72797052426da46a8b81b27ddf4a6241c7c069880ae488eea4b2713c3da23",
-    "commands/Fun/violence.js": "b9c4044638bba7ddc193f0990579f8e91040ecf799ce339757c1e03031aec280",
     "commands/Fun/walking.js": "14173a79c3938ea1b6340c78be9cbafddff07cef83c38b8f9544c15f832a5f96",
     "commands/Fun/wanted.js": "4aef084d0554bb079b794e9862911b4c2144174674e34748bf7d90637f8e7862",
     "commands/Fun/wasted.js": "409f664f97895a2efc57bc5f3c960ddc5e18fcefed2bbe2efb634b4f5a32e744",
@@ -263,7 +257,7 @@
     "commands/Info/serveravatar.js": "6bba03840a48a2dbc87050b74ac64b06df9da0dfe4c8f016d6111a4a925a0119",
     "commands/Info/serverbanner.js": "db259c089d75e9bbafd169be0bdbcfe7d2941d27cb08c957bd2853bad0722844",
     "commands/Info/serverinfo.js": "23a66cde5b8a160e2345c5d25395512c0b963d9f77d66c3e992972323d416bc6",
-    "commands/Info/servers.js": "18c867ae493af2ff56302766e4c1e8674702c0659598fada23b22f7d70dbd594",
+    "commands/Info/servers.js": "04e03179f2befe90c02db2677efe06be00443161fdbec5fdec306c1bc326ff1b",
     "commands/Info/showblacklist.js": "84f28e33ff9bc9775aca0932292e588b37c1e378b004342520cb6d893418b186",
     "commands/Info/sponsor.js": "476ae8b840154d1cf1ea786a1b4f8b71b135625dc1b68db063c9133ea8f103e0",
     "commands/Info/stats.js": "b470396731d0da4d50e0122caf83d25a417829deb8c9c5546fcc97f1632d2ca3",
@@ -492,7 +486,6 @@
     "commands/Soundboard/a-wow.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/abdi.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/afewmomentslater.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/ahshit.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/airhorn.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/amogus.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/araara.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
@@ -505,14 +498,11 @@
     "commands/Soundboard/game-over.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/giggle.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/gimme-ohyeah.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/ha-gay.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/hellomf.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/honk.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/ilikecutg.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/illuminati.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/iphone-notification.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/john-cena.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/kuss-digga.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/laugh.js": "3784788f41ca5c4084dd9a866a78b543ea561fcf06e7beed6df81cc96206154d",
     "commands/Soundboard/magic.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/margayamc.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
@@ -523,7 +513,6 @@
     "commands/Soundboard/oioioi.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/onichan.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/pew-pew.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/ph-intro.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/quack-quack.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/rickroll.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/samsung-notification.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
@@ -533,13 +522,10 @@
     "commands/Soundboard/skype.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/suiii.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/superidol.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/surprisemf.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/sus.js": "3784788f41ca5c4084dd9a866a78b543ea561fcf06e7beed6df81cc96206154d",
     "commands/Soundboard/uwu.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/verpissdich.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/wetfart.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Soundboard/wow.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
-    "commands/Soundboard/wryd-stepbro.js": "c90170c828433336209bb205b7cc86dbbb269f48c462b43409735949217302e3",
     "commands/Voice/voice.js": "ebebc1df85565fd8f0d69d137dba5facc7c91b603083abf9346ed645c796c2c4",
     "dashboard/architect-routes.js": "b67231d1141cc48510e588d3cebaa5696fe744012f8d05a6242cb4e5ceebaf5e",
     "dashboard/auth.js": "eefd7730bdc83821210da2ca9e288bb56031ea5f519d36f8009bbb55e4853922",
@@ -630,8 +616,8 @@
     "handlers/clientvariables.js": "071f2605013834b1821f9330007a5b1fee9b4356c9dbc2290d4bdc1bc23c737f",
     "handlers/command-category-settings.js": "8a3526df0dcf2a8e312bbf7969c11bfdeffffbd5d1ff4632824e073da4cd1d76",
     "handlers/command-execution.js": "553237b6797909a4a5efdab2aa4f81de90cad43d57440f6870e7575d4771e9d9",
-    "handlers/command-policy.js": "5b1a59d511961e32916f52fb52b459965811e41b1ca3f70b2fa3dfc709d8724c",
-    "handlers/command-registry.js": "624b1fc3276fd369c245cc2a8c60d7ba80325d76682e051f724c852d6f9fd97d",
+    "handlers/command-policy.js": "5fcab5e3016855fa38a291b22e8d16cffff08c38e4828f20fe41cc290e1faf9e",
+    "handlers/command-registry.js": "229df2a9ac4254b1fff193a5911158cd8020a41ab69429320b1e0b749095fe87",
     "handlers/command.js": "c9b33d598887dbbeab9472785a6e39ccbeac38451b9278494bae2a58fb956d73",
     "handlers/config-service.js": "137ea42d9192aa31da808646e7267f0ecdb6a2029d3727359320c29e5f3c6ac4",
     "handlers/configuration-roles.js": "94f3a19f481423413b7adebf9486a9d6d9dec4bb0fc15414a7d99240cc5266f6",
@@ -686,7 +672,7 @@
     "handlers/membercount.js": "208914607571e8d063659acb4cbc574882935846b622f084cde157b7f0f1425b",
     "handlers/membership-settings.js": "4596c5cbfc660d5195d611147ecbbfaa9c28c1c1184350a05e28a44cee912de6",
     "handlers/membership-title.js": "e2412c75b687a031493431f6f29c9b9e004879729c096a4db9ab896d942b8387",
-    "handlers/meme-service.js": "c910cb659d62ea0aabf097666afecf42070920c9bb2439e328d50fea213a715c",
+    "handlers/meme-service.js": "b3046194fe0aed8f244c49151e8bf2ee2333b81b17e508c98588c7b6e1852c3c",
     "handlers/moderation/action.js": "4191794f414e311e5185b35ea309656375b42246ac4322e24aa6cb9284e162ad",
     "handlers/moderation/ban.js": "dc8927b9a012572cb2e25d9040f476d05e27277819b278ff1c6fbac5db574a69",
     "handlers/moderation/cases.js": "55f3593431f534a6cec2b04e93b8bda451a4f4aafec1f0431b3f98210dffa367",
@@ -840,11 +826,11 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "05d6a0b06eeb55584d283629e4f3ed0d794c6704fdfa9724b825abff8b7bef60",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "9685e299f1b1bf4473f4266b43932a854706d2f0c8615ecbae9760d4358f2b87",
-    "locales/es.json": "dca97b067b233f615de90f349eab0b561315f1b8630959021ea72fd0e0ba4192",
+    "locales/en.json": "3e1598631c735437d3c2392e570cb749ebb7bf16e6874471f78c1c1e6eb8f1f7",
+    "locales/es.json": "37b77b3c22a9a50ddbc20b6b8f32d40883a45755ebfcc357a15c4de352d2d048",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
-    "slashCommands/Anime/emote.js": "778e5b1f10ec2c461a0cb862cb2bc5ee197c3ef08261605e36b605f575e80566",
+    "slashCommands/Anime/emote.js": "d0ee4af2a83cb7a16c1cda84a59ec35a8d239ed393c3e258656700b3f025dd5b",
     "slashCommands/Birthday/check.js": "ce8cea993339dac218c32138932782c6e3f8be2774e592dafd69028e00b9a64c",
     "slashCommands/Birthday/list.js": "e2a58015413e95f8244cd87dc72fbfd908c6be3b16646f9aaf3b5aa41b67a021",
     "slashCommands/Birthday/remove.js": "da8dd691c079eeb4460687fd4d448013ae87d6269cd1ac2a2810373d7b0bc147",
@@ -896,7 +882,7 @@
     "slashCommands/Giveaway/pause.js": "f67aa133dd10f5295c1da8224523a61e195e709b53f89cae285d6a6587dd6b0e",
     "slashCommands/Giveaway/reroll.js": "f2d9fbc8bea8347f61854ae6bb9005792e34ffe80e714f09e364f12afdc24704",
     "slashCommands/Giveaway/resume.js": "95a34ce722f8b94598356ad68cfa63fa2f645a040e643e7636d665e8f0e557d5",
-    "slashCommands/Giveaway/start.js": "7066d9be0c955ffea7531dfe06bd294ce5ad0d8868abcb7695992aa105de0e3c",
+    "slashCommands/Giveaway/start.js": "e4be84086d6d65d5c511237f29d7e3f83e1d363247fab5d116db6ecef88a512b",
     "slashCommands/Info/avatar.js": "93decadb84d651693aec86bb53e5dab013f42dc8453dc8ea802b3d618a902019",
     "slashCommands/Info/botfaq.js": "149d3753b5948993b199d53ccb6d9415a6e9dc9ae6f0ba2e64568f26384797f6",
     "slashCommands/Info/botinfo.js": "892585ef50fb514861f7639697ee231b80cb78932d692bb65261525a3a432dc7",
@@ -973,7 +959,7 @@
     "slashCommands/Rank/leaderboard.js": "a61aa756e31f56a8161fee184f45fb66006d9ceb7db5f598d99c739ad0a9fdfb",
     "slashCommands/Rank/rank.js": "b54eda26d6b1344f1ff2f2f2e988a59a84e30873b8a439a9f933768d7b3e0fd1",
     "slashCommands/Rank/setlevel.js": "a87534a7f428c290f7a436ad0bb538ce656868701eafa82bc08f43e5997640c9",
-    "slashCommands/Soundboard/play.js": "7cac4a75e3e9cb1c51475faabf3b3d5b63aaf78d6199d1a9ee5b375ee2ad65cd",
+    "slashCommands/Soundboard/play.js": "3b916a66f340136173a16d9092acda70b6112c428fbc8d1d78d7a4f1d4b64978",
     "slashCommands/Ticket/add.js": "f9a5242a4b4f010195ca336450f04d86d95a745ed12a6b1d0b0743343b5526af",
     "slashCommands/Ticket/claim.js": "1e8f1084c765e4b309562b6ade2e84ae2eedc4c9d5ff1e647e508cfa8882ecdb",
     "slashCommands/Ticket/close.js": "4b79ce140fdcb6e1dc56ad3eec058b232ed95a753bf4979893502689d5ba6311",
@@ -1061,7 +1047,12 @@
     "handlers/slash-publication-transport.js": "e6304d1339bfd1c1d358a03479e97848e817ed9cbd6a408347d4eb44b76ffead",
     "handlers/slash-publication.js": "262488a66ea64d295b788dad6d21e919b1058886728f34cba8e557157dcb822a",
     "handlers/slash-publication-command.js": "42ab1989a561d56dd6c8fa821bcfc55aeb5961f7c4a8b7a77036299a9d3a522e",
-    "scripts/verify-p0-classification.js": "0db993be1e1d39e78243962af55c0f941a9c6e0efa257a156c5e886bb6dabd5e"
+    "scripts/verify-p0-classification.js": "972133588297ca55b4bc064434f3896ce95bba54c9fe9e83cba0b91332ede6e1",
+    "handlers/giveaway-eligibility.js": "b3d46f3522fba34b7a6e3848069ca6e098d586890de3fd561ebe87740d8b1471",
+    "handlers/owner-server-list.js": "2e53f396e27f3feeca47aa664211ae7a96ed6e8a7bd27bb3068cd636cc02877f",
+    "handlers/backup-restore.js": "7f000265b88f1426e0ab9a167bac9806526e0cad1d828af06a1b45b09b07b5c2",
+    "handlers/backup-restore-command.js": "078ff4139eec5170239298d806e2c11748bbaeebc22a86ae9b69fa2dd0813e0c",
+    "handlers/retired-content.json": "95ee5d9501890cb1b3627b264a6a0cb7bec0fe38fe9b53cc844e37e2f3ef6a86"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -1549,32 +1540,6 @@
     "commands/Anime-Emotions/a-kick.js": {
       "kind": "current-command-adapter",
       "file": "commands/Anime-Emotions/a-kick.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.getFooter",
-          "line": 24
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
-    "commands/Anime-Emotions/a-kill.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Anime-Emotions/a-kill.js",
       "export": "run",
       "observedClientCalls": [
         {
@@ -3057,56 +3022,6 @@
         "client.settings"
       ]
     },
-    "commands/Soundboard/ahshit.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/ahshit.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
     "commands/Soundboard/airhorn.js": {
       "kind": "current-command-adapter",
       "file": "commands/Soundboard/airhorn.js",
@@ -4200,48 +4115,6 @@
         {
           "call": "client.getFooter",
           "line": 26
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
-    "commands/Fun/cancer.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Fun/cancer.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.users.fetch(args[0]).catch",
-          "line": 47
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 47
-        },
-        {
-          "call": "client.memer.cancer(avatar).then",
-          "line": 62
-        },
-        {
-          "call": "client.memer.cancer",
-          "line": 62
         }
       ],
       "storeReferences": [
@@ -6080,48 +5953,6 @@
       "storeReferences": [
         "client.settings",
         "client.economy"
-      ]
-    },
-    "commands/Fun/disability.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Fun/disability.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.users.fetch(args[0]).catch",
-          "line": 47
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 47
-        },
-        {
-          "call": "client.memer.disability(avatar).then",
-          "line": 62
-        },
-        {
-          "call": "client.memer.disability",
-          "line": 62
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
       ]
     },
     "commands/Soundboard/disconnected.js": {
@@ -8280,56 +8111,6 @@
         "client.settings"
       ]
     },
-    "commands/Soundboard/ha-gay.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/ha-gay.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
     "commands/MiniGames/hangman.js": {
       "kind": "current-command-adapter",
       "file": "commands/MiniGames/hangman.js",
@@ -8388,104 +8169,12 @@
         "client.settings"
       ]
     },
-    "commands/Soundboard/hellomf.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/hellomf.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
     "commands/Info/help.js": {
       "kind": "current-command-adapter",
       "file": "commands/Info/help.js",
       "export": "run",
       "observedClientCalls": [],
       "storeReferences": []
-    },
-    "commands/Fun/hitler.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Fun/hitler.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.users.fetch(args[0]).catch",
-          "line": 47
-        },
-        {
-          "call": "client.users.fetch",
-          "line": 47
-        },
-        {
-          "call": "client.memer.hitler(avatar).then",
-          "line": 62
-        },
-        {
-          "call": "client.memer.hitler",
-          "line": 62
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
     },
     "commands/Soundboard/honk.js": {
       "kind": "current-command-adapter",
@@ -9842,40 +9531,6 @@
       "observedClientCalls": [],
       "storeReferences": []
     },
-    "commands/Fun/kill.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Fun/kill.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 50
-        },
-        {
-          "call": "client.getFooter",
-          "line": 61
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
     "commands/Fun/kiss.js": {
       "kind": "current-command-adapter",
       "file": "commands/Fun/kiss.js",
@@ -9928,56 +9583,6 @@
         {
           "call": "client.getFooter",
           "line": 108
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
-    "commands/Soundboard/kuss-digga.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/kuss-digga.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
         }
       ],
       "storeReferences": [
@@ -10309,68 +9914,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Administration/loadbackup.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.guilds.cache.get",
-          "line": 20
-        },
-        {
-          "call": "client.settings.get",
-          "line": 44
-        },
-        {
-          "call": "client.settings.get",
-          "line": 45
-        },
-        {
-          "call": "client.settings.get",
-          "line": 46
-        },
-        {
-          "call": "client.settings.get",
-          "line": 47
-        },
-        {
-          "call": "client.getFooter",
-          "line": 70
-        },
-        {
-          "call": "client.backupDB.ensure",
-          "line": 75
-        },
-        {
-          "call": "client.backupDB.get",
-          "line": 78
-        },
-        {
-          "call": "client.settings.get",
-          "line": 140
-        },
-        {
-          "call": "client.settings.get",
-          "line": 142
-        },
-        {
-          "call": "client.settings.set",
-          "line": 143
-        },
-        {
-          "call": "client.user.displayAvatarURL",
-          "line": 153
-        },
-        {
-          "call": "client.getFooter",
-          "line": 156
-        },
-        {
-          "call": "client.getFooter",
-          "line": 162
-        }
-      ],
-      "storeReferences": [
-        "client.settings",
-        "client.backupDB"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/lockchannel.js": {
       "kind": "current-command-adapter",
@@ -11824,56 +11369,6 @@
     "commands/Soundboard/pew-pew.js": {
       "kind": "current-command-adapter",
       "file": "commands/Soundboard/pew-pew.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
-    "commands/Soundboard/ph-intro.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/ph-intro.js",
       "export": "run",
       "observedClientCalls": [
         {
@@ -14817,35 +14312,8 @@
       "kind": "current-command-adapter",
       "file": "commands/Info/servers.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 16
-        },
-        {
-          "call": "client.settings.get",
-          "line": 17
-        },
-        {
-          "call": "client.getFooter",
-          "line": 24
-        },
-        {
-          "call": "client.guilds.cache .sort((a, b) => b?.memberCount - a.memberCount) .map",
-          "line": 29
-        },
-        {
-          "call": "client.guilds.cache .sort",
-          "line": 29
-        },
-        {
-          "call": "client.getFooter",
-          "line": 47
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
+      "observedClientCalls": [],
+      "storeReferences": []
     },
     "commands/Administration/setautoarchiveduration.js": {
       "kind": "current-command-adapter",
@@ -16214,56 +15682,6 @@
       "export": "run",
       "observedClientCalls": [],
       "storeReferences": []
-    },
-    "commands/Soundboard/surprisemf.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/surprisemf.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
     },
     "commands/Soundboard/sus.js": {
       "kind": "current-command-adapter",
@@ -18068,56 +17486,6 @@
         "client.settings"
       ]
     },
-    "commands/Soundboard/verpissdich.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/verpissdich.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
     "commands/Filter/vibrate.js": {
       "kind": "current-command-adapter",
       "file": "commands/Filter/vibrate.js",
@@ -18157,40 +17525,6 @@
         }
       ],
       "storeReferences": []
-    },
-    "commands/Fun/violence.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Fun/violence.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.memer.violence(text).then",
-          "line": 60
-        },
-        {
-          "call": "client.memer.violence",
-          "line": 60
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
     },
     "commands/Voice/voice.js": {
       "kind": "current-command-adapter",
@@ -19362,56 +18696,6 @@
     "commands/Soundboard/wow.js": {
       "kind": "current-command-adapter",
       "file": "commands/Soundboard/wow.js",
-      "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.settings.get",
-          "line": 18
-        },
-        {
-          "call": "client.settings.get",
-          "line": 19
-        },
-        {
-          "call": "client.settings.get",
-          "line": 20
-        },
-        {
-          "call": "client.getFooter",
-          "line": 25
-        },
-        {
-          "call": "client.getFooter",
-          "line": 44
-        },
-        {
-          "call": "client.getFooter",
-          "line": 54
-        },
-        {
-          "call": "client.getFooter",
-          "line": 64
-        },
-        {
-          "call": "client.getFooter",
-          "line": 74
-        },
-        {
-          "call": "client.getFooter",
-          "line": 83
-        },
-        {
-          "call": "client.getFooter",
-          "line": 106
-        }
-      ],
-      "storeReferences": [
-        "client.settings"
-      ]
-    },
-    "commands/Soundboard/wryd-stepbro.js": {
-      "kind": "current-command-adapter",
-      "file": "commands/Soundboard/wryd-stepbro.js",
       "export": "run",
       "observedClientCalls": [
         {
@@ -22055,15 +21339,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:a-kill",
-      "name": "a-kill",
-      "transport": "prefix",
-      "owner": "commands/Anime-Emotions/a-kill.js",
-      "category": "Anime-Emotions",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:a-kiss",
       "name": "a-kiss",
       "transport": "prefix",
@@ -22414,15 +21689,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:ahshit",
-      "name": "ahshit",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/ahshit.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:airhorn",
       "name": "airhorn",
       "transport": "prefix",
@@ -22698,15 +21964,6 @@
       "transport": "prefix",
       "owner": "commands/School-Commands/calculator.js",
       "category": "School-Commands",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:cancer",
-      "name": "cancer",
-      "transport": "prefix",
-      "owner": "commands/Fun/cancer.js",
-      "category": "Fun",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
     },
@@ -23182,15 +22439,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:disability",
-      "name": "disability",
-      "transport": "prefix",
-      "owner": "commands/Fun/disability.js",
-      "category": "Fun",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:disconnected",
       "name": "disconnected",
       "transport": "prefix",
@@ -23623,15 +22871,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:ha-gay",
-      "name": "ha-gay",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/ha-gay.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:hangman",
       "name": "hangman",
       "transport": "prefix",
@@ -23641,29 +22880,11 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:hellomf",
-      "name": "hellomf",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/hellomf.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:help",
       "name": "help",
       "transport": "prefix",
       "owner": "commands/Info/help.js",
       "category": "Info",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:hitler",
-      "name": "hitler",
-      "transport": "prefix",
-      "owner": "commands/Fun/hitler.js",
-      "category": "Fun",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
     },
@@ -23920,29 +23141,11 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:kill",
-      "name": "kill",
-      "transport": "prefix",
-      "owner": "commands/Fun/kill.js",
-      "category": "Fun",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:kiss",
       "name": "kiss",
       "transport": "prefix",
       "owner": "commands/Fun/kiss.js",
       "category": "Fun",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:kuss-digga",
-      "name": "kuss-digga",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/kuss-digga.js",
-      "category": "Soundboard",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
     },
@@ -24454,15 +23657,6 @@
       "name": "pew-pew",
       "transport": "prefix",
       "owner": "commands/Soundboard/pew-pew.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:ph-intro",
-      "name": "ph-intro",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/ph-intro.js",
       "category": "Soundboard",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
@@ -26191,15 +25385,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:surprisemf",
-      "name": "surprisemf",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/surprisemf.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:sus",
       "name": "sus",
       "transport": "prefix",
@@ -26581,15 +25766,6 @@
       "behaviorAcceptance": "pending"
     },
     {
-      "id": "prefix:verpissdich",
-      "name": "verpissdich",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/verpissdich.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
       "id": "prefix:vibrate",
       "name": "vibrate",
       "transport": "prefix",
@@ -26604,15 +25780,6 @@
       "transport": "prefix",
       "owner": "commands/Filter/vibrato.js",
       "category": "Filter",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:violence",
-      "name": "violence",
-      "transport": "prefix",
-      "owner": "commands/Fun/violence.js",
-      "category": "Fun",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
     },
@@ -26783,15 +25950,6 @@
       "name": "wow",
       "transport": "prefix",
       "owner": "commands/Soundboard/wow.js",
-      "category": "Soundboard",
-      "permissionsMetadata": [],
-      "behaviorAcceptance": "pending"
-    },
-    {
-      "id": "prefix:wryd-stepbro",
-      "name": "wryd-stepbro",
-      "transport": "prefix",
-      "owner": "commands/Soundboard/wryd-stepbro.js",
       "category": "Soundboard",
       "permissionsMetadata": [],
       "behaviorAcceptance": "pending"
@@ -29223,10 +28381,6 @@
       "target": "a-kick"
     },
     {
-      "alias": "akill",
-      "target": "a-kill"
-    },
-    {
       "alias": "akiss",
       "target": "a-kiss"
     },
@@ -29301,10 +28455,6 @@
     {
       "alias": "anime-kick",
       "target": "a-kick"
-    },
-    {
-      "alias": "anime-kill",
-      "target": "a-kill"
     },
     {
       "alias": "anime-kiss",
@@ -29437,10 +28587,6 @@
     {
       "alias": "animekick",
       "target": "a-kick"
-    },
-    {
-      "alias": "animekill",
-      "target": "a-kill"
     },
     {
       "alias": "animekiss",
@@ -32451,10 +31597,6 @@
           "line": 10
         },
         {
-          "file": "commands/Soundboard/ahshit.js",
-          "line": 10
-        },
-        {
           "file": "commands/Soundboard/airhorn.js",
           "line": 10
         },
@@ -32503,14 +31645,6 @@
           "line": 10
         },
         {
-          "file": "commands/Soundboard/ha-gay.js",
-          "line": 10
-        },
-        {
-          "file": "commands/Soundboard/hellomf.js",
-          "line": 10
-        },
-        {
           "file": "commands/Soundboard/honk.js",
           "line": 10
         },
@@ -32528,10 +31662,6 @@
         },
         {
           "file": "commands/Soundboard/john-cena.js",
-          "line": 10
-        },
-        {
-          "file": "commands/Soundboard/kuss-digga.js",
           "line": 10
         },
         {
@@ -32575,10 +31705,6 @@
           "line": 10
         },
         {
-          "file": "commands/Soundboard/ph-intro.js",
-          "line": 10
-        },
-        {
           "file": "commands/Soundboard/quack-quack.js",
           "line": 10
         },
@@ -32615,10 +31741,6 @@
           "line": 10
         },
         {
-          "file": "commands/Soundboard/surprisemf.js",
-          "line": 10
-        },
-        {
           "file": "commands/Soundboard/sus.js",
           "line": 10
         },
@@ -32627,19 +31749,11 @@
           "line": 10
         },
         {
-          "file": "commands/Soundboard/verpissdich.js",
-          "line": 10
-        },
-        {
           "file": "commands/Soundboard/wetfart.js",
           "line": 10
         },
         {
           "file": "commands/Soundboard/wow.js",
-          "line": 10
-        },
-        {
-          "file": "commands/Soundboard/wryd-stepbro.js",
           "line": 10
         },
         {
@@ -32829,10 +31943,6 @@
           "line": 8
         },
         {
-          "file": "commands/Anime-Emotions/a-kill.js",
-          "line": 8
-        },
-        {
           "file": "commands/Anime-Emotions/a-kiss.js",
           "line": 8
         },
@@ -33019,10 +32129,6 @@
           "line": 5
         },
         {
-          "file": "commands/Anime-Emotions/a-kill.js",
-          "line": 5
-        },
-        {
           "file": "commands/Anime-Emotions/a-kiss.js",
           "line": 5
         },
@@ -33131,10 +32237,6 @@
           "line": 6
         },
         {
-          "file": "commands/Fun/cancer.js",
-          "line": 6
-        },
-        {
           "file": "commands/Fun/changemymind.js",
           "line": 6
         },
@@ -33160,10 +32262,6 @@
         },
         {
           "file": "commands/Fun/delete.js",
-          "line": 6
-        },
-        {
-          "file": "commands/Fun/disability.js",
           "line": 6
         },
         {
@@ -33215,10 +32313,6 @@
           "line": 7
         },
         {
-          "file": "commands/Fun/hitler.js",
-          "line": 6
-        },
-        {
           "file": "commands/Fun/invert.js",
           "line": 7
         },
@@ -33241,10 +32335,6 @@
         {
           "file": "commands/Fun/keepdistance.js",
           "line": 6
-        },
-        {
-          "file": "commands/Fun/kill.js",
-          "line": 5
         },
         {
           "file": "commands/Fun/kiss.js",
@@ -33328,10 +32418,6 @@
         },
         {
           "file": "commands/Fun/tweet.js",
-          "line": 6
-        },
-        {
-          "file": "commands/Fun/violence.js",
           "line": 6
         },
         {
@@ -33635,14 +32721,6 @@
           "line": 3
         },
         {
-          "file": "commands/Anime-Emotions/a-kill.js",
-          "line": 2
-        },
-        {
-          "file": "commands/Anime-Emotions/a-kill.js",
-          "line": 3
-        },
-        {
           "file": "commands/Anime-Emotions/a-kiss.js",
           "line": 2
         },
@@ -33843,14 +32921,6 @@
           "line": 2
         },
         {
-          "file": "commands/Soundboard/ahshit.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/ahshit.js",
-          "line": 6
-        },
-        {
           "file": "commands/Soundboard/airhorn.js",
           "line": 3
         },
@@ -34021,14 +33091,6 @@
         {
           "file": "commands/School-Commands/calculator.js",
           "line": 9
-        },
-        {
-          "file": "commands/Fun/cancer.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Fun/cancer.js",
-          "line": 4
         },
         {
           "file": "commands/Fun/changemymind.js",
@@ -34233,14 +33295,6 @@
         {
           "file": "commands/Economy/dice.js",
           "line": 2
-        },
-        {
-          "file": "commands/Fun/disability.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Fun/disability.js",
-          "line": 4
         },
         {
           "file": "commands/Soundboard/disconnected.js",
@@ -34543,36 +33597,12 @@
           "line": 3
         },
         {
-          "file": "commands/Soundboard/ha-gay.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/ha-gay.js",
-          "line": 6
-        },
-        {
           "file": "commands/MiniGames/hangman.js",
           "line": 2
         },
         {
           "file": "commands/MiniGames/hangman.js",
           "line": 3
-        },
-        {
-          "file": "commands/Soundboard/hellomf.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/hellomf.js",
-          "line": 6
-        },
-        {
-          "file": "commands/Fun/hitler.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Fun/hitler.js",
-          "line": 4
         },
         {
           "file": "commands/Soundboard/honk.js",
@@ -34735,28 +33765,12 @@
           "line": 4
         },
         {
-          "file": "commands/Fun/kill.js",
-          "line": 2
-        },
-        {
-          "file": "commands/Fun/kill.js",
-          "line": 3
-        },
-        {
           "file": "commands/Fun/kiss.js",
           "line": 4
         },
         {
           "file": "commands/Fun/kiss.js",
           "line": 5
-        },
-        {
-          "file": "commands/Soundboard/kuss-digga.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/kuss-digga.js",
-          "line": 6
         },
         {
           "file": "commands/Info/latestquotes.js",
@@ -34992,14 +34006,6 @@
         },
         {
           "file": "commands/Soundboard/pew-pew.js",
-          "line": 6
-        },
-        {
-          "file": "commands/Soundboard/ph-intro.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/ph-intro.js",
           "line": 6
         },
         {
@@ -35415,14 +34421,6 @@
           "line": 6
         },
         {
-          "file": "commands/Soundboard/surprisemf.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/surprisemf.js",
-          "line": 6
-        },
-        {
           "file": "commands/Soundboard/sus.js",
           "line": 3
         },
@@ -35611,28 +34609,12 @@
           "line": 2
         },
         {
-          "file": "commands/Soundboard/verpissdich.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/verpissdich.js",
-          "line": 6
-        },
-        {
           "file": "commands/Filter/vibrate.js",
           "line": 2
         },
         {
           "file": "commands/Filter/vibrato.js",
           "line": 2
-        },
-        {
-          "file": "commands/Fun/violence.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Fun/violence.js",
-          "line": 4
         },
         {
           "file": "commands/Voice/voice.js",
@@ -35716,14 +34698,6 @@
         },
         {
           "file": "commands/Soundboard/wow.js",
-          "line": 6
-        },
-        {
-          "file": "commands/Soundboard/wryd-stepbro.js",
-          "line": 3
-        },
-        {
-          "file": "commands/Soundboard/wryd-stepbro.js",
           "line": 6
         },
         {
@@ -37425,10 +36399,6 @@
           "line": 8
         },
         {
-          "file": "commands/Fun/cancer.js",
-          "line": 8
-        },
-        {
           "file": "commands/Fun/changemymind.js",
           "line": 8
         },
@@ -37454,10 +36424,6 @@
         },
         {
           "file": "commands/Fun/delete.js",
-          "line": 8
-        },
-        {
-          "file": "commands/Fun/disability.js",
           "line": 8
         },
         {
@@ -37509,10 +36475,6 @@
           "line": 9
         },
         {
-          "file": "commands/Fun/hitler.js",
-          "line": 8
-        },
-        {
           "file": "commands/Fun/invert.js",
           "line": 9
         },
@@ -37535,10 +36497,6 @@
         {
           "file": "commands/Fun/keepdistance.js",
           "line": 8
-        },
-        {
-          "file": "commands/Fun/kill.js",
-          "line": 7
         },
         {
           "file": "commands/Fun/kiss.js",
@@ -37618,10 +36576,6 @@
         },
         {
           "file": "commands/Fun/tweet.js",
-          "line": 8
-        },
-        {
-          "file": "commands/Fun/violence.js",
           "line": 8
         },
         {
@@ -37920,13 +36874,13 @@
     }
   ],
   "counts": {
-    "commandOperations": 675,
-    "prefix": 531,
+    "commandOperations": 661,
+    "prefix": 517,
     "slashHandlers": 144,
     "slashTopLevel": 20,
-    "aliases": 779,
+    "aliases": 776,
     "httpRoutes": 95,
-    "sourceFiles": 979,
+    "sourceFiles": 1043,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

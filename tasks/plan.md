@@ -115,11 +115,11 @@ El usuario solicitó una auditoría y cuestionó la arquitectura durante la unid
 
 ### Unidad inmediata: cierre acotado de P0 · 31/10/2026
 
-La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **675 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **51 grupos/168 comandos/21 rutas**. Los otros 507/74 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
+La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **661 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **51 grupos/168 comandos/21 rutas**. Los otros 493/74 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
 
-1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674→675 por `slashCommands/setup.js`, tareas y CI de integridad.
-2. **P0-C2 siguiente:** fronteras sensibles de giveaway/servers/loadbackup, triage de contenido y evidencia de rotación de la credencial Mongo anterior. Resolver los riesgos de base; el negocio completo conserva su fase.
-3. **P0-C3 pendiente:** sesión/tenant/CSRF y salida mínima de las 13 rutas base, conciliando la evidencia anterior sin promover las operaciones de negocio.
+1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674−14 retirados+`slashCommands/setup.js`=661, con procedencia de las retiradas, tareas y CI de integridad.
+2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados en aislamiento. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
+3. **P0-C3 siguiente:** sesión/tenant/CSRF y salida mínima de las 13 rutas base, conciliando la evidencia anterior sin promover las operaciones de negocio.
 4. **P0-C4 pendiente:** documentación pública conforme a **G25**, con historia, avisos, exclusiones y soporte reales.
 5. **P0-C5 pendiente:** corte de instalación/versiones/lock/CI y loader/registro/aliases conforme a **G01/G02**, más aceptación de G25. Evidencia del corte; separar comprobación local de CI remoto.
 

@@ -5,7 +5,7 @@ const anime = require('anime-actions')
 
 const EMOTIONS = [
   'agree','baka','bite','blush','bonk','bored','bully','confused','cry','cuddle',
-  'dance','goodnight','happy','highfive','hug','kick','kill','kiss','nervous',
+  'dance','goodnight','happy','highfive','hug','kick','kiss','nervous',
   'pat','poke','punch','sad','scream','slap','smile','stare','thinking',
   'wave','wink','yeet','yes',
 ]
@@ -28,7 +28,6 @@ const MSG = {
   highfive:  (s, t) => `**${s}** le da un high-five a **${t ?? 'alguien'}** ${obeyUi.markup("icon.hand")}`,
   hug:       (s, t) => `**${s}** abraza a **${t ?? 'alguien'}** ${obeyUi.markup("icon.hand")}`,
   kick:      (s, t) => `**${s}** le da una patada a **${t ?? 'alguien'}** ${obeyUi.markup("icon.hand")}`,
-  kill:      (s, t) => `**${s}** intenta matar a **${t ?? 'alguien'}** ${obeyUi.markup("icon.swords")}`,
   kiss:      (s, t) => `**${s}** besa a **${t ?? 'alguien'}** ${obeyUi.markup("icon.kiss")}`,
   nervous:   (s)    => `**${s}** está nervioso/a ${obeyUi.markup("icon.face-cry")}`,
   pat:       (s, t) => `**${s}** le da palmaditas a **${t ?? 'alguien'}** ${obeyUi.markup("icon.hand")}`,
