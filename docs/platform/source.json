@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "cb68e4e9c15b9624360f3429789e471e8a439e35",
-    "image": "b7b0480c938913e7edcb641bd697f5c899f67a5f5e9c9d8a8cedfda44510e2ad",
+    "code": "3295f5c5e6a4a8ef0748c4df910efbbb853bff1e",
+    "image": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-owner-console-20261031.json",
-    "change": "Discord JavaScript consoles and fixed historical-ID grant retired; follow-redirects patched to 1.16.2",
-    "tag": "localhost/obey-your-master_bot:release-p0-owner-console-20261031-cb68e4e9",
+    "evidence": "evidence/p0-slash-publication-20261031.json",
+    "change": "Scoped confirmed slash publication with current-owner checks and shared no-op startup synchronization; dedicated non-retrying writer",
+    "tag": "localhost/obey-your-master_bot:release-p0-slash-publication-20261031-3295f5c5",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-owner-console-20261031.json",
-    "deploymentKind": "application_only_p0_owner_console",
+    "statusEvidence": "evidence/p0-slash-publication-20261031.json",
+    "deploymentKind": "application_only_p0_slash_publication",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -72,7 +72,8 @@
     "supervisorAlways": true,
     "commandHotReloadRetired": true,
     "ownerConsoleRetired": true,
-    "followRedirects": "1.16.2"
+    "followRedirects": "1.16.2",
+    "slashStartup": "unchanged"
   },
   "preserve": [
     "Personal OBEY hearts in Discord and web",

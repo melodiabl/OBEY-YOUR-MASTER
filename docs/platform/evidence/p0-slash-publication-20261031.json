@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0",
+  "code": "3295f5c5e6a4a8ef0748c4df910efbbb853bff1e",
+  "image": "8b8a55bf89d9d22af7dcfa8e70bf5288c683a7e838812519fa27dd9e82321a10",
+  "tag": "localhost/obey-your-master_bot:release-p0-slash-publication-20261031-3295f5c5",
+  "previousImage": "b7b0480c938913e7edcb641bd697f5c899f67a5f5e9c9d8a8cedfda44510e2ad",
+  "scope": [
+    "prefix:deployslash",
+    "internal:startup-global-slash-synchronization"
+  ],
+  "authorization": {
+    "historicalFixedIdGrantRemoved": true,
+    "exactCurrentOwnerIds": true,
+    "freshOriginMemberChannelAndBot": true,
+    "freshTargetGuildAndBotMembership": true,
+    "noNewAdministratorRequirement": true,
+    "unknownGuildNeverFallsBackToGlobal": true
+  },
+  "confirmation": {
+    "singleUseOpaquePreparation": true,
+    "contextClientAndDestinationBound": true,
+    "expiryMs": 30000,
+    "actorGuildMessageNonceBound": true,
+    "previewShowsScopeRootsInvocationsAndDiffCounts": true,
+    "ackPriorNoticeAndFinalAuthorizationBeforePut": true,
+    "catalogAndRemoteDriftRejected": true
+  },
+  "publication": {
+    "sharedManualAndStartupAuthority": true,
+    "oneActivePerClient": true,
+    "lockHeldUntilUnderlyingSettlement": true,
+    "shutdownTracksOperation": true,
+    "callerTimeoutMs": 20000,
+    "separateWriteRest": true,
+    "writeRetries": 0,
+    "writeTimeoutMs": 10000,
+    "rejectRateLimitsInsteadOfRetry": true,
+    "sharedRestOptionsUnchanged": true,
+    "responseApplicationScopeAndPayloadVerified": true,
+    "unchangedRegistriesNotOverwritten": true,
+    "omittedInstallationContextsPreservedForExistingCommands": true,
+    "clientPropagationNotCertified": true,
+    "noDiscordCasOrCrossProcessLockClaimed": true
+  },
+  "legacyReproduction": {
+    "unknownGuildFallsBackToGlobalWrite": true,
+    "historicalIdGrantedOutsideConfiguredOwners": true,
+    "allEffectsFaked": true
+  },
+  "verification": {
+    "newCasesHost": 45,
+    "newCasesImage": 45,
+    "originalTestsHost": 25,
+    "originalTestsImage": 25,
+    "originalTestFilesUnchanged": true,
+    "sdkTransportSimulated500429AbortAndResetSingleSend": true,
+    "realSdkBuildersUsed": true,
+    "noRealDiscordPutOrTestMessages": true,
+    "types": true,
+    "dependencyBoundaries": {
+      "pass": true,
+      "modules": 1183,
+      "dependencies": 3449
+    },
+    "imageGate": {
+      "pass": true,
+      "sourceHashes": 1051,
+      "commandsLoaded": 675,
+      "aliasesLoaded": 779,
+      "slashRoots": 20,
+      "slashInvocations": 144,
+      "routesInUnchangedInventory": 95,
+      "node": "22.23.4",
+      "bundledUndici": "6.29.1",
+      "followRedirects": "1.16.2"
+    },
+    "nativeDependencyAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 0,
+      "critical": 0,
+      "total": 50
+    },
+    "dependencyManifestsUnchanged": true,
+    "composeVariantsValidated": 3,
+    "review": {
+      "catalogPasses": 3,
+      "catalogActionableFindings": 4,
+      "publicationPasses": 2,
+      "publicationActionableFindings": 1,
+      "allImplemented": true,
+      "lastCatalogFindingCorrectedAfterFinalPass": true,
+      "lastBoundsFixVerifiedByLocalRedGreen": true,
+      "noFourthCatalogReview": true,
+      "externalModelUsed": false
+    },
+    "providerReadOnlyComparison": {
+      "readOnly": true,
+      "mutatingRestMethodsBlocked": true,
+      "equal": true,
+      "roots": 20,
+      "invocations": 144,
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "startupOutcome": {
+      "unchanged": true,
+      "confirmed": false,
+      "unconfirmed": false
+    },
+    "comparisonUsesStartupAssetUnicodeFallback": true
+  },
+  "deployment": {
+    "pass": true,
+    "health": "healthy",
+    "restarts": 0,
+    "time": "2026-10-31T01:38:59.623Z",
+    "priorStableSamples": 5,
+    "healthySamples": 10,
+    "httpPassed": 7,
+    "assetsHashMatched": 13,
+    "backupBefore": {
+      "bytes": 59231906,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "source": "persistent",
+      "retryAfterFailedFirstAttempt": true,
+      "retryExitCode": 0,
+      "backupUriMatchesRuntime": true
+    },
+    "backupAfter": {
+      "bytes": 59233077,
+      "crc": true,
+      "temporaryConfigRemoved": true,
+      "globalConfigurationFiles": 3,
+      "manifestMatches": true,
+      "activeProjectionMatches": true,
+      "source": "persistent"
+    },
+    "initialBackupFailedWithoutDumpDiagnostics": true,
+    "initialFailureCauseConfirmed": false,
+    "successfulRetryExitCode": 0,
+    "recipesUpdated": true,
+    "previousImageRetained": true,
+    "rollbackRestoresPreviousPublisher": true,
+    "musicHealthIsBasicOnly": true
+  },
+  "cleanup": {
+    "temporaryVerifiersRemoved": true,
+    "fixturesRemoved": true,
+    "failedPartialBackupRemoved": true,
+    "rollbackImageRetained": true,
+    "planningNoteRemoved": true,
+    "evidenceRetained": true,
+    "productionPublicationModulesRetained": true,
+    "originalTestFiles": 3,
+    "originalTestCases": 25
+  },
+  "coverage": {
+    "reviewedGroups": 51,
+    "commandEntriesReviewed": 168,
+    "httpRoutesReviewed": 21,
+    "totalCommandEntries": 675,
+    "totalHttpRoutes": 95,
+    "remainingCommandEntries": 507,
+    "remainingHttpRoutes": 74
+  },
+  "pending": [
+    "Durable publication receipts and audit",
+    "Cross-process coordination and unavoidable external changes after GET",
+    "Real owner-invoked publication acceptance",
+    "Other Owner and Settings operations",
+    "G01/G02 and authenticated two-guild acceptance",
+    "P1 lavalink-client migration and real audio recovery acceptance"
+  ],
+  "pushed": false
+}
