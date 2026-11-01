@@ -2,9 +2,9 @@ name: Platform checks
 
 on:
   pull_request:
-    branches: [feat/motor-soundy]
+    branches: [master, feature/obey-main-implementation, feat/motor-soundy]
   push:
-    branches: [feature/obey-main-implementation]
+    branches: [master, feature/obey-main-implementation]
 
 permissions:
   contents: read
@@ -25,12 +25,19 @@ jobs:
         with:
           node-version: '22.23.4'
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            dashboard/frontend/package-lock.json
       - name: Install native Canvas build requirements
         run: sudo apt-get update && sudo apt-get install -y build-essential pkg-config libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev python3
       - run: npm ci
+      - run: npm ci --prefix dashboard/frontend --ignore-scripts
       - run: npm run typecheck:welcome
       - run: npm run dependencies:welcome
+      - run: npm run web:typecheck
       - run: npm test
+      - run: npm audit --audit-level=high
+      - run: npm audit --prefix dashboard/frontend --audit-level=high
       - name: Verify capability classification without promoting functional acceptance
         run: node scripts/verify-p0-classification.js
       - run: node scripts/obey-assets.js
@@ -86,6 +93,42 @@ jobs:
             assert(exception && dependency.sites.every(site => site.file === exception.file), `Undeclared runtime dependency: ${dependency.name}`)
           }
           console.log(JSON.stringify({ commands: ids.size, aliases: aliases.aliases.size, routes: routes.size, node: process.version }))
+          NODE
+      - name: Compare actual command loaders with the inventory without login
+        run: |
+          docker run --rm --network none -i --entrypoint node obey-platform-check <<'NODE'
+          const assert = require('node:assert/strict'), { EventEmitter } = require('node:events')
+          require('colors')
+          const { Client, Collection } = require('discord.js')
+          const scheduler = require.resolve('discord-giveaways'), original = require(scheduler)
+          // Only the giveaway scheduler is replaced; command loaders and exports are real.
+          require.cache[scheduler].exports = { ...original, GiveawaysManager: class extends EventEmitter {} }
+          const client = new Client({ intents: [] })
+          Object.assign(client, { commands: new Collection(), aliases: new Map(), slashCommands: new Collection(), allCommands: [], backupDB: new Map() })
+          for (const method of ['get', 'post', 'put', 'patch', 'delete']) client.rest[method] = () => { throw Error('Network access is forbidden in the registry check') }
+          async function verify() {
+            try {
+              await require('./handlers/command')(client)
+              await require('./handlers/slashCommands')(client)
+              const { buildCommandCatalog } = require('./handlers/command-registry')
+              const inventory = require('./docs/platform/operation-ownership.json')
+              const catalog = buildCommandCatalog(client)
+              assert.deepEqual(catalog.map(entry => entry.id).sort(), inventory.commands.map(entry => entry.id).sort())
+              for (const entry of inventory.commands) {
+                const parts = entry.id.replace(/^slash:/, '').split('.')
+                const loaded = entry.transport === 'prefix' ? client.commands.get(entry.name) : client.slashCommands.get(parts.length === 1 ? 'normal' + parts[0] : parts[0] + parts.at(-1))
+                assert.equal(loaded, require('./' + entry.owner), `Loader owner differs for ${entry.id}`)
+              }
+              assert.deepEqual([...client.aliases].sort(([a], [b]) => a.localeCompare(b)), inventory.aliases.map(entry => [entry.alias, entry.target]))
+              const snapshot = require('./handlers/slash-publication-catalog').snapshotCatalog(client)
+              assert.equal(snapshot.invocations, inventory.commands.filter(entry => entry.transport === 'slash').length)
+              console.log(JSON.stringify({ prefix: client.commands.size, slash: client.slashCommands.size, roots: snapshot.roots, aliases: client.aliases.size, network: false, login: false }))
+            } finally {
+              require.cache[scheduler].exports = original
+              await client.destroy()
+            }
+          }
+          verify().catch(error => { console.error(error); process.exitCode = 1 })
           NODE
       - name: Install the frozen migration client in isolation
         run: |
