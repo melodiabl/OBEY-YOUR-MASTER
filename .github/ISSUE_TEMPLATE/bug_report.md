@@ -1,32 +1,18 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-title: Bug report
-labels: bug
-assignees: Tomato6966
-
+name: Informar un fallo
+about: Pasos, versión y resultado observado en OBEY
+title: "[Fallo] "
+labels: ''
+assignees: ''
 ---
 
-## **What's your nodejs Version.**
-> Show the output of: `node -v`
+Consulta primero el [repositorio](https://github.com/melodiabl/OBEY-YOUR-MASTER) y SUPPORT.md del checkout recibido. Esta plantilla solo está disponible si el mantenedor habilita Issues; no demuestra que exista un canal activo.
 
-## **What's the version you downloaded the bot?**
-> From the releases e.g.: 10.2.0
+- Commit/imagen y versión de Node:
+- Comando o pantalla:
+- Pasos para reproducir:
+- Resultado esperado y observado:
+- Fecha, hora y zona horaria:
+- Error mínimo o captura sin datos privados:
 
-## **Desktop (please complete the following information):**
-> - OS: [e.g. iOS]
-> - Version [e.g. 22]
-
-## **Describe the bug**
-> A clear and concise description of what the bug is.
-
-## **To Reproduce**
-> Steps to reproduce the behavior e.g:
-1. Execute the Command '....'
-2. See error
-
-## **Expected behavior**
-> A clear and concise description of what you expected to happen.
-
-## **Additional context, text and screenshots!**
-> Add any other context about the problem here.
+No adjuntes `.env`, tokens, cookies, URI con credenciales ni respaldos. Las vulnerabilidades requieren un contacto privado confirmado según SECURITY.md.

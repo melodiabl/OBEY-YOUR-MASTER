@@ -1,3 +1,5 @@
+> Historial de revisión de los paquetes de guía (ediciones 0.6–0.13), conservado sin reinterpretarlo como estado actual. Las cantidades y declaraciones de no ejecución pertenecen a esas entregas; el [índice vigente](../README.md) y el [checkpoint](../platform/CHECKPOINT.md) identifican el trabajo posterior.
+
 > Actualización vigente 0.6: [catálogo de eventos](sistema/15_CATALOGO_EVENTOS.md) integrado en assets/obey/catalog-eventos/. Escenas y seis GIF se conservan. Los antiguos 24 iconos de registros se retiraron; runtime y publicación Discord siguen pendientes.
 
 # Revisión de la documentación

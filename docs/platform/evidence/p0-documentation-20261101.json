@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-01",
+  "recordedAt": "2026-11-01T02:09:34.953030+00:00",
+  "baseCommit": "746647ab7e52c4d23ff109d72cc38d5ad9d0a907",
+  "scope": "P0-C4 original G25 public documentation; no functional promotion",
+  "status": "documentation-updated-contact-pending",
+  "g25Accepted": false,
+  "checks": {
+    "localLinks": {
+      "checked": 72,
+      "failed": 0
+    },
+    "shellBlocks": {
+      "checked": 8,
+      "valid": true
+    },
+    "jsonExamples": 1,
+    "historicalReadmeUnchanged": true,
+    "historicalFundingUnchanged": true,
+    "fundingNoLongerActive": true,
+    "licenseUnchanged": true,
+    "templateYamlValid": true,
+    "nodeExampleSchemaValid": true,
+    "nodeExampleNetworkUsed": false,
+    "npmCommandsExist": 5,
+    "originalTestsUnchanged": true,
+    "temporaryScriptsAdded": false,
+    "cleanInstallRerun": false,
+    "applicationTestsRerun": false,
+    "runtimeChanged": false,
+    "remoteSettingsChanged": false,
+    "remoteCIExecuted": false,
+    "allEntryAndReportLocalLinks": {
+      "checked": 118,
+      "failed": 0
+    },
+    "historicalReadmeExistingMarkdownHardBreaksPreserved": 4,
+    "newContentDiffCheck": true,
+    "diffCheckScope": "All staged changes except the byte-identical historical README; four inherited Markdown hard-break trailing spaces retained explicitly."
+  },
+  "support": {
+    "repository": "https://github.com/melodiabl/OBEY-YOUR-MASTER",
+    "repositoryVerifiedBy": "GitHub connector, read-only repository metadata",
+    "hasIssues": false,
+    "hasDiscussions": false,
+    "hasPullRequests": true,
+    "issuesPageHttpStatus": 200,
+    "issuesPageIsNotAvailabilityProof": true,
+    "oldDiscordInvite": "QJeavgKU",
+    "discordInviteApiHttpStatus": 404,
+    "whatsappPageHttpStatus": 200,
+    "whatsappOwnershipAndSupportConfirmed": false,
+    "privateAdvisoryFormRedirectsToLogin": true,
+    "privateVulnerabilityReportingEnabledConfirmed": false,
+    "operationalSupportConfigured": false,
+    "operationalContactConfigured": false,
+    "maintainerContactRequested": true,
+    "contactAnswerReceived": false
+  },
+  "history": {
+    "readme": {
+      "source": "746647ab:README.md",
+      "archive": "docs/history/README-2026-10-31.md",
+      "sha256": "7eb85150e39b80dfc4df06f1ed50f9851809fd7d344db28bc49b6b23207f9ef9"
+    },
+    "funding": {
+      "source": "746647ab:.github/FUNDING.yml",
+      "archive": "docs/history/FUNDING-upstream.yml",
+      "sha256": "c49c5e9aa8b6899d37df314589670c240a5ad64c699723bcdc2bca3f0c7eff17"
+    }
+  },
+  "coverage": {
+    "reviewedGroups": 52,
+    "commandEntriesReviewed": 168,
+    "httpRoutesReviewed": 34,
+    "totalCommandEntries": 661,
+    "totalHttpRoutes": 95,
+    "functionalCoverageChanged": false
+  },
+  "limits": [
+    "Public support and private security contacts remain unconfirmed; G25 not accepted.",
+    "Provider Mongo credential rotation remains open under C2.",
+    "G01/G02/G25 final acceptance remains C5; no new clean install or live service bootstrap claimed.",
+    "No runtime restart, Discord publication/messages, user data mutations or new business acceptance.",
+    "No screenshot of a real account or mockup presented as a product capture."
+  ]
+}

@@ -1,4 +1,6 @@
-> Estado vigente del checkout: [conciliación 0.15 y prioridades](CONCILIACION_2026-10-23.md). Se preservan los avances y el runtime `7801061` ([fachada musical y registro](modulos/music.md)); los informes de base conservan su fecha y alcance.
+> Entrada vigente · 01/11/2026: [índice público](../README.md), [plan activo](../../tasks/plan.md) y [checkpoint](../platform/CHECKPOINT.md). El runtime verificado es `2355287f`; esta guía conserva especificaciones e informes anteriores con su fecha. El árbol objetivo, las fichas y los casos escritos no certifican implementación completa.
+
+> Nota histórica del 23/10/2026 (no identifica el runtime actual): Estado vigente del checkout: [conciliación 0.15 y prioridades](CONCILIACION_2026-10-23.md). Se preservan los avances y el runtime `7801061` ([fachada musical y registro](modulos/music.md)); los informes de base conservan su fecha y alcance.
 
 > Actualización vigente 0.6: [catálogo de eventos](sistema/15_CATALOGO_EVENTOS.md) integrado en assets/obey/catalog-eventos/. Escenas y seis GIF se conservan. Los antiguos 24 iconos de registros se retiraron; runtime y publicación Discord siguen pendientes.
 

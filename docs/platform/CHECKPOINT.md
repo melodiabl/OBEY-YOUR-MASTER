@@ -1,5 +1,9 @@
 # Checkpoint activo — implementación en el proyecto principal
 
+## 01/11/2026 · documentación pública conciliada; contactos de G25 pendientes
+
+README, instalación, uso, contribuciones, seguridad, avisos y entradas de lectura actualizados. Historia y LICENSE conservados; financiación upstream archivada fuera de la configuración activa y plantillas sin asignar al autor anterior. Pasan 72 destinos locales, ocho bloques shell y el ejemplo de nodos sin red. **No se acepta G25:** Issues/Discussions desactivados, invitación Discord vencida y contacto privado no confirmado; se pidió el destino real al mantenedor. C4 queda parcial, C2 conserva la rotación Mongo externa y C5 el corte final G01/G02/G25. Runtime `2355287f` conservado sin reinicio; revisión funcional 52/168/34 sin aumento. [Informe](P0-DOCUMENTATION-2026-11-01.md).
+
 ## 31/10/2026 · sesión y trece rutas base verificadas y desplegadas
 
 Código `2355287f`, imagen `7bf3d9f8b4d3`: sesiones y state OAuth ordenados, logout revoca también cookies de respuestas tardías, permisos de guild frescos sin fallback antiguo y estadísticas públicas mínimas/SSE autenticado. Cuarenta casos nuevos (39+Mongo) y 25 originales pasan en host/imagen; trece escenarios de navegador con cuentas ficticias y cero excepciones JS. Tipos, fronteras, 1.046 hashes, HTTP 13/13 y recursos 13/13. Diez muestras saludables, cero reinicios; respaldos CRC, configuración y reversión conservados; temporales retirados. Revisión: **52 grupos/168 comandos/34 rutas**, pendientes 493/61 en sus capacidades. **Siguiente C4/G25**: documentación pública; después corte G01/G02/G25. Rotación Mongo del proveedor sigue abierta; no se acepta P0 ni negocio P2 por estos fixtures. [Informe](P0-SESSION-2026-10-31.md).

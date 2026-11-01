@@ -1,20 +1,16 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: Feature request
-labels: enhancement
+name: Propuesta de mejora
+about: Describe la necesidad y el resultado que esperas
+title: "[Propuesta] "
+labels: ''
 assignees: ''
-
 ---
 
-## **Is your feature request related to a problem? Please describe.**
-> A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+Revisa el plan activo del checkout antes de duplicar una tarea. Issues puede estar desactivado; el estado del contacto figura en SUPPORT.md.
 
-## **Describe the solution you'd like**
-> A clear and concise description of what you want to happen.
+- ¿Qué tarea quieres realizar y quién la utiliza?
+- ¿Qué dificultad tienes ahora?
+- ¿Qué comportamiento resolvería el problema?
+- ¿Qué alternativas probaste?
 
-## **Describe alternatives you've considered**
-> A clear and concise description of any alternative solutions or features you've considered.
-
-## **Additional context**
-> Add any other context or screenshots about the feature request here.
+No incluyas datos personales, secretos ni capturas de otros servidores sin ocultarlos.

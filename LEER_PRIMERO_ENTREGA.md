@@ -1,3 +1,5 @@
+> Documento histórico del paquete integrado 0.15 (22/10/2026). Sus afirmaciones de no ejecución o no despliegue se refieren a esa ampliación. Para instalar y conocer el checkout/runtime actuales, consulta [README](README.md) y [checkpoint](docs/platform/CHECKPOINT.md). No reextraigas el ZIP sobre datos o secretos existentes.
+
 # Estado de la entrega integrada 0.15
 
 Empezar en [LEER_PRIMERO.md](LEER_PRIMERO.md). Incluye proyecto base, bootstrap previamente preparado, guía vigente y materiales; no requiere aplicar parches.

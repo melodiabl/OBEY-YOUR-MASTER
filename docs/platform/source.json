@@ -397,7 +397,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "P0-C4: original G25 public documentation (README, guides, notices, real support, history/exclusions). C3 thirteen base routes verified and deployed. C2 provider Mongo credential rotation stays externally open. Then exact G01/G02/G25 cut. Review: 52 groups / 168 commands / 34 routes; 493 commands / 61 routes remain in their capability phases. P0 not accepted.",
+    "nextUnit": "P0-C4 documentation reconciled; confirm an active public support destination and private security contact before accepting G25. Then P0-C5 exact G01/G02/G25 cut. C2 provider Mongo credential rotation stays externally open. C3 deployed. Functional review unchanged: 52 groups / 168 commands / 34 routes. P0 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -522,5 +522,18 @@
     "distributedAccepted": false,
     "implementationCode": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
     "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7"
+  },
+  "p0Documentation": {
+    "date": "2026-11-01",
+    "report": "P0-DOCUMENTATION-2026-11-01.md",
+    "evidence": "evidence/p0-documentation-20261101.json",
+    "status": "documentation-updated-contact-pending",
+    "g25Accepted": false,
+    "runtimeChanged": false,
+    "pending": [
+      "Verified public support destination",
+      "Verified private security contact",
+      "Final G01/G02/G25 acceptance cut"
+    ]
   }
 }

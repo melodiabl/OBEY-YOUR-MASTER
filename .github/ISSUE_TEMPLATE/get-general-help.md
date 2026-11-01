@@ -1,21 +1,16 @@
 ---
-name: Get General Help
-about: If you need help for hosting, starting, installing, ... the Bot!
-title: Get General Help
-labels: help wanted, question
-assignees: Tomato6966
-
+name: Consulta de uso o instalación
+about: Indica el paso concreto donde necesitas ayuda
+title: "[Consulta] "
+labels: ''
+assignees: ''
 ---
 
-## **What's your nodejs Version.**
-Show the output of: `node -v`
+Consulta el [repositorio](https://github.com/melodiabl/OBEY-YOUR-MASTER) y SUPPORT.md del checkout recibido y la guía de instalación del checkout recibido. Esta plantilla no habilita Issues ni promete atención.
 
-## **What's the version you downloaded the bot?**
-From the releases e.g.: 10.2.0
+- ¿Usas una instancia ajena o mantienes la tuya?
+- Commit y versión de Node, si administras el despliegue:
+- Paso, comando o pantalla:
+- Qué esperabas y qué aparece:
 
-## **Desktop (please complete the following information):**
-> - OS: [e.g. iOS]
-> - Version [e.g. 22]
-
-## **Additional context, text and screenshots!**
-> Add any other context about the problem here.
+No envíes secretos ni datos de usuarios. No asignes esta consulta al autor de la base: el soporte actual debe confirmarlo el mantenedor OBEY.
