@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 01/11/2026 · G01/G02 comprobados localmente; aceptación externa pendiente
+
+CI `5703f837`: ramas activas, frontend, auditorías y cargadores reales. Build sin caché y desarrollo limpio con Node22.23.4; tipos/fronteras, 25 originales en ambos entornos y componentes Canvas/Opus pasan. Coinciden 1.046 hashes, 517 prefix/144 slash/20 raíces/776 alias y 95 rutas; 674−14+1=661 sin diferencias sin explicar. Tres alteraciones del registro se rechazan. Auditoría: 50 moderadas backend, cero altas/críticas; frontend cero. C5 local correcto, **P0 no aceptado**: faltan rotación Mongo, contactos reales de G25 y estado remoto del corte que se publique; sin push/CI remoto. Runtime `2355287f` conservado saludable, sin reinicio. Temporales retirados; revisión funcional 52/168/34 intacta. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
+
 ## 01/11/2026 · documentación pública conciliada; contactos de G25 pendientes
 
 README, instalación, uso, contribuciones, seguridad, avisos y entradas de lectura actualizados. Historia y LICENSE conservados; financiación upstream archivada fuera de la configuración activa y plantillas sin asignar al autor anterior. Pasan 72 destinos locales, ocho bloques shell y el ejemplo de nodos sin red. **No se acepta G25:** Issues/Discussions desactivados, invitación Discord vencida y contacto privado no confirmado; se pidió el destino real al mantenedor. C4 queda parcial, C2 conserva la rotación Mongo externa y C5 el corte final G01/G02/G25. Runtime `2355287f` conservado sin reinicio; revisión funcional 52/168/34 sin aumento. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
@@ -135,7 +139,7 @@ La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-
 2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados y desplegados. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
 3. **P0-C3 completado:** trece rutas base verificadas con Express, navegador e imagen/Mongo aislados; desplegadas y saludables. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
 4. **P0-C4 parcial:** documentación pública conciliada; faltan destino real de soporte y contacto privado de seguridad para aceptar **G25**. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
-5. **P0-C5 pendiente:** corte de instalación/versiones/lock/CI y loader/registro/aliases conforme a **G01/G02**, más aceptación de G25. Evidencia del corte; separar comprobación local de CI remoto.
+5. **P0-C5 · verificación local completada; aceptación pendiente:** instalación limpia, tipos/build/locks, cargadores, alias y rutas comprobados con Node exacto. Falta cerrar C2/G25 y comprobar CI remoto del corte publicado antes de aceptar P0. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
 
 **Aceptación de P0:** criterios originales G01/G02/G25 y discrepancias de base resueltas. No exige remodelar primero todos los comandos de P1/P2/P6. Recorridos completos en dos guilds pertenecen a P2; audio y migración a lavalink-client a P1; recibos duraderos conservan sus requisitos por capacidad y recuperación. No se eliminan los pendientes históricos por esta corrección de seguimiento.
 

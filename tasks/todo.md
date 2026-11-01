@@ -1,5 +1,9 @@
 # Tareas y checkpoints de OBEY
 
+## 01/11/2026 · G01/G02 comprobados localmente; aceptación externa pendiente
+
+CI `5703f837`: ramas activas, frontend, auditorías y cargadores reales. Build sin caché y desarrollo limpio con Node22.23.4; tipos/fronteras, 25 originales en ambos entornos y componentes Canvas/Opus pasan. Coinciden 1.046 hashes, 517 prefix/144 slash/20 raíces/776 alias y 95 rutas; 674−14+1=661 sin diferencias sin explicar. Tres alteraciones del registro se rechazan. Auditoría: 50 moderadas backend, cero altas/críticas; frontend cero. C5 local correcto, **P0 no aceptado**: faltan rotación Mongo, contactos reales de G25 y estado remoto del corte que se publique; sin push/CI remoto. Runtime `2355287f` conservado saludable, sin reinicio. Temporales retirados; revisión funcional 52/168/34 intacta. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
+
 ## 01/11/2026 · documentación pública conciliada; contactos de G25 pendientes
 
 README, instalación, uso, contribuciones, seguridad, avisos y entradas de lectura actualizados. Historia y LICENSE conservados; financiación upstream archivada fuera de la configuración activa y plantillas sin asignar al autor anterior. Pasan 72 destinos locales, ocho bloques shell y el ejemplo de nodos sin red. **No se acepta G25:** Issues/Discussions desactivados, invitación Discord vencida y contacto privado no confirmado; se pidió el destino real al mantenedor. C4 queda parcial, C2 conserva la rotación Mongo externa y C5 el corte final G01/G02/G25. Runtime `2355287f` conservado sin reinicio; revisión funcional 52/168/34 sin aumento. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
@@ -137,7 +141,7 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 - [ ] **P0-C2 · pendiente externo:** código de giveaway/servers/loadbackup y contenido señalado corregidos, verificados y desplegados; falta acreditar rotación Mongo en el proveedor. [Evidencia](../docs/platform/P0-SECURITY-2026-10-31.md).
 - [x] **P0-C3:** 13 rutas base verificadas y desplegadas; sin aceptación por arrastre del negocio. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
 - [ ] **P0-C4 · parcial/G25:** README/guías/avisos/historia conciliados; faltan soporte vigente y contacto privado confirmado. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
-- [ ] **P0-C5 · G01/G02/G25:** instalación exacta, comprobaciones de base y registro/aliases del corte, aceptación explícita de cada gate; CI remoto separado de evidencia local.
+- [ ] **P0-C5 · local correcto/aceptación pendiente:** G01/G02 comprobados localmente con instalación limpia y registro real aislado; faltan C2/G25 y CI remoto del corte publicado para aceptar P0. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
 - [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
 - [ ] **Luego · P2:** completar configuración/setups, bienvenida, tickets, moderación y logs por recorrido, con aceptación entre dos guilds.
 - [ ] **En cada recorrido · P3:** recursos, IDs/fallbacks, idiomas y evidencia visual de esa capacidad.

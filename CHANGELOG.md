@@ -4,6 +4,8 @@ Registro de entregas verificadas en este checkout; no equivale a releases public
 
 ## 01/11/2026 · documentación pública
 
+Comprobación posterior de base en `5703f837`: instalación limpia y build sin caché con Node22.23.4; cargadores reales e inventario coincidentes, 95 rutas y tests originales aprobados. CI amplía sus ramas objetivo, verifica frontend y auditorías y compara los cargadores reales sin login. Ver [el informe del corte](docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md). Los cambios permanecen locales, sin ejecución remota de CI ni despliegue nuevo; P0 conserva sus pendientes externos.
+
 README, índice, instalación, uso, contribuciones y avisos conciliados con el código actual. README anterior archivado sin modificar y entradas del paquete diferenciadas del runtime. Se corrigen instrucciones de instalación y fuentes de música; el soporte Discord vencido y los servicios GitHub desactivados se señalan explícitamente. Contactos de soporte/seguridad pendientes de confirmación. Esta entrega documental no reinicia ni despliega el bot.
 
 ## 31/10/2026 · sesiones y acceso web · `2355287f`

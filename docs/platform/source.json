@@ -397,7 +397,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "P0-C4 documentation reconciled; confirm an active public support destination and private security contact before accepting G25. Then P0-C5 exact G01/G02/G25 cut. C2 provider Mongo credential rotation stays externally open. C3 deployed. Functional review unchanged: 52 groups / 168 commands / 34 routes. P0 not accepted.",
+    "nextUnit": "P0 local G01/G02 installation and isolated staging registry checks passed. Resolve C2 provider Mongo credential rotation and C4 verified public support/private security contacts; assess remote CI for the eventual published cut before final P0 acceptance. CI changes remain local; C3 deployed. No further P0 command-by-command review is required before this acceptance. Then P1 music per original plan.",
     "sequence": [
       "P0",
       "P1",
@@ -535,5 +535,18 @@
       "Verified private security contact",
       "Final G01/G02/G25 acceptance cut"
     ]
+  },
+  "p0FinalVerification": {
+    "date": "2026-11-01",
+    "report": "P0-FINAL-VERIFICATION-2026-11-01.md",
+    "evidence": "evidence/p0-final-verification-20261101.json",
+    "ciCode": "5703f837af1295d1bf5e94eacd55f2622d0e2115",
+    "verificationImage": "b983df5e3570ea196a9877477b8db5b7121cbb3642da1107cf10ddb9bd3a457c",
+    "status": "local-verification-passed-acceptance-pending",
+    "localG01CriterionPassed": true,
+    "localG02CriterionPassed": true,
+    "remoteCIConfirmed": false,
+    "runtimeChanged": false,
+    "globalG01G02Accepted": false
   }
 }

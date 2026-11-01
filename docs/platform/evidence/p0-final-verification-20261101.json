@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-01",
+  "recordedAt": "2026-11-01T02:52:58.042944+00:00",
+  "scope": "P0-C5 exact G01/G02 local installation and isolated staging registry; final phase acceptance remains open",
+  "baseCommit": "c469c93dd18ef3b07a53a53b4db7f47ad4a1b784",
+  "ciCode": "5703f837af1295d1bf5e94eacd55f2622d0e2115",
+  "workflowSha256": "e6fbc01959607234bbd16323ba2787cc479f3d599ee63afb8af6b6a3770d11cf",
+  "verificationImage": "b983df5e3570ea196a9877477b8db5b7121cbb3642da1107cf10ddb9bd3a457c",
+  "status": "local-verification-passed-acceptance-pending",
+  "gates": {
+    "G01": {
+      "localCriterionPassed": true,
+      "remoteCIConfirmed": false
+    },
+    "G02": {
+      "localCriterionPassed": true,
+      "liveRegistryRepublished": false
+    },
+    "G25": {
+      "accepted": false,
+      "pending": [
+        "Verified support destination",
+        "Verified private security contact"
+      ]
+    }
+  },
+  "globalG01G02Accepted": false,
+  "p0Accepted": false,
+  "checks": {
+    "cleanDockerBuild": true,
+    "dockerBuildCacheUsed": false,
+    "privateEnvironmentCopied": false,
+    "nodeModulesCopied": false,
+    "node": "22.23.4",
+    "bundledUndici": "6.29.1",
+    "npm": "10.9.9",
+    "runtimeUid": 1000,
+    "napiCanvas": true,
+    "legacyCanvas": true,
+    "opus": true,
+    "compiledNext": true,
+    "cleanDevelopmentInstall": true,
+    "initialNpmCacheEmpty": true,
+    "bothLocksAndManifestsUnchanged": true,
+    "welcomeTypes": true,
+    "frontendTypes": true,
+    "dependencyBoundaries": {
+      "modules": 1175,
+      "dependencies": 3391,
+      "violations": 0
+    },
+    "originalDevelopmentTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "originalImageTests": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "skipped": 0
+    },
+    "sourceHashes": 1046,
+    "classification": true,
+    "assets": true,
+    "historicalDelta": {
+      "originalCandidates": 674,
+      "currentOwners": 661,
+      "removed": [
+        "commands/Anime-Emotions/a-kill.js",
+        "commands/Fun/cancer.js",
+        "commands/Fun/disability.js",
+        "commands/Fun/hitler.js",
+        "commands/Fun/kill.js",
+        "commands/Fun/violence.js",
+        "commands/Soundboard/ahshit.js",
+        "commands/Soundboard/ha-gay.js",
+        "commands/Soundboard/hellomf.js",
+        "commands/Soundboard/kuss-digga.js",
+        "commands/Soundboard/ph-intro.js",
+        "commands/Soundboard/surprisemf.js",
+        "commands/Soundboard/verpissdich.js",
+        "commands/Soundboard/wryd-stepbro.js"
+      ],
+      "added": [
+        "slashCommands/setup.js"
+      ],
+      "retiredMatch": true,
+      "prefix": 517,
+      "slash": 144
+    },
+    "actualLoaders": {
+      "prefix": 517,
+      "slash": 144,
+      "roots": 20,
+      "aliases": 776,
+      "idsAndOwnersEqual": true,
+      "aliasTargetsEqual": true,
+      "giveawaySchedulerFixtureOnly": true,
+      "network": false,
+      "login": false
+    },
+    "negativeRegistryCases": {
+      "missing-entry": "rejected",
+      "wrong-owner": "rejected",
+      "wrong-alias": "rejected"
+    },
+    "httpComposition": {
+      "routes": 95,
+      "methodsPathsAndHandlerCountsEqual": true,
+      "realRouteModules": true,
+      "sessionStore": "synthetic-memory",
+      "listenerOpened": false,
+      "requestsExecuted": 0
+    },
+    "auditBackend": {
+      "info": 0,
+      "low": 0,
+      "moderate": 50,
+      "high": 0,
+      "critical": 0,
+      "total": 50
+    },
+    "auditFrontend": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "auditHighGatesPassed": true,
+    "unfilteredAuditSnapshotExit": 1,
+    "frozenMigrationClient": {
+      "client": "2.11.0",
+      "ws": "8.22.0",
+      "node": "v22.23.4",
+      "productionInstalled": false
+    },
+    "workflowSyntaxAndShell": true,
+    "originalTestSourcesUnchanged": true
+  },
+  "ciRegression": {
+    "before": "pull_request targeted only feat/motor-soundy; required-target assertion failed",
+    "after": "master, feature/obey-main-implementation and preserved legacy PR target; frontend install/types, audits and actual loaders added",
+    "temporaryRegressionSourcesRetained": false
+  },
+  "remote": {
+    "pushExecuted": false,
+    "actionsExecuted": false,
+    "queriedRevision": "5703f837",
+    "actionsRuns": 0,
+    "branch": "feature/obey-main-implementation",
+    "observedBranchHead": "c8ba6d3ee86515813e68a028e1221d093301e91b",
+    "observedDefaultBranchHead": "c96f529c53193dce0f4429d1d1b67af271486a18",
+    "settingsChanged": false
+  },
+  "runtime": {
+    "changed": false,
+    "code": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
+    "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7",
+    "health": "healthy",
+    "restarts": 0
+  },
+  "limits": [
+    "Provider Mongo credential rotation remains open under C2.",
+    "G25 support and private security contacts are not yet confirmed.",
+    "Local commands do not establish remote GitHub Actions success.",
+    "Isolated registry and native checks do not accept business commands, real OAuth or voice/audio continuity.",
+    "Frozen lavalink-client stays outside production; production queue was not migrated."
+  ],
+  "harnessIssuesResolved": [
+    "Build started before context extraction completed; sequential invocation completed successfully.",
+    "Non-root result directory initially unwritable; dedicated UID1000 output directory used, production permissions untouched."
+  ],
+  "cleanup": {
+    "temporarySourcesRemoved": [
+      "context/",
+      "development/",
+      "migration/",
+      "actual-loaders.cjs",
+      "development-check.sh",
+      "native.cjs",
+      "registry-negative.cjs",
+      "routes.cjs",
+      "static-inventory.cjs"
+    ],
+    "testContainersRemaining": false,
+    "verificationImageRemoved": true,
+    "productionImagePreserved": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7",
+    "originalTestsPreserved": true,
+    "logsRetained": true
+  },
+  "logHashes": {
+    "actual-loaders-initial.log": "6863d363ed46eeae635ac4c10187ec4b64294cc2eb532db6361934b0200e3516",
+    "assets.json": "c81668402ecaccb29deaaad8aad4692a64b5d92d7ef5e9972ae2553230d8d648",
+    "audit-backend-gate.json": "a0996ca698916fb5606a752a7b0153e6893044795cd90498786cd23dd5bfef60",
+    "audit-backend.json": "94dd8db08c4dcdb0caab989b65ea3b84b34966b3bcb57295b9e9616c1129a1f7",
+    "audit-frontend-gate.json": "614b08855496551d4b34fb595d8b94a42a363032fadc42b2bd4f064d6d63812d",
+    "audit-run.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ci-contract.json": "c93aa26c7419d5344fac954d3b70f3e84380ca2378a828e20030cb89b3780552",
+    "classification.log": "a4f432ded8f425dcf4d0224d025747950c084a8d850271ef77d8feaa2d8d2eb5",
+    "clean-build.log": "bed0ca17dfe316c864b00a2436f61315049682ffe21e8c2fa325e1ee465c1ca4",
+    "dependencies.log": "1c213650d7f43a6f62dfbf48043838c28783d69811f31d57a36d5dbc9b05a303",
+    "development-check-run.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "historical-delta.json": "a85b9d76723d02cdc7fbb38ffa4a76fdb244dcde63587a00be916f4ddd0197ac",
+    "image-check-run.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "image-provenance.json": "38e2445327ccb7b0b7beb68d5c8a98d58edaf1fd1a598caffd9c52087876f9c2",
+    "image-results/actual-loaders-image.log": "facb9f44c99d7737e54aeef596265a41e40f40ddebbacd9c2cb97544d3a65123",
+    "image-results/native-image.json": "43ea0b9bb4fd1955ee6eddfa8910371b9344added748fd50a10dbd099ab4e4be",
+    "image-results/original-image-tests.log": "8f9f70a02114b5b13237c69e8f763795c8933d719780cf3779182eacf552120b",
+    "image-results/routes-image.log": "c6398a70184a73aa673ea51f848d35eed4285acdc27036f037b5543904deb4d1",
+    "image-results/static-inventory-image.log": "1e242171216b658f80e74067d4a55c1a97f1481350c730130ac022b13dc36678",
+    "install-environment.json": "0d15f8604664a3c4d33346ac1316d799e8a59b04ab90091d4895174c61d22f86",
+    "install-run.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "migration-compatibility.json": "bd31293cd4d0a21587537ed248a1526bb1821ae50e2fda31c66f4dada620ae40",
+    "negative-missing-entry.log": "6e0122bbacf614141359256e5825fb51d5ea84bef872b57b391c301e9a5c26aa",
+    "negative-wrong-alias.log": "2704721b8a5f993040636b26ad6194b4fdd85f2782ca4c6a6d37dcce36cbda91",
+    "negative-wrong-owner.log": "29d6605c5417a122136814a6dd16dae28927a198614d8be407d5a380905a6f9a",
+    "npm-ci-frontend.log": "d9acd5fcced8cca7c98c26fd5aae94f1f71abde5b0beeebf122a2903a21c8e20",
+    "npm-ci-migration.log": "bbc3987b1900137f690081af76422f82207b2e80ec330d3bc9526f092a515297",
+    "npm-ci-root.log": "bc89a568709d9e9078eae1a89da11ef72d22065b69aade1bbcc74f29b7887e84",
+    "original-tests.log": "894f7831af997ae67120ca53e4031e37f00eeb34732226de5106ae22f733785e",
+    "routes-initial.log": "c6398a70184a73aa673ea51f848d35eed4285acdc27036f037b5543904deb4d1",
+    "typecheck-frontend.log": "b76787d92ad8ba666bdb306d825fae51ddda643f5e67646c8496755c5d9dc59e",
+    "typecheck-welcome.log": "25b341739d7cff3ea3afcedde711b1c7ac9c7b06b69acb8707a2c32506ee8a1f"
+  }
+}

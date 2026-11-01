@@ -19,9 +19,11 @@ npm run dependencies:welcome
 npm run web:typecheck
 npm run web:build
 node scripts/verify-p0-classification.js
+npm audit --audit-level=high
+npm audit --prefix dashboard/frontend --audit-level=high
 ```
 
-Ejecuta los pertinentes al cambio. El script `scripts/obey-assets.js` valida recursos sin `--apply`; aplicar publica emojis. La comprobación de clasificación valida inventario y trazabilidad, no acepta todo el negocio. Si cambia un consumidor inventariado, actualiza sus hashes/contratos con evidencia; no borres la entrada para eludir una comprobación.
+Ejecuta los pertinentes al cambio. La auditoría bloquea avisos altos/críticos; los moderados registrados conservan su deuda. El script `scripts/obey-assets.js` valida recursos sin `--apply`; aplicar publica emojis. La comprobación de clasificación valida inventario y trazabilidad, no acepta todo el negocio. Si cambia un consumidor inventariado, actualiza sus hashes/contratos con evidencia; no borres la entrada para eludir una comprobación.
 
 Los tres archivos originales de `test/` se conservan. No repongas baterías retiradas, generadores auxiliares o scripts temporales en la entrega. Para cambios de comportamiento, demuestra las invariantes y casos de regresión relevantes, conserva resultados y retira los verificadores temporales al cerrar. No uses sorteos, restauraciones, voz o mensajes de usuarios reales como fixtures.
 
