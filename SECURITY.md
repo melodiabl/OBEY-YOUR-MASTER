@@ -4,13 +4,13 @@
 
 El proyecto está en remodelación y no publica aquí una matriz de versiones con mantenimiento garantizado. El último corte operativo verificado es `2355287f`, descrito en [P0-C3](docs/platform/P0-SESSION-2026-10-31.md). Los informes delimitan las funciones revisadas; no certifican todo el bot. El código público remoto puede estar por detrás del checkout local.
 
-La última auditoría del backend registró 50 vulnerabilidades moderadas y ninguna alta/crítica. La rotación de una credencial Mongo previa **sigue pendiente en el proveedor**; retirar una credencial de argumentos o documentación no demuestra su revocación. Las sesiones se ordenan dentro de un proceso; la aceptación distribuida continúa en P5.
+La última auditoría del backend registró 50 vulnerabilidades moderadas y ninguna alta/crítica. La rotación de una credencial Mongo previa **no se realizó**; el mantenedor indicó expresamente que no hace falta para este cierre el 01/11/2026. Se registra como excepción de alcance, sin atribuirle una revocación o rotación inexistentes. Las sesiones se ordenan dentro de un proceso; la aceptación distribuida continúa en P5.
 
 ## Comunicar una vulnerabilidad
 
-**No hay todavía un contacto privado de seguridad confirmado para publicación.** Issues está desactivado y no se ha acreditado que GitHub Private Vulnerability Reporting esté habilitado. No se ofrece ese enlace como canal operativo. El mantenedor debe proporcionar y verificar un destino privado antes de cerrar este punto de G25.
+Usa [Report a vulnerability en GitHub](https://github.com/melodiabl/OBEY-YOUR-MASTER/security/advisories/new). El repositorio tiene **Private Vulnerability Reporting habilitado**, comprobado mediante su API el 01/11/2026. Necesitas iniciar sesión en GitHub. El reporte se dirige de forma privada a los responsables del repositorio; no se ha enviado un reporte de prueba ni se garantiza un plazo de respuesta.
 
-Si ya tienes contacto privado con el operador afectado, comunícale el componente y una descripción mínima sin enviar secretos. No publiques credenciales ni detalles de explotación en una solicitud de cambios, chat público o captura. Guarda los pasos y el alcance para el canal privado confirmado.
+No publiques credenciales ni detalles de explotación en Issues, solicitudes de cambios, chats públicos o capturas. El soporte general va a [GitHub Issues](https://github.com/melodiabl/OBEY-YOUR-MASTER/issues); una incidencia pública no es el formulario privado de seguridad.
 
 El informe privado debe identificar el commit, componente, condiciones necesarias, impacto observado y reproducción mínima con cuentas/datos de prueba. No es necesario acceder a datos de otros usuarios para reportar un fallo.
 

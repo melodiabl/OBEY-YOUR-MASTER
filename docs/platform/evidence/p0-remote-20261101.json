@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-01",
+  "recordedAt": "2026-11-01T03:07:40.158006+00:00",
+  "status": "p0-accepted-with-user-exception",
+  "publication": {
+    "branch": "feature/obey-main-implementation",
+    "previousHead": "c8ba6d3ee86515813e68a028e1221d093301e91b",
+    "publishedHead": "ebc79f4ae3de697ed593671ccbf0faf478b22a40",
+    "fastForward": true,
+    "force": false,
+    "messagesOrReportsCreated": false
+  },
+  "support": {
+    "actions": [
+      {
+        "action": "enableIssues",
+        "success": true
+      },
+      {
+        "action": "enablePrivateReporting",
+        "success": true
+      }
+    ],
+    "hasIssues": true,
+    "hasDiscussions": false,
+    "privateVulnerabilityReporting": true,
+    "publicSupport": "https://github.com/melodiabl/OBEY-YOUR-MASTER/issues",
+    "privateSecurity": "https://github.com/melodiabl/OBEY-YOUR-MASTER/security/advisories/new",
+    "messagesOrReportsCreated": false
+  },
+  "secretCheck": {
+    "newTextBlobsScanned": 1859,
+    "knownSecretKeysCompared": [
+      "BOT_TOKEN",
+      "DISCORD_CLIENT_SECRET",
+      "GOOGLE_CLIENT_SECRET",
+      "MONGO_URL",
+      "SESSION_SECRET",
+      "YOUTUBE_PO_TOKEN",
+      "YOUTUBE_REFRESH_TOKEN"
+    ],
+    "findings": 0,
+    "contentsRedacted": true
+  },
+  "mongoAuthority": {
+    "connected": true,
+    "provider": "atlas",
+    "userManagementPrivilegeObserved": false,
+    "credentialRotationPerformed": false
+  },
+  "mongoRotationException": {
+    "date": "2026-11-01",
+    "userInstruction": "no hace falta igual",
+    "scope": "Provider Mongo credential rotation excluded from P0 by explicit user instruction",
+    "performed": false,
+    "requiredForP0": false,
+    "evidence": "evidence/p0-remote-20261101.json"
+  },
+  "ci": {
+    "id": 41267669259,
+    "url": "https://github.com/melodiabl/OBEY-YOUR-MASTER/actions/runs/41267669259",
+    "head": "ebc79f4ae3de697ed593671ccbf0faf478b22a40",
+    "status": "completed",
+    "conclusion": "success",
+    "updatedAt": "2026-11-01T03:07:42Z",
+    "jobs": [
+      {
+        "name": "checks",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install native Canvas build requirements",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --prefix dashboard/frontend --ignore-scripts",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run typecheck:welcome",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run dependencies:welcome",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run web:typecheck",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm test",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm audit --audit-level=high",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm audit --prefix dashboard/frontend --audit-level=high",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify capability classification without promoting functional acceptance",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node scripts/obey-assets.js",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build Next.js panel and runtime image without starting services",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate effective inventory, owners and alias policy in the image",
+            "conclusion": "success"
+          },
+          {
+            "name": "Compare actual command loaders with the inventory without login",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install the frozen migration client in isolation",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "localPrerequisites": "p0-final-verification-20261101.json",
+  "runtimeChanged": false,
+  "realDiscordEffects": false,
+  "g25Accepted": true,
+  "p0Accepted": true,
+  "acceptedAt": "2026-11-01T03:09:48.322284+00:00",
+  "acceptedStage": "P0",
+  "nextStage": "P1",
+  "scope": "Base installation/registry/documentation acceptance only; no promotion of unreviewed business commands",
+  "gates": {
+    "G01": {
+      "accepted": true,
+      "evidence": "Clean exact-version installation/build and passing real GitHub workflow"
+    },
+    "G02": {
+      "accepted": true,
+      "evidence": "674-14+1=661; real loader/alias comparison; passing isolated image gate"
+    },
+    "G25": {
+      "accepted": true,
+      "evidence": "Updated public documentation; Issues and private reporting enabled and verified"
+    }
+  },
+  "runtime": {
+    "code": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
+    "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7",
+    "changed": false,
+    "health": "healthy",
+    "restarts": 0
+  },
+  "checks": {
+    "currentLocalLinksPassed": 55,
+    "classificationGatePassed": true,
+    "businessIntentAndCoverageUnchanged": true,
+    "originalTestsUnchanged": true,
+    "temporarySourceFilesAdded": false
+  },
+  "logHashes": {
+    "ci-initial.log": "3350f8b7bf6e4e700b7d4b33fcef807529614af8bc5a209108ea9da7725642e3",
+    "github-support.json": "5ccc06c42ed99cb6aea1ac3d959636d4f998d96f1e8ac4a9b17e11a730f4b3c3",
+    "mongo-authority.json": "f48ab329619780dee8d3e8cd984cd2fac5dad7b9c1b51058fc8843b97f79e064",
+    "publication-secret-scan.json": "d1c5a2532609e21aac83c71d2e40dc665a990d0d37b1751292b43bc70554f0b8",
+    "push-initial.log": "9c158c4ae4545ce48057752d1adc6c065e8845aa707aae6e8fa99a0ecb9d8bfa",
+    "ci-initial-result.json": "f42200482ec727a61ad36bc88a87ba32f1b4d55e8f5e89014af34d58e18033f1"
+  }
+}

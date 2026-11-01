@@ -1329,10 +1329,15 @@
     "remainingCommandEntries": 493,
     "remainingHttpRoutes": 61
   },
-  "globalG01G02Accepted": false,
+  "globalG01G02Accepted": true,
   "limits": [
     "Source tracing establishes current authorities, not end-to-end acceptance",
     "Behavioral acceptance is scoped to synthetic tests in each linked increment; source ownership alone does not accept business behavior",
     "No moderation actions, Discord messages, real database writes or voice joins used for this review"
-  ]
+  ],
+  "baseAcceptance": {
+    "scope": "Base gates only, established by installation and actual CI rather than source tracing",
+    "evidence": "evidence/p0-remote-20261101.json",
+    "reviewedBusinessCoverageChanged": false
+  }
 }

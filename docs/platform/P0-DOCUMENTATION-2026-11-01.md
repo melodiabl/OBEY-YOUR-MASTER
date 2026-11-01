@@ -1,5 +1,7 @@
 # P0-C4 · documentación pública G25 · 01/11/2026
 
+> Actualización posterior · 01/11/2026: [soporte y publicación remota](P0-REMOTE-2026-11-01.md). GitHub Issues y reporte privado ya están habilitados/verificados. El usuario excluyó expresamente la rotación Mongo del cierre; no se realizó. Los estados y limitaciones de abajo conservan el corte anterior; la aceptación posterior se registra en ese informe y en el plan activo.
+
 Se concilió la documentación pública con el checkout posterior a `746647ab`, conservando el código desplegado `2355287f` y su imagen. **G25 y P0 permanecen abiertos:** falta confirmar un canal de soporte vigente y un contacto privado para vulnerabilidades. No se cambió la configuración del repositorio remoto, se publicaron mensajes ni se reinició el bot.
 
 ## Hallazgos y correcciones

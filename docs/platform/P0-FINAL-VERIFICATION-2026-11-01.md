@@ -1,5 +1,7 @@
 # P0-C5 · verificación local de base · 01/11/2026
 
+> Actualización posterior · 01/11/2026: [soporte y publicación remota](P0-REMOTE-2026-11-01.md). GitHub Issues y reporte privado ya están habilitados/verificados. El usuario excluyó expresamente la rotación Mongo del cierre; no se realizó. Los estados y limitaciones de abajo conservan el corte anterior; la aceptación posterior se registra en ese informe y en el plan activo.
+
 **Resultado local correcto; aceptación final de P0 pendiente.** El corte comprueba los criterios locales originales de G01/G02, sin exigir remodelar primero los otros 493 comandos y 61 rutas de sus capacidades. G25 continúa sin contactos públicos/privados confirmados, C2 conserva la rotación Mongo en el proveedor y no se ha ejecutado el CI remoto de este cambio. No se avanza una puerta de fase por contar archivos.
 
 Código de CI `5703f837`, sobre el checkout `c469c93d`. Imagen de verificación `b983df5e3570`; no se desplegó. El bot conserva código `2355287f`, imagen `7bf3d9f8b4d3`, saludable y con cero reinicios observados. No cambiaron manifests, lockfiles, código de aplicación, credenciales o datos.

@@ -1,5 +1,9 @@
 # Tareas y checkpoints de OBEY
 
+## 01/11/2026 · P0 cerrado; unidad activa P1 música
+
+Rama publicada sin force-push; CI real de GitHub **success**, run 41267669259 sobre `ebc79f4a`. G01/G02 acreditados por instalación limpia, build/tipos/tests y registro real; G25 cerrado con Issues y reporte privado de vulnerabilidades habilitados/verificados. El usuario excluyó expresamente la rotación Mongo («no hace falta igual»): **no realizada y fuera del cierre**. C1–C5 completados para la base, sin aceptar todo el negocio. Revisión funcional 52/168/34 intacta; las 493 entradas y 61 rutas restantes conservan su fase. Runtime `2355287f` saludable, sin reinicio. **Sigue P1**: cola/estado canónicos, migración a lavalink-client, continuidad, controles y después reproductor web. [Cierre y evidencia](../docs/platform/P0-REMOTE-2026-11-01.md).
+
 ## 01/11/2026 · G01/G02 comprobados localmente; aceptación externa pendiente
 
 CI `5703f837`: ramas activas, frontend, auditorías y cargadores reales. Build sin caché y desarrollo limpio con Node22.23.4; tipos/fronteras, 25 originales en ambos entornos y componentes Canvas/Opus pasan. Coinciden 1.046 hashes, 517 prefix/144 slash/20 raíces/776 alias y 95 rutas; 674−14+1=661 sin diferencias sin explicar. Tres alteraciones del registro se rechazan. Auditoría: 50 moderadas backend, cero altas/críticas; frontend cero. C5 local correcto, **P0 no aceptado**: faltan rotación Mongo, contactos reales de G25 y estado remoto del corte que se publique; sin push/CI remoto. Runtime `2355287f` conservado saludable, sin reinicio. Temporales retirados; revisión funcional 52/168/34 intacta. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
@@ -138,11 +142,11 @@ Código `3d62a7b4`, imagen `ee586c109e73`: borrado de canales/roles con acceso f
 Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 → P2 → P4 → P5 → P6**, con **P3 transversal** a cada recorrido. Los checkpoints y tareas posteriores conservan su evidencia; no definen por sí solos qué se hace a continuación.
 
 - [x] **P0-C1:** clasificar 661 comandos/95 rutas en 27 capacidades, conservar revisión funcional 168/21 y conciliar 674−14+1=661 y trazar las retiradas. [Contrato y aceptación](../docs/platform/P0-CLOSURE-2026-10-31.md).
-- [ ] **P0-C2 · pendiente externo:** código de giveaway/servers/loadbackup y contenido señalado corregidos, verificados y desplegados; falta acreditar rotación Mongo en el proveedor. [Evidencia](../docs/platform/P0-SECURITY-2026-10-31.md).
+- [x] **P0-C2 · con excepción del usuario:** código verificado/desplegado; rotación Mongo excluida expresamente el 01/11/2026 y no realizada. [Registro](../docs/platform/P0-REMOTE-2026-11-01.md).
 - [x] **P0-C3:** 13 rutas base verificadas y desplegadas; sin aceptación por arrastre del negocio. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
-- [ ] **P0-C4 · parcial/G25:** README/guías/avisos/historia conciliados; faltan soporte vigente y contacto privado confirmado. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
-- [ ] **P0-C5 · local correcto/aceptación pendiente:** G01/G02 comprobados localmente con instalación limpia y registro real aislado; faltan C2/G25 y CI remoto del corte publicado para aceptar P0. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
-- [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
+- [x] **P0-C4/G25:** documentación, soporte GitHub Issues y reporte privado habilitados/verificados. [Informe](../docs/platform/P0-REMOTE-2026-11-01.md).
+- [x] **P0-C5:** G01/G02/G25 aceptados con instalación limpia y CI remoto real aprobado; excepción Mongo explícita y no realizada. [Cierre](../docs/platform/P0-REMOTE-2026-11-01.md).
+- [ ] **Unidad activa · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
 - [ ] **Luego · P2:** completar configuración/setups, bienvenida, tickets, moderación y logs por recorrido, con aceptación entre dos guilds.
 - [ ] **En cada recorrido · P3:** recursos, IDs/fallbacks, idiomas y evidencia visual de esa capacidad.
 - [ ] **Tras las dependencias anteriores · P4/P5/P6:** sandbox de votos/derechos; escalado/recuperación; ampliaciones con sus contratos.

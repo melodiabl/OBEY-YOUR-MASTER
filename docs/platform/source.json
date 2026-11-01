@@ -80,7 +80,16 @@
       "backupRestore": "bound snapshot, fresh authority, one-use confirmation and uncertain-outcome reservation",
       "retiredCommands": 14,
       "retiredAudioAssets": 8,
-      "providerCredentialRotated": false
+      "providerCredentialRotated": false,
+      "providerCredentialRotationRequiredForP0": false,
+      "providerCredentialRotationException": {
+        "date": "2026-11-01",
+        "userInstruction": "no hace falta igual",
+        "scope": "Provider Mongo credential rotation excluded from P0 by explicit user instruction",
+        "performed": false,
+        "requiredForP0": false,
+        "evidence": "evidence/p0-remote-20261101.json"
+      }
     },
     "sessionBoundaries": {
       "baseRoutesReviewed": 13,
@@ -396,8 +405,8 @@
   },
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
-    "activeStage": "P0",
-    "nextUnit": "P0 local G01/G02 installation and isolated staging registry checks passed. Resolve C2 provider Mongo credential rotation and C4 verified public support/private security contacts; assess remote CI for the eventual published cut before final P0 acceptance. CI changes remain local; C3 deployed. No further P0 command-by-command review is required before this acceptance. Then P1 music per original plan.",
+    "activeStage": "P1",
+    "nextUnit": "P1 music: transfer queue/state ownership to lavalink-client, preserve data and controls, verify continuity/recovery, then complete the web player on that contract. P0 accepted with real GitHub CI and verified support channels; Mongo credential rotation explicitly excluded by user, not performed.",
     "sequence": [
       "P0",
       "P1",
@@ -408,7 +417,7 @@
     ],
     "transversal": "P3 resources and localization accompany each capability",
     "completedStagesNotImplied": true,
-    "closureReport": "P0-CLOSURE-2026-10-31.md",
+    "closureReport": "P0-REMOTE-2026-11-01.md",
     "classification": "p0-classification.json"
   },
   "p0Reconciliation": {
@@ -504,13 +513,22 @@
     "date": "2026-10-31",
     "report": "P0-SECURITY-2026-10-31.md",
     "evidence": "evidence/p0-security-20261031.json",
-    "status": "deployed-healthy-provider-rotation-open",
+    "status": "deployed-healthy-rotation-excluded-by-user",
     "retiredCommands": 14,
     "retiredAudioAssets": 8,
     "providerCredentialRotated": false,
-    "globalP0Accepted": false,
+    "globalP0Accepted": true,
     "implementationCode": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
-    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a"
+    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
+    "providerCredentialRotationRequiredForP0": false,
+    "rotationException": {
+      "date": "2026-11-01",
+      "userInstruction": "no hace falta igual",
+      "scope": "Provider Mongo credential rotation excluded from P0 by explicit user instruction",
+      "performed": false,
+      "requiredForP0": false,
+      "evidence": "evidence/p0-remote-20261101.json"
+    }
   },
   "p0Session": {
     "date": "2026-10-31",
@@ -527,14 +545,13 @@
     "date": "2026-11-01",
     "report": "P0-DOCUMENTATION-2026-11-01.md",
     "evidence": "evidence/p0-documentation-20261101.json",
-    "status": "documentation-updated-contact-pending",
-    "g25Accepted": false,
+    "status": "verified-public-support-and-private-reporting",
+    "g25Accepted": true,
     "runtimeChanged": false,
-    "pending": [
-      "Verified public support destination",
-      "Verified private security contact",
-      "Final G01/G02/G25 acceptance cut"
-    ]
+    "pending": [],
+    "supportUrl": "https://github.com/melodiabl/OBEY-YOUR-MASTER/issues/new",
+    "securityUrl": "https://github.com/melodiabl/OBEY-YOUR-MASTER/security/advisories/new",
+    "currentEvidence": "evidence/p0-remote-20261101.json"
   },
   "p0FinalVerification": {
     "date": "2026-11-01",
@@ -542,11 +559,34 @@
     "evidence": "evidence/p0-final-verification-20261101.json",
     "ciCode": "5703f837af1295d1bf5e94eacd55f2622d0e2115",
     "verificationImage": "b983df5e3570ea196a9877477b8db5b7121cbb3642da1107cf10ddb9bd3a457c",
-    "status": "local-verification-passed-acceptance-pending",
+    "status": "accepted-with-real-remote-ci",
     "localG01CriterionPassed": true,
     "localG02CriterionPassed": true,
-    "remoteCIConfirmed": false,
+    "remoteCIConfirmed": true,
     "runtimeChanged": false,
-    "globalG01G02Accepted": false
+    "globalG01G02Accepted": true,
+    "remoteCIRun": 41267669259,
+    "remoteCIHead": "ebc79f4ae3de697ed593671ccbf0faf478b22a40",
+    "remoteCIConclusion": "success",
+    "acceptanceEvidence": "evidence/p0-remote-20261101.json"
+  },
+  "p0Acceptance": {
+    "date": "2026-11-01",
+    "accepted": true,
+    "report": "P0-REMOTE-2026-11-01.md",
+    "evidence": "evidence/p0-remote-20261101.json",
+    "ciHead": "ebc79f4ae3de697ed593671ccbf0faf478b22a40",
+    "ciRun": 41267669259,
+    "ciConclusion": "success",
+    "gates": [
+      "G01",
+      "G02",
+      "G25"
+    ],
+    "mongoRotationPerformed": false,
+    "mongoRotationRequiredForP0": false,
+    "exceptionByExplicitUserInstruction": true,
+    "businessAcceptanceImplied": false,
+    "nextStage": "P1"
   }
 }

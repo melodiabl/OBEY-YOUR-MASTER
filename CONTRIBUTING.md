@@ -35,4 +35,4 @@ Usa los catálogos y materiales existentes; ES/EN son la base por conciliar. Añ
 
 La solicitud de cambios debe explicar el problema, el comportamiento resultante, qué se verificó y qué permanece pendiente. Identifica commit/imagen si hubo despliegue y separa CI local de CI remoto. No incluyas secretos ni datos de usuarios en diffs o capturas. No se cambia una puerta de fase a aceptada sin su criterio original.
 
-GitHub permite solicitudes de cambios, pero actualmente tiene Issues y Discussions desactivados. Usa [SUPPORT](SUPPORT.md) para conocer el estado del contacto y [SECURITY](SECURITY.md) para vulnerabilidades; una solicitud de cambios pública no es un canal privado de seguridad.
+GitHub permite solicitudes de cambios e Issues; Discussions permanece desactivado. Usa [SUPPORT](SUPPORT.md) para consultas generales y [SECURITY](SECURITY.md) para el formulario privado de vulnerabilidades. Una solicitud de cambios o incidencia pública no es un canal privado de seguridad.

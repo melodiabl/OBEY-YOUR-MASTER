@@ -1,5 +1,9 @@
 # Cambios de OBEY
 
+## 01/11/2026 · P0 cerrado y rama publicada
+
+CI remoto aprobado en `ebc79f4a`, run 41267669259; G01/G02/G25 aceptados para la base. Issues y reporte privado habilitados y verificados. La rotación Mongo se excluye por instrucción explícita del mantenedor y no se realizó. Historia conservada y sin reinicio del bot. Continúa P1 música; [cierre y alcance](docs/platform/P0-REMOTE-2026-11-01.md).
+
 Registro de entregas verificadas en este checkout; no equivale a releases publicadas en GitHub. La historia Git, los informes fechados y el [checkpoint](docs/platform/CHECKPOINT.md) conservan los incrementos anteriores. La versión `14.0.0` del manifest no identifica por sí sola una imagen o entrega.
 
 ## 01/11/2026 · documentación pública
@@ -18,7 +22,7 @@ Reglas de sorteos sin interpolación de código y con persistencia; listado priv
 
 ## Problemas y aceptaciones pendientes
 
-- P0 continúa abierto: rotación Mongo externa, contacto público/privado real y corte final G01/G02/G25.
+- P0 está cerrado para la base, con la rotación Mongo no realizada y excluida expresamente por el mantenedor. Los demás pendientes conservan su fase.
 - P1 conserva migración a lavalink-client, continuidad de cola/audio, controles, sincronización y medición de latencia. Un Lavalink conectado o `/health` saludable no certifica estos recorridos.
 - P2 conserva aceptación completa de setups, tickets, moderación, bienvenida y logs entre dos servidores. La revisión de middleware no acepta por arrastre esas funciones.
 - Next/React está incorporado parcialmente; convive con EJS. Las letras, fuentes/plugins y nodos públicos no tienen una garantía global de sincronización o disponibilidad.

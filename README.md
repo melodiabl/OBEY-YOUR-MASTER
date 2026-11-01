@@ -2,14 +2,14 @@
 
 Bot de Discord con música, configuración del servidor, bienvenida, moderación, tickets y herramientas de comunidad. Este repositorio conserva la base de Tomato6966 y la remodela por capacidades, manteniendo los datos y las entradas compatibles.
 
-**Estado al 01/11/2026:** en remodelación; P0 sigue abierto. El último despliegue verificado corresponde al código `2355287f`; su [informe de sesiones y permisos](docs/platform/P0-SESSION-2026-10-31.md) describe las pruebas y sus límites. Los cambios locales de documentación pueden estar por delante de GitHub. No se declara que todas las funciones estén aceptadas por disponer de comandos registrados.
+**Estado al 01/11/2026:** en remodelación; [P0 cerrado](docs/platform/P0-REMOTE-2026-11-01.md), con la rotación Mongo excluida expresamente por el mantenedor. Continúa P1 música. El último despliegue verificado corresponde al código `2355287f`; su [informe de sesiones y permisos](docs/platform/P0-SESSION-2026-10-31.md) describe las pruebas y sus límites. La rama de implementación está publicada y su CI remoto pasó; el informe identifica el corte verificado. No se declara que todas las funciones estén aceptadas por disponer de comandos registrados.
 
 ## Empezar
 
 - **Usar el bot:** abre `/info help` y `/setup` en Discord. El prefijo de texto es configurable; los ejemplos con `!` usan el predeterminado. La [guía de uso](docs/user/INICIO.md) explica configuración, música y Me gusta.
 - **Instalar una instancia propia:** sigue [instalación y configuración](docs/operations/INSTALACION.md). Requiere tus propias credenciales, MongoDB y un nodo Lavalink v4; el repositorio no incluye el entorno privado del despliegue.
 - **Entender el trabajo pendiente:** consulta el [índice de documentación](docs/README.md), el [plan activo](tasks/plan.md) y el [checkpoint](docs/platform/CHECKPOINT.md).
-- **Contribuir o comunicar problemas:** consulta [CONTRIBUTING](CONTRIBUTING.md), [SUPPORT](SUPPORT.md) y [SECURITY](SECURITY.md). El antiguo enlace de Discord está vencido y Issues está desactivado; el canal de atención está pendiente de confirmación.
+- **Contribuir o comunicar problemas:** consulta [CONTRIBUTING](CONTRIBUTING.md), [SUPPORT](SUPPORT.md) y [SECURITY](SECURITY.md). GitHub Issues y el formulario privado de vulnerabilidades están habilitados y verificados; los enlaces están en esas guías.
 
 ## Qué hay actualmente
 

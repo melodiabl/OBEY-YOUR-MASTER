@@ -6,7 +6,7 @@ labels: ''
 assignees: ''
 ---
 
-Revisa el plan activo del checkout antes de duplicar una tarea. Issues puede estar desactivado; el estado del contacto figura en SUPPORT.md.
+Revisa el plan activo del checkout antes de duplicar una tarea. El contacto de soporte figura en SUPPORT.md; las vulnerabilidades van al formulario privado de SECURITY.md.
 
 - ¿Qué tarea quieres realizar y quién la utiliza?
 - ¿Qué dificultad tienes ahora?

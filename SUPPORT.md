@@ -1,8 +1,10 @@
 # Soporte
 
-Estado comprobado el 01/11/2026. El repositorio es [melodiabl/OBEY-YOUR-MASTER](https://github.com/melodiabl/OBEY-YOUR-MASTER), pero **Issues y Discussions están desactivados**. Las plantillas del checkout no habilitan esos servicios. No se promete un tiempo de respuesta ni soporte permanente.
+Estado comprobado el 01/11/2026. El soporte del proyecto se recibe en [GitHub Issues](https://github.com/melodiabl/OBEY-YOUR-MASTER/issues). Puedes [abrir una consulta o informar un fallo](https://github.com/melodiabl/OBEY-YOUR-MASTER/issues/new) con tu cuenta GitHub. Issues está habilitado y se verificó mediante la API del repositorio. Discussions permanece desactivado. No se promete un tiempo de respuesta ni soporte permanente.
 
-La invitación Discord del README anterior devuelve «invitación desconocida» (HTTP 404). No se publica como canal vigente. La página de WhatsApp responde, pero eso no confirma que el canal exista, atienda incidencias o sea un contacto privado de seguridad. **Falta que el mantenedor confirme un destino público de soporte y un contacto privado para vulnerabilidades.** G25 conserva ese pendiente.
+Para vulnerabilidades, usa el [formulario privado de seguridad](https://github.com/melodiabl/OBEY-YOUR-MASTER/security/advisories/new), cuyo estado habilitado también se verificó por API. No envíes una vulnerabilidad a una incidencia pública; consulta [SECURITY](SECURITY.md).
+
+La invitación Discord anterior está vencida y no se presenta como canal vigente. El canal WhatsApp histórico no se usa como contacto de soporte o seguridad. Las plantillas de esta rama están actualizadas; GitHub utiliza las de la rama predeterminada en su selector. El enlace de consulta anterior abre el formulario genérico y no depende de esas plantillas.
 
 ## Si usas una instancia del bot
 

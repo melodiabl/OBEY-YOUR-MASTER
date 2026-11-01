@@ -6,7 +6,7 @@ labels: ''
 assignees: ''
 ---
 
-Consulta el [repositorio](https://github.com/melodiabl/OBEY-YOUR-MASTER) y SUPPORT.md del checkout recibido y la guía de instalación del checkout recibido. Esta plantilla no habilita Issues ni promete atención.
+Consulta el [repositorio](https://github.com/melodiabl/OBEY-YOUR-MASTER) y SUPPORT.md y la guía de instalación del checkout recibido. Issues está habilitado; no se promete un plazo de respuesta.
 
 - ¿Usas una instancia ajena o mantienes la tuya?
 - Commit y versión de Node, si administras el despliegue:

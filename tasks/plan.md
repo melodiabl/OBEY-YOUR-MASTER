@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 01/11/2026 · P0 cerrado; unidad activa P1 música
+
+Rama publicada sin force-push; CI real de GitHub **success**, run 41267669259 sobre `ebc79f4a`. G01/G02 acreditados por instalación limpia, build/tipos/tests y registro real; G25 cerrado con Issues y reporte privado de vulnerabilidades habilitados/verificados. El usuario excluyó expresamente la rotación Mongo («no hace falta igual»): **no realizada y fuera del cierre**. C1–C5 completados para la base, sin aceptar todo el negocio. Revisión funcional 52/168/34 intacta; las 493 entradas y 61 rutas restantes conservan su fase. Runtime `2355287f` saludable, sin reinicio. **Sigue P1**: cola/estado canónicos, migración a lavalink-client, continuidad, controles y después reproductor web. [Cierre y evidencia](../docs/platform/P0-REMOTE-2026-11-01.md).
+
 ## 01/11/2026 · G01/G02 comprobados localmente; aceptación externa pendiente
 
 CI `5703f837`: ramas activas, frontend, auditorías y cargadores reales. Build sin caché y desarrollo limpio con Node22.23.4; tipos/fronteras, 25 originales en ambos entornos y componentes Canvas/Opus pasan. Coinciden 1.046 hashes, 517 prefix/144 slash/20 raíces/776 alias y 95 rutas; 674−14+1=661 sin diferencias sin explicar. Tres alteraciones del registro se rechazan. Auditoría: 50 moderadas backend, cero altas/críticas; frontend cero. C5 local correcto, **P0 no aceptado**: faltan rotación Mongo, contactos reales de G25 y estado remoto del corte que se publique; sin push/CI remoto. Runtime `2355287f` conservado saludable, sin reinicio. Temporales retirados; revisión funcional 52/168/34 intacta. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
@@ -119,8 +123,8 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 | Orden | Etapa | Trabajo y condición de avance |
 | --- | --- | --- |
-| 1 · activa | P0 · base e inventario | Completar conciliación de comandos, rutas, aliases y propietarios; resolver discrepancias de versiones/lock/CI. Cerrar con evidencia de la base y registro efectivos, no solo inventario de archivos. |
-| 2 | P1 · música consistente | Migrar a lavalink-client con una sola autoridad de cola y snapshots compatibles. Verificar fin/skip/stop, modos, autoplay/manual, errores y recuperación; conservar doce controles, favoritos y reloj. |
+| 1 · completada | P0 · base e inventario | G01/G02/G25 verificados, rama publicada y CI remoto aprobado; rotación Mongo excluida expresamente por el usuario y no realizada. [Cierre](../docs/platform/P0-REMOTE-2026-11-01.md). |
+| 2 · activa | P1 · música consistente | Migrar a lavalink-client con una sola autoridad de cola y snapshots compatibles. Verificar fin/skip/stop, modos, autoplay/manual, errores y recuperación; conservar doce controles, favoritos y reloj. |
 | 3 | P2 · configuración y gestión | Completar recorridos de setups/configuración, bienvenida, tickets, moderación y logs con permisos y datos reales por recorrido. Aceptación en dos guilds y permisos distintos. |
 | Transversal | P3 · recursos e idiomas | Integrar materiales, IDs reales, fallbacks y textos con cada recorrido de P1/P2 y siguientes. No reservarlo para una renovación global al final. |
 | 4 | P4 · votos y premium | Contratos, deduplicación, conciliación y derechos en sandbox; sin venta pública automática. |
@@ -131,15 +135,15 @@ La corrección del usuario «sigue un orden en el plan» fija una única secuenc
 
 El usuario solicitó una auditoría y cuestionó la arquitectura durante la unidad Config. [Informe](../docs/platform/MUSIC-AUDIT-2026-10-24.md) y [evidencia](../docs/platform/evidence/music-architecture-audit-20261024.json): respaldos actualmente fallidos, recuperación agotada, pausa retenida por autoplay y prioridad manual incompleta reproducidas. Diagnóstico terminado; [concurrencia y restauración corregidas](../docs/platform/MUSIC-CONCURRENCY-2026-10-25.md) y desplegadas en `6479683`. La migración y los demás hallazgos siguen pendientes. La auditoría inicial fue de lectura y P0/P1 siguen abiertos. Resumen Config y categoría MUSIC se verificaron y desplegaron después en `7828e8c`; los hallazgos se vinculan a P0/P1 sin sustituir la secuencia global.
 
-### Unidad inmediata: cierre acotado de P0 · 31/10/2026
+### P0 aceptado · 01/11/2026 · siguiente unidad P1
 
 La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **661 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **52 grupos/168 comandos/34 rutas**. Los otros 493/61 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
 
 1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674−14 retirados+`slashCommands/setup.js`=661, con procedencia de las retiradas, tareas y CI de integridad.
-2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados y desplegados. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
+2. **P0-C2 completado con excepción explícita:** fronteras sensibles y contenido señalados corregidos, verificados y desplegados. El usuario excluyó la rotación Mongo del cierre el 01/11/2026; **no se realizó**. [Estado y excepción](../docs/platform/P0-REMOTE-2026-11-01.md). El negocio completo conserva su fase.
 3. **P0-C3 completado:** trece rutas base verificadas con Express, navegador e imagen/Mongo aislados; desplegadas y saludables. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
-4. **P0-C4 parcial:** documentación pública conciliada; faltan destino real de soporte y contacto privado de seguridad para aceptar **G25**. [Informe](../docs/platform/P0-DOCUMENTATION-2026-11-01.md).
-5. **P0-C5 · verificación local completada; aceptación pendiente:** instalación limpia, tipos/build/locks, cargadores, alias y rutas comprobados con Node exacto. Falta cerrar C2/G25 y comprobar CI remoto del corte publicado antes de aceptar P0. [Informe](../docs/platform/P0-FINAL-VERIFICATION-2026-11-01.md).
+4. **P0-C4 completado/G25:** documentación conciliada, GitHub Issues habilitado y reporte privado de vulnerabilidades habilitado/verificado. [Informe](../docs/platform/P0-REMOTE-2026-11-01.md).
+5. **P0-C5 completado:** instalación limpia con Node exacto, tipos/build/locks, cargadores, alias y rutas; CI remoto real aprobado. G01/G02/G25 aceptados para la base. [Cierre](../docs/platform/P0-REMOTE-2026-11-01.md).
 
 **Aceptación de P0:** criterios originales G01/G02/G25 y discrepancias de base resueltas. No exige remodelar primero todos los comandos de P1/P2/P6. Recorridos completos en dos guilds pertenecen a P2; audio y migración a lavalink-client a P1; recibos duraderos conservan sus requisitos por capacidad y recuperación. No se eliminan los pendientes históricos por esta corrección de seguimiento.
 
