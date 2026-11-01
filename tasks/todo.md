@@ -1,5 +1,10 @@
 # Tareas y checkpoints de OBEY
 
+## 31/10/2026 · sesión y trece rutas base verificadas y desplegadas
+
+Código `2355287f`, imagen `7bf3d9f8b4d3`: sesiones y state OAuth ordenados, logout revoca también cookies de respuestas tardías, permisos de guild frescos sin fallback antiguo y estadísticas públicas mínimas/SSE autenticado. Cuarenta casos nuevos (39+Mongo) y 25 originales pasan en host/imagen; trece escenarios de navegador con cuentas ficticias y cero excepciones JS. Tipos, fronteras, 1.046 hashes, HTTP 13/13 y recursos 13/13. Diez muestras saludables, cero reinicios; respaldos CRC, configuración y reversión conservados; temporales retirados. Revisión: **52 grupos/168 comandos/34 rutas**, pendientes 493/61 en sus capacidades. **Siguiente C4/G25**: documentación pública; después corte G01/G02/G25. Rotación Mongo del proveedor sigue abierta; no se acepta P0 ni negocio P2 por estos fixtures. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
+
+
 ## 31/10/2026 · fronteras sensibles de P0 desplegadas
 
 Código `debad1e8`, imagen `8582432834dc`: reglas de sorteos sin código generado y conservadas al reiniciar; `servers` privado con dueño vigente por ID exacto; restauración ligada a copia/destino, acceso fresco, confirmación y reserva ante resultado incierto. Catorce comandos/ocho audios señalados retirados, Fun conservado. Inventario 661 comandos/776 alias/95 rutas; 1.043 hashes. Cuarenta y ocho casos nuevos y 25 originales pasan en host/imagen, tipos y fronteras; HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC, reversión y proyección global conservados; temporales retirados. **C2 sigue abierto por rotación Mongo en el proveedor**; revisión funcional 51/168/21 sin aumento. Siguiente bloque independiente C3 (sesión/tenant), luego G25 y corte G01/G02/G25. Sin restauraciones, sorteos, voz o mensajes reales de prueba. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md).
@@ -126,8 +131,8 @@ Seguir el [orden activo del plan](plan.md#orden-activo--23102026): **P0 → P1 �
 
 - [x] **P0-C1:** clasificar 661 comandos/95 rutas en 27 capacidades, conservar revisión funcional 168/21 y conciliar 674−14+1=661 y trazar las retiradas. [Contrato y aceptación](../docs/platform/P0-CLOSURE-2026-10-31.md).
 - [ ] **P0-C2 · pendiente externo:** código de giveaway/servers/loadbackup y contenido señalado corregidos, verificados y desplegados; falta acreditar rotación Mongo en el proveedor. [Evidencia](../docs/platform/P0-SECURITY-2026-10-31.md).
-- [ ] **P0-C3 · en cierre:** 13 rutas base verificadas; completar imagen/despliegue. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
-- [ ] **P0-C4 · G25:** conciliar README/guías/avisos/soporte, conservar historia y exclusiones.
+- [x] **P0-C3:** 13 rutas base verificadas y desplegadas; sin aceptación por arrastre del negocio. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
+- [ ] **P0-C4 · siguiente/G25:** conciliar README/guías/avisos/soporte, conservar historia y exclusiones.
 - [ ] **P0-C5 · G01/G02/G25:** instalación exacta, comprobaciones de base y registro/aliases del corte, aceptación explícita de cada gate; CI remoto separado de evidencia local.
 - [ ] **Después · P1:** migrar música a lavalink-client con cola única, preservación de datos y matriz de continuidad/recuperación; completar la interfaz musical sobre ese contrato.
 - [ ] **Luego · P2:** completar configuración/setups, bienvenida, tickets, moderación y logs por recorrido, con aceptación entre dos guilds.

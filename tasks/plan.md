@@ -1,5 +1,10 @@
 # Plan de implementación de la plataforma OBEY
 
+## 31/10/2026 · sesión y trece rutas base verificadas y desplegadas
+
+Código `2355287f`, imagen `7bf3d9f8b4d3`: sesiones y state OAuth ordenados, logout revoca también cookies de respuestas tardías, permisos de guild frescos sin fallback antiguo y estadísticas públicas mínimas/SSE autenticado. Cuarenta casos nuevos (39+Mongo) y 25 originales pasan en host/imagen; trece escenarios de navegador con cuentas ficticias y cero excepciones JS. Tipos, fronteras, 1.046 hashes, HTTP 13/13 y recursos 13/13. Diez muestras saludables, cero reinicios; respaldos CRC, configuración y reversión conservados; temporales retirados. Revisión: **52 grupos/168 comandos/34 rutas**, pendientes 493/61 en sus capacidades. **Siguiente C4/G25**: documentación pública; después corte G01/G02/G25. Rotación Mongo del proveedor sigue abierta; no se acepta P0 ni negocio P2 por estos fixtures. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
+
+
 ## 31/10/2026 · fronteras sensibles de P0 desplegadas
 
 Código `debad1e8`, imagen `8582432834dc`: reglas de sorteos sin código generado y conservadas al reiniciar; `servers` privado con dueño vigente por ID exacto; restauración ligada a copia/destino, acceso fresco, confirmación y reserva ante resultado incierto. Catorce comandos/ocho audios señalados retirados, Fun conservado. Inventario 661 comandos/776 alias/95 rutas; 1.043 hashes. Cuarenta y ocho casos nuevos y 25 originales pasan en host/imagen, tipos y fronteras; HTTP 7/7, recursos 13/13 y diez muestras saludables sin reinicios. Respaldos CRC, reversión y proyección global conservados; temporales retirados. **C2 sigue abierto por rotación Mongo en el proveedor**; revisión funcional 51/168/21 sin aumento. Siguiente bloque independiente C3 (sesión/tenant), luego G25 y corte G01/G02/G25. Sin restauraciones, sorteos, voz o mensajes reales de prueba. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md).
@@ -120,12 +125,12 @@ El usuario solicitó una auditoría y cuestionó la arquitectura durante la unid
 
 ### Unidad inmediata: cierre acotado de P0 · 31/10/2026
 
-La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **661 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **51 grupos/168 comandos/21 rutas**. Los otros 493/74 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
+La [clasificación completa y lista de cierre](../docs/platform/P0-CLOSURE-2026-10-31.md) sustituye el seguimiento activo por comandos sueltos. Hay **661 comandos/95 rutas clasificados en 27 capacidades**; la revisión funcional sigue en **52 grupos/168 comandos/34 rutas**. Los otros 493/61 conservan tareas en su fase. No se declara aceptación por inventariar ni se rebaja el contrato de cada operación.
 
 1. **P0-C1 completado:** clasificación exacta, propietarios/hash desde el inventario, diferencia histórica 674−14 retirados+`slashCommands/setup.js`=661, con procedencia de las retiradas, tareas y CI de integridad.
 2. **P0-C2 parcial:** fronteras giveaway/servers/loadbackup corregidas y 14 comandos/8 audios retirados, verificados y desplegados. Sigue abierta la rotación Mongo en el proveedor; no hay permisos de gestión observados ni conector. [Informe](../docs/platform/P0-SECURITY-2026-10-31.md). El negocio completo conserva su fase.
-3. **P0-C3 en cierre:** trece rutas base corregidas y verificadas con Express/navegador/Mongo aislados; completar imagen y despliegue. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
-4. **P0-C4 pendiente:** documentación pública conforme a **G25**, con historia, avisos, exclusiones y soporte reales.
+3. **P0-C3 completado:** trece rutas base verificadas con Express, navegador e imagen/Mongo aislados; desplegadas y saludables. [Informe](../docs/platform/P0-SESSION-2026-10-31.md).
+4. **P0-C4 siguiente:** documentación pública conforme a **G25**, con historia, avisos, exclusiones y soporte reales.
 5. **P0-C5 pendiente:** corte de instalación/versiones/lock/CI y loader/registro/aliases conforme a **G01/G02**, más aceptación de G25. Evidencia del corte; separar comprobación local de CI remoto.
 
 **Aceptación de P0:** criterios originales G01/G02/G25 y discrepancias de base resueltas. No exige remodelar primero todos los comandos de P1/P2/P6. Recorridos completos en dos guilds pertenecen a P2; audio y migración a lavalink-client a P1; recibos duraderos conservan sus requisitos por capacidad y recuperación. No se eliminan los pendientes históricos por esta corrección de seguimiento.

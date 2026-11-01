@@ -27,19 +27,19 @@
     "latestRevision": "integrated_guide_0_15_adopted_without_runtime_replacement"
   },
   "currentRuntime": {
-    "code": "debad1e8c428a08b8ca3c3a8ec3f248ef235261e",
-    "image": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
+    "code": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
+    "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7",
     "selectedPublicNode": "serenetia",
     "backupOrder": [
       "millohost"
     ],
     "privateEnabled": false,
-    "evidence": "evidence/p0-security-20261031.json",
-    "change": "P0-C2: safe persisted giveaway rules, private current-owner server listing, confirmed backup restore admission, scoped content retirement",
-    "tag": "localhost/obey-your-master_bot:release-p0-security-20261031-debad1e8",
+    "evidence": "evidence/p0-session-20261031.json",
+    "change": "P0-C3: live session fences, guarded OAuth rotation/logout, fresh guild permissions and minimal public statistics",
+    "tag": "localhost/obey-your-master_bot:release-p0-session-20261031-2355287f",
     "status": "healthy",
-    "statusEvidence": "evidence/p0-security-20261031.json",
-    "deploymentKind": "Verified image; same environment/mounts/resources/supervisor; exact registry unchanged; no business effects used as tests",
+    "statusEvidence": "evidence/p0-session-20261031.json",
+    "deploymentKind": "Verified image, same environment/mounts/resources/supervisor; unchanged slash registry; no real user OAuth used as a test",
     "node": "22.23.4",
     "bundledUndici": "6.29.1",
     "musicAudit": {
@@ -81,6 +81,15 @@
       "retiredCommands": 14,
       "retiredAudioAssets": 8,
       "providerCredentialRotated": false
+    },
+    "sessionBoundaries": {
+      "baseRoutesReviewed": 13,
+      "singleProcessOrdering": true,
+      "publicStatsAggregateOnly": true,
+      "statisticsStreamAuthenticated": true,
+      "lateOAuthPredecessorLogoutRevokesSuccessor": true,
+      "realUserOAuthAccepted": false,
+      "distributedAccepted": false
     }
   },
   "preserve": [
@@ -388,7 +397,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md#orden-activo--23102026",
     "activeStage": "P0",
-    "nextUnit": "Finish P0-C3 image/browser/deployment verification, then P0-C4 original G25 public documentation. Provider Mongo credential rotation remains externally open under C2. Review: 52 groups / 168 commands / 34 routes; 493 commands / 61 routes remain in their capability phases. G01/G02/G25 not accepted.",
+    "nextUnit": "P0-C4: original G25 public documentation (README, guides, notices, real support, history/exclusions). C3 thirteen base routes verified and deployed. C2 provider Mongo credential rotation stays externally open. Then exact G01/G02/G25 cut. Review: 52 groups / 168 commands / 34 routes; 493 commands / 61 routes remain in their capability phases. P0 not accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -488,7 +497,8 @@
       "aliases": 776,
       "retiredEntries": 14,
       "evidence": "evidence/p0-security-20261031.json"
-    }
+    },
+    "lastReviewEvidence": "evidence/p0-session-20261031.json"
   },
   "p0Security": {
     "date": "2026-10-31",
@@ -506,9 +516,11 @@
     "date": "2026-10-31",
     "report": "P0-SESSION-2026-10-31.md",
     "evidence": "evidence/p0-session-20261031.json",
-    "status": "verified-in-isolation-image-pending",
+    "status": "deployed-healthy",
     "baseRoutesReviewed": 13,
     "realUserOAuthAccepted": false,
-    "distributedAccepted": false
+    "distributedAccepted": false,
+    "implementationCode": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
+    "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7"
   }
 }

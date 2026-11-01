@@ -3,7 +3,7 @@
   "date": "2026-10-31",
   "scope": "P0-C3 thirteen base routes; single-process session boundary, not full business or distributed acceptance",
   "baseCommit": "e3a3de52db0e1ae8178c4f99107d090af1cc1d4d",
-  "status": "verified-in-isolation-image-pending",
+  "status": "deployed-healthy",
   "checks": {
     "hostNode": "v22.23.2",
     "hostFocused": {
@@ -25,7 +25,7 @@
       "browser": "HeadlessChrome/151.0.7922.34",
       "user": "nobody",
       "realUserProfile": false,
-      "passed": 12,
+      "passed": 13,
       "exceptions": 0,
       "cases": [
         "anonymous-public-counters-only",
@@ -34,13 +34,17 @@
         "context-allowlist-no-oauth-tokens",
         "httponly-lax-cookie",
         "refresh-control-sends-csrf",
+        "compiled-next-panel-uses-authorized-context",
         "revocation-removes-old-guild",
         "isolated-context-has-no-other-session",
         "authenticated-statistics-stream-delivered",
         "logout-form-sends-csrf-and-clears-session",
         "existing-tab-denied-after-logout",
         "stream-reconnect-denied-after-logout"
-      ]
+      ],
+      "imageVerified": true,
+      "chromeSandboxEnabled": false,
+      "syntheticFixturesOnly": true
     },
     "original": {
       "tests": 25,
@@ -60,7 +64,60 @@
     },
     "nativeAuditExit": 1,
     "typecheck": true,
-    "dependencyBoundaries": true
+    "dependencyBoundaries": true,
+    "imageFocused": {
+      "tests": 39,
+      "pass": 39,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "imageMongoAdapter": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "imageOriginal": {
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "imageNode": "v22.23.4",
+    "bundledUndici": "6.29.1",
+    "imageBuilt": true,
+    "httpPassed": 13,
+    "assetHashesPassed": 13,
+    "sourceHashesVerified": 1046,
+    "browserHost": {
+      "passed": 12,
+      "exceptions": 0,
+      "realUserProfile": false
+    },
+    "imageInventory": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "node": "v22.23.4"
+    },
+    "slashReadOnlyComparison": {
+      "dryRun": true,
+      "mutatingRestDisabled": true,
+      "equal": true,
+      "roots": 20,
+      "invocations": 144,
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "startup": {
+      "startupUnchanged": true,
+      "startupUnconfirmed": false,
+      "privateLogRetained": true
+    }
   },
   "implementation": {
     "expressSession": "1.19.0",
@@ -92,8 +149,131 @@
     "remainingHttpRoutes": 61
   },
   "deployment": {
-    "status": "pending",
-    "runtimeChanged": false
+    "deployed": true,
+    "image": "7bf3d9f8b4d3537bffbd19fb49e7209495f13f9ba3d30ce0472f1800451113a7",
+    "tag": "localhost/obey-your-master_bot:release-p0-session-20261031-2355287f",
+    "rollbackContainer": "obey_bot_p0_session_rollback",
+    "previousImage": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
+    "samples": [
+      {
+        "sample": 1,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 2,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 3,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 4,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 5,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 6,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 7,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 8,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 9,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      },
+      {
+        "sample": 10,
+        "running": true,
+        "containerHealth": "healthy",
+        "restarts": 0,
+        "database": true,
+        "music": true,
+        "status": "ok"
+      }
+    ],
+    "environmentEqual": true,
+    "mountsEqual": true,
+    "supervisorEqual": true,
+    "rollbackContainerRemovedAfterValidation": true,
+    "rollbackImageRetained": "8582432834dcd45e55b98ed8a959c63e4db81ccd9e7fbdb761e3a73eb3d2b40a",
+    "rollbackArguments": "rollback-arguments.private.json",
+    "rollbackAutomaticRestartRiskRemoved": true,
+    "runtimeChanged": true,
+    "code": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9",
+    "preBackup": {
+      "backup": "/home/backups/obey-releases/2026-10-31T22-13-03-244Z",
+      "bytes": 59282985,
+      "crcValid": true,
+      "globalDocuments": 3,
+      "globalHashesMatch": true,
+      "uriMatchesRuntime": true
+    },
+    "postBackup": {
+      "backup": "/home/backups/obey-releases/2026-10-31T22-19-35-505Z",
+      "bytes": 59283513,
+      "crcValid": true,
+      "globalDocuments": 3,
+      "globalHashesMatch": true,
+      "globalProjectionUnchanged": true
+    },
+    "latestUpdated": true,
+    "privateRecipesUpdated": 2,
+    "rollbackRetention": "Previous image, private inspection/environment and recreation arguments retained. Previous stopped container removed after validation to avoid two automatic starts. Old image restores its previous session behavior."
   },
   "limits": [
     "No real user OAuth, Discord messages, voice or business mutations used as tests.",
@@ -102,13 +282,28 @@
     "Provider Mongo credential rotation, original G25 and final G01/G02/G25 gates remain open."
   ],
   "cleanup": {
-    "temporarySourcesRemoved": false,
-    "originalTestsPreserved": true
+    "temporarySourcesRemoved": true,
+    "originalTestsPreserved": true,
+    "temporaryBrowserAndMongoContainersRemoved": true,
+    "temporaryBrowserProfileRemoved": true,
+    "operationalEnvironmentRetained": true
   },
   "logHashes": {
     "all-host.tap": "74a474bad2c30a1739ccd81401dbb9b52afb1b26680669a7e552808a79315a28",
+    "all-image.tap": "7afa624d9ad787dd0dffed2b75efebae85a784486b4491ce185dfafff834c5ff",
     "mongo-green.tap": "62a67a58bf3c410e51c8ee903f175f49397b341a100182b0ba3a1b78a04c69f5",
-    "browser-results.json": "a25568d00148b0ea0bcd8376028da38a3ec04bb7d940d1a353cf115e89e27636",
-    "original-tests.log": "c8a24b52c7615d4164b3c182cf3d048647e2de29b2c8739ef112080534778a29"
-  }
+    "mongo-image.tap": "5ede91e108f08e4c0015987ebf7225bdeb6291f952d346318a48338538faad62",
+    "http-permissions-final.tap": "01f7c62cf39883b48c58723cd314e0495f90b3aad9c0ff54da0c59519ce9ba76",
+    "original-tests.log": "c8a24b52c7615d4164b3c182cf3d048647e2de29b2c8739ef112080534778a29",
+    "image-original-tests.log": "3ee5016a860fa896830316a90c7ed8c66d09541a37b274c067205befbfaded88",
+    "browser-host-results.json": "a25568d00148b0ea0bcd8376028da38a3ec04bb7d940d1a353cf115e89e27636",
+    "browser-results.json": "4337085a04a62c352e64ddc9f9ad58b5f3ef057de6952bab60b01a31d8234a80",
+    "http-assets.json": "5d227844791c68d35f9747e2f52d44d9d4ad215b7884611a481657b556249157",
+    "image-inventory.log": "1e242171216b658f80e74067d4a55c1a97f1481350c730130ac022b13dc36678",
+    "startup-summary.json": "57ee3113cf8a1de8880f0d4122fbbe406ccbc86797025bd37f6011c3ba6aab10",
+    "backup-verified.json": "9cc8c65a6a7351ea10564681ae4de95ec67d45d2cdafe2110da29387829ac6f0",
+    "post-backup-verified.json": "280ff1e5cd457d7907a4e295b26a5288d59767d3c775099e49b5b4c48e53a4b6",
+    "dependency-audit.json": "94dd8db08c4dcdb0caab989b65ea3b84b34966b3bcb57295b9e9616c1129a1f7"
+  },
+  "implementationCode": "2355287ff0ee71f23211b83dc37a6f62c0d8ffb9"
 }
