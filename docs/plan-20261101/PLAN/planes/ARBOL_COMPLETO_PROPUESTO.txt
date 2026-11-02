@@ -1,0 +1,710 @@
+OBEY/
+├── index.js
+├── package.json
+├── .env.example
+├── bot/
+│   ├── client.js
+│   ├── conexiones/
+│   │   ├── discord.js
+│   │   ├── lavalink.js
+│   │   ├── mongo.js
+│   │   └── redis.js
+│   ├── sistema/
+│   │   ├── comandos.js
+│   │   ├── interacciones.js
+│   │   ├── eventos.js
+│   │   ├── permisos.js
+│   │   ├── errores.js
+│   │   └── sesiones.js
+│   └── modulos/
+│       ├── estadisticas/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── estadisticas.js
+│       │   │   ├── actividad.js
+│       │   │   ├── informes.js
+│       │   ├── servicios/
+│       │   │   ├── resumen.js
+│       │   │   ├── actividad.js
+│       │   │   ├── exportar.js
+│       │   ├── vistas/
+│       │   │   ├── panel.js
+│       │   │   ├── resumen.js
+│       │   │   ├── detalle.js
+│       │   │   ├── datos-vacios.js
+│       │   ├── datos/
+│       │   │   └── medir.js
+│       │   └── LEER.md
+│       ├── solicitudes/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── solicitar.js
+│       │   │   ├── revisar.js
+│       │   │   ├── decidir.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── ver.js
+│       │   │   ├── resolver.js
+│       │   ├── vistas/
+│       │   │   ├── formulario.js
+│       │   │   ├── pendiente.js
+│       │   │   ├── aprobada.js
+│       │   │   ├── rechazada.js
+│       │   ├── datos/
+│       │   │   └── solicitudes.js
+│       │   └── LEER.md
+│       ├── builder/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── crear.js
+│       │   │   ├── planificar.js
+│       │   │   ├── aplicar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── simular.js
+│       │   │   ├── aplicar.js
+│       │   ├── vistas/
+│       │   │   ├── plano.js
+│       │   │   ├── progreso.js
+│       │   │   ├── resultado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── plano.js
+│       │   └── LEER.md
+│       ├── automatizaciones/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── crear.js
+│       │   │   ├── pausar.js
+│       │   │   ├── activar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── programar.js
+│       │   │   ├── ejecutar.js
+│       │   ├── vistas/
+│       │   │   ├── regla.js
+│       │   │   ├── programada.js
+│       │   │   ├── ejecutada.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── reglas.js
+│       │   └── LEER.md
+│       ├── automod/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── reglas.js
+│       │   │   ├── activar.js
+│       │   │   ├── desactivar.js
+│       │   ├── servicios/
+│       │   │   ├── detectar.js
+│       │   │   ├── evaluar.js
+│       │   │   ├── actuar.js
+│       │   ├── vistas/
+│       │   │   ├── reglas.js
+│       │   │   ├── alerta.js
+│       │   │   ├── resultado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── reglas.js
+│       │   └── LEER.md
+│       ├── tarjetas/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── tarjeta.js
+│       │   │   ├── mostrar.js
+│       │   │   ├── personalizar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── renderizar.js
+│       │   │   ├── guardar.js
+│       │   ├── vistas/
+│       │   │   ├── vista.js
+│       │   │   ├── creando.js
+│       │   │   ├── resultado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── tarjetas.js
+│       │   └── LEER.md
+│       ├── colecciones/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── coleccion.js
+│       │   │   ├── ver.js
+│       │   │   ├── filtrar.js
+│       │   ├── servicios/
+│       │   │   ├── catalogar.js
+│       │   │   ├── consultar.js
+│       │   │   ├── ordenar.js
+│       │   ├── vistas/
+│       │   │   ├── catalogo.js
+│       │   │   ├── detalle.js
+│       │   │   ├── vacio.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── colecciones.js
+│       │   └── LEER.md
+│       ├── decoracion/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── decorar.js
+│       │   │   ├── previsualizar.js
+│       │   │   ├── aplicar.js
+│       │   ├── servicios/
+│       │   │   ├── previsualizar.js
+│       │   │   ├── validar.js
+│       │   │   ├── aplicar.js
+│       │   ├── vistas/
+│       │   │   ├── catalogo.js
+│       │   │   ├── preview.js
+│       │   │   ├── confirmacion.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── temas.js
+│       │   └── LEER.md
+│       ├── economia/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── saldo.js
+│       │   │   ├── transferir.js
+│       │   │   ├── trabajar.js
+│       │   ├── servicios/
+│       │   │   ├── consultar.js
+│       │   │   ├── transferir.js
+│       │   │   ├── registrar.js
+│       │   ├── vistas/
+│       │   │   ├── saldo.js
+│       │   │   ├── transaccion.js
+│       │   │   ├── confirmacion.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── saldos.js
+│       │   └── LEER.md
+│       ├── eventos/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── evento.js
+│       │   │   ├── crear.js
+│       │   │   ├── inscribir.js
+│       │   ├── servicios/
+│       │   │   ├── programar.js
+│       │   │   ├── registrar.js
+│       │   │   ├── cerrar.js
+│       │   ├── vistas/
+│       │   │   ├── agenda.js
+│       │   │   ├── detalle.js
+│       │   │   ├── cierre.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── eventos.js
+│       │   └── LEER.md
+│       ├── feeds/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── seguir.js
+│       │   │   ├── canal.js
+│       │   │   ├── quitar.js
+│       │   ├── servicios/
+│       │   │   ├── suscribir.js
+│       │   │   ├── recibir.js
+│       │   │   ├── publicar.js
+│       │   ├── vistas/
+│       │   │   ├── fuente.js
+│       │   │   ├── novedad.js
+│       │   │   ├── fallo.js
+│       │   │   ├── configuracion.js
+│       │   ├── datos/
+│       │   │   └── fuentes.js
+│       │   └── LEER.md
+│       ├── diversion/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── jugar.js
+│       │   │   ├── reaccion.js
+│       │   │   ├── azar.js
+│       │   ├── servicios/
+│       │   │   ├── jugar.js
+│       │   │   ├── reaccionar.js
+│       │   │   ├── validar.js
+│       │   ├── vistas/
+│       │   │   ├── inicio.js
+│       │   │   ├── resultado.js
+│       │   │   ├── limite.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── juegos.js
+│       │   └── LEER.md
+│       ├── sorteos/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── sorteo.js
+│       │   │   ├── participar.js
+│       │   │   ├── terminar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── participar.js
+│       │   │   ├── sortear.js
+│       │   ├── vistas/
+│       │   │   ├── anuncio.js
+│       │   │   ├── participacion.js
+│       │   │   ├── ganador.js
+│       │   │   ├── cerrado.js
+│       │   ├── datos/
+│       │   │   └── sorteos.js
+│       │   └── LEER.md
+│       ├── niveles/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── nivel.js
+│       │   │   ├── ranking.js
+│       │   │   ├── puntos.js
+│       │   ├── servicios/
+│       │   │   ├── sumar.js
+│       │   │   ├── consultar.js
+│       │   │   ├── calcular.js
+│       │   ├── vistas/
+│       │   │   ├── perfil.js
+│       │   │   ├── ranking.js
+│       │   │   ├── subida.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── niveles.js
+│       │   └── LEER.md
+│       ├── registros/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── logs.js
+│       │   │   ├── canal.js
+│       │   │   ├── tipos.js
+│       │   ├── servicios/
+│       │   │   ├── registrar.js
+│       │   │   ├── filtrar.js
+│       │   │   ├── enviar.js
+│       │   ├── vistas/
+│       │   │   ├── entrada.js
+│       │   │   ├── cambio.js
+│       │   │   ├── incidencia.js
+│       │   │   ├── vacio.js
+│       │   ├── datos/
+│       │   │   └── eventos.js
+│       │   └── LEER.md
+│       ├── mensajes/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── mensaje.js
+│       │   │   ├── editar.js
+│       │   │   ├── publicar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── editar.js
+│       │   │   ├── enviar.js
+│       │   ├── vistas/
+│       │   │   ├── editor.js
+│       │   │   ├── preview.js
+│       │   │   ├── publicado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── plantillas.js
+│       │   └── LEER.md
+│       ├── migraciones/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── exportar.js
+│       │   │   ├── importar.js
+│       │   │   ├── restaurar.js
+│       │   ├── servicios/
+│       │   │   ├── verificar.js
+│       │   │   ├── importar.js
+│       │   │   ├── recuperar.js
+│       │   ├── vistas/
+│       │   │   ├── plan.js
+│       │   │   ├── progreso.js
+│       │   │   ├── resultado.js
+│       │   │   ├── alerta.js
+│       │   ├── datos/
+│       │   │   └── versiones.js
+│       │   └── LEER.md
+│       ├── moderacion/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── ban.js
+│       │   │   ├── kick.js
+│       │   │   ├── timeout.js
+│       │   ├── servicios/
+│       │   │   ├── banear.js
+│       │   │   ├── expulsar.js
+│       │   │   ├── silenciar.js
+│       │   ├── vistas/
+│       │   │   ├── caso.js
+│       │   │   ├── accion.js
+│       │   │   ├── confirmacion.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── casos.js
+│       │   └── LEER.md
+│       ├── musica/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── reproducir.js
+│       │   │   ├── pausar.js
+│       │   │   ├── cola.js
+│       │   ├── servicios/
+│       │   │   ├── reproducir.js
+│       │   │   ├── controlar.js
+│       │   │   ├── recomendar.js
+│       │   ├── vistas/
+│       │   │   ├── reproductor.js
+│       │   │   ├── cola.js
+│       │   │   ├── busqueda.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── reproductores.js
+│       │   ├── botones/
+│       │   │   ├── controlar.js
+│       │   │   └── navegar.js
+│       │   ├── lavalink/
+│       │   │   ├── nodos.js
+│       │   │   ├── eventos.js
+│       │   │   └── recuperar.js
+│       │   └── LEER.md
+│       ├── perfiles/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── perfil.js
+│       │   │   ├── editar.js
+│       │   │   ├── ver.js
+│       │   ├── servicios/
+│       │   │   ├── consultar.js
+│       │   │   ├── actualizar.js
+│       │   │   ├── privacidad.js
+│       │   ├── vistas/
+│       │   │   ├── perfil.js
+│       │   │   ├── editar.js
+│       │   │   ├── privado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── perfiles.js
+│       │   └── LEER.md
+│       ├── recordatorios/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── recordar.js
+│       │   │   ├── listar.js
+│       │   │   ├── cancelar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── programar.js
+│       │   │   ├── cancelar.js
+│       │   ├── vistas/
+│       │   │   ├── nuevo.js
+│       │   │   ├── programado.js
+│       │   │   ├── entregado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── recordatorios.js
+│       │   └── LEER.md
+│       ├── roles/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── roles.js
+│       │   │   ├── asignar.js
+│       │   │   ├── quitar.js
+│       │   ├── servicios/
+│       │   │   ├── asignar.js
+│       │   │   ├── retirar.js
+│       │   │   ├── comprobar.js
+│       │   ├── vistas/
+│       │   │   ├── selector.js
+│       │   │   ├── asignado.js
+│       │   │   ├── sin-permiso.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── roles.js
+│       │   └── LEER.md
+│       ├── seguridad/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── proteger.js
+│       │   │   ├── alertas.js
+│       │   │   ├── estado.js
+│       │   ├── servicios/
+│       │   │   ├── detectar.js
+│       │   │   ├── proteger.js
+│       │   │   ├── recuperar.js
+│       │   ├── vistas/
+│       │   │   ├── estado.js
+│       │   │   ├── alerta.js
+│       │   │   ├── incidencia.js
+│       │   │   ├── recuperacion.js
+│       │   ├── datos/
+│       │   │   └── alertas.js
+│       │   └── LEER.md
+│       ├── destacados/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── destacar.js
+│       │   │   ├── ver.js
+│       │   │   ├── configurar.js
+│       │   ├── servicios/
+│       │   │   ├── destacar.js
+│       │   │   ├── consultar.js
+│       │   │   ├── retirar.js
+│       │   ├── vistas/
+│       │   │   ├── destacado.js
+│       │   │   ├── nuevo.js
+│       │   │   ├── sin-resultados.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── entradas.js
+│       │   └── LEER.md
+│       ├── fijados/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── fijar.js
+│       │   │   ├── editar.js
+│       │   │   ├── quitar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── actualizar.js
+│       │   │   ├── quitar.js
+│       │   ├── vistas/
+│       │   │   ├── fijado.js
+│       │   │   ├── editado.js
+│       │   │   ├── retirado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── mensajes.js
+│       │   └── LEER.md
+│       ├── sugerencias/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── sugerir.js
+│       │   │   ├── votar.js
+│       │   │   ├── revisar.js
+│       │   ├── servicios/
+│       │   │   ├── proponer.js
+│       │   │   ├── votar.js
+│       │   │   ├── resolver.js
+│       │   ├── vistas/
+│       │   │   ├── nueva.js
+│       │   │   ├── votacion.js
+│       │   │   ├── aprobada.js
+│       │   │   ├── rechazada.js
+│       │   ├── datos/
+│       │   │   └── propuestas.js
+│       │   └── LEER.md
+│       ├── plantillas/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── plantilla.js
+│       │   │   ├── usar.js
+│       │   │   ├── editar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── validar.js
+│       │   │   ├── publicar.js
+│       │   ├── vistas/
+│       │   │   ├── catalogo.js
+│       │   │   ├── editor.js
+│       │   │   ├── preview.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── plantillas.js
+│       │   └── LEER.md
+│       ├── tickets/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── ticket.js
+│       │   │   ├── abrir.js
+│       │   │   ├── cerrar.js
+│       │   ├── servicios/
+│       │   │   ├── abrir.js
+│       │   │   ├── asignar.js
+│       │   │   ├── cerrar.js
+│       │   ├── vistas/
+│       │   │   ├── panel.js
+│       │   │   ├── abierto.js
+│       │   │   ├── atencion.js
+│       │   │   ├── cerrado.js
+│       │   ├── datos/
+│       │   │   └── tickets.js
+│       │   └── LEER.md
+│       ├── utilidades/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── ayuda.js
+│       │   │   ├── ping.js
+│       │   │   ├── usuario.js
+│       │   ├── servicios/
+│       │   │   ├── consultar.js
+│       │   │   ├── validar.js
+│       │   │   ├── formatear.js
+│       │   ├── vistas/
+│       │   │   ├── ayuda.js
+│       │   │   ├── resultado.js
+│       │   │   ├── vacio.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── preferencias.js
+│       │   └── LEER.md
+│       ├── verificacion/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── verificar.js
+│       │   │   ├── estado.js
+│       │   │   ├── configurar.js
+│       │   ├── servicios/
+│       │   │   ├── iniciar.js
+│       │   │   ├── comprobar.js
+│       │   │   ├── aprobar.js
+│       │   ├── vistas/
+│       │   │   ├── inicio.js
+│       │   │   ├── pendiente.js
+│       │   │   ├── verificado.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── solicitudes.js
+│       │   └── LEER.md
+│       ├── voz/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── canal.js
+│       │   │   ├── invitar.js
+│       │   │   ├── controlar.js
+│       │   ├── servicios/
+│       │   │   ├── crear.js
+│       │   │   ├── mover.js
+│       │   │   ├── limpiar.js
+│       │   ├── vistas/
+│       │   │   ├── panel.js
+│       │   │   ├── creado.js
+│       │   │   ├── cambio.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── canales.js
+│       │   └── LEER.md
+│       ├── bienvenida/
+│       │   ├── index.js
+│       │   ├── comandos/
+│       │   │   ├── bienvenida.js
+│       │   │   ├── configurar.js
+│       │   │   ├── probar.js
+│       │   ├── servicios/
+│       │   │   ├── recibir.js
+│       │   │   ├── componer.js
+│       │   │   ├── enviar.js
+│       │   ├── vistas/
+│       │   │   ├── editor.js
+│       │   │   ├── preview.js
+│       │   │   ├── bienvenida.js
+│       │   │   ├── error.js
+│       │   ├── datos/
+│       │   │   └── plantillas.js
+│       │   └── LEER.md
+├── compartido/
+│   ├── mensajes/
+│   │   ├── contenedor.js
+│   │   ├── componentes.js
+│   │   └── estados.js
+│   ├── emojis/
+│   │   ├── registro.js
+│   │   └── animaciones.js
+│   ├── idiomas/
+│   │   ├── es.json
+│   │   ├── en.json
+│   │   └── traducir.js
+│   └── validacion/
+│       ├── permisos.js
+│       └── datos.js
+├── web/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── loading.tsx
+│   │   ├── error.tsx
+│   │   ├── (publico)/
+│   │   │   ├── funciones/
+│   │   │   │   └── page.tsx
+│   │   │   ├── ayuda/
+│   │   │   │   └── page.tsx
+│   │   │   └── estado/
+│   │   │       └── page.tsx
+│   │   ├── acceso/
+│   │   │   └── page.tsx
+│   │   ├── panel/
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   ├── servidores/
+│   │   │   │   └── page.tsx
+│   │   │   └── [servidor]/
+│   │   │       ├── page.tsx
+│   │   │       ├── musica/
+│   │   │       │   └── page.tsx
+│   │   │       ├── moderacion/
+│   │   │       │   └── page.tsx
+│   │   │       ├── seguridad/
+│   │   │       │   └── page.tsx
+│   │   │       ├── registros/
+│   │   │       │   └── page.tsx
+│   │   │       ├── roles/
+│   │   │       │   └── page.tsx
+│   │   │       ├── tickets/
+│   │   │       │   └── page.tsx
+│   │   │       ├── plantillas/
+│   │   │       │   └── page.tsx
+│   │   │       ├── automatizaciones/
+│   │   │       │   └── page.tsx
+│   │   │       ├── estadisticas/
+│   │   │       │   └── page.tsx
+│   │   │       └── ajustes/
+│   │   │           └── page.tsx
+│   │   └── api/
+│   │       └── estado/
+│   │           └── route.ts
+│   ├── componentes/
+│   │   ├── navegacion/
+│   │   │   ├── menu.tsx
+│   │   │   ├── barra.tsx
+│   │   │   └── servidor.tsx
+│   │   ├── interfaz/
+│   │   │   ├── boton.tsx
+│   │   │   ├── tarjeta.tsx
+│   │   │   ├── dialogo.tsx
+│   │   │   ├── formulario.tsx
+│   │   │   └── tabla.tsx
+│   │   ├── musica/
+│   │   │   ├── reproductor.tsx
+│   │   │   └── cola.tsx
+│   │   └── estados/
+│   │       ├── vacio.tsx
+│   │       ├── cargando.tsx
+│   │       └── error.tsx
+│   ├── servicios/
+│   │   ├── sesiones.ts
+│   │   ├── permisos.ts
+│   │   ├── servidores.ts
+│   │   └── musica.ts
+│   ├── hooks/
+│   │   └── reproductor.ts
+│   ├── contratos/
+│   │   ├── datos.ts
+│   │   └── validacion.ts
+│   ├── estilos/
+│   │   └── global.css
+│   ├── pruebas/
+│   │   ├── acceso.test.ts
+│   │   └── permisos.test.ts
+│   ├── next.config.ts
+│   ├── package.json
+│   └── tsconfig.json
+├── recursos/                 (solo recursos visuales para el bot Discord)
+│   ├── emojis/
+│   ├── animaciones/
+│   ├── personajes/
+│   ├── tarjetas/
+│   └── banners/
+├── pruebas/
+│   ├── modulos/
+│   ├── discord/
+│   ├── musica/
+│   └── web/
+└── docs/

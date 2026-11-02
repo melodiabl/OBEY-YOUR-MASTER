@@ -1,5 +1,14 @@
 # Tareas y checkpoints de OBEY
 
+## 02/11/2026 · Continuación con el ZIP nuevo
+
+- [x] Localizar y validar el ZIP nuevo; preservar su original y copiar únicamente documentación. Comparar los 4.267 archivos versionados sin sobrescribir avances. [Evidencia](../docs/platform/evidence/plan-reconciliation-20261102.json).
+- [x] Conciliar alcance, decisiones visuales y dependencias con el orden P0 → P1 vigente. [Plan](../docs/platform/PLAN-2026-11-02.md).
+- [ ] Voz: cerrar cancelación de autoplay tardío, exclusión de controles durante join y permisos de filtros; pruebas de regresión y originales, checks e inventario.
+- [ ] Frontera musical: migrar consumidores SDK restantes antes de transferir autoridad de cola al cliente objetivo.
+- [ ] lavalink-client: contrato, versión fijada, eventos/cola/recuperación y gate musical con nodo real y dos guilds.
+- [ ] Builder, módulos, panel y help según el plan conciliado; conservar materiales y landing.
+
 ## 01/11/2026 · P0 cerrado; unidad activa P1 música
 
 Rama publicada sin force-push; CI real de GitHub **success**, run 41267669259 sobre `ebc79f4a`. G01/G02 acreditados por instalación limpia, build/tipos/tests y registro real; G25 cerrado con Issues y reporte privado de vulnerabilidades habilitados/verificados. El usuario excluyó expresamente la rotación Mongo («no hace falta igual»): **no realizada y fuera del cierre**. C1–C5 completados para la base, sin aceptar todo el negocio. Revisión funcional 52/168/34 intacta; las 493 entradas y 61 rutas restantes conservan su fase. Runtime `2355287f` saludable, sin reinicio. **Sigue P1**: cola/estado canónicos, migración a lavalink-client, continuidad, controles y después reproductor web. [Cierre y evidencia](../docs/platform/P0-REMOTE-2026-11-01.md).

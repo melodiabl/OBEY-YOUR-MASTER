@@ -1,0 +1,666 @@
+{
+  "status": "user-approved-assets-staged-in-implementation-zip",
+  "palette": {
+    "gold": "#FFD36F",
+    "blue": "#66A8FF",
+    "navy": "#101D36"
+  },
+  "items": [
+    {
+      "slug": "ticket",
+      "id": "A01",
+      "name": "Ticket",
+      "module": "Tickets",
+      "pending": "Abriendo",
+      "result": "Abierto",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/ticket/idle-128.png",
+      "resultFile": "approved/ticket/result-128.png",
+      "motion": "approved/ticket/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/ticket/idle-128.png",
+          "bytes": 6498,
+          "sha256": "eee9d2de7f921893940ce5263ec96dfdc8753420baf0b30291f2191bbe6768f8"
+        },
+        {
+          "path": "approved/ticket/idle-256.png",
+          "bytes": 18225,
+          "sha256": "947d5bd18409148dc0edb64dc273c8980878f411ccaba6efaf841da2a239cca8"
+        },
+        {
+          "path": "approved/ticket/idle.svg",
+          "bytes": 685,
+          "sha256": "c9c4d3aec1c8589b4bdad677310362a64d220939302612907fd6998314e76151"
+        },
+        {
+          "path": "approved/ticket/motion.gif",
+          "bytes": 116355,
+          "sha256": "a2bc07767735cbfaf9001228d02f460ae4a6a0f075eed09100bbfaa2f1ab466b"
+        },
+        {
+          "path": "approved/ticket/result-128.png",
+          "bytes": 6888,
+          "sha256": "2ebe33ebb0bfeb7dd01687bfa002d21e71dd70243d370dc40b85b296e560a921"
+        },
+        {
+          "path": "approved/ticket/result-256.png",
+          "bytes": 18930,
+          "sha256": "877e1b4d8a21cfdeedd543892f77838cd52c6d9dbdc923a07916d8b7ce6fca28"
+        },
+        {
+          "path": "approved/ticket/result.svg",
+          "bytes": 886,
+          "sha256": "e5080ba31d2bb9c13172c24369a96cf119d4014b1734789262659f28c1fe3986"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "favorito",
+      "id": "A02",
+      "name": "Favorito",
+      "module": "Música · Perfil",
+      "pending": "Guardando",
+      "result": "Guardado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/favorito/idle-128.png",
+      "resultFile": "approved/favorito/result-128.png",
+      "motion": "approved/favorito/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/favorito/idle-128.png",
+          "bytes": 2492,
+          "sha256": "3371665bda440be858cd74ca18e6d3f7db94a4090b4b68ac9bbbd98942eb3787"
+        },
+        {
+          "path": "approved/favorito/idle-256.png",
+          "bytes": 5002,
+          "sha256": "e67a088a7debe6c0cf5fe36e39b47baea737ea41bbc7275fe9fba061ef20d9d6"
+        },
+        {
+          "path": "approved/favorito/idle.svg",
+          "bytes": 553,
+          "sha256": "a944517b7b0e93104bf3bbbf5b48a9f8edc0c6c47b18c1889336f8250e994d29"
+        },
+        {
+          "path": "approved/favorito/motion.gif",
+          "bytes": 26655,
+          "sha256": "9e86b19ebb02d8d73f3bc1f523f82b081c0597e270a985cdc4725600a719ee51"
+        },
+        {
+          "path": "approved/favorito/result-128.png",
+          "bytes": 5347,
+          "sha256": "440463df507904f4d1b97e0c5f72026096daf6735b024c83a00845f3d6f736c8"
+        },
+        {
+          "path": "approved/favorito/result-256.png",
+          "bytes": 13685,
+          "sha256": "f742642813d619b569bf283b0291cc74f6c93d6fcbda4a53b64c5c15d73dd864"
+        },
+        {
+          "path": "approved/favorito/result.svg",
+          "bytes": 556,
+          "sha256": "bab48e358f4539e60d0b3ba0a03266e8ea682dba4e60ad31a3d5c859bf8b0d9d"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "reproduccion",
+      "id": "A03",
+      "name": "Reproducción",
+      "module": "Música",
+      "pending": "Reproduciendo",
+      "result": "Pausar",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "active",
+      "idle": "approved/reproduccion/idle-128.png",
+      "resultFile": "approved/reproduccion/result-128.png",
+      "motion": "approved/reproduccion/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/reproduccion/idle-128.png",
+          "bytes": 3782,
+          "sha256": "70b551573b6de76eaf11be9c121b0ac287b34e57a6db96a3de138328117253e3"
+        },
+        {
+          "path": "approved/reproduccion/idle-256.png",
+          "bytes": 10127,
+          "sha256": "ea593cbfdbebdfcde7f0557517ab2dcce6c988fd0211faaebea4dfc1dafcbf0a"
+        },
+        {
+          "path": "approved/reproduccion/idle.svg",
+          "bytes": 385,
+          "sha256": "25aa9d6a1b0c190da2d2e91436762172bd296d253d46335c3866c30199f2a375"
+        },
+        {
+          "path": "approved/reproduccion/motion.gif",
+          "bytes": 25794,
+          "sha256": "438dccbef225ea13b4d1e972a38fa3a0c4dd411e5838b4f4fbdc343bba4eff09"
+        },
+        {
+          "path": "approved/reproduccion/result-128.png",
+          "bytes": 2366,
+          "sha256": "ec6d2936d1b79ed5e6cf57c2b05239eac40c44a8679cf33eadbe698595042794"
+        },
+        {
+          "path": "approved/reproduccion/result-256.png",
+          "bytes": 6135,
+          "sha256": "eeeedb45cbb3afbeee2ce82f64e2607ba5263b5af7fc763cdbaa53fb6d4e10b9"
+        },
+        {
+          "path": "approved/reproduccion/result.svg",
+          "bytes": 427,
+          "sha256": "9bb281904ecec4012503a94b32dee610ef1b0029532c22f47862e18816ad4036"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "mezcla",
+      "id": "A04",
+      "name": "Mezclar",
+      "module": "Música",
+      "pending": "Cambiando",
+      "result": "Activado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/mezcla/idle-128.png",
+      "resultFile": "approved/mezcla/result-128.png",
+      "motion": "approved/mezcla/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/mezcla/idle-128.png",
+          "bytes": 3062,
+          "sha256": "8ec6a5d910ab531bf23b954a0c0d0a80bb433a53f901bd93b7eb797083a7af0f"
+        },
+        {
+          "path": "approved/mezcla/idle-256.png",
+          "bytes": 6365,
+          "sha256": "26c2ab7a4d530fdb0a7fdeb35567ad085b25c58df2f8ec585410d7e2871b7fe2"
+        },
+        {
+          "path": "approved/mezcla/idle.svg",
+          "bytes": 596,
+          "sha256": "124e8eb4d3888acb4cc073ab3f0148ca85a62b74f7615ba5cd1eef86025b7218"
+        },
+        {
+          "path": "approved/mezcla/motion.gif",
+          "bytes": 32434,
+          "sha256": "22f9ac73756700003750b58de9d55cea3e1319963d26049ac20c7b92891dde87"
+        },
+        {
+          "path": "approved/mezcla/result-128.png",
+          "bytes": 3201,
+          "sha256": "a0201b5f6f3c5dcca0c8e8fab374839c1ddb4d1bd0d97c82e04b3a3f17f8b5bf"
+        },
+        {
+          "path": "approved/mezcla/result-256.png",
+          "bytes": 6652,
+          "sha256": "92c273af0e613722de46503f65182f046bf379f18fceccd4f90e91f00f35ad41"
+        },
+        {
+          "path": "approved/mezcla/result.svg",
+          "bytes": 643,
+          "sha256": "0779a9171455a7cab19c028d40d16750f4716ad06a83c794a3e722fa0c8e4ce9"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "repetir",
+      "id": "A05",
+      "name": "Repetir",
+      "module": "Música",
+      "pending": "Cambiando",
+      "result": "Activado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/repetir/idle-128.png",
+      "resultFile": "approved/repetir/result-128.png",
+      "motion": "approved/repetir/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/repetir/idle-128.png",
+          "bytes": 1940,
+          "sha256": "76ed2352972e9eb090d53c8adffdb9314573e3733322ea312c9665a70b902650"
+        },
+        {
+          "path": "approved/repetir/idle-256.png",
+          "bytes": 3895,
+          "sha256": "238f993418bfa5eaafd9c99c1063a985d2624350cb6f87efc563e53540b973f1"
+        },
+        {
+          "path": "approved/repetir/idle.svg",
+          "bytes": 572,
+          "sha256": "e26d4f666a878e59d42304473e6aa5d4ad22f6b638db6d7437dd137c858ede1f"
+        },
+        {
+          "path": "approved/repetir/motion.gif",
+          "bytes": 22576,
+          "sha256": "39fbb1226f7fd9564f889423d225289cbd4c2d8e2fda96fa425d9003edc07564"
+        },
+        {
+          "path": "approved/repetir/result-128.png",
+          "bytes": 2073,
+          "sha256": "69da3c92a5f5b87c1ceb87a9a8693a16489ecb3146a983f322357655f92a1c22"
+        },
+        {
+          "path": "approved/repetir/result-256.png",
+          "bytes": 4226,
+          "sha256": "2ca9be4881790d8130ca56481a8508c90ca3f681c2e4c27e606b84afc4a68a96"
+        },
+        {
+          "path": "approved/repetir/result.svg",
+          "bytes": 618,
+          "sha256": "8596fd7146f01468d966ef88f5c339c3a4f7d799a28eca216c39cbb8b608faca"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "autoplay",
+      "id": "A06",
+      "name": "Autoplay",
+      "module": "Música",
+      "pending": "Cambiando",
+      "result": "Activado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/autoplay/idle-128.png",
+      "resultFile": "approved/autoplay/result-128.png",
+      "motion": "approved/autoplay/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/autoplay/idle-128.png",
+          "bytes": 2864,
+          "sha256": "3a0ee8b4f89aea337adce5dc061078f4d9d8eafb1039e68c8141530bd2a0e061"
+        },
+        {
+          "path": "approved/autoplay/idle-256.png",
+          "bytes": 5836,
+          "sha256": "11cf848c9e2d9a6460957a5777ff2547844711845f94203db14881b0a8482f33"
+        },
+        {
+          "path": "approved/autoplay/idle.svg",
+          "bytes": 483,
+          "sha256": "238c9876ed9f7a65498a6c813d3ef3584d410d1d7230bb916cbb43aa8421a5eb"
+        },
+        {
+          "path": "approved/autoplay/motion.gif",
+          "bytes": 32989,
+          "sha256": "0b32d43e554833037824786be985661fd8c0b757ddde1c57f8b9d76e677402a6"
+        },
+        {
+          "path": "approved/autoplay/result-128.png",
+          "bytes": 3088,
+          "sha256": "363f6db5260dae333efbaa039a598ffe0f333fac9033de4735c5a1a8368da2e6"
+        },
+        {
+          "path": "approved/autoplay/result-256.png",
+          "bytes": 6283,
+          "sha256": "125b4c0221505bdf317aca77b469b9939d055fcbe60c37266cf837458948bb54"
+        },
+        {
+          "path": "approved/autoplay/result.svg",
+          "bytes": 531,
+          "sha256": "7724ad218031553a343c2af7eb7d5a3345ec8e70853a00f08ff8fac71baa44c3"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "escudo",
+      "id": "A07",
+      "name": "Protección",
+      "module": "Seguridad",
+      "pending": "Revisando",
+      "result": "Protegido",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/escudo/idle-128.png",
+      "resultFile": "approved/escudo/result-128.png",
+      "motion": "approved/escudo/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/escudo/idle-128.png",
+          "bytes": 2604,
+          "sha256": "edffd8c9bcb7c0294a941548faeba0992bc6a57aaa5f9d2f7400173379a2fc0d"
+        },
+        {
+          "path": "approved/escudo/idle-256.png",
+          "bytes": 4957,
+          "sha256": "abec425a9c08f5403b650541c03410dfdcdce7fd4928a4141c6588caaf6244ac"
+        },
+        {
+          "path": "approved/escudo/idle.svg",
+          "bytes": 604,
+          "sha256": "7dae553bb4e81b1141da30626bfe2e6bbd6acb432a87b244b493a80d45532ed1"
+        },
+        {
+          "path": "approved/escudo/motion.gif",
+          "bytes": 39247,
+          "sha256": "78e53bf322018d6ae85135629d3e016c8040f2c6a693985a2142ed78ee313f54"
+        },
+        {
+          "path": "approved/escudo/result-128.png",
+          "bytes": 2875,
+          "sha256": "658fe3177bbcf5a53d3a7adf64ef566b6d63ce0c426b9ca6b145f81c92043b8d"
+        },
+        {
+          "path": "approved/escudo/result-256.png",
+          "bytes": 5308,
+          "sha256": "4d9c60b5b0d83d31c14ced5181d23f14580361b8a38fd68fee290ef3d8f6acd4"
+        },
+        {
+          "path": "approved/escudo/result.svg",
+          "bytes": 588,
+          "sha256": "76c3143d86a5e3f01c534b70be29c06b42bb01c0647071683629efee1672d3f4"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "avisos",
+      "id": "A08",
+      "name": "Avisos",
+      "module": "Notificaciones",
+      "pending": "Enviando",
+      "result": "Enviado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/avisos/idle-128.png",
+      "resultFile": "approved/avisos/result-128.png",
+      "motion": "approved/avisos/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/avisos/idle-128.png",
+          "bytes": 1838,
+          "sha256": "4349fa13ab208f17319a59e5696757db838d11bec8b9984bde082a0a6d32fb90"
+        },
+        {
+          "path": "approved/avisos/idle-256.png",
+          "bytes": 3842,
+          "sha256": "5bca27a23d95a67eae3bb7e5a34da1a00ee3476cfcab51c480547bc42e89d419"
+        },
+        {
+          "path": "approved/avisos/idle.svg",
+          "bytes": 615,
+          "sha256": "390c90e03f3fb67b35ab628ff54c00388c7e1581986b469563de876a5978d5a6"
+        },
+        {
+          "path": "approved/avisos/motion.gif",
+          "bytes": 29176,
+          "sha256": "1dd32b2523ae37871e32a8a41699d4eaae12cb54b9fdcab05cab66cce9e55309"
+        },
+        {
+          "path": "approved/avisos/result-128.png",
+          "bytes": 2163,
+          "sha256": "ca5b31a3b659b58ff64d37d9e43c29dea6747aa3bb50d5ac07f33ab5da33c5fc"
+        },
+        {
+          "path": "approved/avisos/result-256.png",
+          "bytes": 4414,
+          "sha256": "aee24ae3b83f80fb934ee368c859cac00b6c81f5d507bc78f07f301fca429fe3"
+        },
+        {
+          "path": "approved/avisos/result.svg",
+          "bytes": 797,
+          "sha256": "f2a4eb8f12ee32526d3ab65926b8b3ae97182841d4498a9111e908b64616ea44"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "exportar",
+      "id": "A09",
+      "name": "Exportar",
+      "module": "Transcripciones",
+      "pending": "Preparando",
+      "result": "Disponible",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/exportar/idle-128.png",
+      "resultFile": "approved/exportar/result-128.png",
+      "motion": "approved/exportar/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/exportar/idle-128.png",
+          "bytes": 1604,
+          "sha256": "c36d6bac81d8884a0bfc0e4fcbe48ada7179f88b2af77140d487c7dcd1eb0697"
+        },
+        {
+          "path": "approved/exportar/idle-256.png",
+          "bytes": 3183,
+          "sha256": "75fb86f1994f9601cca93a0d4436ad2de1a584c889fa582e97807792d221e5ce"
+        },
+        {
+          "path": "approved/exportar/idle.svg",
+          "bytes": 696,
+          "sha256": "1dce111113b7ee675cd4b1ef943d40795bbf9adb1d5a822d8fbcfeff66eff255"
+        },
+        {
+          "path": "approved/exportar/motion.gif",
+          "bytes": 39608,
+          "sha256": "8a172f851c105049dbeb130a64f24f409242ba5396a8f6063c15d22aff85545f"
+        },
+        {
+          "path": "approved/exportar/result-128.png",
+          "bytes": 1660,
+          "sha256": "c9cf334bd0a4f7e59fca14c5e687b3921f4f6b031f3cbb33cfa1b6aafc21af0a"
+        },
+        {
+          "path": "approved/exportar/result-256.png",
+          "bytes": 3061,
+          "sha256": "7ea055935141b945b301b826501c51bc297d667019e1aec5d40565b152f12f70"
+        },
+        {
+          "path": "approved/exportar/result.svg",
+          "bytes": 720,
+          "sha256": "5a4cc09f79f1663c50594ad0eac5fa8c3e12d025b58f6372df9292fb6dd448a6"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "tarjeta",
+      "id": "A10",
+      "name": "Tarjeta",
+      "module": "Bienvenida · Imágenes",
+      "pending": "Generando",
+      "result": "Disponible",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/tarjeta/idle-128.png",
+      "resultFile": "approved/tarjeta/result-128.png",
+      "motion": "approved/tarjeta/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/tarjeta/idle-128.png",
+          "bytes": 2161,
+          "sha256": "924f9b44a0b8c86a8120b6bb07fef4b5c55c9b14804829d771807b5ec755c674"
+        },
+        {
+          "path": "approved/tarjeta/idle-256.png",
+          "bytes": 4496,
+          "sha256": "8bc8db1b71c85e73f85fdec53f36df894f0dcec0bf63a227e8fbb371d8805f56"
+        },
+        {
+          "path": "approved/tarjeta/idle.svg",
+          "bytes": 635,
+          "sha256": "e3a80571637574de0d8489fe705617c6c29c10105c2237fcbbacc769a75a5680"
+        },
+        {
+          "path": "approved/tarjeta/motion.gif",
+          "bytes": 46782,
+          "sha256": "c8171d5d511cc62a0d8be73caead6643f8dd0bd572decf9b8b8ceab6fba5a26f"
+        },
+        {
+          "path": "approved/tarjeta/result-128.png",
+          "bytes": 2670,
+          "sha256": "f6ea2505a92a0d06c8ad97c4f12dce9e3979646f6053186726a221055c340e92"
+        },
+        {
+          "path": "approved/tarjeta/result-256.png",
+          "bytes": 5353,
+          "sha256": "e34722d52ce44f0bef92608763e97d8712754cd5d3bf9c2dafcb0edf0556dc6b"
+        },
+        {
+          "path": "approved/tarjeta/result.svg",
+          "bytes": 816,
+          "sha256": "449e56e0f5cefabac55080893b94f08030ce538b5f09de3f80500a5f72841e94"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "confirmacion",
+      "id": "A11",
+      "name": "Confirmación",
+      "module": "Compartido",
+      "pending": "Confirmado",
+      "result": "Confirmado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "confirmation",
+      "idle": "approved/confirmacion/idle-128.png",
+      "resultFile": "approved/confirmacion/result-128.png",
+      "motion": "approved/confirmacion/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/confirmacion/idle-128.png",
+          "bytes": 3493,
+          "sha256": "ebdc2124616dc8b1306bbaafcb4ef37efb7c1b0085a88cfc10d9f5031f5163a9"
+        },
+        {
+          "path": "approved/confirmacion/idle-256.png",
+          "bytes": 6584,
+          "sha256": "d28b923b51068688d498babc33bbfa1e8c2c1c14346a2f9590d8dab90c57c399"
+        },
+        {
+          "path": "approved/confirmacion/idle.svg",
+          "bytes": 574,
+          "sha256": "da1287b9ed442cd2c48dae32df42fe45a1ab428d474ad6e6d0c93a1426fbbf68"
+        },
+        {
+          "path": "approved/confirmacion/motion.gif",
+          "bytes": 25190,
+          "sha256": "ef618e2c75e63980130de9388ab2955203067a817870cc0ea770f729b3cfef2b"
+        },
+        {
+          "path": "approved/confirmacion/result-128.png",
+          "bytes": 3475,
+          "sha256": "45c0ad8467cadcdd6c9ea76e3c724b67aff08fca7a3443e53f07fcb92aaff9d4"
+        },
+        {
+          "path": "approved/confirmacion/result-256.png",
+          "bytes": 6524,
+          "sha256": "2dba1e9a07944455596636d3842fd93520364c36486c8518258d6f9a2048d308"
+        },
+        {
+          "path": "approved/confirmacion/result.svg",
+          "bytes": 574,
+          "sha256": "ba159aa9ba6ce9482aaca5a898e9c713649584abd0ceed18fc48dbab8f435e5d"
+        }
+      ],
+      "approvedByUser": true
+    },
+    {
+      "slug": "sincronizar",
+      "id": "A12",
+      "name": "Sincronizar",
+      "module": "Configuración",
+      "pending": "Sincronizando",
+      "result": "Actualizado",
+      "proposed": false,
+      "status": "user-approved",
+      "animationRole": "pending",
+      "idle": "approved/sincronizar/idle-128.png",
+      "resultFile": "approved/sincronizar/result-128.png",
+      "motion": "approved/sincronizar/motion.gif",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "files": [
+        {
+          "path": "approved/sincronizar/idle-128.png",
+          "bytes": 2709,
+          "sha256": "7d479fd2d36aaff0fa99d0f901e76084e6477a41bfd091715a675a888faa6890"
+        },
+        {
+          "path": "approved/sincronizar/idle-256.png",
+          "bytes": 5430,
+          "sha256": "380803e84a393a102c53e65cc4110a39d46e679e56e1025781aab649189c9c86"
+        },
+        {
+          "path": "approved/sincronizar/idle.svg",
+          "bytes": 611,
+          "sha256": "9a06053b5a37fe129a300224c67eb7bc6ed824bf0edb305f1eb657d39207febc"
+        },
+        {
+          "path": "approved/sincronizar/motion.gif",
+          "bytes": 26085,
+          "sha256": "9491eb824101f3a024217ae700eedaaf1c4fe34a16fce67e4cb4731e3fca6b20"
+        },
+        {
+          "path": "approved/sincronizar/result-128.png",
+          "bytes": 3009,
+          "sha256": "47e9584fb2237bfe1be55f60719a0cbfb47489d7c1df185eb942bfcd6e50f392"
+        },
+        {
+          "path": "approved/sincronizar/result-256.png",
+          "bytes": 5982,
+          "sha256": "f377d776d400e857c40b1d64cbf9ff25d43ac9090e23665aebe80fbed37089aa"
+        },
+        {
+          "path": "approved/sincronizar/result.svg",
+          "bytes": 742,
+          "sha256": "28e6b1658e730986fc9320dfe7d5b8025d6f68af704f0311b73e5fec935d37be"
+        }
+      ],
+      "approvedByUser": true
+    }
+  ],
+  "approval": {
+    "scope": "A01-A12 visual assets and animations",
+    "basis": "User: Me gustaron todos",
+    "date": "2026-10-20",
+    "timezone": "America/Asuncion",
+    "publishedToDiscord": false,
+    "mainImplementationZipUpdated": true
+  }
+}

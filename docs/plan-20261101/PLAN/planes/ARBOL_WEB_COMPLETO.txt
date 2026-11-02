@@ -1,0 +1,234 @@
+OBEY/                                     [OBJETIVO · SOLO PLAN]
+├── index.js                               # Arranque del bot (no se implementa aquí)
+├── bot/
+│   ├── client.js
+│   ├── conexiones/
+│   │   ├── discord.js
+│   │   ├── mongo.js
+│   │   ├── redis.js
+│   │   └── lavalink.js
+│   ├── sistema/
+│   │   ├── comandos.js
+│   │   ├── interacciones.js
+│   │   ├── permisos.js
+│   │   ├── eventos.js
+│   │   └── errores.js
+│   └── modulos/
+│       ├── builder/
+│       ├── musica/
+│       ├── moderacion/
+│       ├── seguridad/
+│       ├── tickets/
+│       ├── registros/
+│       ├── roles/
+│       ├── bienvenida/
+│       ├── niveles/
+│       ├── economia/
+│       ├── colecciones/
+│       ├── sorteos/
+│       ├── automatizaciones/
+│       └── [resto conservado en las 32 fichas]
+├── web/                                     # Next.js 16 + React 19
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   ├── error.tsx
+│   │   ├── not-found.tsx
+│   │   ├── globals.css
+│   │   ├── (publico)/
+│   │   │   └── [landing existente, SIN CAMBIOS]
+│   │   └── (panel)/
+│   │       └── panel/
+│   │           ├── layout.tsx
+│   │           ├── page.tsx                  # Mis servidores
+│   │           ├── loading.tsx
+│   │           └── [servidor]/
+│   │               ├── layout.tsx
+│   │               ├── page.tsx              # Resumen
+│   │               ├── loading.tsx
+│   │               ├── error.tsx
+│   │               ├── builder/
+│   │               │   ├── page.tsx
+│   │               │   ├── plantillas/page.tsx
+│   │               │   ├── editor/page.tsx
+│   │               │   ├── respaldos/page.tsx
+│   │               │   ├── historial/page.tsx
+│   │               │   └── revisar/page.tsx
+│   │               ├── musica/
+│   │               │   ├── page.tsx
+│   │               │   ├── cola/page.tsx
+│   │               │   └── favoritos/page.tsx
+│   │               ├── moderacion/
+│   │               │   ├── page.tsx
+│   │               │   └── casos/page.tsx
+│   │               ├── seguridad/
+│   │               │   ├── page.tsx
+│   │               │   └── reglas/page.tsx
+│   │               ├── registros/
+│   │               │   ├── page.tsx
+│   │               │   └── eventos/page.tsx
+│   │               ├── tickets/
+│   │               │   ├── page.tsx
+│   │               │   └── paneles/page.tsx
+│   │               ├── comunidad/
+│   │               │   ├── page.tsx
+│   │               │   ├── bienvenida/page.tsx
+│   │               │   ├── despedida/page.tsx
+│   │               │   ├── roles/page.tsx
+│   │               │   ├── niveles/page.tsx
+│   │               │   ├── sugerencias/page.tsx
+│   │               │   └── eventos/page.tsx
+│   │               ├── automatizaciones/
+│   │               │   ├── page.tsx
+│   │               │   └── tareas/page.tsx
+│   │               ├── estadisticas/page.tsx
+│   │               ├── actividad/page.tsx
+│   │               └── ajustes/
+│   │                   ├── page.tsx
+│   │                   ├── permisos/page.tsx
+│   │                   ├── idioma/page.tsx
+│   │                   └── integraciones/page.tsx
+│   ├── componentes/
+│   │   ├── interfaz/
+│   │   │   ├── boton.tsx
+│   │   │   ├── tarjeta.tsx
+│   │   │   ├── modal.tsx
+│   │   │   ├── campo.tsx
+│   │   │   ├── selector.tsx
+│   │   │   ├── pestanas.tsx
+│   │   │   ├── tabla.tsx
+│   │   │   ├── aviso.tsx
+│   │   │   ├── esqueleto.tsx
+│   │   │   ├── vacio.tsx
+│   │   │   ├── confirmacion.tsx
+│   │   │   └── buscador.tsx
+│   │   ├── panel/
+│   │   │   ├── menu.tsx
+│   │   │   ├── encabezado.tsx
+│   │   │   ├── servidores.tsx
+│   │   │   ├── ruta.tsx
+│   │   │   ├── cuenta.tsx
+│   │   │   └── accesos.tsx
+│   │   ├── animaciones/
+│   │   │   ├── entrada.tsx
+│   │   │   ├── cambio.tsx
+│   │   │   ├── lista.tsx
+│   │   │   ├── transicion.tsx
+│   │   │   └── movimientos.ts
+│   │   └── estados/
+│   │       ├── cargando.tsx
+│   │       ├── error.tsx
+│   │       ├── sin-permiso.tsx
+│   │       ├── desconectado.tsx
+│   │       └── conflicto.tsx
+│   ├── modulos/                              # Código UI de cada dominio
+│   │   ├── builder/
+│   │   │   ├── componentes/
+│   │   │   │   ├── editor.tsx
+│   │   │   │   ├── arbol.tsx
+│   │   │   │   ├── inspector.tsx
+│   │   │   │   ├── plantilla.tsx
+│   │   │   │   └── diferencias.tsx
+│   │   │   ├── hooks/
+│   │   │   │   └── use-borrador.ts
+│   │   │   ├── servicios/
+│   │   │   │   └── builder.ts
+│   │   │   ├── tipos.ts
+│   │   │   └── esquema.ts
+│   │   ├── musica/
+│   │   │   ├── componentes/
+│   │   │   │   ├── reproductor.tsx
+│   │   │   │   ├── cola.tsx
+│   │   │   │   └── controles.tsx
+│   │   │   ├── hooks/use-musica.ts
+│   │   │   ├── servicios/musica.ts
+│   │   │   └── tipos.ts
+│   │   ├── moderacion/
+│   │   ├── seguridad/
+│   │   ├── tickets/
+│   │   ├── registros/
+│   │   ├── comunidad/
+│   │   ├── automatizaciones/
+│   │   ├── estadisticas/
+│   │   └── ajustes/
+│   ├── hooks/
+│   │   ├── use-servidor.ts
+│   │   ├── use-permisos.ts
+│   │   ├── use-actividad.ts
+│   │   └── use-confirmacion.ts
+│   ├── servicios/
+│   │   ├── api.ts
+│   │   ├── auth.ts
+│   │   ├── servidores.ts
+│   │   ├── permisos.ts
+│   │   ├── eventos.ts
+│   │   └── errores.ts
+│   ├── tipos/
+│   │   ├── servidor.ts
+│   │   ├── usuario.ts
+│   │   ├── permisos.ts
+│   │   ├── api.ts
+│   │   └── eventos.ts
+│   ├── estilos/
+│   │   ├── tokens.css
+│   │   ├── panel.css
+│   │   ├── interfaz.css
+│   │   └── animaciones.css
+│   ├── pruebas/
+│   │   ├── navegacion.test.ts
+│   │   ├── permisos.test.ts
+│   │   ├── builder.test.ts
+│   │   ├── musica.test.ts
+│   │   └── accesibilidad.spec.ts
+│   ├── public/                               # Solo assets generales web, no emojis Discord
+│   ├── next.config.ts
+│   ├── tsconfig.json
+│   └── package.json
+├── api/                                       # Autoridad servidor: Express actual migrable
+│   ├── index.js
+│   ├── rutas/
+│   │   ├── sesion.js
+│   │   ├── servidores.js
+│   │   ├── builder.js
+│   │   ├── musica.js
+│   │   ├── moderacion.js
+│   │   ├── seguridad.js
+│   │   ├── registros.js
+│   │   ├── tickets.js
+│   │   ├── comunidad.js
+│   │   ├── automatizaciones.js
+│   │   └── estadisticas.js
+│   ├── servicios/
+│   │   ├── sesiones.js
+│   │   ├── permisos.js
+│   │   ├── builder.js
+│   │   ├── musica.js
+│   │   ├── auditoria.js
+│   │   └── eventos.js
+│   ├── controles/
+│   │   ├── auth.js
+│   │   ├── csrf.js
+│   │   ├── limites.js
+│   │   ├── validar.js
+│   │   └── errores.js
+│   ├── tiempo-real/
+│   │   ├── socket.js
+│   │   └── estado.js
+│   └── pruebas/
+│       ├── acceso.test.js
+│       ├── permisos.test.js
+│       ├── builder.test.js
+│       └── musica.test.js
+├── compartido/
+│   ├── contratos/                             # Zod / JSON Schema como verdad común
+│   │   ├── builder.ts
+│   │   ├── musica.ts
+│   │   ├── servidores.ts
+│   │   └── eventos.ts
+│   └── constantes/
+│       ├── modulos.ts
+│       └── rutas.ts
+└── docs/                                      # Plan e instrucciones, no código productivo
+    ├── api.md
+    ├── seguridad.md
+    ├── animaciones.md
+    └── migracion.md

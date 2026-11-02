@@ -1,0 +1,22 @@
+:root {
+  color-scheme: dark;
+  --bg: #161923;
+  --surface: #1e222e;
+  --raised: #252a37;
+  --border: #353b4b;
+  --text: #f1f3f9;
+  --muted: #aeb6c8;
+  --accent: #98a3ff;
+  --action: #5865f2;
+  --success: #7bddb5;
+  --warning: #edcf87;
+  --radius: 12px;
+  --ease-ui: cubic-bezier(.2,.75,.3,1);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

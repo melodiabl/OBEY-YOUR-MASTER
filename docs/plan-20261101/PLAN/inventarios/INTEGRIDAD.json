@@ -1,0 +1,24 @@
+{
+  "original_zip_sha256_before": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+  "original_zip_sha256_after": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+  "original_code_modified": false,
+  "github_mutation": false,
+  "vps_mutation": false,
+  "assets_A_rebuilt": false,
+  "approved_A_verified_files": 84,
+  "modules_documented": 32,
+  "status": "documentation-and-local-preview-only",
+  "sources": [
+    "ZIP original del usuario",
+    "documentacion discord.js official",
+    "npm lavalink-client Tomato6966"
+  ],
+  "verification_this_revision": {
+    "original_zip_exists": true,
+    "original_zip_sha256": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+    "unchanged_since_prior_plan": true,
+    "web_panel_preview": "concept",
+    "next_prototype": "isolated-not-built",
+    "source_code_changed": false
+  }
+}

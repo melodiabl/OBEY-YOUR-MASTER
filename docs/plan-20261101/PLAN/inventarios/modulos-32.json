@@ -1,0 +1,1000 @@
+[
+  {
+    "origen": "analytics",
+    "carpeta": "estadisticas",
+    "nombre": "Estadísticas",
+    "icono": "stats",
+    "comandos": [
+      "estadisticas",
+      "actividad",
+      "informes"
+    ],
+    "servicios": [
+      "resumen",
+      "actividad",
+      "exportar"
+    ],
+    "datos": [
+      "medir",
+      "consultar",
+      "exportar"
+    ],
+    "vistas": [
+      "panel",
+      "resumen",
+      "detalle",
+      "datos-vacios"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/analytics.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "applications",
+    "carpeta": "solicitudes",
+    "nombre": "Solicitudes",
+    "icono": "request",
+    "comandos": [
+      "solicitar",
+      "revisar",
+      "decidir"
+    ],
+    "servicios": [
+      "crear",
+      "ver",
+      "resolver"
+    ],
+    "datos": [
+      "solicitudes",
+      "revision",
+      "decision"
+    ],
+    "vistas": [
+      "formulario",
+      "pendiente",
+      "aprobada",
+      "rechazada"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/applications.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "architect",
+    "carpeta": "builder",
+    "nombre": "Builder",
+    "icono": "builder",
+    "comandos": [
+      "builder",
+      "crear",
+      "editar",
+      "clonar",
+      "plantillas",
+      "copias"
+    ],
+    "servicios": [
+      "estructura",
+      "plantillas",
+      "simular",
+      "aplicar",
+      "recuperar"
+    ],
+    "datos": [
+      "plano",
+      "simulacion",
+      "aplicacion"
+    ],
+    "vistas": [
+      "inicio",
+      "editor",
+      "revision",
+      "progreso",
+      "resultado"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/architect.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "automation",
+    "carpeta": "automatizaciones",
+    "nombre": "Automatizaciones",
+    "icono": "clock",
+    "comandos": [
+      "crear",
+      "pausar",
+      "activar"
+    ],
+    "servicios": [
+      "crear",
+      "programar",
+      "ejecutar"
+    ],
+    "datos": [
+      "reglas",
+      "trabajos",
+      "ejecuciones"
+    ],
+    "vistas": [
+      "regla",
+      "programada",
+      "ejecutada",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/automation.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "automod",
+    "carpeta": "automod",
+    "nombre": "AutoMod",
+    "icono": "shield",
+    "comandos": [
+      "reglas",
+      "activar",
+      "desactivar"
+    ],
+    "servicios": [
+      "detectar",
+      "evaluar",
+      "actuar"
+    ],
+    "datos": [
+      "reglas",
+      "detecciones",
+      "acciones"
+    ],
+    "vistas": [
+      "reglas",
+      "alerta",
+      "resultado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/automod.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "cards",
+    "carpeta": "tarjetas",
+    "nombre": "Tarjetas",
+    "icono": "image",
+    "comandos": [
+      "tarjeta",
+      "mostrar",
+      "personalizar"
+    ],
+    "servicios": [
+      "crear",
+      "renderizar",
+      "guardar"
+    ],
+    "datos": [
+      "tarjetas",
+      "imagenes",
+      "render"
+    ],
+    "vistas": [
+      "vista",
+      "creando",
+      "resultado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/cards.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "collections",
+    "carpeta": "colecciones",
+    "nombre": "Colecciones",
+    "icono": "layers",
+    "comandos": [
+      "coleccion",
+      "ver",
+      "filtrar"
+    ],
+    "servicios": [
+      "catalogar",
+      "consultar",
+      "ordenar"
+    ],
+    "datos": [
+      "colecciones",
+      "items",
+      "preferencias"
+    ],
+    "vistas": [
+      "catalogo",
+      "detalle",
+      "vacio",
+      "error"
+    ],
+    "estado_origen": "deferred_no_confirmed_domain",
+    "origen_guia": "docs/guia-arquitectura/modulos/collections.md",
+    "fase": "diferido-por-falta-de-dominio-confirmado",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "decoration",
+    "carpeta": "decoracion",
+    "nombre": "Decoración",
+    "icono": "palette",
+    "comandos": [
+      "decorar",
+      "previsualizar",
+      "aplicar"
+    ],
+    "servicios": [
+      "previsualizar",
+      "validar",
+      "aplicar"
+    ],
+    "datos": [
+      "temas",
+      "simbolos",
+      "plantillas"
+    ],
+    "vistas": [
+      "catalogo",
+      "preview",
+      "confirmacion",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/decoration.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "economy",
+    "carpeta": "economia",
+    "nombre": "Economía",
+    "icono": "wallet",
+    "comandos": [
+      "saldo",
+      "transferir",
+      "trabajar"
+    ],
+    "servicios": [
+      "consultar",
+      "transferir",
+      "registrar"
+    ],
+    "datos": [
+      "saldos",
+      "movimientos",
+      "reglas"
+    ],
+    "vistas": [
+      "saldo",
+      "transaccion",
+      "confirmacion",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/economy.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "events",
+    "carpeta": "eventos",
+    "nombre": "Eventos",
+    "icono": "calendar",
+    "comandos": [
+      "evento",
+      "crear",
+      "inscribir"
+    ],
+    "servicios": [
+      "programar",
+      "registrar",
+      "cerrar"
+    ],
+    "datos": [
+      "eventos",
+      "inscripciones",
+      "avisos"
+    ],
+    "vistas": [
+      "agenda",
+      "detalle",
+      "cierre",
+      "error"
+    ],
+    "estado_origen": "deferred_no_confirmed_domain",
+    "origen_guia": "docs/guia-arquitectura/modulos/events.md",
+    "fase": "diferido-por-falta-de-dominio-confirmado",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "feeds",
+    "carpeta": "feeds",
+    "nombre": "Publicaciones",
+    "icono": "rss",
+    "comandos": [
+      "seguir",
+      "canal",
+      "quitar"
+    ],
+    "servicios": [
+      "suscribir",
+      "recibir",
+      "publicar"
+    ],
+    "datos": [
+      "fuentes",
+      "entregas",
+      "reglas"
+    ],
+    "vistas": [
+      "fuente",
+      "novedad",
+      "fallo",
+      "configuracion"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/feeds.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "fun",
+    "carpeta": "diversion",
+    "nombre": "Diversión",
+    "icono": "dice",
+    "comandos": [
+      "jugar",
+      "reaccion",
+      "azar"
+    ],
+    "servicios": [
+      "jugar",
+      "reaccionar",
+      "validar"
+    ],
+    "datos": [
+      "juegos",
+      "sesiones",
+      "limites"
+    ],
+    "vistas": [
+      "inicio",
+      "resultado",
+      "limite",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/fun.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "giveaways",
+    "carpeta": "sorteos",
+    "nombre": "Sorteos",
+    "icono": "gift",
+    "comandos": [
+      "sorteo",
+      "participar",
+      "terminar"
+    ],
+    "servicios": [
+      "crear",
+      "participar",
+      "sortear"
+    ],
+    "datos": [
+      "sorteos",
+      "participantes",
+      "premios"
+    ],
+    "vistas": [
+      "anuncio",
+      "participacion",
+      "ganador",
+      "cerrado"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/giveaways.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "levels",
+    "carpeta": "niveles",
+    "nombre": "Niveles",
+    "icono": "chart",
+    "comandos": [
+      "nivel",
+      "ranking",
+      "puntos"
+    ],
+    "servicios": [
+      "sumar",
+      "consultar",
+      "calcular"
+    ],
+    "datos": [
+      "niveles",
+      "puntos",
+      "recompensas"
+    ],
+    "vistas": [
+      "perfil",
+      "ranking",
+      "subida",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/levels.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "logs",
+    "carpeta": "registros",
+    "nombre": "Registros",
+    "icono": "file-text",
+    "comandos": [
+      "logs",
+      "canal",
+      "tipos"
+    ],
+    "servicios": [
+      "registrar",
+      "filtrar",
+      "enviar"
+    ],
+    "datos": [
+      "eventos",
+      "destinos",
+      "entradas"
+    ],
+    "vistas": [
+      "entrada",
+      "cambio",
+      "incidencia",
+      "vacio"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/logs.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "messages",
+    "carpeta": "mensajes",
+    "nombre": "Mensajes",
+    "icono": "message",
+    "comandos": [
+      "mensaje",
+      "editar",
+      "publicar"
+    ],
+    "servicios": [
+      "crear",
+      "editar",
+      "enviar"
+    ],
+    "datos": [
+      "plantillas",
+      "mensajes",
+      "publicaciones"
+    ],
+    "vistas": [
+      "editor",
+      "preview",
+      "publicado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/messages.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "migrations",
+    "carpeta": "migraciones",
+    "nombre": "Migraciones",
+    "icono": "database",
+    "comandos": [
+      "exportar",
+      "importar",
+      "restaurar"
+    ],
+    "servicios": [
+      "verificar",
+      "importar",
+      "recuperar"
+    ],
+    "datos": [
+      "versiones",
+      "respaldo",
+      "cambios"
+    ],
+    "vistas": [
+      "plan",
+      "progreso",
+      "resultado",
+      "alerta"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/migrations.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "moderation",
+    "carpeta": "moderacion",
+    "nombre": "Moderación",
+    "icono": "gavel",
+    "comandos": [
+      "ban",
+      "kick",
+      "timeout"
+    ],
+    "servicios": [
+      "banear",
+      "expulsar",
+      "silenciar"
+    ],
+    "datos": [
+      "casos",
+      "sanciones",
+      "permisos"
+    ],
+    "vistas": [
+      "caso",
+      "accion",
+      "confirmacion",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/moderation.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "music",
+    "carpeta": "musica",
+    "nombre": "Música",
+    "icono": "music",
+    "comandos": [
+      "reproducir",
+      "pausar",
+      "cola"
+    ],
+    "servicios": [
+      "reproducir",
+      "controlar",
+      "recomendar"
+    ],
+    "datos": [
+      "reproductores",
+      "colas",
+      "favoritos"
+    ],
+    "vistas": [
+      "reproductor",
+      "cola",
+      "busqueda",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/music.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "profiles",
+    "carpeta": "perfiles",
+    "nombre": "Perfiles",
+    "icono": "user",
+    "comandos": [
+      "perfil",
+      "editar",
+      "ver"
+    ],
+    "servicios": [
+      "consultar",
+      "actualizar",
+      "privacidad"
+    ],
+    "datos": [
+      "perfiles",
+      "preferencias",
+      "insignias"
+    ],
+    "vistas": [
+      "perfil",
+      "editar",
+      "privado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/profiles.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "reminders",
+    "carpeta": "recordatorios",
+    "nombre": "Recordatorios",
+    "icono": "bell",
+    "comandos": [
+      "recordar",
+      "listar",
+      "cancelar"
+    ],
+    "servicios": [
+      "crear",
+      "programar",
+      "cancelar"
+    ],
+    "datos": [
+      "recordatorios",
+      "entregas",
+      "preferencias"
+    ],
+    "vistas": [
+      "nuevo",
+      "programado",
+      "entregado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/reminders.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "roles",
+    "carpeta": "roles",
+    "nombre": "Roles",
+    "icono": "users",
+    "comandos": [
+      "roles",
+      "asignar",
+      "quitar"
+    ],
+    "servicios": [
+      "asignar",
+      "retirar",
+      "comprobar"
+    ],
+    "datos": [
+      "roles",
+      "paneles",
+      "reglas"
+    ],
+    "vistas": [
+      "selector",
+      "asignado",
+      "sin-permiso",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/roles.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "security",
+    "carpeta": "seguridad",
+    "nombre": "Seguridad",
+    "icono": "lock",
+    "comandos": [
+      "proteger",
+      "alertas",
+      "estado"
+    ],
+    "servicios": [
+      "detectar",
+      "proteger",
+      "recuperar"
+    ],
+    "datos": [
+      "alertas",
+      "bloqueos",
+      "politicas"
+    ],
+    "vistas": [
+      "estado",
+      "alerta",
+      "incidencia",
+      "recuperacion"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/security.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "starboard",
+    "carpeta": "destacados",
+    "nombre": "Destacados",
+    "icono": "star",
+    "comandos": [
+      "destacar",
+      "ver",
+      "configurar"
+    ],
+    "servicios": [
+      "destacar",
+      "consultar",
+      "retirar"
+    ],
+    "datos": [
+      "entradas",
+      "votos",
+      "reglas"
+    ],
+    "vistas": [
+      "destacado",
+      "nuevo",
+      "sin-resultados",
+      "error"
+    ],
+    "estado_origen": "deferred_no_confirmed_domain",
+    "origen_guia": "docs/guia-arquitectura/modulos/starboard.md",
+    "fase": "diferido-por-falta-de-dominio-confirmado",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "sticky",
+    "carpeta": "fijados",
+    "nombre": "Mensajes fijados",
+    "icono": "pin",
+    "comandos": [
+      "fijar",
+      "editar",
+      "quitar"
+    ],
+    "servicios": [
+      "crear",
+      "actualizar",
+      "quitar"
+    ],
+    "datos": [
+      "mensajes",
+      "canales",
+      "reglas"
+    ],
+    "vistas": [
+      "fijado",
+      "editado",
+      "retirado",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/sticky.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "suggestions",
+    "carpeta": "sugerencias",
+    "nombre": "Sugerencias",
+    "icono": "lightbulb",
+    "comandos": [
+      "sugerir",
+      "votar",
+      "revisar"
+    ],
+    "servicios": [
+      "proponer",
+      "votar",
+      "resolver"
+    ],
+    "datos": [
+      "propuestas",
+      "votos",
+      "decisiones"
+    ],
+    "vistas": [
+      "nueva",
+      "votacion",
+      "aprobada",
+      "rechazada"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/suggestions.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "templates",
+    "carpeta": "plantillas",
+    "nombre": "Plantillas",
+    "icono": "layout",
+    "comandos": [
+      "plantilla",
+      "usar",
+      "editar"
+    ],
+    "servicios": [
+      "crear",
+      "validar",
+      "publicar"
+    ],
+    "datos": [
+      "plantillas",
+      "versiones",
+      "permisos"
+    ],
+    "vistas": [
+      "catalogo",
+      "editor",
+      "preview",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/templates.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "tickets",
+    "carpeta": "tickets",
+    "nombre": "Tickets",
+    "icono": "ticket",
+    "comandos": [
+      "ticket",
+      "abrir",
+      "cerrar"
+    ],
+    "servicios": [
+      "abrir",
+      "asignar",
+      "cerrar"
+    ],
+    "datos": [
+      "tickets",
+      "participantes",
+      "transcripciones"
+    ],
+    "vistas": [
+      "panel",
+      "abierto",
+      "atencion",
+      "cerrado"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/tickets.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "utilities",
+    "carpeta": "utilidades",
+    "nombre": "Utilidades",
+    "icono": "tool",
+    "comandos": [
+      "ayuda",
+      "ping",
+      "usuario"
+    ],
+    "servicios": [
+      "consultar",
+      "validar",
+      "formatear"
+    ],
+    "datos": [
+      "preferencias",
+      "cache",
+      "diagnosticos"
+    ],
+    "vistas": [
+      "ayuda",
+      "resultado",
+      "vacio",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/utilities.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "verification",
+    "carpeta": "verificacion",
+    "nombre": "Verificación",
+    "icono": "check",
+    "comandos": [
+      "verificar",
+      "estado",
+      "configurar"
+    ],
+    "servicios": [
+      "iniciar",
+      "comprobar",
+      "aprobar"
+    ],
+    "datos": [
+      "solicitudes",
+      "reglas",
+      "resultados"
+    ],
+    "vistas": [
+      "inicio",
+      "pendiente",
+      "verificado",
+      "error"
+    ],
+    "estado_origen": "deferred_no_confirmed_domain",
+    "origen_guia": "docs/guia-arquitectura/modulos/verification.md",
+    "fase": "diferido-por-falta-de-dominio-confirmado",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "voice",
+    "carpeta": "voz",
+    "nombre": "Voz",
+    "icono": "headphones",
+    "comandos": [
+      "canal",
+      "invitar",
+      "controlar"
+    ],
+    "servicios": [
+      "crear",
+      "mover",
+      "limpiar"
+    ],
+    "datos": [
+      "canales",
+      "propietarios",
+      "limites"
+    ],
+    "vistas": [
+      "panel",
+      "creado",
+      "cambio",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/voice.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  },
+  {
+    "origen": "welcome",
+    "carpeta": "bienvenida",
+    "nombre": "Bienvenida",
+    "icono": "heart",
+    "comandos": [
+      "bienvenida",
+      "configurar",
+      "probar"
+    ],
+    "servicios": [
+      "recibir",
+      "componer",
+      "enviar"
+    ],
+    "datos": [
+      "plantillas",
+      "canales",
+      "avisos"
+    ],
+    "vistas": [
+      "editor",
+      "preview",
+      "bienvenida",
+      "error"
+    ],
+    "estado_origen": "audit_before_migration",
+    "origen_guia": "docs/guia-arquitectura/modulos/welcome.md",
+    "fase": "auditoria-migracion-pendiente",
+    "estado_diseno": "propuesta-no-implementada"
+  }
+]

@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 02/11/2026 · ZIP conciliado y continuación P1
+
+La [referencia recibida](../docs/plan-20261101/LEER_PRIMERO.md) se conserva sin sobrescribir el proyecto histórico sobre avances actuales. [Decisiones, discrepancias y orden](../docs/platform/PLAN-2026-11-02.md): P0 sigue cerrado; terminar voz/continuidad, frontera de motor, lavalink-client y aceptación musical antes de Builder y panel por capacidades. Landing/materiales conservados; Constructor/Builder como destino; Express mantiene autoridad durante P1 y Fastify exige paridad posterior. No se acepta la migración por documentación ni se publican rediseños rechazados.
+
 ## 01/11/2026 · P0 cerrado; unidad activa P1 música
 
 Rama publicada sin force-push; CI real de GitHub **success**, run 41267669259 sobre `ebc79f4a`. G01/G02 acreditados por instalación limpia, build/tipos/tests y registro real; G25 cerrado con Issues y reporte privado de vulnerabilidades habilitados/verificados. El usuario excluyó expresamente la rotación Mongo («no hace falta igual»): **no realizada y fuera del cierre**. C1–C5 completados para la base, sin aceptar todo el negocio. Revisión funcional 52/168/34 intacta; las 493 entradas y 61 rutas restantes conservan su fase. Runtime `2355287f` saludable, sin reinicio. **Sigue P1**: cola/estado canónicos, migración a lavalink-client, continuidad, controles y después reproductor web. [Cierre y evidencia](../docs/platform/P0-REMOTE-2026-11-01.md).

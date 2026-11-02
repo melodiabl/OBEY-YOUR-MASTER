@@ -1,0 +1,2295 @@
+{
+  "scope": "staged-materials-not-runtime",
+  "entries": [
+    {
+      "id": "B01",
+      "slug": "previous",
+      "name": "Anterior",
+      "nameEn": "Previous",
+      "module": "music",
+      "canonicalProposal": "icon.previous",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/previous/icon-128.png",
+      "svg": "new/previous/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/previous/icon-128.png",
+          "bytes": 1547,
+          "sha256": "dbc0b35cfa04aa025591b2e3bcbfec72fa1ac872d1b34a394de08bbc1c73af43"
+        },
+        {
+          "path": "new/previous/icon-256.png",
+          "bytes": 3189,
+          "sha256": "d1248a1cf719a6c1e9d8c8f335642576b10bea6a1fa5d1497e598738253348d0"
+        },
+        {
+          "path": "new/previous/icon.svg",
+          "bytes": 336,
+          "sha256": "e0a3dbd2bbc960029ba6c4a5d897a9fbef4491692828351e64afc5093f4cc9a6"
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "slug": "skip",
+      "name": "Siguiente pista",
+      "nameEn": "Next track",
+      "module": "music",
+      "canonicalProposal": "icon.skip",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/skip/icon-128.png",
+      "svg": "new/skip/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/skip/icon-128.png",
+          "bytes": 1538,
+          "sha256": "072bfe795f18d4768537bf178e1e249ef2be90296492ce999571bbda5fe9b47c"
+        },
+        {
+          "path": "new/skip/icon-256.png",
+          "bytes": 3170,
+          "sha256": "2de0ffe3b2600f3fc1c2fc6a953400e2ce2cf811c769e0fba1cf95eea05bc081"
+        },
+        {
+          "path": "new/skip/icon.svg",
+          "bytes": 336,
+          "sha256": "4e7c183e0305d9ea8c4f04eb99e89cab4718eb5cfa08390f111b30a08ae5c1ce"
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "slug": "stop",
+      "name": "Detener",
+      "nameEn": "Stop",
+      "module": "music",
+      "canonicalProposal": "icon.stop",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/stop/icon-128.png",
+      "svg": "new/stop/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/stop/icon-128.png",
+          "bytes": 813,
+          "sha256": "4c5dd455220a7ec710dcb11861cd1f1ac2bfd292b8d8e070ccf6facadc30d12d"
+        },
+        {
+          "path": "new/stop/icon-256.png",
+          "bytes": 1945,
+          "sha256": "c853c13cfcd1efc59088a6a3814376db8c911f09ef5d56bfb3a63d3be1ae8e21"
+        },
+        {
+          "path": "new/stop/icon.svg",
+          "bytes": 194,
+          "sha256": "6bfeca67c5725cebf757710adc9529a97a4744bbff453dc6a3edde833a021ec6"
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "slug": "volume-down",
+      "name": "Bajar volumen",
+      "nameEn": "Volume down",
+      "module": "music",
+      "canonicalProposal": "icon.volume-down",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/volume-down/icon-128.png",
+      "svg": "new/volume-down/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/volume-down/icon-128.png",
+          "bytes": 1802,
+          "sha256": "bfe7dd9c51da68a22f29ae39ba0347aca8a7a5bef10f9745f251c79992c774b1"
+        },
+        {
+          "path": "new/volume-down/icon-256.png",
+          "bytes": 3914,
+          "sha256": "a65a56835ee47437403045d5cf9ee15710ea0d23ab36fdfb04842f03fc73324e"
+        },
+        {
+          "path": "new/volume-down/icon.svg",
+          "bytes": 356,
+          "sha256": "c2940482e9bf478297cd2cd49fa689622b12c20c17b8a14da0d45bbddffaae2f"
+        }
+      ]
+    },
+    {
+      "id": "B05",
+      "slug": "volume-up",
+      "name": "Subir volumen",
+      "nameEn": "Volume up",
+      "module": "music",
+      "canonicalProposal": "icon.volume-up",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/volume-up/icon-128.png",
+      "svg": "new/volume-up/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/volume-up/icon-128.png",
+          "bytes": 2436,
+          "sha256": "e5ead14231dd5e42878c786bdb59a0eee7e1c38a0527c5dea084fa8a1da53157"
+        },
+        {
+          "path": "new/volume-up/icon-256.png",
+          "bytes": 5354,
+          "sha256": "05c2bf7c956729662aa8823ac462553e92df5f7532dda556e7448aa37777a654"
+        },
+        {
+          "path": "new/volume-up/icon.svg",
+          "bytes": 481,
+          "sha256": "4a00ef612f25caab6c7fb7e5ee695f681613826d25287ef3bb8fd2c2637b9708"
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "slug": "mute",
+      "name": "Silenciar",
+      "nameEn": "Mute",
+      "module": "music",
+      "canonicalProposal": "icon.mute",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/mute/icon-128.png",
+      "svg": "new/mute/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/mute/icon-128.png",
+          "bytes": 2024,
+          "sha256": "e53cddd0e2e6de89bea51c99cb4479b548e18d77e1ffd0b8c4f79c74db2aa0ea"
+        },
+        {
+          "path": "new/mute/icon-256.png",
+          "bytes": 4344,
+          "sha256": "17b9bd47f902267f76ae599b8c3d41c399e0a7b5212c2626d2be96c5b6095698"
+        },
+        {
+          "path": "new/mute/icon.svg",
+          "bytes": 366,
+          "sha256": "f9674860488f623ca1964b1d60b5372d7b38e01c914eec497317ac9fe5dc5dd0"
+        }
+      ]
+    },
+    {
+      "id": "B07",
+      "slug": "queue",
+      "name": "Cola",
+      "nameEn": "Queue",
+      "module": "music",
+      "canonicalProposal": "icon.queue",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/queue/icon-128.png",
+      "svg": "new/queue/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/queue/icon-128.png",
+          "bytes": 1004,
+          "sha256": "859b051a00bebb96a9cbc68724e6e948efa3ad6cf55cad430973b4b776405589"
+        },
+        {
+          "path": "new/queue/icon-256.png",
+          "bytes": 2319,
+          "sha256": "1e550032e41b13e86ff5b57257f03d3b8354a04f20005014a2e253e7a0479480"
+        },
+        {
+          "path": "new/queue/icon.svg",
+          "bytes": 282,
+          "sha256": "7e281b235c60665dc148cd856dbea1ff9c33e5a7b39a52d89851c8ff1d7f44f2"
+        }
+      ]
+    },
+    {
+      "id": "B08",
+      "slug": "lyrics",
+      "name": "Letras",
+      "nameEn": "Lyrics",
+      "module": "music",
+      "canonicalProposal": "icon.lyrics",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/lyrics/icon-128.png",
+      "svg": "new/lyrics/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/lyrics/icon-128.png",
+          "bytes": 1625,
+          "sha256": "6c1027e1cc2964ede38ea237038fcc08c9b29b3d05806b50612af8d6618a19aa"
+        },
+        {
+          "path": "new/lyrics/icon-256.png",
+          "bytes": 3699,
+          "sha256": "b091a3daccb4657a1fc5e22842c3192a0dcf529f09ffc3fec29a91f096b2aaac"
+        },
+        {
+          "path": "new/lyrics/icon.svg",
+          "bytes": 517,
+          "sha256": "c8c0d43e9907276af71f706a14e55dad610a61bd7fffd8cb522e497aa1ad9b8d"
+        }
+      ]
+    },
+    {
+      "id": "B09",
+      "slug": "search",
+      "name": "Buscar",
+      "nameEn": "Search",
+      "module": "utilities",
+      "canonicalProposal": "icon.search",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/search/icon-128.png",
+      "svg": "new/search/icon.svg",
+      "motion": "new/search/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/search/icon-128.png",
+          "bytes": 2166,
+          "sha256": "e9cba1ec08b6b32d80b3170edabcd8921f20ebb48cf82e3140f1565e59190e23"
+        },
+        {
+          "path": "new/search/icon-256.png",
+          "bytes": 4420,
+          "sha256": "ef9148bb76d094c672e82bc74e8eff91423a49f32e595e2351daf811e6019400"
+        },
+        {
+          "path": "new/search/icon.svg",
+          "bytes": 291,
+          "sha256": "66b87d987addd8f9ceb65e73b34cfec4a83a8dedca46bfb688e3e00000f45d0a"
+        },
+        {
+          "path": "new/search/motion.gif",
+          "bytes": 16198,
+          "sha256": "c4c875f4c9005256bafdda881cfb75eb801a22810a5e7f743be888772d2a429e"
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "slug": "album",
+      "name": "Álbum",
+      "nameEn": "Album",
+      "module": "music",
+      "canonicalProposal": "icon.album",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/album/icon-128.png",
+      "svg": "new/album/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/album/icon-128.png",
+          "bytes": 2874,
+          "sha256": "5d77ab7492b71460df7b9a912845443128f553e7147269b7c7be80be0ea053b2"
+        },
+        {
+          "path": "new/album/icon-256.png",
+          "bytes": 6138,
+          "sha256": "2fd813985eee9f55a910f1cbcfdbfaf8b0085f5606f9c7df304a32e8ad24fd2a"
+        },
+        {
+          "path": "new/album/icon.svg",
+          "bytes": 348,
+          "sha256": "3d4baa9aaab3f6a23c6bd250cb3384ae87c1572af9019cb24da8b199781dbaff"
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "slug": "radio",
+      "name": "Radio",
+      "nameEn": "Radio",
+      "module": "music",
+      "canonicalProposal": "icon.radio",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/radio/icon-128.png",
+      "svg": "new/radio/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/radio/icon-128.png",
+          "bytes": 2454,
+          "sha256": "859846db7bbee3378bd468894001509174ab94d9e5b0c73cbc74cee12aba3af4"
+        },
+        {
+          "path": "new/radio/icon-256.png",
+          "bytes": 5105,
+          "sha256": "41b85fc0de7c96c19e995d0847412df8af0153b19cfafc266d246bb9533ef95f"
+        },
+        {
+          "path": "new/radio/icon.svg",
+          "bytes": 513,
+          "sha256": "0c40d22e85747793fa920e6be2c15d24f10b04947f7e02ba4453c792fc77e20d"
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "slug": "repeat-one",
+      "name": "Repetir pista",
+      "nameEn": "Repeat track",
+      "module": "music",
+      "canonicalProposal": "icon.repeat-one",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/repeat-one/icon-128.png",
+      "svg": "new/repeat-one/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/repeat-one/icon-128.png",
+          "bytes": 2182,
+          "sha256": "77e9c306dbc9bb20d3c7524305e22aa1c8b8b388078bfa0e9d843065ece726e5"
+        },
+        {
+          "path": "new/repeat-one/icon-256.png",
+          "bytes": 4489,
+          "sha256": "2621bd326dd2d0f266268d5ddef9e5219d85fe97eb13a3c97f2f76f595f04104"
+        },
+        {
+          "path": "new/repeat-one/icon.svg",
+          "bytes": 528,
+          "sha256": "588dba8ec499f51a74b2d9be9518bcdf09cf3c775be4bfde07e505c30cf94900"
+        }
+      ]
+    },
+    {
+      "id": "B13",
+      "slug": "claim",
+      "name": "Asignar",
+      "nameEn": "Assign",
+      "module": "tickets",
+      "canonicalProposal": "icon.claim",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/claim/icon-128.png",
+      "svg": "new/claim/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/claim/icon-128.png",
+          "bytes": 2213,
+          "sha256": "3b9ac014a2446ccd51c18be932393df5d5e456e16dec64a12f006cd20ab85e4a"
+        },
+        {
+          "path": "new/claim/icon-256.png",
+          "bytes": 4660,
+          "sha256": "d1c2ab6e2e91b90c1a66e9be16a7f4118c878c3ee0e22cb57a547cf49b04ef1a"
+        },
+        {
+          "path": "new/claim/icon.svg",
+          "bytes": 442,
+          "sha256": "bbf24522c0b7c48ebc1102784896049483f4df047a49da75835c414d4ab4e3ed"
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "slug": "close",
+      "name": "Cerrar",
+      "nameEn": "Close",
+      "module": "tickets",
+      "canonicalProposal": "icon.close",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/close/icon-128.png",
+      "svg": "new/close/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/close/icon-128.png",
+          "bytes": 971,
+          "sha256": "c88d17d3b9cc6674450f5bc10a819e6ad50744b40639d2dddebc4afaf9670c7e"
+        },
+        {
+          "path": "new/close/icon-256.png",
+          "bytes": 2184,
+          "sha256": "eeee2af03f67b64ef181e370967462a30e0034eb8116287c581193db2e34a59a"
+        },
+        {
+          "path": "new/close/icon.svg",
+          "bytes": 225,
+          "sha256": "f6140c24139a598f96c4431b6782521f757472f632b3cad45dd96d3bfd2afc1f"
+        }
+      ]
+    },
+    {
+      "id": "B15",
+      "slug": "reopen",
+      "name": "Reabrir",
+      "nameEn": "Reopen",
+      "module": "tickets",
+      "canonicalProposal": "icon.reopen",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/reopen/icon-128.png",
+      "svg": "new/reopen/icon.svg",
+      "motion": "new/reopen/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/reopen/icon-128.png",
+          "bytes": 2337,
+          "sha256": "106bea17ffba0f2f3f5c19d487ebd124065722c6377de3720748ffaa8118aa86"
+        },
+        {
+          "path": "new/reopen/icon-256.png",
+          "bytes": 4690,
+          "sha256": "e19b3ddabdeed9df7c34edcb507505101f77fd291db8b2463c2428947c2a744f"
+        },
+        {
+          "path": "new/reopen/icon.svg",
+          "bytes": 353,
+          "sha256": "98ac459edd8f63eeb4153a957df745f94a954c580f1f838d5e5340c41b804cf5"
+        },
+        {
+          "path": "new/reopen/motion.gif",
+          "bytes": 15426,
+          "sha256": "9fa420ec7735bcaf21c5fbc8b127604b248d56e80286e56da60b25411f6e7266"
+        }
+      ]
+    },
+    {
+      "id": "B16",
+      "slug": "transcript",
+      "name": "Transcripción",
+      "nameEn": "Transcript",
+      "module": "tickets",
+      "canonicalProposal": "icon.transcript",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/transcript/icon-128.png",
+      "svg": "new/transcript/icon.svg",
+      "motion": "new/transcript/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/transcript/icon-128.png",
+          "bytes": 1406,
+          "sha256": "98a8c512696daf4f695219e391f7bd1645fc8ae6835cbd75f5c78540c20601ed"
+        },
+        {
+          "path": "new/transcript/icon-256.png",
+          "bytes": 3078,
+          "sha256": "8e5f68d8254d465bef9b5a917af7d597ef5ffee95482f7aacd0384b4ac62466b"
+        },
+        {
+          "path": "new/transcript/icon.svg",
+          "bytes": 482,
+          "sha256": "e1fb507f920aa443d3c48dbb22b98396b81766ecc255e59f71639eaa0510f6bc"
+        },
+        {
+          "path": "new/transcript/motion.gif",
+          "bytes": 15326,
+          "sha256": "91abfa34feea02e6121fb73863b461ad7b046ef74a260dafc2ab21eaa23405aa"
+        }
+      ]
+    },
+    {
+      "id": "B17",
+      "slug": "archive",
+      "name": "Archivar",
+      "nameEn": "Archive",
+      "module": "tickets",
+      "canonicalProposal": "icon.archive",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/archive/icon-128.png",
+      "svg": "new/archive/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/archive/icon-128.png",
+          "bytes": 1555,
+          "sha256": "4e7d1b8ad4b1be5772983ccc0f0c6cdaf4c790e432cacde9f3e82610b0954553"
+        },
+        {
+          "path": "new/archive/icon-256.png",
+          "bytes": 3202,
+          "sha256": "f2792d21630cb82fdb6f58c3266261ef63651ee4606c47706dee098c4b9dec1b"
+        },
+        {
+          "path": "new/archive/icon.svg",
+          "bytes": 402,
+          "sha256": "07128c5108af170bf1dd58cf68f9debe2337666f1390d2e3af4d69b7188a5a21"
+        }
+      ]
+    },
+    {
+      "id": "B18",
+      "slug": "rating",
+      "name": "Valorar atención",
+      "nameEn": "Rate support",
+      "module": "tickets",
+      "canonicalProposal": "ticket.icon.valoracion",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/rating/icon-128.png",
+      "svg": "new/rating/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/rating/icon-128.png",
+          "bytes": 1556,
+          "sha256": "a5a963fdc45cd917f5baee346379e1910398de23843298dac2f9a1cacf51140d"
+        },
+        {
+          "path": "new/rating/icon-256.png",
+          "bytes": 3664,
+          "sha256": "cd5cb57bb3ff555045eae30e1e5edddb3c62ffdfcdadd452e33d24daf06cb01e"
+        },
+        {
+          "path": "new/rating/icon.svg",
+          "bytes": 360,
+          "sha256": "49dcfaeb290c2d4e5584ce982a33e38c2cee0a6bbacc26f7239019370bfd35f3"
+        }
+      ]
+    },
+    {
+      "id": "B19",
+      "slug": "report",
+      "name": "Reporte",
+      "nameEn": "Report",
+      "module": "tickets",
+      "canonicalProposal": "ticket.icon.reporte",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/report/icon-128.png",
+      "svg": "new/report/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/report/icon-128.png",
+          "bytes": 2344,
+          "sha256": "5244d6b9ba756974a431ff44b17dae302a30e2f206993139b1c92744ea243b06"
+        },
+        {
+          "path": "new/report/icon-256.png",
+          "bytes": 4708,
+          "sha256": "ad87d959bb8d169075fb7eabbc9363a785c5c32e2e09403802719c2e22dc5415"
+        },
+        {
+          "path": "new/report/icon.svg",
+          "bytes": 414,
+          "sha256": "58d78c5bfde40d2ca094d57ee6b5f2eed6d9343101f2b245ad90b01ff9a9f494"
+        }
+      ]
+    },
+    {
+      "id": "B20",
+      "slug": "support",
+      "name": "Soporte",
+      "nameEn": "Support",
+      "module": "tickets",
+      "canonicalProposal": "ticket.icon.ayuda",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/support/icon-128.png",
+      "svg": "new/support/icon.svg",
+      "motion": "new/support/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/support/icon-128.png",
+          "bytes": 2943,
+          "sha256": "15ef12e2cf86ee7978320eb65c1b1277f9c7c77843a2b4d4053f11db272d9da0"
+        },
+        {
+          "path": "new/support/icon-256.png",
+          "bytes": 5614,
+          "sha256": "2217fcb109529bd7c2f4e84d1af83d6c84ac3c6f294c9bee02866b37ad5d118e"
+        },
+        {
+          "path": "new/support/icon.svg",
+          "bytes": 558,
+          "sha256": "135b91e7307093368486032322b29a54bfc4b6feb9a5a591b1359572c9877e38"
+        },
+        {
+          "path": "new/support/motion.gif",
+          "bytes": 21381,
+          "sha256": "026b8d1c2fd0b47a9954ff2aa761ef86fb72eb3ff96a803973d26fd0131ca557"
+        }
+      ]
+    },
+    {
+      "id": "B21",
+      "slug": "technical",
+      "name": "Ayuda técnica",
+      "nameEn": "Technical support",
+      "module": "tickets",
+      "canonicalProposal": "ticket.icon.tecnico",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/technical/icon-128.png",
+      "svg": "new/technical/icon.svg",
+      "motion": "new/technical/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/technical/icon-128.png",
+          "bytes": 2454,
+          "sha256": "b7a8f54b0ff76089e4fa753053778cf94544f193ce02a6fbf2be3a10fb07c8bf"
+        },
+        {
+          "path": "new/technical/icon-256.png",
+          "bytes": 5309,
+          "sha256": "e3553e97253e69a023ab8323747cd765715a1b54e95205109b2005502d4b2fa4"
+        },
+        {
+          "path": "new/technical/icon.svg",
+          "bytes": 313,
+          "sha256": "c03d69fdb732614d03bf529ecf8c012526fd2463edefb72be9b81365e9da351b"
+        },
+        {
+          "path": "new/technical/motion.gif",
+          "bytes": 16025,
+          "sha256": "209bc25c5ceb4c9a4d7be6d3b6e6388248e5d6680d26d47d997b74ee00054e4a"
+        }
+      ]
+    },
+    {
+      "id": "B22",
+      "slug": "wait",
+      "name": "En espera",
+      "nameEn": "Waiting",
+      "module": "tickets",
+      "canonicalProposal": "ticket.icon.espera",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/wait/icon-128.png",
+      "svg": "new/wait/icon.svg",
+      "motion": "new/wait/motion.gif",
+      "motionRole": "waiting",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/wait/icon-128.png",
+          "bytes": 2932,
+          "sha256": "69d081ad457f209cce21460f4d96493d29942eab7deee1d06a9bf1f1ba4fdef2"
+        },
+        {
+          "path": "new/wait/icon-256.png",
+          "bytes": 5659,
+          "sha256": "c5799503f4748cc0911d52a4c19b7b7d1f7c84fb2b7e36183219ea215115142b"
+        },
+        {
+          "path": "new/wait/icon.svg",
+          "bytes": 293,
+          "sha256": "73e3d84861c5a1d4843cf38dd655fc3fc1dbcf705755db2df781ccf2fce262f9"
+        },
+        {
+          "path": "new/wait/motion.gif",
+          "bytes": 16374,
+          "sha256": "f8af022fecd66706662066ae30bfe89082290aa84a4839ad04ad65eb913aaf93"
+        }
+      ]
+    },
+    {
+      "id": "B23",
+      "slug": "error",
+      "name": "Error",
+      "nameEn": "Error",
+      "module": "shared",
+      "canonicalProposal": "icon.error",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/error/icon-128.png",
+      "svg": "new/error/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/error/icon-128.png",
+          "bytes": 3289,
+          "sha256": "8c1358f7dd60cc9d80905916098952bc6667882db62e40da71c1a9a0de9b5d09"
+        },
+        {
+          "path": "new/error/icon-256.png",
+          "bytes": 6312,
+          "sha256": "b632242cf4568072313655805b53f242d4396c0333e48ede3e9d3eea89c9cf96"
+        },
+        {
+          "path": "new/error/icon.svg",
+          "bytes": 303,
+          "sha256": "cf968e5c94189811ea11c1d74474ee53c18a944c4e13d4ce3b88d987d254e2d1"
+        }
+      ]
+    },
+    {
+      "id": "B24",
+      "slug": "warning",
+      "name": "Advertencia",
+      "nameEn": "Warning",
+      "module": "shared",
+      "canonicalProposal": "icon.warning",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/warning/icon-128.png",
+      "svg": "new/warning/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/warning/icon-128.png",
+          "bytes": 2344,
+          "sha256": "5244d6b9ba756974a431ff44b17dae302a30e2f206993139b1c92744ea243b06"
+        },
+        {
+          "path": "new/warning/icon-256.png",
+          "bytes": 4708,
+          "sha256": "ad87d959bb8d169075fb7eabbc9363a785c5c32e2e09403802719c2e22dc5415"
+        },
+        {
+          "path": "new/warning/icon.svg",
+          "bytes": 414,
+          "sha256": "58d78c5bfde40d2ca094d57ee6b5f2eed6d9343101f2b245ad90b01ff9a9f494"
+        }
+      ]
+    },
+    {
+      "id": "B25",
+      "slug": "info",
+      "name": "Información",
+      "nameEn": "Information",
+      "module": "utilities",
+      "canonicalProposal": "icon.info",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/info/icon-128.png",
+      "svg": "new/info/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/info/icon-128.png",
+          "bytes": 2943,
+          "sha256": "540b1e6bf98ab215e060b336734bb6afae637281f97c38eb77d25fd8e604add1"
+        },
+        {
+          "path": "new/info/icon-256.png",
+          "bytes": 5591,
+          "sha256": "23d9a93c781ff2ed177f2cc9ccc6ae305b6e6815c498dbd2add9b8779f727da0"
+        },
+        {
+          "path": "new/info/icon.svg",
+          "bytes": 366,
+          "sha256": "6dd7b66eb74956a71a0b53b411676bf927158641036ebacab952d3127c7bdaa5"
+        }
+      ]
+    },
+    {
+      "id": "B26",
+      "slug": "permissions",
+      "name": "Permisos",
+      "nameEn": "Permissions",
+      "module": "security",
+      "canonicalProposal": "icon.lock",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/permissions/icon-128.png",
+      "svg": "new/permissions/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/permissions/icon-128.png",
+          "bytes": 1928,
+          "sha256": "2fb38ea9fa73ce899b9e972622142b86f23461f2e580d3434d6659e4f5c75f0e"
+        },
+        {
+          "path": "new/permissions/icon-256.png",
+          "bytes": 4096,
+          "sha256": "716381592f334b5da889ca2fec46b1cdee1a8ef44de8873e99cebb915ba6eb5c"
+        },
+        {
+          "path": "new/permissions/icon.svg",
+          "bytes": 443,
+          "sha256": "55cfa317b70caa7ae9eea5295b8f4005c66b190f98718ba197aa196e7ee56ddf"
+        }
+      ]
+    },
+    {
+      "id": "B27",
+      "slug": "empty",
+      "name": "Sin contenido",
+      "nameEn": "Empty",
+      "module": "shared",
+      "canonicalProposal": "scene.empty-symbol",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/empty/icon-128.png",
+      "svg": "new/empty/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/empty/icon-128.png",
+          "bytes": 1817,
+          "sha256": "7e92566ef8bc60a7e71a45d51d1f2a722b4b522c0a34d6647d83cd00f9e316ee"
+        },
+        {
+          "path": "new/empty/icon-256.png",
+          "bytes": 3650,
+          "sha256": "878119c47933adc2f19b2d2dd9be05ca37acc0912c4b6bcc4bf867cc13226736"
+        },
+        {
+          "path": "new/empty/icon.svg",
+          "bytes": 361,
+          "sha256": "2c7b5e6f4e80d8b3140491cd9d88dd4eea80a008ab7e3cd51b845338ce7cec72"
+        }
+      ]
+    },
+    {
+      "id": "B28",
+      "slug": "expired",
+      "name": "Sesión caducada",
+      "nameEn": "Session expired",
+      "module": "shared",
+      "canonicalProposal": "state.expired",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/expired/icon-128.png",
+      "svg": "new/expired/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/expired/icon-128.png",
+          "bytes": 4015,
+          "sha256": "3a5cf96e2d43497dd5fbe30b67f8e58e327b3676b55da60655fa9b05c0080ba8"
+        },
+        {
+          "path": "new/expired/icon-256.png",
+          "bytes": 6943,
+          "sha256": "d94879c56137a03255d129e6fc212c2e4eacf5abc7239eb0a794bd4ede55f211"
+        },
+        {
+          "path": "new/expired/icon.svg",
+          "bytes": 510,
+          "sha256": "de8ef00ae03c9c66222fd631c1812a72941dceb12a203e2696177959c558f044"
+        }
+      ]
+    },
+    {
+      "id": "B29",
+      "slug": "offline",
+      "name": "Sin conexión",
+      "nameEn": "Offline",
+      "module": "shared",
+      "canonicalProposal": "state.offline",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/offline/icon-128.png",
+      "svg": "new/offline/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/offline/icon-128.png",
+          "bytes": 2372,
+          "sha256": "794adff2867317b72b76bcd28abe322425296bebd6de9b68bbf301c8e0e7b2fd"
+        },
+        {
+          "path": "new/offline/icon-256.png",
+          "bytes": 4828,
+          "sha256": "c3b6b584adde41578c3fe7725d896532e07456e86e8340fbd546c8515609bff9"
+        },
+        {
+          "path": "new/offline/icon.svg",
+          "bytes": 438,
+          "sha256": "d83de83b13ba4bca1cb16ff32b82260421bf0952453cd6abf500c5c25974daba"
+        }
+      ]
+    },
+    {
+      "id": "B30",
+      "slug": "reconnect",
+      "name": "Reconectar",
+      "nameEn": "Reconnect",
+      "module": "music",
+      "canonicalProposal": "icon.connection",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/reconnect/icon-128.png",
+      "svg": "new/reconnect/icon.svg",
+      "motion": "new/reconnect/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/reconnect/icon-128.png",
+          "bytes": 1829,
+          "sha256": "21f2ea6d2612b1605e303df72e097e8c0cf98488625f91380f2aa00386f5acc4"
+        },
+        {
+          "path": "new/reconnect/icon-256.png",
+          "bytes": 3752,
+          "sha256": "6ac06cefabd7eb70fe1f0b9a35a6ac7ef3c740978c018e08a20f1e01216b0a59"
+        },
+        {
+          "path": "new/reconnect/icon.svg",
+          "bytes": 318,
+          "sha256": "f61bffc3bda2d20f8a95c7a56919cc16dbfc989183cf0a70caef9f3abb94f22b"
+        },
+        {
+          "path": "new/reconnect/motion.gif",
+          "bytes": 12659,
+          "sha256": "ce22578ed7ccace6dbd8d6c2d1eed2002526cc41e20a91df6d494ac4b31baaa6"
+        }
+      ]
+    },
+    {
+      "id": "B31",
+      "slug": "welcome",
+      "name": "Bienvenida",
+      "nameEn": "Welcome",
+      "module": "welcome",
+      "canonicalProposal": "icon.join",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/welcome/icon-128.png",
+      "svg": "new/welcome/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/welcome/icon-128.png",
+          "bytes": 1885,
+          "sha256": "9bbd1bbb738b7c49a32398f8247cdf24cf587600a5af6cd0e28751d820619c0e"
+        },
+        {
+          "path": "new/welcome/icon-256.png",
+          "bytes": 4077,
+          "sha256": "75e2d96583d35e2672d57450c86fe627ee2c0a882f36697192739c4b26889562"
+        },
+        {
+          "path": "new/welcome/icon.svg",
+          "bytes": 443,
+          "sha256": "9862dfaeb96e8886f276bf14366647542a543fb0d6d7ae28184aee9f2c6cf17a"
+        }
+      ]
+    },
+    {
+      "id": "B32",
+      "slug": "farewell",
+      "name": "Despedida",
+      "nameEn": "Goodbye",
+      "module": "welcome",
+      "canonicalProposal": "icon.exit",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/farewell/icon-128.png",
+      "svg": "new/farewell/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/farewell/icon-128.png",
+          "bytes": 1960,
+          "sha256": "3a20d5a5095a15fe9e311dd9549610a24a3170931bd20cb1500d50398734721d"
+        },
+        {
+          "path": "new/farewell/icon-256.png",
+          "bytes": 4077,
+          "sha256": "5d8765e81f509233262d72105264ff01882b7c513e34d6029961cd520cf57d11"
+        },
+        {
+          "path": "new/farewell/icon.svg",
+          "bytes": 456,
+          "sha256": "8f01181060faed3c34b0574c54162564648295da5c38a6b860dbee2079041afb"
+        }
+      ]
+    },
+    {
+      "id": "B33",
+      "slug": "roles",
+      "name": "Roles",
+      "nameEn": "Roles",
+      "module": "roles",
+      "canonicalProposal": "icon.roles",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/roles/icon-128.png",
+      "svg": "new/roles/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/roles/icon-128.png",
+          "bytes": 2725,
+          "sha256": "764b84b7dc39c42ec86cc0ad13849c3aeacfbdb5e87372eb4b2f35a4099c5b51"
+        },
+        {
+          "path": "new/roles/icon-256.png",
+          "bytes": 5445,
+          "sha256": "49b457ca0cff93354489c4f3ba05f1a4f77ef00c72b85975bee7a1b6b98e7fb2"
+        },
+        {
+          "path": "new/roles/icon.svg",
+          "bytes": 393,
+          "sha256": "282446305e6f41889aa99550d733e7424903d69d6fd15552d6a1a00a06c50bd0"
+        }
+      ]
+    },
+    {
+      "id": "B34",
+      "slug": "moderation",
+      "name": "Moderación",
+      "nameEn": "Moderation",
+      "module": "moderation",
+      "canonicalProposal": "icon.gavel",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/moderation/icon-128.png",
+      "svg": "new/moderation/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/moderation/icon-128.png",
+          "bytes": 1739,
+          "sha256": "f909bec035d9a89488304801f71cb61d8587f631a7aa1a994d019e6597ca5ae8"
+        },
+        {
+          "path": "new/moderation/icon-256.png",
+          "bytes": 3441,
+          "sha256": "f9936d7b7fd9882df994e7ada8ae35ff2baa923b7f537a5202dbf9153b91040b"
+        },
+        {
+          "path": "new/moderation/icon.svg",
+          "bytes": 503,
+          "sha256": "e86ec519aa655f81bed794faff5f37c346b544e6675c64d45d470a3580010e1d"
+        }
+      ]
+    },
+    {
+      "id": "B35",
+      "slug": "logs",
+      "name": "Registros",
+      "nameEn": "Logs",
+      "module": "logs",
+      "canonicalProposal": "icon.document",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/logs/icon-128.png",
+      "svg": "new/logs/icon.svg",
+      "motion": "new/logs/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/logs/icon-128.png",
+          "bytes": 1406,
+          "sha256": "98a8c512696daf4f695219e391f7bd1645fc8ae6835cbd75f5c78540c20601ed"
+        },
+        {
+          "path": "new/logs/icon-256.png",
+          "bytes": 3078,
+          "sha256": "8e5f68d8254d465bef9b5a917af7d597ef5ffee95482f7aacd0384b4ac62466b"
+        },
+        {
+          "path": "new/logs/icon.svg",
+          "bytes": 482,
+          "sha256": "e1fb507f920aa443d3c48dbb22b98396b81766ecc255e59f71639eaa0510f6bc"
+        },
+        {
+          "path": "new/logs/motion.gif",
+          "bytes": 15326,
+          "sha256": "91abfa34feea02e6121fb73863b461ad7b046ef74a260dafc2ab21eaa23405aa"
+        }
+      ]
+    },
+    {
+      "id": "B36",
+      "slug": "levels",
+      "name": "Niveles",
+      "nameEn": "Levels",
+      "module": "levels",
+      "canonicalProposal": "icon.levels",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/levels/icon-128.png",
+      "svg": "new/levels/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/levels/icon-128.png",
+          "bytes": 1536,
+          "sha256": "aea376a054aad343031f23533da9e98ca656b1b392828f8c6f3f10a8f3b9fdd4"
+        },
+        {
+          "path": "new/levels/icon-256.png",
+          "bytes": 3537,
+          "sha256": "b580eb625289dabd2bc5ab7a588a3ca4701a546dadde7b70d7ad67b73b87dd59"
+        },
+        {
+          "path": "new/levels/icon.svg",
+          "bytes": 501,
+          "sha256": "0b17eee9c81e54a9d8f10de20a8ab931f2602e6da5c6361fe3a04c939ed2188e"
+        }
+      ]
+    },
+    {
+      "id": "B37",
+      "slug": "profile",
+      "name": "Perfil",
+      "nameEn": "Profile",
+      "module": "profiles",
+      "canonicalProposal": "icon.profile",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/profile/icon-128.png",
+      "svg": "new/profile/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/profile/icon-128.png",
+          "bytes": 2927,
+          "sha256": "a9df4e85773b90e5a1a832b0680e45c29c0a039659a7d4d9e34893e69047dbc5"
+        },
+        {
+          "path": "new/profile/icon-256.png",
+          "bytes": 5861,
+          "sha256": "7b613f9ecc780a07736ee5fcc83d6c870692baf2fe660a85cf12a6a29b81053d"
+        },
+        {
+          "path": "new/profile/icon.svg",
+          "bytes": 393,
+          "sha256": "12ad98764cd1de13baae7fea24cf7df31c1b43f67520bff1f4434382edb5b963"
+        }
+      ]
+    },
+    {
+      "id": "B38",
+      "slug": "coins",
+      "name": "Economía",
+      "nameEn": "Economy",
+      "module": "economy",
+      "canonicalProposal": "icon.coins",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/coins/icon-128.png",
+      "svg": "new/coins/icon.svg",
+      "motion": "new/coins/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/coins/icon-128.png",
+          "bytes": 3328,
+          "sha256": "e806790ff88318737e557d51bdfce73d911d512c4eb4a0da748a9f49765b559d"
+        },
+        {
+          "path": "new/coins/icon-256.png",
+          "bytes": 6674,
+          "sha256": "00d47bcf17abe44749c31bb91982719d3d43b3727e959ffabef64a44cb4b634b"
+        },
+        {
+          "path": "new/coins/icon.svg",
+          "bytes": 535,
+          "sha256": "16a9e8490862ccae0b40bb756426ba00fc0b3b06af71a527a694961413045b49"
+        },
+        {
+          "path": "new/coins/motion.gif",
+          "bytes": 24680,
+          "sha256": "6dd5226bac40e54f3d6bd1a1e0cf3cf8ec8895850ab4e7530a482a5338fb95a5"
+        }
+      ]
+    },
+    {
+      "id": "B39",
+      "slug": "gift",
+      "name": "Regalo",
+      "nameEn": "Gift",
+      "module": "economy",
+      "canonicalProposal": "icon.gift",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/gift/icon-128.png",
+      "svg": "new/gift/icon.svg",
+      "motion": "new/gift/motion.gif",
+      "motionRole": "confirmed-celebration",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/gift/icon-128.png",
+          "bytes": 2522,
+          "sha256": "b3c51557eb6708b54985614665a72d98335f2eaf55bd6eab4115422cd9f49bd5"
+        },
+        {
+          "path": "new/gift/icon-256.png",
+          "bytes": 5269,
+          "sha256": "1f751639d15776fd0f17c505201f65ae5f2bff3aea3261ff67f81d0193571ce1"
+        },
+        {
+          "path": "new/gift/icon.svg",
+          "bytes": 565,
+          "sha256": "dfeee4f6d5b348d72bfd78fe13f7cb878b604e7f37f23361fd0df7c9644313cc"
+        },
+        {
+          "path": "new/gift/motion.gif",
+          "bytes": 23156,
+          "sha256": "843291d2600f5fd4486da6b25e77f48b165c03f24404e7ac33f037f561ecf37a"
+        }
+      ]
+    },
+    {
+      "id": "B40",
+      "slug": "games",
+      "name": "Juegos",
+      "nameEn": "Games",
+      "module": "fun",
+      "canonicalProposal": "icon.game",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/games/icon-128.png",
+      "svg": "new/games/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/games/icon-128.png",
+          "bytes": 2751,
+          "sha256": "548aad4c80cccb4111de41d26c14545e560ce70ca2d62b37011a34f6785b28f0"
+        },
+        {
+          "path": "new/games/icon-256.png",
+          "bytes": 5489,
+          "sha256": "1aaf701e1760646c74bc7c5c8abb91899ecd600be69ee2ff52ab0d41dea9cfde"
+        },
+        {
+          "path": "new/games/icon.svg",
+          "bytes": 573,
+          "sha256": "7c341e741762ae0bbb36721ec88a435a33de25b2d50d83e39982e712d6881944"
+        }
+      ]
+    },
+    {
+      "id": "B41",
+      "slug": "giveaways",
+      "name": "Sorteos",
+      "nameEn": "Giveaways",
+      "module": "giveaways",
+      "canonicalProposal": "icon.medal",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/giveaways/icon-128.png",
+      "svg": "new/giveaways/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/giveaways/icon-128.png",
+          "bytes": 2312,
+          "sha256": "b178eab8973ab836fcc3c7043350d71b1c66e238c0c234c19997753c162fa164"
+        },
+        {
+          "path": "new/giveaways/icon-256.png",
+          "bytes": 4718,
+          "sha256": "605b93e6c200a20e6deee81d4c3a6bb753b5d402070883107a9ae55bb79ff959"
+        },
+        {
+          "path": "new/giveaways/icon.svg",
+          "bytes": 418,
+          "sha256": "04d281e0ba320e4df4fe07bf31df218c8ad9c29936872861f31797555f767f80"
+        }
+      ]
+    },
+    {
+      "id": "B42",
+      "slug": "suggestions",
+      "name": "Sugerencias",
+      "nameEn": "Suggestions",
+      "module": "suggestions",
+      "canonicalProposal": "icon.idea",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/suggestions/icon-128.png",
+      "svg": "new/suggestions/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/suggestions/icon-128.png",
+          "bytes": 2120,
+          "sha256": "eb0f15b496824712bc692e982340e8ed4d8354048923e80fc3fd5ba501ec17ad"
+        },
+        {
+          "path": "new/suggestions/icon-256.png",
+          "bytes": 4516,
+          "sha256": "f902edeb41c782f568278623034b16b1f3778155bdfc404679f8e8b40fc6ffb8"
+        },
+        {
+          "path": "new/suggestions/icon.svg",
+          "bytes": 379,
+          "sha256": "0e67c0b83b5b460363acbb1b2f0205bc54580fe3bc0ea7da8566cecf46e38c44"
+        }
+      ]
+    },
+    {
+      "id": "B43",
+      "slug": "reminders",
+      "name": "Recordatorios",
+      "nameEn": "Reminders",
+      "module": "reminders",
+      "canonicalProposal": "icon.calendar",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/reminders/icon-128.png",
+      "svg": "new/reminders/icon.svg",
+      "motion": "new/reminders/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/reminders/icon-128.png",
+          "bytes": 1954,
+          "sha256": "4fb9392844e8473fb52618970693edde3176f691be2ed25ea6f3d72edf7517ae"
+        },
+        {
+          "path": "new/reminders/icon-256.png",
+          "bytes": 4062,
+          "sha256": "b319621b73174b7977451ddb2a8e99c06f28d8e162e184db3310a0fab487d130"
+        },
+        {
+          "path": "new/reminders/icon.svg",
+          "bytes": 466,
+          "sha256": "46abb1146e250dea6bc5d68ce492614b2cbd6c37dda7525640c9a780730a92b4"
+        },
+        {
+          "path": "new/reminders/motion.gif",
+          "bytes": 17792,
+          "sha256": "62f70276501e30ac54316bf3737e0fa587d0c5cc31db30d6982bf43b78c271ed"
+        }
+      ]
+    },
+    {
+      "id": "B44",
+      "slug": "messages",
+      "name": "Mensajes",
+      "nameEn": "Messages",
+      "module": "messages",
+      "canonicalProposal": "icon.conversation",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/messages/icon-128.png",
+      "svg": "new/messages/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/messages/icon-128.png",
+          "bytes": 1336,
+          "sha256": "44f9b4063591526e6fafbabe87082f3ae062388eda7b824736bcb3474aa517fb"
+        },
+        {
+          "path": "new/messages/icon-256.png",
+          "bytes": 3194,
+          "sha256": "8a09860a13a2f2d6698658836a19acd760948c518e7dc272d6af399228027113"
+        },
+        {
+          "path": "new/messages/icon.svg",
+          "bytes": 361,
+          "sha256": "fe49f1f2c8a4ad57a0fb30c690884d1fd57b9bbd7c82550a04df36aa7eac50f6"
+        }
+      ]
+    },
+    {
+      "id": "B45",
+      "slug": "automation",
+      "name": "Automatización",
+      "nameEn": "Automation",
+      "module": "automation",
+      "canonicalProposal": "icon.automation",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/automation/icon-128.png",
+      "svg": "new/automation/icon.svg",
+      "motion": "new/automation/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/automation/icon-128.png",
+          "bytes": 2290,
+          "sha256": "3280f93729dde3271ada9a2b998d2359f782f77c7269ae7abc155cd1c1fba7bb"
+        },
+        {
+          "path": "new/automation/icon-256.png",
+          "bytes": 5241,
+          "sha256": "421545ac4e79a25b6d9b4c26e641bbcad7f8a89b82dba008ad10d443e17c5066"
+        },
+        {
+          "path": "new/automation/icon.svg",
+          "bytes": 462,
+          "sha256": "ef7b7cd45f0f4a3136af8cb4516487a98e1a9df226b2c085f441d1c3161e881e"
+        },
+        {
+          "path": "new/automation/motion.gif",
+          "bytes": 18898,
+          "sha256": "842ac160b4dddd5be28abd428cb7a97fd016b4a29b544e0031c7f2b566c7b05e"
+        }
+      ]
+    },
+    {
+      "id": "B46",
+      "slug": "feeds",
+      "name": "Fuentes y avisos",
+      "nameEn": "Feeds",
+      "module": "feeds",
+      "canonicalProposal": "icon.feed",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/feeds/icon-128.png",
+      "svg": "new/feeds/icon.svg",
+      "motion": "new/feeds/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/feeds/icon-128.png",
+          "bytes": 2508,
+          "sha256": "04349535df22a8dc898cc2de03cd81a0dbfbb126b8458cd390cf9473813acf7d"
+        },
+        {
+          "path": "new/feeds/icon-256.png",
+          "bytes": 4832,
+          "sha256": "3b0281ec8bea3d92c9077520f959c6af71bb93e3b840c72cd742d8123c285a7b"
+        },
+        {
+          "path": "new/feeds/icon.svg",
+          "bytes": 319,
+          "sha256": "dfa6027f4475f9811e626dc4bc33705efbdb45ce25335625872bfd30af966b5c"
+        },
+        {
+          "path": "new/feeds/motion.gif",
+          "bytes": 17397,
+          "sha256": "87415319a167d4e64c4776be271e5ab732e85d42d89d076a534b9a42e84395e6"
+        }
+      ]
+    },
+    {
+      "id": "B47",
+      "slug": "analytics",
+      "name": "Estadísticas",
+      "nameEn": "Analytics",
+      "module": "analytics",
+      "canonicalProposal": "icon.chart",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/analytics/icon-128.png",
+      "svg": "new/analytics/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/analytics/icon-128.png",
+          "bytes": 1536,
+          "sha256": "aea376a054aad343031f23533da9e98ca656b1b392828f8c6f3f10a8f3b9fdd4"
+        },
+        {
+          "path": "new/analytics/icon-256.png",
+          "bytes": 3537,
+          "sha256": "b580eb625289dabd2bc5ab7a588a3ca4701a546dadde7b70d7ad67b73b87dd59"
+        },
+        {
+          "path": "new/analytics/icon.svg",
+          "bytes": 501,
+          "sha256": "0b17eee9c81e54a9d8f10de20a8ab931f2602e6da5c6361fe3a04c939ed2188e"
+        }
+      ]
+    },
+    {
+      "id": "B48",
+      "slug": "applications",
+      "name": "Solicitudes",
+      "nameEn": "Applications",
+      "module": "applications",
+      "canonicalProposal": "icon.document",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/applications/icon-128.png",
+      "svg": "new/applications/icon.svg",
+      "motion": "new/applications/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/applications/icon-128.png",
+          "bytes": 1845,
+          "sha256": "b3dd4828ebc34a3e13b12b236a051208a1f43a00cbd64b93ac752ecaeba3f540"
+        },
+        {
+          "path": "new/applications/icon-256.png",
+          "bytes": 3715,
+          "sha256": "6da300d258721dd94d6a593d3aa1d80b42fb181df0f37563f2d2adb6aebb06ca"
+        },
+        {
+          "path": "new/applications/icon.svg",
+          "bytes": 618,
+          "sha256": "5096b6708118e078e2bef5174045583d92d4eef1297b106acf71459f1cf6fc88"
+        },
+        {
+          "path": "new/applications/motion.gif",
+          "bytes": 19518,
+          "sha256": "a464ce9f75fe831fe6db01ec683efc6c56889ed94eca7291263a8a20ab07cef3"
+        }
+      ]
+    },
+    {
+      "id": "B49",
+      "slug": "architect",
+      "name": "Estructura",
+      "nameEn": "Structure",
+      "module": "architect",
+      "canonicalProposal": "icon.blueprint",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/architect/icon-128.png",
+      "svg": "new/architect/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/architect/icon-128.png",
+          "bytes": 1662,
+          "sha256": "141058488705c42d1a8ad30acf032ad0899a3a54e29235d54d608178edb52a53"
+        },
+        {
+          "path": "new/architect/icon-256.png",
+          "bytes": 3704,
+          "sha256": "023688935cb0deea5726ef4f273d7cc0214977fb3798e0ac1f2442adfdc40e51"
+        },
+        {
+          "path": "new/architect/icon.svg",
+          "bytes": 518,
+          "sha256": "0d17da07e5175adcae36d90db9582182e9150eb67c34ef0fad107b769ae5bb7b"
+        }
+      ]
+    },
+    {
+      "id": "B50",
+      "slug": "templates",
+      "name": "Plantillas",
+      "nameEn": "Templates",
+      "module": "templates",
+      "canonicalProposal": "icon.template",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/templates/icon-128.png",
+      "svg": "new/templates/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/templates/icon-128.png",
+          "bytes": 1933,
+          "sha256": "1afe7f867172dbc2b2bc15d1fd286568f42ac1355b01d6242ef9dfa135811595"
+        },
+        {
+          "path": "new/templates/icon-256.png",
+          "bytes": 4012,
+          "sha256": "57c70ff5eed715fd116a99d6ac8ad204e00b803fec54a01b7560df69b5c1dfee"
+        },
+        {
+          "path": "new/templates/icon.svg",
+          "bytes": 427,
+          "sha256": "8a4f35a9d5153642f1c51e4675d2e19b7098cff4d6fbfbf4b50f7333c2fbcb45"
+        }
+      ]
+    },
+    {
+      "id": "B51",
+      "slug": "settings",
+      "name": "Configuración",
+      "nameEn": "Settings",
+      "module": "shared",
+      "canonicalProposal": "icon.settings",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/settings/icon-128.png",
+      "svg": "new/settings/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/settings/icon-128.png",
+          "bytes": 1678,
+          "sha256": "0347b8d747573e08bdbfcda455d61da3573297693ea5bc456c71b4a915202dea"
+        },
+        {
+          "path": "new/settings/icon-256.png",
+          "bytes": 4898,
+          "sha256": "e0beeb51c0a57abccfc68688b2115de5d2686f3f53a07d609a50467d819aba8b"
+        },
+        {
+          "path": "new/settings/icon.svg",
+          "bytes": 473,
+          "sha256": "e29ad7687c33d1a97088a01b65882ff597533d4c814abbd7d9fb97568f7a14c1"
+        }
+      ]
+    },
+    {
+      "id": "B52",
+      "slug": "edit",
+      "name": "Editar",
+      "nameEn": "Edit",
+      "module": "shared",
+      "canonicalProposal": "icon.edit",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/edit/icon-128.png",
+      "svg": "new/edit/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/edit/icon-128.png",
+          "bytes": 1350,
+          "sha256": "77c2db04b39fe605402de125acb0dd340cc70033c397c490ddba195e2edeb9c6"
+        },
+        {
+          "path": "new/edit/icon-256.png",
+          "bytes": 2649,
+          "sha256": "dff30313b8d0aaea8ae63b063c79cc3693671c19ba144db940452d08adfdd855"
+        },
+        {
+          "path": "new/edit/icon.svg",
+          "bytes": 251,
+          "sha256": "35d6f4638c8a173a800d2c259f2f0003a65189efa4a0bfde9b4421931cc07473"
+        }
+      ]
+    },
+    {
+      "id": "B53",
+      "slug": "save",
+      "name": "Guardar",
+      "nameEn": "Save",
+      "module": "shared",
+      "canonicalProposal": "icon.save",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/save/icon-128.png",
+      "svg": "new/save/icon.svg",
+      "motion": "new/save/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/save/icon-128.png",
+          "bytes": 1656,
+          "sha256": "d27a8444c33ce4db96b4097cf784f6ccc6acd2c65a44625e6fa5c58dc6a3cce1"
+        },
+        {
+          "path": "new/save/icon-256.png",
+          "bytes": 3816,
+          "sha256": "46e1f7699b138493fd7185696ac60eb8b4b57a77d0443ec23435963957c64ed2"
+        },
+        {
+          "path": "new/save/icon.svg",
+          "bytes": 421,
+          "sha256": "ab0aae911cbb7a63d4234a785677122159f06f20092abb6061b12643e2a94fb9"
+        },
+        {
+          "path": "new/save/motion.gif",
+          "bytes": 18336,
+          "sha256": "1624bcbb7239bc024fe6ea8b108f62a31b1d711c22b191044a614c6513e58538"
+        }
+      ]
+    },
+    {
+      "id": "B54",
+      "slug": "delete",
+      "name": "Eliminar",
+      "nameEn": "Delete",
+      "module": "shared",
+      "canonicalProposal": "icon.delete",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/delete/icon-128.png",
+      "svg": "new/delete/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/delete/icon-128.png",
+          "bytes": 1862,
+          "sha256": "ecb52d1aeba82d8a8f02d28ce8eccd32b47550722b0fee3b1672dcc8b863bace"
+        },
+        {
+          "path": "new/delete/icon-256.png",
+          "bytes": 4166,
+          "sha256": "a5681d0ac257f7ac7b836f48c499855f789ca7013f955d3bdf9d90d7f8c72faf"
+        },
+        {
+          "path": "new/delete/icon.svg",
+          "bytes": 372,
+          "sha256": "28ae0894d847380c48f51e4c6c57ebd67d419d3c10a120744705aee50b6dceb2"
+        }
+      ]
+    },
+    {
+      "id": "B55",
+      "slug": "voice",
+      "name": "Voz",
+      "nameEn": "Voice",
+      "module": "voice",
+      "canonicalProposal": "icon.microphone",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/voice/icon-128.png",
+      "svg": "new/voice/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/voice/icon-128.png",
+          "bytes": 2616,
+          "sha256": "9f0f6a4fc73fa7e63c62cf235467619022fa20f29968d8b24bb7e3657d6241d4"
+        },
+        {
+          "path": "new/voice/icon-256.png",
+          "bytes": 5477,
+          "sha256": "3f271a6be5096cdf2da5bc6929252c5e6368ac7e74a00901161c64072b819393"
+        },
+        {
+          "path": "new/voice/icon.svg",
+          "bytes": 353,
+          "sha256": "1366bed9641549454694124fe1f44c4e61a5b571b4e256b405b9721e8375cabb"
+        }
+      ]
+    },
+    {
+      "id": "B56",
+      "slug": "channel",
+      "name": "Canal",
+      "nameEn": "Channel",
+      "module": "voice",
+      "canonicalProposal": "icon.channel",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/channel/icon-128.png",
+      "svg": "new/channel/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/channel/icon-128.png",
+          "bytes": 1379,
+          "sha256": "0ae5e5516dd1221d4ff2d7f2256f8cecae61d3a57566e3a8f0ae7a5757a8d3bb"
+        },
+        {
+          "path": "new/channel/icon-256.png",
+          "bytes": 3188,
+          "sha256": "1c538d46579ac1b6ffbaad36c79dd3ee0e167881e152509ea4362ccf82330793"
+        },
+        {
+          "path": "new/channel/icon.svg",
+          "bytes": 251,
+          "sha256": "3ea012ff7970ab54a6b7f36cbbb72525adeed8a29ccef6397ca3006af70cb7ac"
+        }
+      ]
+    },
+    {
+      "id": "B57",
+      "slug": "members",
+      "name": "Miembros",
+      "nameEn": "Members",
+      "module": "shared",
+      "canonicalProposal": "icon.roles",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/members/icon-128.png",
+      "svg": "new/members/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/members/icon-128.png",
+          "bytes": 2559,
+          "sha256": "6c7a955c95fbe0ecb23836cd9367fe836c3ec1ebe88f3e43fdb5869f6261bb07"
+        },
+        {
+          "path": "new/members/icon-256.png",
+          "bytes": 5413,
+          "sha256": "74c0aebccc8ff4079fc3685f95335706e2e1334136770c22954a5ed919a5ac86"
+        },
+        {
+          "path": "new/members/icon.svg",
+          "bytes": 468,
+          "sha256": "9a3e33b37a23d3aa6b1b6ca3e751602c1ebe8bd2acd7982c40d52b7dad7449b2"
+        }
+      ]
+    },
+    {
+      "id": "B58",
+      "slug": "notify-off",
+      "name": "Avisos desactivados",
+      "nameEn": "Notifications off",
+      "module": "feeds",
+      "canonicalProposal": "icon.notify-off",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/notify-off/icon-128.png",
+      "svg": "new/notify-off/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/notify-off/icon-128.png",
+          "bytes": 2244,
+          "sha256": "1fe630bbfe8a95da3bb26a94fcd142685a947d19b3c26c5b0d67ae1d4ef6d5eb"
+        },
+        {
+          "path": "new/notify-off/icon-256.png",
+          "bytes": 4558,
+          "sha256": "682a5e6dc156a8d0eaebde99bca3d0a2350ea6666f32024779d7f37a58c243b2"
+        },
+        {
+          "path": "new/notify-off/icon.svg",
+          "bytes": 384,
+          "sha256": "3053c737ab55057e328ccfed67addeb3bb2cb53a8acba78a14f76440ee92c6ec"
+        }
+      ]
+    },
+    {
+      "id": "B59",
+      "slug": "back",
+      "name": "Página anterior",
+      "nameEn": "Previous page",
+      "module": "utilities",
+      "canonicalProposal": "icon.page-previous",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/back/icon-128.png",
+      "svg": "new/back/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/back/icon-128.png",
+          "bytes": 794,
+          "sha256": "abfca3323383175005c0bd89800c013be733bc55e0929a6c6fae000db824290c"
+        },
+        {
+          "path": "new/back/icon-256.png",
+          "bytes": 1749,
+          "sha256": "29b8e2a75b03410a547fa7878781df2d622e0ce845cac5bff4e002d32f48af62"
+        },
+        {
+          "path": "new/back/icon.svg",
+          "bytes": 229,
+          "sha256": "ed278dfc1c5ca1bd26f6d4837d869e16aea484134e6df0cbc1d4c105510f2db7"
+        }
+      ]
+    },
+    {
+      "id": "B60",
+      "slug": "next",
+      "name": "Página siguiente",
+      "nameEn": "Next page",
+      "module": "utilities",
+      "canonicalProposal": "icon.page-next",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/next/icon-128.png",
+      "svg": "new/next/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/next/icon-128.png",
+          "bytes": 802,
+          "sha256": "830037e8ba7ecf4c5044b3efff3f1cd0da89bd26ee86976e466cb6e954beb46a"
+        },
+        {
+          "path": "new/next/icon-256.png",
+          "bytes": 1778,
+          "sha256": "08a1654d3bf7692344dfdb08b1eb37dfad4b197288546ac14e494a729b8df71f"
+        },
+        {
+          "path": "new/next/icon.svg",
+          "bytes": 230,
+          "sha256": "c5b48b1c26411bd2a306f1024e5e1b7a0f3ae9dc24f601a5dcd5aeb86238500d"
+        }
+      ]
+    },
+    {
+      "id": "B61",
+      "slug": "language",
+      "name": "Idioma",
+      "nameEn": "Language",
+      "module": "shared",
+      "canonicalProposal": "icon.globe",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/language/icon-128.png",
+      "svg": "new/language/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/language/icon-128.png",
+          "bytes": 3948,
+          "sha256": "6dc248752cafab2fed1ab5c5dea451ebeefd44d5089a9013996d30208da7df6c"
+        },
+        {
+          "path": "new/language/icon-256.png",
+          "bytes": 8126,
+          "sha256": "6b9f51a529893a19cd2cecb781b1dc88972622dbd4a17a4191aef10808174045"
+        },
+        {
+          "path": "new/language/icon.svg",
+          "bytes": 397,
+          "sha256": "747e3c7df970d6bec9e1a1ebaf44d04fca82cbb2610a41881720e501c95a3548"
+        }
+      ]
+    },
+    {
+      "id": "B62",
+      "slug": "upload",
+      "name": "Subir archivo",
+      "nameEn": "Upload file",
+      "module": "shared",
+      "canonicalProposal": "icon.export",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/upload/icon-128.png",
+      "svg": "new/upload/icon.svg",
+      "motion": "new/upload/motion.gif",
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/upload/icon-128.png",
+          "bytes": 2761,
+          "sha256": "8d3243a7623e8d023bedff5ffa6b3c395ac986f2c09f39236e1ace9682106953"
+        },
+        {
+          "path": "new/upload/icon-256.png",
+          "bytes": 5610,
+          "sha256": "3fe0fa2192f4ce68c5e854c75c3b0c9dae5f56ba09e8e635117eb1248e2fa7a8"
+        },
+        {
+          "path": "new/upload/icon.svg",
+          "bytes": 425,
+          "sha256": "176d1af6ccf7f9e2caaa6676c752bf35fc51b061787de9ab6910b17ce7b8fe48"
+        },
+        {
+          "path": "new/upload/motion.gif",
+          "bytes": 17744,
+          "sha256": "7c3a7589b7bbc83a091a7301498cfc1fd0ef6c6ffc082869d69f90c74c55cd2e"
+        }
+      ]
+    },
+    {
+      "id": "B63",
+      "slug": "send",
+      "name": "Enviar",
+      "nameEn": "Send",
+      "module": "messages",
+      "canonicalProposal": "icon.send",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/send/icon-128.png",
+      "svg": "new/send/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/send/icon-128.png",
+          "bytes": 2331,
+          "sha256": "56962a14d17de1aec98aee94abd0297f6dad98d65ece387f0c9efd3926df597c"
+        },
+        {
+          "path": "new/send/icon-256.png",
+          "bytes": 4495,
+          "sha256": "6240f23c85bc4df1316f1753e5f658eab947303c1b23170a778fb509c088d3ca"
+        },
+        {
+          "path": "new/send/icon.svg",
+          "bytes": 240,
+          "sha256": "7c0417ab70b63630640b1e054d37a85af16327b820cde5d0293aa4e117f6ad1b"
+        }
+      ]
+    },
+    {
+      "id": "B64",
+      "slug": "image",
+      "name": "Imagen",
+      "nameEn": "Image",
+      "module": "cards",
+      "canonicalProposal": "icon.image",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/image/icon-128.png",
+      "svg": "new/image/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/image/icon-128.png",
+          "bytes": 2764,
+          "sha256": "49fb43f622a441173e2f2b9e81d7c44270daa1a7e94ea12f39b58a737b71c012"
+        },
+        {
+          "path": "new/image/icon-256.png",
+          "bytes": 5308,
+          "sha256": "0576c840512e60af3ea8296c369ae94d497a800f9dbacfc39501828460ad63cd"
+        },
+        {
+          "path": "new/image/icon.svg",
+          "bytes": 411,
+          "sha256": "893b45e7c0162bb7297e8008006c00ad6561cd2924c4e45625ee8b0a1427881a"
+        }
+      ]
+    },
+    {
+      "id": "B65",
+      "slug": "help",
+      "name": "Ayuda",
+      "nameEn": "Help",
+      "module": "utilities",
+      "canonicalProposal": "icon.help",
+      "approvedByUser": false,
+      "status": "new-extension-review-required",
+      "runtimeRegistered": false,
+      "applicationEmojiId": null,
+      "icon": "new/help/icon-128.png",
+      "svg": "new/help/icon.svg",
+      "motion": null,
+      "motionRole": "pending",
+      "resultPolicy": "confirmed-domain-state-and-text; use A11 only for confirmation messages, not as a universal control icon",
+      "files": [
+        {
+          "path": "new/help/icon-128.png",
+          "bytes": 1877,
+          "sha256": "4f1c5509c99af785f38943e1181f5991bc489834713956e72e4ee51f522f53f9"
+        },
+        {
+          "path": "new/help/icon-256.png",
+          "bytes": 3672,
+          "sha256": "2aeff3d7d5b9863ce67f645b7be6790d590295eaa087e4752c95f2ebf593f572"
+        },
+        {
+          "path": "new/help/icon.svg",
+          "bytes": 337,
+          "sha256": "5713512bd827f4bb8b80c1b107b48734da85275d13f70be4d0d190080e5802d8"
+        }
+      ]
+    }
+  ]
+}

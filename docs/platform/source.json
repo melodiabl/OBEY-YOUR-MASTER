@@ -404,7 +404,7 @@
     "libraryDeployed": true
   },
   "executionOrder": {
-    "authority": "../../tasks/plan.md#orden-activo--23102026",
+    "authority": "../../tasks/plan.md",
     "activeStage": "P1",
     "nextUnit": "P1 music: transfer queue/state ownership to lavalink-client, preserve data and controls, verify continuity/recovery, then complete the web player on that contract. P0 accepted with real GitHub CI and verified support channels; Mongo credential rotation explicitly excluded by user, not performed.",
     "sequence": [
@@ -418,7 +418,8 @@
     "transversal": "P3 resources and localization accompany each capability",
     "completedStagesNotImplied": true,
     "closureReport": "P0-REMOTE-2026-11-01.md",
-    "classification": "p0-classification.json"
+    "classification": "p0-classification.json",
+    "latestPlanReconciliation": "PLAN-2026-11-02.md"
   },
   "p0Reconciliation": {
     "implementationCode": "1f4a7ae23b4dd4aba11923a49bc619467491a172",
@@ -588,5 +589,24 @@
     "exceptionByExplicitUserInstruction": true,
     "businessAcceptanceImplied": false,
     "nextStage": "P1"
+  },
+  "latestPlan": {
+    "receivedDate": "2026-11-02",
+    "archive": "/home/OBEY_Proyecto_Original_y_Plan_Sin_Tocar_Materiales_2026-11-01.zip",
+    "sha256": "7e9a60986fa75b596f9802cb4f2db02bd6bf2908f4fd18fe60d5fafb33073efc",
+    "innerSha256": "8372fa45286987d7ccd0c3299b47a61c517de4ad00a5a20ac554096f8e357f62",
+    "reference": "../plan-20261101/LEER_PRIMERO.md",
+    "report": "PLAN-2026-11-02.md",
+    "evidence": "evidence/plan-reconciliation-20261102.json",
+    "originalOverlaid": false,
+    "archiveRetained": true,
+    "referenceFiles": 66,
+    "materialsChanged": false,
+    "landingChanged": false,
+    "builderTargetName": "Constructor / OBEY Builder",
+    "apiDuringP1": "Express with current session/permission authority; Fastify evaluated later with parity",
+    "targetMusicClient": "lavalink-client",
+    "productionMusicClient": "Shoukaku",
+    "deployedByReceipt": false
   }
 }
