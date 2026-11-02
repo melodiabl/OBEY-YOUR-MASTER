@@ -1,0 +1,200 @@
+{
+  "date": "2026-11-02",
+  "request": "Research a high-level music dependency with maximum built-in functionality before continuing the migration",
+  "registry": [
+    {
+      "name": "moonlink.js",
+      "version": "5.2.0",
+      "released": "2026-02-28T21:40:22.205Z",
+      "engines": {
+        "node": ">=22.x.x"
+      },
+      "license": "Open Software License 3.0",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Ecliptia/moonlink.js.git"
+      },
+      "integrity": "sha512-xVtMQiBNqFAp3gzTt6V4FgS9UuouwU8mEXelRZwdNLoom+DEAA6zYXqI9fgnIkl/JZxDmzovPVYto/tb02exgQ==",
+      "tarball": "https://registry.npmjs.org/moonlink.js/-/moonlink.js-5.2.0.tgz",
+      "dependencies": {}
+    },
+    {
+      "name": "lavalink-client",
+      "version": "2.11.0",
+      "released": "2026-08-21T15:28:23.214Z",
+      "engines": {
+        "bun": ">=1.1.27",
+        "node": ">=18.0.0"
+      },
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tomato6966/lavalink-client.git"
+      },
+      "integrity": "sha512-x4mobBpwSjJ+jC2XDevcMc8Mj454Bx3cTfmWgtLHisY+U/HlK7ubWkdHawZrEwBW5E6zIDjoiBvVBR8FDIUdkw==",
+      "tarball": "https://registry.npmjs.org/lavalink-client/-/lavalink-client-2.11.0.tgz",
+      "dependencies": {
+        "tslib": "^2.8.1",
+        "ws": "^8.21.3"
+      }
+    },
+    {
+      "name": "kazagumo",
+      "version": "3.4.3",
+      "released": "2026-03-05T19:40:45.842Z",
+      "engines": {
+        "node": ">=16.5.0"
+      },
+      "license": "MIT",
+      "repository": {
+        "url": "git+https://github.com/Takiyo0/Kazagumo.git",
+        "type": "git"
+      },
+      "integrity": "sha512-0Y0MJgfjHQICdnPQTNyHKnDTBBcyMCvUDw/GJ2X8svn//gkrPlod31fnf8nUuSuCmU2cFv7ymVcQXaqgJWcddw==",
+      "tarball": "https://registry.npmjs.org/kazagumo/-/kazagumo-3.4.3.tgz",
+      "dependencies": {
+        "shoukaku": "^4.3.0"
+      }
+    },
+    {
+      "name": "poru",
+      "version": "5.3.0",
+      "released": "2026-02-28T15:13:43.210Z",
+      "engines": {
+        "node": ">=16.9.0"
+      },
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/parasop/poru.git"
+      },
+      "integrity": "sha512-K9ptpzZI6D9llg7mtFIYpbsVfzvaQ7Mwt/g8Ndx3oatcbbavHkd6K7zKPFFYgTKCtpQMJuV5KaQqc48pFKZbAA==",
+      "tarball": "https://registry.npmjs.org/poru/-/poru-5.3.0.tgz",
+      "dependencies": {
+        "gen-esm-wrapper": "^1.1.3",
+        "ws": "^8.16.0"
+      }
+    },
+    {
+      "name": "riffy",
+      "version": "1.0.12",
+      "released": "2026-03-01T09:42:00.156Z",
+      "engines": {},
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/riffy-team/riffy.git"
+      },
+      "integrity": "sha512-rFVIERWq0FeKINDOTKobUamrvX9m4xdP8NTJfA8thYbLrkOfK6vgZ6UlTjHeBippjFq6xlPv7OGVT2INl6Y0hQ==",
+      "tarball": "https://registry.npmjs.org/riffy/-/riffy-1.0.12.tgz",
+      "dependencies": {
+        "jsdom": "^26.0.0",
+        "undici": ">=6.11.1",
+        "ws": "^8.16.0"
+      }
+    },
+    {
+      "name": "lavashark",
+      "version": "2.3.3",
+      "released": "2026-08-09T15:45:32.192Z",
+      "engines": {
+        "node": ">=22.19.0"
+      },
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hmes98318/LavaShark.git"
+      },
+      "integrity": "sha512-jyL4ZCNoQIsulbJc67YQ4Q+h5U8Vs5UzUlRZlt+iD3t2DHJ50iaUnHeQBFXdjUoi4G27lxp/vYxxVDkEUUuguw==",
+      "tarball": "https://registry.npmjs.org/lavashark/-/lavashark-2.3.3.tgz",
+      "dependencies": {
+        "otpauth": "^9.5.1",
+        "undici": "^8.10.0",
+        "ws": "^8.21.3"
+      }
+    }
+  ],
+  "publishedPackagesInspected": [
+    {
+      "name": "moonlink.js",
+      "version": "5.2.0",
+      "integrity": "sha512-xVtMQiBNqFAp3gzTt6V4FgS9UuouwU8mEXelRZwdNLoom+DEAA6zYXqI9fgnIkl/JZxDmzovPVYto/tb02exgQ==",
+      "sha1": "49cc9d8def46d6710838c409ae0dd39e65bcfedc",
+      "files": 81,
+      "unpackedBytes": 607813
+    },
+    {
+      "name": "poru",
+      "version": "5.3.0",
+      "integrity": "sha512-K9ptpzZI6D9llg7mtFIYpbsVfzvaQ7Mwt/g8Ndx3oatcbbavHkd6K7zKPFFYgTKCtpQMJuV5KaQqc48pFKZbAA==",
+      "sha1": "e9a26f4e03ea6593da526f2274fed009e41e1f4a",
+      "files": 136,
+      "unpackedBytes": 1314586
+    },
+    {
+      "name": "riffy",
+      "version": "1.0.12",
+      "integrity": "sha512-rFVIERWq0FeKINDOTKobUamrvX9m4xdP8NTJfA8thYbLrkOfK6vgZ6UlTjHeBippjFq6xlPv7OGVT2INl6Y0hQ==",
+      "sha1": "ffac7164a1794941e91ef6afb039c2ce27b5cfc7",
+      "files": 16,
+      "unpackedBytes": 149134
+    },
+    {
+      "name": "lavashark",
+      "version": "2.3.3",
+      "integrity": "sha512-jyL4ZCNoQIsulbJc67YQ4Q+h5U8Vs5UzUlRZlt+iD3t2DHJ50iaUnHeQBFXdjUoi4G27lxp/vYxxVDkEUUuguw==",
+      "sha1": "9a21601b22900b7b0684dd62ac82a66b3e48497a",
+      "files": 51,
+      "unpackedBytes": 261441
+    }
+  ],
+  "moonlinkInspection": {
+    "version": "5.2.0",
+    "node": "v22.23.4",
+    "network": "none",
+    "initialized": false,
+    "methodChecks": {
+      "player": [
+        "play",
+        "pause",
+        "resume",
+        "stop",
+        "skip",
+        "back",
+        "seek",
+        "shuffle",
+        "transferNode",
+        "restart",
+        "setAutoPlay",
+        "subscribeLyrics"
+      ],
+      "queue": [
+        "add",
+        "remove",
+        "move",
+        "shuffle",
+        "removeDuplicates"
+      ],
+      "node": [
+        "handleAutoPlay"
+      ]
+    },
+    "volumeSetterAwaitsAcknowledgement": false,
+    "autoplayLookupRechecksCancellationAfterSearch": false,
+    "scope": "Actual published SDK methods with external boundaries substituted; no Discord/node or audible playback tested"
+  },
+  "scope": {
+    "readPublishedCode": true,
+    "networkDisabledForExecution": true,
+    "liveAudio": false,
+    "liveDiscord": false,
+    "productionChanged": false,
+    "selectedNewEngine": false
+  },
+  "recommendation": {
+    "maximumAutomation": "moonlink.js 5.2.0",
+    "forObeyConfirmedControls": "lavalink-client 2.11.0",
+    "reason": "Native queue/history/filters/nodes reduce custom engine work; Moonlink has more automation but delayed autocomplete/optimistic volume need explicit OBEY guarantees"
+  },
+  "report": "MUSIC-LIBRARIES-2026-11-02.md"
+}

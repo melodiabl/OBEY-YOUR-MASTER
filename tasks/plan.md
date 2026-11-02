@@ -1,5 +1,9 @@
 # Plan de implementación de la plataforma OBEY
 
+## 02/11/2026 · Prioridad del usuario: dependencia musical completa
+
+El usuario pidió investigar antes de continuar y evitar ampliar Shoukaku. [Comparación de seis dependencias](../docs/platform/MUSIC-LIBRARIES-2026-11-02.md): Moonlink.js 5.2.0 ofrece más automatismos; lavalink-client 2.11.0 es la recomendación para las garantías de confirmación/cancelación actuales de OBEY. El paquete Moonlink publicado se examinó y ejecutó sin red con Node22.23.4; se acreditaron dos límites concretos, sin probar audio. No se sustituyó el motor ni se dejó una dependencia instalada anticipadamente. La siguiente implementación debe usar la cola/historial/eventos nativos del cliente elegido; no prolongar el motor artesanal. La unidad local de voz anterior conserva 37 casos aislados y los 25 originales aprobados, tipos y fronteras; queda pendiente su construcción final/entrega, sin despliegue ni cierre P1.
+
 ## 02/11/2026 · ZIP conciliado y continuación P1
 
 La [referencia recibida](../docs/plan-20261101/LEER_PRIMERO.md) se conserva sin sobrescribir el proyecto histórico sobre avances actuales. [Decisiones, discrepancias y orden](../docs/platform/PLAN-2026-11-02.md): P0 sigue cerrado; terminar voz/continuidad, frontera de motor, lavalink-client y aceptación musical antes de Builder y panel por capacidades. Landing/materiales conservados; Constructor/Builder como destino; Express mantiene autoridad durante P1 y Fastify exige paridad posterior. No se acepta la migración por documentación ni se publican rediseños rechazados.

@@ -1,5 +1,11 @@
 # Tareas y checkpoints de OBEY
 
+## 02/11/2026 · Investigar dependencia antes de continuar
+
+- [x] Comparar seis clientes Lavalink con metadatos npm, documentación y código publicado; comprobar Moonlink 5.2.0 en Node22.23.4 sin red. [Resultado](../docs/platform/MUSIC-LIBRARIES-2026-11-02.md).
+- [ ] Ejecutar migración al cliente de mayor nivel con cola/historial/eventos nativos, sin seguir ampliando Shoukaku. No equivale a instalar el paquete ni a duplicar la cola.
+- [ ] Conservar evidencia de la unidad local de voz: 37 casos aislados/25 originales, tipos/fronteras pasan; build y entrega de esa unidad no realizados al cambiar la prioridad a investigación.
+
 ## 02/11/2026 · Continuación con el ZIP nuevo
 
 - [x] Localizar y validar el ZIP nuevo; preservar su original y copiar únicamente documentación. Comparar los 4.267 archivos versionados sin sobrescribir avances. [Evidencia](../docs/platform/evidence/plan-reconciliation-20261102.json).

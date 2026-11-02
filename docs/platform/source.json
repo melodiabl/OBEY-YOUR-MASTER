@@ -406,7 +406,7 @@
   "executionOrder": {
     "authority": "../../tasks/plan.md",
     "activeStage": "P1",
-    "nextUnit": "P1 music: transfer queue/state ownership to lavalink-client, preserve data and controls, verify continuity/recovery, then complete the web player on that contract. P0 accepted with real GitHub CI and verified support channels; Mongo credential rotation explicitly excluded by user, not performed.",
+    "nextUnit": "Direct migration to a high-level music engine with its native queue/history/events; compare Moonlink and lavalink-client per latest research. No further Shoukaku feature expansion. P0 remains accepted.",
     "sequence": [
       "P0",
       "P1",
@@ -608,5 +608,14 @@
     "targetMusicClient": "lavalink-client",
     "productionMusicClient": "Shoukaku",
     "deployedByReceipt": false
+  },
+  "musicLibraryReview": {
+    "date": "2026-11-02",
+    "report": "MUSIC-LIBRARIES-2026-11-02.md",
+    "evidence": "evidence/music-library-research-20261102.json",
+    "recommendationOnly": true,
+    "highestBuiltInAutomation": "moonlink.js 5.2.0",
+    "recommendedForCurrentObeyGuarantees": "lavalink-client 2.11.0",
+    "productionChanged": false
   }
 }
