@@ -617,5 +617,17 @@
     "highestBuiltInAutomation": "moonlink.js 5.2.0",
     "recommendedForCurrentObeyGuarantees": "lavalink-client 2.11.0",
     "productionChanged": false
+  },
+  "currentMusicDecision": {
+    "date": "2026-11-03",
+    "authority": "User selected own fork NyxLink; supersedes earlier lavalink-client recommendation",
+    "targetMusicClient": "nyxlink",
+    "version": "0.1.0-dev.2",
+    "codeCommit": "623ca80a",
+    "productionDeployed": true,
+    "engineOwner": "Native Manager/Player/Queue",
+    "nativeQueueVerified": true,
+    "operationalAcceptance": "pending Discord listening and real failover",
+    "evidence": "docs/platform/evidence/nyx-migration-20261103.json"
   }
 }

@@ -72,7 +72,7 @@
         "G06"
       ],
       "authorityReview": "Gateway y OAuth comparten servicio; una sola cola/autoridad. Flags musicales heredados no acreditan permisos frescos ni guardado confirmado.",
-      "acceptance": "Migración lavalink-client y matriz original de fin/skip/stop/error, modos, manual/autoplay, recuperación y letras.",
+      "acceptance": "Migración NyxLink elegida por el usuario (03/11/2026), con SDK y cola nativos y matriz original de fin/skip/stop/error, modos, manual/autoplay, recuperación y letras.",
       "status": "pending-capability-acceptance",
       "transversal": [
         "P3"

@@ -130,7 +130,7 @@ jobs:
           }
           verify().catch(error => { console.error(error); process.exitCode = 1 })
           NODE
-      - name: Install the frozen migration client in isolation
+      - name: Verify the frozen NyxLink production client in isolation
         run: |
           task_dir="$RUNNER_TEMP/obey-music-client-compatibility"
           node - "$task_dir" <<'NODE'
@@ -143,10 +143,12 @@ jobs:
           npm ci --prefix "$task_dir" --ignore-scripts --no-fund --no-audit
           node - "$task_dir" <<'NODE'
           const path = require('node:path'), assert = require('node:assert/strict'), contract = require('./docs/platform/music-client-installation.json')
-          const directory = process.argv[2], installed = path.join(directory, 'node_modules/lavalink-client')
-          assert.equal(require(installed + '/package.json').version, contract.package.dependencies['lavalink-client'])
-          assert.equal(typeof require(installed).LavalinkManager, 'function')
-          const ws = require.resolve('ws/package.json', { paths: [installed] })
-          assert.equal(require(ws).version, contract.lockfile.packages['node_modules/ws'].version)
-          console.log(JSON.stringify({ client: require(installed + '/package.json').version, ws: require(ws).version, node: process.version, productionInstalled: false }))
+          const directory = process.argv[2], installed = path.join(directory, 'node_modules/nyxlink')
+          assert.equal(require(installed + '/package.json').version, contract.package.dependencies.nyxlink)
+          assert.equal(typeof require(installed).Manager, 'function')
+          const consola = require.resolve('consola/package.json', { paths: [installed] })
+          assert.equal(require(consola).version, contract.lockfile.packages['node_modules/consola'].version)
+          assert.equal(contract.lockfile.packages['node_modules/nyxlink'].integrity, require('./package-lock.json').packages['node_modules/nyxlink'].integrity)
+          assert.equal(contract.productionDependencyInstalled, true)
+          console.log(JSON.stringify({ client: require(installed + '/package.json').version, consola: require(consola).version, node: process.version, productionInstalled: true }))
           NODE
