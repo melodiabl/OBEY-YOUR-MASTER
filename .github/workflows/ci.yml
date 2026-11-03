@@ -146,7 +146,7 @@ jobs:
           const directory = process.argv[2], installed = path.join(directory, 'node_modules/nyxlink')
           assert.equal(require(installed + '/package.json').version, contract.package.dependencies.nyxlink)
           assert.equal(typeof require(installed).Manager, 'function')
-          const consola = require.resolve('consola/package.json', { paths: [installed] })
+          const consola = path.join(directory, 'node_modules/consola/package.json')
           assert.equal(require(consola).version, contract.lockfile.packages['node_modules/consola'].version)
           assert.equal(contract.lockfile.packages['node_modules/nyxlink'].integrity, require('./package-lock.json').packages['node_modules/nyxlink'].integrity)
           assert.equal(contract.productionDependencyInstalled, true)
