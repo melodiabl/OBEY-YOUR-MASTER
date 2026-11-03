@@ -319,3 +319,61 @@ test('the web player highlights the preferred category without losing other resu
   assert.equal(items(catalog, 'tracks')[0].title, 'Song')
   assert.equal(items({ ...catalog, preferredTab: 'artists' }, 'all')[0].title, 'Adele')
 })
+
+test('Apple Music artist identity ignores its optional display slug while retaining region and ID', () => {
+  const { artistUri } = require('../handlers/music/artists')
+  assert.equal(artistUri('https://music.apple.com/us/artist/adele/262836961'), 'https://music.apple.com/us/artist/262836961')
+  assert.equal(artistUri('https://music.apple.com/us/artist/ad%C3%A9la/1765924916'), 'https://music.apple.com/us/artist/1765924916')
+  assert.notEqual(artistUri('https://music.apple.com/us/artist/262836961'), artistUri('https://music.apple.com/us/artist/1765924916'))
+  assert.notEqual(artistUri('https://music.apple.com/us/artist/262836961'), artistUri('https://music.apple.com/es/artist/262836961'))
+})
+
+test('artist tab and selection open native NodeLink Apple Music tops without enqueuing', async () => {
+  const { EventEmitter } = require('node:events'), { nodeView } = require('../handlers/music/node-view')
+  const { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const collector = new EventEmitter(), renders = [], queries = []
+  const track = { encoded: 'top', info: { title: 'Someone Like You', author: 'Adele', sourceName: 'applemusic', uri: 'https://music.apple.com/us/song/420075084' } }
+  const native = { identifier: 'native', isNodeLink: true, rest: { loadTracks: async query => {
+    queries.push(query)
+    // NodeLink's Apple URL matcher requires a display segment before the ID.
+    if (query !== 'https://music.apple.com/us/artist/_/262836961') return { loadType: 'empty', data: {} }
+    return { loadType: 'artist', data: { info: { name: "Adele's Top Tracks" }, pluginInfo: {}, tracks: [track] } }
+  } } }
+  let enqueues = 0
+  const client = { nodePool: { candidates: () => [nodeView(native)] }, music: { enqueue: () => enqueues++ } }
+  await openCatalogPicker({ client, query: 'Adele', actor: { id: 'owner' }, guild: { id: 'guild' }, results: {
+    tracks: [track], albums: [], artists: [{ type: 'artist', title: 'Adele', uri: 'https://music.apple.com/us/artist/adele/262836961', sourceName: 'applemusic' }] },
+    edit: async payload => { renders.push(payload); return { createMessageComponentCollector: () => collector } } })
+  const interact = collector.listeners('collect')[0], replies = []
+  const event = customId => ({ customId, user: { id: 'owner' }, values: ['0'], deferUpdate: async () => {}, followUp: async payload => replies.push(payload) })
+  await interact(event('srch_tab:artists'))
+  assert.match(renders.at(-1).embeds[0].toJSON().title, /Artistas/)
+  await interact(event('srch_pick'))
+  assert.deepEqual(replies, [])
+  assert.match(renders.at(-1).embeds[0].toJSON().title, /populares/)
+  assert.match(renders.at(-1).embeds[0].toJSON().description, /Someone Like You/)
+  assert.deepEqual(queries, ['https://music.apple.com/us/artist/_/262836961'])
+  assert.equal(enqueues, 0)
+})
+
+test('LavaSrc Apple Music artist profiles accept the same ID with a canonical URL', async () => {
+  const { getArtist } = require('../handlers/music/artists')
+  const uri = 'https://music.apple.com/us/artist/adele/262836961'
+  const client = { nodePool: { candidates: () => [{ name: 'lavasrc', rest: { resolve: async () => ({ loadType: 'playlist', data: {
+    info: { name: "Adele's Top Tracks" }, pluginInfo: { type: 'artist', author: 'Adele', url: 'https://music.apple.com/us/artist/262836961' },
+    tracks: [{ encoded: 'top', info: { title: 'Hello', author: 'Adele', sourceName: 'applemusic' } }] } }) } }] } }
+  const profile = await getArtist(client, uri)
+  assert.equal(profile.artist.uri, 'https://music.apple.com/us/artist/262836961')
+  assert.equal(profile.tracks[0].info.title, 'Hello')
+})
+
+test('artist album buttons retain real Apple Music album metadata and reject unrelated URLs', () => {
+  const { albumsFromTracks } = require('../handlers/music/artists')
+  const track = albumUrl => ({ info: { title: 'Hello', author: 'Adele', sourceName: 'applemusic' }, pluginInfo: { albumName: '25', albumUrl } })
+  const uri = 'https://music.apple.com/us/album/25/1051394208'
+  const albums = albumsFromTracks([track(uri), track(uri.replace('/25/', '/hello/')), track('https://evil.invalid/us/album/25/1051394208'), track('https://music.apple.com/us/song/1051394215')])
+  assert.equal(albums.length, 1)
+  assert.equal(albums[0].uri, 'https://music.apple.com/us/album/1051394208')
+  assert.equal(albums[0].title, '25')
+  assert.equal(albums[0].sourceName, 'applemusic')
+})

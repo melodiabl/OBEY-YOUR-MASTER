@@ -3,15 +3,17 @@ const { allowedMusicTrack } = require('./nodes-config')
 const { recordingArtist } = require('./recordings')
 const { lookupWithTimeout } = require('./resolve-timeout')
 
-function artistUri(value) {
+function catalogUri(value, kind) {
   try {
     const url = new URL(value)
     if (url.protocol !== 'https:' || url.username || url.password || url.port) return null
-    if (url.hostname === 'open.spotify.com' && /^\/artist\/[A-Za-z0-9]{22}$/.test(url.pathname)) return url.origin + url.pathname
-    if (url.hostname === 'music.apple.com' && /^\/[a-z]{2}\/artist\/(?:[^/]+\/)?\d+$/.test(url.pathname)) return url.origin + url.pathname
+    if (url.hostname === 'open.spotify.com' && new RegExp(`^/${kind}/[A-Za-z0-9]{22}$`).test(url.pathname)) return url.origin + url.pathname
+    const apple = url.pathname.match(new RegExp(`^/([a-z]{2})/${kind}/(?:[^/]+/)?(\\d+)$`))
+    if (url.hostname === 'music.apple.com' && apple) return `${url.origin}/${apple[1]}/${kind}/${apple[2]}`
   } catch {}
   return null
 }
+const artistUri = value => catalogUri(value, 'artist')
 function image(value) { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : null } catch { return null } }
 function normalizeArtist(item) {
   const info = item?.info || item || {}, plugin = item?.pluginInfo || {}
@@ -38,10 +40,10 @@ function uniqueArtists(items) {
 function albumsFromTracks(tracks) {
   const albums = new Map()
   for (const track of tracks) {
-    const info = track.info || track, plugin = track.pluginInfo || {}, uri = plugin.albumUrl
-    if (!/^https:\/\/open\.spotify\.com\/album\/[A-Za-z0-9]{22}$/.test(uri || '')) continue
+    const info = track.info || track, plugin = track.pluginInfo || {}, uri = catalogUri(plugin.albumUrl, 'album')
+    if (!uri) continue
     if (!albums.has(uri)) albums.set(uri, { type: 'album', title: plugin.albumName || '', author: info.author, uri,
-      artworkUrl: image(plugin.albumArtUrl || info.artworkUrl), sourceName: 'spotify' })
+      artworkUrl: image(plugin.albumArtUrl || info.artworkUrl), sourceName: uri.includes('open.spotify.com') ? 'spotify' : 'applemusic' })
   }
   return [...albums.values()]
 }

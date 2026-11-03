@@ -9,7 +9,14 @@ function nodeView(node) {
     get stats() { return node.stats },
     get penalties() { return node.getPenalties?.() || 0 },
     rest: {
-      resolve: (query, options) => node.rest.loadTracks(query, options),
+      async resolve(query, options) {
+        // NodeLink requires a display segment even when Apple returns only an ID.
+        const identifier = node.isNodeLink && typeof query === 'string'
+          ? query.replace(/^(https:\/\/music\.apple\.com\/[a-z]{2}\/(?:artist|album))\/(\d+)$/, '$1/_/$2') : query
+        const result = await node.rest.loadTracks(identifier, options)
+        // NodeLink returns Apple artist tops as a collection with type artist.
+        return node.isNodeLink && result?.loadType === 'artist' ? { ...result, loadType: 'playlist' } : result
+      },
       // Optional catalog/lyrics plugins have no generic method in the typed SDK.
       async fetch({ endpoint, options = {} }) {
         if (endpoint === '/info') return node.info || node.rest.getInfo()

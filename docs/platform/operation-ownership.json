@@ -1053,11 +1053,11 @@
     "dashboard/oauth.js": "266ce8b91a50fee6c59399a239ea3a8b96de3f1f50fcb5ef2c32f72233dd7e11",
     "dashboard/statistics.js": "89702fa0dfe723d027fc3c0f17095704e2ccce4fbae2a3ff0e6deaae5327df67",
     "handlers/music/voice-session.js": "453ea02f7cd0211cd6f15bb82bd03dd36df4f8433e91c1bf227baefa779d577d",
-    "handlers/music/node-view.js": "22ae917af0b3c5b6a1d68d12b2f435e33367c2dd04f5879f8bdd7f0b76ff5bab",
+    "handlers/music/node-view.js": "b3e6533888957a48a55f00e966c88db022433e00b116eac18dffea4cce60c8a9",
     "handlers/music/recording-recovery.js": "7715e1ad92925ab0f645837776058412e0115fcfa261d7a2d94c0e6993db2963",
     "handlers/music/session-lifecycle.js": "22a2963462267dbac0a85366dc2ea4665b6f41f20f1ce85d682cbce3fec183be",
     "handlers/music/tracks.js": "f22ecabe5b41a70e9df9288098945a72a91b80e4f60d8d0744eea64219c787b1",
-    "handlers/music/artists.js": "7233269e26102f8144cddb85ff5b730afd05db0a561ac29f7dc58335ff4d359c"
+    "handlers/music/artists.js": "f284bfb4a454d4b4b513deec6d326c01db92377ba864076d7f6e0d9e982cc301"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
