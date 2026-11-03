@@ -145,5 +145,47 @@
     "Artist albums represent the releases identified from top tracks, not complete discography",
     "No real Chrome visual validation was possible"
   ],
-  "sourceInventory": "fd3cb30b381e8b136a39dc29b600955d22ea4939b9fd84b4c9820576dca370cf"
+  "sourceInventory": "fd3cb30b381e8b136a39dc29b600955d22ea4939b9fd84b4c9820576dca370cf",
+  "image": {
+    "id": "02eab6a0f2f19efbfe4f1c74bc60973c398edea1b85c27666b5213645c63f62e",
+    "name": "localhost/obey-your-master_bot:release-artists-20261103-e79d7633",
+    "codeCommit": "e79d7633",
+    "node": "22.23.4",
+    "tests": 37,
+    "failed": 0,
+    "registryCommands": 661,
+    "aliases": 776,
+    "routes": 95
+  },
+  "runtime": {
+    "observedAt": "2026-11-03T16:22:06.805Z",
+    "status": "running",
+    "health": "healthy",
+    "restarts": 0,
+    "httpStatus": 200,
+    "serviceHealth": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 162
+    },
+    "defaultNode": "trinium-nodelink-1",
+    "ready": [
+      "nazha",
+      "millohost",
+      "trinium-nodelink-1",
+      "trinium-nodelink-2",
+      "nazha",
+      "trinium-nodelink-1",
+      "trinium-nodelink-2"
+    ],
+    "privateDisabled": true,
+    "restoreFailures": 0,
+    "unhandledErrors": 0,
+    "guildPreferences": "6 auto; no persisted selection had to be migrated"
+  },
+  "probeIdMapping": {
+    "trinium-nl-com": "trinium-nodelink-1",
+    "trinium-nl-02-com": "trinium-nodelink-2"
+  }
 }

@@ -25,3 +25,11 @@ Las pruebas cubren identidades, homónimos, orden de tops, rechazo de URLs arbit
 Chrome DevTools no pudo arrancar: primero ejecución como root y después falta de sandbox utilizable también bajo un usuario sin privilegios. No se desactivó el sandbox. La prueba DOM y el render EJS no acreditan una revisión visual en Chrome.
 
 La comprobación real final con Adele devolvió dos identidades (Spotify/Apple Music). El perfil Spotify cargó diez tops y resolvió los nombres de cuatro publicaciones cuando el proveedor omitía albumName: 21, 30, Skyfall y 25. El conjunto tardó 2.953 ms en la muestra; se conserva el orden del top y cada publicación mantiene su identidad de catálogo.
+
+## Despliegue
+
+Código e79d7633, imagen release-artists-20261103-e79d7633, Node22.23.4. Pasan 37/37 pruebas dentro de la imagen, tipos Welcome y fronteras de dependencias. Los cargadores reales verifican 661 comandos, 776 aliases y 95 rutas sin login ni red; no se registró un comando raíz nuevo.
+
+Se recreó únicamente obey_bot y se instaló el registro público junto con su nuevo principal de forma coordinada, después del cierre anterior. Salud HTTP200, Mongo/música disponibles, contenedor healthy, cero reinicios y sin errores fatales/fallos de restauración en la muestra. Los cuatro nodos habilitados emitieron Ready; el privado está excluido. Las seis preferencias guardadas eran auto y no requirieron editar Mongo.
+
+Se conservan imagen anterior, configuración previa y registro anterior bajo .runtime/nodes-artists-20261103. Los arneses DOM y el navegador temporal se retiran después de guardar resultados. La aceptación de audición Discord, failover real entre proveedores y revisión visual Chrome sigue pendiente. [Evidencia](evidence/nodes-artists-20261103.json), [pruebas del proyecto](evidence/nodes-artists-20261103.tap).
