@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-03",
+  "symptom": "Artist selection fails in catalog buttons",
+  "causes": [
+    "NodeLink Apple artist collections use loadType artist",
+    "LavaSrc artist URLs can omit a display slug",
+    "NodeLink Apple URI matcher requires a display segment",
+    "Apple album metadata may use several display slugs for the same ID"
+  ],
+  "fixes": [
+    "Normalize artist collection type at the REST boundary",
+    "Canonical artist and album identities preserve platform, region and ID",
+    "Adapt canonical Apple links only when addressing NodeLink",
+    "Keep real album metadata and deduplicate canonical IDs"
+  ],
+  "checks": {
+    "testsPassed": 53,
+    "testsFailed": 0,
+    "backendTypes": true,
+    "dependencyBoundaries": true,
+    "classification": true,
+    "redBeforeFix": true,
+    "imageTests": {
+      "node": "22.23.4",
+      "passed": 53,
+      "failed": 0,
+      "network": false
+    },
+    "effectiveRegistry": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "prefix": 517,
+      "slash": 144,
+      "roots": 20,
+      "login": false
+    }
+  },
+  "profiles": [
+    {
+      "uri": "https://music.apple.com/us/artist/adele/262836961",
+      "canonicalUri": "https://music.apple.com/us/artist/262836961",
+      "artist": "Adele",
+      "ms": 1183,
+      "tracks": 10,
+      "albums": [],
+      "firstTrack": "Someone Like You",
+      "node": "trinium-nodelink-1"
+    },
+    {
+      "uri": "https://music.apple.com/us/artist/ad%C3%A9la/1765924916",
+      "canonicalUri": "https://music.apple.com/us/artist/1765924916",
+      "artist": "ADÉLA",
+      "ms": 900,
+      "tracks": 10,
+      "albums": [],
+      "firstTrack": "Nicole Kidman",
+      "node": "trinium-nodelink-1"
+    },
+    {
+      "uri": "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+      "canonicalUri": "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+      "artist": "Adele",
+      "ms": 1213,
+      "tracks": 10,
+      "albums": [],
+      "firstTrack": "Set Fire to the Rain",
+      "node": "trinium-nodelink-1"
+    }
+  ],
+  "navigation": {
+    "steps": [
+      "Artistas",
+      "Elegir Adele (Apple Music)",
+      "Álbumes",
+      "Volver a artistas"
+    ],
+    "titles": [
+      "🎵 Pistas",
+      "👤 Artistas",
+      "Canciones populares",
+      "Álbumes de estas canciones",
+      "👤 Artistas"
+    ],
+    "errors": [],
+    "enqueues": 0,
+    "transport": "Real NyxLink REST and public nodes; Discord component events simulated without sending messages"
+  },
+  "limitations": [
+    "Discord events simulated with real providers; no actual Discord message was sent",
+    "Album lists depend on metadata supplied by each node",
+    "Browser UI not visually verified in Chrome"
+  ],
+  "deployment": {
+    "status": "healthy",
+    "image": "localhost/obey-your-master_bot:release-artist-buttons-20261103-af6b34a8",
+    "imageId": "e16acab6ce9faf69237704956c2bbcbab65ca505fe5b5568ce2272b64475a18d",
+    "codeRevision": "af6b34a87f3f627ff286f1e88ae73522b486c34c",
+    "restarts": 0,
+    "httpHealth": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 26
+      }
+    },
+    "rollbackImage": "localhost/obey-your-master_bot:release-search-20261103-88a9c6b6",
+    "privateNodeEnabled": false
+  }
+}
