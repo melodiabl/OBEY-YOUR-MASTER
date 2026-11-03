@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-03",
+  "change": "Search titles, credited artists and albums independently without implicit artist filtering",
+  "tests": {
+    "passed": 49,
+    "failed": 0,
+    "redBeforeFix": [
+      "homonymous artist removed title/album matches",
+      "partial title prefix rejected",
+      "combined title/artist lost to covers",
+      "album and artist intent not reflected in selection"
+    ]
+  },
+  "checks": {
+    "backendTypes": true,
+    "frontendTypes": true,
+    "dependencyBoundaries": true,
+    "classification": true,
+    "ejsRenderAndInlineScriptSyntax": true,
+    "imageTests": {
+      "node": "22.23.4",
+      "passed": 49,
+      "failed": 0,
+      "network": false
+    },
+    "effectiveRegistry": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "prefix": 517,
+      "slash": 144,
+      "roots": 20,
+      "login": false
+    }
+  },
+  "liveQueries": [
+    {
+      "query": "Hello",
+      "elapsedMs": 4084,
+      "preferredTab": "tracks",
+      "counts": {
+        "tracks": 10,
+        "albums": 0,
+        "artists": 0
+      },
+      "firstTrack": {
+        "title": "Hello",
+        "author": "Adele",
+        "source": "applemusic"
+      },
+      "firstAlbum": null
+    },
+    {
+      "query": "Hello Adele",
+      "elapsedMs": 5327,
+      "preferredTab": "tracks",
+      "counts": {
+        "tracks": 19,
+        "albums": 1,
+        "artists": 1
+      },
+      "firstTrack": {
+        "title": "Hello",
+        "author": "Adele",
+        "source": "applemusic"
+      },
+      "firstAlbum": {
+        "title": "Hello",
+        "author": "Adele"
+      }
+    },
+    {
+      "query": "Adele Hello",
+      "elapsedMs": 5115,
+      "preferredTab": "tracks",
+      "counts": {
+        "tracks": 14,
+        "albums": 1,
+        "artists": 0
+      },
+      "firstTrack": {
+        "title": "Hello",
+        "author": "Adele",
+        "source": "applemusic"
+      },
+      "firstAlbum": {
+        "title": "Hello",
+        "author": "Adele"
+      }
+    },
+    {
+      "query": "Discovery Daft Punk",
+      "elapsedMs": 5342,
+      "preferredTab": "albums",
+      "counts": {
+        "tracks": 13,
+        "albums": 1,
+        "artists": 0
+      },
+      "firstTrack": {
+        "title": "Daft Punk - Discovery (Full Album)",
+        "author": "DJ Diablo",
+        "source": "youtube"
+      },
+      "firstAlbum": {
+        "title": "Discovery",
+        "author": "Daft Punk"
+      }
+    }
+  ],
+  "review": {
+    "correctness": "Regression cases and real provider searches",
+    "architecture": "Shared catalog policy, existing native NyxLink queue unchanged",
+    "security": "Existing permissions and safe artist URLs retained; no public node credentials in evidence",
+    "performance": "No automatic artist-top expansion; existing timeouts and cache preserved"
+  },
+  "limitations": [
+    "Provider availability and counts vary between requests",
+    "No real Chrome visual verification: host cannot run the browser sandbox",
+    "No human listening or real voice failover acceptance"
+  ],
+  "deployment": {
+    "status": "running",
+    "image": "localhost/obey-your-master_bot:release-search-20261103-88a9c6b6",
+    "imageId": "8f50a5bb3f3d7bed1363175f34299ba50fcff775e623a42815ae8b7a596eb507",
+    "codeRevision": "88a9c6b6",
+    "httpHealth": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "database": true,
+        "music": true,
+        "uptime": 26
+      }
+    },
+    "containerHealth": "healthy",
+    "restarts": 0,
+    "rollbackImage": "localhost/obey-your-master_bot:release-artists-20261103-e79d7633",
+    "privateNodeEnabled": false
+  }
+}
