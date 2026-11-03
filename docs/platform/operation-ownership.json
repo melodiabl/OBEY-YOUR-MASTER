@@ -8,7 +8,7 @@
     "network": "disabled",
     "schedulerAndSessionFixtures": true,
     "baseImage": "271e2efd2a2f2202b8171458e3c0a0268c9f9905b8c2b07a49bac3e210029d84",
-    "sourceRefresh": "NyxLink migration: current source hashes and static client calls/imports; command and HTTP composition unchanged"
+    "sourceRefresh": "Public node rotation and artist catalog: source hashes/static calls/imports refreshed; command and HTTP composition unchanged"
   },
   "sourceHashes": {
     "commands/Administration/addrole.js": "ae836ae3423fbfc779e4f95569de4e8fb7daa107f4893b0d56d87b25e7c3e42f",
@@ -534,7 +534,7 @@
     "dashboard/configuration-routes.js": "6637add63b556cf4a08431a3dd2f8e6e458391a7f00542fa1c137e60d9bb5fb2",
     "dashboard/frontend-routes.js": "b35c58423cb3d31b9005eed00990883c348761019e5dea86c1c0065cbf82d2d7",
     "dashboard/help-routes.js": "bb0056da7c903c2a060ae37a70e00f2e64e25b311600f6f0c55a65f641501d55",
-    "dashboard/index.js": "17e8de3bb1c9af6bb9c85e57049569c5fbebf12b76cf83400ea89b6c8e154d25",
+    "dashboard/index.js": "f1b299aca147c8a5d5e1c1e1694ef1aa8f00d9a2ed63c65c9e4f10017ffebe91",
     "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
     "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
     "dashboard/music-visibility.js": "69ccb986fef629933848cf9baac403e7e672b3a29f28182bf8d5e2214bd5c927",
@@ -627,7 +627,7 @@
     "handlers/configuration.js": "d2d5c76734cbb13e094da59f850ed0a7aae380028c0396567d6bb69e86cc77de",
     "handlers/counter.js": "96d0182015ae87a2e6c1bf3b8db56e8d229bfc80108d6b6121bd48d0b7577f79",
     "handlers/dailyfact.js": "7e4e3c9275e40bb2329f80cdbf09dd84b63c7e346062c6fc0b04a4ee0fa0c3e7",
-    "handlers/discordmusiccatalog.js": "fcf0d8fc80a8efc485b51ecb38f22ce961406f8bc840d34837b80e5816fe4dac",
+    "handlers/discordmusiccatalog.js": "48c91f7692553ff427e33991f18edb62741fb0bfd05a2b31b3161c00fce6be3e",
     "handlers/economy/messages.js": "b29712bea3427950f2e8ea25c15a9e9962c7309817dec0061a47684c9cf2814a",
     "handlers/enmap-like.js": "297c0d9ebfdfc1bd9983cde1cc1b731efa3907a9f5c8f251491e37c498c3e41c",
     "handlers/epicgamesverification.js": "560ac5b4f37f4d4303a082c0482ae56038417c4e8dc00904a3c0ad31c671210d",
@@ -681,8 +681,8 @@
     "handlers/moderation/member-actions.js": "2ec2949d1f58e5730335d29bda24d8d91c4efcd3c563b9f319a918edbaa66e7c",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
-    "handlers/music/catalog-picker.js": "b7e80d6cf95798752c2ce68170d69e4bd43179ebf60dd292fda4c2dc288a243e",
-    "handlers/music/catalog-search.js": "f26c91a29234c6a8bcc74eaeb0119b6f350be3a453f1937d8c29ae25e0aa609f",
+    "handlers/music/catalog-picker.js": "c005221c45cda3d55689c6cea0f90d7eaacefa08b9362de2644d23b82fa7e833",
+    "handlers/music/catalog-search.js": "12fa13e596cd3343ba7ea5ac60fac8d6dd7712df626f940b62f79f47f4a73bf7",
     "handlers/music/command-settings.js": "6d2ba3f11d2e5bbcf5d30c0ad5e7004b10ea699203744c00c5effe9bd9c1d7d1",
     "handlers/music/config.js": "6aea8da60cec38d7717d6c932dda7b87bbc628e5729681ddb037269e5aeba677",
     "handlers/music/controls.js": "f0fbb9c6dd4bd0f49a545205193482efdbaecebc2788b04e0551af353f9bce56",
@@ -712,7 +712,7 @@
     "handlers/music/playback-health.js": "b9789429d9395ea4bbde36d9dca31bda37c59aa997b957732997069c4c62018b",
     "handlers/music/playlist-name.js": "79b2ef70892dacc4d7ec09456ae252436962998eca1ac380e45ad43510c95991",
     "handlers/music/playlist-repository.js": "6f18e2d3489ca2655098fcc34987679b434fa54ce6b33519b7c45abfa8e18ea3",
-    "handlers/music/playui.js": "a77521ab4c3f433d8c3b95144661788861b6542174f6b0bda150ae3bd0e60d4b",
+    "handlers/music/playui.js": "bb89e0c19f5db55b3ccb317fe0c4103d3789e31eea95db771f7754d43fb202b1",
     "handlers/music/prefix-compat.js": "8a6d7e81ba530cb2495b9a44748c92174de19879660a4f911fb74a703e47d01c",
     "handlers/music/radio-setup.js": "c716d064c9740d1baf46187f679d2b19ec2c39a4391de1b016a5f0b8a65f6545",
     "handlers/music/recommendations.js": "2574a39956de5ae12253d6850f3477d212d77bdf422bd6df856ae6ab14ab1477",
@@ -822,8 +822,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "39cde3e0e92abb1a44b261e27b46fc5a4d75e6496d60d855a95be391867cf968",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "eecf3c3e7c423c82b23a570c2d1c109e40791214d12a1a3123448d93f860a6c5",
-    "locales/es.json": "bd72bf30ba315f7edf1e5ca0fc3f9af2ed2b6bff214e94a203a499a1a52e483d",
+    "locales/en.json": "dbdb09112a97e929b265347e67c9bcd6dbad3d4228dff22d1bc90fa974f86bea",
+    "locales/es.json": "773f9e58df372704ae6c16a6f0a24036f16df2ea170f7bba7f71295ea77ace36",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "d0ee4af2a83cb7a16c1cda84a59ec35a8d239ed393c3e258656700b3f025dd5b",
@@ -1018,7 +1018,7 @@
     "handlers/sync-map-mutations.js": "ffa821c002052c7728d5477c54653dbc24c4572bd8b63ebf5b0829e4ea45da9c",
     "handlers/global-prefix-command.js": "42d53803fa048a18f01dc77b77855c8f2e0fc18deb9a1677b9c495c6b68cbdef",
     "handlers/global-prefix-settings.js": "29b985662ea0d798e38e3d317b91d77901e3ae8d0a1c712015d86582ac435d9a",
-    "docker-compose.yml": "4d17883d7f4b362e38dffc53011998b3619c3ba8e071e2590f08c8e31de03781",
+    "docker-compose.yml": "9addb9d5bf9c5f8a53ec12f95d3e10907e8f0b932c24163f487ad635a924c428",
     "scripts/backup-before-release.js": "dfe9d6b85fc97fcc990a93cbd08d57439d9e9f84db81e420577ccaf2445903ab",
     "scripts/initialize-global-configuration.js": "dab030bcc4f224513859251db0f66e043ac3f9f07bb276c40620e7c5e5f7f796",
     "handlers/global-configuration.js": "4bfa800a1277f819fab94a2225619e4dd3a9e49fb44defccdd138eff068b4473",
@@ -1056,7 +1056,8 @@
     "handlers/music/node-view.js": "22ae917af0b3c5b6a1d68d12b2f435e33367c2dd04f5879f8bdd7f0b76ff5bab",
     "handlers/music/recording-recovery.js": "7715e1ad92925ab0f645837776058412e0115fcfa261d7a2d94c0e6993db2963",
     "handlers/music/session-lifecycle.js": "22a2963462267dbac0a85366dc2ea4665b6f41f20f1ce85d682cbce3fec183be",
-    "handlers/music/tracks.js": "f22ecabe5b41a70e9df9288098945a72a91b80e4f60d8d0744eea64219c787b1"
+    "handlers/music/tracks.js": "f22ecabe5b41a70e9df9288098945a72a91b80e4f60d8d0744eea64219c787b1",
+    "handlers/music/artists.js": "cf759d0e150e25228e1f707ee49b7112a17f4eeda0f623c39a6a9a475c273c31"
   },
   "owners": {
     "commands/MiniGames/2024.js": {
@@ -21118,15 +21119,15 @@
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 738
+          "line": 742
         },
         {
           "call": "client.on",
-          "line": 800
+          "line": 804
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 801
+          "line": 805
         }
       ]
     }
@@ -32009,16 +32010,16 @@
           "line": 1
         },
         {
-          "file": "dashboard/index.js",
-          "line": 5
-        },
-        {
           "file": "handlers/functions.js",
           "line": 2517
         },
         {
           "file": "handlers/musiccatalog.js",
           "line": 1
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 5
         }
       ]
     },
@@ -35481,10 +35482,6 @@
           "line": 1
         },
         {
-          "file": "handlers/music/playui.js",
-          "line": 5
-        },
-        {
           "file": "handlers/music/searchui.js",
           "line": 5
         },
@@ -35495,10 +35492,6 @@
         {
           "file": "handlers/music/ui.js",
           "line": 10
-        },
-        {
-          "file": "handlers/music/catalog-picker.js",
-          "line": 1
         },
         {
           "file": "handlers/invitetracking.js",
@@ -35721,10 +35714,6 @@
           "line": 3
         },
         {
-          "file": "dashboard/index.js",
-          "line": 9
-        },
-        {
           "file": "events/guild/interactionCreate.js",
           "line": 12
         },
@@ -35775,6 +35764,18 @@
         {
           "file": "handlers/music/voice-session.js",
           "line": 1
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 9
+        },
+        {
+          "file": "handlers/music/catalog-picker.js",
+          "line": 1
+        },
+        {
+          "file": "handlers/music/playui.js",
+          "line": 5
         }
       ]
     },
@@ -36075,12 +36076,12 @@
           "line": 1
         },
         {
-          "file": "dashboard/index.js",
-          "line": 116
-        },
-        {
           "file": "index.js",
           "line": 29
+        },
+        {
+          "file": "dashboard/index.js",
+          "line": 116
         }
       ]
     },
@@ -36860,7 +36861,7 @@
     "slashTopLevel": 20,
     "aliases": 776,
     "httpRoutes": 95,
-    "sourceFiles": 1046,
+    "sourceFiles": 1047,
     "unlocatedCommands": 0,
     "unlocatedRoutes": 0
   },

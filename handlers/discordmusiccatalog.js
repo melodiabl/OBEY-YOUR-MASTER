@@ -2,6 +2,7 @@
 // searchDiscordCatalog/enqueueCatalogItem, pero ahora todo resuelve vía
 // client.music.search (catálogo combinado Lavalink) y respaldo legado de álbumes.
 const http = require('http')
+const { artistsFromTracks, uniqueArtists } = require('./music/artists')
 const { sameRecording, rankMusicTracks, recordingArtist, recordingTitle } = require('./music/recordings')
 
 const CATALOG_LIMIT = 20
@@ -83,13 +84,13 @@ async function searchDiscordCatalog(client, query, context = {}) {
     seen.add(album.uri); return true
   }).slice(0, 20)
 
-  return { tracks, albums, playlists: [] }
+  return { tracks, albums, artists: uniqueArtists([...(result?.artists || []), ...artistsFromTracks(tracks, query)]), playlists: [] }
 }
 
 async function enqueueCatalogItem(client, message, voiceChannel, item, { authorize } = {}) {
   const info   = itemInfo(item)
   const state  = client.music.getState(message.guild.id)
-  const epoch = state.requestEpoch || 0
+  const epoch = state.stopRequestEpoch || 0
   let tracks
 
   if (info.type === 'album' || info.type === 'playlist') {
@@ -111,7 +112,7 @@ async function enqueueCatalogItem(client, message, voiceChannel, item, { authori
     tracks = [first]
   }
 
-  const current = () => !client._shuttingDown && client.music.getState(message.guild.id) === state && (state.requestEpoch || 0) === epoch
+  const current = () => !client._shuttingDown && client.music.getState(message.guild.id) === state && !state.stopRequested && (state.stopRequestEpoch || 0) === epoch
   if (!current()) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')
   if (authorize) voiceChannel = await authorize()
   if (!current()) throw new Error('La solicitud se canceló al detener o vaciar el reproductor.')

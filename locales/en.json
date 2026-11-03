@@ -87,7 +87,15 @@
       "nodes": "No music connections are available.",
       "cancelled": "The connection was cancelled when playback was stopped.",
       "failed": "The connection could not be confirmed. Check its current state before retrying."
-    }
+    },
+    "artists": "Artists",
+    "chooseArtist": "Choose an artist",
+    "openArtist": "View top tracks and albums",
+    "noArtists": "No artists found for this search.",
+    "backToArtists": "Back to artists",
+    "artistTopTracks": "Top tracks",
+    "artistAlbums": "Albums from these tracks",
+    "artistUnavailable": "Could not load this artist. Choose another or try again."
   },
   "economy": {
     "disabled": "The economy system is disabled.",

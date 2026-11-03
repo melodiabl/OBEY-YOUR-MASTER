@@ -16,6 +16,7 @@ const DISK = MUSIC_ICON
 const TABS = [
   { id: 'tracks', label: 'Pistas', emoji: obeyUi.component('🎵'), asset: 'icon.music' },
   { id: 'albums', label: 'Álbumes', emoji: obeyUi.component('💿'), asset: 'icon.album' },
+  { id: 'artists', label: 'Artistas', asset: 'icon.profile' },
 ]
 
 function fmtMs(ms) { const s = Math.floor((ms || 0) / 1000), m = Math.floor(s / 60), sec = s % 60; return `${m}:${String(sec).padStart(2, '0')}` }
@@ -35,7 +36,7 @@ function catEmbed(tabId, items, query, locale = 'es', page = 0) {
     return new EmbedBuilder().setColor(0x4f545c)
       .setAuthor(obeyMeta.asAuthor({ name: translate(locale, 'music.resultsFor', { query: query.slice(0, 50) }), iconURL: DISK }))
       .setTitle(obeyUi.limit(`${registry.markup(tab.asset)} ${translate(locale, `music.${tab.id}`)}`, 256))
-      .setDescription(obeyUi.limit(translate(locale, tab.id === 'albums' ? 'music.noAlbums' : 'music.noTracks'), 4096))
+      .setDescription(obeyUi.limit(translate(locale, tab.id === 'artists' ? 'music.noArtists' : tab.id === 'albums' ? 'music.noAlbums' : 'music.noTracks'), 4096))
       .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.emptyFooter') }))
   }
   const view = catalogPage(items, page)
@@ -43,6 +44,7 @@ function catEmbed(tabId, items, query, locale = 'es', page = 0) {
   const lines = view.items.map((t, i) => {
     const info = itemInfo(t)
     const title = (info?.title || '?').slice(0, 55), author = (info?.author || '?').slice(0, 40)
+    if (tab.id === 'artists') return `**${view.offset + i + 1}.** **[${title}](${info.uri})**\n┗ ${info.sourceName === 'applemusic' ? 'Apple Music' : 'Spotify'} · ${translate(locale, 'music.openArtist')}`
     if (tab.id === 'albums') {
       return `**${view.offset + i + 1}.** **[${title}](${info?.uri || ''})**\n┗ ${E.music} ${author}${info.totalTracks ? ` · ${translate(locale, 'music.trackCount', { count: info.totalTracks })}` : ''}`
     }
@@ -56,29 +58,30 @@ function catEmbed(tabId, items, query, locale = 'es', page = 0) {
     .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.resultsPage', { count: items.length, page: view.page + 1, pages: view.pages }) }))
 }
 
-function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0) {
+function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0, { artistView = false } = {}) {
   const view = catalogPage(items, page)
   const rows = []
   if (items.length) {
     rows.push(new ActionRowBuilder().addComponents(
       new StringSelectMenuBuilder().setCustomId(`${cid}_pick`)
-        .setPlaceholder(obeyUi.plain(translate(locale, tabId === 'albums' ? 'music.chooseAlbum' : 'music.chooseTrack')))
+        .setPlaceholder(obeyUi.plain(translate(locale, tabId === 'artists' ? 'music.chooseArtist' : tabId === 'albums' ? 'music.chooseAlbum' : 'music.chooseTrack')))
         .addOptions(view.items.map((t, i) => {
           const info = itemInfo(t)
-          const desc = tabId === 'albums'
+          const desc = tabId === 'artists' ? `${info.sourceName === 'applemusic' ? 'Apple Music' : 'Spotify'} · ${translate(locale, 'music.openArtist')}` : tabId === 'albums'
             ? `${(info?.author || '?').slice(0, 40)}${info.totalTracks ? ` · ${translate(locale, 'music.trackCount', { count: info.totalTracks })}` : ''}`
             : `${(info?.author || '?').slice(0, 45)} · ${fmtMs(info?.length)}`
           const o = { label: `${view.offset + i + 1}. ${info?.title || '?'}`.slice(0, 100), description: desc.slice(0, 100), value: String(view.offset + i) }
-          o.emoji = registry.emoji(tabId === 'albums' ? 'icon.album' : 'icon.music')
+          o.emoji = registry.emoji(tabId === 'artists' ? 'icon.profile' : tabId === 'albums' ? 'icon.album' : 'icon.music')
           return o
         })),
     ))
   }
   rows.push(new ActionRowBuilder().addComponents(
-    ...TABS.map(tab => new ButtonBuilder().setCustomId(`${cid}_tab:${tab.id}`).setLabel(obeyUi.plain(translate(locale, `music.${tab.id}`))).setEmoji(obeyUi.component(registry.emoji(tab.asset)))
+    ...TABS.filter(tab => !artistView || tab.id !== 'artists').map(tab => new ButtonBuilder().setCustomId(`${cid}_tab:${tab.id}`).setLabel(obeyUi.plain(translate(locale, `music.${tab.id}`))).setEmoji(obeyUi.component(registry.emoji(tab.asset)))
       .setStyle(tab.id === tabId ? ButtonStyle.Primary : ButtonStyle.Secondary)),
     new ButtonBuilder().setCustomId(`${cid}_cancel`).setLabel(obeyUi.plain(translate(locale, 'common.cancel'))).setStyle(ButtonStyle.Danger).setEmoji(obeyUi.component(registry.emoji('icon.close'))),
   ))
+  if (artistView) rows.push(new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(`${cid}_artists-back`).setLabel(translate(locale, 'music.backToArtists')).setStyle(ButtonStyle.Secondary)))
   if (view.pages > 1) rows.push(new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId(`${cid}_page:${view.page - 1}`).setLabel(translate(locale, 'common.previous')).setStyle(ButtonStyle.Secondary).setDisabled(view.page === 0),
     new ButtonBuilder().setCustomId(`${cid}_page:${view.page + 1}`).setLabel(translate(locale, 'common.next')).setStyle(ButtonStyle.Secondary).setDisabled(view.page === view.pages - 1),

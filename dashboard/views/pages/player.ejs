@@ -259,6 +259,7 @@ button{font-family:inherit;cursor:pointer}
 .r-back:hover{background:var(--surf2);color:var(--text)}
 .r-tabs{display:flex;gap:5px;padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto;scrollbar-width:none}
 .r-tab{border:none;border-radius:999px;background:var(--surf2);color:var(--muted);font-size:10px;font-weight:700;padding:6px 10px;white-space:nowrap}
+.artist-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:16px}.artist-result{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px;color:var(--text);background:var(--surf2);border:1px solid var(--border);border-radius:14px;text-align:left}.artist-result img{width:64px;height:64px;object-fit:cover;border-radius:50%}.artist-result span,.artist-profile p,.artist-status{font-size:12px;color:#aaa5bd}.artist-profile{padding:16px}.artist-profile h2{margin-top:16px}.artist-result:focus-visible,.artist-profile button:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .r-tab.active{background:#fff;color:#0a0a12}
 .r-empty{padding:34px 20px;text-align:center;color:var(--muted);font-size:12px;line-height:1.5}
 .r-empty i{display:block;font-size:24px;margin-bottom:10px;opacity:.32}
@@ -629,6 +630,8 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
           <div class="r-tabs" id="r-tabs">
             <button class="r-tab active" data-kind="all">Todo <span id="count-all"></span></button>
             <button class="r-tab" data-kind="tracks">Canciones <span id="count-tracks"></span></button>
+            <button class="r-tab" data-kind="artists">Artistas <span id="count-artists"></span></button>
+            <button class="r-tab" data-kind="albums">Álbumes <span id="count-albums"></span></button>
           </div>
           <div style="flex:1;overflow-y:auto" id="r-list"></div>
         </div>
@@ -846,6 +849,8 @@ function showBrowse() {
   document.querySelectorAll('.gc').forEach(c => c.classList.remove('active-genre'))
 }
 function showResults(label) {
+  artistGeneration++
+  document.getElementById('r-tabs').style.display = 'flex'
   document.getElementById('pane-browse').style.display  = 'none'
   const rp = document.getElementById('pane-results')
   rp.style.display = 'flex'
@@ -854,7 +859,8 @@ function showResults(label) {
 
 let activeSource = 'spotify'
 let activeResultKind = 'all'
-let lastCatalog = { tracks: [], albums: [], playlists: [] }
+let lastCatalog = { tracks: [], albums: [], playlists: [], artists: [] }
+let artistGeneration = 0
 let serverSeedTracks = []
 let serverMixItems = []
 
@@ -863,7 +869,7 @@ async function searchAPI(query, source = activeSource, kind = 'all') {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, source, kind }),
-  }).then(r => r.json())
+  }).then(async r => { const data = await r.json(); if (!r.ok || data.error) throw Error(data.error || 'search_unavailable'); return data })
 }
 
 function discoverSearch(query) {
@@ -905,13 +911,35 @@ async function doSearch() {
   } finally { searchBusy = false }
 }
 
+async function openArtist(item) {
+  const container = document.getElementById('r-list'), root = lastCatalog, previousKind = activeResultKind, generation = ++artistGeneration
+  const back = document.createElement('button'); back.className = 'r-back'; back.type = 'button'; back.textContent = '← Volver a resultados'
+  back.addEventListener('click', () => { artistGeneration++; activeResultKind = previousKind; showResults(document.getElementById('s-inp').value); renderCatalog(container, root); [...container.querySelectorAll('.artist-result')].find(button => button.dataset.artistUri === item.uri)?.focus() })
+  const loading = document.createElement('p'); loading.className = 'artist-status'; loading.setAttribute('role', 'status'); loading.textContent = 'Cargando artista…'
+  container.replaceChildren(back, loading)
+  document.getElementById('r-tabs').style.display = 'none'
+  try {
+    const profile = await searchAPI(item.uri, activeSource, 'artist')
+    if (generation !== artistGeneration) return
+    activeResultKind = 'all'; renderCatalog(container, profile, profile.artist)
+    const header = document.createElement('section'); header.className = 'artist-profile'
+    const title = document.createElement('h2'); title.tabIndex = -1; title.textContent = profile.artist.title
+    const source = document.createElement('p'); source.textContent = 'Top del catálogo · ' + (profile.artist.sourceName === 'spotify' ? 'Spotify' : 'Apple Music')
+    header.append(back, title, source); container.prepend(header); title.focus()
+  } catch {
+    if (generation !== artistGeneration) return
+    loading.setAttribute('role', 'alert'); loading.textContent = 'No pude cargar este artista. Vuelve a resultados e inténtalo de nuevo.'
+  }
+}
+
 // ── Structured search renderer ───────────────────────────────────
 function sourceClass(value='') { return String(value).toLowerCase().replace(/[^a-z0-9_-]/g, '') }
 function resultItems(catalog, kind) {
   if (kind === 'tracks') return catalog.tracks || []
   if (kind === 'albums') return catalog.albums || []
   if (kind === 'playlists') return catalog.playlists || []
-  return [...(catalog.tracks || []), ...(catalog.albums || []), ...(catalog.playlists || [])]
+  if (kind === 'artists') return catalog.artists || []
+  return [...(catalog.tracks || []), ...(catalog.albums || []), ...(catalog.playlists || []), ...(catalog.artists || [])]
 }
 
 function collectionRow(title, items, icon) {
@@ -949,18 +977,21 @@ function collectionRow(title, items, icon) {
   return wrap
 }
 
-function renderCatalog(container, catalog) {
+function renderCatalog(container, catalog, artist = null) {
+  document.getElementById('r-tabs').style.display = artist ? 'none' : 'flex'
   lastCatalog = {
     tracks: catalog?.tracks || catalog?.results || [],
     albums: catalog?.albums || [],
     playlists: catalog?.playlists || [],
+    artists: catalog?.artists || [],
   }
   const counts = {
     tracks: lastCatalog.tracks.length,
     albums: lastCatalog.albums.length,
     playlists: lastCatalog.playlists.length,
+    artists: lastCatalog.artists.length,
   }
-  counts.all = counts.tracks + counts.albums + counts.playlists
+  counts.all = counts.tracks + counts.albums + counts.playlists + counts.artists
   Object.entries(counts).forEach(([key, value]) => {
     const count = document.getElementById(`count-${key}`)
     if (count) count.textContent = value ? `(${value})` : ''
@@ -975,7 +1006,7 @@ function renderCatalog(container, catalog) {
 
   const frag = document.createDocumentFragment()
   const top = visible[0]
-  const topType = top.type === 'album' ? 'Álbum' : top.type === 'playlist' ? 'Playlist' : 'Canción'
+  const topType = top.type === 'artist' ? 'Artista' : top.type === 'album' ? 'Álbum' : top.type === 'playlist' ? 'Playlist' : 'Canción'
   const topDetail = top.type === 'track' ? (top.isStream ? 'EN VIVO' : fmt(top.length)) : top.totalTracks ? `${top.totalTracks} pistas` : 'Colección'
   const topCard = document.createElement('div')
   topCard.className = 'top-result-card'
@@ -987,8 +1018,9 @@ function renderCatalog(container, catalog) {
       <span style="margin-left:auto;font-size:11px;font-family:var(--font-ui)">${topDetail}</span>
     </div>
     <div class="meta-chips" style="margin-bottom:12px">${metaChips(top, { limit: 4, isrc: true })}</div>
-    <button class="btn-add-green"><i class="fas fa-circle-plus"></i> ${top.type === 'track' ? 'Añadir' : 'Ver pistas'}</button>`
+    <button class="btn-add-green"><i class="fas fa-circle-plus"></i> ${top.type === 'artist' ? 'Ver artista' : top.type === 'track' ? 'Añadir' : 'Ver pistas'}</button>`
   topCard.querySelector('.btn-add-green').addEventListener('click', function() {
+    if (top.type === 'artist') { openArtist(top); return }
     if (top.type === 'track') {
       addTrack(top.playUri || top.uri, this)
     } else {
@@ -999,10 +1031,21 @@ function renderCatalog(container, catalog) {
       })
     }
   })
-  frag.appendChild(topCard)
+  if (!artist) frag.appendChild(topCard)
 
+  if (activeResultKind === 'all' || activeResultKind === 'artists') {
+    const artists = document.createElement('section'); artists.className = 'artist-results'
+    for (const item of lastCatalog.artists) {
+      const button = document.createElement('button'); button.className = 'artist-result'; button.type = 'button'; button.dataset.artistUri = item.uri
+      if (item.artworkUrl) { const img = document.createElement('img'); img.src = item.artworkUrl; img.alt = ''; button.appendChild(img) }
+      const title = document.createElement('strong'); title.textContent = item.title; button.appendChild(title)
+      const detail = document.createElement('span'); detail.textContent = (item.sourceName === 'applemusic' ? 'Apple Music' : 'Spotify') + ' · Ver canciones populares y álbumes'; button.appendChild(detail)
+      button.addEventListener('click', () => openArtist(item)); artists.appendChild(button)
+    }
+    if (lastCatalog.artists.length) frag.appendChild(artists)
+  }
   if (activeResultKind === 'all' || activeResultKind === 'albums') {
-    const albums = collectionRow('Álbumes', lastCatalog.albums, '💿')
+    const albums = collectionRow(artist ? 'Álbumes de estas canciones' : 'Álbumes', lastCatalog.albums, '💿')
     if (albums) frag.appendChild(albums)
   }
   if (activeResultKind === 'all' || activeResultKind === 'playlists') {
@@ -1011,7 +1054,7 @@ function renderCatalog(container, catalog) {
   }
   if (activeResultKind === 'all' || activeResultKind === 'tracks') {
     const songsWrap = document.createElement('div')
-    songsWrap.innerHTML = '<div style="padding:14px 16px 4px;font-size:14px;font-weight:700;color:#fff">🎵 Canciones</div>'
+    songsWrap.innerHTML = '<div style="padding:14px 16px 4px;font-size:14px;font-weight:700;color:#fff">' + (artist ? 'Canciones populares' : 'Canciones') + '</div>'
     const list = document.createElement('div'); list.className = 'sp-list'
     list.innerHTML = lastCatalog.tracks.slice(0, 20).map((track, index) => `
       <div class="sp-tr">

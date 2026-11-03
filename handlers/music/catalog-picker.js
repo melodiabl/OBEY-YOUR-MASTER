@@ -3,14 +3,18 @@ const { catEmbed, catRows, catalogPage, addedEmbed, err, itemInfo } = require('.
 const { enqueueCatalogItem, searchDiscordCatalog } = require('../discordmusiccatalog')
 const { commandDenial } = require('./permissions')
 const { t } = require('../i18n')
+const { getArtist } = require('./artists')
 
 async function openCatalogPicker({ client, query, results, actor, guild, channelId, prefix = 'srch', edit, locale = 'es', commandName = 'play' }) {
-  let tab = results.tracks?.length ? 'tracks' : 'albums'
-  const pages = { tracks: 0, albums: 0 }
+  let tab = results.tracks?.length ? 'tracks' : results.artists?.length ? 'artists' : 'albums', profile = null
+  const pages = { tracks: 0, albums: 0, artists: 0 }
   let closed = false, busy = false
-  const items = () => results[tab] || []
-  const render = () => edit({ embeds: [catEmbed(tab, items(), query, locale, pages[tab])],
-    components: catRows(tab, items(), prefix, locale, pages[tab]), allowedMentions: { parse: [] } })
+  const items = () => (profile || results)[tab] || []
+  const render = () => {
+    const embed = catEmbed(tab, items(), profile?.artist.title || query, locale, pages[tab])
+    if (profile) embed.setAuthor({ name: profile.artist.title }).setTitle(t(locale, tab === 'tracks' ? 'music.artistTopTracks' : 'music.artistAlbums')).setThumbnail(profile.artist.artworkUrl || null)
+    return edit({ embeds: [embed], components: catRows(tab, items(), prefix, locale, pages[tab], { artistView: Boolean(profile) }), allowedMentions: { parse: [] } })
+  }
   const reply = await render()
   const collector = reply.createMessageComponentCollector({ time: 60000 })
   collector.on('collect', async interaction => {
@@ -22,9 +26,10 @@ async function openCatalogPicker({ client, query, results, actor, guild, channel
     try {
       await interaction.deferUpdate()
       if (closed) return
+      if (id === prefix + '_artists-back') { profile = null; tab = 'artists'; return await render() }
       if (id.startsWith(prefix + '_tab:')) {
         const selected = id.split(':')[1]
-        if (!['tracks', 'albums'].includes(selected)) return
+        if (!['tracks', 'albums', ...(profile ? [] : ['artists'])].includes(selected)) return
         tab = selected
         return await render()
       }
@@ -42,6 +47,17 @@ async function openCatalogPicker({ client, query, results, actor, guild, channel
       const value = interaction.values?.[0]
       if (typeof value !== 'string' || !/^\d+$/.test(value) || !items()[Number(value)]) return
       const item = items()[Number(value)]
+      if (tab === 'artists' && !profile) {
+        try {
+          const result = await getArtist(client, item.uri, { guildId: guild.id })
+          if (closed) return
+          profile = result; tab = 'tracks'; pages.tracks = 0; pages.albums = 0
+          return await render()
+        } catch {
+          if (!closed) await interaction.followUp({ content: t(locale, 'music.artistUnavailable'), ephemeral: true }).catch(() => {})
+          return
+        }
+      }
       // Consume before awaits: the second click cannot create a second enqueue.
       closed = true; collector.stop('picked')
       const authorize = async () => {
@@ -77,7 +93,7 @@ async function searchCatalogPicker(options) {
   catch (error) {
     return edit({ embeds: [err(t(locale, error.code === 'music_search_busy' ? 'music.searchBusy' : 'music.searchFailed'))], components: [] })
   }
-  if (!results.tracks.length && !results.albums.length) return edit({
+  if (!results.tracks.length && !results.albums.length && !results.artists?.length) return edit({
     embeds: [err(t(locale, 'music.noResultsQuery', { query: query.slice(0, 60) }))], components: [] })
   return openCatalogPicker({ ...options, results })
 }

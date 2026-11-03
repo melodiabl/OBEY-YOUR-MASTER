@@ -724,12 +724,16 @@ module.exports = async client => {
     try {
       if (typeof query !== 'string' || query.length > 2000) return res.status(400).json({ results: [], error: 'invalid_query' })
       const { normalizePublicTrack } = require('../handlers/music/utils')
+      if (kind === 'artist') {
+        const profile = await require('../handlers/music/artists').getArtist(client, query, { guildId })
+        return res.json({ ...profile, tracks: profile.tracks.map(t => normalizePublicTrack(t)) })
+      }
       const { searchDiscordCatalog } = require('../handlers/discordmusiccatalog')
       const result = await searchDiscordCatalog(client, query, { guildId, limit: 50 })
       const tracks = result.tracks.map(t => normalizePublicTrack(t))
-      res.json({ results: tracks, tracks, albums: result.albums })
+      res.json({ results: tracks, tracks, albums: result.albums, artists: result.artists })
     } catch (e) {
-      res.status(e.code === 'music_search_busy' ? 429 : 503).json({ results: [], tracks: [], albums: [], error: e.code === 'music_search_busy' ? 'search_busy' : 'search_unavailable' })
+      res.status(e.code === 'invalid_artist' ? 400 : e.code === 'music_search_busy' ? 429 : 503).json({ results: [], tracks: [], albums: [], artists: [], error: e.code === 'music_search_busy' ? 'search_busy' : 'search_unavailable' })
     }
   })
 

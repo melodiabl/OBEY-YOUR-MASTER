@@ -1,0 +1,149 @@
+{
+  "capturedAt": "2026-11-03T16:13:58.073Z",
+  "tests": {
+    "permanent": 37,
+    "failures": 0,
+    "baseline": 30
+  },
+  "nodeReadiness": [
+    {
+      "id": "trinium-nl-com",
+      "ready": true,
+      "backend": "nodelink",
+      "version": "3.8.0"
+    },
+    {
+      "id": "trinium-nl-02-com",
+      "ready": true,
+      "backend": "nodelink",
+      "version": "3.8.0"
+    },
+    {
+      "id": "nazha",
+      "ready": true,
+      "backend": "lavalink",
+      "version": "4.2.2"
+    }
+  ],
+  "audioSamples": [
+    {
+      "id": "trinium-nl-com",
+      "http": 200,
+      "contentType": "audio/l16;rate=48000;channels=2",
+      "bytes": 116767,
+      "nonZero": 2395,
+      "ms": 2438
+    },
+    {
+      "id": "trinium-nl-02-com",
+      "http": 200,
+      "contentType": "audio/l16;rate=48000;channels=2",
+      "bytes": 117082,
+      "nonZero": 2595,
+      "ms": 4106
+    }
+  ],
+  "realArtistFlow": {
+    "searchMs": 4787,
+    "tracks": 29,
+    "albums": 0,
+    "artists": [
+      {
+        "type": "artist",
+        "title": "Adele",
+        "author": "Adele",
+        "uri": "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+        "identifier": "4dpARuHxo51G3z768sgnrY",
+        "sourceName": "spotify",
+        "artworkUrl": null
+      },
+      {
+        "type": "artist",
+        "title": "Adele",
+        "author": "Adele",
+        "uri": "https://music.apple.com/us/artist/adele/262836961",
+        "identifier": "262836961",
+        "sourceName": "applemusic",
+        "artworkUrl": null
+      }
+    ],
+    "profile": {
+      "ms": 742,
+      "artist": {
+        "type": "artist",
+        "title": "Adele",
+        "author": "Adele",
+        "uri": "https://open.spotify.com/artist/4dpARuHxo51G3z768sgnrY",
+        "identifier": "4dpARuHxo51G3z768sgnrY",
+        "sourceName": "spotify",
+        "artworkUrl": "https://i.scdn.co/image/ab6761610000517468f6e5892075d7f22615bd17"
+      },
+      "tracks": 10,
+      "albums": 0,
+      "ranking": "provider-top"
+    }
+  },
+  "realArtistAlbums": {
+    "ms": 2953,
+    "artist": "Adele",
+    "tracks": 10,
+    "albums": [
+      {
+        "title": "21",
+        "uri": "https://open.spotify.com/album/5duyQokC4FMcWPYTV9Gpf9",
+        "totalTracks": 11
+      },
+      {
+        "title": "30",
+        "uri": "https://open.spotify.com/album/21jF5jlMtzo94wbxmJ18aa",
+        "totalTracks": 12
+      },
+      {
+        "title": "Skyfall",
+        "uri": "https://open.spotify.com/album/6TwN6Lq9glwnG8kNp6chHY",
+        "totalTracks": 1
+      },
+      {
+        "title": "25",
+        "uri": "https://open.spotify.com/album/6TVfiWmo8KtflUAmkK9gGF",
+        "totalTracks": 11
+      }
+    ]
+  },
+  "dom": {
+    "navigation": "passed",
+    "profile": "passed",
+    "topTracks": "passed",
+    "albums": "passed",
+    "back": "passed",
+    "browseEnqueues": 0,
+    "realBrowser": false,
+    "fixtureCompatibility": "Inline search entry bound to event listener for DOM evaluator script-scope limitation"
+  },
+  "browser": {
+    "chromeDevtools": "unavailable: root launch rejected; unprivileged Chrome lacks a usable sandbox",
+    "sandboxDisabled": false
+  },
+  "privateExcluded": true,
+  "selection": {
+    "primary": "trinium-nodelink-1",
+    "backups": [
+      "trinium-nodelink-2",
+      "nazha"
+    ],
+    "lastResortAndCatalog": "millohost",
+    "disabled": [
+      "serenetia",
+      "gdjkhp",
+      "trinium",
+      "trinium-02"
+    ]
+  },
+  "limits": [
+    "Measurements are short samples, not availability/latency guarantees",
+    "PCM signal does not prove Discord audibility",
+    "Artist albums represent the releases identified from top tracks, not complete discography",
+    "No real Chrome visual validation was possible"
+  ],
+  "sourceInventory": "fd3cb30b381e8b136a39dc29b600955d22ea4939b9fd84b4c9820576dca370cf"
+}

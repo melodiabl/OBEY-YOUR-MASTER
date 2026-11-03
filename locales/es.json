@@ -87,7 +87,15 @@
       "nodes": "No hay conexiones de música disponibles.",
       "cancelled": "La conexión se canceló al detener el reproductor.",
       "failed": "No se pudo confirmar la conexión. Consulta el estado actual antes de repetirla."
-    }
+    },
+    "artists": "Artistas",
+    "chooseArtist": "Elige un artista",
+    "openArtist": "Ver canciones populares y álbumes",
+    "noArtists": "No encontré artistas para esta búsqueda.",
+    "backToArtists": "Volver a artistas",
+    "artistTopTracks": "Canciones populares",
+    "artistAlbums": "Álbumes de estas canciones",
+    "artistUnavailable": "No pude cargar este artista. Puedes elegir otro o volver a intentarlo."
   },
   "economy": {
     "disabled": "El sistema de economía no está activado.",

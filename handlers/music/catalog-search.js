@@ -1,3 +1,4 @@
+const { artistsFromTracks, normalizeArtist, uniqueArtists } = require('./artists')
 const { lookupWithTimeout } = require('./resolve-timeout')
 const { tracksFromResolve } = require('./utils')
 const { allowedMusicTrack } = require('./nodes-config')
@@ -34,7 +35,7 @@ async function collect(client, nodes, query) {
   }))
   // Stable source/node order matters: completion time must not decide the winner.
   for (const node of nodes.slice(0, 2)) rows.push(...(successful.find(batch => batch.node === node)?.tracks || []))
-  const albums = []
+  const albums = [], artistResults = []
   let artistIdentity = null
   const exact = rows.filter(track => recordingArtist(track.info?.author) === recordingArtist(phrase))
   const artistSearch = new Set(exact.map(track => recordingTitle(track.info))).size >= 2
@@ -51,7 +52,8 @@ async function collect(client, nodes, query) {
           if (Array.isArray(found?.albums) || Array.isArray(found?.artists)) { data = found; metadataNode = batch; break }
         } catch { /* Another node may provide the optional plugin. */ }
       }
-      if (!data) return { loadType: 'search', tracks: rankMusicTracks(rows, phrase).slice(0, 50), albums, playlistName: null }
+      if (!data) return { loadType: 'search', tracks: rankMusicTracks(rows, phrase).slice(0, 50), albums, artists: artistsFromTracks(rows, phrase), playlistName: null }
+      artistResults.push(...(data.artists || []).map(normalizeArtist).filter(artist => artist && recordingArtist(artist.title).includes(recordingArtist(phrase))))
       const candidates = (data?.albums || []).slice(0, 20).filter(item => {
         const info = { title: item.info?.name, author: item.pluginInfo?.author }
         return spotifyURL(item.pluginInfo?.url, 'album') && (artistSearch
@@ -90,11 +92,14 @@ async function collect(client, nodes, query) {
     String(track.info?.author || '').split(/\s+(?:feat\.?|ft\.?|with|and|x)\s+|[,/&]/i)
       .some(credit => creditedArtist(credit) === creditedArtist(artistIdentity))), phrase).slice(0, 50)
   if (!tracks.length && !albums.length && failures && !successful.length) throw new Error('No se pudo consultar la música. Reintenta en unos minutos.')
-  return { loadType: 'search', tracks, albums, playlistName: null }
+  return { loadType: 'search', tracks, albums, artists: uniqueArtists([...artistResults, ...artistsFromTracks(rows, phrase)]), playlistName: null }
 }
 
 async function searchCatalogNodes(client, nodes, query, signal) {
   if (signal?.aborted) throw new Error('Music lookup cancelled')
+  // Catalog plugins are useful even when audio is routed to another backend.
+  const score = node => Number(Boolean(client.nodePool?.supportsPlugin?.(node.name, 'lavasrc'))) * 2 + Number(Boolean(client.nodePool?.supportsPlugin?.(node.name, 'lavasearch')))
+  nodes = nodes.slice().sort((a, b) => score(b) - score(a))
   let state = catalogs.get(client)
   if (!state) { state = { entries: new Map(), active: 0 }; catalogs.set(client, state) }
   const key = JSON.stringify([nodes.slice(0, 2).map(node => node.name), query])

@@ -1,0 +1,236 @@
+
+> obey-your-master@14.0.0 test
+> node --test test/*.test.js
+
+TAP version 13
+# Subtest: searchDiscordCatalog returns Lavalink tracks via client.music.search
+ok 1 - searchDiscordCatalog returns Lavalink tracks via client.music.search
+  ---
+  duration_ms: 7.129303
+  type: 'test'
+  ...
+# Subtest: toQueueTrack keeps metadata and stays without encoded for lazy resolution
+ok 2 - toQueueTrack keeps metadata and stays without encoded for lazy resolution
+  ---
+  duration_ms: 0.32209
+  type: 'test'
+  ...
+# Subtest: selecting a collection queues all of its resolved tracks
+ok 3 - selecting a collection queues all of its resolved tracks
+  ---
+  duration_ms: 0.617421
+  type: 'test'
+  ...
+# Subtest: a real Lavalink track is queued as-is with the requester set
+ok 4 - a real Lavalink track is queued as-is with the requester set
+  ---
+  duration_ms: 0.361534
+  type: 'test'
+  ...
+# Subtest: artist identities come from catalog URLs and keep homonymous artists separate
+ok 5 - artist identities come from catalog URLs and keep homonymous artists separate
+  ---
+  duration_ms: 1.055989
+  type: 'test'
+  ...
+# Subtest: artist profile preserves provider top order, returns albums, and never enqueues
+ok 6 - artist profile preserves provider top order, returns albums, and never enqueues
+  ---
+  duration_ms: 3.531464
+  type: 'test'
+  ...
+# Subtest: artist profiles reject arbitrary URLs before contacting any node
+ok 7 - artist profiles reject arbitrary URLs before contacting any node
+  ---
+  duration_ms: 1.192393
+  type: 'test'
+  ...
+# Subtest: an artist selection opens top tracks and returns to artists without starting playback
+ok 8 - an artist selection opens top tracks and returns to artists without starting playback
+  ---
+  duration_ms: 494.168274
+  type: 'test'
+  ...
+# Subtest: NodeLink artist collections with native top-track metadata remain browsable
+ok 9 - NodeLink artist collections with native top-track metadata remain browsable
+  ---
+  duration_ms: 1.804485
+  type: 'test'
+  ...
+# Subtest: Stop invalidates a pending catalog collection even when its state object is retained
+ok 10 - Stop invalidates a pending catalog collection even when its state object is retained
+  ---
+  duration_ms: 1.074372
+  type: 'test'
+  ...
+# Subtest: missing album names in artist tops are resolved from the real album identity
+ok 11 - missing album names in artist tops are resolved from the real album identity
+  ---
+  duration_ms: 1.058965
+  type: 'test'
+  ...
+# Subtest: preserves extended metadata for web player results
+ok 12 - preserves extended metadata for web player results
+  ---
+  duration_ms: 2.362294
+  type: 'test'
+  ...
+# Subtest: returns real tracks, albums and playlists from LavaSearch
+ok 13 - returns real tracks, albums and playlists from LavaSearch
+  ---
+  duration_ms: 4.770595
+  type: 'test'
+  ...
+# Subtest: falls back to regular Lavalink search when LavaSearch is missing
+ok 14 - falls back to regular Lavalink search when LavaSearch is missing
+  ---
+  duration_ms: 1.600595
+  type: 'test'
+  ...
+# Subtest: turns a direct playlist URL into a playable collection
+ok 15 - turns a direct playlist URL into a playable collection
+  ---
+  duration_ms: 0.512696
+  type: 'test'
+  ...
+# Subtest: ranks exact catalog matches and removes duplicate ISRC results
+ok 16 - ranks exact catalog matches and removes duplicate ISRC results
+  ---
+  duration_ms: 1.525976
+  type: 'test'
+  ...
+# Subtest: uses the public Apple catalog as an album fallback
+ok 17 - uses the public Apple catalog as an album fallback
+  ---
+  duration_ms: 1.509325
+  type: 'test'
+  ...
+# Subtest: uses real YouTube playlist results when LavaSearch returns no playlists
+ok 18 - uses real YouTube playlist results when LavaSearch returns no playlists
+  ---
+  duration_ms: 1.586148
+  type: 'test'
+  ...
+# Subtest: marks YouTube Music albums with a playable search fallback
+ok 19 - marks YouTube Music albums with a playable search fallback
+  ---
+  duration_ms: 1.156376
+  type: 'test'
+  ...
+# Subtest: resolves complete Spotify collections with track metadata
+ok 20 - resolves complete Spotify collections with track metadata
+  ---
+  duration_ms: 0.6755
+  type: 'test'
+  ...
+# Subtest: pause and resume emit a synchronized public player state
+ok 21 - pause and resume emit a synchronized public player state
+  ---
+  duration_ms: 861.0458
+  type: 'test'
+  ...
+# Subtest: plain text searches try spsearch first and return its list result
+ok 22 - plain text searches try spsearch first and return its list result
+  ---
+  duration_ms: 11.905507
+  type: 'test'
+  ...
+# Subtest: a single spsearch track is kept as fallback while ytmsearch provides the list
+ok 23 - a single spsearch track is kept as fallback while ytmsearch provides the list
+  ---
+  duration_ms: 5.545109
+  type: 'test'
+  ...
+# Subtest: search falls back to the single spsearch track when no list source has results
+ok 24 - search falls back to the single spsearch track when no list source has results
+  ---
+  duration_ms: 3.873913
+  type: 'test'
+  ...
+# Subtest: spotify album URIs resolve directly and return album tracks
+ok 25 - spotify album URIs resolve directly and return album tracks
+  ---
+  duration_ms: 3.823068
+  type: 'test'
+  ...
+# Subtest: joining voice applies saved music defaults
+ok 26 - joining voice applies saved music defaults
+  ---
+  duration_ms: 12.809204
+  type: 'test'
+  ...
+# Subtest: skip advances the queue even when the player is paused
+ok 27 - skip advances the queue even when the player is paused
+  ---
+  duration_ms: 17.066431
+  type: 'test'
+  ...
+# Subtest: a blocked YouTube track falls back only to the matching Apple Music recording
+ok 28 - a blocked YouTube track falls back only to the matching Apple Music recording
+  ---
+  duration_ms: 5.065485
+  type: 'test'
+  ...
+# Subtest: volume remains at the confirmed value until a delayed acknowledgement succeeds
+ok 29 - volume remains at the confirmed value until a delayed acknowledgement succeeds
+  ---
+  duration_ms: 17.120182
+  type: 'test'
+  ...
+# Subtest: rapid volume changes reach the backend in order and retain confirmed volume on failure
+ok 30 - rapid volume changes reach the backend in order and retain confirmed volume on failure
+  ---
+  duration_ms: 4.940853
+  type: 'test'
+  ...
+# Subtest: queue editing rejects invalid positions and clearing keeps the playing song
+ok 31 - queue editing rejects invalid positions and clearing keeps the playing song
+  ---
+  duration_ms: 3.433071
+  type: 'test'
+  ...
+# Subtest: changing audio presets clears previous effects
+ok 32 - changing audio presets clears previous effects
+  ---
+  duration_ms: 3.470881
+  type: 'test'
+  ...
+# Subtest: seek exposes confirmed positionMs to the existing Discord command consumer
+ok 33 - seek exposes confirmed positionMs to the existing Discord command consumer
+  ---
+  duration_ms: 5.53507
+  type: 'test'
+  ...
+# Subtest: stop cancels a pending backend search before its result can reconnect or enqueue
+ok 34 - stop cancels a pending backend search before its result can reconnect or enqueue
+  ---
+  duration_ms: 5.120678
+  type: 'test'
+  ...
+# Subtest: voice relocation rejects an actor outside the requested channel before native side effects
+ok 35 - voice relocation rejects an actor outside the requested channel before native side effects
+  ---
+  duration_ms: 3.851241
+  type: 'test'
+  ...
+# Subtest: voice relocation rejects missing bot permissions before native side effects
+ok 36 - voice relocation rejects missing bot permissions before native side effects
+  ---
+  duration_ms: 1.815366
+  type: 'test'
+  ...
+# Subtest: authorized voice relocation moves through the native gateway and preserves paused playback and queue
+ok 37 - authorized voice relocation moves through the native gateway and preserves paused playback and queue
+  ---
+  duration_ms: 4.092731
+  type: 'test'
+  ...
+1..37
+# tests 37
+# suites 0
+# pass 37
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1189.926119
