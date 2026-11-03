@@ -114,7 +114,7 @@ module.exports = async client => {
 
   app.get('/health', (req, res) => {
     const database = client._dbReady && require('mongoose').connection.readyState === 1
-    const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
+    const node = client.music?.getNode?.()
     const music = Boolean(node && node.state === 1)
     const healthy = database && music && !client._shuttingDown
     res.set('Cache-Control', 'no-store').status(healthy ? 200 : 503).json({ status: healthy ? 'ok' : 'degraded', database: Boolean(database), music, uptime: Math.floor(process.uptime()) })
@@ -195,7 +195,7 @@ module.exports = async client => {
     sseCache.data = {
       guilds:        client.guilds.cache.size,
       users:         client.guilds.cache.reduce((a, g) => a + (g.memberCount || 0), 0),
-      activePlayers: client.shoukaku?.players?.size ?? 0,
+      activePlayers: client.nyxlink?.players?.size ?? 0,
       uptime:        Math.floor(process.uptime()),
       memUsed:       Math.round(mem.heapUsed  / 1024 / 1024),
       memTotal:      Math.round(mem.heapTotal  / 1024 / 1024),

@@ -1,4 +1,5 @@
 const obeyUi = require("../../handlers/assets/system")
+const { voiceErrorText } = require('../../handlers/music/responses')
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {
@@ -27,21 +28,10 @@ module.exports = {
       return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setTitle(obeyUi.limit(`${obeyUi.markup("icon.error")} No tengo permisos para unirme a ${userVC.name}.`, 256))] })
     }
 
-    const botVC    = message.guild.members.me.voice.channel
-    const state    = client.music?.getState(message.guild.id)
-    const vcId     = state?.voiceChannelId || botVC?.id
-
-    // ── Estado 1: ya estoy en el mismo canal que el usuario ─────────────────
-    if (vcId && vcId === userVC.id) {
-      return message.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(es.color)
-            .setTitle(obeyUi.limit(obeyUi.owned('🎙️ Ya estoy en tu canal'), 256))
-            .setDescription(obeyUi.limit(`Ya estoy conectado en <#${userVC.id}>.`, 4096)),
-        ],
-      })
-    }
+    const state = client.music?.getState(message.guild.id)
+    const voice = message.guild.members.me?.voice
+    const vcId = voice ? voice.channelId : state?.voiceChannelId
+    const expectedSession = { id: state?.sessionId, playbackId: state?.playbackId, stopEpoch: state?.stopRequestEpoch || 0 }
 
     // ── Estado 2: estoy en un canal diferente → preguntar si mover ──────────
     if (vcId && vcId !== userVC.id) {
@@ -73,9 +63,8 @@ module.exports = {
         }
         // Mover al nuevo canal
         try {
-          await client.shoukaku?.leaveVoiceChannel(message.guild.id)
-          await new Promise(r => setTimeout(r, 400))
-          const player = await client.music?.joinChannel(message.guild.id, userVC.id, message.channel.id)
+          const player = await client.music.relocateVoice(message.guild.id, { command: 'join', actorId: message.author.id,
+            voiceChannelId: userVC.id, textChannelId: message.channel.id, expectedVoiceChannelId: vcId, expectedSession })
           if (player) {
             await reply.edit({
               embeds: [
@@ -90,7 +79,7 @@ module.exports = {
             await reply.edit({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(obeyUi.owned('❌ No pude moverme al canal.'), 4096))], components: [] })
           }
         } catch (e) {
-          await reply.edit({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${e.message || e}`, 4096))], components: [] })
+          await reply.edit({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${voiceErrorText(client, message.guild.id, e)}`, 4096))], components: [] })
         }
       })
 
@@ -105,7 +94,8 @@ module.exports = {
 
     // ── Estado 3: no estoy en ningún canal → unirse ──────────────────────────
     try {
-      const player = await client.music?.joinChannel(message.guild.id, userVC.id, message.channel.id)
+      const player = await client.music.relocateVoice(message.guild.id, { command: 'join', actorId: message.author.id,
+        voiceChannelId: userVC.id, textChannelId: message.channel.id, expectedVoiceChannelId: vcId || null, expectedSession })
       if (player) {
         await message.react(obeyUi.reaction('🎙')).catch(() => {})
         return message.reply({
@@ -119,7 +109,7 @@ module.exports = {
       }
       return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(obeyUi.owned('❌ No pude unirme al canal.'), 4096))] })
     } catch (e) {
-      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${e.message || e}`, 4096))] })
+      return message.reply({ embeds: [new EmbedBuilder().setColor(es.wrongcolor).setDescription(obeyUi.limit(`${obeyUi.markup("icon.error")} ${voiceErrorText(client, message.guild.id, e)}`, 4096))] })
     }
   },
 }

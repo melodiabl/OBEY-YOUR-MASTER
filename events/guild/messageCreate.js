@@ -257,7 +257,7 @@ module.exports = async (client, message) => {
                 ///////////////////////////////
                 ///////////////////////////////
 
-                const player = client.shoukaku?.players?.get(message.guild.id) ?? null;
+                const player = client.music?.getPlayer?.(message.guild.id) ?? null;
                 const mstate = player ? (client.music?.getState(message.guild.id) ?? null) : null;
 
 
@@ -274,11 +274,6 @@ module.exports = async (client, message) => {
                             return message.reply({
                                 embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.join_vc, 256))],
                             }).catch(() => {});
-                        }
-
-                        if (!player && mechannel) {
-                            await message.guild.members.me.voice.disconnect().catch(() => {});
-                            await delay(350);
                         }
 
                         if (mstate?.currentTrack && command.parameters.check_dj) {
@@ -300,7 +295,6 @@ module.exports = async (client, message) => {
                                 }).catch(() => {});
                             }
                             if (!mechannel) {
-                                try { await client.shoukaku?.leaveVoiceChannel(message.guild.id); await delay(350); } catch {}
                                 not_allowed = true;
                                 return message.reply({
                                     embeds: [new EmbedBuilder().setColor(es.wrongcolor).setFooter(obeyMeta.asFooter(client.getFooter(es))).setTitle(obeyUi.limit(client.la[ls].common.not_connected, 256))],

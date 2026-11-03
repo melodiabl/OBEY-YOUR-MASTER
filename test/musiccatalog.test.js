@@ -9,13 +9,13 @@ const {
 } = require('../handlers/musiccatalog')
 
 function makeClient(rest, config = {}) {
-  const node = { rest }
+  // The catalog consumes the public node view; native SDK integration is
+  // covered by musichandler-state.test.js and the migration runtime suite.
+  const node = { name: 'main', state: 1, rest }
   return {
     config,
-    shoukaku: {
-      nodes: new Map([['main', node]]),
-      options: { nodeResolver: nodes => nodes.get('main') },
-    },
+    music: { getNode: () => node },
+    nodePool: { choose: () => node, candidates: () => [node] },
   }
 }
 
@@ -98,7 +98,7 @@ test('falls back to regular Lavalink search when LavaSearch is missing', async (
       data: [{ info: { title: identifier, author: 'YouTube', uri: 'https://youtube.com/watch?v=1', length: 123000, sourceName: 'youtube' } }],
     }),
   }
-  const catalog = createMusicCatalog(makeClient(rest))
+  const catalog = createMusicCatalog(makeClient(rest), { http: { get: async () => ({ data: '<script>var ytInitialData = {}</script>' }) } })
 
   const result = await catalog.search('fallback song', { source: 'youtube' })
 
@@ -123,7 +123,7 @@ test('turns a direct playlist URL into a playable collection', async () => {
       },
     }),
   }
-  const catalog = createMusicCatalog(makeClient(rest))
+  const catalog = createMusicCatalog(makeClient(rest), { http: { get: async () => ({ data: '<script>var ytInitialData = {}</script>' }) } })
   const url = 'https://open.spotify.com/playlist/abc'
 
   const result = await catalog.search(url)

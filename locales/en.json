@@ -73,7 +73,21 @@
     "off": "Off",
     "silenced": "Muted",
     "voiceRequired": "Join a voice channel first.",
-    "defaultEqualizerUnconfirmed": "Default equalizer unconfirmed"
+    "defaultEqualizerUnconfirmed": "Default equalizer unconfirmed",
+    "voice": {
+      "invalid": "The voice connection request is invalid.",
+      "unavailable": "The music system is unavailable.",
+      "access": "Access to the server or channel could not be verified.",
+      "actor": "You must remain in the selected voice channel and retain access to it.",
+      "permissions": "I need permission to connect and speak in that channel.",
+      "disabled": "Music is disabled in this server.",
+      "control": "You no longer have the DJ or requester permissions required for this action.",
+      "busy": "The voice connection is already changing.",
+      "changed": "Playback or the voice channel changed. Open the command again.",
+      "nodes": "No music connections are available.",
+      "cancelled": "The connection was cancelled when playback was stopped.",
+      "failed": "The connection could not be confirmed. Check its current state before retrying."
+    }
   },
   "economy": {
     "disabled": "The economy system is disabled.",

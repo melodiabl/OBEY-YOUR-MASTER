@@ -11,7 +11,7 @@ function sampleCpu() {
 }
 async function collectBotInfo(client, guildId, { cpu = sampleCpu } = {}) {
   const guilds = [...(client.guilds?.cache?.values() || [])], memory = process.memoryUsage()
-  const player = client.shoukaku?.players?.get(guildId), nodes = client.music?.getNodes?.(guildId)
+  const player = client.music?.getPlayer?.(guildId), nodes = client.music?.getNodes?.(guildId)
   const value = await Promise.resolve().then(cpu).catch(() => null)
   const valid = n => Number.isFinite(n) && n >= 0 ? n : null
   return { guilds: guilds.length, members: guilds.reduce((sum, guild) => sum + (guild.memberCount ?? guild.members?.cache?.size ?? 0), 0),

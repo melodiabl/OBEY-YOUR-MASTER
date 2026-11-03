@@ -8,6 +8,6 @@ const schema = new Schema({
   position: { type: Number, default: 0 }, paused: Boolean,
   volume: { type: Number, min: 0, max: 200, default: 100 },
   loop: { type: String, enum: ['none', 'track', 'queue'], default: 'none' },
-  customFilters: Schema.Types.Mixed, filter: String, autoplay: Boolean, shuffle: Boolean, radioMode: Boolean,
+  customFilters: Schema.Types.Mixed, filter: String, autoplay: Boolean, autoplayPending: { type: Boolean, default: false }, shuffle: Boolean, radioMode: Boolean,
 }, { timestamps: true })
 module.exports = model('MusicSession', schema)

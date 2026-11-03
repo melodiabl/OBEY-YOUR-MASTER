@@ -58,7 +58,7 @@ module.exports = client => {
     "POST /api/player/:guildId/add",
   ],
   realtime: { emitted: ['player:state', 'player:tick'], consumed: ['join', 'leave'] },
-  dependencies: ['shoukaku', 'mongoose', 'socket.io'],
+  dependencies: ['nyxlink', 'mongoose', 'socket.io'],
   capabilities: {
     playback: client.music ? 'available' : 'unavailable',
     guildToggle: 'pending',

@@ -414,7 +414,7 @@ function createMusicCatalog(client, options = {}) {
   let lavaSearchAvailable = null
 
   function getNode() {
-    return client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes) || null
+    return client.music?.getNode?.() || null
   }
 
   function hasSpotifyCredentials() {

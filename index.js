@@ -160,8 +160,7 @@ async function shutdown() {
     ['sessions', () => client.music?.flushSessions?.()],
     ['database', () => client.flushDatabase?.()],
     ['voice', async () => {
-      const results = await Promise.allSettled([...client.shoukaku.players.keys()].map(id => client.shoukaku.leaveVoiceChannel(id)))
-      if (results.some(result => result.status === 'rejected')) throw Error('voice_shutdown_failed')
+      await client.nyxlink.shutdown()
     }],
     ['gateway', () => client.destroy()],
     ['mongo', () => mongoose.disconnect()],

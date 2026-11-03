@@ -146,7 +146,7 @@ module.exports = async (client, interaction) => {
             }
         }
 
-        const player = client.shoukaku?.players?.get(guild.id) ?? null;
+        const player = client.music?.getPlayer?.(guild.id) ?? null;
         const mstate = client.music?.getState(guild.id) ?? null;
 
 
@@ -170,11 +170,6 @@ module.exports = async (client, interaction) => {
                                 .setTitle(obeyUi.limit(client.la[ls].common.join_vc, 256)),
                         ],
                     });
-                }
-                //If there is no player, then kick the bot out of the channel, if connected to
-                if (!player && mechannel) {
-                    await guild.members.me.voice.disconnect().catch(e => {});
-                    await delay(350);
                 }
                 if (mstate?.currentTrack && command.parameters.check_dj) {
                     if (check_if_dj(client, interaction?.member, mstate.currentTrack?.info || mstate.currentTrack)) {
@@ -205,7 +200,6 @@ module.exports = async (client, interaction) => {
                         });
                     }
                     if (!mechannel) {
-                        try { await client.shoukaku?.leaveVoiceChannel(guild.id); await delay(350); } catch {}
                         not_allowed = true;
                         return interaction?.reply({
                             ephemeral: true,

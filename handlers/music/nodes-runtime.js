@@ -1,46 +1,46 @@
-const { Shoukaku, Connectors } = require('shoukaku')
+const { Manager, Connectors } = require('nyxlink')
 const { loadNodeConfig } = require('./nodes-config')
 const { createNodePool } = require('./nodes')
-const { StatePlayer, StateRest } = require('./node-player')
+const { nodeView } = require('./node-view')
 function initializeNodes(client, config) {
   const entries = loadNodeConfig({ legacyNodes: config.clientsettings?.nodes || [] })
-  const pool = createNodePool(entries, { defaultNodeId: process.env.LAVALINK_DEFAULT_NODE || 'auto', preferenceFor: guildId => guildId ? client.music?.getState(guildId)?.nodePreference || 'auto' : 'auto' })
+  if (!entries.some(entry => entry.enabled)) throw Error('no_audio_nodes_configured')
+  const manager = new Manager({
+    nodes: entries.filter(entry => entry.enabled).map(entry => {
+      const url = new URL('http://' + entry.url)
+      return { identifier: entry.id, host: url.hostname, port: Number(url.port), password: entry.auth, secure: entry.secure, priority: entry.priority }
+    }),
+    options: {
+      database: { type: 'memory' }, resume: true, resumeTimeout: 60000,
+      node: { selectionStrategy: 'priority', autoMovePlayers: true, avoidUnhealthyNodes: true,
+        retryAmount: 20, retryDelay: 5000, failover: { maxAttempts: 3, retryDelayMs: 250, preserveOnFailure: true } },
+      search: { defaultPlatform: 'youtubemusic', resultLimit: 50, timeoutMs: 8000 },
+      sources: { disabledSources: ['jiosaavn', 'soundcloud', 'deezer', 'pornhub', 'soundgasm', 'hentai', 'nsfw', 'tts'] },
+      defaultPlayer: { selfDeaf: true, autoPlay: false, historySize: 10 },
+      trackHandling: { autoSkipOnError: true, skipStuckTracks: true, retryFailedTracks: false },
+    },
+  })
+  client.nyxlink = manager
+  const pool = createNodePool(entries, { defaultNodeId: process.env.LAVALINK_DEFAULT_NODE || 'auto',
+    preferenceFor: guildId => (guildId ? client.music?.getState(guildId)?.nodePreference : null) || 'auto' })
   client.nodePool = pool
-  const reconnect = new Map(), attempts = new Map()
-  client.shoukaku = new Shoukaku(new Connectors.DiscordJS(client), entries.filter(entry => entry.enabled).map(entry => ({ name: entry.id, url: entry.url, auth: entry.auth, secure: entry.secure })), {
-    resume: true, resumeTimeout: 60, resumeByLibrary: false, moveOnDisconnect: false,
-    reconnectTries: 1, reconnectInterval: 1, restTimeout: 10,
-    structures: { player: StatePlayer, rest: StateRest },
-    nodeResolver: (nodes, connection) => pool.choose(connection?.guildId),
-  })
-  pool.attach(client.shoukaku)
-  function retry(name) {
-    if (client._shuttingDown || reconnect.has(name)) return
-    const entry = entries.find(value => value.id === name && value.enabled)
-    if (!entry) return
-    const attempt = (attempts.get(name) || 0) + 1
-    attempts.set(name, attempt)
-    const timer = setTimeout(() => {
-      reconnect.delete(name)
-      if (client._shuttingDown || client.shoukaku.nodes.get(name)?.state === 1) return
-      try {
-        if (client.shoukaku.nodes.has(name)) client.shoukaku.removeNode(name, 'Scheduled reconnect')
-        client.shoukaku.addNode({ name: entry.id, url: entry.url, auth: entry.auth, secure: entry.secure })
-      } catch { retry(name) }
-    }, Math.min(120000, 5000 * 2 ** Math.min(attempt - 1, 5)))
-    timer.unref?.(); reconnect.set(name, timer)
+  pool.attach(manager)
+  const search = manager.search.bind(manager)
+  manager.search = async query => {
+    const result = await search(query)
+    const { viewTrack } = require('./tracks')
+    result.tracks = result.tracks.filter(track => require('./nodes-config').allowedMusicTrack(viewTrack(track)))
+    return result
   }
-  client.shoukaku.on('ready', name => {
-    clearTimeout(reconnect.get(name)); reconnect.delete(name); attempts.delete(name); pool.recover(name)
-    console.log('[Lavalink] Conexión disponible: ' + (entries.find(entry => entry.id === name)?.visibility === 'private' ? 'interna' : name))
-  })
-  client.shoukaku.on('error', name => { pool.fail(name); console.warn('[Lavalink] Conexión no disponible'); retry(name) })
-  client.shoukaku.on('disconnect', name => { pool.fail(name); retry(name) })
-  client.stopNodes = () => { for (const timer of reconnect.values()) clearTimeout(timer); reconnect.clear(); pool.dispose() }
+  manager.on('nodeReady', node => { pool.recover(node.identifier); console.info('[Audio] Nodo disponible: ' + (entries.find(e => e.id === node.identifier)?.visibility === 'private' ? 'interno' : node.identifier)) })
+  manager.on('nodeError', node => { pool.fail(node.identifier); console.warn('[Audio] Conexión no disponible') })
+  manager.on('nodeDisconnect', node => pool.fail(node.identifier))
+  manager.use(new Connectors.DiscordJs(), client)
+  client.stopNodes = () => pool.dispose()
   return pool
 }
 async function configureSponsorBlock(player, pool) {
-  const node = player?.node
+  const node = nodeView(player?.node)
   if (!node?.sessionId || !pool?.supportsPlugin(node.name, 'sponsorblock')) return
   try {
     await node.rest.fetch({ endpoint: '/sessions/' + encodeURIComponent(node.sessionId) + '/players/' + encodeURIComponent(player.guildId) + '/sponsorblock/categories',

@@ -1,4 +1,4 @@
-const { fx, err, E } = require('../../handlers/music/responses')
+const { fx, err, E, voiceErrorText } = require('../../handlers/music/responses')
 module.exports = {
   name: 'reconnect', category: 'Music',
   aliases: ['rc'],
@@ -10,14 +10,11 @@ module.exports = {
     const vcId  = state?.voiceChannelId || message.member?.voice?.channel?.id
     if (!vcId) return message.reply({ embeds: [err('No hay canal de voz activo.')] }).catch(() => {})
     try {
-      const node = client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)
-      if (!node) throw new Error('No hay nodos Lavalink disponibles.')
-      await client.shoukaku.leaveVoiceChannel(message.guild.id).catch(() => {})
-      await new Promise(r => setTimeout(r, 800))
-      await client.music.joinChannel(message.guild.id, vcId, state?.textChannelId || message.channel.id)
+      await client.music.relocateVoice(message.guild.id, { command: 'reconnect', actorId: message.author.id,
+        voiceChannelId: vcId, textChannelId: state?.textChannelId || message.channel.id })
       return message.reply({ embeds: [fx(E.link, 'Reconectado al canal de voz')] }).catch(() => {})
     } catch (e) {
-      return message.reply({ embeds: [err(e.message)] }).catch(() => {})
+      return message.reply({ embeds: [err(voiceErrorText(client, message.guild.id, e))] }).catch(() => {})
     }
   },
 }

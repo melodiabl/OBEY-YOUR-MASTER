@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-02",
+  "request": "Check whether upstream already fixed the two observed Moonlink behaviors",
+  "npm": {
+    "tags": {
+      "latest": "5.2.0"
+    },
+    "latestReleased": "2026-02-28T21:40:22.205Z",
+    "latestGitHead": "f87a0cc388c9f74b6aa2444da42667ef98e960a6"
+  },
+  "refs": {
+    "stable": "3d76632abc6c9759427b3529e9b6701006464d9b",
+    "dev": "f6631bb289aee180af48cb4f0f1671e5e075249c"
+  },
+  "upstreamDelta": {
+    "ahead": 18,
+    "behind": 0,
+    "relevantCommits": [
+      {
+        "sha": "a3cd87dda2e7fe20eef79feb95d035c512564d5c",
+        "date": "2026-03-01T02:24:04Z",
+        "message": "Fix: include volume in play() payload"
+      },
+      {
+        "sha": "e034ab17bc3816ce301dbf17a2cd3056be370585",
+        "date": "2026-04-09T03:37:46Z",
+        "message": "refactor: improve recommendations autoplay and core state management"
+      },
+      {
+        "sha": "4afc54befa3b06c859d234d01eccbb2de7f63f2d",
+        "date": "2026-05-31T20:23:04Z",
+        "message": "refactor: simplify autoplay system and remove complex brain/scoring logic"
+      },
+      {
+        "sha": "483baf40b07c01ee3e5ca8aba4797e80b44da7b2",
+        "date": "2026-08-22T21:31:41Z",
+        "message": "feat: add player stop event"
+      },
+      {
+        "sha": "f6631bb289aee180af48cb4f0f1671e5e075249c",
+        "date": "2026-08-22T21:54:31Z",
+        "message": "feat: add player stop event (#176)"
+      }
+    ]
+  },
+  "behavior": {
+    "node": "v22.23.4",
+    "network": "none",
+    "methodSource": "Actual upstream TypeScript methods transpiled without logic edits; external I/O replaced with deferred promises",
+    "scope": "No live node or Discord/audio; dispatch after stop is observed, not audible playback",
+    "results": [
+      {
+        "branch": "v5.2",
+        "version": "5.2.0",
+        "sourceHashes": {
+          "player": "0ec21d01db26ebe040bc1dd2393453ce2ccf37dc990edff549a35aef30e7e392",
+          "node": "77ad771c2257cb9ec87655b2cb1ca479b1c0928d69aff6324ebaa8585623a163"
+        },
+        "volume": {
+          "returnsPromise": false,
+          "confirmedBeforeReturn": false
+        },
+        "autoplay": [
+          {
+            "operation": "disableAutoplay",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          },
+          {
+            "operation": "stop",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          },
+          {
+            "operation": "destroy",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          }
+        ]
+      },
+      {
+        "branch": "dev",
+        "version": "5.3.0-dev.2",
+        "sourceHashes": {
+          "player": "893e09f93454cf1a973e3094bf21f97f853073fae3ee267a3e431c417fe8bd20",
+          "node": "35454dd416e013b76b880442cc897248668ffb6b54f165e16c726b0d12c12969"
+        },
+        "volume": {
+          "returnsPromise": false,
+          "confirmedBeforeReturn": false
+        },
+        "autoplay": [
+          {
+            "operation": "disableAutoplay",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          },
+          {
+            "operation": "stop",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          },
+          {
+            "operation": "destroy",
+            "queueAddsAfterOperation": 1,
+            "playInvocationsAfterOperation": 1,
+            "cancelled": false
+          }
+        ]
+      }
+    ]
+  },
+  "conclusion": {
+    "autoplayCancellationFixedInStable": false,
+    "autoplayCancellationFixedInDev": false,
+    "volumeSetterAwaitsAcknowledgementInStable": false,
+    "volumeSetterAwaitsAcknowledgementInDev": false,
+    "volumeSetterInterpretation": "Synchronous fluent API; lack of remote confirmation is an integration constraint, not evidence of broken audio",
+    "upstreamVolumePlaybackFixIsDifferent": true,
+    "liveAudioTested": false,
+    "productionChanged": false
+  }
+}

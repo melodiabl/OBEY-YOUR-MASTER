@@ -4,7 +4,7 @@ const { assertMusicQuery, allowedMusicTrack } = require('./nodes-config')
 const { rankMusicTracks, sameRecording } = require('./recordings')
 async function searchNodes(client, raw, requester, { guildId, signal, multiple = false } = {}) {
   const query = assertMusicQuery(raw)
-  const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)
+  const nodes = client.nodePool?.candidates(guildId) || [client.music?.getNode?.(guildId)].filter(Boolean)
   if (!nodes.length) throw new Error('No hay conexiones de música disponibles.')
   const name = typeof requester === 'string' ? requester : requester?.username || requester?.tag || 'Unknown'
   const url = /^https?:\/\//i.test(query)
@@ -27,13 +27,13 @@ async function searchNodes(client, raw, requester, { guildId, signal, multiple =
           info: { ...track.info, requester: name, requesterId: typeof requester === 'object' ? requester.id : track.info?.requesterId || null } }))
         if (!tracks.length) continue
         if (response.loadType === 'track' && !url) { single = { loadType: response.loadType, tracks, playlistName: null }; continue }
-        if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
+        if (guildId && !client.nyxlink?.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
         const combined = single && !collection ? [...tracks, single.tracks[0]] : tracks
         return { loadType: response.loadType === 'album' ? 'playlist' : response.loadType, tracks: url || ['playlist', 'album'].includes(response.loadType) ? combined : rankMusicTracks(combined, query), playlistName: response.data?.info?.name || null }
       } catch (error) { if (signal?.aborted) throw error; failed = true; nodeFailed = true }
     }
     if (single) {
-      if (guildId && !client.shoukaku.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
+      if (guildId && !client.nyxlink?.players.has(guildId)) client.nodePool?.pin(guildId, node.name)
       return single
     }
     if (nodeFailed) client.nodePool?.fail(node.name)

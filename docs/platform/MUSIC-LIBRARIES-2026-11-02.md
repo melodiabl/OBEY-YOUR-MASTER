@@ -38,6 +38,18 @@ La siguiente unidad sigue siendo la migración directa del motor y sus consumido
 
 ## Fuentes primarias
 
+### Revisión posterior: ¿ya están corregidos los dos casos?
+
+Por petición del usuario se contrastaron npm, la rama estable `v5.2` y el HEAD de `dev`, además de los commits posteriores a la publicación. npm sigue ofreciendo 5.2.0 (`f87a0cc`); `dev` declara 5.3.0-dev.2 (`f6631bb`). Se ejecutaron los métodos TypeScript reales de ambas ramas, extraídos y transpilados sin editar su lógica, con I/O diferido en Node22.23.4 sin red.
+
+- En ambas ramas, resolver la búsqueda retenida después de desactivar autoplay, ejecutar Stop o marcar destrucción sigue añadiendo un candidato e invocando `play()`. Son seis comprobaciones de dispatch; no demuestran reproducción audible ni conexión real.
+- En ambas ramas, `setVolume()` sigue siendo síncrono y devuelve `this` antes de la confirmación remota. Esto es una limitación del contrato para una UI que necesita ACK, no prueba por sí sola un fallo de volumen/audio.
+- Sí existe un cambio posterior para incluir el volumen en el payload de `play()` (01/03/2026), cambios de recomendaciones y un evento `playerStop` (22/08/2026). No corrigen los dos casos anteriores: el evento comunica Stop y no cancela automáticamente una búsqueda pendiente.
+
+[Evidencia comparativa](evidence/moonlink-fix-status-20261102.json). No se cambió el runtime ni se instalaron ramas de desarrollo en OBEY.
+
+### Referencias
+
 - [Moonlink Player](https://moonlink.js.org/api/player), [Node/autoplay](https://moonlink.js.org/api/node), [NodeManager](https://moonlink.js.org/api/node-manager), [Queue](https://moonlink.js.org/api/queue).
 - [Código Moonlink Player](https://github.com/Ecliptia/moonlink.js/blob/v5.2/src/entities/Player.ts), [paquete publicado 5.2.0](https://registry.npmjs.org/moonlink.js/-/moonlink.js-5.2.0.tgz).
 - [lavalink-client: funciones](https://tomato6966.github.io/lavalink-client/home/features/), [opciones/autoplay](https://tomato6966.github.io/lavalink-client/api/types/manager/interfaces/managerplayeroptions/), [Player/letras](https://tomato6966.github.io/lavalink-client/api/player/classes/player/).

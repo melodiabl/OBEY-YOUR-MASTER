@@ -18,7 +18,7 @@ async function recommendTracks(client, seed, requester, { guildId, signal } = {}
   const info = seed.info || seed
   const query = `${info.title || ''} ${info.author || ''}`.trim()
   if (!query) return null
-  const nodes = client.nodePool?.candidates(guildId) || [client.shoukaku?.options?.nodeResolver(client.shoukaku.nodes)].filter(Boolean)
+  const nodes = client.nodePool?.candidates(guildId) || [client.music?.getNode?.(guildId)].filter(Boolean)
   for (const node of nodes.slice(0, 2)) {
     try {
       let id = youtubeId(seed)

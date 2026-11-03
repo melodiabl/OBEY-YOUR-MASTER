@@ -13,5 +13,11 @@ function fx(emoji, text, color = OK) {
 function err(text) {
   return new EmbedBuilder().setColor(NO).setDescription(`${E.no} ${text}`)
 }
+function voiceErrorText(client, guildId, error) {
+  const { localeFor, t } = require('../i18n')
+  const code = String(error?.code || '').replace(/^music_voice_/, '')
+  const known = ['invalid', 'unavailable', 'access', 'actor', 'permissions', 'disabled', 'control', 'busy', 'changed', 'nodes', 'cancelled']
+  return t(localeFor(client, guildId), 'music.voice.' + (known.includes(code) ? code : 'failed'))
+}
 
-module.exports = { fx, err, E, OK, NO }
+module.exports = { fx, err, E, OK, NO, voiceErrorText }

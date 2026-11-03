@@ -10,10 +10,10 @@ module.exports = {
       return interaction.reply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ Debes estar en un canal de voz.'), 4096))], ephemeral: true })
     await interaction.deferReply()
     const state = client.music?.getState(interaction.guild.id)
-    if (!state) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay sesión de música activa.'), 4096))] })
+    if (!state || !client.music.getPlayer(interaction.guild.id)) return interaction.editReply({ embeds: [new EmbedBuilder().setColor(0xED4245).setDescription(obeyUi.limit(obeyUi.owned('❌ No hay sesión de música activa.'), 4096))] })
     const raw = interaction.options.getString('estado')
     const target = raw ? raw === 'on' : !state.autoplay
-    state.autoplay = target
+    client.music.setAutoplay(interaction.guild.id, target)
     await interaction.editReply({ embeds: [new EmbedBuilder()
       .setColor(target ? 0x57F287 : 0x4f545c)
       .setTitle(obeyUi.limit(target ? obeyUi.owned('🎲 Autoplay activado') : obeyUi.owned('🔇 Autoplay desactivado'), 256))

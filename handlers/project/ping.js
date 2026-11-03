@@ -11,7 +11,7 @@ async function runPing(client, context, { slash = false, locale = localeFor(clie
   const elapsed = now() - started, edit = payload => slash ? context.editReply(payload) : message.edit(payload)
   try {
     const value = n => Number.isFinite(n) && n >= 0 ? Math.round(n) + ' ms' : tr('unavailable')
-    const player = client.shoukaku?.players?.get(guildId), view = client.music?.getNodes?.(guildId)
+    const player = client.music?.getPlayer?.(guildId), view = client.music?.getNodes?.(guildId)
     const label = player && view?.nodes?.find(n => n.id === view.currentId)?.label
     const embed = new EmbedBuilder().setColor(style?.color ?? 0xFFD36F).setTitle(tr('title'))
       .addFields(

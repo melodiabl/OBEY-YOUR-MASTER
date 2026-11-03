@@ -7,7 +7,14 @@ const {
   toQueueTrack,
 } = require('../handlers/discordmusiccatalog')
 
-test('searchDiscordCatalog returns Lavalink tracks via client.music.search', async () => {
+test('searchDiscordCatalog returns Lavalink tracks via client.music.search', async t => {
+  // The optional legacy album catalog is an external HTTP boundary.
+  t.mock.method(require('node:http'), 'get', (_url, _options, onResponse) => {
+    const request = new (require('node:events').EventEmitter)()
+    request.destroy = () => {}
+    queueMicrotask(() => onResponse({ statusCode: 404, resume() {} }))
+    return request
+  })
   let receivedQuery
   const tracks = Array.from({ length: 25 }, (_, i) => ({
     encoded: `t${i}`,
@@ -59,16 +66,16 @@ test('selecting a collection queues all of its resolved tracks', async () => {
           { encoded: 'e2', info: { title: 'Two', author: 'Artist', uri: 'u2', isrc: 'TWO' } },
         ],
       }),
-      enqueue: async (_, tracks) => { state.queue.push(...tracks); played = true },
+      playCollection: async (_, _voice, _text, tracks) => { state.queue.push(...tracks); played = true },
     },
   }
   const message = {
-    guild: { id: 'guild' },
-    channel: { id: 'text' },
+    guild: { id: '123456789012345678' },
+    channel: { id: '323456789012345678' },
     author: { username: 'Tester' },
   }
 
-  const result = await enqueueCatalogItem(client, message, { id: 'voice' }, {
+  const result = await enqueueCatalogItem(client, message, { id: '223456789012345678' }, {
     type: 'playlist',
     title: 'Playlist',
     uri: 'https://open.spotify.com/playlist/1',
@@ -87,12 +94,12 @@ test('a real Lavalink track is queued as-is with the requester set', async () =>
       joinChannel: async () => ({ id: 'player' }),
       getState: () => state,
       search: async () => { throw new Error('should not search for encoded tracks') },
-      enqueue: async (_, tracks) => { state.queue.push(...tracks) },
+      playCollection: async (_, _voice, _text, tracks) => { state.queue.push(...tracks) },
     },
   }
-  const message = { guild: { id: 'g' }, channel: { id: 't' }, author: { username: 'Tester' } }
+  const message = { guild: { id: '123456789012345678' }, channel: { id: '323456789012345678' }, author: { username: 'Tester' } }
 
-  const result = await enqueueCatalogItem(client, message, { id: 'v' }, {
+  const result = await enqueueCatalogItem(client, message, { id: '223456789012345678' }, {
     encoded: 'real',
     info: { title: 'Song', author: 'Artist', uri: 'u' },
   })

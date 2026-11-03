@@ -1,0 +1,123 @@
+{
+  "capturedAt": "2026-11-03T14:48:16.059Z",
+  "package": {
+    "name": "nyxlink",
+    "version": "0.1.0-dev.2",
+    "integrity": "sha512-6DzVTEowRzlZEpSK+fc3yo6TuShQpM+UaviUbMxVjXjFVkKbtzzwjzWtlwXr6n++Aa8MWIkvvzKK91fUqqxByg=="
+  },
+  "tests": {
+    "original": 30,
+    "temporaryNative": 13,
+    "temporaryLifecycle": 18,
+    "total": 61,
+    "failures": 0
+  },
+  "checks": {
+    "welcomeTypes": "passed",
+    "dependencyBoundaries": "passed",
+    "webTypes": "passed",
+    "nextBuild": "passed"
+  },
+  "audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 50,
+    "high": 0,
+    "critical": 0,
+    "total": 50,
+    "newNyxAdvisories": 0
+  },
+  "nodes": {
+    "nodes": [
+      {
+        "id": "serenetia",
+        "ready": true,
+        "backend": "unknown",
+        "version": "47c0c5fddc6d23f6a9503437c59d74e57a626630-SNAPSHOT",
+        "searches": {
+          "ytmsearch": {
+            "type": "search",
+            "count": 20
+          },
+          "spsearch": {
+            "type": "search",
+            "count": 10
+          }
+        }
+      },
+      {
+        "id": "gdjkhp",
+        "ready": false,
+        "backend": "unknown",
+        "searches": {}
+      },
+      {
+        "id": "millohost",
+        "ready": true,
+        "backend": "unknown",
+        "version": "3d2748ed3186cd956146a78ef14edbb6a05c9046-SNAPSHOT",
+        "searches": {
+          "ytmsearch": {
+            "type": "search",
+            "count": 20
+          },
+          "spsearch": {
+            "type": "search",
+            "count": 10
+          }
+        }
+      },
+      {
+        "id": "nazha",
+        "ready": true,
+        "backend": "lavalink",
+        "version": "4.2.2",
+        "searches": {
+          "ytmsearch": {
+            "type": "search",
+            "count": 20
+          },
+          "spsearch": {
+            "type": "error",
+            "count": 0
+          }
+        }
+      },
+      {
+        "id": "trinium",
+        "ready": true,
+        "backend": "lavalink",
+        "version": "4.2.2",
+        "searches": {
+          "ytmsearch": {
+            "type": "search",
+            "count": 20
+          },
+          "spsearch": {
+            "type": "error",
+            "count": 0
+          }
+        }
+      },
+      {
+        "id": "trinium-02",
+        "ready": false,
+        "backend": "unknown",
+        "searches": {}
+      }
+    ]
+  },
+  "privateExcluded": true,
+  "sourceInventory": "32bb5e44b75fa2847c0e1813d16beaf2fc2eeb561490d555738fea277818ae7c",
+  "limits": [
+    "Native I/O tests use gateway/backend/storage doubles",
+    "Live node probes load catalog only; no audible Discord playback claimed",
+    "P1 operational acceptance remains open",
+    "Backend detection remains unknown for hash-SNAPSHOT provider versions"
+  ],
+  "review": {
+    "cycles": 3,
+    "criticalFindings": "corrected and regression-tested",
+    "externalSecondOpinion": false
+  }
+}

@@ -1005,7 +1005,7 @@ async function autoplay(client, player, type) {
             if (config.settings.LeaveOnEmpty_Queue.enabled && type != "skip") {
                 return setTimeout(() => {
                     try {
-                        player = client.shoukaku?.players?.get(player.guild) ?? null;
+                        player = client.music?.getPlayer?.(player.guild) ?? null;
                         if (player.queue.size === 0) {
                             let embed = new EmbedBuilder();
                             try {

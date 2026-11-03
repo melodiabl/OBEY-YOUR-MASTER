@@ -10,7 +10,7 @@ function snapshot(state) {
     textChannelId: state.textChannelId, currentTrack: state.currentTrack, queue: state.queue,
     history: state.history, position: clampMs(position || 0, info?.length || 0), paused: state.paused,
     customFilters: state.customFilters, volume: state.volume, loop: state.loop, filter: state.filter,
-    autoplay: state.autoplay, shuffle: state.shuffle, radioMode: state.radioMode,
+    autoplay: state.autoplay, autoplayPending: Boolean(state.autoplaySearching || state.autoplayPending), shuffle: state.shuffle, radioMode: state.radioMode,
   }
 }
 function createSessionRepository(model) {

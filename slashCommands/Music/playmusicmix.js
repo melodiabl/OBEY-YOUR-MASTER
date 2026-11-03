@@ -21,13 +21,7 @@ module.exports = {
       const tracks = mix?.tracks?.slice(0, 10) || []
       if (!tracks.length) return interaction.editReply({ embeds: [err(obeyUi.owned('❌ No se pudo generar la mezcla.'))] })
       const vc = interaction.member.voice.channel
-      await client.music.joinChannel(interaction.guild.id, vc.id, interaction.channelId)
-      const state = client.music.getState(interaction.guild.id)
-      await client.music.enqueue(interaction.guild.id, tracks)
-      if (!state.currentTrack) {
-        const player = client.shoukaku?.players?.get(interaction.guild.id)
-        await client.music._playNext(interaction.guild.id, player)
-      }
+      await client.music.playCollection(interaction.guild.id, vc.id, interaction.channelId, tracks, interaction.user)
       await interaction.editReply({ embeds: [ok(obeyUi.owned('🎲 Mezcla generada'), `**${tracks.length}** canciones basadas en **${seedInfo.title}** añadidas a la cola.`)] })
     } catch (e) { await interaction.editReply({ embeds: [err(`${obeyUi.markup("icon.error")} ${e.message}`)] }) }
   },

@@ -73,7 +73,21 @@
     "off": "Desactivado",
     "silenced": "Silenciado",
     "voiceRequired": "Debes estar en un canal de voz.",
-    "defaultEqualizerUnconfirmed": "Ecualizador predeterminado sin confirmar"
+    "defaultEqualizerUnconfirmed": "Ecualizador predeterminado sin confirmar",
+    "voice": {
+      "invalid": "La solicitud de conexión no es válida.",
+      "unavailable": "El sistema de música no está disponible.",
+      "access": "No se pudo comprobar el acceso al servidor o al canal.",
+      "actor": "Debes estar en el canal de voz elegido y conservar acceso a él.",
+      "permissions": "No tengo permisos para conectar y hablar en ese canal.",
+      "disabled": "La música está desactivada en este servidor.",
+      "control": "No conservas los permisos de DJ o solicitante necesarios para esta acción.",
+      "busy": "La conexión ya está cambiando.",
+      "changed": "La reproducción o el canal cambió. Vuelve a abrir el comando.",
+      "nodes": "No hay conexiones de música disponibles.",
+      "cancelled": "La conexión se canceló al detener el reproductor.",
+      "failed": "No se pudo confirmar la conexión. Consulta el estado actual antes de repetirla."
+    }
   },
   "economy": {
     "disabled": "El sistema de economía no está activado.",

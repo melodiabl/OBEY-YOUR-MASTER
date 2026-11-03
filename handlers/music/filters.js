@@ -54,3 +54,14 @@ function filterLabel(preset) {
 }
 
 module.exports = { FILTER_PRESETS, FILTER_RESET, FILTER_NAMES, filterLabel }
+
+// JSON snapshots contain bookkeeping too; retain the SDK's native collections.
+function restoreNativeFilters(filters, snapshot = {}) {
+  filters.clear()
+  if (Array.isArray(snapshot.activeFilters)) for (const name of snapshot.activeFilters) if (typeof name === 'string' && filters.has(name)) filters.enable(name)
+  for (const key of ['volume', 'equalizer', 'karaoke', 'timescale', 'tremolo', 'vibrato', 'rotation', 'distortion', 'channelMix', 'lowPass', 'echo', 'chorus', 'compressor', 'highpass', 'phaser', 'spatial', 'pluginFilters']) {
+    if (Object.hasOwn(snapshot, key)) filters[key] = snapshot[key]
+  }
+  return filters
+}
+module.exports.restoreNativeFilters = restoreNativeFilters
