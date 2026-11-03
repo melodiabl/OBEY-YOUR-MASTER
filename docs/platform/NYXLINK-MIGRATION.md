@@ -23,3 +23,11 @@ Los tres archivos originales de tests se adaptaron al SDK real. La batería de m
 Se verificó conexión v4 y búsquedas reales en Serenetia/Millohost (20 resultados YouTube Music y 10 Spotify en la consulta observada), con nodo privado excluido. Ambos anuncian semver de compilación por hash: NyxLink los deja como backend desconocido; esta prueba no acredita capacidades exclusivas de NodeLink. Nazha/Trinium anuncian Lavalink4.2.2 y devolvieron YouTube Music, pero Spotify devolvió error. No se cambió la selección operativa por esas pruebas.
 
 Se conservan landing, materiales, favoritos, colecciones y permisos. P0 mantiene su aceptación anterior; no se promueve ninguna capacidad por pasar esta batería. La audición real en Discord y la aceptación completa P1 siguen pendientes.
+
+## Despliegue
+
+Código `623ca80a`, imagen `release-nyx-20261103-623ca80a`, Node22.23.4 y UID1000. En la imagen pasan 61/61 casos (30 del proyecto, 13 de integración nativa y 18 de ciclo de vida). El inventario verifica 1.046 hashes, 661 comandos y 95 rutas; no se incluyen `.env` ni Shoukaku en la imagen. Tipos Welcome/Web, fronteras de dependencias y build Next pasan. La auditoría mantiene 50 avisos moderados del árbol existente, ninguno alto/crítico ni atribuido a NyxLink/consola.
+
+Se recreó únicamente `obey_bot`. Salud observada HTTP200, Mongo y música disponibles, contenedor healthy y cero reinicios; sin errores fatales ni fallos de restauración registrados en la muestra. Millohost estaba disponible en esa observación; Serenetia había respondido en la prueba previa, pero no había emitido Ready en el arranque observado. No se presenta esto como failover real aceptado. El privado sigue excluido.
+
+Reversión: imagen anterior `release-p0-session-20261031-2355287f` y configuración previa conservadas bajo `.runtime/nyx-migration-20261103/`. No hay migración destructiva de datos. [Evidencia de imagen y operación](evidence/nyx-migration-20261103.json), [resultado de las pruebas](evidence/nyx-migration-20261103.tap).

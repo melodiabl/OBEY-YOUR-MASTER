@@ -1,0 +1,383 @@
+TAP version 13
+# [Music] No se pudo restaurar la sesión (1/5).
+# [Music] No se pudo restaurar la sesión (1/5).
+# [Music v2] 0 canal(es) de peticiones cargados
+# [Music] No se pudo restaurar la sesión (1/5).
+# [Music] No se pudo restaurar la sesión (1/5).
+# (node:7) ExperimentalWarning: The MockTimers API is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: restores an old Mongo snapshot into native paused playback, queue, history, filters, and volume
+ok 1 - restores an old Mongo snapshot into native paused playback, queue, history, filters, and volume
+  ---
+  duration_ms: 1151.926469
+  type: 'test'
+  ...
+# Subtest: failed restore destroys the partial player and preserves the old durable snapshot
+ok 2 - failed restore destroys the partial player and preserves the old durable snapshot
+  ---
+  duration_ms: 8.688254
+  type: 'test'
+  ...
+# Subtest: stop during delayed restore prevents playback and leaves only a stopped durable session
+ok 3 - stop during delayed restore prevents playback and leaves only a stopped durable session
+  ---
+  duration_ms: 6.231285
+  type: 'test'
+  ...
+# Subtest: native SDK failover transfers paused current playback and preserves the native queue
+ok 4 - native SDK failover transfers paused current playback and preserves the native queue
+  ---
+  duration_ms: 5.007923
+  type: 'test'
+  ...
+# Subtest: a delayed TrackStart after confirmed seek cannot reset the public playback clock
+ok 5 - a delayed TrackStart after confirmed seek cannot reset the public playback clock
+  ---
+  duration_ms: 4.132472
+  type: 'test'
+  ...
+# Subtest: a stale TrackStart from the previous song cannot reset or unpause the current song
+ok 6 - a stale TrackStart from the previous song cannot reset or unpause the current song
+  ---
+  duration_ms: 2.262347
+  type: 'test'
+  ...
+# Subtest: custom filter snapshots with activeFilters arrays retain native Set bookkeeping for later preset changes
+ok 7 - custom filter snapshots with activeFilters arrays retain native Set bookkeeping for later preset changes
+  ---
+  duration_ms: 6.781791
+  type: 'test'
+  ...
+# Subtest: setFilter backend rejection restores native filters and permits the next preset change
+ok 8 - setFilter backend rejection restores native filters and permits the next preset change
+  ---
+  duration_ms: 4.199368
+  type: 'test'
+  ...
+# Subtest: setAudioParameter backend rejection restores native filters and permits the next preset change
+ok 9 - setAudioParameter backend rejection restores native filters and permits the next preset change
+  ---
+  duration_ms: 4.314441
+  type: 'test'
+  ...
+# Subtest: restoring a saved off filter bypasses the guild default EQ and explicitly keeps native effects off
+ok 10 - restoring a saved off filter bypasses the guild default EQ and explicitly keeps native effects off
+  ---
+  duration_ms: 6.334817
+  type: 'test'
+  ...
+# Subtest: failed startup restoration for a 24/7 guild cannot idle-join and overwrite its retryable durable tracks
+ok 11 - failed startup restoration for a 24/7 guild cannot idle-join and overwrite its retryable durable tracks
+  ---
+  duration_ms: 6.122722
+  type: 'test'
+  ...
+# Subtest: a rejected default EQ leaves a successful native voice join connected and marks the default unconfirmed
+ok 12 - a rejected default EQ leaves a successful native voice join connected and marks the default unconfirmed
+  ---
+  duration_ms: 6.11057
+  type: 'test'
+  ...
+# Subtest: native destruction after recovery failure preserves the durable current track and queue
+ok 13 - native destruction after recovery failure preserves the durable current track and queue
+  ---
+  duration_ms: 2.787536
+  type: 'test'
+  ...
+# Subtest: failed Stop persistence cancels a failed-restore retry across its backoff and later persists the stopped tombstone
+ok 14 - failed Stop persistence cancels a failed-restore retry across its backoff and later persists the stopped tombstone
+  ---
+  duration_ms: 37.999117
+  type: 'test'
+  ...
+# Subtest: Stop before database readiness retains cancellation when database recovery exposes an old snapshot
+ok 15 - Stop before database readiness retains cancellation when database recovery exposes an old snapshot
+  ---
+  duration_ms: 2.631996
+  type: 'test'
+  ...
+# Subtest: an explicit manual join can start a new native session after Stop was unconfirmed
+ok 16 - an explicit manual join can start a new native session after Stop was unconfirmed
+  ---
+  duration_ms: 5.940303
+  type: 'test'
+  ...
+# Subtest: an explicit manual play can start a new native session after Stop was unconfirmed
+ok 17 - an explicit manual play can start a new native session after Stop was unconfirmed
+  ---
+  duration_ms: 12.288805
+  type: 'test'
+  ...
+# Subtest: failed manual join after offline Stop retains cancellation until the old snapshot is tombstoned
+ok 18 - failed manual join after offline Stop retains cancellation until the old snapshot is tombstoned
+  ---
+  duration_ms: 6.440875
+  type: 'test'
+  ...
+# Subtest: music initializes from the actual published Nyx Manager without a Shoukaku alias
+ok 19 - music initializes from the actual published Nyx Manager without a Shoukaku alias
+  ---
+  duration_ms: 1038.827422
+  type: 'test'
+  ...
+# Subtest: held guild state projects native current, queue, and history after direct SDK changes
+ok 20 - held guild state projects native current, queue, and history after direct SDK changes
+  ---
+  duration_ms: 13.634253
+  type: 'test'
+  ...
+# Subtest: enqueue accepts catalog track views and stores actual SDK Track instances in the native queue
+ok 21 - enqueue accepts catalog track views and stores actual SDK Track instances in the native queue
+  ---
+  duration_ms: 5.491956
+  type: 'test'
+  ...
+# Subtest: pause resumes through the SDK and projects acknowledgements to public state
+ok 22 - pause resumes through the SDK and projects acknowledgements to public state
+  ---
+  duration_ms: 2.971057
+  type: 'test'
+  ...
+# Subtest: skip while paused and previous use the native queue and native history
+ok 23 - skip while paused and previous use the native queue and native history
+  ---
+  duration_ms: 4.91491
+  type: 'test'
+  ...
+# Subtest: volume acknowledgements, loop translation, and shuffle affect the actual native player
+ok 24 - volume acknowledgements, loop translation, and shuffle affect the actual native player
+  ---
+  duration_ms: 4.938164
+  type: 'test'
+  ...
+# Subtest: one backend track end advances the native queue exactly once
+ok 25 - one backend track end advances the native queue exactly once
+  ---
+  duration_ms: 14.109739
+  type: 'test'
+  ...
+# Subtest: stop invalidates an enqueue while the backend playback acknowledgement is delayed
+ok 26 - stop invalidates an enqueue while the backend playback acknowledgement is delayed
+  ---
+  duration_ms: 6.241144
+  type: 'test'
+  ...
+# Subtest: stop prevents a pending high-level search from enqueueing or reconnecting later
+ok 27 - stop prevents a pending high-level search from enqueueing or reconnecting later
+  ---
+  duration_ms: 4.309021
+  type: 'test'
+  ...
+# Subtest: stop cancels native autoplay while recommendation resolution is pending
+ok 28 - stop cancels native autoplay while recommendation resolution is pending
+  ---
+  duration_ms: 5.535677
+  type: 'test'
+  ...
+# Subtest: two guilds keep native playback, volume, loop, and queue isolated
+ok 29 - two guilds keep native playback, volume, loop, and queue isolated
+  ---
+  duration_ms: 3.36433
+  type: 'test'
+  ...
+# Subtest: catalog node pool exposes native nodes through the legacy resolve/fetch view
+ok 30 - catalog node pool exposes native nodes through the legacy resolve/fetch view
+  ---
+  duration_ms: 2.787576
+  type: 'test'
+  ...
+# Subtest: voice errors are localized to ES/EN without exposing native backend details
+ok 31 - voice errors are localized to ES/EN without exposing native backend details
+  ---
+  duration_ms: 2.135981
+  type: 'test'
+  ...
+# Subtest: searchDiscordCatalog returns Lavalink tracks via client.music.search
+ok 32 - searchDiscordCatalog returns Lavalink tracks via client.music.search
+  ---
+  duration_ms: 13.130554
+  type: 'test'
+  ...
+# Subtest: toQueueTrack keeps metadata and stays without encoded for lazy resolution
+ok 33 - toQueueTrack keeps metadata and stays without encoded for lazy resolution
+  ---
+  duration_ms: 6.508671
+  type: 'test'
+  ...
+# Subtest: selecting a collection queues all of its resolved tracks
+ok 34 - selecting a collection queues all of its resolved tracks
+  ---
+  duration_ms: 0.953587
+  type: 'test'
+  ...
+# Subtest: a real Lavalink track is queued as-is with the requester set
+ok 35 - a real Lavalink track is queued as-is with the requester set
+  ---
+  duration_ms: 0.56306
+  type: 'test'
+  ...
+# Subtest: preserves extended metadata for web player results
+ok 36 - preserves extended metadata for web player results
+  ---
+  duration_ms: 2.922176
+  type: 'test'
+  ...
+# Subtest: returns real tracks, albums and playlists from LavaSearch
+ok 37 - returns real tracks, albums and playlists from LavaSearch
+  ---
+  duration_ms: 11.316502
+  type: 'test'
+  ...
+# Subtest: falls back to regular Lavalink search when LavaSearch is missing
+ok 38 - falls back to regular Lavalink search when LavaSearch is missing
+  ---
+  duration_ms: 6.968178
+  type: 'test'
+  ...
+# Subtest: turns a direct playlist URL into a playable collection
+ok 39 - turns a direct playlist URL into a playable collection
+  ---
+  duration_ms: 0.941234
+  type: 'test'
+  ...
+# Subtest: ranks exact catalog matches and removes duplicate ISRC results
+ok 40 - ranks exact catalog matches and removes duplicate ISRC results
+  ---
+  duration_ms: 2.37213
+  type: 'test'
+  ...
+# Subtest: uses the public Apple catalog as an album fallback
+ok 41 - uses the public Apple catalog as an album fallback
+  ---
+  duration_ms: 2.128849
+  type: 'test'
+  ...
+# Subtest: uses real YouTube playlist results when LavaSearch returns no playlists
+ok 42 - uses real YouTube playlist results when LavaSearch returns no playlists
+  ---
+  duration_ms: 1.97402
+  type: 'test'
+  ...
+# Subtest: marks YouTube Music albums with a playable search fallback
+ok 43 - marks YouTube Music albums with a playable search fallback
+  ---
+  duration_ms: 2.370599
+  type: 'test'
+  ...
+# Subtest: resolves complete Spotify collections with track metadata
+ok 44 - resolves complete Spotify collections with track metadata
+  ---
+  duration_ms: 2.236498
+  type: 'test'
+  ...
+# Subtest: pause and resume emit a synchronized public player state
+ok 45 - pause and resume emit a synchronized public player state
+  ---
+  duration_ms: 1049.446577
+  type: 'test'
+  ...
+# Subtest: plain text searches try spsearch first and return its list result
+ok 46 - plain text searches try spsearch first and return its list result
+  ---
+  duration_ms: 8.523869
+  type: 'test'
+  ...
+# Subtest: a single spsearch track is kept as fallback while ytmsearch provides the list
+ok 47 - a single spsearch track is kept as fallback while ytmsearch provides the list
+  ---
+  duration_ms: 3.511054
+  type: 'test'
+  ...
+# Subtest: search falls back to the single spsearch track when no list source has results
+ok 48 - search falls back to the single spsearch track when no list source has results
+  ---
+  duration_ms: 2.353196
+  type: 'test'
+  ...
+# Subtest: spotify album URIs resolve directly and return album tracks
+ok 49 - spotify album URIs resolve directly and return album tracks
+  ---
+  duration_ms: 2.375849
+  type: 'test'
+  ...
+# Subtest: joining voice applies saved music defaults
+ok 50 - joining voice applies saved music defaults
+  ---
+  duration_ms: 8.852942
+  type: 'test'
+  ...
+# Subtest: skip advances the queue even when the player is paused
+ok 51 - skip advances the queue even when the player is paused
+  ---
+  duration_ms: 12.665266
+  type: 'test'
+  ...
+# Subtest: a blocked YouTube track falls back only to the matching Apple Music recording
+ok 52 - a blocked YouTube track falls back only to the matching Apple Music recording
+  ---
+  duration_ms: 5.248282
+  type: 'test'
+  ...
+# Subtest: volume remains at the confirmed value until a delayed acknowledgement succeeds
+ok 53 - volume remains at the confirmed value until a delayed acknowledgement succeeds
+  ---
+  duration_ms: 17.44178
+  type: 'test'
+  ...
+# Subtest: rapid volume changes reach the backend in order and retain confirmed volume on failure
+ok 54 - rapid volume changes reach the backend in order and retain confirmed volume on failure
+  ---
+  duration_ms: 4.491903
+  type: 'test'
+  ...
+# Subtest: queue editing rejects invalid positions and clearing keeps the playing song
+ok 55 - queue editing rejects invalid positions and clearing keeps the playing song
+  ---
+  duration_ms: 4.250132
+  type: 'test'
+  ...
+# Subtest: changing audio presets clears previous effects
+ok 56 - changing audio presets clears previous effects
+  ---
+  duration_ms: 3.165661
+  type: 'test'
+  ...
+# Subtest: seek exposes confirmed positionMs to the existing Discord command consumer
+ok 57 - seek exposes confirmed positionMs to the existing Discord command consumer
+  ---
+  duration_ms: 6.560188
+  type: 'test'
+  ...
+# Subtest: stop cancels a pending backend search before its result can reconnect or enqueue
+ok 58 - stop cancels a pending backend search before its result can reconnect or enqueue
+  ---
+  duration_ms: 4.743291
+  type: 'test'
+  ...
+# Subtest: voice relocation rejects an actor outside the requested channel before native side effects
+ok 59 - voice relocation rejects an actor outside the requested channel before native side effects
+  ---
+  duration_ms: 4.424257
+  type: 'test'
+  ...
+# Subtest: voice relocation rejects missing bot permissions before native side effects
+ok 60 - voice relocation rejects missing bot permissions before native side effects
+  ---
+  duration_ms: 2.08717
+  type: 'test'
+  ...
+# Subtest: authorized voice relocation moves through the native gateway and preserves paused playback and queue
+ok 61 - authorized voice relocation moves through the native gateway and preserves paused playback and queue
+  ---
+  duration_ms: 5.258111
+  type: 'test'
+  ...
+1..61
+# tests 61
+# suites 0
+# pass 61
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1550.089936

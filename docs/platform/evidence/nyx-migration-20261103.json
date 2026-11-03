@@ -119,5 +119,49 @@
     "cycles": 3,
     "criticalFindings": "corrected and regression-tested",
     "externalSecondOpinion": false
+  },
+  "runtime": {
+    "codeCommit": "623ca80a",
+    "image": "5c484d77281a808bae71b6eda2bc9dc4764dc2aace488f616d146f6624fe10ba",
+    "imageName": "localhost/obey-your-master_bot:release-nyx-20261103-623ca80a",
+    "startedAt": "2026-11-03T15:50:41.626448265+01:00",
+    "observedAt": "2026-11-03T14:52:24.138Z",
+    "status": "running",
+    "containerHealth": "healthy",
+    "restarts": 0,
+    "httpStatus": 200,
+    "health": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 102
+    },
+    "readyNodes": 1,
+    "musicRestoreFailures": 0,
+    "unhandledErrors": 0,
+    "privateDisabled": true,
+    "rollbackImage": "localhost/obey-your-master_bot:release-p0-session-20261031-2355287f"
+  },
+  "imageVerification": {
+    "node": "v22.23.4",
+    "uid": 1000,
+    "nyx": "0.1.0-dev.2",
+    "shoukakuInstalled": false,
+    "envPresent": false,
+    "classification": {
+      "classifiedCommands": 661,
+      "classifiedRoutes": 95,
+      "capabilities": 27,
+      "functionalReview": {
+        "reviewedGroups": 52,
+        "commandEntriesReviewed": 168,
+        "httpRoutesReviewed": 34,
+        "totalCommandEntries": 661,
+        "totalHttpRoutes": 95,
+        "remainingCommandEntries": 493,
+        "remainingHttpRoutes": 61
+      },
+      "gateAcceptance": "not-assessed-by-classification"
+    }
   }
 }
