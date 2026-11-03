@@ -91,4 +91,4 @@ async function getArtist(client, value, { guildId, signal } = {}) {
     throw Object.assign(Error('No se pudieron cargar las canciones populares del artista. Vuelve a intentarlo.'), { code: signal?.aborted ? 'artist_cancelled' : 'artist_unavailable' })
   }
 }
-module.exports = { artistUri, normalizeArtist, artistsFromTracks, uniqueArtists, getArtist }
+module.exports = { artistUri, normalizeArtist, artistsFromTracks, uniqueArtists, albumsFromTracks, getArtist }

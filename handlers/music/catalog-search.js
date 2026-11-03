@@ -1,14 +1,12 @@
-const { artistsFromTracks, normalizeArtist, uniqueArtists } = require('./artists')
+const { artistsFromTracks, normalizeArtist, uniqueArtists, albumsFromTracks } = require('./artists')
 const { lookupWithTimeout } = require('./resolve-timeout')
 const { tracksFromResolve } = require('./utils')
 const { allowedMusicTrack } = require('./nodes-config')
-const { rankMusicTracks, recordingArtist, recordingTitle } = require('./recordings')
+const { rankMusicTracks, recordingArtist } = require('./recordings')
 
 const catalogs = new WeakMap()
 const PREFIXES = ['spsearch:', 'ytmsearch:', 'ytsearch:', 'amsearch:']
 const cleanQuery = query => query.replace(/^(?:spsearch|ytmsearch|ytsearch|amsearch):/i, '')
-const creditedArtist = name => String(name || '').normalize('NFC').toLowerCase()
-  .replace(/\s+-\s+topic$|vevo$/i, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
 const spotifyURL = (value, kind) => typeof value === 'string' &&
   new RegExp('^https://open\\.spotify\\.com/' + kind + '/[A-Za-z0-9]{22}$').test(value)
 
@@ -36,63 +34,37 @@ async function collect(client, nodes, query) {
   // Stable source/node order matters: completion time must not decide the winner.
   for (const node of nodes.slice(0, 2)) rows.push(...(successful.find(batch => batch.node === node)?.tracks || []))
   const albums = [], artistResults = []
-  let artistIdentity = null
-  const exact = rows.filter(track => recordingArtist(track.info?.author) === recordingArtist(phrase))
-  const artistSearch = new Set(exact.map(track => recordingTitle(track.info))).size >= 2
   const metadataNodes = successful.filter(batch => batch.node.rest.fetch).sort((a, b) =>
     Number(b.tracks.some(track => track.info?.sourceName === 'spotify')) - Number(a.tracks.some(track => track.info?.sourceName === 'spotify')))
   if ((!typed || /^spsearch:/i.test(query)) && metadataNodes.length && Date.now() < deadline) {
     try {
-      let data, metadataNode
+      let data
       for (const batch of metadataNodes) {
         if (Date.now() >= deadline) break
         try {
           const found = await bounded(() => batch.node.rest.fetch({ endpoint: '/loadsearch',
             options: { params: { query: 'spsearch:' + phrase, types: 'artist,album' } } }), 1000)
-          if (Array.isArray(found?.albums) || Array.isArray(found?.artists)) { data = found; metadataNode = batch; break }
+          if (Array.isArray(found?.albums) || Array.isArray(found?.artists)) { data = found; break }
         } catch { /* Another node may provide the optional plugin. */ }
       }
-      if (!data) return { loadType: 'search', tracks: rankMusicTracks(rows, phrase).slice(0, 50), albums, artists: artistsFromTracks(rows, phrase), playlistName: null }
+      data ||= {}
       artistResults.push(...(data.artists || []).map(normalizeArtist).filter(artist => artist && recordingArtist(artist.title).includes(recordingArtist(phrase))))
       const candidates = (data?.albums || []).slice(0, 20).filter(item => {
         const info = { title: item.info?.name, author: item.pluginInfo?.author }
-        return spotifyURL(item.pluginInfo?.url, 'album') && (artistSearch
-          ? recordingArtist(info.author) === recordingArtist(phrase)
-          : rankMusicTracks([{ info }], phrase).length > 0)
+        return spotifyURL(item.pluginInfo?.url, 'album') && rankMusicTracks([{ info }], phrase).length > 0
       })
-      const artists = [...new Map((data?.artists || []).slice(0, 20)
-        .filter(item => spotifyURL(item.pluginInfo?.url, 'artist') && recordingArtist(item.pluginInfo.author) === recordingArtist(phrase))
-        .map(item => [item.pluginInfo.url, item])).values()]
-      // A name shared by several Spotify identities is not an artist selection.
-      const enrich = artistSearch && artists.length === 1 ? [artists[0], ...candidates.slice(0, 1)] : []
-      if (enrich.length) artistIdentity = artists[0].pluginInfo.author
-      const expanded = await Promise.all(enrich.map(async item => {
-        try {
-          const resolved = await bounded(() => metadataNode.node.rest.resolve(item.pluginInfo.url), 2000)
-          const tracks = tracksFromResolve(resolved).slice(0, 500).filter(allowedMusicTrack)
-          item.observedTracks = tracks.length
-          return tracks.map(track => ({ ...track, _resolvedNode: metadataNode.node.name }))
-        } catch { return [] /* Optional expansion preserves valid search results. */ }
-      }))
-      rows.push(...expanded.flat())
       for (const item of candidates) {
-        const total = item.observedTracks ?? item.pluginInfo.totalTracks
+        const total = item.pluginInfo.totalTracks
         if (Number(total) < 2 || !Number.isFinite(Number(total))) continue
         albums.push({ type: 'album', title: item.info?.name || phrase, author: item.pluginInfo.author,
           uri: item.pluginInfo.url, artworkUrl: item.pluginInfo.artworkUrl || null, sourceName: 'spotify', totalTracks: Number(total) })
       }
     } catch { /* LavaSearch is optional; missing plugins retain basic search. */ }
   }
-  // Accent folding finds candidates, but cannot establish that ADÉLA and a
-  // homonymous AdELA are the same artist. Anchor uncertain credits to songs
-  // observed in the confirmed catalog, instead of importing their discography.
-  const knownTitles = new Set(rows.filter(track => /^(?:spotify|applemusic)$/.test(track.info?.sourceName || '') &&
-    creditedArtist(track.info.author) === creditedArtist(artistIdentity)).map(track => recordingTitle(track.info)))
-  const tracks = rankMusicTracks(rows.filter(track => !artistIdentity || knownTitles.has(recordingTitle(track.info)) ||
-    String(track.info?.author || '').split(/\s+(?:feat\.?|ft\.?|with|and|x)\s+|[,/&]/i)
-      .some(credit => creditedArtist(credit) === creditedArtist(artistIdentity))), phrase).slice(0, 50)
+  const tracks = rankMusicTracks(rows, phrase).slice(0, 50)
+  const rankedAlbums = rankMusicTracks([...albums, ...albumsFromTracks(rows).filter(a => a.title)], phrase).slice(0, 20)
   if (!tracks.length && !albums.length && failures && !successful.length) throw new Error('No se pudo consultar la música. Reintenta en unos minutos.')
-  return { loadType: 'search', tracks, albums, artists: uniqueArtists([...artistResults, ...artistsFromTracks(rows, phrase)]), playlistName: null }
+  return { loadType: 'search', tracks, albums: rankedAlbums, artists: uniqueArtists([...artistResults, ...artistsFromTracks(rows, phrase)]), playlistName: null }
 }
 
 async function searchCatalogNodes(client, nodes, query, signal) {

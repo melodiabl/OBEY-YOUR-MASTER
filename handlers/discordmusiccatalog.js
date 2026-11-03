@@ -3,7 +3,7 @@
 // client.music.search (catálogo combinado Lavalink) y respaldo legado de álbumes.
 const http = require('http')
 const { artistsFromTracks, uniqueArtists } = require('./music/artists')
-const { sameRecording, rankMusicTracks, recordingArtist, recordingTitle } = require('./music/recordings')
+const { sameRecording, rankMusicTracks, preferredCatalogTab } = require('./music/recordings')
 
 const CATALOG_LIMIT = 20
 const LEO = 'http://140.245.242.153:8081'
@@ -75,16 +75,10 @@ async function searchDiscordCatalog(client, query, context = {}) {
   ])
   const limit = Math.max(1, Math.min(50, Number(context.limit) || CATALOG_LIMIT))
   const tracks = (result?.tracks || []).slice(0, limit)
-  const exact = tracks.filter(track => recordingArtist(itemInfo(track).author) === recordingArtist(query))
-  const artistSearch = new Set(exact.map(track => recordingTitle(itemInfo(track)))).size >= 2
-  const seen = new Set()
-  const albums = [...(result?.albums || []), ...legacy].filter(album => {
-    if (seen.has(album.uri) || artistSearch && recordingArtist(album.author) !== recordingArtist(query)) return false
-    if (!rankMusicTracks([{ info: { title: album.title, author: album.author } }], query).length) return false
-    seen.add(album.uri); return true
-  }).slice(0, 20)
+  const albums = rankMusicTracks([...(result?.albums || []), ...legacy], query).slice(0, 20)
 
-  return { tracks, albums, artists: uniqueArtists([...(result?.artists || []), ...artistsFromTracks(tracks, query)]), playlists: [] }
+  const catalog = { tracks, albums, artists: uniqueArtists([...(result?.artists || []), ...artistsFromTracks(tracks, query)]), playlists: [] }
+  return { ...catalog, preferredTab: preferredCatalogTab(catalog, query) }
 }
 
 async function enqueueCatalogItem(client, message, voiceChannel, item, { authorize } = {}) {

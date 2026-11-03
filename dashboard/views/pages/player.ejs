@@ -939,7 +939,9 @@ function resultItems(catalog, kind) {
   if (kind === 'albums') return catalog.albums || []
   if (kind === 'playlists') return catalog.playlists || []
   if (kind === 'artists') return catalog.artists || []
-  return [...(catalog.tracks || []), ...(catalog.albums || []), ...(catalog.playlists || []), ...(catalog.artists || [])]
+  const kinds = ['tracks', 'albums', 'playlists', 'artists']
+  const ordered = kinds.includes(catalog.preferredTab) ? [catalog.preferredTab, ...kinds.filter(key => key !== catalog.preferredTab)] : kinds
+  return ordered.flatMap(key => catalog[key] || [])
 }
 
 function collectionRow(title, items, icon) {
@@ -984,6 +986,7 @@ function renderCatalog(container, catalog, artist = null) {
     albums: catalog?.albums || [],
     playlists: catalog?.playlists || [],
     artists: catalog?.artists || [],
+    preferredTab: catalog?.preferredTab,
   }
   const counts = {
     tracks: lastCatalog.tracks.length,

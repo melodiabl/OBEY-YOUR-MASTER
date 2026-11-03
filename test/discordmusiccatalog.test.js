@@ -195,3 +195,127 @@ test('missing album names in artist tops are resolved from the real album identi
   assert.equal(profile.albums[0].title, '21')
   assert.equal(profile.albums[0].totalTracks, 11)
 })
+
+test('a track title match is not discarded when an artist has the same name as the query', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const track = (title, author, id) => ({ info: { title, author, uri: 'https://example.com/' + id, sourceName: 'spotify' } })
+  const results = rankMusicTracks([track('Other song', 'Hello', 'a'), track('Another song', 'Hello', 'b'), track('Hello', 'Adele', 'c'), track('Hello', 'Lionel Richie', 'd')], 'Hello')
+  assert.equal(results[0].info.title, 'Hello')
+  assert.deepEqual(results.slice(0, 2).map(t => t.info.author), ['Adele', 'Lionel Richie'])
+  assert.ok(results.some(t => t.info.author === 'Hello'), 'artist matches remain discoverable without displacing title matches')
+})
+
+test('partial, accented and combined title searches favor song evidence over author-only hits', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const track = (title, author, id) => ({ info: { title, author, uri: 'https://example.com/' + id, sourceName: 'spotify' } })
+  for (const [query, correct] of [['Titanium', track('Titanium (feat. Sia)', 'David Guetta', 't')], ['corazon partio', track('Corazón Partío (Official Video)', 'Alejandro Sanz', 's')], ['Hello Adele', track('Hello', 'Adele', 'h')], ['Adele Hello', track('Hello', 'Adele', 'h2')]]) {
+    const unrelated = [track('Unrelated one', query, 'a'), track('Unrelated two', query, 'b')]
+    const results = rankMusicTracks([...unrelated, correct], query)
+    assert.equal(results[0], correct, query)
+  }
+})
+
+test('an album title remains searchable even if track results identify a homonymous artist', async t => {
+  const http = require('node:http')
+  t.mock.method(http, 'get', (_url, _options, callback) => {
+    const request = new (require('node:events').EventEmitter)(); request.destroy = () => {}
+    queueMicrotask(() => callback({ statusCode: 404, resume() {} })); return request
+  })
+  const album = { type: 'album', title: 'Discovery', author: 'Daft Punk', uri: 'https://open.spotify.com/album/1111111111111111111111', totalTracks: 14 }
+  const client = { music: { search: async () => ({ tracks: [{ info: { title: 'One', author: 'Discovery' } }, { info: { title: 'Two', author: 'Discovery' } }], albums: [album] }) } }
+  const result = await searchDiscordCatalog(client, 'Discovery')
+  assert.deepEqual(result.albums, [album])
+})
+
+test('YouTube artist prefixes do not turn a catalog artist search into uploader title matches', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const official = { info: { title: 'Hello', author: 'Adele', sourceName: 'spotify', uri: 'https://open.spotify.com/track/1111111111111111111111' } }
+  const upload = { info: { title: 'Adele - Hello (Lyrics)', author: 'Music Channel', sourceName: 'youtube', uri: 'https://www.youtube.com/watch?v=11111111111' } }
+  assert.equal(rankMusicTracks([upload, official], 'Adele')[0], official)
+  assert.equal(rankMusicTracks([upload, official], 'Hello')[0], official)
+})
+
+test('whole-title matches ignore spacing differences without becoming artist-only matches', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const track = { info: { title: 'Starboy', author: 'The Weeknd', sourceName: 'spotify' } }
+  assert.equal(rankMusicTracks([track], 'star boy')[0], track)
+})
+
+test('catalog search retains title matches and albums and does not implicitly open an artist top', async () => {
+  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const uri = 'https://open.spotify.com/artist/1111111111111111111111'
+  const track = (title, author, id) => ({ info: { title, author, sourceName: 'spotify', uri: 'https://example.com/' + id } })
+  const queries = []
+  const node = { name: 'node', rest: {
+    resolve: async query => { queries.push(query); return { loadType: 'search', data: [track('Other song', 'Hello', 'a'), track('Another song', 'Hello', 'b'), track('Hello', 'Adele', 'c')] } },
+    fetch: async () => ({ artists: [{ info: { name: 'Hello' }, pluginInfo: { url: uri, author: 'Hello' } }], albums: [{ info: { name: 'Hello' }, pluginInfo: { url: 'https://open.spotify.com/album/2222222222222222222222', author: 'Other artist', totalTracks: 10 } }] }),
+  } }
+  const result = await searchCatalogNodes({}, [node], 'Hello')
+  assert.equal(result.tracks[0].info.author, 'Adele')
+  assert.equal(result.albums[0].author, 'Other artist')
+  assert.equal(result.artists[0].title, 'Hello')
+  assert.equal(queries.some(query => query.startsWith('https:')), false)
+})
+
+test('album-name search can use catalog track metadata without LavaSearch', async () => {
+  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const uri = 'https://open.spotify.com/album/1111111111111111111111'
+  const node = { name: 'node', rest: { resolve: async () => ({ loadType: 'search', data: [{ info: { title: 'One More Time', author: 'Daft Punk', sourceName: 'spotify' }, pluginInfo: { albumName: 'Discovery', albumUrl: uri } }] }) } }
+  const result = await searchCatalogNodes({}, [node], 'Discovery')
+  assert.equal(result.albums[0].title, 'Discovery')
+  assert.equal(result.albums[0].uri, uri)
+  assert.equal(result.tracks.length, 0)
+})
+
+test('query intent uses exact names independently, preferring song titles over homonymous artists', () => {
+  const { preferredCatalogTab } = require('../handlers/music/recordings')
+  const result = { tracks: [{ info: { title: 'Hello', author: 'Adele' } }, { info: { title: 'Other song', author: 'Discovery' } }], albums: [{ title: 'Discovery', author: 'Daft Punk' }], artists: [{ title: 'Adele' }, { title: 'Hello' }, { title: 'Discovery' }] }
+  assert.equal(preferredCatalogTab(result, 'Hello'), 'tracks')
+  assert.equal(preferredCatalogTab(result, 'Discovery'), 'albums')
+  assert.equal(preferredCatalogTab(result, 'Adele'), 'artists')
+  assert.equal(preferredCatalogTab(result, 'Hello Adele'), 'tracks')
+  assert.equal(preferredCatalogTab(result, 'Discovery Daft Punk'), 'albums')
+  assert.equal(preferredCatalogTab(result, 'Daft Punk Discovery'), 'albums')
+})
+
+test('partial title words remain searchable without requiring an exact artist word', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const song = { info: { title: 'Titanium', author: 'David Guetta', sourceName: 'spotify' } }
+  assert.equal(rankMusicTracks([song], 'titani')[0], song)
+})
+
+test('a title and credited artist query outranks covers that put the artist inside the title', () => {
+  const { rankMusicTracks } = require('../handlers/music/recordings')
+  const song = { info: { title: 'Hello', author: 'Adele', sourceName: 'spotify' } }
+  const cover = { info: { title: 'Hello (Adele)', author: 'PelleK', sourceName: 'applemusic' } }
+  const namesake = { info: { title: 'Hello Adele', author: 'Zen Gnarly', sourceName: 'applemusic' } }
+  assert.equal(rankMusicTracks([cover, namesake, song], 'Hello Adele')[0], song)
+  assert.equal(rankMusicTracks([cover, namesake, song], 'Adele Hello')[0], song)
+  assert.equal(rankMusicTracks([cover, namesake, song], 'Hello')[0], song)
+})
+
+test('Discord opens the preferred category while keeping the other search tabs available', async () => {
+  const { EventEmitter } = require('node:events')
+  const { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  for (const preferredTab of ['albums', 'artists']) {
+    const collector = new EventEmitter(), renders = []
+    const results = { preferredTab, tracks: [{ info: { title: 'Song', author: 'Artist' } }],
+      albums: [{ type: 'album', title: 'Discovery', author: 'Daft Punk', uri: 'https://open.spotify.com/album/1111111111111111111111' }],
+      artists: [{ type: 'artist', title: 'Adele', author: 'Adele', uri: 'https://open.spotify.com/artist/2222222222222222222222' }] }
+    await openCatalogPicker({ client: {}, query: preferredTab === 'albums' ? 'Discovery' : 'Adele', results,
+      actor: { id: 'owner' }, guild: { id: 'guild' }, edit: async payload => { renders.push(payload); return { createMessageComponentCollector: () => collector } } })
+    assert.match(renders[0].embeds[0].toJSON().title, preferredTab === 'albums' ? /Álbumes/ : /Artistas/)
+    assert.ok(renders[0].components.flatMap(row => row.toJSON().components).some(button => button.custom_id === 'srch_tab:tracks'))
+  }
+})
+
+test('the web player highlights the preferred category without losing other result kinds', () => {
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../dashboard/views/pages/player.ejs'), 'utf8')
+  const code = source.match(/function resultItems\(catalog, kind\) \{[\s\S]*?\n\}/)[0]
+  const items = require('node:vm').runInNewContext(code + '\nresultItems')
+  const catalog = { tracks: [{ title: 'Song' }], albums: [{ title: 'Discovery' }], artists: [{ title: 'Adele' }], preferredTab: 'albums' }
+  assert.equal(items(catalog, 'all')[0].title, 'Discovery')
+  assert.equal(items(catalog, 'all').length, 3)
+  assert.equal(items(catalog, 'tracks')[0].title, 'Song')
+  assert.equal(items({ ...catalog, preferredTab: 'artists' }, 'all')[0].title, 'Adele')
+})

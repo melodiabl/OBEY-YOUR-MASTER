@@ -534,7 +534,7 @@
     "dashboard/configuration-routes.js": "6637add63b556cf4a08431a3dd2f8e6e458391a7f00542fa1c137e60d9bb5fb2",
     "dashboard/frontend-routes.js": "b35c58423cb3d31b9005eed00990883c348761019e5dea86c1c0065cbf82d2d7",
     "dashboard/help-routes.js": "bb0056da7c903c2a060ae37a70e00f2e64e25b311600f6f0c55a65f641501d55",
-    "dashboard/index.js": "f1b299aca147c8a5d5e1c1e1694ef1aa8f00d9a2ed63c65c9e4f10017ffebe91",
+    "dashboard/index.js": "38e7fe8feb87767aa603c1387347ebcf9fb0b6d5fdc77cf36c94422463a6c14d",
     "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
     "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
     "dashboard/music-visibility.js": "69ccb986fef629933848cf9baac403e7e672b3a29f28182bf8d5e2214bd5c927",
@@ -627,7 +627,7 @@
     "handlers/configuration.js": "d2d5c76734cbb13e094da59f850ed0a7aae380028c0396567d6bb69e86cc77de",
     "handlers/counter.js": "96d0182015ae87a2e6c1bf3b8db56e8d229bfc80108d6b6121bd48d0b7577f79",
     "handlers/dailyfact.js": "7e4e3c9275e40bb2329f80cdbf09dd84b63c7e346062c6fc0b04a4ee0fa0c3e7",
-    "handlers/discordmusiccatalog.js": "48c91f7692553ff427e33991f18edb62741fb0bfd05a2b31b3161c00fce6be3e",
+    "handlers/discordmusiccatalog.js": "b9ef8abd946dc380584cfb75af476ca07e309cf1612726fa1775e4b5ba9d3b87",
     "handlers/economy/messages.js": "b29712bea3427950f2e8ea25c15a9e9962c7309817dec0061a47684c9cf2814a",
     "handlers/enmap-like.js": "297c0d9ebfdfc1bd9983cde1cc1b731efa3907a9f5c8f251491e37c498c3e41c",
     "handlers/epicgamesverification.js": "560ac5b4f37f4d4303a082c0482ae56038417c4e8dc00904a3c0ad31c671210d",
@@ -681,8 +681,8 @@
     "handlers/moderation/member-actions.js": "2ec2949d1f58e5730335d29bda24d8d91c4efcd3c563b9f319a918edbaa66e7c",
     "handlers/music/action-queue.js": "cde9e6028025645c79b3c1861469a2fb76005a87c7b1b2cfb44e9541180ee01a",
     "handlers/music/apiRoutes.js": "d91baa818a7c092c2d62841c98f118675bcbb185af1a0c2078fd45efdd1c47be",
-    "handlers/music/catalog-picker.js": "c005221c45cda3d55689c6cea0f90d7eaacefa08b9362de2644d23b82fa7e833",
-    "handlers/music/catalog-search.js": "12fa13e596cd3343ba7ea5ac60fac8d6dd7712df626f940b62f79f47f4a73bf7",
+    "handlers/music/catalog-picker.js": "902dc6b9039a3261dce5f97bfec1588a349433e3dc42d9879775f7597a1a0b19",
+    "handlers/music/catalog-search.js": "b22f1facd10bb9c226cfa393a18fa0aee4ecf101a5bf203e832a2f630906c886",
     "handlers/music/command-settings.js": "6d2ba3f11d2e5bbcf5d30c0ad5e7004b10ea699203744c00c5effe9bd9c1d7d1",
     "handlers/music/config.js": "6aea8da60cec38d7717d6c932dda7b87bbc628e5729681ddb037269e5aeba677",
     "handlers/music/controls.js": "f0fbb9c6dd4bd0f49a545205193482efdbaecebc2788b04e0551af353f9bce56",
@@ -716,7 +716,7 @@
     "handlers/music/prefix-compat.js": "8a6d7e81ba530cb2495b9a44748c92174de19879660a4f911fb74a703e47d01c",
     "handlers/music/radio-setup.js": "c716d064c9740d1baf46187f679d2b19ec2c39a4391de1b016a5f0b8a65f6545",
     "handlers/music/recommendations.js": "2574a39956de5ae12253d6850f3477d212d77bdf422bd6df856ae6ab14ab1477",
-    "handlers/music/recordings.js": "a539aa48539acd52af2fb5b5ed0647a5060d8751e7b971d24b6187e354b18994",
+    "handlers/music/recordings.js": "1a76b1a713d3385259137054fedddf430d5ddfe7ed545507c9e691baeabeb488",
     "handlers/music/recovery-policy.js": "ff64afbe88bc821ecc684d1b92189e374140d10e5f7da788e378e0b27da1cdd7",
     "handlers/music/request-timing.js": "effd8482b6a2da9236521c54132c5a05c203384f23f6e0a67a9ad652868e80ac",
     "handlers/music/resolve-timeout.js": "2b0e46252f0a51c14ba1488488b9a67e6756c3d49ec78f96f9c2a59d4b92efcd",
@@ -1057,7 +1057,7 @@
     "handlers/music/recording-recovery.js": "7715e1ad92925ab0f645837776058412e0115fcfa261d7a2d94c0e6993db2963",
     "handlers/music/session-lifecycle.js": "22a2963462267dbac0a85366dc2ea4665b6f41f20f1ce85d682cbce3fec183be",
     "handlers/music/tracks.js": "f22ecabe5b41a70e9df9288098945a72a91b80e4f60d8d0744eea64219c787b1",
-    "handlers/music/artists.js": "cf759d0e150e25228e1f707ee49b7112a17f4eeda0f623c39a6a9a475c273c31"
+    "handlers/music/artists.js": "7233269e26102f8144cddb85ff5b730afd05db0a561ac29f7dc58335ff4d359c"
   },
   "owners": {
     "commands/MiniGames/2024.js": {

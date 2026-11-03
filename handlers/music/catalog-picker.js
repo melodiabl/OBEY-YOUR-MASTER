@@ -6,7 +6,8 @@ const { t } = require('../i18n')
 const { getArtist } = require('./artists')
 
 async function openCatalogPicker({ client, query, results, actor, guild, channelId, prefix = 'srch', edit, locale = 'es', commandName = 'play' }) {
-  let tab = results.tracks?.length ? 'tracks' : results.artists?.length ? 'artists' : 'albums', profile = null
+  let tab = ['tracks', 'albums', 'artists'].includes(results.preferredTab) && results[results.preferredTab]?.length
+    ? results.preferredTab : results.tracks?.length ? 'tracks' : results.artists?.length ? 'artists' : 'albums', profile = null
   const pages = { tracks: 0, albums: 0, artists: 0 }
   let closed = false, busy = false
   const items = () => (profile || results)[tab] || []
