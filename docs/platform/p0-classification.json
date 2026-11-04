@@ -3,7 +3,7 @@
   "date": "2026-10-31",
   "scope": "Complete active workload classification, with fourteen retired entries separately traced. Not behavioral acceptance. Current owners and hashes resolve through operation-ownership.json.",
   "inputs": {
-    "inventoryCoreSha256": "d0916bcaea315b022dcb65596530898c0fcfdd88a7c5dd4c9f372c9709fa0a0c",
+    "inventoryCoreSha256": "a8938ff2cc0c2e2433f1817bad231fa0872d62428ded687734cd7398cf93e1cf",
     "sharedIntentsSha256": "fb37d5cd167e3aed493c3072026f2c996414fb839cedfa094a1afccc975d3a0a",
     "retiredContentSha256": "3fd37040c10b97e812c7d101ac70c9558669cd4ae036e643927350843a9dda30"
   },

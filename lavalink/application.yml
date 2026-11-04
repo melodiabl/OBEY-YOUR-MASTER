@@ -154,7 +154,6 @@ plugins:
       albumLoadLimit: 10
       resolveArtistsInSearch: true
       localFiles: false
-      anonymousTokenUrl: http://140.245.242.153:8082/api/token
 metrics:
   prometheus:
     enabled: false

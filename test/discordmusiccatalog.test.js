@@ -7,14 +7,7 @@ const {
   toQueueTrack,
 } = require('../handlers/discordmusiccatalog')
 
-test('searchDiscordCatalog returns Lavalink tracks via client.music.search', async t => {
-  // The optional legacy album catalog is an external HTTP boundary.
-  t.mock.method(require('node:http'), 'get', (_url, _options, onResponse) => {
-    const request = new (require('node:events').EventEmitter)()
-    request.destroy = () => {}
-    queueMicrotask(() => onResponse({ statusCode: 404, resume() {} }))
-    return request
-  })
+test('searchDiscordCatalog returns Lavalink tracks via client.music.search', async () => {
   let receivedQuery
   const tracks = Array.from({ length: 25 }, (_, i) => ({
     encoded: `t${i}`,
@@ -215,12 +208,7 @@ test('partial, accented and combined title searches favor song evidence over aut
   }
 })
 
-test('an album title remains searchable even if track results identify a homonymous artist', async t => {
-  const http = require('node:http')
-  t.mock.method(http, 'get', (_url, _options, callback) => {
-    const request = new (require('node:events').EventEmitter)(); request.destroy = () => {}
-    queueMicrotask(() => callback({ statusCode: 404, resume() {} })); return request
-  })
+test('an album title remains searchable even if track results identify a homonymous artist', async () => {
   const album = { type: 'album', title: 'Discovery', author: 'Daft Punk', uri: 'https://open.spotify.com/album/1111111111111111111111', totalTracks: 14 }
   const client = { music: { search: async () => ({ tracks: [{ info: { title: 'One', author: 'Discovery' } }, { info: { title: 'Two', author: 'Discovery' } }], albums: [album] }) } }
   const result = await searchDiscordCatalog(client, 'Discovery')

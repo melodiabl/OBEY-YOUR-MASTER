@@ -1,8 +1,10 @@
 # OBEY YOUR MASTER — Roadmap de completitud bot + web
 
+> Referencia histórica de junio. La revisión vigente de música está en [la auditoría del 04/11/2026](docs/platform/SEARCH-AUDIT-2026-11-04.md); los recuentos y decisiones antiguas de este documento no describen el despliegue actual.
+
 > Estado (2026-06-11): 628 prefix · **18 grupos slash desplegados** (Admin, Anime, Birthday, Config,
 > Economy, Fun, Giveaway, Info, Invites, Moderation, Music 25, NSFW, Playlist, Rank, Soundboard, Ticket, Welcome, chat)
-> Música: modular en `handlers/music/` · spsearch→ytmsearch→ytsearch · sin catálogo/mirror · LEO solo para álbumes web
+> Música actual: `handlers/music/` con NyxLink y nodos públicos; búsqueda y previsualización sin catálogo externo por IP.
 > Web: 5 páginas · player con RAF sin rebote (fix `player.position` stale) · preview de álbumes ok
 > Infra: Docker Compose (bot + Lavalink 4.2.2 + PulseLink) · MongoDB · Sentry
 
@@ -10,7 +12,7 @@
 
 - Fase 1 (paridad slash): Moderation, Config, Economy, Rank, Soundboard (autocomplete), Fun, Anime (autocomplete), Info (25/25), Music (25/25), Playlist (7), NSFW, Ticket, Welcome, Birthday, Giveaway, Invites
 - Fase 2 parcial: playlists usuario MongoDB (`/playlist` 7 subcmds), historial (`/music history` + MusicHistory schema), lyrics LRCLib (`lyrics.js`), filtros 13 presets, autoplay básico (ytmsearch), recovery de tracks fallidos
-- Web player: barra RAF estable, metadata normalizada (`normalizePublicTrack`), álbumes discover vía LEO `/api/resolve`, preview de álbum con tracks
+- Web player: metadata normalizada (`normalizePublicTrack`); la previsualización de colecciones se resuelve con el servicio de música y los nodos configurados.
 
 ---
 

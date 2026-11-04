@@ -534,7 +534,7 @@
     "dashboard/configuration-routes.js": "6637add63b556cf4a08431a3dd2f8e6e458391a7f00542fa1c137e60d9bb5fb2",
     "dashboard/frontend-routes.js": "b35c58423cb3d31b9005eed00990883c348761019e5dea86c1c0065cbf82d2d7",
     "dashboard/help-routes.js": "bb0056da7c903c2a060ae37a70e00f2e64e25b311600f6f0c55a65f641501d55",
-    "dashboard/index.js": "38e7fe8feb87767aa603c1387347ebcf9fb0b6d5fdc77cf36c94422463a6c14d",
+    "dashboard/index.js": "07c98a470bbe6fecc6cad30c5e36c653ad3213c42fff742b245c254be747cab7",
     "dashboard/logs-routes.js": "498fd9eec71c2bf9186fbe061d7c87eff5e40beab0a464bd484af7d829ad8774",
     "dashboard/music-realtime.js": "6ebc153dd540d7d77bbc1c91fc28b7e9d06aedc1ebfea664adeb8f8f9a81341c",
     "dashboard/music-visibility.js": "69ccb986fef629933848cf9baac403e7e672b3a29f28182bf8d5e2214bd5c927",
@@ -627,7 +627,7 @@
     "handlers/configuration.js": "d2d5c76734cbb13e094da59f850ed0a7aae380028c0396567d6bb69e86cc77de",
     "handlers/counter.js": "96d0182015ae87a2e6c1bf3b8db56e8d229bfc80108d6b6121bd48d0b7577f79",
     "handlers/dailyfact.js": "7e4e3c9275e40bb2329f80cdbf09dd84b63c7e346062c6fc0b04a4ee0fa0c3e7",
-    "handlers/discordmusiccatalog.js": "b9ef8abd946dc380584cfb75af476ca07e309cf1612726fa1775e4b5ba9d3b87",
+    "handlers/discordmusiccatalog.js": "b66bb3b8a7afcb39f1dd44057193fe038e05a43c1185e2f1e38c2edaccdcfb2e",
     "handlers/economy/messages.js": "b29712bea3427950f2e8ea25c15a9e9962c7309817dec0061a47684c9cf2814a",
     "handlers/enmap-like.js": "297c0d9ebfdfc1bd9983cde1cc1b731efa3907a9f5c8f251491e37c498c3e41c",
     "handlers/epicgamesverification.js": "560ac5b4f37f4d4303a082c0482ae56038417c4e8dc00904a3c0ad31c671210d",
@@ -730,7 +730,6 @@
     "handlers/music/ui.js": "2541fcd0ed3efbcf3be6ecb5bcbd23ca0e0e0398b9dd968515f1f0833f74c94a",
     "handlers/music/utils.js": "1edd4e1339f76b3d1baf7e3ebec02c7e6e1599f797968366563077e18cbaa600",
     "handlers/music/web-lyrics.js": "91d026f1e02f7326b69043397a1f03963dcc6979691534a5a0fe19888f7780bd",
-    "handlers/musiccatalog.js": "67a69f11949a9e72b5f0bad3a98fd479375a52d8866cf952065874c954b5123a",
     "handlers/musichandler.js": "57d0cb346d90a4e1c5b362e21bc31431beb7c69a5a77d4c48baf53be0942b5e9",
     "handlers/mute.js": "5f06323e669eb06c1cf61210e8611e89c9ed920d51b5b549be819ef233ce4397",
     "handlers/neko-provider.js": "c726175276f4722893d1b047e090909a100f8a8770aea4087be89dfd8c55e9e4",
@@ -21119,15 +21118,15 @@
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 742
+          "line": 717
         },
         {
           "call": "client.on",
-          "line": 804
+          "line": 779
         },
         {
           "call": "client.guilds.cache.get",
-          "line": 805
+          "line": 780
         }
       ]
     }
@@ -28178,7 +28177,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/search",
       "owner": "dashboard/index.js",
-      "line": 716,
+      "line": 691,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     },
@@ -28187,7 +28186,7 @@
       "method": "POST",
       "path": "/api/player/:guildId/add",
       "owner": "dashboard/index.js",
-      "line": 736,
+      "line": 715,
       "handlerCount": 3,
       "behaviorAcceptance": "not-executed"
     }
@@ -32012,10 +32011,6 @@
         {
           "file": "handlers/functions.js",
           "line": 2517
-        },
-        {
-          "file": "handlers/musiccatalog.js",
-          "line": 1
         },
         {
           "file": "dashboard/index.js",

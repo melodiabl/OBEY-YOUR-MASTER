@@ -1,12 +1,10 @@
 // Shim de compatibilidad: los comandos prefix (play/search) siguen llamando
 // searchDiscordCatalog/enqueueCatalogItem, pero ahora todo resuelve vía
-// client.music.search (catálogo combinado Lavalink) y respaldo legado de álbumes.
-const http = require('http')
+// client.music.search (catálogo de los nodos públicos configurados).
 const { artistsFromTracks, uniqueArtists } = require('./music/artists')
 const { sameRecording, rankMusicTracks, preferredCatalogTab } = require('./music/recordings')
 
 const CATALOG_LIMIT = 20
-const LEO = 'http://140.245.242.153:8081'
 
 function itemInfo(item) {
   return item?.info || item || {}
@@ -34,48 +32,11 @@ function toQueueTrack(item, requester) {
   }
 }
 
-function leoGet(path) {
-  return new Promise(resolve => {
-    const request = http.get(`${LEO}${path}`, { timeout: 1500, signal: AbortSignal.timeout(1500) }, r => {
-      if (r.statusCode !== 200) { r.resume(); return resolve(null) }
-      let d = ''
-      r.on('data', c => { d += c; if (Buffer.byteLength(d) > 1000000) { request.destroy(); resolve(null) } })
-      r.on('error', () => resolve(null))
-      r.on('end', () => { try { resolve(JSON.parse(d)) } catch { resolve(null) } })
-    }).on('error', () => resolve(null)).on('timeout', () => { request.destroy(); resolve(null) })
-  })
-}
-
-async function legacyAlbums(query) {
-  const albumsRaw = await leoGet(`/api/search/albums?q=${encodeURIComponent(query)}&limit=10`)
-  // LEO /search/albums devuelve también "singles" (1 pista) sin distinguir.
-  // Resolvemos cada uno en paralelo para saber su nº de pistas + carátula,
-  // y descartamos los de 1 sola pista (esos son tracks, no álbumes reales).
-  const albumsBasic = (Array.isArray(albumsRaw) ? albumsRaw : []).filter(a => /^[A-Za-z0-9]{22}$/.test(a.id)).slice(0, 8)
-  const albumsResolved = await Promise.all(albumsBasic.map(async a => {
-    const meta  = await leoGet(`/api/resolve?url=https://open.spotify.com/album/${a.id}`).catch(() => null)
-    const total = Number(meta?.total) || (meta?.items?.length || 0)
-    return {
-      type: 'album',
-      title: a.name,
-      author: a.author,
-      uri: `https://open.spotify.com/album/${a.id}`,
-      artworkUrl: meta?.artwork || null,
-      sourceName: 'spotify',
-      totalTracks: total,
-    }
-  }))
-  return albumsResolved.filter(a => a.totalTracks >= 2)
-}
-
 async function searchDiscordCatalog(client, query, context = {}) {
-  const [result, legacy] = await Promise.all([
-    client.music.search(query, 'Búsqueda', { ...context, multiple: true }),
-    legacyAlbums(query),
-  ])
+  const result = await client.music.search(query, 'Búsqueda', { ...context, multiple: true })
   const limit = Math.max(1, Math.min(50, Number(context.limit) || CATALOG_LIMIT))
   const tracks = (result?.tracks || []).slice(0, limit)
-  const albums = rankMusicTracks([...(result?.albums || []), ...legacy], query).slice(0, 20)
+  const albums = rankMusicTracks(result?.albums || [], query).slice(0, 20)
 
   const catalog = { tracks, albums, artists: uniqueArtists([...(result?.artists || []), ...artistsFromTracks(tracks, query)]), playlists: [] }
   return { ...catalog, preferredTab: preferredCatalogTab(catalog, query) }

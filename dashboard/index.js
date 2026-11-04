@@ -671,38 +671,13 @@ module.exports = async client => {
     if (!canManageGuild(req.session.user, guildId))
       return res.json({ ok: false, error: 'no_permission' })
     const { uri } = req.body
-    if (!uri) return res.json({ ok: false, error: 'no_uri' })
+    if (typeof uri !== 'string' || !uri || uri.length > 2000) return res.status(400).json({ ok: false, error: 'invalid_uri' })
     const music = client.music
     if (!music) return res.json({ ok: false, error: 'no_music' })
     try {
       const { normalizePublicTrack } = require('../handlers/music/utils')
-      const LEO = 'http://140.245.242.153:8081'
-
-      // Spotify album URL → Lavalink puede resolverlo como playlist con encoded
-      // También acepta el formato legacy spotify:album:{id}
-      const albumMatch = uri.match(/^(?:spotify:album:|https:\/\/open\.spotify\.com\/album\/)([A-Za-z0-9]+)/)
-      if (albumMatch) {
-        const albumId = albumMatch[1]
-        const albumData = await new Promise(resolve => {
-          http.get(`${LEO}/api/resolve?url=https://open.spotify.com/album/${albumId}`, { timeout: 8000 }, r => {
-            let d = ''; r.on('data', c => d += c)
-            r.on('end', () => { try { resolve(JSON.parse(d)) } catch { resolve(null) } })
-          }).on('error', () => resolve(null)).on('timeout', () => resolve(null))
-        })
-        if (!albumData?.items?.length) return res.json({ ok: false, error: 'not_a_collection' })
-        const tracks = albumData.items.map(t => ({
-          title:      t.title,
-          author:     Array.isArray(t.artists) ? t.artists[0] : t.artists || '',
-          artworkUrl: t.artwork || albumData.artwork || null,
-          length:     t.duration || 0,
-          uri:        `https://open.spotify.com/track/${t.id}`,
-          sourceName: 'spotify',
-          isrc:       t.isrc || null,
-        }))
-        return res.json({ ok: true, title: albumData.name || 'Álbum', tracks })
-      }
-
-      const result = await music.search(uri, req.session.user.username, { guildId })
+      const identifier = uri.replace(/^spotify:(album|playlist):([A-Za-z0-9]{22})$/, 'https://open.spotify.com/$1/$2')
+      const result = await music.search(identifier, req.session.user.username, { guildId })
       if (!result || !['playlist', 'album'].includes(result.loadType) || !result.tracks?.length) {
         return res.json({ ok: false, error: 'not_a_collection' })
       }

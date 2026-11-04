@@ -86,7 +86,7 @@ El motor vive en `handlers/music/` y se expone como **`client.music`** (iniciali
 
 > **Esta es la sección más importante del porte.** Si el nuevo motor no re-implementa esto, la música puede dejar de sonar.
 
-1. **Spotify bloquea la IP del VPS** → búsqueda usa `spsearch` vía **PulseLink** (token de servicio externo `140.245.242.153:8082`, LEO API `:8081`). NO volver a la API oficial de Spotify.
+1. **Dependencia externa retirada (04/11/2026)**: las consultas, los metadatos y la previsualización se obtienen de los nodos públicos configurados. No se usa el antiguo catálogo HTTP ni su servicio de tokens. Este documento describe el motor anterior; la arquitectura vigente está en `docs/platform/SEARCH-AUDIT-2026-11-04.md`.
 2. **Orden de búsqueda** `spsearch → ytsearch`; `spsearch` devuelve 1 solo track → conservar como fallback y continuar a ytsearch para listas.
 3. **`spotify:album:{id}` da `loadType: empty`** → usar `https://open.spotify.com/album/{id}`.
 4. **Catálogo** (`discordmusiccatalog.js`): tracks sin `encoded` se resuelven vía `_mirrorYouTubeTrack()` (ytsearch); el URI original queda en `info.catalogUri` / `info.catalogSourceName`. `platform()` debe mirar primero `catalogSourceName` (el URI ya es de YouTube tras el mirror).
