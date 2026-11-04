@@ -1,0 +1,265 @@
+{
+  "date": "2026-11-04",
+  "scope": "Public source inspection and private-bot official documentation; no access to proprietary internals",
+  "publicRepositories": [
+    {
+      "repository": "jagrosh/MusicBot",
+      "sha": "859e5c5862decf433f8face5eaca3372d7d27b22",
+      "date": "2024-08-12T17:28:38Z",
+      "reviewedFiles": [
+        {
+          "path": "src/main/java/com/jagrosh/jmusicbot/commands/music/SearchCmd.java",
+          "url": "https://github.com/jagrosh/MusicBot/blob/859e5c5862decf433f8face5eaca3372d7d27b22/src/main/java/com/jagrosh/jmusicbot/commands/music/SearchCmd.java"
+        },
+        {
+          "path": "src/main/java/com/jagrosh/jmusicbot/audio/PlayerManager.java",
+          "url": "https://github.com/jagrosh/MusicBot/blob/859e5c5862decf433f8face5eaca3372d7d27b22/src/main/java/com/jagrosh/jmusicbot/audio/PlayerManager.java"
+        },
+        {
+          "path": "src/main/java/com/jagrosh/jmusicbot/audio/AudioHandler.java",
+          "url": "https://github.com/jagrosh/MusicBot/blob/859e5c5862decf433f8face5eaca3372d7d27b22/src/main/java/com/jagrosh/jmusicbot/audio/AudioHandler.java"
+        }
+      ]
+    },
+    {
+      "repository": "eritislami/evobot",
+      "sha": "d785326612165d83c06a429c1914c76db04005e6",
+      "date": "2024-06-06T21:14:34Z",
+      "reviewedFiles": [
+        {
+          "path": "commands/search.ts",
+          "url": "https://github.com/eritislami/evobot/blob/d785326612165d83c06a429c1914c76db04005e6/commands/search.ts"
+        },
+        {
+          "path": "structs/MusicQueue.ts",
+          "url": "https://github.com/eritislami/evobot/blob/d785326612165d83c06a429c1914c76db04005e6/structs/MusicQueue.ts"
+        },
+        {
+          "path": "structs/Song.ts",
+          "url": "https://github.com/eritislami/evobot/blob/d785326612165d83c06a429c1914c76db04005e6/structs/Song.ts"
+        }
+      ]
+    },
+    {
+      "repository": "Cog-Creators/Red-DiscordBot",
+      "sha": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "date": "2026-10-25T08:52:46Z",
+      "reviewedFiles": [
+        {
+          "path": "redbot/cogs/audio/apis/interface.py",
+          "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/apis/interface.py"
+        },
+        {
+          "path": "redbot/cogs/audio/apis/persist_queue_wrapper.py",
+          "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/apis/persist_queue_wrapper.py"
+        },
+        {
+          "path": "redbot/cogs/audio/core/events/lavalink.py",
+          "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/events/lavalink.py"
+        },
+        {
+          "path": "redbot/cogs/audio/core/utilities/parsers.py",
+          "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/utilities/parsers.py"
+        }
+      ]
+    },
+    {
+      "repository": "museofficial/muse",
+      "sha": "fb15afef3733011e59527cdcc4c1cbb9f7709971",
+      "date": "2026-10-30T05:55:15Z",
+      "reviewedFiles": [
+        {
+          "path": "package.json",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/package.json"
+        },
+        {
+          "path": "src/services/get-songs.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/get-songs.ts"
+        },
+        {
+          "path": "src/services/add-query-to-queue.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/add-query-to-queue.ts"
+        },
+        {
+          "path": "src/services/playback-attempt.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/playback-attempt.ts"
+        },
+        {
+          "path": "src/services/voice-connection-recovery.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/voice-connection-recovery.ts"
+        },
+        {
+          "path": "src/services/session-player.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/session-player.ts"
+        },
+        {
+          "path": "schema.prisma",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/schema.prisma"
+        },
+        {
+          "path": "src/services/player.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/player.ts"
+        },
+        {
+          "path": "src/services/file-cache.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/file-cache.ts"
+        },
+        {
+          "path": "src/services/listening-session.ts",
+          "url": "https://github.com/museofficial/muse/blob/fb15afef3733011e59527cdcc4c1cbb9f7709971/src/services/listening-session.ts"
+        }
+      ]
+    }
+  ],
+  "privateDocumentation": [
+    {
+      "name": "Jockie Music",
+      "urls": [
+        "https://www.jockiemusic.com/commands?q=perks",
+        "https://www.jockiemusic.com/faq"
+      ],
+      "unknown": [
+        "implementation language",
+        "audio engine",
+        "node ownership",
+        "matching algorithm",
+        "internal cache and failover"
+      ]
+    },
+    {
+      "name": "FredBoat",
+      "urls": [
+        "https://fredboat.com/docs",
+        "https://fredboat.com/docs/commands",
+        "https://fredboat.com/premium"
+      ],
+      "unknown": [
+        "current production engine",
+        "node ownership",
+        "internal matching and cache"
+      ]
+    },
+    {
+      "name": "Rythm",
+      "urls": [
+        "https://docs.rythm.fm/commands/",
+        "https://docs.rythm.fm/troubleshooting/"
+      ],
+      "unknown": [
+        "backend implementation",
+        "catalog ranking",
+        "node topology",
+        "internal recovery"
+      ]
+    }
+  ],
+  "obey": {
+    "baselineRevision": "acc96c5ee3ed9b303f4482b0abda36c7325b97b9",
+    "client": "nyxlink@0.1.0-dev.2",
+    "queueOwner": "Native NyxLink Player/Queue",
+    "removedLegacyModule": "handlers/musiccatalog.js",
+    "pending": [
+      "independent typed category search",
+      "honor requested source through all consumers",
+      "separate provider lookup failures from audio-node health",
+      "make expired search interactions clear",
+      "real voice playback and failover acceptance"
+    ]
+  },
+  "nativeTypeProbe": [
+    {
+      "query": "amsearch:artist:Adela",
+      "loadType": "search",
+      "count": 10
+    },
+    {
+      "query": "amsearch:album:Discovery Daft Punk",
+      "loadType": "search",
+      "count": 4
+    },
+    {
+      "query": "spsearch:artist:Adela",
+      "error": "unavailable"
+    }
+  ],
+  "retirementVerification": {
+    "codeRevision": "3898b252",
+    "activeAddressReferences": 0,
+    "retiredModule": "handlers/musiccatalog.js",
+    "testsPassed": 50,
+    "testsFailed": 0,
+    "types": true,
+    "dependencyBoundaries": true,
+    "classification": true,
+    "commandEntries": 661,
+    "httpRoutes": 95,
+    "sourceHashes": 1046,
+    "collections": [
+      {
+        "uri": "https://open.spotify.com/album/5duyQokC4FMcWPYTV9Gpf9",
+        "ms": 1637,
+        "type": "playlist",
+        "title": "21",
+        "count": 11,
+        "node": "trinium-nodelink-1",
+        "source": "spotify",
+        "firstTitle": "Rolling in the Deep"
+      },
+      {
+        "uri": "https://music.apple.com/us/album/697194953",
+        "ms": 1342,
+        "type": "playlist",
+        "title": "Discovery",
+        "count": 14,
+        "node": "trinium-nodelink-1",
+        "source": "applemusic",
+        "firstTitle": "One More Time"
+      }
+    ],
+    "deployment": {
+      "status": "healthy",
+      "image": "localhost/obey-your-master_bot:release-node-catalog-20261104-3898b252",
+      "imageId": "76c5b3884491f43aa5bc4e4b13c20ca0de45e44c524d7c73b55f3c68d9c0a20c",
+      "revision": "3898b2521fb1462e541ff02f83472ff47009bf86",
+      "restarts": 0,
+      "health": {
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "database": true,
+          "music": true,
+          "uptime": 45
+        }
+      },
+      "imageTests": {
+        "passed": 50,
+        "failed": 0,
+        "node": "22.23.4"
+      },
+      "effectiveRegistry": {
+        "commands": 661,
+        "aliases": 776,
+        "routes": 95,
+        "prefix": 517,
+        "slash": 144,
+        "roots": 20
+      },
+      "privateNodeEnabled": false
+    }
+  },
+  "installedSearchService": {
+    "file": "node_modules/nyxlink/dist/src/search/SearchService.js",
+    "sha256": "e4d5a2271a4e4c0428dc1ec736114dd87e78df41653c61e4b56aff37c5a6f9da",
+    "version": "0.1.0-dev.2",
+    "observed": [
+      "query source selection",
+      "fallbackPlatforms",
+      "bounded search configuration",
+      "response validation"
+    ],
+    "obeyEntry": "handlers/music/index.js client.music.search calls node-search.searchNodes",
+    "managerFile": "node_modules/nyxlink/dist/src/core/Manager.js",
+    "managerSha256": "c04854871d9e414ea3819ebe0726343ad6c881e057bd269cd431884662e97645",
+    "optionalClientCatalogSources": "Spotify and Deezer default disabled; OBEY does not enable them"
+  }
+}
