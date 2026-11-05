@@ -1,9 +1,9 @@
-const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
+const { searchCatalogPicker } = require("../../bot/modulos/musica/comandos/buscar")
 const { localeFor } = require('../../handlers/i18n')
 // /music play estilo Soundy: muestra resultados (🎵 Pistas / 💿 Álbumes) para elegir; URL directa.
 const { EmbedBuilder } = require('discord.js')
 const { config } = require('../../handlers/music/config')
-const { err, addedEmbed, playlistAdded } = require('../../handlers/music/playui')
+const { err, addedEmbed, playlistAdded } = require("../../bot/modulos/musica/vistas/catalogo")
 
 const isUrl = s => /^https?:\/\//i.test(s)
 

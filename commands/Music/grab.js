@@ -1,7 +1,7 @@
 const obeyMeta = require("../../handlers/presentation/metadata")
 const { t, localeFor } = require('../../handlers/i18n')
 const { registry } = require('../../handlers/assets/registry')
-const { fx, err, E } = require('../../handlers/music/responses')
+const { fx, err, E } = require("../../bot/modulos/musica/vistas/respuestas")
 const { EmbedBuilder } = require('discord.js')
 module.exports = {
   name: 'grab', category: 'Music',

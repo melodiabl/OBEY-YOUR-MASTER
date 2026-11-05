@@ -73,7 +73,7 @@
     "web:typecheck": "npm run typecheck --prefix dashboard/frontend",
     "test": "node --test test/*.test.js",
     "typecheck:welcome": "tsc --project tsconfig.welcome.json",
-    "dependencies:welcome": "depcruise --config .dependency-cruiser.cjs --output-type err handlers dashboard slashCommands commands"
+    "dependencies:welcome": "depcruise --config .dependency-cruiser.cjs --output-type err handlers dashboard slashCommands commands bot api"
   },
   "author": "Tomato6966 (updated by OBEY team)",
   "license": "MIT",

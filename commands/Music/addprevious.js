@@ -1,4 +1,4 @@
-const { fx, err, E } = require('../../handlers/music/responses')
+const { fx, err, E } = require("../../bot/modulos/musica/vistas/respuestas")
 module.exports = {
   name: 'addprevious', category: 'Music',
   aliases: ['ap', 'prev'],

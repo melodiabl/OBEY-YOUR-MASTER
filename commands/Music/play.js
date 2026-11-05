@@ -1,11 +1,11 @@
-const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
+const { searchCatalogPicker } = require("../../bot/modulos/musica/comandos/buscar")
 const obeyUi = require("../../handlers/assets/system")
 const { localeFor } = require('../../handlers/i18n')
 // play estilo Soundy: muestra RESULTADOS (🎵 Pistas / 💿 Álbumes, clasificados) para elegir
 // antes de reproducir. Las URLs (track/playlist) se reproducen directas.
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 const { config } = require('../../handlers/music/config')
-const { E, err, addedEmbed, playlistAdded } = require('../../handlers/music/playui')
+const { E, err, addedEmbed, playlistAdded } = require("../../bot/modulos/musica/vistas/catalogo")
 
 const isUrl = s => /^https?:\/\//i.test(s)
 

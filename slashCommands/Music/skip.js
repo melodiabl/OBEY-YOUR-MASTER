@@ -1,4 +1,4 @@
-const { runPlaybackControl } = require('../../handlers/music/responses')
+const { runPlaybackControl } = require("../../bot/modulos/musica/comandos/controlar")
 module.exports = {
   name: 'skip', description: 'Salta la cancion actual',
   parameters: { type: 'music', activeplayer: true, previoussong: false },

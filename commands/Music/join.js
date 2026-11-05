@@ -1,5 +1,5 @@
 const obeyUi = require("../../handlers/assets/system")
-const { voiceErrorText } = require('../../handlers/music/responses')
+const { voiceErrorText } = require("../../bot/modulos/musica/vistas/respuestas")
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } = require('discord.js')
 
 module.exports = {

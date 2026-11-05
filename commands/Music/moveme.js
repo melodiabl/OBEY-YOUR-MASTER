@@ -1,4 +1,4 @@
-const { fx, err, E, voiceErrorText } = require('../../handlers/music/responses')
+const { fx, err, E, voiceErrorText } = require("../../bot/modulos/musica/vistas/respuestas")
 module.exports = {
   name: 'moveme', category: 'Music',
   aliases: [],

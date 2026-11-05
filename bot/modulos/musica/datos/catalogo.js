@@ -1,9 +1,9 @@
-const { normalizeArtist, normalizeAlbum } = require('./artists')
-const { lookupWithTimeout } = require('./resolve-timeout')
-const { tracksFromResolve } = require('./utils')
-const { viewTrack } = require('./tracks')
-const { allowedMusicTrack, assertMusicQuery } = require('./nodes-config')
-const { rankMusicTracks, recordingArtist } = require('./recordings')
+const { normalizeArtist, normalizeAlbum } = require("../../../../handlers/music/artists")
+const { lookupWithTimeout } = require("../../../../handlers/music/resolve-timeout")
+const { tracksFromResolve } = require("../../../../handlers/music/utils")
+const { viewTrack } = require("../../../../handlers/music/tracks")
+const { allowedMusicTrack, assertMusicQuery } = require("../../../../handlers/music/nodes-config")
+const { rankMusicTracks, recordingArtist } = require("../../../../handlers/music/recordings")
 
 const catalogs = new WeakMap()
 const SOURCES = { spotify: 'spsearch', applemusic: 'amsearch', ytmusic: 'ytmsearch', youtube: 'ytsearch' }

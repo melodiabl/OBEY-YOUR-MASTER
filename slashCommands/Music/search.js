@@ -1,7 +1,7 @@
-const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
+const { searchCatalogPicker } = require("../../bot/modulos/musica/comandos/buscar")
 const { localeFor } = require('../../handlers/i18n')
 // /music search estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes + menú para elegir.
-const { err } = require('../../handlers/music/playui')
+const { err } = require("../../bot/modulos/musica/vistas/catalogo")
 
 module.exports = {
   name: 'search',

@@ -1,4 +1,4 @@
-const { runPlaybackControl } = require('../../handlers/music/responses')
+const { runPlaybackControl } = require("../../bot/modulos/musica/comandos/controlar")
 module.exports = {
   name: 'stop', description: 'Detiene la musica y limpia la cola',
   parameters: { type: 'music', activeplayer: false, previoussong: false }, options: [],

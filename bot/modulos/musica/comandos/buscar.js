@@ -1,9 +1,9 @@
 const { PermissionFlagsBits } = require('discord.js')
-const { catEmbed, catRows, catalogPage, addedEmbed, err, itemInfo, SEARCH_SOURCES } = require('./playui')
-const { enqueueCatalogItem, searchDiscordCatalog } = require('../discordmusiccatalog')
-const { commandDenial } = require('./permissions')
-const { t } = require('../i18n')
-const { getArtist } = require('./artists')
+const { catEmbed, catRows, catalogPage, addedEmbed, err, itemInfo, SEARCH_SOURCES } = require("../vistas/catalogo")
+const { enqueueCatalogItem, searchCatalog } = require("../servicios/catalogo")
+const { commandDenial } = require("../../../../handlers/music/permissions")
+const { t } = require("../../../../handlers/i18n")
+const { getArtist } = require("../../../../handlers/music/artists")
 
 async function openCatalogPicker({ client, query, results, actor, guild, channelId, prefix = 'srch', edit, locale = 'es', commandName = 'play' }) {
   query = results.query || query.replace(/^(?:spsearch|amsearch|ytsearch|ytmsearch):/i, '')
@@ -20,7 +20,7 @@ async function openCatalogPicker({ client, query, results, actor, guild, channel
     return edit({ content: null, embeds: [embed], components: catRows(tab, items(), prefix, locale, pages[tab], { artistView: Boolean(profile), source }), allowedMentions: { parse: [] } })
   }
   const load = async () => {
-    const pending = searchDiscordCatalog(client, query, { guildId: guild.id, limit: 50, kind: tab, source, signal: controller.signal }).catch(error => ({ error }))
+    const pending = searchCatalog(client, query, { guildId: guild.id, limit: 50, kind: tab, source, signal: controller.signal }).catch(error => ({ error }))
     results[tab] = []; pages[tab] = 0
     results.statuses = { ...results.statuses, [tab]: 'loading' }
     await render()
@@ -116,7 +116,7 @@ async function openCatalogPicker({ client, query, results, actor, guild, channel
 async function searchCatalogPicker(options) {
   const { client, query, guild, edit, locale = 'es' } = options
   let results
-  try { results = await searchDiscordCatalog(client, query, { guildId: guild.id, limit: 50, kind: 'tracks', source: 'auto' }) }
+  try { results = await searchCatalog(client, query, { guildId: guild.id, limit: 50, kind: 'tracks', source: 'auto' }) }
   catch (error) {
     return edit({ embeds: [err(t(locale, error.code === 'music_search_busy' ? 'music.searchBusy' : 'music.searchFailed'))], components: [] })
   }

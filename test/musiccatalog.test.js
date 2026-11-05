@@ -1,6 +1,33 @@
 const assert = require('node:assert/strict')
 const test = require('node:test')
-const { searchDiscordCatalog } = require('../handlers/discordmusiccatalog')
+const { searchCatalog } = require("../bot/modulos/musica/servicios/catalogo")
+
+test('the HTTP catalog adapter preserves category, source, access checks and error statuses', async t => {
+  const express = require('express'), app = express(), calls = []
+  let access = true, failure = null
+  const client = { music: { search: async (query, requester, context) => {
+    calls.push({ query, context })
+    if (failure) throw failure
+    return { tracks: [], albums: [{ type: 'album', title: 'Discovery', author: 'Daft Punk', uri: 'https://music.apple.com/us/album/697194953', sourceName: 'applemusic' }], artists: [], kind: context.kind, source: context.source, query, statuses: { albums: 'ready' }, sources: { albums: 'applemusic' } }
+  } } }
+  app.use(express.json(), (req, res, next) => { req.session = { user: { id: 'actor' } }; next() })
+  app.post('/search/:guildId', require('../api/rutas/musica/http')({ client, canManageGuild: () => access }))
+  const server = app.listen(0, '127.0.0.1'); await require('node:events').once(server, 'listening')
+  t.after(() => { server.closeAllConnections(); return new Promise(resolve => server.close(resolve)) })
+  const request = body => fetch(`http://127.0.0.1:${server.address().port}/search/guild`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  let response = await request({ query: 'Discovery', kind: 'albums', source: 'applemusic' }), data = await response.json()
+  assert.equal(response.status, 200); assert.equal(data.albums[0].title, 'Discovery')
+  assert.equal(calls[0].context.kind, 'albums'); assert.equal(calls[0].context.source, 'applemusic')
+  assert.equal(data.sources.albums, 'applemusic')
+  access = false; response = await request({ query: 'Discovery' }); data = await response.json()
+  assert.equal(data.error, 'no_permission'); assert.equal(calls.length, 1)
+  access = true; response = await request({ query: { invalid: true } }); assert.equal(response.status, 400)
+  for (const [code, status] of [['invalid_search_options', 400], ['music_search_busy', 429], ['backend_unavailable', 503]]) {
+    failure = Object.assign(Error('private backend detail'), { code })
+    response = await request({ query: 'Discovery' }); data = await response.json()
+    assert.equal(response.status, status); assert.doesNotMatch(JSON.stringify(data), /private backend detail/)
+  }
+})
 const { searchNodes, trackOnNode } = require('../handlers/music/node-search')
 const { normalizePublicTrack, tracksFromResolve } = require('../handlers/music/utils')
 
@@ -22,13 +49,13 @@ test('catalog search returns node albums without calling a separate HTTP catalog
   t.mock.method(require('node:http'), 'get', () => { assert.fail('A separate HTTP catalog must not be contacted') })
   const nativeAlbum = { type: 'album', title: 'Discovery', author: 'Daft Punk', uri: album, sourceName: 'spotify', totalTracks: 14 }
   const client = { music: { search: async (_query, _requester, context) => { assert.equal(context.multiple, true); return { tracks: [], albums: [nativeAlbum] } } } }
-  const result = await searchDiscordCatalog(client, 'Discovery')
+  const result = await searchCatalog(client, 'Discovery')
   assert.deepEqual(result.albums, [nativeAlbum])
 })
 
 test('missing node results do not trigger a legacy HTTP fallback', async t => {
   t.mock.method(require('node:http'), 'get', () => { assert.fail('A legacy HTTP fallback must not be contacted') })
-  const result = await searchDiscordCatalog({ music: { search: async () => ({ tracks: [], albums: [], artists: [] }) } }, 'Unknown')
+  const result = await searchCatalog({ music: { search: async () => ({ tracks: [], albums: [], artists: [] }) } }, 'Unknown')
   assert.deepEqual(result.tracks, [])
   assert.deepEqual(result.albums, [])
   assert.deepEqual(result.artists, [])
@@ -65,7 +92,7 @@ test('cross-node playback matching rejects another recording and preserves reque
 })
 
 test('artists are queried as native resources independently from track matches', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const queries = [], uri = 'https://music.apple.com/us/artist/1765924916'
   const node = { name: 'public', native: { isNodeLink: true }, rest: { resolve: async query => {
     queries.push(query)
@@ -79,7 +106,7 @@ test('artists are queried as native resources independently from track matches',
 })
 
 test('native album search retains real track counts and canonical album identities', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const node = { name: 'public', native: { isNodeLink: true }, rest: { resolve: async query => {
     assert.equal(query, 'amsearch:album:Discovery Daft Punk')
     return { loadType: 'search', data: ['discovery', 'one-more-time'].map(slug => ({ info: { title: 'Discovery', author: 'Daft Punk', sourceName: 'applemusic', uri: `https://music.apple.com/us/album/${slug}/697194953` }, pluginInfo: { type: 'album', trackCount: 14 } })) }
@@ -91,7 +118,7 @@ test('native album search retains real track counts and canonical album identiti
 })
 
 test('Lavalink metadata queries use the selected source and exact LavaSearch type', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const node = { name: 'java', rest: { resolve: async () => assert.fail('metadata must not use track queries'), fetch: async request => {
     assert.deepEqual(request.options.params, { query: 'amsearch:Discovery', types: 'album' })
     return { albums: [{ info: { name: 'Discovery' }, pluginInfo: { author: 'Daft Punk', url: 'https://music.apple.com/us/album/697194953', totalTracks: 14 } }] }
@@ -101,7 +128,7 @@ test('Lavalink metadata queries use the selected source and exact LavaSearch typ
 })
 
 test('an explicit provider failure is not silently replaced by another platform', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const calls = [], client = { nyxlink: { search: async options => { calls.push(options.source); return { loadType: 'error', tracks: [] } } } }
   const result = await searchCatalogNodes(client, [{ name: 'public' }], 'Hello', undefined, { kind: 'tracks', source: 'spotify' })
   assert.deepEqual(calls, ['spsearch'])
@@ -110,7 +137,7 @@ test('an explicit provider failure is not silently replaced by another platform'
 })
 
 test('automatic track search uses the native client and stops after a successful catalog', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const calls = [], client = { nyxlink: { search: async options => {
     calls.push(options.source)
     return options.source === 'spsearch' ? { loadType: 'error', tracks: [] } : { loadType: 'search', tracks: [{ ...song('hello', 'Hello'), info: { ...song('hello', 'Hello').info, sourceName: 'applemusic' } }] }
@@ -122,7 +149,7 @@ test('automatic track search uses the native client and stops after a successful
 })
 
 test('cache isolation preserves category, platform and backend session', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const queries = [], client = { nyxlink: { search: async options => { queries.push(options.source); return { loadType: 'empty', tracks: [] } } } }
   const node = { name: 'public', sessionId: 'one', native: { isNodeLink: true }, rest: { resolve: async q => { queries.push(q); return { loadType: 'empty', data: {} } } } }
   for (const context of [{ kind: 'tracks', source: 'spotify' }, { kind: 'artists', source: 'spotify' }, { kind: 'tracks', source: 'spotify' }, { kind: 'tracks', source: 'applemusic' }]) await searchCatalogNodes(client, [node], 'Adela', undefined, context)
@@ -132,7 +159,7 @@ test('cache isolation preserves category, platform and backend session', async (
 })
 
 test('unsupported artist platforms and empty catalog results have distinct statuses', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   let calls = 0
   const node = { name: 'public', native: { isNodeLink: true }, rest: { resolve: async () => { calls++; return { loadType: 'empty', data: {} } } } }
   const empty = await searchCatalogNodes({}, [node], 'Unknown', undefined, { kind: 'artists', source: 'applemusic' })
@@ -151,7 +178,7 @@ test('URL previews do not pin or penalize audio nodes on catalog failure', async
 })
 
 test('a responsive node wins without waiting for or retaining a slower catalog request', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   let aborted = false, timer
   const client = { nyxlink: { search: options => options.node === 'slow'
     ? new Promise((_, reject) => options.signal.addEventListener('abort', () => { aborted = true; reject(Error('cancelled')) }, { once: true }))

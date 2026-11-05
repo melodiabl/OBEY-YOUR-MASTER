@@ -3,7 +3,7 @@ const obeyUi = require("../../handlers/assets/system")
 const { EmbedBuilder } = require('discord.js')
 const Playlist = require('../../database/schemas/PlaylistSchema')
 const { exactPlaylistName } = require('../../handlers/music/playlist-name')
-const { toQueueTrack } = require('../../handlers/discordmusiccatalog')
+const { toQueueTrack } = require("../../bot/modulos/musica/servicios/catalogo")
 const { isLikedPlaylist, getLikedPlaylist } = require('../../handlers/music/liked-playlist')
 const { allowedMusicTrack } = require('../../handlers/music/nodes-config')
 

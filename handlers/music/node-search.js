@@ -9,7 +9,7 @@ async function searchNodes(client, raw, requester, { guildId, signal, kind = 'tr
   const name = typeof requester === 'string' ? requester : requester?.username || requester?.tag || 'Unknown'
   const url = /^https?:\/\//i.test(query)
   if (!url) {
-    const result = await require('./catalog-search').searchCatalogNodes(client, nodes, query, signal, { kind, source })
+    const result = await require("../../bot/modulos/musica/datos/catalogo").searchCatalogNodes(client, nodes, query, signal, { kind, source })
     return { ...result, tracks: result.tracks.map(track => ({ ...track, info: { ...track.info,
       requester: name, requesterId: typeof requester === 'object' ? requester.id : null } })) }
   }

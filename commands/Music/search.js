@@ -1,10 +1,10 @@
-const { searchCatalogPicker } = require('../../handlers/music/catalog-picker')
+const { searchCatalogPicker } = require("../../bot/modulos/musica/comandos/buscar")
 const obeyUi = require("../../handlers/assets/system")
 const { localeFor } = require('../../handlers/i18n')
 // Búsqueda estilo Soundy: pestañas 🎵 Pistas / 💿 Álbumes (clasificadas) + menú para elegir.
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js')
 const { config } = require('../../handlers/music/config')
-const { E, err } = require('../../handlers/music/playui')
+const { E, err } = require("../../bot/modulos/musica/vistas/catalogo")
 
 module.exports = {
   name: 'search',

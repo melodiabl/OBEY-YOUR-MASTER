@@ -60,11 +60,11 @@ test('invalid skip counts are rejected before executing a playback action', asyn
 
 const {
   enqueueCatalogItem,
-  searchDiscordCatalog,
+  searchCatalog,
   toQueueTrack,
-} = require('../handlers/discordmusiccatalog')
+} = require("../bot/modulos/musica/servicios/catalogo")
 
-test('searchDiscordCatalog returns Lavalink tracks via client.music.search', async () => {
+test('searchCatalog returns Lavalink tracks via client.music.search', async () => {
   let receivedQuery
   const tracks = Array.from({ length: 25 }, (_, i) => ({
     encoded: `t${i}`,
@@ -79,7 +79,7 @@ test('searchDiscordCatalog returns Lavalink tracks via client.music.search', asy
     },
   }
 
-  const result = await searchDiscordCatalog(client, 'query')
+  const result = await searchCatalog(client, 'query')
 
   assert.equal(receivedQuery, 'query')
   assert.equal(result.tracks.length, 20)
@@ -161,7 +161,7 @@ test('a real Lavalink track is queued as-is with the requester set', async () =>
 })
 
 test('artist identities come from catalog URLs and keep homonymous artists separate', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const make = uri => ({ info: { title: 'Adela', uri, sourceName: 'spotify' }, pluginInfo: { type: 'artist' } })
   const one = 'https://open.spotify.com/artist/1111111111111111111111'
   const two = 'https://open.spotify.com/artist/2222222222222222222222'
@@ -196,7 +196,7 @@ test('artist profiles reject arbitrary URLs before contacting any node', async (
 
 test('an artist selection opens top tracks and returns to artists without starting playback', async () => {
   const { EventEmitter } = require('node:events')
-  const { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const { openCatalogPicker } = require("../bot/modulos/musica/comandos/buscar")
   const uri = 'https://open.spotify.com/artist/1111111111111111111111'
   const collector = new EventEmitter(); collector.stop = reason => collector.emit('end', [], reason)
   const renders = []; let enqueues = 0
@@ -269,7 +269,7 @@ test('partial, accented and combined title searches favor song evidence over aut
 test('an album title remains searchable even if track results identify a homonymous artist', async () => {
   const album = { type: 'album', title: 'Discovery', author: 'Daft Punk', uri: 'https://open.spotify.com/album/1111111111111111111111', totalTracks: 14 }
   const client = { music: { search: async () => ({ tracks: [{ info: { title: 'One', author: 'Discovery' } }, { info: { title: 'Two', author: 'Discovery' } }], albums: [album] }) } }
-  const result = await searchDiscordCatalog(client, 'Discovery')
+  const result = await searchCatalog(client, 'Discovery')
   assert.deepEqual(result.albums, [album])
 })
 
@@ -288,7 +288,7 @@ test('whole-title matches ignore spacing differences without becoming artist-onl
 })
 
 test('catalog search retains title matches and albums and does not implicitly open an artist top', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const uri = 'https://open.spotify.com/artist/1111111111111111111111'
   const track = (title, author, id) => ({ info: { title, author, sourceName: 'spotify', uri: 'https://example.com/' + id } })
   const queries = []
@@ -305,7 +305,7 @@ test('catalog search retains title matches and albums and does not implicitly op
 })
 
 test('album-name search uses the native album category without depending on track titles', async () => {
-  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const { searchCatalogNodes } = require("../bot/modulos/musica/datos/catalogo")
   const uri = 'https://open.spotify.com/album/1111111111111111111111'
   const node = { name: 'node', native: { isNodeLink: true }, rest: { resolve: async query => { assert.equal(query, 'spsearch:album:Discovery'); return { loadType: 'search', data: [{ info: { title: 'Discovery', author: 'Daft Punk', sourceName: 'spotify', uri }, pluginInfo: { type: 'album' } }] } } } }
   const result = await searchCatalogNodes({}, [node], 'Discovery', undefined, { kind: 'albums', source: 'spotify' })
@@ -343,7 +343,7 @@ test('a title and credited artist query outranks covers that put the artist insi
 
 test('Discord opens the preferred category while keeping the other search tabs available', async () => {
   const { EventEmitter } = require('node:events')
-  const { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const { openCatalogPicker } = require("../bot/modulos/musica/comandos/buscar")
   for (const preferredTab of ['albums', 'artists']) {
     const collector = new EventEmitter(), renders = []
     const results = { preferredTab, tracks: [{ info: { title: 'Song', author: 'Artist' } }],
@@ -377,7 +377,7 @@ test('Apple Music artist identity ignores its optional display slug while retain
 
 test('artist tab and selection open native NodeLink Apple Music tops without enqueuing', async () => {
   const { EventEmitter } = require('node:events'), { nodeView } = require('../handlers/music/node-view')
-  const { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const { openCatalogPicker } = require("../bot/modulos/musica/comandos/buscar")
   const collector = new EventEmitter(), renders = [], queries = []
   const track = { encoded: 'top', info: { title: 'Someone Like You', author: 'Adele', sourceName: 'applemusic', uri: 'https://music.apple.com/us/song/420075084' } }
   const native = { identifier: 'native', isNodeLink: true, rest: { loadTracks: async query => {
@@ -426,7 +426,7 @@ test('artist album buttons retain real Apple Music album metadata and reject unr
 })
 
 test('Discord category buttons query their resource and source changes reload that category', async () => {
-  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require("../bot/modulos/musica/comandos/buscar")
   const collector = new EventEmitter(), renders = [], calls = []
   const client = { music: { search: async (_query, _who, context) => {
     calls.push({ kind: context.kind, source: context.source })
@@ -447,7 +447,7 @@ test('Discord category buttons query their resource and source changes reload th
 })
 
 test('a Discord search closed during a category lookup ignores its late results', async () => {
-  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require("../bot/modulos/musica/comandos/buscar")
   const collector = new EventEmitter(), renders = []; let release, entered
   const ready = new Promise(r => { entered = r }), waiting = new Promise(r => { release = r })
   const client = { music: { search: async () => { entered(); await waiting; return { tracks: [], albums: [], artists: [{ type: 'artist', title: 'Late artist', uri: 'https://open.spotify.com/artist/1111111111111111111111' }], statuses: { artists: 'ready' } } } } }

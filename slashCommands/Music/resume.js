@@ -1,4 +1,4 @@
-const { runPlaybackControl } = require('../../handlers/music/responses')
+const { runPlaybackControl } = require("../../bot/modulos/musica/comandos/controlar")
 module.exports = {
   name: 'resume', description: 'Reanuda la musica pausada',
   parameters: { type: 'music', activeplayer: true, previoussong: false }, options: [],

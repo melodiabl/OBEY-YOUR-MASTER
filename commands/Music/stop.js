@@ -1,4 +1,4 @@
-const { runPlaybackControl } = require('../../handlers/music/responses')
+const { runPlaybackControl } = require("../../bot/modulos/musica/comandos/controlar")
 module.exports = {
   name: 'stop', category: 'Music',
   aliases: ['leave', 'disconnect', 'dis', 'votestop'],

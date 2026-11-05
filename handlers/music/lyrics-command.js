@@ -1,7 +1,7 @@
 const { fetchLyricsResult } = require('./lyrics')
 const { getCurrentLyrics } = require('./web-lyrics')
 const { showLyrics } = require('./lyrics-pagination')
-const { err } = require('./responses')
+const { err } = require("../../bot/modulos/musica/vistas/respuestas")
 const { localeFor, t } = require('../i18n')
 
 async function runLyrics(client, interaction, query = '', { currentLookup = getCurrentLyrics, lookup = fetchLyricsResult } = {}) {

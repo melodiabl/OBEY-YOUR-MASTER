@@ -1,7 +1,6 @@
-// Shim de compatibilidad: los comandos prefix (play/search) siguen llamando
-// searchDiscordCatalog/enqueueCatalogItem, pero ahora todo resuelve vía
-// client.music.search (catálogo de los nodos públicos configurados).
-const { sameRecording, rankMusicTracks, preferredCatalogTab } = require('./music/recordings')
+// Catálogo compartido por Discord y HTTP. Las consultas y la inserción usan
+// el servicio de música y la cola nativa del reproductor.
+const { sameRecording, rankMusicTracks, preferredCatalogTab } = require("../../../../handlers/music/recordings")
 
 const CATALOG_LIMIT = 20
 
@@ -31,7 +30,7 @@ function toQueueTrack(item, requester) {
   }
 }
 
-async function searchDiscordCatalog(client, query, context = {}) {
+async function searchCatalog(client, query, context = {}) {
   const result = await client.music.search(query, 'Búsqueda', { ...context, multiple: true })
   const limit = Math.max(1, Math.min(50, Number(context.limit) || CATALOG_LIMIT))
   const tracks = (result?.tracks || []).slice(0, limit)
@@ -82,4 +81,4 @@ async function enqueueCatalogItem(client, message, voiceChannel, item, { authori
   return { added: tracks.length, isNow: wasIdle, state }
 }
 
-module.exports = { searchDiscordCatalog, enqueueCatalogItem, itemInfo, toQueueTrack }
+module.exports = { searchCatalog, enqueueCatalogItem, itemInfo, toQueueTrack }

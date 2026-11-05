@@ -1,7 +1,22 @@
-// Scoped to the migrated welcome configuration. Legacy consumers are still scanned
-// for imports into it; unrelated legacy dependencies are not validated here.
+// Enforce boundaries on migrated welcome and music code. Legacy consumers are
+// scanned for imports; unrelated legacy dependencies remain outside these rules.
 module.exports = {
   forbidden: [
+    { name: 'music-no-unresolved', severity: 'error',
+      from: { path: '^bot/modulos/musica/' }, to: { couldNotResolve: true } },
+    { name: 'music-no-cycles', severity: 'error',
+      from: { path: '^bot/modulos/musica/' }, to: { circular: true } },
+    { name: 'music-services-no-command-or-view', severity: 'error',
+      from: { path: '^bot/modulos/musica/(datos|servicios)/' },
+      to: { path: '^bot/modulos/musica/(comandos|vistas)/' } },
+    { name: 'music-browser-no-server-import', severity: 'error',
+      from: { path: '^dashboard/(frontend|public)/' },
+      to: { path: '^(bot|api)/' } },
+    { name: 'music-http-no-unresolved', severity: 'error',
+      from: { path: '^api/rutas/musica/' }, to: { couldNotResolve: true } },
+    { name: 'music-http-no-discord-view', severity: 'error',
+      from: { path: '^api/rutas/musica/' },
+      to: { path: '^bot/modulos/musica/(comandos|vistas)/' } },
     { name: 'welcome-no-unresolved', severity: 'error',
       from: { path: '^handlers/welcome/' }, to: { couldNotResolve: true } },
     { name: 'welcome-no-cycles', severity: 'error',

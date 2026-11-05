@@ -1,4 +1,4 @@
-const { fx, err, E } = require('./responses')
+const { fx, err, E } = require("../../bot/modulos/musica/vistas/respuestas")
 const { fmtMs } = require('./utils')
 const { localeFor, t } = require('../i18n')
 

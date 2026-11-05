@@ -1,14 +1,14 @@
-const obeyMeta = require("../presentation/metadata")
-const obeyUi = require("../assets/system")
+const obeyMeta = require("../../../../handlers/presentation/metadata")
+const obeyUi = require("../../../../handlers/assets/system")
 // UI compartida de play/search estilo Soundy: pestañas LIMPIAS 🎵 Pistas / 💿 Álbumes
 // (clasificados, sin mezclar) + menú para elegir, y embeds "Añadido" / "Álbum" / "Playlist".
 const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require('discord.js')
-const { config } = require('./config')
-const { platform, MUSIC_ICON } = require('./utils')
-const { itemInfo } = require('../discordmusiccatalog')
+const { config } = require("../../../../handlers/music/config")
+const { platform, MUSIC_ICON } = require("../../../../handlers/music/utils")
+const { itemInfo } = require("../servicios/catalogo")
 
-const { registry } = require('../assets/registry')
-const { t: translate } = require('../i18n')
+const { registry } = require("../../../../handlers/assets/registry")
+const { t: translate } = require("../../../../handlers/i18n")
 const E = config.emoji
 const DISK = MUSIC_ICON
 // Ordinals are text; option emoji identifies the kind of result.

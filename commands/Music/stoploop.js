@@ -1,4 +1,4 @@
-const { fx, E } = require('../../handlers/music/responses')
+const { fx, E } = require("../../bot/modulos/musica/vistas/respuestas")
 module.exports = {
   name: 'stoploop', category: 'Music',
   aliases: ['noloop', 'norepeat'],
