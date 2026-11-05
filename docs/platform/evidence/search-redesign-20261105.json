@@ -1,0 +1,318 @@
+{
+  "date": "2026-11-05",
+  "scope": "Shared typed search for Discord and web using native NyxLink track search and public-node metadata APIs",
+  "runtimeClient": "nyxlink@0.1.0-dev.2",
+  "changes": [
+    "Independent artist and album queries",
+    "Explicit source preserved and automatic source fallback disclosed per category",
+    "Native SearchService with LavaSrc Java resolver hook",
+    "Catalog queries never pin or penalize audio nodes",
+    "Fast valid node response cancels slower request",
+    "Cache isolates query, kind, source and backend session; requester attached per caller",
+    "Source selectors and retry controls in Discord and web",
+    "Latest response wins; closed searches ignore pending replies",
+    "Exact artist names precede related artists"
+  ],
+  "checks": {
+    "testsPassed": 63,
+    "testsFailed": 0,
+    "backendTypes": true,
+    "frontendTypes": true,
+    "dependencyBoundaries": true,
+    "classification": true,
+    "ejsRenderAndSyntax": true,
+    "chromeVisual": false
+  },
+  "liveCatalog": {
+    "transport": "Real NyxLink SearchService and public HTTP endpoints; backend availability initialized from real info, no Discord voice connection",
+    "nodes": [
+      {
+        "id": "trinium-nodelink-1",
+        "backend": "nodelink"
+      },
+      {
+        "id": "trinium-nodelink-2",
+        "backend": "nodelink"
+      },
+      {
+        "id": "millohost",
+        "backend": "unknown"
+      }
+    ],
+    "queries": [
+      {
+        "query": "Hello Adele",
+        "kind": "tracks",
+        "requestedSource": "auto",
+        "source": "applemusic",
+        "status": "ready",
+        "count": 5,
+        "ms": 3349,
+        "first": [
+          {
+            "title": "Hello",
+            "author": "Adele",
+            "source": "applemusic"
+          },
+          {
+            "title": "Hello (Adele)",
+            "author": "PelleK",
+            "source": "applemusic"
+          },
+          {
+            "title": "#Hello (ADELE TRIBUTE)",
+            "author": "Joe",
+            "source": "applemusic"
+          }
+        ]
+      },
+      {
+        "query": "Adela",
+        "kind": "artists",
+        "requestedSource": "applemusic",
+        "source": "applemusic",
+        "status": "ready",
+        "count": 10,
+        "ms": 882,
+        "first": [
+          {
+            "title": "ADÉLA",
+            "author": "ADÉLA",
+            "uri": "https://music.apple.com/us/artist/1765924916"
+          },
+          {
+            "title": "Adela",
+            "author": "Adela",
+            "uri": "https://music.apple.com/us/artist/1492375901"
+          },
+          {
+            "title": "Adela",
+            "author": "Adela",
+            "uri": "https://music.apple.com/us/artist/1447903021"
+          }
+        ]
+      },
+      {
+        "query": "Discovery Daft Punk",
+        "kind": "albums",
+        "requestedSource": "applemusic",
+        "source": "applemusic",
+        "status": "ready",
+        "count": 4,
+        "ms": 890,
+        "first": [
+          {
+            "title": "Discovery",
+            "author": "Daft Punk",
+            "uri": "https://music.apple.com/us/album/697194953",
+            "totalTracks": 14
+          },
+          {
+            "title": "Homework (25th Anniversary Edition)",
+            "author": "Daft Punk",
+            "uri": "https://music.apple.com/us/album/1609438391",
+            "totalTracks": 31
+          },
+          {
+            "title": "Random Access Memories",
+            "author": "Daft Punk",
+            "uri": "https://music.apple.com/us/album/617154241",
+            "totalTracks": 13
+          }
+        ]
+      },
+      {
+        "query": "Adele Hello",
+        "kind": "tracks",
+        "requestedSource": "ytmusic",
+        "source": "ytmusic",
+        "status": "ready",
+        "count": 3,
+        "ms": 1544,
+        "first": [
+          {
+            "title": "Hello",
+            "author": "Adele",
+            "source": "youtube"
+          },
+          {
+            "title": "Hello By Adele Amapiano",
+            "author": "AIBI AWEEH",
+            "source": "youtube"
+          },
+          {
+            "title": "Adele - Hello - Piano Cover",
+            "author": "Adele - Piano Covers",
+            "source": "youtube"
+          }
+        ]
+      },
+      {
+        "query": "Adela",
+        "kind": "artists",
+        "requestedSource": "spotify",
+        "source": "spotify",
+        "status": "ready",
+        "count": 20,
+        "ms": 1863,
+        "first": [
+          {
+            "title": "ADÉLA",
+            "author": "ADÉLA",
+            "uri": "https://open.spotify.com/artist/2qanRMyA5bNuTvz1dK45OP"
+          },
+          {
+            "title": "Adela",
+            "author": "Adela",
+            "uri": "https://open.spotify.com/artist/4CNBDandjnpWJePuFHzRs7"
+          },
+          {
+            "title": "Adela",
+            "author": "Adela",
+            "uri": "https://open.spotify.com/artist/6dFrX9SJjOGT9BsArOdL1D"
+          }
+        ]
+      }
+    ]
+  },
+  "dom": {
+    "passed": true,
+    "steps": [
+      "initial search",
+      "provider switch",
+      "artists tab",
+      "artist top tracks and albums",
+      "back and focus",
+      "unsupported source feedback",
+      "retry",
+      "late result ignored"
+    ],
+    "adds": 0,
+    "errors": [],
+    "driver": "21.0.4",
+    "limitation": "DOM execution of rendered EJS and real product JavaScript; no Chrome visual rendering. Fixture replaces only the search-button inline entry binding."
+  },
+  "limitations": [
+    "Artist and album lookup uses Spotify and Apple Music; YouTube and YouTube Music are track search sources",
+    "Playlist discovery is outside this change",
+    "Chrome could not start with the host sandbox configuration; DOM checks are not a Chrome visual audit",
+    "No new Discord voice session, human listening test or real voice failover acceptance"
+  ],
+  "deployment": {
+    "image": "localhost/obey-your-master_bot:release-search-redesign-20261105-9f8eeb49",
+    "imageId": "a997a403131181e25494fc4183c468c465b58686b0883d8aa331d7e02ef42ccd",
+    "codeRevision": "9f8eeb49afbfe4fc94a3e1fdc325f141f1ba9957",
+    "status": "deployed",
+    "health": "healthy",
+    "restarts": 0,
+    "application": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 217
+    },
+    "imageTests": {
+      "passed": 63,
+      "failed": 0,
+      "node": "22.23.4"
+    },
+    "registry": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "prefixCommands": 517,
+      "slashCommands": 144,
+      "slashRoots": 20
+    },
+    "rollbackImage": "localhost/obey-your-master_bot:release-node-catalog-20261104-3898b252",
+    "privateNodeEnabled": false
+  },
+  "liveSourceMatrix": {
+    "transport": "Real NyxLink SearchService and public HTTP endpoints; backend availability initialized from real info, no Discord voice connection",
+    "nodes": [
+      {
+        "id": "trinium-nodelink-1",
+        "backend": "nodelink"
+      },
+      {
+        "id": "millohost",
+        "backend": "unknown"
+      }
+    ],
+    "queries": [
+      {
+        "query": "Hello Adele",
+        "kind": "tracks",
+        "requestedSource": "spotify",
+        "source": "spotify",
+        "status": "ready",
+        "count": 2,
+        "ms": 2360,
+        "first": [
+          {
+            "title": "Hello",
+            "author": "Adele",
+            "source": "spotify"
+          },
+          {
+            "title": "Hello (Adele)",
+            "author": "PelleK",
+            "source": "spotify"
+          }
+        ]
+      },
+      {
+        "query": "Hello Adele",
+        "kind": "tracks",
+        "requestedSource": "applemusic",
+        "source": "applemusic",
+        "status": "ready",
+        "count": 5,
+        "ms": 1335,
+        "first": [
+          {
+            "title": "Hello",
+            "author": "Adele",
+            "source": "applemusic"
+          },
+          {
+            "title": "Hello (Adele)",
+            "author": "PelleK",
+            "source": "applemusic"
+          },
+          {
+            "title": "#Hello (ADELE TRIBUTE)",
+            "author": "Joe",
+            "source": "applemusic"
+          }
+        ]
+      },
+      {
+        "query": "Adele Hello",
+        "kind": "tracks",
+        "requestedSource": "youtube",
+        "source": "youtube",
+        "status": "ready",
+        "count": 7,
+        "ms": 1442,
+        "first": [
+          {
+            "title": "Adele - Hello (Official Music Video)",
+            "author": "Adele",
+            "source": "youtube"
+          },
+          {
+            "title": "Adele - Hello (Lyrics)",
+            "author": "Rare Vibes",
+            "source": "youtube"
+          },
+          {
+            "title": "Adele - Hello (Lyrics)",
+            "author": "Deep Ocean",
+            "source": "youtube"
+          }
+        ]
+      }
+    ]
+  }
+}

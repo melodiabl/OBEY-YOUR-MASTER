@@ -83,9 +83,11 @@ NodeLink documenta consultas por tipo; LavaSearch documenta tipos separados. Se 
 ## 6. Orden de implementación y estado
 
 1. Retirar la IP, el catálogo y el servicio de tokens antiguos; conservar los campos públicos del preview y comprobar colecciones con nodos. Cambio de esta revisión.
-2. Unificar el contrato query/kind/source, integrar la búsqueda de pistas de NyxLink y consultar artistas/álbumes con la API correspondiente. Pendiente; la retirada de la IP no completa el rediseño de búsqueda.
-3. Propagar la elección de fuente desde ambas interfaces. Mostrar fuente efectiva y distinguir ready, empty, unavailable y unsupported. Pendiente.
-4. Separar fallos de catálogo de salud del nodo de audio y evitar cambios de selección durante un preview. Pendiente.
+2. Unificar el contrato query/kind/source, integrar la búsqueda de pistas de NyxLink y consultar artistas/álbumes con la API correspondiente. Implementado el 05/11/2026; véase [el contrato](SEARCH-IMPLEMENTATION-2026-11-04.md).
+3. Propagar la elección de fuente desde ambas interfaces. Mostrar fuente efectiva y distinguir ready, empty, unavailable y unsupported. Implementado: selector, categorías, reintento y protección frente a respuestas antiguas.
+4. Separar fallos de catálogo de salud del nodo de audio y evitar cambios de selección durante un preview. Implementado: las consultas no fijan ni penalizan nodos y los fallos quedan asociados al catálogo.
 5. Verificar búsqueda, selección, dos temas consecutivos, Stop durante carga, reconexión y cambio real de nodo con audio. Se conservan las aceptaciones funcionales pendientes del plan; no se cierran por disponer de pruebas unitarias.
 
 La limpieza se valida con regresiones que prohíben el HTTP externo, resolución de álbumes mediante nodos, metadatos públicos y equivalencia de grabación entre nodos. Las pruebas exclusivas del módulo retirado se sustituyen por pruebas del recorrido activo. No se cambia la lista de proveedores permitidos ni se incorpora otro motor de reproducción.
+
+La verificación del rediseño y sus límites están en [la evidencia de implementación](evidence/search-redesign-20261105.json). Los hallazgos de la sección 4 describen la revisión inicial; esta sección indica los cambios posteriores.
