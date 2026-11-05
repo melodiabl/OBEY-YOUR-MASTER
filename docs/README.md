@@ -1,5 +1,8 @@
 # Documentación de OBEY
 
+**Auditoría y plan actualizados (05/11/2026):** [fallos de música y Spotify](platform/AUDITORIA-MUSICA-CATALOGO-2026-11-05.md), [auditoría transversal](platform/AUDITORIA-TRANSVERSAL-2026-11-05.md), [referencias de bots públicos y cerrados](platform/COMPARATIVA-BOTS-2026-11-05.md) y [plan de renovación por gates](platform/PLAN-RENOVACION-2026-11-05.md). Son diagnósticos estáticos y tareas, no funcionalidades probadas; la referencia viva sigue siendo [checkpoint](platform/CHECKPOINT.md).
+
+
 Índice vigente al 01/11/2026. El [README](../README.md) describe el producto y el entorno actual. Las guías de diseño explican el destino; los informes fechados explican qué se comprobó en cada entrega.
 
 ## Uso y mantenimiento

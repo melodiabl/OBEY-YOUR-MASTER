@@ -1,3 +1,9 @@
+## 05/11/2026 · Auditoría integral y plan de reparación (documentación)
+
+Se revisaron fallos reportados de pistas/álbumes/artistas/Spotify y las superficies principales BOT/WEB/API, con comparación de código abierto y documentación de bots cerrados. **NyxLink 0.1.0-dev.2 es el gestor actual; la aceptación musical P1 sigue abierta.** Seguir [diagnóstico musical](../docs/platform/AUDITORIA-MUSICA-CATALOGO-2026-11-05.md), [matriz por proyecto](../docs/platform/AUDITORIA-TRANSVERSAL-2026-11-05.md), [comparativa de bots](../docs/platform/COMPARATIVA-BOTS-2026-11-05.md) y [plan por gates](../docs/platform/PLAN-RENOVACION-2026-11-05.md). Los antiguos recordatorios de migrar a lavalink-client/Shoukaku quedaron superados y no son la instrucción vigente.
+
+Esta actualización es **solo documental**: ninguna reparación, prueba operativa, cambio visual, instalación o despliegue queda acreditado por el commit.
+
 # Plan de implementación de la plataforma OBEY
 
 ## 02/11/2026 · Prioridad del usuario: dependencia musical completa
