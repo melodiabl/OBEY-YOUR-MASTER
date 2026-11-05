@@ -18,6 +18,8 @@ const TABS = [
   { id: 'albums', label: 'Álbumes', emoji: obeyUi.component('💿'), asset: 'icon.album' },
   { id: 'artists', label: 'Artistas', asset: 'icon.profile' },
 ]
+const SEARCH_SOURCES = { auto: null, spotify: 'Spotify', applemusic: 'Apple Music', ytmusic: 'YouTube Music', youtube: 'YouTube' }
+const sourceLabel = (source, locale) => SEARCH_SOURCES[source] || translate(locale, 'music.sourceAuto')
 
 function fmtMs(ms) { const s = Math.floor((ms || 0) / 1000), m = Math.floor(s / 60), sec = s % 60; return `${m}:${String(sec).padStart(2, '0')}` }
 function totalFmt(tracks) { return fmtMs(tracks.reduce((a, t) => a + (t.info?.length || 0), 0)) }
@@ -30,13 +32,13 @@ function catalogPage(items, page = 0) {
   return { page: current, pages, offset: current * 10, items: items.slice(current * 10, current * 10 + 10) }
 }
 
-function catEmbed(tabId, items, query, locale = 'es', page = 0) {
+function catEmbed(tabId, items, query, locale = 'es', page = 0, { status, source } = {}) {
   const tab = TABS.find(t => t.id === tabId) || TABS[0]
   if (!items.length) {
     return new EmbedBuilder().setColor(0x4f545c)
       .setAuthor(obeyMeta.asAuthor({ name: translate(locale, 'music.resultsFor', { query: query.slice(0, 50) }), iconURL: DISK }))
       .setTitle(obeyUi.limit(`${registry.markup(tab.asset)} ${translate(locale, `music.${tab.id}`)}`, 256))
-      .setDescription(obeyUi.limit(translate(locale, tab.id === 'artists' ? 'music.noArtists' : tab.id === 'albums' ? 'music.noAlbums' : 'music.noTracks'), 4096))
+      .setDescription(obeyUi.limit(translate(locale, status === 'loading' ? 'music.searchLoading' : status === 'unavailable' ? 'music.searchUnavailable' : status === 'unsupported' ? 'music.searchUnsupported' : tab.id === 'artists' ? 'music.noArtists' : tab.id === 'albums' ? 'music.noAlbums' : 'music.noTracks'), 4096))
       .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.emptyFooter') }))
   }
   const view = catalogPage(items, page)
@@ -55,10 +57,10 @@ function catEmbed(tabId, items, query, locale = 'es', page = 0) {
     .setTitle(obeyUi.limit(`${registry.markup(tab.asset)} ${translate(locale, `music.${tab.id}`)}`, 256))
     .setDescription(obeyUi.limit(lines.join('\n\n'), 4096))
     .setThumbnail(first?.artworkUrl || first?.thumbnail || null)
-    .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.resultsPage', { count: items.length, page: view.page + 1, pages: view.pages }) }))
+    .setFooter(obeyMeta.asFooter({ text: translate(locale, 'music.resultsPage', { count: items.length, page: view.page + 1, pages: view.pages }) + (source ? ` · ${translate(locale, 'music.sourceLabel')}: ${sourceLabel(source, locale)}` : '') }))
 }
 
-function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0, { artistView = false } = {}) {
+function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0, { artistView = false, source = 'auto' } = {}) {
   const view = catalogPage(items, page)
   const rows = []
   if (items.length) {
@@ -80,7 +82,11 @@ function catRows(tabId, items, cid = 'srch', locale = 'es', page = 0, { artistVi
     ...TABS.filter(tab => !artistView || tab.id !== 'artists').map(tab => new ButtonBuilder().setCustomId(`${cid}_tab:${tab.id}`).setLabel(obeyUi.plain(translate(locale, `music.${tab.id}`))).setEmoji(obeyUi.component(registry.emoji(tab.asset)))
       .setStyle(tab.id === tabId ? ButtonStyle.Primary : ButtonStyle.Secondary)),
     new ButtonBuilder().setCustomId(`${cid}_cancel`).setLabel(obeyUi.plain(translate(locale, 'common.cancel'))).setStyle(ButtonStyle.Danger).setEmoji(obeyUi.component(registry.emoji('icon.close'))),
+    ...(!artistView ? [new ButtonBuilder().setCustomId(`${cid}_retry`).setLabel(translate(locale, 'music.searchRetry')).setStyle(ButtonStyle.Secondary)] : []),
   ))
+  if (!artistView) rows.push(new ActionRowBuilder().addComponents(new StringSelectMenuBuilder().setCustomId(`${cid}_source`)
+    .setPlaceholder(`${translate(locale, 'music.sourceLabel')}: ${sourceLabel(source, locale)}`)
+    .addOptions(Object.keys(SEARCH_SOURCES).map(value => ({ label: sourceLabel(value, locale), value, default: value === source })))))
   if (artistView) rows.push(new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId(`${cid}_artists-back`).setLabel(translate(locale, 'music.backToArtists')).setStyle(ButtonStyle.Secondary)))
   if (view.pages > 1) rows.push(new ActionRowBuilder().addComponents(
     new ButtonBuilder().setCustomId(`${cid}_page:${view.page - 1}`).setLabel(translate(locale, 'common.previous')).setStyle(ButtonStyle.Secondary).setDisabled(view.page === 0),
@@ -127,4 +133,4 @@ function playlistAdded(result, query, userId, locale = 'es') {
     .setTimestamp()
 }
 
-module.exports = { E, TABS, fmtMs, totalFmt, err, catEmbed, catRows, catalogPage, addedEmbed, playlistAdded, itemInfo }
+module.exports = { E, TABS, SEARCH_SOURCES, fmtMs, totalFmt, err, catEmbed, catRows, catalogPage, addedEmbed, playlistAdded, itemInfo }

@@ -367,3 +367,54 @@ test('artist album buttons retain real Apple Music album metadata and reject unr
   assert.equal(albums[0].title, '25')
   assert.equal(albums[0].sourceName, 'applemusic')
 })
+
+test('Discord category buttons query their resource and source changes reload that category', async () => {
+  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const collector = new EventEmitter(), renders = [], calls = []
+  const client = { music: { search: async (_query, _who, context) => {
+    calls.push({ kind: context.kind, source: context.source })
+    const apple = context.source === 'applemusic'
+    return { tracks: [], albums: [], artists: [{ type: 'artist', title: 'Adela', uri: apple ? 'https://music.apple.com/us/artist/1765924916' : 'https://open.spotify.com/artist/1111111111111111111111', sourceName: apple ? 'applemusic' : 'spotify' }], statuses: { artists: 'ready' }, sources: { artists: apple ? 'applemusic' : 'spotify' }, source: context.source, kind: context.kind }
+  } } }
+  await openCatalogPicker({ client, query: 'Adela', results: { kind: 'tracks', source: 'auto', tracks: [{ info: { title: 'Song', author: 'Adela' } }], artists: [], albums: [], statuses: { tracks: 'ready' } }, actor: { id: 'owner' }, guild: { id: 'guild' }, edit: async p => { renders.push(p); return { createMessageComponentCollector: () => collector } } })
+  const interact = collector.listeners('collect')[0]
+  const event = (customId, values) => ({ customId, values, user: { id: 'owner' }, deferUpdate: async () => {}, reply: async () => {} })
+  await interact(event('srch_tab:artists'))
+  assert.deepEqual(calls, [{ kind: 'artists', source: 'auto' }])
+  assert.match(renders.at(-1).embeds[0].toJSON().description, /Spotify/)
+  await interact(event('srch_source', ['applemusic']))
+  assert.deepEqual(calls[1], { kind: 'artists', source: 'applemusic' })
+  assert.match(renders.at(-1).embeds[0].toJSON().description, /Apple Music/)
+  const menu = renders.at(-1).components.flatMap(row => row.toJSON().components).find(c => c.custom_id === 'srch_source')
+  assert.equal(menu.options.find(o => o.default).value, 'applemusic')
+})
+
+test('a Discord search closed during a category lookup ignores its late results', async () => {
+  const { EventEmitter } = require('node:events'), { openCatalogPicker } = require('../handlers/music/catalog-picker')
+  const collector = new EventEmitter(), renders = []; let release, entered
+  const ready = new Promise(r => { entered = r }), waiting = new Promise(r => { release = r })
+  const client = { music: { search: async () => { entered(); await waiting; return { tracks: [], albums: [], artists: [{ type: 'artist', title: 'Late artist', uri: 'https://open.spotify.com/artist/1111111111111111111111' }], statuses: { artists: 'ready' } } } } }
+  await openCatalogPicker({ client, query: 'Late', results: { kind: 'tracks', tracks: [{ info: { title: 'Song', author: 'Artist' } }], albums: [], artists: [], statuses: { tracks: 'ready' } }, actor: { id: 'owner' }, guild: { id: 'guild' }, edit: async p => { renders.push(p); return { createMessageComponentCollector: () => collector } } })
+  const pending = collector.listeners('collect')[0]({ customId: 'srch_tab:artists', user: { id: 'owner' }, deferUpdate: async () => {} })
+  let timer
+  try { await Promise.race([ready, new Promise((_, reject) => { timer = setTimeout(() => reject(Error('Category lookup was not started')), 1000) })]) }
+  finally { clearTimeout(timer) }
+  collector.emit('end', [], 'time'); release(); await pending
+  assert.deepEqual(renders.at(-1).components, [])
+  assert.equal(renders.some(p => p.embeds?.[0]?.toJSON().description?.includes('Late artist')), false)
+})
+
+test('web category selection sends the selected platform and preserves other loaded categories', async () => {
+  const source = require('node:fs').readFileSync(require('node:path').join(__dirname, '../dashboard/views/pages/player.ejs'), 'utf8')
+  const code = source.match(/async function selectSearchKind\(kind\) \{[\s\S]*?\n\}/)?.[0]
+  assert.ok(code, 'web category navigation must load a category')
+  const calls = [], rendered = []
+  const context = { lastCatalog: { tracks: [{ title: 'Existing song' }], albums: [], artists: [], statuses: { tracks: 'ready' }, sources: {} }, activeSource: 'applemusic', activeResultKind: 'all', lastSearchQuery: 'Adela', artistGeneration: 0,
+    document: { getElementById: () => ({ innerHTML: '' }) }, renderCatalog: (_container, catalog) => rendered.push(catalog),
+    searchAPI: async (query, source, kind) => { calls.push({ query, source, kind }); return { artists: [{ title: 'Adela' }], statuses: { artists: 'ready' }, sources: { artists: source } } } }
+  const select = require('node:vm').runInNewContext(code + '\nselectSearchKind', context)
+  await select('artists'); await select('tracks'); await select('artists')
+  assert.deepEqual(calls, [{ query: 'Adela', source: 'applemusic', kind: 'artists' }])
+  assert.equal(rendered.at(-1).tracks[0].title, 'Existing song')
+  assert.equal(rendered.at(-1).artists[0].title, 'Adela')
+})

@@ -3,7 +3,7 @@ const { lookupWithTimeout } = require('./resolve-timeout')
 const { tracksFromResolve } = require('./utils')
 const { viewTrack } = require('./tracks')
 const { allowedMusicTrack, assertMusicQuery } = require('./nodes-config')
-const { rankMusicTracks } = require('./recordings')
+const { rankMusicTracks, recordingArtist } = require('./recordings')
 
 const catalogs = new WeakMap()
 const SOURCES = { spotify: 'spsearch', applemusic: 'amsearch', ytmusic: 'ytmsearch', youtube: 'ytsearch' }
@@ -23,7 +23,7 @@ function searchOptions(query, { kind = 'all', source = 'auto' } = {}) {
 }
 async function collect(client, nodes, options) {
   const deadline = Date.now() + 6500
-  const result = { loadType: 'search', tracks: [], albums: [], artists: [], playlists: [], statuses: {}, sources: {}, source: options.source, kind: options.kind, playlistName: null }
+  const result = { loadType: 'search', tracks: [], albums: [], artists: [], playlists: [], statuses: {}, sources: {}, query: options.query, source: options.source, kind: options.kind, playlistName: null }
   const kinds = options.kind === 'all' ? KINDS : [options.kind]
   await Promise.all(kinds.map(async kind => {
     const supported = kind === 'tracks' ? Object.keys(SOURCES) : kind === 'playlists' ? [] : ['spotify', 'applemusic']
@@ -63,6 +63,7 @@ async function collect(client, nodes, options) {
           rows = rows.filter(item => kind === 'tracks'
             ? (item.info?.sourceName === source || source === 'ytmusic' && ['youtube', 'youtubemusic'].includes(item.info?.sourceName) || source === 'youtube' && item.info?.sourceName === 'ytdlp')
             : item.sourceName === source)
+          if (kind === 'tracks') rows = rankMusicTracks(rows, options.query).slice(0, 50)
           responded = true
           if (rows.length) return { rows }
         } catch { /* A catalog failure does not change audio-node health. */ }
@@ -72,8 +73,15 @@ async function collect(client, nodes, options) {
       round.abort()
       successful ||= responded
       if (!found) continue
-      if (kind === 'tracks') result.tracks = rankMusicTracks(found.rows, options.query).slice(0, 50)
-      else result[kind] = [...new Map(found.rows.map(row => [row.uri, row])).values()].slice(0, 20)
+      if (kind === 'tracks') result.tracks = found.rows
+      else {
+        const rows = [...new Map(found.rows.map(row => [row.uri, row])).values()]
+        if (kind === 'artists') {
+          const name = recordingArtist(options.query)
+          rows.sort((a, b) => Number(recordingArtist(b.title) === name) - Number(recordingArtist(a.title) === name))
+        }
+        result[kind] = rows.slice(0, 20)
+      }
       if (!result[kind].length) continue
       result.statuses[kind] = 'ready'; result.sources[kind] = source; return
     }

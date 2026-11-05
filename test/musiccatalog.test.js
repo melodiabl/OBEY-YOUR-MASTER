@@ -69,7 +69,7 @@ test('artists are queried as native resources independently from track matches',
   const queries = [], uri = 'https://music.apple.com/us/artist/1765924916'
   const node = { name: 'public', native: { isNodeLink: true }, rest: { resolve: async query => {
     queries.push(query)
-    return { loadType: 'search', data: [{ info: { title: 'ADÉLA', author: 'Apple Music', uri, sourceName: 'applemusic' }, pluginInfo: { type: 'artist' } }] }
+    return { loadType: 'search', data: [{ info: { title: 'Another Adela Project', uri: 'https://music.apple.com/us/artist/1492375901', sourceName: 'applemusic' }, pluginInfo: { type: 'artist' } }, { info: { title: 'ADÉLA', author: 'Apple Music', uri, sourceName: 'applemusic' }, pluginInfo: { type: 'artist' } }] }
   } } }
   const result = await searchCatalogNodes({}, [node], 'Adela', undefined, { kind: 'artists', source: 'applemusic' })
   assert.deepEqual(queries, ['amsearch:artist:Adela'])

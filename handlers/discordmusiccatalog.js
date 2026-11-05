@@ -37,7 +37,7 @@ async function searchDiscordCatalog(client, query, context = {}) {
   const tracks = (result?.tracks || []).slice(0, limit)
   const albums = rankMusicTracks(result?.albums || [], query).slice(0, 20)
 
-  const catalog = { tracks, albums, artists: result?.artists || [], playlists: [], statuses: result?.statuses || {}, sources: result?.sources || {}, source: result?.source || context.source || 'auto', kind: result?.kind || context.kind || 'all' }
+  const catalog = { tracks, albums, artists: result?.artists || [], playlists: [], statuses: result?.statuses || {}, sources: result?.sources || {}, query: result?.query || query.replace(/^(?:spsearch|amsearch|ytsearch|ytmsearch):/i, ''), source: result?.source || context.source || 'auto', kind: result?.kind || context.kind || 'all' }
   return { ...catalog, preferredTab: preferredCatalogTab(catalog, query) }
 }
 

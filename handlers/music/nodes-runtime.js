@@ -12,6 +12,7 @@ function initializeNodes(client, config) {
     }),
     options: {
       database: { type: 'memory' }, resume: true, resumeTimeout: 60000,
+      spotify: { enabled: false }, deezer: { enabled: false },
       node: { selectionStrategy: 'priority', autoMovePlayers: true, avoidUnhealthyNodes: true,
         retryAmount: 20, retryDelay: 5000, failover: { maxAttempts: 3, retryDelayMs: 250, preserveOnFailure: true } },
       search: { defaultPlatform: 'youtubemusic', resultLimit: 50, timeoutMs: 8000, resolver: resolveLavaSrcSearch },

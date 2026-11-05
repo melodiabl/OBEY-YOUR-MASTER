@@ -607,7 +607,15 @@ input[type=range].mp-vslider:hover{background:rgba(255,255,255,.25)}
             onkeydown="if(event.key==='Enter')doSearch()">
           <button class="s-btn" onclick="doSearch()"><i class="fas fa-search"></i></button>
         </div>
-        <div class="source-strip" id="source-strip" style="display:none">
+        <div class="source-strip" id="source-strip" style="align-items:center">
+          <label for="s-source" style="font-size:12px;color:var(--muted)">Fuente</label>
+          <select id="s-source" class="r-tab" style="max-width:100%">
+            <option value="auto">Automática</option>
+            <option value="spotify">Spotify</option>
+            <option value="applemusic">Apple Music</option>
+            <option value="ytmusic">YouTube Music</option>
+            <option value="youtube">YouTube</option>
+          </select>
         </div>
 
         <!-- Browse panel -->
@@ -844,6 +852,7 @@ function buildGenreGrid() {
 
 // ── Right panel toggle ─────────────────────────────────────────────
 function showBrowse() {
+  artistGeneration++
   document.getElementById('pane-browse').style.display  = 'block'
   document.getElementById('pane-results').style.display = 'none'
   document.querySelectorAll('.gc').forEach(c => c.classList.remove('active-genre'))
@@ -857,9 +866,10 @@ function showResults(label) {
   document.getElementById('r-label').innerHTML = `<i class="fas fa-music"></i> ${esc(label)}`
 }
 
-let activeSource = 'spotify'
+let activeSource = 'auto'
 let activeResultKind = 'all'
 let lastCatalog = { tracks: [], albums: [], playlists: [], artists: [] }
+let lastSearchQuery = ''
 let artistGeneration = 0
 let serverSeedTracks = []
 let serverMixItems = []
@@ -871,6 +881,12 @@ async function searchAPI(query, source = activeSource, kind = 'all') {
     body: JSON.stringify({ query, source, kind }),
   }).then(async r => { const data = await r.json(); if (!r.ok || data.error) throw Error(data.error || 'search_unavailable'); return data })
 }
+let discoverySearch = Promise.resolve()
+function backgroundSearchAPI(...args) {
+  const pending = discoverySearch.catch(() => {}).then(() => searchAPI(...args))
+  discoverySearch = pending
+  return pending
+}
 
 function discoverSearch(query) {
   document.getElementById('s-inp').value = query
@@ -881,34 +897,52 @@ function discoverSearch(query) {
 async function loadGenre(id) {
   const g = GENRES.find(x => x.id === id); if (!g) return
   document.querySelectorAll('.gc').forEach(c => c.classList.toggle('active-genre', c.dataset.id === id))
-  showResults(g.label)
-  document.getElementById('r-list').innerHTML =
-    '<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)"><i class="fas fa-spinner fa-spin" style="margin-right:6px"></i>Cargando…</div>'
-  try {
-    const catalog = await searchAPI(g.q)
-    activeResultKind = 'all'
-    renderCatalog(document.getElementById('r-list'), catalog)
-  } catch {
-    document.getElementById('r-list').innerHTML = '<div style="padding:16px;text-align:center;font-size:12px;color:var(--red)">Error</div>'
-  }
+  document.getElementById('s-inp').value = g.q
+  return doSearch()
 }
 
 // ── Search ─────────────────────────────────────────────────────────
-let searchBusy = false
 async function doSearch() {
   const q = document.getElementById('s-inp').value.trim()
-  if (!q || searchBusy) return
-  searchBusy = true
+  if (!q) return
   showResults(`"${q}"`)
+  const generation = artistGeneration, source = activeSource
+  lastSearchQuery = q
+  lastCatalog = { tracks: [], albums: [], artists: [], playlists: [], statuses: {}, sources: {} }
   document.getElementById('r-list').innerHTML =
     '<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)"><i class="fas fa-spinner fa-spin" style="margin-right:6px"></i>Buscando…</div>'
   try {
-    const catalog = await searchAPI(q)
+    const catalog = await searchAPI(q, source, 'all')
+    if (generation !== artistGeneration || source !== activeSource) return
+    lastSearchQuery = catalog.query || q
+    activeSource = catalog.source || source
+    document.getElementById('s-source').value = activeSource
+    document.getElementById('s-inp').value = lastSearchQuery
     activeResultKind = 'all'
     renderCatalog(document.getElementById('r-list'), catalog)
   } catch {
-    document.getElementById('r-list').innerHTML = '<div style="padding:16px;text-align:center;font-size:12px;color:var(--red)">Error</div>'
-  } finally { searchBusy = false }
+    if (generation !== artistGeneration) return
+    document.getElementById('r-list').innerHTML = '<div class="r-empty" role="alert">No pude consultar el catálogo. Vuelve a buscar o elige otra fuente.</div>'
+  }
+}
+
+async function selectSearchKind(kind) {
+  activeResultKind = kind
+  const container = document.getElementById('r-list'), generation = ++artistGeneration
+  if (kind === 'all' || lastCatalog.statuses?.[kind] && lastCatalog.statuses[kind] !== 'unavailable') {
+    renderCatalog(container, lastCatalog); return
+  }
+  container.innerHTML = '<div class="r-empty" role="status">Consultando el catálogo…</div>'
+  try {
+    const next = await searchAPI(lastSearchQuery, activeSource, kind)
+    if (generation !== artistGeneration) return
+    lastCatalog = { ...lastCatalog, [kind]: next[kind] || [], statuses: { ...lastCatalog.statuses, ...next.statuses }, sources: { ...lastCatalog.sources, ...next.sources } }
+    renderCatalog(container, lastCatalog)
+  } catch {
+    if (generation !== artistGeneration) return
+    lastCatalog = { ...lastCatalog, [kind]: [], statuses: { ...lastCatalog.statuses, [kind]: 'unavailable' } }
+    renderCatalog(container, lastCatalog)
+  }
 }
 
 async function openArtist(item) {
@@ -987,6 +1021,8 @@ function renderCatalog(container, catalog, artist = null) {
     playlists: catalog?.playlists || [],
     artists: catalog?.artists || [],
     preferredTab: catalog?.preferredTab,
+    statuses: catalog?.statuses || {},
+    sources: catalog?.sources || {},
   }
   const counts = {
     tracks: lastCatalog.tracks.length,
@@ -1003,7 +1039,13 @@ function renderCatalog(container, catalog, artist = null) {
 
   const visible = resultItems(lastCatalog, activeResultKind)
   if (!visible.length) {
-    container.innerHTML = `<div class="r-empty"><i class="fas fa-compact-disc"></i>Sin ${activeResultKind === 'all' ? 'resultados' : activeResultKind} para esta búsqueda.</div>`
+    const status = activeResultKind === 'all' && Object.values(lastCatalog.statuses).includes('unavailable') ? 'unavailable' : lastCatalog.statuses[activeResultKind]
+    const label = { tracks: 'canciones', albums: 'álbumes', artists: 'artistas', all: 'resultados' }[activeResultKind] || 'resultados'
+    container.innerHTML = `<div class="r-empty" role="${status === 'unavailable' ? 'alert' : 'status'}">${status === 'unavailable' ? 'La fuente no respondió. Reintenta o elige otra fuente.' : status === 'unsupported' ? 'Elige Spotify o Apple Music para consultar esta categoría.' : `Sin ${label} para esta búsqueda.`}</div>`
+    if (status === 'unavailable') {
+      const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'r-back'; retry.textContent = 'Reintentar'
+      retry.addEventListener('click', () => activeResultKind === 'all' ? doSearch() : selectSearchKind(activeResultKind)); container.appendChild(retry)
+    }
     return
   }
 
@@ -1017,7 +1059,7 @@ function renderCatalog(container, catalog, artist = null) {
     ${top.artworkUrl ? `<img class="top-result-art" src="${esc(top.artworkUrl)}" onerror="this.style.display='none'">` : '<div class="top-result-art ph">🎵</div>'}
     <div class="top-result-title">${esc(top.title)}</div>
     <div class="top-result-sub">
-      <span>${esc(top.author)}</span><span class="top-result-badge">${topType}</span>
+      <span>${esc(top.author)}</span><span class="top-result-badge">${topType}</span><span>${esc(({ spotify: 'Spotify', applemusic: 'Apple Music', ytmusic: 'YouTube Music', youtube: 'YouTube' })[top.sourceName] || '')}</span>
       <span style="margin-left:auto;font-size:11px;font-family:var(--font-ui)">${topDetail}</span>
     </div>
     <div class="meta-chips" style="margin-bottom:12px">${metaChips(top, { limit: 4, isrc: true })}</div>
@@ -1415,7 +1457,7 @@ function renderHcards(container, tracks, showPlays) {
 async function loadSection(id, query, kind = 'tracks', source = 'all', retries = 1) {
   const row = document.getElementById(id); if (!row) return
   try {
-    const d = await searchAPI(query, source, kind)
+    const d = await backgroundSearchAPI(query, source, kind)
     const items = d[kind] || (kind === 'tracks' ? d.results : []) || []
     if (items.length) { renderHcards(row, items); return }
     // No results or auth error — retry once after 3s
@@ -1432,7 +1474,7 @@ async function loadMultiSection(id, queries, kind = 'tracks', source = 'all', ex
   const seen = new Set()
   const items = []
   try {
-    const responses = await Promise.all(queries.map(query => searchAPI(query, source, kind).catch(() => null)))
+    const responses = await Promise.all(queries.map(query => backgroundSearchAPI(query, source, kind).catch(() => null)))
     const pools = responses.map(d => d?.[kind] || [])
     const maxPoolSize = Math.max(0, ...pools.map(pool => pool.length))
     for (let index = 0; index < maxPoolSize && items.length < 10; index++) {
@@ -1611,7 +1653,7 @@ function mobileTab(tab) {
 
 // ── Keyboard ──────────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if (['INPUT','TEXTAREA'].includes(e.target.tagName)) return
+  if (['INPUT','TEXTAREA','SELECT','BUTTON'].includes(e.target.tagName) || e.target.isContentEditable) return
   const modal = document.getElementById('kb-modal')
   if (modal.classList.contains('show')) { if(e.key==='Escape')modal.classList.remove('show'); return }
   switch(e.key) {
@@ -1632,10 +1674,14 @@ document.addEventListener('keydown', e => {
 // ── Init ──────────────────────────────────────────────────────────
 buildGenreGrid()
 document.querySelectorAll('.r-tab').forEach(button => {
+  if (!button.dataset.kind) return
   button.addEventListener('click', () => {
-    activeResultKind = button.dataset.kind || 'all'
-    renderCatalog(document.getElementById('r-list'), lastCatalog)
+    selectSearchKind(button.dataset.kind || 'all')
   })
+})
+document.getElementById('s-source').addEventListener('change', event => {
+  activeSource = event.target.value
+  if (document.getElementById('s-inp').value.trim()) doSearch()
 })
 loadTopTracks()
 Promise.all([

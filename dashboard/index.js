@@ -706,7 +706,7 @@ module.exports = async client => {
       const { searchDiscordCatalog } = require('../handlers/discordmusiccatalog')
       const result = await searchDiscordCatalog(client, query, { guildId, limit: 50, kind, source })
       const tracks = result.tracks.map(t => normalizePublicTrack(t))
-      res.json({ results: tracks, tracks, albums: result.albums, artists: result.artists, preferredTab: result.preferredTab, statuses: result.statuses, sources: result.sources, source: result.source, kind: result.kind })
+      res.json({ results: tracks, tracks, albums: result.albums, artists: result.artists, preferredTab: result.preferredTab, statuses: result.statuses, sources: result.sources, source: result.source, kind: result.kind, query: result.query })
     } catch (e) {
       res.status(['invalid_artist', 'invalid_search_options'].includes(e.code) ? 400 : e.code === 'music_search_busy' ? 429 : 503).json({ results: [], tracks: [], albums: [], artists: [], error: e.code === 'invalid_search_options' ? 'invalid_search_options' : e.code === 'music_search_busy' ? 'search_busy' : 'search_unavailable' })
     }
