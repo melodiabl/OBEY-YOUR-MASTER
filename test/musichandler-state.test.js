@@ -34,7 +34,7 @@ function nativeClient(t, { connected = true, defaults = {} } = {}) {
         channel_id: packet.d.channel_id, session_id: 'voice-session' } })
       if (packet.d.channel_id) await manager.packetUpdate({ t: 'VOICE_SERVER_UPDATE', d: { guild_id: guildId, token: 'voice-token', endpoint: 'test.invalid' } })
     })
-  }, options: { database: { type: 'memory' } } })
+  }, options: { database: { type: 'memory' }, search: { resolver: require('../handlers/music/node-view').resolveLavaSrcSearch } } })
   manager.database = new DatabaseManager(manager)
   manager.clientId = BOT; manager.initialized = true
   const node = new Node(manager, config)
@@ -104,7 +104,7 @@ test('plain text searches try spsearch first and return its list result', async 
   assert.equal(result.tracks[0].info.requester, 'Tester')
 })
 
-test('a single spsearch track is kept as fallback while ytmsearch provides the list', async t => {
+test('a valid single catalog recording is retained without mixing in another platform', async t => {
   const { client, node } = nativeClient(t)
   const identifiers = []
   node.rest.loadTracks = async identifier => {
@@ -114,18 +114,18 @@ test('a single spsearch track is kept as fallback while ytmsearch provides the l
       : { loadType: 'search', data: [rawTrack('yt-track', 'Test song')] }
   }
   const result = await client.music.search('test song', 'Tester')
-  assert.deepEqual(identifiers, ['spsearch:test song', 'ytmsearch:test song'])
+  assert.deepEqual(identifiers, ['spsearch:test song'])
   assert.equal(result.loadType, 'search')
-  assert.equal(result.tracks[0].info.title, 'Test song')
+  assert.equal(result.tracks[0].info.title, 'Test song (Single)')
 })
 
-test('search falls back to the single spsearch track when no list source has results', async t => {
+test('single catalog recordings use the same search contract as lists', async t => {
   const { client, node } = nativeClient(t)
   node.rest.loadTracks = async identifier => identifier.startsWith('spsearch:')
     ? { loadType: 'track', data: rawTrack('sp-track', 'Test song (Single)', 'spotify') }
     : { loadType: 'empty', data: null }
   const result = await client.music.search('test song', 'Tester')
-  assert.equal(result.loadType, 'track')
+  assert.equal(result.loadType, 'search')
   assert.equal(result.tracks[0].info.title, 'Test song (Single)')
 })
 

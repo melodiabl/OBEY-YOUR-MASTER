@@ -1,7 +1,7 @@
 const { Manager, Connectors } = require('nyxlink')
 const { loadNodeConfig } = require('./nodes-config')
 const { createNodePool } = require('./nodes')
-const { nodeView } = require('./node-view')
+const { nodeView, resolveLavaSrcSearch } = require('./node-view')
 function initializeNodes(client, config) {
   const entries = loadNodeConfig({ legacyNodes: config.clientsettings?.nodes || [] })
   if (!entries.some(entry => entry.enabled)) throw Error('no_audio_nodes_configured')
@@ -14,7 +14,7 @@ function initializeNodes(client, config) {
       database: { type: 'memory' }, resume: true, resumeTimeout: 60000,
       node: { selectionStrategy: 'priority', autoMovePlayers: true, avoidUnhealthyNodes: true,
         retryAmount: 20, retryDelay: 5000, failover: { maxAttempts: 3, retryDelayMs: 250, preserveOnFailure: true } },
-      search: { defaultPlatform: 'youtubemusic', resultLimit: 50, timeoutMs: 8000 },
+      search: { defaultPlatform: 'youtubemusic', resultLimit: 50, timeoutMs: 8000, resolver: resolveLavaSrcSearch },
       sources: { disabledSources: ['jiosaavn', 'soundcloud', 'deezer', 'pornhub', 'soundgasm', 'hentai', 'nsfw', 'tts'] },
       defaultPlayer: { selfDeaf: true, autoPlay: false, historySize: 10 },
       trackHandling: { autoSkipOnError: true, skipStuckTracks: true, retryFailedTracks: false },

@@ -103,14 +103,15 @@ test('a real Lavalink track is queued as-is with the requester set', async () =>
   assert.equal(state.queue[0].info.requester, 'Tester')
 })
 
-test('artist identities come from catalog URLs and keep homonymous artists separate', () => {
-  const { artistsFromTracks } = require('../handlers/music/artists')
-  const make = (artistUrl, author = 'Adela') => ({ info: { author, sourceName: 'spotify' }, pluginInfo: { artistUrl } })
+test('artist identities come from catalog URLs and keep homonymous artists separate', async () => {
+  const { searchCatalogNodes } = require('../handlers/music/catalog-search')
+  const make = uri => ({ info: { title: 'Adela', uri, sourceName: 'spotify' }, pluginInfo: { type: 'artist' } })
   const one = 'https://open.spotify.com/artist/1111111111111111111111'
   const two = 'https://open.spotify.com/artist/2222222222222222222222'
-  const result = artistsFromTracks([make(one), make(one), make(two), make('https://evil.invalid/artist/abc')], 'Adela')
-  assert.deepEqual(result.map(x => x.uri), [one, two])
-  assert.equal(result.every(x => x.type === 'artist' && x.title === 'Adela'), true)
+  const node = { name: 'public', native: { isNodeLink: true }, rest: { resolve: async () => ({ loadType: 'search', data: [make(one), make(one), make(two), make('https://evil.invalid/artist/abc')] }) } }
+  const result = await searchCatalogNodes({}, [node], 'Adela', undefined, { kind: 'artists', source: 'spotify' })
+  assert.deepEqual(result.artists.map(x => x.uri), [one, two])
+  assert.equal(result.artists.every(x => x.type === 'artist' && x.title === 'Adela'), true)
 })
 
 test('artist profile preserves provider top order, returns albums, and never enqueues', async () => {
@@ -238,18 +239,19 @@ test('catalog search retains title matches and albums and does not implicitly op
     resolve: async query => { queries.push(query); return { loadType: 'search', data: [track('Other song', 'Hello', 'a'), track('Another song', 'Hello', 'b'), track('Hello', 'Adele', 'c')] } },
     fetch: async () => ({ artists: [{ info: { name: 'Hello' }, pluginInfo: { url: uri, author: 'Hello' } }], albums: [{ info: { name: 'Hello' }, pluginInfo: { url: 'https://open.spotify.com/album/2222222222222222222222', author: 'Other artist', totalTracks: 10 } }] }),
   } }
-  const result = await searchCatalogNodes({}, [node], 'Hello')
+  const client = { nyxlink: { search: async options => { queries.push(options.query); return { loadType: 'search', tracks: [track('Other song', 'Hello', 'a'), track('Another song', 'Hello', 'b'), track('Hello', 'Adele', 'c')] } } } }
+  const result = await searchCatalogNodes(client, [node], 'Hello')
   assert.equal(result.tracks[0].info.author, 'Adele')
   assert.equal(result.albums[0].author, 'Other artist')
   assert.equal(result.artists[0].title, 'Hello')
   assert.equal(queries.some(query => query.startsWith('https:')), false)
 })
 
-test('album-name search can use catalog track metadata without LavaSearch', async () => {
+test('album-name search uses the native album category without depending on track titles', async () => {
   const { searchCatalogNodes } = require('../handlers/music/catalog-search')
   const uri = 'https://open.spotify.com/album/1111111111111111111111'
-  const node = { name: 'node', rest: { resolve: async () => ({ loadType: 'search', data: [{ info: { title: 'One More Time', author: 'Daft Punk', sourceName: 'spotify' }, pluginInfo: { albumName: 'Discovery', albumUrl: uri } }] }) } }
-  const result = await searchCatalogNodes({}, [node], 'Discovery')
+  const node = { name: 'node', native: { isNodeLink: true }, rest: { resolve: async query => { assert.equal(query, 'spsearch:album:Discovery'); return { loadType: 'search', data: [{ info: { title: 'Discovery', author: 'Daft Punk', sourceName: 'spotify', uri }, pluginInfo: { type: 'album' } }] } } } }
+  const result = await searchCatalogNodes({}, [node], 'Discovery', undefined, { kind: 'albums', source: 'spotify' })
   assert.equal(result.albums[0].title, 'Discovery')
   assert.equal(result.albums[0].uri, uri)
   assert.equal(result.tracks.length, 0)

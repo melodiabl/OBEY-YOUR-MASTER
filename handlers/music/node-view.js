@@ -25,7 +25,7 @@ function nodeView(node) {
         for (const [key, value] of Object.entries(options.params || {})) if (value != null) url.searchParams.set(key, value)
         if (url.origin !== base.origin) throw Error('invalid_node_plugin_route')
         const response = await fetch(url, { method: options.method || 'GET', headers: { Authorization: node.password, ...options.headers },
-          body: options.body == null ? undefined : JSON.stringify(options.body), signal: AbortSignal.timeout(8000) })
+          body: options.body == null ? undefined : JSON.stringify(options.body), signal: options.signal || AbortSignal.timeout(8000) })
         if (!response.ok) throw Error('node_plugin_unavailable')
         return response.status === 204 ? null : response.json()
       },
@@ -33,4 +33,10 @@ function nodeView(node) {
   })
   return views.get(node)
 }
-module.exports = { nodeView }
+// NyxLink's resolver hook keeps standard LavaSrc prefixes available on Java
+// nodes; its built-in feature gate otherwise classifies them as NodeLink-only.
+function resolveLavaSrcSearch({ query, source, signal }, node) {
+  if (node.isNodeLink || !['spsearch', 'amsearch'].includes(source)) return null
+  return node.rest.loadTracks(`${source}:${query}`, { signal, timeoutMs: node.manager.options.search?.timeoutMs || 8000 })
+}
+module.exports = { nodeView, resolveLavaSrcSearch }

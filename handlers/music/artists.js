@@ -1,6 +1,5 @@
 const { tracksFromResolve } = require('./utils')
 const { allowedMusicTrack } = require('./nodes-config')
-const { recordingArtist } = require('./recordings')
 const { lookupWithTimeout } = require('./resolve-timeout')
 
 function catalogUri(value, kind) {
@@ -22,20 +21,14 @@ function normalizeArtist(item) {
   return { type: 'artist', title, author: title, uri, identifier: uri.split('/').at(-1),
     sourceName: uri.includes('open.spotify.com') ? 'spotify' : 'applemusic', artworkUrl: image(plugin.artworkUrl || info.artworkUrl) }
 }
-function artistsFromTracks(tracks, query = '') {
-  const seen = new Set(), result = [], phrase = recordingArtist(query)
-  for (const track of tracks) {
-    const info = track.info || track, plugin = track.pluginInfo || {}
-    const title = String(info.author || '').trim()
-    const artist = normalizeArtist({ title, uri: plugin.artistUrl || plugin.artistUri, artworkUrl: plugin.artistArtworkUrl })
-    if (!artist || seen.has(artist.uri) || phrase && !recordingArtist(title).includes(phrase)) continue
-    seen.add(artist.uri); result.push(artist)
-  }
-  return result.slice(0, 20)
-}
-function uniqueArtists(items) {
-  const seen = new Set()
-  return items.filter(item => item && !seen.has(item.uri) && seen.add(item.uri)).slice(0, 20)
+function normalizeAlbum(item) {
+  const info = item?.info || item || {}, plugin = item?.pluginInfo || {}
+  const uri = catalogUri(plugin.url || info.uri, 'album'), title = String(info.title || info.name || '').trim()
+  if (!uri || !title) return null
+  const count = Number(plugin.totalTracks ?? plugin.trackCount ?? info.totalTracks)
+  return { type: 'album', title, author: String(plugin.author || info.author || '').trim(), uri,
+    sourceName: uri.includes('open.spotify.com') ? 'spotify' : 'applemusic', artworkUrl: image(plugin.artworkUrl || info.artworkUrl),
+    ...(Number.isInteger(count) && count > 0 ? { totalTracks: count } : {}) }
 }
 function albumsFromTracks(tracks) {
   const albums = new Map()
@@ -93,4 +86,4 @@ async function getArtist(client, value, { guildId, signal } = {}) {
     throw Object.assign(Error('No se pudieron cargar las canciones populares del artista. Vuelve a intentarlo.'), { code: signal?.aborted ? 'artist_cancelled' : 'artist_unavailable' })
   }
 }
-module.exports = { artistUri, normalizeArtist, artistsFromTracks, uniqueArtists, albumsFromTracks, getArtist }
+module.exports = { artistUri, normalizeArtist, normalizeAlbum, albumsFromTracks, getArtist }
