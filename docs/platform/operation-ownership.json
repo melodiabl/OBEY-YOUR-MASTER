@@ -325,7 +325,7 @@
     "commands/Music/musictop.js": "85764259d1592fc6bd8b554ab4518d35c9575a15141a884d5f66d743f940ac77",
     "commands/Music/nodes.js": "364061d076ffd35cfa12d3dbd709d651d0963defd08779253ada7dd383bab253",
     "commands/Music/nowplaying.js": "d1c0eea9eaa71809c722508217238f83c57a0c131b19fbdc4f7e42545cd58582",
-    "commands/Music/pause.js": "98768db4f56bee32d31ce331ed2ebd0a877b0ae41376f59d3235d3dde14acce0",
+    "commands/Music/pause.js": "004c446690006957f2ee027461248adb70c86290a12e910ea09dc8cd6280256d",
     "commands/Music/play.js": "c74a14b53f6d4eb69f7000ec4d2e8c0ea0e1352b60f7075a772cd589580a08da",
     "commands/Music/playlist.js": "ab35dff506b9d3dc6e76a469bc0871e1183cc6e43c1773520910ff51a3ba7fb5",
     "commands/Music/playmusicmix.js": "30b232bb9b087f9f7d126332d155fc7fc98330ef5401fd9a2bb1df745695faa8",
@@ -343,7 +343,7 @@
     "commands/Music/removetrack.js": "1db55fe19244768d04831e04e7d4e322d299759132c3be75d3908beefcc404a9",
     "commands/Music/removevoteskip.js": "3822a678d70c29806b962f40b4dac7c03bce9bf2b97da02583d38b695d518c46",
     "commands/Music/restart.js": "18961b57b63e1afd35dad2a20e451b904a3754f338a92b7cf88da118310701d8",
-    "commands/Music/resume.js": "e57846e791acab74fa9d21dcc7420aba6e4c1e0e8884cb358b794f583159816c",
+    "commands/Music/resume.js": "485b92dae1c7e3b6e68b1685c0f75cff6ce22ccb4cfe00648bc0b28ea0ad4d8b",
     "commands/Music/rewind.js": "1e06ee31c4d48641903f17a329da43d10d73d50175ca480314679369631c1de7",
     "commands/Music/search.js": "f57cb415a1cadae22f00897ae0cb8f59ee179bceee31b24dfdcb4e3d85ae0df3",
     "commands/Music/searchplaylist.js": "bfdb85d75ee5bcb64cfbb54a6196c372d569c0f38495ce0990ccaabf30f18807",
@@ -353,8 +353,8 @@
     "commands/Music/seek.js": "43ecd201e45c39e63eeab4c0e46b9c939254aec737ea83fa146e0b3a8d71f50d",
     "commands/Music/setupmusic.js": "4a1df652efea48c9fa6ef11cd7e947c21eb0e3f33160276cc11fd0a6be01d2ee",
     "commands/Music/shuffle.js": "93d93a7acfe90e6c45c4bcfcd8416e93469ff7e143affbf0d99cd42e4c55e1be",
-    "commands/Music/skip.js": "a7351a20dab567502753d9a9a79fef86e839f19c8f27f3b0f4d77491ea06ccfb",
-    "commands/Music/stop.js": "dd160de9ff5121f7ca16da33f69b79faa1f69f37d7a984e665efc99852f2c147",
+    "commands/Music/skip.js": "c854081948da554b598dd567c57c2cb59152906f6447109a720d1b69ae41e537",
+    "commands/Music/stop.js": "69429a26d12801414d3b9756219d47b6b93fe19bd0d809a124b0a25452f42eb8",
     "commands/Music/stoploop.js": "ff0e7ef8cac564f97d447a8da7513a0d9de1b1a55d59115f2c77f0b50cd1b0bc",
     "commands/Music/unshuffle.js": "893d918523a876ed55124c98e04c3da150d099f9036794e93f16f711a013e7cd",
     "commands/Music/volume.js": "8d6da144fadb548311b81a53f76eeb925e3754fa96b10bd97148d639b797de88",
@@ -689,7 +689,7 @@
     "handlers/music/database.js": "354757d024f98657c4faf1281c11874b7611e696da6ad32c90b43db69e500b83",
     "handlers/music/embeds.js": "a6905539cce27fe65e1dd190a5b3107541b1e2f3b0fdd385493d27ad414ab0c6",
     "handlers/music/filters.js": "a021be930d84e8df6335b144ad5eb668dfc981d93bb260d6801cfe05df0eac07",
-    "handlers/music/index.js": "ada4f43bc3996c7773d943cada6d5e0f0b738b1fc98a38715f490bdd5740dc76",
+    "handlers/music/index.js": "5b0818dc9cbf363b4f1554b8a390c70a7d3bb8117270a2b6f512b0abbf1d6ee6",
     "handlers/music/library-view.js": "92ff1e24304ebc175460a82886bf2863716b6f345b5f62e1476b270dd56bc72a",
     "handlers/music/liked-playlist.js": "f772b8dde9f9f24a981343dce0cef43b7d3d71a07133e9b0f695021e51f648f6",
     "handlers/music/likes.js": "b9c185b29d73c63d58b8c26e92ff7ebf83bb26d896555cf42d12a21c720baf34",
@@ -720,7 +720,7 @@
     "handlers/music/recovery-policy.js": "ff64afbe88bc821ecc684d1b92189e374140d10e5f7da788e378e0b27da1cdd7",
     "handlers/music/request-timing.js": "effd8482b6a2da9236521c54132c5a05c203384f23f6e0a67a9ad652868e80ac",
     "handlers/music/resolve-timeout.js": "2b0e46252f0a51c14ba1488488b9a67e6756c3d49ec78f96f9c2a59d4b92efcd",
-    "handlers/music/responses.js": "4d1789b8f2596365c9161ad7edac444625e204c710aa7f8cb4d4c6bf64d56a75",
+    "handlers/music/responses.js": "67ad6aec960b7d903ec67c89380e58bcd7c8110ece7dae014eb3e0481c850b2c",
     "handlers/music/saved-queues.js": "ea75d735ed25a3585b2ecbae57efbbdf38af7331bd2f3477f3f585e045c34782",
     "handlers/music/searchui.js": "37df80cf3498b79ad2b12886d888e01bb56a919177d17192fb2bfaa538995846",
     "handlers/music/seek-command.js": "17501b1fd88d79f9f7ecaf8bea822f417057f9841d5c653af3038bb747cff307",
@@ -821,8 +821,8 @@
     "handlers/welcome/ui.js": "12ec009bf7230ba812283c16735cb9422b4fae8a1647ffe6760b4b418832bf43",
     "index.js": "39cde3e0e92abb1a44b261e27b46fc5a4d75e6496d60d855a95be391867cf968",
     "languages/es.json": "45171ba8adaec9ab39601c9f391f12904e0ce4cd85da4c8ea9db448fd6c0e48b",
-    "locales/en.json": "af41a0da9a975994ce17f027ca60e9d49791538371a3d13857f7e80571e7468d",
-    "locales/es.json": "6e74ed6b47a31650cf16a33202aaa05a232275a7be803858a1de40484e5011db",
+    "locales/en.json": "c50ee7e90cfe6f9af73629b0f68b83be62ae2685cdbc586a1b24e5ba4b81724d",
+    "locales/es.json": "abb38ef015fd731d9685ec4dd02a0c65dfca5e53eba0e539a29832cb3ee6634a",
     "slashCommands/Admin/embed.js": "72613169798af232f63499f76b00f5fc30a1351b50e9b274535d1d57d4bd2040",
     "slashCommands/Admin/say.js": "a40417f736c5d8a772cf810fd39655782d7ec5705bbe9094b4f096a483d0e809",
     "slashCommands/Anime/emote.js": "d0ee4af2a83cb7a16c1cda84a59ec35a8d239ed393c3e258656700b3f025dd5b",
@@ -929,20 +929,20 @@
     "slashCommands/Music/lyrics.js": "1081c81ec118b8dc62cd4fb1b31cff1ae28809ed9da9405b55d0c13af4a22c09",
     "slashCommands/Music/move.js": "ae84720b7ee1d9b6a338b9e929679d6648705640fa9e4b9b1d9e0257a6deae57",
     "slashCommands/Music/nowplaying.js": "386440d816afc79746c2fe90d107a66f77c90f9a76f5af91755afec293001bbd",
-    "slashCommands/Music/pause.js": "32f7d1ac8ee86f000ea4630aef1661b674545f355dad1987c1d0e643df0a70a0",
+    "slashCommands/Music/pause.js": "40c2c96636fea9eb6f7170efd2e80e442fa73a8a9c25619a0e5cd45596387371",
     "slashCommands/Music/play.js": "497f54ed49de10f20482c251d4a6f86ba94f7e2d5ae99c9815883189a66953fa",
     "slashCommands/Music/playmusicmix.js": "6fd99070009db73995dd5b2230646284554dc7ba1b517194c8ab50998e6dc0a4",
     "slashCommands/Music/playtop.js": "fdd62f65948bb2bf71020b9595152d2c77a8e1a91dc122fcf99df023ddab4a3c",
     "slashCommands/Music/queue.js": "7601fe0ee8b0c7c46fdc813d4507b15f5aa5d6e1641b63dcaffdc37cf713f423",
     "slashCommands/Music/remove.js": "04460821a9d43e7e41dfcc501ccf18d67661911b343fab3af22ad10a82cc99f2",
     "slashCommands/Music/replay.js": "e55c430bdd20d23486c509acc9a74236a83b149d13743c8c00bd8ae3167ac0ca",
-    "slashCommands/Music/resume.js": "3b6db594396f57d5cec628e81a6c69586929736b4f5727dad09377f447c6bc99",
+    "slashCommands/Music/resume.js": "a50e4af34c89182ddcf3d192fba8e36f49b90c03fc8e9f185814e90bde449f04",
     "slashCommands/Music/rewind.js": "f8eb3a3c9aa21c3762071e5e49aef227479857917e68d45d1c92a65a7f244f9f",
     "slashCommands/Music/search.js": "be0b14101f14a1074f90c950293cde0cfe9e562938ec4b26117399c2f8451aa6",
     "slashCommands/Music/seek.js": "27974e776965ba744ccd3944e67a11701629eb0a555189c35ee615c5dcd0215e",
     "slashCommands/Music/shuffle.js": "23d3d0b431712e7a7754cf16c702adc7d4a43999e0df910058cde3c87914aa67",
-    "slashCommands/Music/skip.js": "24a531cbdb6402aa7c529c63420d8c843b424a352ea850e407ba10b792ee945d",
-    "slashCommands/Music/stop.js": "4ff1a3adaf45eaf204dba7a8ef05e8a800df3730596022674bd00ce196af28e6",
+    "slashCommands/Music/skip.js": "fef9aeff2c188aa69c683d5f29949a93434429edc39066313d5cbc1f35e3dd55",
+    "slashCommands/Music/stop.js": "99b77edaf349eeb58bdd07417cc9115e34a6c2d4696204c1dc81a495b3246472",
     "slashCommands/Music/volume.js": "18725c9ec128eb63ee60dfd9c7e7dc9a225a7182ae95c6e33212cb9368d39894",
     "slashCommands/Playlist/add.js": "f1dcc5136758ec7198cc595d22e4da24a9038b2a347b0964e3c4b13548c4909c",
     "slashCommands/Playlist/create.js": "a2f8b0a739e592cfff44a262661eaad588430d21173d7035f9f0350c06d148d0",
@@ -11246,20 +11246,7 @@
       "kind": "current-command-adapter",
       "file": "commands/Music/pause.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music.pause(guildId).catch",
-          "line": 12
-        },
-        {
-          "call": "client.music.pause",
-          "line": 12
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "commands/Economy/pay.js": {
@@ -13528,20 +13515,7 @@
       "kind": "current-command-adapter",
       "file": "commands/Music/resume.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music.pause(guildId).catch",
-          "line": 13
-        },
-        {
-          "call": "client.music.pause",
-          "line": 13
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "commands/MiniGames/reverse.js": {
@@ -14984,20 +14958,7 @@
       "kind": "current-command-adapter",
       "file": "commands/Music/skip.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music.skip(guildId).catch",
-          "line": 13
-        },
-        {
-          "call": "client.music.skip",
-          "line": 13
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "commands/Soundboard/skype.js": {
@@ -15322,16 +15283,7 @@
       "kind": "current-command-adapter",
       "file": "commands/Music/stop.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.stop(message.guild.id).catch",
-          "line": 9
-        },
-        {
-          "call": "client.music?.stop",
-          "line": 9
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "commands/Owner/stopbot.js": {
@@ -20335,16 +20287,7 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Music/pause.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music?.pause",
-          "line": 14
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "slashCommands/Music/play.js": {
@@ -20462,16 +20405,7 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Music/resume.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music?.pause",
-          "line": 14
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "slashCommands/Music/rewind.js": {
@@ -20515,32 +20449,14 @@
       "kind": "current-command-adapter",
       "file": "slashCommands/Music/skip.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 11
-        },
-        {
-          "call": "client.music.skip",
-          "line": 16
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "slashCommands/Music/stop.js": {
       "kind": "current-command-adapter",
       "file": "slashCommands/Music/stop.js",
       "export": "run",
-      "observedClientCalls": [
-        {
-          "call": "client.music?.getState",
-          "line": 10
-        },
-        {
-          "call": "client.music?.stop",
-          "line": 12
-        }
-      ],
+      "observedClientCalls": [],
       "storeReferences": []
     },
     "slashCommands/Music/volume.js": {
@@ -35109,10 +35025,6 @@
           "line": 2
         },
         {
-          "file": "slashCommands/Music/pause.js",
-          "line": 2
-        },
-        {
           "file": "slashCommands/Music/play.js",
           "line": 4
         },
@@ -35129,19 +35041,7 @@
           "line": 2
         },
         {
-          "file": "slashCommands/Music/resume.js",
-          "line": 2
-        },
-        {
           "file": "slashCommands/Music/shuffle.js",
-          "line": 2
-        },
-        {
-          "file": "slashCommands/Music/skip.js",
-          "line": 2
-        },
-        {
-          "file": "slashCommands/Music/stop.js",
           "line": 2
         },
         {

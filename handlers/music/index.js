@@ -183,13 +183,39 @@ module.exports = client => {
       if (ok) confirmed(id)
       return ok
     },
-    async pause(id) {
+    async pause(id, paused = null) {
       const player = required(id), state = getState(id), elapsed = clock.position(state), track = player.current
-      if (player.paused) await player.resume(); else await player.pause()
+      if (!track) throw Error('No hay música reproduciéndose.')
+      if (paused !== null && typeof paused !== 'boolean') throw Error('Estado de pausa inválido.')
+      const desired = paused === null ? !player.paused : paused
+      if (player.paused === desired) return desired
+      if (desired) await player.pause(); else await player.resume()
       if (player.current !== track || player.destroyed) throw cancelled()
-      confirmed(id); clock.anchor(state, elapsed); return player.paused
+      if (player.paused !== desired) throw Error('No se pudo confirmar la pausa.')
+      confirmed(id); clock.anchor(state, elapsed); scheduleNpUpdate(client, id); return player.paused
     },
-    async skip(id) { getState(id).playbackId = randomUUID(); const player = required(id); if (player.loop === 'track') player.setLoop('off'); const ok = await player.skip(); if (!ok && player.queue.size) throw Error('No se pudo avanzar la reproducción.'); confirmed(id); return ok },
+    async skip(id, count = 1) {
+      const player = required(id), state = getState(id), track = player.current, epoch = state.stopRequestEpoch || 0
+      if (!track) throw Error('No hay música reproduciéndose.')
+      if (!Number.isSafeInteger(count) || count < 1 || count > player.queue.size + 1) throw Error('Cantidad de canciones inválida.')
+      const removed = player.queue.slice(0, count - 1), loop = player.loop
+      state.playbackId = randomUUID()
+      if (removed.length) player.queue.removeRange(0, removed.length - 1)
+      if (loop === 'track') player.setLoop('off')
+      try {
+        if (!await player.skip()) throw Error('No se pudo avanzar la reproducción.')
+        assertCurrent(id, state, epoch)
+        confirmed(id); return true
+      } catch (error) {
+        // NyxLink restores its next candidate on a rejected play. Restore the
+        // batch prefix only while this original session is still current.
+        if (current(id, state, epoch) && !player.destroyed && player.current === track) {
+          if (removed.length) player.queue.insert(0, removed)
+          if (loop === 'track') player.setLoop(loop)
+        }
+        throw error
+      }
+    },
     async previous(id) { getState(id).playbackId = randomUUID(); const player = required(id); const ok = await player.back(); if (!ok) throw Error('No hay una canción anterior disponible.'); confirmed(id); return ok },
     async stop(id) {
       const state = getState(id), player = active(id)

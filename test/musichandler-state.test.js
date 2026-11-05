@@ -94,6 +94,64 @@ test('pause and resume emit a synchronized public player state', async t => {
   assert.equal(publicState.queue[0].pos, 0)
 })
 
+test('explicit pause and resume remain idempotent when commands arrive together', async t => {
+  const { client, player, requests } = nativeClient(t)
+  player.current = new Track(rawTrack('current', 'Current')); player.playing = true
+  assert.deepEqual(await Promise.all([client.music.pause(GUILD, true), client.music.pause(GUILD, true)]), [true, true])
+  assert.equal(player.paused, true)
+  assert.deepEqual(await Promise.all([client.music.pause(GUILD, false), client.music.pause(GUILD, false)]), [false, false])
+  assert.deepEqual(requests.filter(row => Object.hasOwn(row.payload, 'paused')).map(row => row.payload.paused), [true, false])
+})
+
+test('skipping several songs sends only the final song to the backend', async t => {
+  const { client, player, requests } = nativeClient(t)
+  player.current = new Track(rawTrack('current', 'Current')); player.playing = true
+  player.queue.add(['second', 'third', 'fourth', 'fifth'].map(id => new Track(rawTrack(id, id))))
+  assert.equal(await client.music.skip(GUILD, 3), true)
+  assert.equal(player.current.title, 'fourth')
+  assert.deepEqual(player.queue.all.map(track => track.title), ['fifth'])
+  assert.deepEqual(requests.filter(row => row.payload.track?.encoded).map(row => row.payload.track.encoded), ['fourth'])
+})
+
+test('invalid batch skips leave the playing song and queue untouched', async t => {
+  const { client, player, requests } = nativeClient(t)
+  player.current = new Track(rawTrack('current', 'Current')); player.playing = true
+  player.queue.add(new Track(rawTrack('next', 'Next')))
+  for (const count of [0, -1, 1.5, 3, Number.MAX_SAFE_INTEGER]) await assert.rejects(client.music.skip(GUILD, count))
+  assert.equal(player.current.title, 'Current')
+  assert.deepEqual(player.queue.all.map(track => track.title), ['Next'])
+  assert.equal(requests.length, 0)
+})
+
+test('a rejected batch skip preserves skipped candidates for a retry', async t => {
+  const { client, player, node } = nativeClient(t)
+  player.current = new Track(rawTrack('current', 'Current')); player.playing = true
+  player.queue.add(['second', 'third', 'fourth'].map(id => new Track(rawTrack(id, id))))
+  node.rest.updatePlayer = async () => null
+  await assert.rejects(client.music.skip(GUILD, 3))
+  assert.equal(player.current.title, 'Current')
+  assert.deepEqual(player.queue.all.map(track => track.title), ['second', 'third', 'fourth'])
+})
+
+test('Stop invalidates a pending batch skip without restoring removed tracks', async t => {
+  const { client, player, node, manager } = nativeClient(t)
+  player.current = new Track(rawTrack('current', 'Current')); player.playing = true
+  player.queue.add(['second', 'third', 'fourth'].map(id => new Track(rawTrack(id, id))))
+  let release, entered
+  const ready = new Promise(resolve => { entered = resolve }), waiting = new Promise(resolve => { release = resolve })
+  const update = node.rest.updatePlayer
+  node.rest.updatePlayer = async (id, payload) => { if (payload.track?.encoded) { entered(); await waiting } return update(id, payload) }
+  const skipping = client.music.skip(GUILD, 3)
+  const rejected = assert.rejects(skipping)
+  await waitForBoundary(ready)
+  const stopping = client.music.stop(GUILD)
+  release()
+  await stopping; await rejected
+  assert.equal(manager.players.get(GUILD), undefined)
+  assert.equal(client.music.getState(GUILD).currentTrack, null)
+  assert.equal(client.music.getState(GUILD).queue.length, 0)
+})
+
 test('plain text searches try spsearch first and return its list result', async t => {
   const { client, node } = nativeClient(t)
   const identifiers = []

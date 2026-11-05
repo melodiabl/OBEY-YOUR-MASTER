@@ -8,6 +8,16 @@
     "commandError": "An error occurred while running the command."
   },
   "music": {
+    "controlLoading": "Applying the control…",
+    "controlFailed": "I could not confirm the change. Check the current state before trying again.",
+    "controlCancelled": "The action was cancelled when the player stopped.",
+    "controlPaused": "Playback paused.",
+    "controlResumed": "Playback resumed.",
+    "controlSkipped": "Song skipped.",
+    "controlSkippedMany": "Skipped **{count}** songs.",
+    "controlSkipInvalid": "Enter a whole number between 1 and the total songs, including the current one.",
+    "controlStopped": "Playback stopped, queue cleared and bot disconnected.",
+    "controlStopPending": "Playback stopped. Saving the stopped state is still pending.",
     "seekLoading": "Checking playback position…",
     "seekInvalid": "Invalid time. Use seconds, mm:ss or hh:mm:ss.",
     "seekSecondsInvalid": "Enter a positive whole number of seconds.",

@@ -8,6 +8,16 @@
     "commandError": "Ocurrió un error al ejecutar el comando."
   },
   "music": {
+    "controlLoading": "Aplicando el control…",
+    "controlFailed": "No pude confirmar el cambio. Consulta el estado actual antes de repetirlo.",
+    "controlCancelled": "La acción se canceló al detener el reproductor.",
+    "controlPaused": "Reproducción pausada.",
+    "controlResumed": "Reproducción reanudada.",
+    "controlSkipped": "Canción saltada.",
+    "controlSkippedMany": "Se han saltado **{count}** canciones.",
+    "controlSkipInvalid": "Indica una cantidad entera entre 1 y el total de canciones, incluida la actual.",
+    "controlStopped": "Reproducción detenida, cola vaciada y bot desconectado.",
+    "controlStopPending": "Reproducción detenida. El guardado de la detención sigue pendiente.",
     "seekLoading": "Comprobando la posición…",
     "seekInvalid": "Tiempo inválido. Usa segundos, mm:ss o hh:mm:ss.",
     "seekSecondsInvalid": "Indica una cantidad entera positiva de segundos.",

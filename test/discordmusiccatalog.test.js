@@ -1,6 +1,63 @@
 const assert = require('node:assert/strict')
 const test = require('node:test')
 
+test('prefix playback commands report failed actions instead of a false success', async () => {
+  for (const action of ['pause', 'resume', 'skip', 'stop']) {
+    const replies = [], state = { currentTrack: { info: { title: 'Current' } }, queue: [], paused: action === 'resume' }
+    const context = { guild: { id: 'guild' }, member: { voice: { channel: { id: 'voice' } } }, reply: async payload => {
+      replies.push(payload)
+      return { edit: async next => { replies.push(next) } }
+    } }
+    const fail = async () => { throw Error('backend unavailable') }
+    const client = { settings: { get: () => 'es' }, music: { getState: () => state, pause: fail, skip: fail, stop: fail } }
+    await require('../commands/Music/' + action).run(client, context, [])
+    const embed = replies.at(-1).embeds[0].toJSON()
+    assert.equal(embed.color, 0xED4245, action)
+    assert.match(embed.description, /No pude confirmar/, action)
+    assert.doesNotMatch(embed.description, /backend unavailable/, action)
+  }
+})
+
+test('prefix and slash pause/resume request the same explicit playback state', async () => {
+  for (const slash of [false, true]) for (const action of ['pause', 'resume']) {
+    const calls = [], state = { currentTrack: { info: { title: 'Current' } }, queue: [], paused: action === 'pause' }
+    const context = { guild: { id: 'guild' }, member: { voice: { channel: { id: 'voice' } } },
+      reply: async () => ({ edit: async () => {} }), deferReply: async () => {}, editReply: async () => {} }
+    const client = { settings: { get: () => 'es' }, music: { getState: () => state, pause: async (id, paused) => { calls.push([id, paused]); return paused } } }
+    await require('../' + (slash ? 'slashCommands' : 'commands') + '/Music/' + action).run(client, context, [])
+    assert.deepEqual(calls, [['guild', action === 'pause']])
+  }
+})
+
+test('slash batch skip invokes one operation and propagates an English failure', async () => {
+  const calls = [], replies = []
+  const client = { settings: { get: () => 'en' }, music: { getState: () => ({ currentTrack: { title: 'Current' }, queue: [{}, {}, {}] }), skip: async (...args) => { calls.push(args); throw Error('private backend detail') } } }
+  const context = { guild: { id: 'guild' }, member: { voice: { channel: { id: 'voice' } } }, options: { getInteger: () => 3 }, deferReply: async () => {}, editReply: async payload => replies.push(payload) }
+  await require('../slashCommands/Music/skip').run(client, context)
+  assert.deepEqual(calls, [['guild', 3]])
+  const embed = replies.at(-1).embeds[0].toJSON()
+  assert.equal(embed.color, 0xED4245)
+  assert.match(embed.description, /could not confirm/i)
+})
+
+test('Stop can cancel loading before a song exists and reports pending persistence', async () => {
+  const replies = []; let stops = 0
+  const command = require('../slashCommands/Music/stop')
+  assert.equal(command.parameters.activeplayer, false)
+  const client = { settings: { get: (_id, key) => key === 'MUSIC' ? false : 'es' }, music: { getState: () => ({ currentTrack: null, queue: [] }), stop: async () => { stops++; return { stopped: true, persisted: false } } } }
+  await command.run(client, { guild: { id: 'guild' }, member: { voice: { channel: {} } }, deferReply: async () => {}, editReply: async payload => replies.push(payload) })
+  assert.equal(stops, 1)
+  assert.match(replies.at(-1).embeds[0].toJSON().description, /guardado.*pendiente/)
+})
+
+test('invalid skip counts are rejected before executing a playback action', async () => {
+  let skips = 0
+  const replies = [], client = { settings: { get: () => 'es' }, music: { getState: () => ({ currentTrack: {}, queue: [] }), skip: async () => { skips++ } } }
+  await require('../commands/Music/skip').run(client, { guild: { id: 'guild' }, member: { voice: { channel: {} } }, reply: async () => ({ edit: async payload => replies.push(payload) }) }, ['500'])
+  assert.equal(skips, 0)
+  assert.equal(replies.at(-1).embeds[0].toJSON().color, 0xED4245)
+})
+
 const {
   enqueueCatalogItem,
   searchDiscordCatalog,
