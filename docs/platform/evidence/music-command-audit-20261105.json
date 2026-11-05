@@ -1,0 +1,1806 @@
+{
+  "date": "2026-11-05",
+  "scope": "Comparison of Lavalink music-command implementations and first correction of OBEY pause/resume/skip/stop adapters",
+  "baseRevision": "6910df4f1f979601657819dff32fdd31c0b0ea81",
+  "repositories": [
+    {
+      "repo": "fandyahmd/lavamusic",
+      "sha": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "date": "2025-10-22T08:20:04Z",
+      "url": "https://github.com/fandyahmd/lavamusic/commit/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "files": 49
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "sha": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "date": "2025-10-14T02:53:30Z",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/commit/3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "files": 19
+    },
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "sha": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "date": "2026-10-25T08:52:46Z",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/commit/8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "files": 5
+    }
+  ],
+  "referenceFiles": [
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "path": "redbot/cogs/audio/core/commands/controller.py",
+      "revision": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/commands/controller.py",
+      "sha256": "587982f655b01aab9723fbc53bfa9ef6d8bbd74ccbc62005f0de2b92dd44acce"
+    },
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "path": "redbot/cogs/audio/core/commands/equalizer.py",
+      "revision": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/commands/equalizer.py",
+      "sha256": "2f4867ee21d095e6f22354bd002f73a8bcaf518e77da4eb06429814c0ae209cf"
+    },
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "path": "redbot/cogs/audio/core/commands/player.py",
+      "revision": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/commands/player.py",
+      "sha256": "a0b9607399df6cbabe65be074f15b534711427673d8bb16ccd117a89cb47b22b"
+    },
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "path": "redbot/cogs/audio/core/commands/playlists.py",
+      "revision": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/commands/playlists.py",
+      "sha256": "2d1c60c8d56409f833d491675cb990194a02a9a75181400f3c66579bf8593124"
+    },
+    {
+      "repo": "Cog-Creators/Red-DiscordBot",
+      "path": "redbot/cogs/audio/core/commands/queue.py",
+      "revision": "8c726ff446960a0bf7857b6b94f4a2e05c16c31b",
+      "url": "https://github.com/Cog-Creators/Red-DiscordBot/blob/8c726ff446960a0bf7857b6b94f4a2e05c16c31b/redbot/cogs/audio/core/commands/queue.py",
+      "sha256": "a8199c7089bfa6b77626e92de9c417abd5def10e5e4cfdb63f0a4201e119e0be"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "package.json",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/package.json",
+      "sha256": "ce3dd6aeaa5652a9b0fdff40ca52effcc7937eb987f6ea0cd9627f78012f8665"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/8d.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/8d.ts",
+      "sha256": "11e424f7e619f8351da7759333b13849ef2dfa2f1ae53774ade327b3e73ec54c"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/BassBoost.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/BassBoost.ts",
+      "sha256": "a3727f48cabc95bcf5127b81d6c2eec604c6ef6b6e91c652ef43ae3a58e85856"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Karaoke.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Karaoke.ts",
+      "sha256": "2ab42c463c123b0244cfa80ddad17047236e8628c862d7985cdec8a22790ce3d"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/LowPass.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/LowPass.ts",
+      "sha256": "259880f1494eb3d6f409d184ad4620d88c9811666594398e60257a1b7ae13581"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/NightCore.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/NightCore.ts",
+      "sha256": "1f730b97ac39bdf1424a597b5113bb7d8d0545469fac49948d159882640ece47"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Pitch.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Pitch.ts",
+      "sha256": "3bf0395a5813fc7a99e0278686438391d1d741aa941da43c4e3aed6d4d814143"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Rate.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Rate.ts",
+      "sha256": "930e87df3872e97fddd01d85ce015d4eb30a578ffb4eb7f5050c4a97e00843f1"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Reset.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Reset.ts",
+      "sha256": "2a6b36b3117a9da96189d02dac80e209954b7104ccddef92e7477590eac7f375"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Rotation.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Rotation.ts",
+      "sha256": "76f0f45b8b8817dd9fcaafdce18af2a578dad61d804bfbe9c0b3034b76d0bbf3"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Speed.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Speed.ts",
+      "sha256": "21bc10331ccc17b1c2c8bdc1dac5985f6b29f0c1bf3ad59ee0b4b8532073f6ef"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Tremolo.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Tremolo.ts",
+      "sha256": "d4287774c2370f1fe2554b0911a2ee0e8a74f49b15ed9e65c5306bd0d7166370"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/filters/Vibrato.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/filters/Vibrato.ts",
+      "sha256": "5d48a94f148f1a8db6f3bd851cad8a61389ad985975a69ed7debd04426379bd3"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Autoplay.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Autoplay.ts",
+      "sha256": "62319a1b88fb4b8d73fb4019a4c3d93f65f0b62b9c2690e87daad22ed6f861fd"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/ClearQueue.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/ClearQueue.ts",
+      "sha256": "43cad8886888b0f827816b097864361aa7739391f599c91e0a0816f4704b4a65"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/FairPlay.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/FairPlay.ts",
+      "sha256": "a88315d28e46dbd8d14a59d63014e838419159fee516d5c7cee17a7f423d312f"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Grab.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Grab.ts",
+      "sha256": "90c489090e0f5da6b1a618bd98eafaa59a25ee27ce22e6ef2df93b97f16523ed"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Join.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Join.ts",
+      "sha256": "5ed65c743f022c935d0eeb9186b447513eb1b7cb4b7ba91d50b0ca33247102e9"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Leave.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Leave.ts",
+      "sha256": "cbc747712d8cd431a08e802218527c1e39b344ea032340721bc423dbbd41bfbe"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Loop.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Loop.ts",
+      "sha256": "c1b1a51e24307b34945e05dc63d0a7626d202d449bcdfb9fd8a17f1aa2cf1f47"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Lyrics.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Lyrics.ts",
+      "sha256": "5c1b3a029597f9533f9a64d456100c611451632a890a5a9424697ea922faf763"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Nowplaying.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Nowplaying.ts",
+      "sha256": "fa92b25577ad084f2a75478fa8f9921d7a01284df45944b5266bcde7de532555"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Pause.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Pause.ts",
+      "sha256": "dda594340c505d159dff1e54642e7c2ea22e8c031754d33a655e4b00b849ac07"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Play.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Play.ts",
+      "sha256": "c25ca83115edf91fd19520200d1704c64acec1430c4e9d5860b534b6fedea323"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/PlayLocal.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/PlayLocal.ts",
+      "sha256": "fe22b06086d4df27cf6cb6f377e62e459a6406d9e1c29265e236e32addacbc66"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/PlayNext.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/PlayNext.ts",
+      "sha256": "bec1d0531717b36eb1ee34687002da2fde929b1c1f9b422e184d084b244e33ad"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Queue.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Queue.ts",
+      "sha256": "f77cd1406965f7341ad38f6ce874e8e3f18c9078128cbfb4b4e996f21c073398"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Remove.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Remove.ts",
+      "sha256": "09dfc39927dd2f8e18d8dacc566ea2d9e7a1b57a5b0b81dd6b39931c5e4e101b"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Replay.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Replay.ts",
+      "sha256": "ad06020c1c9a755a1a1fb07216e78de7557ce73e469d93d3a3412edf8c9c4aa5"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Resume.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Resume.ts",
+      "sha256": "100041762d984b51ed71f46aeeec075e27f16356d98e6a042ad0a8978db2f6c0"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Search.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Search.ts",
+      "sha256": "120fd371d09760e709cd42c4d37c61318374d85c9ec91c5d82f3554e0255fdca"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Seek.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Seek.ts",
+      "sha256": "acbd1e1dff0a1d212df8b51c76d8b00b33026031c0de4f6d26d9c81acfb0fd48"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Shuffle.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Shuffle.ts",
+      "sha256": "28ecad8041d9025ac2cf680907573c8bf627d6da6e4178ebf6e061919df32598"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Skip.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Skip.ts",
+      "sha256": "63944b2acfa8bb41aac3c23bb07c70ecd5dfce8f5d26bd2552ef15de3a13b7bf"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Skipto.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Skipto.ts",
+      "sha256": "890b7f7315c73af3221ef1c973fda0ab25f20c43ce8da46c3b085ec6410ba43b"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Stop.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Stop.ts",
+      "sha256": "9858c30395cb27042132cb04b75c5878ad6a843a215d36e60a9f26d054c8c0f8"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/music/Volume.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/music/Volume.ts",
+      "sha256": "9cbac2ee1e91e83b0132af302e1707eb2dac78e725ae10c99efaa8291bc82835"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/AddSong.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/AddSong.ts",
+      "sha256": "31ceb449a630e7fa5f3fb74a5c70f95bbea519058480051f0da7d017172895ca"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/Create.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/Create.ts",
+      "sha256": "145e5586ba801a4d0ee1f559fe0ccb52e66059759daa579816f3822054aa3e21"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/Delete.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/Delete.ts",
+      "sha256": "450468d768b88ce66e9130c438f49254ab59199fc3fdbedb00ae2536a4166134"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/List.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/List.ts",
+      "sha256": "4fdcec4664494e33ff4165c91a4d11bdb5b116dcc42b0d07a0308fcf0d558375"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/Load.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/Load.ts",
+      "sha256": "3f3e47ee1c3e2dd7c3e26bea244a0c7b7d6f314c8f6cdae86bf045f639fd3d31"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/RemoveSong.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/RemoveSong.ts",
+      "sha256": "9f08f5a9f9b9ad08073d41b535505e0086da4109679167c695d1e856080ef149"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/commands/playlist/Steal.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/commands/playlist/Steal.ts",
+      "sha256": "e3c9d778db5a135f1f02b16d28576c8daf39a47134581fce94467d3722f0ace3"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/events/node/Error.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/events/node/Error.ts",
+      "sha256": "f204239bbbc9d413e0931c20e73fb5bda2774b64a3c2066620bd417a97b87904"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/events/player/QueueEnd.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/events/player/QueueEnd.ts",
+      "sha256": "194cc5d048ca4e3b4444cd5abfc130deacb43cc75dc93c80e2c197e1bf8f2ef3"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/events/player/TrackEnd.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/events/player/TrackEnd.ts",
+      "sha256": "44d4f40592e1fb3f4bc9b1215e0c5f64768339114764d458787742792d78b485"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/events/player/TrackStart.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/events/player/TrackStart.ts",
+      "sha256": "83ad48c76d92960c261d1c11b19e1afa3fe1c8bfbeed668f7d965b1c6f08f901"
+    },
+    {
+      "repo": "fandyahmd/lavamusic",
+      "path": "src/structures/Context.ts",
+      "revision": "8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac",
+      "url": "https://github.com/fandyahmd/lavamusic/blob/8c1edf0ae95f70887ce2e54e9f4e3e9429aa8bac/src/structures/Context.ts",
+      "sha256": "4204dcbc8b3d7dd2def38ed375b75f8d6b8dc700c03b5a00418f02f5709ff914"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/forward.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/forward.js",
+      "sha256": "f0601902557abd9c75fe9dbab4d107d79ec03a558bff0735486688760a361634"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/help.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/help.js",
+      "sha256": "d9b25f16cdd5fa578751afd6bb152c7d2d3945739050f1d6d75870c507d60a5c"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/lock.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/lock.js",
+      "sha256": "ba3f859df2a602a0f5e13cd2fb226cedbbde6837d46f316e33729b25e136f99a"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/pause.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/pause.js",
+      "sha256": "83c32505b0a4039b7cbf8e7ffe560531866f62f80fed03eae0babc0bb1e497e1"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/ping.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/ping.js",
+      "sha256": "f1e22ba5ef1677362a523404433ca23d2968fb2a1c419c32f069f7acdf3607d8"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/play.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/play.js",
+      "sha256": "590f039288ab076dfb62a80a243f9aa6edc375c800390044a02fff115007c0c0"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/playfile.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/playfile.js",
+      "sha256": "9e8891763232f4b2357df9be7f590d4a79a97b73936fb6e5341720d7073a5416"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/playmessage.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/playmessage.js",
+      "sha256": "7486047bdb0cd30a360e10daf4e193a0299df85566522b640d5e3afa7534adb9"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/queue.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/queue.js",
+      "sha256": "fbb14934e018e9f686ba28b8bb8accf5770a2ec8aaabd73e375006aa7fea6835"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/resume.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/resume.js",
+      "sha256": "e4584c731a830c9902a2c4a14dcf9b31e283bdf670e87c9a30c359c1b33608b1"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/rewind.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/rewind.js",
+      "sha256": "16504d59df541876ef313ea9d095462c1642eedf93c91d75dd1e4452fd03db30"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/search-spotify.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/search-spotify.js",
+      "sha256": "ff1666cb03232c81840777be9f3f498423d50134e8380714e3ab2a1688a5153c"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/search-youtube.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/search-youtube.js",
+      "sha256": "7eafe449ed77cf8fd7f52174206bc64b0d44530123af4cf28289894b5e430d51"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/skip.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/skip.js",
+      "sha256": "6fad0616af65d33068cf80de281830b0d52daeef15875d0899b6d4c066b5de00"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/stop.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/stop.js",
+      "sha256": "5ced104f9ca4019e57537267290579e7c677d66d35135a45bdc2fe07963aa3d0"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/unlock.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/unlock.js",
+      "sha256": "b100abcd5be9d5f155753e2b60c2b484f17cb12e331d564cdf199cdc816d26f0"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "commands/volume.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/commands/volume.js",
+      "sha256": "6d05808dedff89e8391ecd933caecb032b1cce60e7f5f23b0e3f014c926948e2"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "index.js",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/index.js",
+      "sha256": "5254be38d4bfafa04cf711c379ef87d2a981d1c44c4d2ec55abd65981f82ce58"
+    },
+    {
+      "repo": "tsukache/Discord-Lavalink-Music-Bot",
+      "path": "package.json",
+      "revision": "3bacc84d232ce251e605c6d81658e5fd539bfee0",
+      "url": "https://github.com/tsukache/Discord-Lavalink-Music-Bot/blob/3bacc84d232ce251e605c6d81658e5fd539bfee0/package.json",
+      "sha256": "3fce38f331bb69209d9698f34d2cea0b0e5b45e46cdccdd00f06786a65600419"
+    }
+  ],
+  "commands": [
+    {
+      "id": "prefix:247",
+      "owner": "commands/Music/247.js",
+      "group": "setup",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "joinChannel"
+      ]
+    },
+    {
+      "id": "prefix:3d",
+      "owner": "commands/Filter/3d.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:addprevious",
+      "owner": "commands/Music/addprevious.js",
+      "group": "previous",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "previous"
+      ]
+    },
+    {
+      "id": "prefix:addsimilar",
+      "owner": "commands/Music/addsimilar.js",
+      "group": "recommendations",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:autoplay",
+      "owner": "commands/Music/autoplay.js",
+      "group": "autoplay",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "getPlayer",
+        "setAutoplay"
+      ]
+    },
+    {
+      "id": "prefix:bassboost",
+      "owner": "commands/Filter/bassboost.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:china",
+      "owner": "commands/Filter/china.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:chipmunk",
+      "owner": "commands/Filter/chipmunk.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:cleareq",
+      "owner": "commands/Filter/cleareq.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:clearfilter",
+      "owner": "commands/Filter/clearfilter.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:clearqueue",
+      "owner": "commands/Music/clearqueue.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "clearQueue"
+      ]
+    },
+    {
+      "id": "prefix:darthvader",
+      "owner": "commands/Filter/darthvader.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:equalizer",
+      "owner": "commands/Filter/equalizer.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:filtros",
+      "owner": "commands/Filter/filtros.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:forceskip",
+      "owner": "commands/Music/forceskip.js",
+      "group": "skip-variants",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "skip"
+      ]
+    },
+    {
+      "id": "prefix:forward",
+      "owner": "commands/Music/forward.js",
+      "group": "forward",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:grab",
+      "owner": "commands/Music/grab.js",
+      "group": "grab",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState"
+      ]
+    },
+    {
+      "id": "prefix:join",
+      "owner": "commands/Music/join.js",
+      "group": "voice",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "relocateVoice"
+      ]
+    },
+    {
+      "id": "prefix:jump",
+      "owner": "commands/Music/jump.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "jump"
+      ]
+    },
+    {
+      "id": "prefix:like",
+      "owner": "commands/Music/like.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState"
+      ]
+    },
+    {
+      "id": "prefix:likedsongs",
+      "owner": "commands/Music/likedsongs.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:loop",
+      "owner": "commands/Music/loop.js",
+      "group": "loop",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setLoop"
+      ]
+    },
+    {
+      "id": "prefix:loopqueue",
+      "owner": "commands/Music/loopqueue.js",
+      "group": "loop",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setLoop"
+      ]
+    },
+    {
+      "id": "prefix:loopsong",
+      "owner": "commands/Music/loopsong.js",
+      "group": "loop",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setLoop"
+      ]
+    },
+    {
+      "id": "prefix:lyrics",
+      "owner": "commands/Music/lyrics.js",
+      "group": "lyrics",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:move",
+      "owner": "commands/Music/move.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "move"
+      ]
+    },
+    {
+      "id": "prefix:moveme",
+      "owner": "commands/Music/moveme.js",
+      "group": "voice",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "relocateVoice"
+      ]
+    },
+    {
+      "id": "prefix:musictop",
+      "owner": "commands/Music/musictop.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:nightcore",
+      "owner": "commands/Filter/nightcore.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:nodes",
+      "owner": "commands/Music/nodes.js",
+      "group": "nodes",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:nowplaying",
+      "owner": "commands/Music/nowplaying.js",
+      "group": "state",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "sendNowPlaying"
+      ]
+    },
+    {
+      "id": "prefix:pause",
+      "owner": "commands/Music/pause.js",
+      "group": "pause",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:pitch",
+      "owner": "commands/Filter/pitch.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:play",
+      "owner": "commands/Music/play.js",
+      "group": "insertion",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "search",
+        "joinChannel",
+        "getState",
+        "enqueue"
+      ]
+    },
+    {
+      "id": "prefix:playlist",
+      "owner": "commands/Music/playlist.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:playmusicmix",
+      "owner": "commands/Music/playmusicmix.js",
+      "group": "recommendations",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:playprevious",
+      "owner": "commands/Music/playprevious.js",
+      "group": "previous",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "previous"
+      ]
+    },
+    {
+      "id": "prefix:playsc",
+      "owner": "commands/Music/playsc.js",
+      "group": "disabled-source",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:playskip",
+      "owner": "commands/Music/playskip.js",
+      "group": "insertion",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "joinChannel",
+        "search",
+        "getState",
+        "enqueue"
+      ]
+    },
+    {
+      "id": "prefix:playskipsc",
+      "owner": "commands/Music/playskipsc.js",
+      "group": "disabled-source",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:playsongoftheday",
+      "owner": "commands/Music/playsongoftheday.js",
+      "group": "recommendations",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:playtop",
+      "owner": "commands/Music/playtop.js",
+      "group": "insertion",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "joinChannel",
+        "search",
+        "getState",
+        "enqueue"
+      ]
+    },
+    {
+      "id": "prefix:queue",
+      "owner": "commands/Music/queue.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState"
+      ]
+    },
+    {
+      "id": "prefix:queuestatus",
+      "owner": "commands/Music/queuestatus.js",
+      "group": "state",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState"
+      ]
+    },
+    {
+      "id": "prefix:radio",
+      "owner": "commands/Music/radio.js",
+      "group": "radio",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:rate",
+      "owner": "commands/Filter/rate.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:reconnect",
+      "owner": "commands/Music/reconnect.js",
+      "group": "voice",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "relocateVoice"
+      ]
+    },
+    {
+      "id": "prefix:removedupes",
+      "owner": "commands/Music/removedupes.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "removeDuplicates"
+      ]
+    },
+    {
+      "id": "prefix:removetrack",
+      "owner": "commands/Music/removetrack.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "remove"
+      ]
+    },
+    {
+      "id": "prefix:removevoteskip",
+      "owner": "commands/Music/removevoteskip.js",
+      "group": "skip-variants",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:restart",
+      "owner": "commands/Music/restart.js",
+      "group": "seek",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:resume",
+      "owner": "commands/Music/resume.js",
+      "group": "resume",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:rewind",
+      "owner": "commands/Music/rewind.js",
+      "group": "rewind",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:search",
+      "owner": "commands/Music/search.js",
+      "group": "search",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:searchplaylist",
+      "owner": "commands/Music/searchplaylist.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:searchradio",
+      "owner": "commands/Music/searchradio.js",
+      "group": "radio",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:searchsc",
+      "owner": "commands/Music/searchsc.js",
+      "group": "disabled-source",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:searchsimilar",
+      "owner": "commands/Music/searchsimilar.js",
+      "group": "recommendations",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:seek",
+      "owner": "commands/Music/seek.js",
+      "group": "seek",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:setupmusic",
+      "owner": "commands/Music/setupmusic.js",
+      "group": "setup",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:shuffle",
+      "owner": "commands/Music/shuffle.js",
+      "group": "shuffle",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "shuffle"
+      ]
+    },
+    {
+      "id": "prefix:skip",
+      "owner": "commands/Music/skip.js",
+      "group": "skip",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:slowmo",
+      "owner": "commands/Filter/slowmo.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:speed",
+      "owner": "commands/Filter/speed.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:stop",
+      "owner": "commands/Music/stop.js",
+      "group": "stop",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "prefix:stoploop",
+      "owner": "commands/Music/stoploop.js",
+      "group": "loop",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "setLoop"
+      ]
+    },
+    {
+      "id": "prefix:tremolo",
+      "owner": "commands/Filter/tremolo.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:unshuffle",
+      "owner": "commands/Music/unshuffle.js",
+      "group": "shuffle",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "shuffle"
+      ]
+    },
+    {
+      "id": "prefix:vibrate",
+      "owner": "commands/Filter/vibrate.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:vibrato",
+      "owner": "commands/Filter/vibrato.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "prefix:volume",
+      "owner": "commands/Music/volume.js",
+      "group": "volume",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setVolume"
+      ]
+    },
+    {
+      "id": "prefix:voteskip",
+      "owner": "commands/Music/voteskip.js",
+      "group": "skip-variants",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "skip"
+      ]
+    },
+    {
+      "id": "slash:music.autoplay",
+      "owner": "slashCommands/Music/autoplay.js",
+      "group": "autoplay",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "getPlayer",
+        "setAutoplay"
+      ]
+    },
+    {
+      "id": "slash:music.clearqueue",
+      "owner": "slashCommands/Music/clearqueue.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "clearQueue"
+      ]
+    },
+    {
+      "id": "slash:music.filter",
+      "owner": "slashCommands/Music/filter.js",
+      "group": "filters",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setFilter"
+      ]
+    },
+    {
+      "id": "slash:music.forward",
+      "owner": "slashCommands/Music/forward.js",
+      "group": "forward",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.history",
+      "owner": "slashCommands/Music/history.js",
+      "group": "state",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.jump",
+      "owner": "slashCommands/Music/jump.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "jump"
+      ]
+    },
+    {
+      "id": "slash:music.loop",
+      "owner": "slashCommands/Music/loop.js",
+      "group": "loop",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "setLoop"
+      ]
+    },
+    {
+      "id": "slash:music.lyrics",
+      "owner": "slashCommands/Music/lyrics.js",
+      "group": "lyrics",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.move",
+      "owner": "slashCommands/Music/move.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "move"
+      ]
+    },
+    {
+      "id": "slash:music.nowplaying",
+      "owner": "slashCommands/Music/nowplaying.js",
+      "group": "state",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "sendNowPlaying"
+      ]
+    },
+    {
+      "id": "slash:music.pause",
+      "owner": "slashCommands/Music/pause.js",
+      "group": "pause",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.play",
+      "owner": "slashCommands/Music/play.js",
+      "group": "insertion",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "search",
+        "joinChannel",
+        "getState",
+        "enqueue"
+      ]
+    },
+    {
+      "id": "slash:music.playmusicmix",
+      "owner": "slashCommands/Music/playmusicmix.js",
+      "group": "recommendations",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "search",
+        "recommend",
+        "playCollection"
+      ]
+    },
+    {
+      "id": "slash:music.playtop",
+      "owner": "slashCommands/Music/playtop.js",
+      "group": "insertion",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "search",
+        "getState",
+        "enqueue",
+        "joinChannel"
+      ]
+    },
+    {
+      "id": "slash:music.queue",
+      "owner": "slashCommands/Music/queue.js",
+      "group": "queue",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState"
+      ]
+    },
+    {
+      "id": "slash:music.remove",
+      "owner": "slashCommands/Music/remove.js",
+      "group": "remove",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "remove"
+      ]
+    },
+    {
+      "id": "slash:music.replay",
+      "owner": "slashCommands/Music/replay.js",
+      "group": "seek",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.resume",
+      "owner": "slashCommands/Music/resume.js",
+      "group": "resume",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.rewind",
+      "owner": "slashCommands/Music/rewind.js",
+      "group": "rewind",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.search",
+      "owner": "slashCommands/Music/search.js",
+      "group": "search",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.seek",
+      "owner": "slashCommands/Music/seek.js",
+      "group": "seek",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.shuffle",
+      "owner": "slashCommands/Music/shuffle.js",
+      "group": "shuffle",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "shuffle",
+        "getState"
+      ]
+    },
+    {
+      "id": "slash:music.skip",
+      "owner": "slashCommands/Music/skip.js",
+      "group": "skip",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.stop",
+      "owner": "slashCommands/Music/stop.js",
+      "group": "stop",
+      "review": "structural",
+      "fix": "implemented-and-tested",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:music.volume",
+      "owner": "slashCommands/Music/volume.js",
+      "group": "volume",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "setVolume"
+      ]
+    },
+    {
+      "id": "slash:playlist.add",
+      "owner": "slashCommands/Playlist/add.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "search"
+      ]
+    },
+    {
+      "id": "slash:playlist.create",
+      "owner": "slashCommands/Playlist/create.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:playlist.delete",
+      "owner": "slashCommands/Playlist/delete.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:playlist.list",
+      "owner": "slashCommands/Playlist/list.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:playlist.play",
+      "owner": "slashCommands/Playlist/play.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": [
+        "getState",
+        "playCollection"
+      ]
+    },
+    {
+      "id": "slash:playlist.share",
+      "owner": "slashCommands/Playlist/share.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    },
+    {
+      "id": "slash:playlist.show",
+      "owner": "slashCommands/Playlist/show.js",
+      "group": "library",
+      "review": "structural",
+      "fix": "not-changed-in-this-unit",
+      "behaviorAcceptance": "pending",
+      "serviceCalls": []
+    }
+  ],
+  "verification": {
+    "reproduction": {
+      "passed": 1,
+      "failed": 6
+    },
+    "regressionsAndExistingTests": {
+      "passed": 74,
+      "failed": 0
+    },
+    "nativeClient": "nyxlink@0.1.0-dev.2",
+    "externalBoundaries": "Discord gateway and node HTTP transport are test doubles; native Player/Queue/Track and OBEY command adapters are real",
+    "backendTypes": true,
+    "dependencyBoundaries": true,
+    "httpAdapter": {
+      "realHttp": true,
+      "queryKindAndSource": true,
+      "deniedAccess": true,
+      "invalidQuery": true,
+      "errorStatuses": [
+        400,
+        429,
+        503
+      ],
+      "privateErrorDetails": false
+    }
+  },
+  "constraints": {
+    "publicNodesOnly": true,
+    "privateNodeEnabled": false,
+    "newDependencies": 0,
+    "secondPlayerOrQueue": false,
+    "externalReferenceCodeExecuted": false
+  },
+  "limitations": [
+    "Referenced repositories were read, not deployed or certified error-free",
+    "Lavamusic and tsukache revisions date from October 2025",
+    "Structural coverage is not functional acceptance of every command",
+    "No human Discord listening test, real voice failover or complete player visual audit in this unit"
+  ],
+  "deployment": {
+    "image": "localhost/obey-your-master_bot:release-music-commands-20261105-346ce839",
+    "imageId": "0a01028d7c46cdccc1dd6bd2b43f22ed797ab1b10fa2187b01361c3f9801ec16",
+    "status": "deployed",
+    "health": "healthy",
+    "restarts": 0,
+    "application": {
+      "status": "ok",
+      "database": true,
+      "music": true,
+      "uptime": 91
+    },
+    "codeRevision": "346ce83916b0846c2da3e9b58e6841a63c5ec69d",
+    "imageTests": {
+      "passed": 74,
+      "failed": 0,
+      "node": "22.23.4"
+    },
+    "registry": {
+      "commands": 661,
+      "aliases": 776,
+      "routes": 95,
+      "prefix": 517,
+      "slash": 144,
+      "roots": 20
+    },
+    "rollbackImage": "localhost/obey-your-master_bot:release-search-redesign-20261105-9f8eeb49"
+  },
+  "architecture": {
+    "plan": "docs/plan-20261101/PLAN/planes/01_ARQUITECTURA.md",
+    "activeRoot": "bot/modulos/musica",
+    "http": "api/rutas/musica/http.js",
+    "moves": {
+      "handlers/discordmusiccatalog.js": "bot/modulos/musica/servicios/catalogo.js",
+      "handlers/music/catalog-search.js": "bot/modulos/musica/datos/catalogo.js",
+      "handlers/music/catalog-picker.js": "bot/modulos/musica/comandos/buscar.js",
+      "handlers/music/playui.js": "bot/modulos/musica/vistas/catalogo.js",
+      "handlers/music/responses.js": [
+        "bot/modulos/musica/vistas/respuestas.js",
+        "bot/modulos/musica/comandos/controlar.js"
+      ]
+    },
+    "deletedUnused": [
+      "handlers/music/searchui.js"
+    ],
+    "compatibilityReexports": false,
+    "dependenciesEnforced": [
+      "unresolved imports",
+      "cycles",
+      "data/services cannot import commands/views",
+      "HTTP cannot import Discord commands/views",
+      "browser cannot import bot/API server code"
+    ],
+    "legacyStillActive": [
+      "handlers/music native engine and existing support services",
+      "dashboard/views/pages/player.ejs",
+      "dashboard/frontend React panel"
+    ]
+  },
+  "webCatalog": {
+    "requirement": "Native web catalog loads without user query and also supports search; no embedded song lists or generic searches mislabeled as official trends",
+    "implemented": false,
+    "publicNodeSpotifyFilterProbe": {
+      "transport": "Real NyxLink SearchService and public HTTP endpoints; backend availability initialized from real info, no Discord voice connection",
+      "nodes": [
+        {
+          "id": "trinium-nodelink-1",
+          "backend": "nodelink"
+        },
+        {
+          "id": "trinium-nodelink-2",
+          "backend": "nodelink"
+        }
+      ],
+      "queries": [
+        {
+          "query": "tag:new",
+          "kind": "albums",
+          "requestedSource": "spotify",
+          "source": "spotify",
+          "status": "ready",
+          "count": 1,
+          "ms": 1832,
+          "first": [
+            {
+              "title": "Piranguera",
+              "author": "WIU",
+              "uri": "https://open.spotify.com/album/48xWHfPd5CcllSuUviYUc2"
+            }
+          ]
+        },
+        {
+          "query": "year:2026",
+          "kind": "albums",
+          "requestedSource": "spotify",
+          "source": "spotify",
+          "status": "ready",
+          "count": 1,
+          "ms": 1227,
+          "first": [
+            {
+              "title": "Vocês & Deus (Ao Vivo no Rio de Janeiro)",
+              "author": "Zé Neto & Cristiano",
+              "uri": "https://open.spotify.com/album/7fF43JKZ1MTkFiWRzrkzcn"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

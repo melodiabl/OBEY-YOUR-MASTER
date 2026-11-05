@@ -27,4 +27,6 @@ La frontera temporal con `handlers/music` corresponde a nodos, SDK, estado, pol�
 
 El player EJS sigue en uso mientras React no cubra búsqueda, navegación por artistas/álbumes, cola y biblioteca. Esta migración no cambia las rutas públicas, los nombres de comandos, los datos ni los materiales visuales. No acredita la migración completa de música ni del frontend.
 
+El catálogo inicial de la web es un recorrido distinto de buscar: debe cargar datos del proveedor sin una consulta escrita por el usuario. La consulta compartida de esta unidad no sustituye esa portada ni debe presentar búsquedas genéricas como tendencias oficiales.
+
 Ver [comparación y correcciones de comandos](../../../docs/platform/MUSIC-COMMAND-AUDIT-2026-11-05.md) y [plan conciliado](../../../docs/platform/PLAN-2026-11-02.md).
